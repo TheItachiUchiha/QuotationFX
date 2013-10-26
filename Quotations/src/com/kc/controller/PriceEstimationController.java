@@ -1,5 +1,8 @@
 package com.kc.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -7,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 
 public class PriceEstimationController {
+	
+	private static final Logger LOG = LogManager.getLogger(PriceEstimationController.class);
+	
 	@FXML
 	private ComboBox productCategory;
 	@FXML

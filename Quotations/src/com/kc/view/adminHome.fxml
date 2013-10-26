@@ -14,7 +14,7 @@
           <items>
             <Menu mnemonicParsing="false" text="Price Estimation">
               <items>
-                <MenuItem mnemonicParsing="false" onAction="#priceEstimation" text="New" />
+                <MenuItem mnemonicParsing="false" onAction="#priceEstimationNew" text="New" />
                 <MenuItem mnemonicParsing="false" onAction="#quotationPreparation" text="Modify" />
                 <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="View" />
               </items>

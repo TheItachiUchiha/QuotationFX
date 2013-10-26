@@ -1,5 +1,8 @@
 package com.kc.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -8,6 +11,8 @@ import javafx.scene.control.TextField;
 
 public class UsersController {
 
+	private static final Logger LOG = LogManager.getLogger(UsersController.class);
+	
 	@FXML
 	private TextField name;
 	@FXML

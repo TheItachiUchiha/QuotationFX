@@ -1,10 +1,15 @@
 package com.kc.controller;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class ComponentsController {
+	
+	private static final Logger LOG = LogManager.getLogger(ComponentsController.class);
 	
 	@FXML
 	private TextField componentName;
