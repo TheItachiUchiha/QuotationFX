@@ -14,9 +14,9 @@ import javafx.stage.Stage;
 @SuppressWarnings("unused")
 public class LoginController extends Application {
 
-	private static Stage primaryStage;
+	public static Stage primaryStage;
 	private AnchorPane login;
-	private BorderPane home;
+	public static BorderPane home;
 	
 	@FXML
 	private TextField userName;
@@ -47,16 +47,6 @@ public class LoginController extends Application {
 		launch(args);
 	}
 	
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
-	
-	@FXML
-	private void initialize() {
-		
-	}
-	
 	@SuppressWarnings("static-access")
 	public void doLogin()
 	{
@@ -64,7 +54,7 @@ public class LoginController extends Application {
 			if(userName.getText().equals("admin") &&
 					password.getText().equals("admin"))
 			{
-				FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("../view/Home.fxml"));
+				FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("../view/adminHome.fxml"));
 				this.home = (BorderPane) loader.load();
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setScene(scene);
