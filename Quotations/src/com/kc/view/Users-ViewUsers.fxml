@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane alignment="TOP_CENTER" gridLinesVisible="false" prefHeight="262.0000084472631" prefWidth="375.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <TableView maxWidth="-Infinity" prefHeight="262.0" prefWidth="375.0" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0">
+      <columns>
+        <TableColumn prefWidth="75.0" text="Name" />
+        <TableColumn prefWidth="75.0" text="UserName" />
+        <TableColumn prefWidth="75.0" text="Password" />
+        <TableColumn prefWidth="75.0" text="Avail Modules" />
+        <TableColumn prefWidth="75.0" text="UserType" />
+      </columns>
+      <GridPane.margin>
+        <Insets />
+      </GridPane.margin>
+    </TableView>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="717.0" minWidth="10.0" prefWidth="707.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>

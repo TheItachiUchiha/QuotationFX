@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="TOP_CENTER" gridLinesVisible="false" prefHeight="394.0" prefWidth="808.0001220703125" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label prefHeight="35.0" prefWidth="157.0" text="Component Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <font>
+        <Font name="Calibri" size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.00009999999747" text="Component Category" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.0" text="Sub Catagory" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.0" text="Vender" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.0" text="Model" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.0" text="Type" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label font="$x1" prefHeight="34.0" prefWidth="157.0" text="Size" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="157.0" text="Cost Price" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+    <Label font="$x1" prefHeight="32.0" prefWidth="157.0" text="Dealer Price" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+    <Label font="$x1" prefHeight="32.0" prefWidth="157.0" text="End User Price" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+    <HBox id="HBox" alignment="CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="10">
+      <children>
+        <Button contentDisplay="TOP" mnemonicParsing="false" text="Save">
+          <font>
+            <Font size="15.0" fx:id="x2" />
+          </font>
+        </Button>
+        <Button font="$x2" mnemonicParsing="false" text="Store" />
+      </children>
+    </HBox>
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+    <TextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="157.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="717.0" minWidth="10.0" prefWidth="651.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="162.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
