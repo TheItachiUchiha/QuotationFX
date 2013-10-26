@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
+  <top>
+    <MenuBar prefWidth="1100.0">
+      <menus>
+        <Menu mnemonicParsing="false" text="HOME">
+          <items>
+            <Menu mnemonicParsing="false" text="Price Estimation">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#priceEstimation" text="New" />
+                <MenuItem mnemonicParsing="false" onAction="#quotationPreparation" text="Modify" />
+                <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="View" />
+              </items>
+            </Menu>
+            <MenuItem mnemonicParsing="false" onAction="#quotationPreparation" text="Quotation Preparation" />
+            <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="Sales Order Management" />
+            <MenuItem mnemonicParsing="false" onAction="#status" text="Status / Reminder" />
+            <MenuItem mnemonicParsing="false" onAction="#reports" text="Reports" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="PRODUCTS">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#createProduct" text="Create a New Product" />
+            <MenuItem mnemonicParsing="false" onAction="#modifyProduct" text="Modify a Product" />
+            <MenuItem mnemonicParsing="false" onAction="#viewProduct" text="View Products" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="COMPONENTS">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#createComponent" text="Create a New Component" />
+            <MenuItem mnemonicParsing="false" onAction="#modifyComponent" text="Modify a Component" />
+            <MenuItem mnemonicParsing="false" onAction="#viewComponent" text="View Components" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="CUSTOMERS">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#createCustomer" text="Create a New Customer" />
+            <MenuItem mnemonicParsing="false" onAction="#modifyCustomer" text="Modify a Customer" />
+            <MenuItem mnemonicParsing="false" onAction="#viewCustomer" text="View Customers" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="USERS">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#createUser" text="Create a New User" />
+            <MenuItem mnemonicParsing="false" onAction="#modifyUser" text="Modify a User" />
+            <MenuItem mnemonicParsing="false" onAction="#viewUser" text="View Users" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="HELP">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#companyDetails" text="Company Details" />
+            <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+  </top>
+</BorderPane>
