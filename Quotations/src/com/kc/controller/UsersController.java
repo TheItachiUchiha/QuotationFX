@@ -3,6 +3,8 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.UsersVO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -43,4 +45,8 @@ public class UsersController {
 	private ComboBox userType;
 	@FXML
 	private Label title;
+	public void saveUser()
+	{
+		UsersVO usersVO=new UsersVO();
+	}
 }

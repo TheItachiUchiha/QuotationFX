@@ -3,6 +3,8 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.HelpVO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -22,5 +24,9 @@ public class HelpController {
 	private TextArea address;
 	@FXML
 	private Label title;
+	public void saveCompanyDetails()
+	{
+		HelpVO helpVO=new HelpVO();
+	}
 
 }

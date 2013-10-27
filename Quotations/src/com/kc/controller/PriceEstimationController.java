@@ -3,6 +3,8 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.PriceEstimationVO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
@@ -45,4 +47,9 @@ public class PriceEstimationController {
 	private TableColumn dealerEndUser;
 	@FXML
 	private Label title;
+	
+	public void savePriceEstimation()
+	{
+		PriceEstimationVO priceEstimationVO=new PriceEstimationVO();
+	}
 }

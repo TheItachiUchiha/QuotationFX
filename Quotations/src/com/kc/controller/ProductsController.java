@@ -3,6 +3,8 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.ProductsVO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,4 +22,8 @@ public class ProductsController {
 	@FXML
 	private Label title;
 
+	public void saveProduct()
+	{
+		ProductsVO productsVO = new ProductsVO();
+	}
 }

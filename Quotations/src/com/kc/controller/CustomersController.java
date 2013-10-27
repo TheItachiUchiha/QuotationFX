@@ -3,9 +3,11 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.CustomersVO;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -30,9 +32,11 @@ public class CustomersController {
 	@FXML
 	private TextField tinNumber;
 	@FXML
-	private CheckBox dealer;
-	@FXML
-	private CheckBox endUser;
+	private RadioButton customerType;
 	@FXML
 	private Label title;
+	public void saveCustomer()
+	{
+		CustomersVO customersVO=new CustomersVO();
+	}
 }

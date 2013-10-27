@@ -3,6 +3,8 @@ package com.kc.controller;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.ComponentsVO;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -37,7 +39,8 @@ public class ComponentsController {
 	
 	public void saveComponent()
 	{
-		System.out.println("hi");
+		ComponentsVO componentsVO = new ComponentsVO();
+		
 	}
 	
 }
