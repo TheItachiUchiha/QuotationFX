@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <left>
+        <VBox alignment="CENTER" prefHeight="566.0" prefWidth="216.0" spacing="20.0">
+          <children>
+            <Label prefHeight="21.0" text="COMPONENTS" textFill="#cc00ff">
+              <font>
+                <Font size="15.0" />
+              </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <Button id="submenubuttons" mnemonicParsing="false" onAction="#newComponent" text="Create a New Component" />
+            <Separator prefWidth="200.0" />
+            <Button id="submenubuttons" mnemonicParsing="false" onAction="#modifyComponent" text="Modify a Component" />
+            <Separator prefWidth="200.0" />
+            <Button id="submenubuttons" mnemonicParsing="false" text="View Components" />
+            <Separator prefWidth="200.0" />
+          </children>
+          <stylesheets>
+            <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
+          </stylesheets>
+        </VBox>
+      </left>
+    </BorderPane>
+  </center>
+</BorderPane>

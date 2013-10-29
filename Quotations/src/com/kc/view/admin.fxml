@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.TopMenuController">
+  <!-- TODO Add Nodes -->
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+  <top>
+    <HBox fx:id="menuHbox" prefHeight="43.0" prefWidth="874.0">
+      <children>
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#adminHome" prefHeight="43.0" styleClass="menuButtons" text="HOME" />
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#productsHome" prefHeight="43.0" styleClass="menuButtons" text="PRODUCTS" />
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#componentsHome" prefHeight="43.0" styleClass="menuButtons" text="COMPONENTS" />
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#customersHome" prefHeight="43.0" styleClass="menuButtons" text="CUSTOMERS" />
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#usersHome" prefHeight="43.0" styleClass="menuButtons" text="USERS" />
+        <Button id="menuButtons" mnemonicParsing="false" onAction="#helpHome" prefHeight="43.0" styleClass="menuButtons" text="HELP" />
+      </children>
+    </HBox>
+  </top>
+</BorderPane>

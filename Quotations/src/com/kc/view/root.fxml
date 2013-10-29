@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.LoginController">
-  <children>
-    <GridPane alignment="CENTER" gridLinesVisible="false" prefHeight="300.0" prefWidth="387.0" snapToPixel="true" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-16.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.LoginController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <GridPane alignment="CENTER" gridLinesVisible="false" prefHeight="300.0" prefWidth="387.0" snapToPixel="true">
       <children>
         <Label prefHeight="32.0" prefWidth="72.0" text="User Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
           <font>
@@ -17,7 +17,7 @@
           </font>
         </Label>
         <Label font="$x1" prefHeight="32.0" prefWidth="72.0" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <TextField fx:id="userName" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField id="userName" fx:id="username" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <PasswordField fx:id="password" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <HBox id="HBox" alignment="TOP_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <children>
@@ -35,5 +35,5 @@
         <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-  </children>
-</AnchorPane>
+  </center>
+</BorderPane>
