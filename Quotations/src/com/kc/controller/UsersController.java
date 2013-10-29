@@ -6,10 +6,13 @@ import org.apache.log4j.Logger;
 import com.kc.model.UsersVO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class UsersController {
 
@@ -45,8 +48,32 @@ public class UsersController {
 	private ComboBox userType;
 	@FXML
 	private Label title;
-	public void saveUser()
+	public void newUser()
 	{
-		UsersVO usersVO=new UsersVO();
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/users.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public void modifyUser()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/users.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }

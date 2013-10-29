@@ -6,10 +6,13 @@ import org.apache.log4j.Logger;
 import com.kc.model.CustomersVO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class CustomersController {
 	
@@ -35,8 +38,32 @@ public class CustomersController {
 	private RadioButton customerType;
 	@FXML
 	private Label title;
-	public void saveCustomer()
+	public void newCustomer()
 	{
-		CustomersVO customersVO=new CustomersVO();
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/customers-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public void modifyCustomer()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/customers-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }

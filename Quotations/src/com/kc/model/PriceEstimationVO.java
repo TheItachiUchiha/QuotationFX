@@ -10,6 +10,33 @@ public class PriceEstimationVO {
 	private static final Logger LOG = LogManager.getLogger(PriceEstimationVO.class);
 	
 	private String productCategory;
+private String subCategory;
+	
+	private String productName;
+	
+	private String referenceNo;
+	
+	private Date date;
+	
+	private String dealer;
+	
+	private String endUser;
+	
+	private String componentName;
+	
+	private String vender;
+	
+	private String model;
+	
+	private String type;
+	
+	private String size;
+	
+	private String quantity;
+	
+	private String costPrice;
+	
+	private String dealerEndUser;
 	
 	public String getProductCategory() {
 		return productCategory;
@@ -131,32 +158,6 @@ public class PriceEstimationVO {
 		this.dealerEndUser = dealerEndUser;
 	}
 
-	private String subCategory;
 	
-	private String productName;
-	
-	private String referenceNo;
-	
-	private Date date;
-	
-	private String dealer;
-	
-	private String endUser;
-	
-	private String componentName;
-	
-	private String vender;
-	
-	private String model;
-	
-	private String type;
-	
-	private String size;
-	
-	private String quantity;
-	
-	private String costPrice;
-	
-	private String dealerEndUser;
 
 }

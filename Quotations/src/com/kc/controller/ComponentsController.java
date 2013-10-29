@@ -6,8 +6,12 @@ import org.apache.log4j.Logger;
 import com.kc.model.ComponentsVO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class ComponentsController {
 	
@@ -37,10 +41,32 @@ public class ComponentsController {
 	private Label title;
 
 	
-	public void saveComponent()
+	public void newComponent()
 	{
-		ComponentsVO componentsVO = new ComponentsVO();
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/components-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
-	
+	public void modifyComponent()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/components-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 }

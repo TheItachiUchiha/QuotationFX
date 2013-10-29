@@ -18,11 +18,11 @@ public class LoginController extends Application {
 
 	private static final Logger LOG = LogManager.getLogger(LoginController.class);
 	public static Stage primaryStage;
-	private AnchorPane login;
 	public static BorderPane home;
+	public static BorderPane login;
 
 	@FXML
-	private TextField userName;
+	private TextField username;
 	@FXML
 	private TextField password;
 
@@ -35,8 +35,8 @@ public class LoginController extends Application {
 			this.primaryStage.setTitle("Quotation");
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(
-					LoginController.class.getResource("../view/Root.fxml"));
-			login = (AnchorPane) loader.load();
+					LoginController.class.getResource("../view/root.fxml"));
+			login = (BorderPane) loader.load();
 			Scene scene = new Scene(this.login);
 			this.primaryStage.setScene(scene);
 			this.primaryStage.show();
@@ -54,12 +54,17 @@ public class LoginController extends Application {
 	public void doLogin() {
 		LOG.info("Enter : doLogin");
 		try {
-			if (userName.getText().equals("admin")
+			if (username.getText().equals("admin")
 					&& password.getText().equals("admin")) {
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
-								.getResource("../view/adminHome.fxml"));
+								.getResource("../view/admin.fxml"));
+				FXMLLoader subMenuLoader = new FXMLLoader(
+						LoginController.class
+								.getResource("../view/home-admin.fxml"));
 				this.home = (BorderPane) loader.load();
+				BorderPane subMenu = (BorderPane) subMenuLoader.load();
+				this.home.setCenter(subMenu);
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setScene(scene);
 			}

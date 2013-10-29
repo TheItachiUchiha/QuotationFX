@@ -6,9 +6,12 @@ import org.apache.log4j.Logger;
 import com.kc.model.HelpVO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class HelpController {
 	
@@ -24,9 +27,19 @@ public class HelpController {
 	private TextArea address;
 	@FXML
 	private Label title;
-	public void saveCompanyDetails()
+	public void companyDetails()
 	{
-		HelpVO helpVO=new HelpVO();
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/help-companyDetails.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 
 }

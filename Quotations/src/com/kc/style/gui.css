@@ -1,0 +1,18 @@
+#submenubuttons{
+  -fx-background-color: transparent;
+	   -fx-border-color: white;
+   -fx-background-radius: 30;
+	   -fx-border-radius: 30;
+	   -fx-text-fill: black;
+	   -fx-font-size: 14px;
+	   -fx-padding: 10 20 10 20;
+	 
+}
+
+#menuHbox{
+	-fx-background-color: rgb(87,100,123);
+}
+
+.menuButtons{
+	-fx-background-color: transparent;
+}

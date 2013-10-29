@@ -6,8 +6,11 @@ import org.apache.log4j.Logger;
 import com.kc.model.ProductsVO;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 public class ProductsController {
 	
@@ -22,8 +25,32 @@ public class ProductsController {
 	@FXML
 	private Label title;
 
-	public void saveProduct()
+	public void newProduct()
 	{
-		ProductsVO productsVO = new ProductsVO();
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/products-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	public void modifyProduct()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/products-create.fxml"));
+		GridPane componentCreate = (GridPane) menuLoader.load();
+		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 	}
 }
