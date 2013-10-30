@@ -12,7 +12,7 @@ public class ComponentsVO {
 	
 	private String subCategory;
 	
-	private String vender;
+	private String vendor;
 	
 	private String model;
 	
@@ -59,12 +59,12 @@ public class ComponentsVO {
 		this.subCategory = subCategory;
 	}
 
-	public String getVender() {
-		return vender;
+	public String getVendor() {
+		return vendor;
 	}
 
-	public void setVender(String vender) {
-		this.vender = vender;
+	public void setVendor(String vendor) {
+		this.vendor = vendor;
 	}
 
 	public String getModel() {

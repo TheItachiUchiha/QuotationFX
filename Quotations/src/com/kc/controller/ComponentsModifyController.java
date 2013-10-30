@@ -81,7 +81,7 @@ public class ComponentsModifyController implements Initializable {
 							}
 							else if(node.getId().equals("vender"))
 							{
-								((TextField)node).setText(componentsVO.getVender());
+								((TextField)node).setText(componentsVO.getVendor());
 							}
 							else if(node.getId().equals("model"))
 							{

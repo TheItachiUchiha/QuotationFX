@@ -21,7 +21,7 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 	@FXML
 	private TextField subCategory;
 	@FXML
-	private TextField vender;
+	private TextField vendor;
 	@FXML
 	private TextField model;
 	@FXML
@@ -41,7 +41,7 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 		componentsVO.setComponentName(componentName.getText());
 		componentsVO.setComponentCategory(componentCategory.getText());
 		componentsVO.setSubCategory(subCategory.getText());
-		componentsVO.setVender(vender.getText());
+		componentsVO.setVendor(vendor.getText());
 		componentsVO.setModel(model.getText());
 		componentsVO.setType(type.getText());
 		componentsVO.setSize(size.getText());

@@ -31,7 +31,7 @@
     <TextField fx:id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
     <TextField fx:id="componentCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <TextField fx:id="subCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <TextField fx:id="vender" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="vendor" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <TextField fx:id="model" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <TextField fx:id="type" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
     <TextField fx:id="size" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
