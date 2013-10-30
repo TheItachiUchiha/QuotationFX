@@ -26,7 +26,6 @@
     <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="10">
       <children>
         <Button font="$x1" mnemonicParsing="false" onAction="#saveComponents" prefWidth="65.0" text="Save" />
-        <Button font="$x1" mnemonicParsing="false" prefWidth="65.0" text="Store" />
       </children>
     </HBox>
     <TextField fx:id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />

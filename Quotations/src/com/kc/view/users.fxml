@@ -58,7 +58,6 @@
             <Font size="15.0" fx:id="x2" />
           </font>
         </Button>
-        <Button font="$x2" mnemonicParsing="false" text="Store" />
       </children>
     </HBox>
   </children>

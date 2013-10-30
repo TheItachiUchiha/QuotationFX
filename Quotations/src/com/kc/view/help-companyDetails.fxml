@@ -27,7 +27,6 @@
             <Font size="15.0" fx:id="x2" />
           </font>
         </Button>
-        <Button font="$x2" mnemonicParsing="false" text="Store" />
       </children>
     </HBox>
     <TextField fx:id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="252.9998779296875" GridPane.columnIndex="1" GridPane.rowIndex="0" />
