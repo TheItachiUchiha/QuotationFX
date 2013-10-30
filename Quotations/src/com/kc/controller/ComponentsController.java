@@ -39,4 +39,18 @@ public class ComponentsController {
 		}
 		
 	}
+	public void viewComponent()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/components-view.fxml"));
+		BorderPane componentCreate = (BorderPane) menuLoader.load();
+		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(componentCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
 }
