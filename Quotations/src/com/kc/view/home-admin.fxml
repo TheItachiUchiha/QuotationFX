@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
   <!-- TODO Add Nodes -->
   <center>
     <SplitPane dividerPositions="0.2305045871559633" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
@@ -20,7 +20,7 @@
               </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="Price Estimation" />
+            <Button id="submenubuttons" mnemonicParsing="false" onAction="#priceEstimation" text="Price Estimation" />
             <Separator prefWidth="200.0" />
             <Button id="submenubuttons" mnemonicParsing="false" text="Quotation Preparation" />
             <Separator prefWidth="200.0" />

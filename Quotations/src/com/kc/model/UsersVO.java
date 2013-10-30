@@ -1,6 +1,5 @@
 package com.kc.model;
 
-import javafx.fxml.FXML;
 
 public class UsersVO {
 
@@ -13,21 +12,9 @@ public class UsersVO {
 
 	private String password;
 
-	private String quotation;
+	private ModuleVO moduleVO;
 
-	private String priceEstimation;
-
-	private String salesorderManagement;
-
-	private String statusReminder;
-
-	private String report;
-
-	private String view;
-
-	private String edit;
-
-	private String delete;
+	private String permission;
 
 	private String userType;
 
@@ -71,68 +58,20 @@ public class UsersVO {
 		this.password = password;
 	}
 
-	public String getQuotation() {
-		return quotation;
+	
+
+	/**
+	 * @return the moduleVO
+	 */
+	public ModuleVO getModuleVO() {
+		return moduleVO;
 	}
 
-	public void setQuotation(String quotation) {
-		this.quotation = quotation;
-	}
-
-	public String getPriceEstimation() {
-		return priceEstimation;
-	}
-
-	public void setPriceEstimation(String priceEstimation) {
-		this.priceEstimation = priceEstimation;
-	}
-
-	public String getSalesorderManagement() {
-		return salesorderManagement;
-	}
-
-	public void setSalesorderManagement(String salesorderManagement) {
-		this.salesorderManagement = salesorderManagement;
-	}
-
-	public String getStatusReminder() {
-		return statusReminder;
-	}
-
-	public void setStatusReminder(String statusReminder) {
-		this.statusReminder = statusReminder;
-	}
-
-	public String getReport() {
-		return report;
-	}
-
-	public void setReport(String report) {
-		this.report = report;
-	}
-
-	public String getView() {
-		return view;
-	}
-
-	public void setView(String view) {
-		this.view = view;
-	}
-
-	public String getEdit() {
-		return edit;
-	}
-
-	public void setEdit(String edit) {
-		this.edit = edit;
-	}
-
-	public String getDelete() {
-		return delete;
-	}
-
-	public void setDelete(String delete) {
-		this.delete = delete;
+	/**
+	 * @param moduleVO the moduleVO to set
+	 */
+	public void setModuleVO(ModuleVO moduleVO) {
+		this.moduleVO = moduleVO;
 	}
 
 	public String getUserType() {
@@ -143,4 +82,19 @@ public class UsersVO {
 		this.userType = userType;
 	}
 
+	/**
+	 * @return the permission
+	 */
+	public String getPermission() {
+		return permission;
+	}
+
+	/**
+	 * @param permission the permission to set
+	 */
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	
 }

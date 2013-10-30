@@ -1,7 +1,5 @@
 package com.kc.model;
 
-import javafx.fxml.FXML;
-
 public class CustomersVO {
 	
 	private String customerName;

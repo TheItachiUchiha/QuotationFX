@@ -1,5 +1,7 @@
 package com.kc.model;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -18,25 +20,9 @@ private String subCategory;
 	
 	private Date date;
 	
-	private String dealer;
+	private String customerType;
 	
-	private String endUser;
-	
-	private String componentName;
-	
-	private String vender;
-	
-	private String model;
-	
-	private String type;
-	
-	private String size;
-	
-	private String quantity;
-	
-	private String costPrice;
-	
-	private String dealerEndUser;
+	List<ComponentsVO> componentList;
 	
 	public String getProductCategory() {
 		return productCategory;
@@ -78,86 +64,35 @@ private String subCategory;
 		this.date = date;
 	}
 
-	public String getDealer() {
-		return dealer;
+	/**
+	 * @return the customerType
+	 */
+	public String getCustomerType() {
+		return customerType;
 	}
 
-	public void setDealer(String dealer) {
-		this.dealer = dealer;
+	/**
+	 * @param customerType the customerType to set
+	 */
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
 	}
 
-	public String getEndUser() {
-		return endUser;
+	/**
+	 * @return the componentList
+	 */
+	public List<ComponentsVO> getComponentList() {
+		return componentList;
 	}
 
-	public void setEndUser(String endUser) {
-		this.endUser = endUser;
+	/**
+	 * @param componentList the componentList to set
+	 */
+	public void setComponentList(List<ComponentsVO> componentList) {
+		this.componentList = componentList;
 	}
-
-	public String getComponentName() {
-		return componentName;
-	}
-
-	public void setComponentName(String componentName) {
-		this.componentName = componentName;
-	}
-
-	public String getVender() {
-		return vender;
-	}
-
-	public void setVender(String vender) {
-		this.vender = vender;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getSize() {
-		return size;
-	}
-
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public String getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getCostPrice() {
-		return costPrice;
-	}
-
-	public void setCostPrice(String costPrice) {
-		this.costPrice = costPrice;
-	}
-
-	public String getDealerEndUser() {
-		return dealerEndUser;
-	}
-
-	public void setDealerEndUser(String dealerEndUser) {
-		this.dealerEndUser = dealerEndUser;
-	}
-
 	
-
+	
+	
 }
+			

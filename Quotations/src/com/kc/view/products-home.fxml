@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,9 +11,9 @@
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="876.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsController">
   <!-- TODO Add Nodes -->
   <center>
-    <BorderPane prefHeight="200.0" prefWidth="200.0">
-      <left>
-        <VBox alignment="CENTER" prefHeight="566.0" prefWidth="185.0" spacing="20.0">
+    <SplitPane dividerPositions="0.20709382151029748" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+      <items>
+        <VBox alignment="TOP_CENTER" prefHeight="566.0" prefWidth="185.0" spacing="20.0">
           <children>
             <Label prefHeight="21.0" text="PRODUCTS" textFill="#cc00ff">
               <font>
@@ -31,7 +32,12 @@
             <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
           </stylesheets>
         </VBox>
-      </left>
-    </BorderPane>
+        <BorderPane prefHeight="200.0" prefWidth="200.0">
+          <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </padding>
+        </BorderPane>
+      </items>
+    </SplitPane>
   </center>
 </BorderPane>

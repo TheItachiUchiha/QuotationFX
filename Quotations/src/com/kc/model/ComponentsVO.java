@@ -4,6 +4,7 @@ package com.kc.model;
 
 public class ComponentsVO {
 
+	private int id;
 	
 	private String componentName;
 	
@@ -19,11 +20,20 @@ public class ComponentsVO {
 	
 	private String size;
 	
-	private String costPrice;
+	private double costPrice;
 	
-	private String dealerPrice;
+	private double dealerPrice;
 	
-	private String endUserPrice;
+	private double endUserPrice;
+
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getComponentName() {
 		return componentName;
@@ -81,30 +91,34 @@ public class ComponentsVO {
 		this.size = size;
 	}
 
-	public String getCostPrice() {
+	public double getCostPrice() {
 		return costPrice;
 	}
 
-	public void setCostPrice(String costPrice) {
+	public void setCostPrice(double costPrice) {
 		this.costPrice = costPrice;
 	}
 
-	public String getDealerPrice() {
+	public double getDealerPrice() {
 		return dealerPrice;
 	}
 
-	public void setDealerPrice(String dealerPrice) {
+	public void setDealerPrice(double dealerPrice) {
 		this.dealerPrice = dealerPrice;
 	}
 
-	public String getEndUserPrice() {
+	public double getEndUserPrice() {
 		return endUserPrice;
 	}
 
-	public void setEndUserPrice(String endUserPrice) {
+	public void setEndUserPrice(double endUserPrice) {
 		this.endUserPrice = endUserPrice;
 	}
 	
+	public String toString()
+	{
+		return this.componentName;
+	}
 	
 	
 }

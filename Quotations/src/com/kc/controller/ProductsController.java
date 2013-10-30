@@ -8,6 +8,7 @@ import com.kc.model.ProductsVO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -31,8 +32,8 @@ public class ProductsController {
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
 						.getResource("../view/products-create.fxml"));
-		GridPane componentCreate = (GridPane) menuLoader.load();
-		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		GridPane productCreate = (GridPane) menuLoader.load();
+		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(productCreate);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -45,8 +46,8 @@ public class ProductsController {
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
 						.getResource("../view/products-create.fxml"));
-		GridPane componentCreate = (GridPane) menuLoader.load();
-		((BorderPane)((BorderPane)LoginController.home.getCenter()).getCenter()).setCenter(componentCreate);
+		GridPane productCreate = (GridPane) menuLoader.load();
+		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(productCreate);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
