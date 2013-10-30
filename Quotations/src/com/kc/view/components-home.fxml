@@ -21,11 +21,15 @@
               </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" onAction="#newComponent" text="Create a New Component" />
+            <ToggleButton mnemonicParsing="false" onAction="#newComponent" styleClass="submenubuttons" text="Create a New Component">
+              <toggleGroup>
+                <ToggleGroup fx:id="componentSubmenu" />
+              </toggleGroup>
+            </ToggleButton>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" onAction="#modifyComponent" text="Modify a Component" />
+            <ToggleButton mnemonicParsing="false" onAction="#modifyComponent" styleClass="submenubuttons" text="Modify a Component" toggleGroup="$componentSubmenu" />
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="View Components" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="View Components" toggleGroup="$componentSubmenu" />
             <Separator prefWidth="200.0" />
           </children>
           <padding>

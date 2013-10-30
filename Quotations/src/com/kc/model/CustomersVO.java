@@ -2,6 +2,8 @@ package com.kc.model;
 
 public class CustomersVO {
 	
+	private int id;
+	
 	private String customerName;
 	
 	private String companyName;
@@ -15,10 +17,18 @@ public class CustomersVO {
 	private String emailId;
 	
 	private String contactNumber;
+	
 	private String customerType;
-
 	
 	private String tinNumber;
+	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -73,6 +83,9 @@ public class CustomersVO {
 	public void setCustomerType(String customerType) {
 		this.customerType = customerType;
 	}
-	
+	public String toString()
+	{
+		return this.customerName;
+	}
 
 }

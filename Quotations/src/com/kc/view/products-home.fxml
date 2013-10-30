@@ -21,13 +21,20 @@
               </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" onAction="#newProduct" text="Create a New Product" />
+            <ToggleButton mnemonicParsing="false" onAction="#newProduct" styleClass="submenubuttons" text="Create a New Product">
+              <toggleGroup>
+                <ToggleGroup fx:id="productSubmenu" />
+              </toggleGroup>
+            </ToggleButton>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" onAction="#modifyProduct" text="Modify a Product" />
+            <ToggleButton mnemonicParsing="false" onAction="#modifyProduct" styleClass="submenubuttons" text="Modify a Product" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="View Products" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="View Products" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
           </children>
+          <padding>
+            <Insets top="40.0" />
+          </padding>
           <stylesheets>
             <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
           </stylesheets>

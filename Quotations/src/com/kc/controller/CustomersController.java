@@ -29,8 +29,8 @@ public class CustomersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/customers-create.fxml"));
-		GridPane customerCreate = (GridPane) menuLoader.load();
+						.getResource("../view/customers-modify.fxml"));
+		BorderPane customerCreate = (BorderPane) menuLoader.load();
 		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(customerCreate);
 		}
 		catch (Exception e) {

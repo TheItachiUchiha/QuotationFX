@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -20,17 +21,24 @@
               </font>
             </Label>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" onAction="#priceEstimation" text="Price Estimation" />
+            <ToggleButton mnemonicParsing="false" onAction="#priceEstimation" styleClass="submenubuttons" text="Price Estimation">
+              <toggleGroup>
+                <ToggleGroup fx:id="homeSubmenu" />
+              </toggleGroup>
+            </ToggleButton>
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="Quotation Preparation" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="Sales Order" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="Status / Reminder" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="200.0" />
-            <Button id="submenubuttons" mnemonicParsing="false" text="Reports" />
+            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="200.0" />
           </children>
+          <padding>
+            <Insets top="40.0" />
+          </padding>
           <stylesheets>
             <URL value="@../style/gui.css" />
           </stylesheets>
