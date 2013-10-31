@@ -34,6 +34,8 @@ public class ProductsController {
 				LoginController.class
 						.getResource("../view/products-create.fxml"));
 		GridPane productCreate = (GridPane) menuLoader.load();
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create Product");
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(productCreate);
 		}
 		catch (Exception e) {
@@ -48,6 +50,25 @@ public class ProductsController {
 				LoginController.class
 						.getResource("../view/products-create.fxml"));
 		GridPane productCreate = (GridPane) menuLoader.load();
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify Product");
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
+		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(productCreate);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	public void viewProduct()
+	{
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/products-create.fxml"));
+		GridPane productCreate = (GridPane) menuLoader.load();
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Product");
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(productCreate);
 		}
 		catch (Exception e) {
