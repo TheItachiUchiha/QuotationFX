@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -12,7 +13,8 @@ public class AdminHomeController {
 		try{
 			FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("../view/priceEstimation.fxml"));
 			BorderPane price = (BorderPane) loader.load();
-			((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(price);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(price);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
