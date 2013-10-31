@@ -43,7 +43,7 @@
             <URL value="@../style/gui.css" />
           </stylesheets>
         </VBox>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
           <tabs>
             <Tab text="Untitled Tab 1">
               <content>

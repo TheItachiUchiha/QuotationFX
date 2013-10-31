@@ -19,15 +19,18 @@
               <font>
                 <Font size="15.0" />
               </font>
+              <VBox.margin>
+                <Insets bottom="20.0" />
+              </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#newProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Create a New Product">
+            <ToggleButton mnemonicParsing="false" onAction="#newProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Create Product">
               <toggleGroup>
                 <ToggleGroup fx:id="productSubmenu" />
               </toggleGroup>
             </ToggleButton>
             <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#modifyProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify a Product" toggleGroup="$productSubmenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#modifyProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify Product" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
             <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Products" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
@@ -39,7 +42,7 @@
             <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
           </stylesheets>
         </VBox>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
           <tabs>
             <Tab text="Untitled Tab 1">
               <content>

@@ -18,19 +18,19 @@
         <GridPane alignment="TOP_CENTER" gridLinesVisible="false" hgap="0.0" prefHeight="331.0" prefWidth="797.9999000000025" vgap="0.0">
           <!-- TODO Add Nodes -->
           <children>
-            <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <font>
                 <Font name="Calibri" size="15.0" fx:id="x1" />
               </font>
             </Label>
-            <Label font="$x1" prefHeight="33.0" prefWidth="128.0" text="Company Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="Address" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="City" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="State" GridPane.columnIndex="0" GridPane.rowIndex="4" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="Email id" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-            <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Contact Number" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-            <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+            <Label font="$x1" prefHeight="33.0" prefWidth="128.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="City" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="State" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="Email id" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <TextField id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <TextField id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea fx:id="address" maxWidth="-Infinity" prefHeight="51.0" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -60,8 +60,8 @@
             </HBox>
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="197.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="717.0" minWidth="10.0" prefWidth="383.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="-1.0" percentWidth="50.0" prefWidth="-1.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="-1.0" percentWidth="50.0" prefWidth="-1.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -83,7 +83,7 @@
     </HBox>
   </center>
   <top>
-    <HBox prefHeight="41.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER" BorderPane.margin="$x4">
+    <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER" BorderPane.margin="$x4">
       <children>
         <Label minHeight="13.0" prefHeight="41.0" text="Search" />
         <AutoCompleteTextField fx:id="customerNameAutoFill" maxWidth="-Infinity" prefHeight="24.0" prefWidth="240.0" />

@@ -19,6 +19,9 @@
               <font>
                 <Font size="15.0" />
               </font>
+              <VBox.margin>
+                <Insets bottom="20.0" />
+              </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
             <ToggleButton mnemonicParsing="false" onAction="#companyDetails" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Company Details">
@@ -37,7 +40,7 @@
             <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
           </stylesheets>
         </VBox>
-        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
           <tabs>
             <Tab text="Untitled Tab 1">
               <content>

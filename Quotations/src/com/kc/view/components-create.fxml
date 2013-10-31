@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="20.0" prefHeight="307.0" prefWidth="578.9998779296875" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
+<GridPane alignment="CENTER" hgap="20.0" prefHeight="307.0" prefWidth="579.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
   <!-- TODO Add Nodes -->
   <children>
     <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -15,7 +15,7 @@
         <Font size="15.0" fx:id="x1" />
       </font>
     </Label>
-    <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Component Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <Label id="title" font="$x1" prefHeight="19.999900000002526" prefWidth="149.0" text="Component Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
     <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Sub Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
     <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Vender" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
     <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Model" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
@@ -39,7 +39,7 @@
     <TextField fx:id="vendor" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <TextField fx:id="model" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
     <TextField fx:id="type" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <TextField fx:id="size" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField fx:id="size" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0001220703125" GridPane.columnIndex="1" GridPane.rowIndex="6" />
     <TextField fx:id="costPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
     <TextField fx:id="dealerPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
     <TextField fx:id="endUserPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
@@ -58,7 +58,7 @@
     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="89.0" minHeight="9.0" prefHeight="9.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
