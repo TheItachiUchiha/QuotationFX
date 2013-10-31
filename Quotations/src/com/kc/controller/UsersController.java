@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -19,7 +20,8 @@ public class UsersController {
 				LoginController.class
 						.getResource("../view/users.fxml"));
 		GridPane userCreate = (GridPane) menuLoader.load();
-		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(userCreate);
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create User");
+		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
@@ -33,7 +35,8 @@ public class UsersController {
 				LoginController.class
 						.getResource("../view/users.fxml"));
 		GridPane userCreate = (GridPane) menuLoader.load();
-		((BorderPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setCenter(userCreate);
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify User");
+		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

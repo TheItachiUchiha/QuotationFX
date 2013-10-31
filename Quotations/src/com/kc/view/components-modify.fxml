@@ -15,7 +15,7 @@
   <center>
     <HBox fx:id="modifyHbox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
       <children>
-        <GridPane alignment="CENTER" prefHeight="403.0" prefWidth="579.0">
+        <GridPane alignment="CENTER" prefHeight="403.0" prefWidth="579.0" HBox.hgrow="NEVER">
           <!-- TODO Add Nodes -->
           <children>
             <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name" GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -34,7 +34,7 @@
             <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="End User Price" GridPane.columnIndex="0" GridPane.rowIndex="9" />
             <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.halignment="LEFT" GridPane.rowIndex="10">
               <children>
-                <Button font="$x1" mnemonicParsing="false" prefWidth="65.0" text="Save" onAction="#modifyComponent" />
+                <Button font="$x1" mnemonicParsing="false" onAction="#modifyComponent" prefWidth="65.0" text="Save" />
               </children>
             </HBox>
             <TextField id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />

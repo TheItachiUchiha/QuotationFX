@@ -11,26 +11,29 @@
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsController">
   <!-- TODO Add Nodes -->
   <center>
-    <SplitPane dividerPositions="0.2672018348623853" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+    <SplitPane dividerPositions="0.24426605504587157" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
       <items>
-        <VBox alignment="TOP_CENTER" prefHeight="566.0" prefWidth="216.0" spacing="20.0">
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="210.0" spacing="0.0">
           <children>
-            <Label alignment="CENTER" prefHeight="28.0" text="COMPONENTS" textFill="#cc00ff">
+            <Label alignment="CENTER_LEFT" prefHeight="28.0" text="COMPONENTS" textFill="#cc00ff">
               <font>
                 <Font size="15.0" />
               </font>
+              <VBox.margin>
+                <Insets />
+              </VBox.margin>
             </Label>
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#newComponent" styleClass="submenubuttons" text="Create a New Component">
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#newComponent" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Create Component">
               <toggleGroup>
                 <ToggleGroup fx:id="componentSubmenu" />
               </toggleGroup>
             </ToggleButton>
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#modifyComponent" styleClass="submenubuttons" text="Modify a Component" toggleGroup="$componentSubmenu" />
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="View Components" toggleGroup="$componentSubmenu" />
-            <Separator prefWidth="200.0" />
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#modifyComponent" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify Component" toggleGroup="$componentSubmenu" />
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Components" toggleGroup="$componentSubmenu" />
+            <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
           </children>
           <padding>
             <Insets top="40.0" />
@@ -39,11 +42,15 @@
             <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
           </stylesheets>
         </VBox>
-        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
-          <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-          </padding>
-        </BorderPane>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+            <Tab text="Untitled Tab 1">
+              <content>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
       </items>
     </SplitPane>
   </center>

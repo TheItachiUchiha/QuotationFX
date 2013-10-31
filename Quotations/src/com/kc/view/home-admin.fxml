@@ -11,30 +11,30 @@
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
   <!-- TODO Add Nodes -->
   <center>
-    <SplitPane dividerPositions="0.2305045871559633" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+    <SplitPane dividerPositions="0.24426605504587157" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
       <items>
-        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="210.0" spacing="0.0">
           <children>
             <Label prefHeight="21.0" text="HOME" textFill="#cc00ff">
               <font>
                 <Font size="15.0" />
               </font>
             </Label>
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" onAction="#priceEstimation" styleClass="submenubuttons" text="Price Estimation">
+            <Separator prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation">
               <toggleGroup>
                 <ToggleGroup fx:id="homeSubmenu" />
               </toggleGroup>
             </ToggleButton>
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="200.0" />
+            <Separator prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
+            <Separator prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
+            <Separator prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
+            <Separator prefWidth="210.0" />
+            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
+            <Separator prefWidth="210.0" />
           </children>
           <padding>
             <Insets top="40.0" />
@@ -43,7 +43,15 @@
             <URL value="@../style/gui.css" />
           </stylesheets>
         </VBox>
-        <BorderPane prefHeight="200.0" prefWidth="200.0" />
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+          <tabs>
+            <Tab text="Untitled Tab 1">
+              <content>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
       </items>
     </SplitPane>
   </center>

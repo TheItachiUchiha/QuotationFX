@@ -53,7 +53,7 @@
     </ComboBox>
     <HBox id="HBox" alignment="CENTER" spacing="30.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="8">
       <children>
-        <Button contentDisplay="TOP" mnemonicParsing="false" text="Save">
+        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#saveUser" text="Save">
           <font>
             <Font size="15.0" fx:id="x2" />
           </font>

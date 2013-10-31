@@ -12,9 +12,21 @@ public class UsersVO {
 
 	private String password;
 
-	private ModuleVO moduleVO;
+	private String quotation;
+	
+	private String priceEstimation;
 
-	private String permission;
+	private String salesOrderManagement;
+	
+	private String statusReminder;
+	
+	private String report;
+	
+	private String view;
+	
+	private String edit;
+	
+	private String delete;
 
 	private String userType;
 
@@ -58,22 +70,6 @@ public class UsersVO {
 		this.password = password;
 	}
 
-	
-
-	/**
-	 * @return the moduleVO
-	 */
-	public ModuleVO getModuleVO() {
-		return moduleVO;
-	}
-
-	/**
-	 * @param moduleVO the moduleVO to set
-	 */
-	public void setModuleVO(ModuleVO moduleVO) {
-		this.moduleVO = moduleVO;
-	}
-
 	public String getUserType() {
 		return userType;
 	}
@@ -82,19 +78,68 @@ public class UsersVO {
 		this.userType = userType;
 	}
 
-	/**
-	 * @return the permission
-	 */
-	public String getPermission() {
-		return permission;
+	public String getQuotation() {
+		return quotation;
 	}
 
-	/**
-	 * @param permission the permission to set
-	 */
-	public void setPermission(String permission) {
-		this.permission = permission;
+	public void setQuotation(String quotation) {
+		this.quotation = quotation;
 	}
 
-	
+	public String getPriceEstimation() {
+		return priceEstimation;
+	}
+
+	public void setPriceEstimation(String priceEstimation) {
+		this.priceEstimation = priceEstimation;
+	}
+
+	public String getSalesOrderManagement() {
+		return salesOrderManagement;
+	}
+
+	public void setSalesOrderManagement(String salesOrderManagement) {
+		this.salesOrderManagement = salesOrderManagement;
+	}
+
+	public String getStatusReminder() {
+		return statusReminder;
+	}
+
+	public void setStatusReminder(String statusReminder) {
+		this.statusReminder = statusReminder;
+	}
+
+	public String getReport() {
+		return report;
+	}
+
+	public void setReport(String report) {
+		this.report = report;
+	}
+
+	public String getView() {
+		return view;
+	}
+
+	public void setView(String view) {
+		this.view = view;
+	}
+
+	public String getEdit() {
+		return edit;
+	}
+
+	public void setEdit(String edit) {
+		this.edit = edit;
+	}
+
+	public String getDelete() {
+		return delete;
+	}
+
+	public void setDelete(String delete) {
+		this.delete = delete;
+	}
+
 }
