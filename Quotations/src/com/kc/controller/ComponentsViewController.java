@@ -261,6 +261,7 @@ public class ComponentsViewController implements Initializable {
 				componentsDAO.deleteComponents(componentList);
 				message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
 				message.setVisible(true);
+				componentTable.setItems(componentsDAO.getComponents());
 			}
 		}
 		catch (Exception e) {
