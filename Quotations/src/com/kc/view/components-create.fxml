@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="20.0" prefHeight="307.0" prefWidth="579.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
+<GridPane alignment="CENTER" hgap="20.0" prefHeight="541.0" prefWidth="579.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
   <!-- TODO Add Nodes -->
   <children>
     <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -45,29 +45,29 @@
     </HBox>
     <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
       <children>
-        <Label id="title" font="$x1" prefHeight="20.0" prefWidth="258.0" text="One Component Successfully Created" textFill="#a533ff" visible="false" />
+        <Label id="title" fx:id="message" alignment="BASELINE_CENTER" font="$x1" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false" />
       </children>
     </HBox>
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" percentWidth="50.0" prefWidth="-1.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" percentWidth="50.0" prefWidth="-1.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
   </columnConstraints>
   <padding>
     <Insets bottom="150.0" left="20.0" right="40.0" top="100.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="9.0" prefHeight="9.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="5.0" prefHeight="21.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="21.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="9.0" prefHeight="23.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="8.0" prefHeight="23.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>

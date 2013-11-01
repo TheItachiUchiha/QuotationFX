@@ -1,10 +1,12 @@
 package com.kc.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
 
@@ -34,9 +36,13 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 	private TextField dealerPrice;
 	@FXML
 	private TextField endUserPrice;
+	@FXML
+	private Label message;
 	
 	public void saveComponents()
 	{
+		try
+		{
 		ComponentsVO componentsVO=new ComponentsVO();
 		componentsVO.setComponentName(componentName.getText());
 		componentsVO.setComponentCategory(componentCategory.getText());
@@ -50,6 +56,12 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 		componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice.getText()));
 		
 		componentsDAO.saveComponent(componentsVO);
+		message.setText(CommonConstants.COMPONENT_ADD_SUCCESS);
+		message.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

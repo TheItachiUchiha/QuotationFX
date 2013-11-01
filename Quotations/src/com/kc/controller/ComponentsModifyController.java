@@ -8,6 +8,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -15,6 +16,7 @@ import javafx.scene.layout.HBox;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
@@ -36,10 +38,8 @@ public class ComponentsModifyController implements Initializable {
 	
 	@FXML
 	private HBox modifyHbox; 
-	
-
-
-
+	@FXML
+	private Label message;
 
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
@@ -68,45 +68,48 @@ public class ComponentsModifyController implements Initializable {
 							ComponentsModifyController.this.componentsVO.setId(componentsVO.getId());
 							for(Node node : listTextField)
 							{
-								if(node.getId().equals("componentName"))
+								if(null!=node.getId())
 								{
-									((TextField)node).setText(componentsVO.getComponentName());
-								}
-								else if(node.getId().equals("componentCategory"))
-								{
-									((TextField)node).setText(componentsVO.getComponentCategory());
-								}
-								else if(node.getId().equals("subCategory"))
-								{
-									((TextField)node).setText(componentsVO.getSubCategory());
-								}
-								else if(node.getId().equals("vendor"))
-								{
-									((TextField)node).setText(componentsVO.getVendor());
-								}
-								else if(node.getId().equals("model"))
-								{
-									((TextField)node).setText(componentsVO.getModel());
-								}
-								else if(node.getId().equals("type"))
-								{
-									((TextField)node).setText(componentsVO.getType());
-								}
-								else if(node.getId().equals("size"))
-								{
-									((TextField)node).setText(componentsVO.getSize());
-								}
-								else if(node.getId().equals("costPrice"))
-								{
-									((TextField)node).setText(String.valueOf(componentsVO.getCostPrice()));
-								}
-								else if(node.getId().equals("dealerPrice"))
-								{
-									((TextField)node).setText(String.valueOf(componentsVO.getDealerPrice()));
-								}
-								else if(node.getId().equals("endUserPrice"))
-								{
-									((TextField)node).setText(String.valueOf(componentsVO.getEndUserPrice()));
+									if(node.getId().equals("componentName"))
+									{
+										((TextField)node).setText(componentsVO.getComponentName());
+									}
+									else if(node.getId().equals("componentCategory"))
+									{
+										((TextField)node).setText(componentsVO.getComponentCategory());
+									}
+									else if(node.getId().equals("subCategory"))
+									{
+										((TextField)node).setText(componentsVO.getSubCategory());
+									}
+									else if(node.getId().equals("vendor"))
+									{
+										((TextField)node).setText(componentsVO.getVendor());
+									}
+									else if(node.getId().equals("model"))
+									{
+										((TextField)node).setText(componentsVO.getModel());
+									}
+									else if(node.getId().equals("type"))
+									{
+										((TextField)node).setText(componentsVO.getType());
+									}
+									else if(node.getId().equals("size"))
+									{
+										((TextField)node).setText(componentsVO.getSize());
+									}
+									else if(node.getId().equals("costPrice"))
+									{
+										((TextField)node).setText(String.valueOf(componentsVO.getCostPrice()));
+									}
+									else if(node.getId().equals("dealerPrice"))
+									{
+										((TextField)node).setText(String.valueOf(componentsVO.getDealerPrice()));
+									}
+									else if(node.getId().equals("endUserPrice"))
+									{
+										((TextField)node).setText(String.valueOf(componentsVO.getEndUserPrice()));
+									}
 								}
 							}
 						}
@@ -170,6 +173,8 @@ public class ComponentsModifyController implements Initializable {
 			}
 			componentsVO.setId(this.componentsVO.getId());
 			componentsDAO.updateComponent(componentsVO);
+			message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
+			message.setVisible(true);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

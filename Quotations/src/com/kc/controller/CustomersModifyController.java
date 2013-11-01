@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
@@ -15,6 +17,8 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -36,7 +40,15 @@ public class CustomersModifyController implements Initializable{
 	
 	@FXML
 	private HBox modifyHbox; 
+	
+	@FXML
+    private RadioButton dealer;
 
+    @FXML
+    private RadioButton endUser;
+    
+    @FXML
+	private Label message;
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		// TODO Auto-generated method stub
@@ -96,18 +108,25 @@ public class CustomersModifyController implements Initializable{
 									{
 										((TextField)node).setText(customersVO.getContactNumber());
 									}
-									else if(node.getId().equals("customerType"))
-									{
-										((TextField)node).setText(customersVO.getCustomerType());
-									}
 									else if(node.getId().equals("tinNumber"))
 									{
 										((TextField)node).setText(customersVO.getTinNumber());
 									}
+									
 								}
+							}
+							if(customersVO.getCustomerType().equalsIgnoreCase("D"))
+							{
+								dealer.setSelected(true);
+							}
+				
+							if(customersVO.getCustomerType().equalsIgnoreCase("E"))
+							{
+								endUser.setSelected(true);
 							}
 						}
 					}
+					
 				}
 			});
 			}
@@ -115,7 +134,7 @@ public class CustomersModifyController implements Initializable{
 				LOG.error(e.getMessage());
 			}
 	}
-	public void modifyComponent()
+	public void modifyCustomer()
 	{
 		try
 		{
@@ -124,45 +143,54 @@ public class CustomersModifyController implements Initializable{
 		CustomersVO customersVO = new CustomersVO();
 			for(Node node : listTextField)
 			{
-				if(node.getId().equals("customerName"))
+				if(null!=node.getId())
 				{
-					customersVO.setCustomerName(((TextField)node).getText());
+					if(node.getId().equals("customerName"))
+					{
+						customersVO.setCustomerName(((TextField)node).getText());
+					}
+					else if(node.getId().equals("companyName"))
+					{
+						customersVO.setCompanyName(((TextField)node).getText());
+					}
+					else if(node.getId().equals("address"))
+					{
+						customersVO.setAddress(((TextArea)node).getText());
+					}
+					else if(node.getId().equals("city"))
+					{
+						customersVO.setCity(((TextField)node).getText());
+					}
+					else if(node.getId().equals("state"))
+					{
+						customersVO.setState(((TextField)node).getText());
+					}
+					else if(node.getId().equals("emailId"))
+					{
+						customersVO.setEmailId(((TextField)node).getText());
+					}
+					else if(node.getId().equals("contactNumber"))
+					{
+						customersVO.setContactNumber(((TextField)node).getText());
+					}
+					else if(node.getId().equals("tinNumber"))
+					{
+						customersVO.setTinNumber(((TextField)node).getText());
+					}
 				}
-				else if(node.getId().equals("companyName"))
-				{
-					customersVO.setCompanyName(((TextField)node).getText());
-				}
-				else if(node.getId().equals("address"))
-				{
-					customersVO.setAddress(((TextArea)node).getText());
-				}
-				else if(node.getId().equals("city"))
-				{
-					customersVO.setCity(((TextField)node).getText());
-				}
-				else if(node.getId().equals("state"))
-				{
-					customersVO.setState(((TextField)node).getText());
-				}
-				else if(node.getId().equals("emailId"))
-				{
-					customersVO.setEmailId(((TextField)node).getText());
-				}
-				else if(node.getId().equals("contactNumber"))
-				{
-					customersVO.setContactNumber(((TextField)node).getText());
-				}
-				else if(node.getId().equals("customerType"))
-				{
-					customersVO.setCustomerType(((TextField)node).getText());
-				}
-				else if(node.getId().equals("tinNumber"))
-				{
-					customersVO.setTinNumber(((TextField)node).getText());
-				}
+			}
+			if(dealer.isSelected())
+			{
+				customersVO.setCustomerType("D");
+			}
+			else
+			{
+				customersVO.setCustomerType("E");
 			}
 			customersVO.setId(this.customersVO.getId());
 			customersDAO.updateCustomer(customersVO);
+			message.setText(CommonConstants.CUSTOMER_MODIFY_SUCCESS);
+			message.setVisible(true);
 		}
 		catch (Exception e) {
 			// TODO: handle exception
