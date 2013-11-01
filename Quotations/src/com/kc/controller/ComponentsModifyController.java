@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -177,7 +178,8 @@ public class ComponentsModifyController implements Initializable {
 			message.setVisible(true);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			message.setText(CommonConstants.FAILURE);
+			message.setVisible(true);
 			e.printStackTrace();
 		}
 		

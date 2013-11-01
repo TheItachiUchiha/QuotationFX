@@ -18,7 +18,7 @@ public class CustomersDAO {
 	private ResultSet resultSet = null;
 	
 
-	public void saveCustomer(CustomersVO customersVO)
+	public void saveCustomer(CustomersVO customersVO) throws Exception
 	{
 		
 		try
@@ -40,6 +40,7 @@ public class CustomersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
 	}

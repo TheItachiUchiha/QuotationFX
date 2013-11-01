@@ -15,7 +15,7 @@
   <center>
     <HBox fx:id="modifyHbox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
       <children>
-        <GridPane id="message" alignment="CENTER" prefHeight="403.0" prefWidth="579.0" visible="true" HBox.hgrow="NEVER">
+        <GridPane id="message" fx:id="gridPane" alignment="CENTER" prefHeight="403.0" prefWidth="579.0" visible="true" HBox.hgrow="NEVER">
           <!-- TODO Add Nodes -->
           <children>
             <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">

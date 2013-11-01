@@ -1,5 +1,7 @@
 package com.kc.controller;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -68,8 +70,16 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 			message.setText(CommonConstants.CUSTOMER_ADD_SUCCESS);
 			message.setVisible(true);
 		}
+		catch (SQLException s)
+		{
+			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
+				message.setText(CommonConstants.DUPLICATE_CUSTOMER);
+				message.setVisible(true);
+			}
+		}
 		catch (Exception e) {
-		e.printStackTrace();
+			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 	}
 

@@ -13,23 +13,20 @@ import javafx.collections.ObservableList;
 import com.kc.model.ComponentsVO;
 import com.kc.util.DBConnector;
 
-
 public class ComponentsDAO {
-	
+
 	private Connection conn = null;
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
-	
 
-	public void saveComponent(ComponentsVO componentsVO)
-	{
-		
-		try
-		{
+	public void saveComponent(ComponentsVO componentsVO) throws Exception {
+
+		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO components(name,category,subcategory,vendor,model,type,size,costprice,dealerprice,enduserprice) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			
+			preparedStatement = conn
+					.prepareStatement("INSERT INTO components(name,category,subcategory,vendor,model,type,size,costprice,dealerprice,enduserprice) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
 			preparedStatement.setString(1, componentsVO.getComponentName());
 			preparedStatement.setString(2, componentsVO.getComponentCategory());
 			preparedStatement.setString(3, componentsVO.getSubCategory());
@@ -40,17 +37,17 @@ public class ComponentsDAO {
 			preparedStatement.setDouble(8, componentsVO.getCostPrice());
 			preparedStatement.setDouble(9, componentsVO.getDealerPrice());
 			preparedStatement.setDouble(10, componentsVO.getEndUserPrice());
-			
+
 			preparedStatement.execute();
-		}
-		catch (Exception e) {
+		}  catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		}
 		
+
 	}
-	
-	
-	public void updateComponent(ComponentsVO componentsVO)
+
+	public void updateComponent(ComponentsVO componentsVO) throws Exception
 	{
 		try
 		{
@@ -72,21 +69,19 @@ public class ComponentsDAO {
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			throw e;	
 		}
-		
 	}
-	
-	public ObservableList<ComponentsVO> getComponents() throws SQLException
-	{		
-		ObservableList<ComponentsVO> listOfComponents = FXCollections.observableArrayList();
-		try{
+
+	public ObservableList<ComponentsVO> getComponents() throws SQLException {
+		ObservableList<ComponentsVO> listOfComponents = FXCollections
+				.observableArrayList();
+		try {
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
 			resultSet = statement.executeQuery("SELECT * FROM COMPONENTS");
-			
-			while(resultSet.next())
-			{
+
+			while (resultSet.next()) {
 				ComponentsVO componentsVO = new ComponentsVO();
 				componentsVO.setId(resultSet.getInt(1));
 				componentsVO.setComponentName(resultSet.getString(2));
@@ -101,16 +96,28 @@ public class ComponentsDAO {
 				componentsVO.setDealerPrice(resultSet.getInt(11));
 				listOfComponents.add(componentsVO);
 			}
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
-		}
-		finally{
-			if(conn !=null)
-			{
+		} finally {
+			if (conn != null) {
 				conn.close();
 			}
 		}
 		return listOfComponents;
+	}
+
+	public void deleteComponents(List<ComponentsVO> listComponents) throws Exception {
+		try {
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			for (ComponentsVO componentsVO : listComponents) {
+				statement.addBatch("DELETE FROM COMPONENTS WHERE ID="
+						+ componentsVO.getId());
+			}
+			statement.executeBatch();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }

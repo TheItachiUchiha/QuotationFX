@@ -32,7 +32,7 @@
             <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
             <ToggleButton mnemonicParsing="false" onAction="#modifyComponent" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify Component" toggleGroup="$componentSubmenu" />
             <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
-            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Components" toggleGroup="$componentSubmenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#viewComponent" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Components" toggleGroup="$componentSubmenu" />
             <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="210.0" />
           </children>
           <padding>
