@@ -61,6 +61,11 @@
         </Button>
       </children>
     </HBox>
+    <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="9">
+      <children>
+        <Label id="title" font="$x2" prefHeight="20.0" prefWidth="258.0" text="One User Successfully Created" textFill="#a533ff" visible="false" />
+      </children>
+    </HBox>
   </children>
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="-1.0" minWidth="10.0" percentWidth="50.0" prefWidth="-1.0" />
@@ -78,6 +83,7 @@
     <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
   </rowConstraints>
 </GridPane>
