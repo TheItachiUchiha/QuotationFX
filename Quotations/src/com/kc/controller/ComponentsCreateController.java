@@ -59,11 +59,15 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 			componentsDAO.saveComponent(componentsVO);
 			message.setText(CommonConstants.COMPONENT_ADD_SUCCESS);
 			message.setVisible(true);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
 		}
 		catch (SQLException s) {
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_COMPONENT);
 				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
 			}
 		}
 		catch (Exception e) {

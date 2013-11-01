@@ -40,3 +40,11 @@
 .menuButtons{
 	-fx-background-color: transparent;
 }
+
+.success{
+	-fx-text-fill: green;
+}
+
+.failure{
+	-fx-text-fill: red;
+}

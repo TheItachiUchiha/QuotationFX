@@ -73,7 +73,7 @@ public class ComponentsViewController implements Initializable {
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try{
-			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
+			
 			componentsList = componentsDAO.getComponents();
 			componentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			searchByList = FXCollections.observableArrayList();
@@ -89,56 +89,7 @@ public class ComponentsViewController implements Initializable {
 			((ComboBox<String>)topGrid.getChildren().get(3)).valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
-	                if(t1.equals("Component Category"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getComponentCategory());
-	                	}
-	                }
-	                else if(t1.equals("Sub Category"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getSubCategory());
-	                	}
-	                }
-	                else if(t1.equals("Component Name"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getComponentName());
-	                	}
-	                }
-	                else if(t1.equals("Vendor"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getVendor());
-	                	}
-	                }
-	                else if(t1.equals("Model"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getModel());
-	                	}
-	                }
-	                else if(t1.equals("Type"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getType());
-	                	}
-	                }
-	                else if(t1.equals("Size"))
-	                {
-	                	for(ComponentsVO componentsVO : componentsList)
-	                	{
-	                		tempList.add(componentsVO.getSize());
-	                	}
-	                }
-	                ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);
+					 fillAutoCompleteFromComboBox(t1);
 	            }
 	        });
 			
@@ -146,92 +97,8 @@ public class ComponentsViewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
-					String tempString = ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).getText();
-					if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Category"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getComponentCategory().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Sub Category"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getSubCategory().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Name"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getComponentName().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Vendor"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getVendor().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Model"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getModel().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Type"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getType().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
-					else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Size"))
-					{
-						for(ComponentsVO componentsVO : componentsList)
-						{
-							if(componentsVO.getSize().equalsIgnoreCase(tempString))
-							{
-								tempList.add(componentsVO);
-							}
-						}
-					}
 					
-					
-					name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
-					category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
-					subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
-					vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
-					model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
-					type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
-					size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("costPrice"));
-					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("dealerPrice"));
-					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("endUserPrice"));
-					componentTable.setItems(tempList);
-					
+					fillTableFromData();
 				}
 			});
 			
@@ -240,6 +107,166 @@ public class ComponentsViewController implements Initializable {
 			
 		}
 		catch (Exception e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private void fillAutoCompleteFromComboBox(String t1)
+	{
+			try{
+			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
+			if(t1.equals("Component Category"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getComponentCategory());
+	        	}
+	        }
+	        else if(t1.equals("Sub Category"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getSubCategory());
+	        	}
+	        }
+	        else if(t1.equals("Component Name"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getComponentName());
+	        	}
+	        }
+	        else if(t1.equals("Vendor"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getVendor());
+	        	}
+	        }
+	        else if(t1.equals("Model"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getModel());
+	        	}
+	        }
+	        else if(t1.equals("Type"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getType());
+	        	}
+	        }
+	        else if(t1.equals("Size"))
+	        {
+	        	for(ComponentsVO componentsVO : componentsList)
+	        	{
+	        		tempList.add(componentsVO.getSize());
+	        	}
+	        }
+	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);
+	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setText("");
+		}
+		catch (Exception e) {
+			LOG.error(e.getMessage());
+			e.printStackTrace();
+		}	
+	}
+	
+	private void fillTableFromData()
+	{
+		try{
+			componentsList = componentsDAO.getComponents();
+			ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
+			String tempString = ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).getText();
+			if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Category"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getComponentCategory().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Sub Category"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getSubCategory().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Name"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getComponentName().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Vendor"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getVendor().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Model"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getModel().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Type"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getType().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Size"))
+			{
+				for(ComponentsVO componentsVO : componentsList)
+				{
+					if(componentsVO.getSize().equalsIgnoreCase(tempString))
+					{
+						tempList.add(componentsVO);
+					}
+				}
+			}
+			
+			
+			name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
+			category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
+			subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
+			vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
+			model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
+			type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
+			size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
+			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("costPrice"));
+			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("dealerPrice"));
+			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("endUserPrice"));
+			componentTable.setItems(tempList);
+		}
+		catch (Exception e) {
+			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -254,19 +281,31 @@ public class ComponentsViewController implements Initializable {
 		ObservableList<ComponentsVO> componentList = FXCollections.observableArrayList();
 		try{
 			componentList = componentTable.getSelectionModel().getSelectedItems();
-			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-				    "Do you want to continue?", "Confirm Dialog", "title", DialogOptions.OK_CANCEL);
-			if(response.equals(DialogResponse.OK))
+			if(componentList.size()>0)
 			{
-				componentsDAO.deleteComponents(componentList);
-				message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-				message.setVisible(true);
-				componentTable.setItems(componentsDAO.getComponents());
+				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+					    "Do you want to delete selected components", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
+				if(response.equals(DialogResponse.OK))
+				{
+					componentsDAO.deleteComponents(componentList);
+					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
+					message.setVisible(true);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					fillTableFromData();
+					fillAutoCompleteFromComboBox(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem());
+				}
+			}
+			else{
+				Dialogs.showInformationDialog(new Stage(), "Please select atleast one compoenent",
+					    "Delete Component", "Delete Component");
 			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
 			message.setVisible(true);
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
 		}
 		
 	}

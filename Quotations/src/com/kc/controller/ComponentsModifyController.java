@@ -176,10 +176,14 @@ public class ComponentsModifyController implements Initializable {
 			componentsDAO.updateComponent(componentsVO);
 			message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
 			message.setVisible(true);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
 			message.setVisible(true);
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
 			e.printStackTrace();
 		}
 		
