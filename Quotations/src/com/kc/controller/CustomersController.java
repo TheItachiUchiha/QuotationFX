@@ -43,4 +43,20 @@ public class CustomersController {
 		}
 		
 	}
+	public void viewCustomers()
+	{
+		try{
+			FXMLLoader menuLoader = new FXMLLoader(
+					LoginController.class
+							.getResource("../view/customers-view.fxml"));
+			BorderPane customerCreate = (BorderPane) menuLoader.load();
+			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Customers");
+			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
+			((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(customerCreate);
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+			}
+
+	}
 }

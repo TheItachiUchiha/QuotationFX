@@ -5,9 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import com.kc.model.CustomersVO;
 import com.kc.model.CustomersVO;
 import com.kc.util.DBConnector;
 
@@ -91,14 +94,21 @@ public class CustomersDAO {
 				customersVO.setState(resultSet.getString(6));
 				customersVO.setEmailId(resultSet.getString(7));
 				customersVO.setContactNumber(resultSet.getString(8));
-				customersVO.setCustomerType(resultSet.getString(9));
+				if("D".equalsIgnoreCase(resultSet.getString(9)))
+				{
+					customersVO.setCustomerType("Dealer");
+				}
+				else
+				{
+					customersVO.setCustomerType("End User");
+				}
 				customersVO.setTinNumber(resultSet.getString(10));
 				
 				listOfCustomers.add(customersVO);
 			}
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		finally{
 			if(conn !=null)
@@ -107,6 +117,20 @@ public class CustomersDAO {
 			}
 		}
 		return listOfCustomers;
+	}
+	public void deleteCustomers(List<CustomersVO> listCustomers) throws Exception {
+		try {
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			for (CustomersVO customersVO : listCustomers) {
+				statement.addBatch("DELETE FROM CUSTOMERS WHERE ID="
+						+ customersVO.getId());
+			}
+			statement.executeBatch();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 
 }
