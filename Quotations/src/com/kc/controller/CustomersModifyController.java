@@ -115,12 +115,12 @@ public class CustomersModifyController implements Initializable{
 									
 								}
 							}
-							if(customersVO.getCustomerType().equalsIgnoreCase("D"))
+							if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 							{
 								dealer.setSelected(true);
 							}
 				
-							if(customersVO.getCustomerType().equalsIgnoreCase("E"))
+							if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
 							{
 								endUser.setSelected(true);
 							}
@@ -187,6 +187,7 @@ public class CustomersModifyController implements Initializable{
 			{
 				customersVO.setCustomerType("E");
 			}
+			
 			customersVO.setId(this.customersVO.getId());
 			customersDAO.updateCustomer(customersVO);
 			message.setText(CommonConstants.CUSTOMER_MODIFY_SUCCESS);
