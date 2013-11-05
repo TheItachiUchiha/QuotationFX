@@ -12,6 +12,9 @@ public class CommonConstants
 	public static final String CUSTOMER_MODIFY_SUCCESS = "Customer Modified";
 	public static final String CUSTOMER_ADD_SUCCESS = "Customer Added";
 	public static final String DUPLICATE_CUSTOMER = "Duplicate Customer";
+	public static final String USER_MODIFY_SUCCESS = "User Modified";
+	public static final String USER_ADD_SUCCESS = "User Added";
+	public static final String DUPLICATE_USER = "Duplicate User";
 	
 	
 

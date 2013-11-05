@@ -1,19 +1,24 @@
 package com.kc.controller;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.dao.UsersDAO;
 import com.kc.model.UsersVO;
 
 public class UsersCreateController {
-private static final Logger LOG = LogManager.getLogger(UsersController.class);
+	private static final Logger LOG = LogManager.getLogger(UsersController.class);
+	UsersDAO usersDAO=new UsersDAO();
 	
 	@FXML
 	private TextField name;
@@ -43,6 +48,8 @@ private static final Logger LOG = LogManager.getLogger(UsersController.class);
 	private CheckBox delete;
 	@FXML
 	private ComboBox userType;
+	@FXML
+	private Label message;
 	public void saveUsers()
 	{
 		try
@@ -125,12 +132,21 @@ private static final Logger LOG = LogManager.getLogger(UsersController.class);
 			{
 				usersVO.setUserType("NORMAL");
 			}	
-			//UsersDAO.saveUser(usersVO);
+			usersDAO.saveUser(usersVO);
+			message.setText(CommonConstants.USER_ADD_SUCCESS);
+			message.setVisible(true);
 		}
 			
-		catch (Exception e)
+		catch (SQLException s)
 		{
+			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
+				message.setText(CommonConstants.DUPLICATE_USER);
+				message.setVisible(true);
+			}
+		}
+		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 	}
 

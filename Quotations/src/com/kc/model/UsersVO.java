@@ -2,8 +2,11 @@ package com.kc.model;
 
 
 public class UsersVO {
-
+	
+	private int id;
+	
 	private String name;
+	
 	private String designation;
 
 	private String mobileNumber;
@@ -29,6 +32,15 @@ public class UsersVO {
 	private String delete;
 
 	private String userType;
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 
 	public String getName() {
 		return name;
@@ -141,5 +153,9 @@ public class UsersVO {
 	public void setDelete(String delete) {
 		this.delete = delete;
 	}
-
+	
+	public String toString()
+	{
+		return this.name;
+	}
 }

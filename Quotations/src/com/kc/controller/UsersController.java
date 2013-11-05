@@ -17,7 +17,7 @@ public class UsersController {
 	{
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
-				LoginController.class
+				this.getClass()
 						.getResource("../view/users-create.fxml"));
 		GridPane userCreate = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create User");
@@ -33,26 +33,27 @@ public class UsersController {
 	{
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
-				LoginController.class
-						.getResource("../view/users.fxml"));
-		GridPane userCreate = (GridPane) menuLoader.load();
+				this.getClass()
+						.getResource("../view/users-modify.fxml"));
+		BorderPane userCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify User");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+		
 	}
 	
 	public void viewUser()
 	{
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
-				LoginController.class
-						.getResource("../view/users.fxml"));
-		GridPane userCreate = (GridPane) menuLoader.load();
-		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View User");
+				this.getClass()
+						.getResource("../view/users-view.fxml"));
+		BorderPane userCreate = (BorderPane) menuLoader.load();
+		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Users");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
