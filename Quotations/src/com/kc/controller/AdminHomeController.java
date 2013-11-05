@@ -11,7 +11,7 @@ public class AdminHomeController {
 	public void priceEstimation()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("../view/priceEstimation.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/priceEstimation.fxml"));
 			BorderPane price = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(price);
