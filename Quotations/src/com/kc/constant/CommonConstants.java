@@ -15,6 +15,7 @@ public class CommonConstants
 	public static final String USER_MODIFY_SUCCESS = "User Modified";
 	public static final String USER_ADD_SUCCESS = "User Added";
 	public static final String DUPLICATE_USER = "Duplicate User";
+	public static final String USER_DELETE_SUCCESS = "User(s) Deleted";
 	
 	
 

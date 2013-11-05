@@ -6,11 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import com.kc.model.UsersVO;
 import com.kc.model.UsersVO;
 import com.kc.util.DBConnector;
 
@@ -120,5 +117,77 @@ public class UsersDAO {
 			}
 		}
 		return listOfUsers;
+	}
+	public ObservableList<UsersVO> getModules() throws SQLException
+	{		
+		ObservableList<UsersVO> listOfModules = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM USERS");
+			
+			while(resultSet.next())
+			{
+				String modules="";
+				UsersVO usersVO = new UsersVO();
+				usersVO.setId(resultSet.getInt(1));
+				usersVO.setName(resultSet.getString(2));
+				usersVO.setDesignation(resultSet.getString(3));
+				usersVO.setMobileNumber(resultSet.getString(4));
+				usersVO.setUsername(resultSet.getString(5));
+				usersVO.setPassword(resultSet.getString(6));
+				if("Y".equalsIgnoreCase(resultSet.getString(7)))
+				{
+					modules = modules.concat("Quatation\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(8)))
+				{
+					modules = modules.concat("PriceEstimation\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(9)))
+				{
+					modules = modules.concat("Report\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(10)))
+				{
+					modules = modules.concat("SalesOrderManagement\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(11)))
+				{
+					modules = modules.concat("Status / Reminder\n");
+				}
+				usersVO.setQuotation(modules);
+				usersVO.setView(resultSet.getString(12));
+				usersVO.setEdit(resultSet.getString(13));
+				usersVO.setDelete(resultSet.getString(14));
+				usersVO.setUserType(resultSet.getString(15));
+				
+				listOfModules.add(usersVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		return listOfModules;
+	}
+	public void deleteUsers(List<UsersVO> listUsers) throws Exception {
+		try {
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			for (UsersVO usersVO : listUsers) {
+				statement.addBatch("DELETE FROM USERS WHERE ID="
+						+ usersVO.getId());
+			}
+			statement.executeBatch();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 }
