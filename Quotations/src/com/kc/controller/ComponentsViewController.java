@@ -121,49 +121,70 @@ public class ComponentsViewController implements Initializable {
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getComponentCategory());
+	        		if(!tempList.contains(componentsVO.getComponentCategory()))
+	        		{
+	        			tempList.add(componentsVO.getComponentCategory());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Sub Category"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getSubCategory());
+	        		if(!tempList.contains(componentsVO.getSubCategory()))
+	        		{
+	        			tempList.add(componentsVO.getSubCategory());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Component Name"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getComponentName());
+	        		if(!tempList.contains(componentsVO.getComponentName()))
+	        		{
+	        			tempList.add(componentsVO.getComponentName());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Vendor"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getVendor());
+	        		if(!tempList.contains(componentsVO.getVendor()))
+	        		{
+	        			tempList.add(componentsVO.getVendor());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Model"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getModel());
+	        		if(!tempList.contains(componentsVO.getModel()))
+	        		{
+	        			tempList.add(componentsVO.getModel());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Type"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getType());
+	        		if(!tempList.contains(componentsVO.getType()))
+	        		{
+	        			tempList.add(componentsVO.getType());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Size"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
 	        	{
-	        		tempList.add(componentsVO.getSize());
+	        		if(!tempList.contains(componentsVO.getSize()))
+	        		{
+	        			tempList.add(componentsVO.getSize());
+	        		}
 	        	}
 	        }
 	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);

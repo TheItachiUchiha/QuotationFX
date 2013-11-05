@@ -1,6 +1,7 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,14 +57,21 @@ public class ComponentsModifyController implements Initializable {
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try {
 			componentsList = componentsDAO.getComponents();
+			final ObservableList<ComponentsVO> tempComponentsList = FXCollections.observableArrayList();
 			
 			ObservableList<String> tempCategoryList = FXCollections.observableArrayList();
 			final ObservableList<String> tempSubCategoryList = FXCollections.observableArrayList();
 			final ObservableList<ComponentsVO> tempComponentList = FXCollections.observableArrayList();
+			subcategoryCombo.setItems(tempSubCategoryList);
+			componentCombo.setItems(tempComponentList);
+			
 			
 			for(ComponentsVO componentVO : componentsList)
 			{
-				tempCategoryList.add(componentVO.getComponentCategory());
+				if(!tempCategoryList.contains(componentVO.getComponentCategory()))
+				{
+					tempCategoryList.add(componentVO.getComponentCategory());
+				}
 			}
 
 			categoryCombo.setItems(tempCategoryList);
@@ -74,14 +82,27 @@ public class ComponentsModifyController implements Initializable {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
+							componentsList.clear();
+							try {
+								componentsList = componentsDAO.getComponents();
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							tempSubCategoryList.clear();
+							
+							tempComponentsList.clear();
 							for(ComponentsVO componentsVO : componentsList)
 							{
 								if(componentsVO.getComponentCategory().equals(t1))
 								{
-									tempSubCategoryList.add(componentsVO.getSubCategory());
+									if(!tempSubCategoryList.contains(componentsVO.getSubCategory()))
+									{
+										tempSubCategoryList.add(componentsVO.getSubCategory());
+										tempComponentsList.add(componentsVO);
+									}
 								}
 							}
-							subcategoryCombo.setItems(tempSubCategoryList);
 						}
 					});
 
@@ -91,14 +112,17 @@ public class ComponentsModifyController implements Initializable {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
-							for(ComponentsVO componentsVO : componentsList)
+							
+							
+							tempComponentList.clear();
+							
+							for(ComponentsVO componentsVO : tempComponentsList)
 							{
 								if(componentsVO.getSubCategory().equals(t1))
 								{
 									tempComponentList.add(componentsVO);
 								}
 							}
-							componentCombo.setItems(tempComponentList);
 						}
 					});
 
@@ -109,6 +133,8 @@ public class ComponentsModifyController implements Initializable {
 						public void changed(ObservableValue ov, ComponentsVO t,
 								ComponentsVO t1) {
 
+							if(null != t1)
+							{
 							modifyHbox.setVisible(true);
 							GridPane gridPane = (GridPane) modifyHbox
 									.getChildren().get(0);
@@ -165,6 +191,7 @@ public class ComponentsModifyController implements Initializable {
 											}
 										}
 									}
+							}
 						}
 					});
 		} catch (Exception e) {

@@ -1,19 +1,25 @@
 package com.kc.controller;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-public class LoginController extends Application {
+public class LoginController extends Application implements Initializable{
 
 	private static final Logger LOG = LogManager.getLogger(LoginController.class);
 	public static Stage primaryStage;
@@ -72,5 +78,29 @@ public class LoginController extends Application {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : doLogin");
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		username.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent event) {
+		        if(event.getCode() == KeyCode.ENTER); {
+		            doLogin();
+		        } 
+		        event.consume();
+		    }
+		});
+		
+		password.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent event) {
+		        if(event.getCode() == KeyCode.ENTER); {
+		            doLogin();
+		        } 
+		        event.consume();
+		    }
+		});
+		
 	}
 }
