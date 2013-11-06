@@ -106,15 +106,12 @@ public class ComponentsDAO {
 		return listOfComponents;
 	}
 
-	public void deleteComponents(List<ComponentsVO> listComponents) throws Exception {
+	public void deleteComponents(ComponentsVO componentsVO) throws Exception {
 		try {
 			conn = DBConnector.getConnection();
-			statement = conn.createStatement();
-			for (ComponentsVO componentsVO : listComponents) {
-				statement.addBatch("DELETE FROM COMPONENTS WHERE ID="
-						+ componentsVO.getId());
-			}
-			statement.executeBatch();
+			preparedStatement = conn.prepareStatement("DELETE FROM COMPONENTS WHERE ID=?");
+			preparedStatement.setInt(1, componentsVO.getId());
+			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

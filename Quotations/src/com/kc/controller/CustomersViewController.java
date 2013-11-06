@@ -2,15 +2,13 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
-
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,14 +22,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Dialogs.DialogOptions;
 import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
 public class CustomersViewController implements Initializable {
@@ -72,6 +74,7 @@ public class CustomersViewController implements Initializable {
     @FXML private TableColumn<CustomersVO, String> contactNumber;
     @FXML private TableColumn<CustomersVO, String> tinNumber;
     @FXML private TableColumn<CustomersVO, String> customerType;
+    @FXML private TableColumn action;
     @FXML private Label message;
 	
 
@@ -117,6 +120,27 @@ public class CustomersViewController implements Initializable {
 					fillTableFromData();
 				}
 			});
+			action.setSortable(false);
+	         
+	        action.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<CustomersVO, Boolean>,
+	                ObservableValue<Boolean>>() {
+	 
+	            @Override
+	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<CustomersVO, Boolean> p) {
+	                return new SimpleBooleanProperty(p.getValue() != null);
+	            }
+	        });
+	 
+	        action.setCellFactory(
+	                new Callback<TableColumn<CustomersVO, Boolean>, TableCell<CustomersVO, Boolean>>() {
+	 
+	            @Override
+	            public TableCell<CustomersVO, Boolean> call(TableColumn<CustomersVO, Boolean> p) {
+	                return new ButtonCell();
+	            }
+	         
+	        });
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -287,18 +311,14 @@ public class CustomersViewController implements Initializable {
 		
 	}
 	
-	public void deleteCustomers()
+	public void deleteCustomers(CustomersVO customersVO)
 	{
-		ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 		try{
-			customerList = customerTable.getSelectionModel().getSelectedItems();
-			if(customerList.size()>0)
-			{
 				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
 					    "Do you want to delete selected customer(s)", "Confirm", "Delete customer", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					customersDAO.deleteCustomers(customerList);
+					customersDAO.deleteCustomers(customersVO);
 					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
 					message.setVisible(true);
 					message.getStyleClass().remove("failure");
@@ -306,11 +326,6 @@ public class CustomersViewController implements Initializable {
 					fillTableFromData();
 					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 				}
-			}
-			else{
-				Dialogs.showInformationDialog(new Stage(), "Please select atleast one customer",
-					    "Delete customer", "Delete customer");
-			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
@@ -320,5 +335,46 @@ public class CustomersViewController implements Initializable {
 		}
 		
 	}
+	private class ButtonCell extends TableCell<CustomersVO, Boolean> {
+	       
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
+		Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
+		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
+		final Button cellEditButton = new Button("", new ImageView(buttonEditImage));
+       
+         
+        ButtonCell(){
+            
+        	
+        	cellDeleteButton.getStyleClass().add("editDeleteButton");
+        	cellEditButton.getStyleClass().add("editDeleteButton");
+        	
+        	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    deleteCustomers(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
+                }
+            });
+        	
+        	cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
+        		 
+                @Override
+                public void handle(ActionEvent t) {
+                }
+            });
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+            	HBox box = new HBox();
+            	box.getChildren().addAll(cellEditButton, cellDeleteButton);
+                setGraphic(box);
+            }
+        }
+    }
 
 }

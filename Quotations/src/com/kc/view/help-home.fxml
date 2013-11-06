@@ -52,4 +52,7 @@
       </items>
     </SplitPane>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </BorderPane>

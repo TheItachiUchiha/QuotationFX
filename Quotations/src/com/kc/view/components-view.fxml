@@ -12,16 +12,11 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsViewController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="825.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsViewController">
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
       <children>
-        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0">
-          <children>
-            <Button mnemonicParsing="false" onAction="#modifyComponent" text="Modify" />
-            <Button mnemonicParsing="false" onAction="#deleteComponents" text="Delete" />
-          </children>
-        </HBox>
+        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" />
         <HBox id="HBox" alignment="CENTER" spacing="10.0">
           <children>
             <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
@@ -52,6 +47,7 @@
             <TableColumn prefWidth="75.0" text="Cost Price" fx:id="costPrice" />
             <TableColumn prefWidth="75.0" text="Dealer Price" fx:id="dealerPrice" />
             <TableColumn prefWidth="75.0" text="End User Price" fx:id="endUserPrice" />
+            <TableColumn prefWidth="75.0" text="Action" fx:id="action" />
           </columns>
         </TableView>
       </children>

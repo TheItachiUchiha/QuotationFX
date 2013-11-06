@@ -118,15 +118,12 @@ public class CustomersDAO {
 		}
 		return listOfCustomers;
 	}
-	public void deleteCustomers(List<CustomersVO> listCustomers) throws Exception {
+	public void deleteCustomers(CustomersVO customersVO) throws Exception {
 		try {
 			conn = DBConnector.getConnection();
-			statement = conn.createStatement();
-			for (CustomersVO customersVO : listCustomers) {
-				statement.addBatch("DELETE FROM CUSTOMERS WHERE ID="
-						+ customersVO.getId());
-			}
-			statement.executeBatch();
+			preparedStatement = conn.prepareStatement("DELETE FROM CUSTOMERS WHERE ID=?");
+			preparedStatement.setInt(1, customersVO.getId());
+			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

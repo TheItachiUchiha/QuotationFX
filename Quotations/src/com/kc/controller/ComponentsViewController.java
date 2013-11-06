@@ -4,6 +4,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Dialogs.DialogOptions;
@@ -19,12 +21,16 @@ import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -75,6 +81,7 @@ public class ComponentsViewController implements Initializable {
     @FXML private TableColumn<ComponentsVO, Double> costPrice;
     @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
     @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
+    @FXML private TableColumn action;
     @FXML private Label message;
 	
 
@@ -119,6 +126,30 @@ public class ComponentsViewController implements Initializable {
 					fillTableFromData();
 				}
 			});
+			
+			action.setSortable(false);
+	         
+	        action.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<ComponentsVO, Boolean>,
+	                ObservableValue<Boolean>>() {
+	 
+	            @Override
+	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ComponentsVO, Boolean> p) {
+	                return new SimpleBooleanProperty(p.getValue() != null);
+	            }
+	        });
+	 
+	        action.setCellFactory(
+	                new Callback<TableColumn<ComponentsVO, Boolean>, TableCell<ComponentsVO, Boolean>>() {
+	 
+	            @Override
+	            public TableCell<ComponentsVO, Boolean> call(TableColumn<ComponentsVO, Boolean> p) {
+	                return new ButtonCell();
+	            }
+	         
+	        });
+			
+			
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -202,7 +233,7 @@ public class ComponentsViewController implements Initializable {
 	        	}
 	        }
 			keyword.setItems(tempList);
-			keyword.setText("");
+			
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -311,30 +342,22 @@ public class ComponentsViewController implements Initializable {
 		
 	}
 	
-	public void deleteComponents()
+	public void deleteComponents(ComponentsVO componentsVO)
 	{
-		ObservableList<ComponentsVO> componentList = FXCollections.observableArrayList();
 		try{
-			componentList = componentTable.getSelectionModel().getSelectedItems();
-			if(componentList.size()>0)
-			{
 				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
 					    "Do you want to delete selected components", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					componentsDAO.deleteComponents(componentList);
+					componentsDAO.deleteComponents(componentsVO);
 					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
 					message.setVisible(true);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
-					fillTableFromData();
 					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+					fillTableFromData();
+					
 				}
-			}
-			else{
-				Dialogs.showInformationDialog(new Stage(), "Please select atleast one compoenent",
-					    "Delete Component", "Delete Component");
-			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
@@ -344,5 +367,46 @@ public class ComponentsViewController implements Initializable {
 		}
 		
 	}
-	
+
+	private class ButtonCell extends TableCell<ComponentsVO, Boolean> {
+       
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
+		Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
+		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
+		final Button cellEditButton = new Button("", new ImageView(buttonEditImage));
+       
+         
+        ButtonCell(){
+            
+        	
+        	cellDeleteButton.getStyleClass().add("editDeleteButton");
+        	cellEditButton.getStyleClass().add("editDeleteButton");
+        	
+        	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    deleteComponents(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
+                }
+            });
+        	
+        	cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
+        		 
+                @Override
+                public void handle(ActionEvent t) {
+                }
+            });
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+            	HBox box = new HBox();
+            	box.getChildren().addAll(cellEditButton, cellDeleteButton);
+                setGraphic(box);
+            }
+        }
+    }
 }

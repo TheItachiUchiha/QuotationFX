@@ -176,15 +176,12 @@ public class UsersDAO {
 		}
 		return listOfModules;
 	}
-	public void deleteUsers(List<UsersVO> listUsers) throws Exception {
+	public void deleteUsers(UsersVO usersVO) throws Exception {
 		try {
 			conn = DBConnector.getConnection();
-			statement = conn.createStatement();
-			for (UsersVO usersVO : listUsers) {
-				statement.addBatch("DELETE FROM USERS WHERE ID="
-						+ usersVO.getId());
-			}
-			statement.executeBatch();
+			preparedStatement = conn.prepareStatement("DELETE FROM USERS WHERE ID=?");
+			preparedStatement.setInt(1, usersVO.getId());
+			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

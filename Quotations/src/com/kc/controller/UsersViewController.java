@@ -8,6 +8,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.UsersDAO;
 import com.kc.model.UsersVO;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -21,14 +22,18 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Dialogs.DialogOptions;
 import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
 public class UsersViewController implements Initializable {
@@ -66,6 +71,7 @@ public class UsersViewController implements Initializable {
     @FXML private TableColumn<UsersVO, String> password;
     @FXML private TableColumn<UsersVO, String> modules;
     @FXML private TableColumn<UsersVO, String> userType;
+    @FXML private TableColumn action;
     @FXML private Label message;
 	
 
@@ -108,6 +114,27 @@ public class UsersViewController implements Initializable {
 					fillTableFromData();
 				}
 			});
+			action.setSortable(false);
+	         
+	        action.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<UsersVO, Boolean>,
+	                ObservableValue<Boolean>>() {
+	 
+	            @Override
+	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<UsersVO, Boolean> p) {
+	                return new SimpleBooleanProperty(p.getValue() != null);
+	            }
+	        });
+	 
+	        action.setCellFactory(
+	                new Callback<TableColumn<UsersVO, Boolean>, TableCell<UsersVO, Boolean>>() {
+	 
+	            @Override
+	            public TableCell<UsersVO, Boolean> call(TableColumn<UsersVO, Boolean> p) {
+	                return new ButtonCell();
+	            }
+	         
+	        });
 			
 		}
 		catch (Exception e) {
@@ -183,18 +210,15 @@ public class UsersViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void deleteUsers()
+	public void deleteUsers(UsersVO usersVO)
 	{
 		ObservableList<UsersVO> userList = FXCollections.observableArrayList();
 		try{
-			userList = usersTable.getSelectionModel().getSelectedItems();
-			if(userList.size()>0)
-			{
-				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-					    "Do you want to delete selected user(s)", "Confirm", "Delete user", DialogOptions.OK_CANCEL);
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+				    "Do you want to delete selected customer(s)", "Confirm", "Delete customer", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					usersDAO.deleteUsers(userList);
+					usersDAO.deleteUsers(usersVO);
 					message.setText(CommonConstants.USER_DELETE_SUCCESS);
 					message.setVisible(true);
 					message.getStyleClass().remove("failure");
@@ -202,11 +226,6 @@ public class UsersViewController implements Initializable {
 					fillTableFromData();
 					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 				}
-			}
-			else{
-				Dialogs.showInformationDialog(new Stage(), "Please select atleast one user",
-					    "Delete user", "Delete user");
-			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
@@ -216,4 +235,45 @@ public class UsersViewController implements Initializable {
 		}
 		
 	}
+	private class ButtonCell extends TableCell<UsersVO, Boolean> {
+	       
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
+		Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
+		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
+		final Button cellEditButton = new Button("", new ImageView(buttonEditImage));
+       
+         
+        ButtonCell(){
+            
+        	
+        	cellDeleteButton.getStyleClass().add("editDeleteButton");
+        	cellEditButton.getStyleClass().add("editDeleteButton");
+        	
+        	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    deleteUsers(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
+                }
+            });
+        	
+        	cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
+        		 
+                @Override
+                public void handle(ActionEvent t) {
+                }
+            });
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+            	HBox box = new HBox();
+            	box.getChildren().addAll(cellEditButton, cellDeleteButton);
+                setGraphic(box);
+            }
+        }
+    }
 }
