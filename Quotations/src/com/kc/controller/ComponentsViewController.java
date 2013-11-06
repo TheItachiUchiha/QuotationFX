@@ -16,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Dialogs.DialogOptions;
 import javafx.scene.control.Dialogs.DialogResponse;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -53,6 +54,15 @@ public class ComponentsViewController implements Initializable {
 	private GridPane topGrid;
 	
 	@FXML
+	private AutoCompleteTextField<String> keyword;
+	
+	@FXML
+	private ComboBox<String> combo;
+	
+	@FXML
+	private Button go;
+	
+	@FXML
     private TableView<ComponentsVO> componentTable;
 	
 	@FXML private TableColumn<ComponentsVO, String> name;
@@ -84,16 +94,16 @@ public class ComponentsViewController implements Initializable {
 			searchByList.add("Model");
 			searchByList.add("Type");
 			searchByList.add("Size");
-			((ComboBox<String>)topGrid.getChildren().get(3)).setItems(searchByList);
+			combo.setItems(searchByList);
 			
-			((ComboBox<String>)topGrid.getChildren().get(3)).valueProperty().addListener(new ChangeListener<String>() {
+			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
 					 fillAutoCompleteFromComboBox(t1);
 	            }
 	        });
 			
-			((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setOnAction(new EventHandler<ActionEvent>() {
+			keyword.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
@@ -101,10 +111,14 @@ public class ComponentsViewController implements Initializable {
 					fillTableFromData();
 				}
 			});
-			
-			
-			
-			
+			go.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					
+					fillTableFromData();
+				}
+			});
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -187,8 +201,8 @@ public class ComponentsViewController implements Initializable {
 	        		}
 	        	}
 	        }
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setText("");
+			keyword.setItems(tempList);
+			keyword.setText("");
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -201,8 +215,8 @@ public class ComponentsViewController implements Initializable {
 		try{
 			componentsList = componentsDAO.getComponents();
 			ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
-			String tempString = ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).getText();
-			if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Category"))
+			String tempString = keyword.getText();
+			if(combo.getSelectionModel().getSelectedItem().equals("Component Category"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -212,7 +226,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Sub Category"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Sub Category"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -222,7 +236,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Component Name"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Component Name"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -232,7 +246,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Vendor"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Vendor"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -242,7 +256,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Model"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Model"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -252,7 +266,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Type"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Type"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -262,7 +276,7 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Size"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Size"))
 			{
 				for(ComponentsVO componentsVO : componentsList)
 				{
@@ -314,7 +328,7 @@ public class ComponentsViewController implements Initializable {
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
 					fillTableFromData();
-					fillAutoCompleteFromComboBox(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem());
+					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 				}
 			}
 			else{

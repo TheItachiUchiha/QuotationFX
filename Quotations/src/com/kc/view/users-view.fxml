@@ -55,14 +55,9 @@
   <top>
     <GridPane fx:id="topGrid" alignment="TOP_CENTER">
       <children>
-        <Label alignment="CENTER" minHeight="13.0" prefHeight="30.0" prefWidth="300.0" text="Keyword" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-        <AutoCompleteTextField id="userAutoFill" maxWidth="-Infinity" prefHeight="24.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-          <GridPane.margin>
-            <Insets left="5.0" />
-          </GridPane.margin>
-        </AutoCompleteTextField>
         <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="29.999900000002526" prefWidth="300.0" text="Search By" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <ComboBox prefHeight="30.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <Label alignment="CENTER" minHeight="13.0" prefHeight="30.0" prefWidth="300.0" text="Keyword" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <ComboBox id="search" fx:id="combo" prefHeight="30.0" prefWidth="249.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
@@ -70,6 +65,15 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
           </GridPane.margin>
         </ComboBox>
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+          <children>
+            <AutoCompleteTextField id="userAutoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="21.0" prefWidth="208.0" />
+            <Button fx:id="go" mnemonicParsing="false" text="Go" />
+          </children>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+        </HBox>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

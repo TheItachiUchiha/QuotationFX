@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
@@ -51,6 +52,15 @@ public class CustomersViewController implements Initializable {
 	private GridPane topGrid;
 	
 	@FXML
+	private AutoCompleteTextField<String> keyword;
+	
+	@FXML
+	private ComboBox<String> combo;
+	
+	@FXML
+	private Button go;
+	
+	@FXML
     private TableView<CustomersVO> customerTable;
 	
 	@FXML private TableColumn<CustomersVO, String> name;
@@ -81,16 +91,16 @@ public class CustomersViewController implements Initializable {
 			searchByList.add("Email Id");
 			searchByList.add("TIN Number");
 			searchByList.add("Customer Type");
-			((ComboBox<String>)topGrid.getChildren().get(3)).setItems(searchByList);
+			combo.setItems(searchByList);
 			
-			((ComboBox<String>)topGrid.getChildren().get(3)).valueProperty().addListener(new ChangeListener<String>() {
+			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
 					 fillAutoCompleteFromComboBox(t1);
 	            }
 	        });
 			
-			((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setOnAction(new EventHandler<ActionEvent>() {
+			keyword.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
@@ -99,9 +109,14 @@ public class CustomersViewController implements Initializable {
 				}
 			});
 			
-			
-			
-			
+			go.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					
+					fillTableFromData();
+				}
+			});
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -163,8 +178,8 @@ public class CustomersViewController implements Initializable {
 	        		tempList.add(customersVO.getCustomerType());
 	        	}
 	        }
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setText("");
+	        keyword.setItems(tempList);
+	        keyword.setText("");
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -177,8 +192,8 @@ public class CustomersViewController implements Initializable {
 		try{
 			customersList = customersDAO.getCustomers();
 			ObservableList<CustomersVO> tempList =  FXCollections.observableArrayList();
-			String tempString = ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).getText();
-			if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Customer Name"))
+			String tempString = keyword.getText();
+			if(combo.getSelectionModel().getSelectedItem().equals("Customer Name"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -188,7 +203,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Company Name"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Company Name"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -198,7 +213,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("State"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("State"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -208,7 +223,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("City"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("City"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -218,7 +233,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Email Id"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Email Id"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -228,7 +243,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("TIN Number"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("TIN Number"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -238,7 +253,7 @@ public class CustomersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Customer Type"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Customer Type"))
 			{
 				for(CustomersVO customersVO : customersList)
 				{
@@ -289,7 +304,7 @@ public class CustomersViewController implements Initializable {
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
 					fillTableFromData();
-					fillAutoCompleteFromComboBox(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem());
+					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 				}
 			}
 			else{

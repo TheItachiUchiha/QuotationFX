@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
@@ -49,6 +50,15 @@ public class UsersViewController implements Initializable {
 	private GridPane topGrid;
 	
 	@FXML
+	private AutoCompleteTextField<String> keyword;
+	
+	@FXML
+	private ComboBox<String> combo;
+	
+	@FXML
+	private Button go;
+	
+	@FXML
     private TableView<UsersVO> usersTable;
 	
 	@FXML private TableColumn<UsersVO, String> name;
@@ -70,16 +80,27 @@ public class UsersViewController implements Initializable {
 			searchByList = FXCollections.observableArrayList();
 			searchByList.add("Name");
 			searchByList.add("Username");
-			((ComboBox<String>)topGrid.getChildren().get(3)).setItems(searchByList);
+			combo.setItems(searchByList);
 			
-			((ComboBox<String>)topGrid.getChildren().get(3)).valueProperty().addListener(new ChangeListener<String>() {
+			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
 					 fillAutoCompleteFromComboBox(t1);
 	            }
 	        });
 			
-			((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setOnAction(new EventHandler<ActionEvent>() {
+			
+						
+			keyword.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					
+					fillTableFromData();
+				}
+			});
+			
+			go.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
@@ -114,8 +135,8 @@ public class UsersViewController implements Initializable {
 	        		tempList.add(usersVO.getUsername());
 	        	}
 	        }
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setItems(tempList);
-	        ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).setText("");
+	        keyword.setItems(tempList);
+	        keyword.setText("");
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -126,12 +147,12 @@ public class UsersViewController implements Initializable {
 	private void fillTableFromData()
 	{
 		try{
-			//adusersList = usersDAO.getModules();
+			modulesList= usersDAO.getModules();
 			ObservableList<UsersVO> tempList =  FXCollections.observableArrayList();
-			String tempString = ((AutoCompleteTextField<String>)topGrid.getChildren().get(1)).getText();
-			if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Name"))
+			String tempString = keyword.getText();
+			if(combo.getSelectionModel().getSelectedItem().equals("Name"))
 			{
-				for(UsersVO usersVO : usersList)
+				for(UsersVO usersVO : modulesList)
 				{
 					if(usersVO.getName().equalsIgnoreCase(tempString))
 					{
@@ -139,9 +160,9 @@ public class UsersViewController implements Initializable {
 					}
 				}
 			}
-			else if(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem().equals("Username"))
+			else if(combo.getSelectionModel().getSelectedItem().equals("Username"))
 			{
-				for(UsersVO usersVO : usersList)
+				for(UsersVO usersVO : modulesList)
 				{
 					if(usersVO.getUsername().equalsIgnoreCase(tempString))
 					{
@@ -149,7 +170,7 @@ public class UsersViewController implements Initializable {
 					}
 				}
 			}
-			modulesList= usersDAO.getModules();
+			
 			name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
 			username.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("username"));
 			password.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("password"));
@@ -179,7 +200,7 @@ public class UsersViewController implements Initializable {
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
 					fillTableFromData();
-					fillAutoCompleteFromComboBox(((ComboBox<String>)topGrid.getChildren().get(3)).getSelectionModel().getSelectedItem());
+					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 				}
 			}
 			else{
