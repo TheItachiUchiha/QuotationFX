@@ -19,18 +19,27 @@ import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.dao.LoginDAO;
+
 public class LoginController extends Application implements Initializable{
 
 	private static final Logger LOG = LogManager.getLogger(LoginController.class);
 	public static Stage primaryStage;
 	public static BorderPane home;
 	public static BorderPane login;
+	private LoginDAO loginDAO;
 
 	@FXML
 	private TextField username;
 	@FXML
 	private TextField password;
 
+	
+	public LoginController()
+	{
+		loginDAO = new LoginDAO();
+	}
+	
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) {
@@ -59,8 +68,7 @@ public class LoginController extends Application implements Initializable{
 	public void doLogin() {
 		LOG.info("Enter : doLogin");
 		try {
-			if (username.getText().equals("admin")
-					&& password.getText().equals("admin")) {
+			if (loginDAO.verifyUser(username.getText(), password.getText())) {
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
 								.getResource("../view/admin.fxml"));
