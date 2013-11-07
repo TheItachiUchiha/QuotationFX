@@ -42,6 +42,22 @@ public class CustomersModifyController implements Initializable{
 	private HBox modifyHbox; 
 	
 	@FXML
+	private TextField customerName;
+	@FXML
+	private TextField companyName;
+	@FXML
+	private TextArea address;
+	@FXML
+	private TextField city;
+	@FXML
+	private TextField state;
+	@FXML
+	private TextField emailId;
+	@FXML
+	private TextField contactNumber;
+	@FXML
+	private TextField tinNumber;
+	@FXML
     private RadioButton dealer;
 
     @FXML
@@ -67,118 +83,58 @@ public class CustomersModifyController implements Initializable{
 				@Override
 				public void handle(ActionEvent arg0) {
 					
-					GridPane gridPane = (GridPane) modifyHbox.getChildren().get(0);
-					ObservableList<Node> listTextField = gridPane.getChildren();
-					
 					for(CustomersVO customersVO: customersList)
 					{
 						if(customersVO.getCustomerName().equals(customerNameAutoFill.getText())){
 							modifyHbox.setVisible(true);
 							customerNameAutoFill.setDisable(true);
-							CustomersModifyController.this.customersVO.setId(customersVO.getId());
-							for(Node node : listTextField)
-							{
-								if(null!=node.getId())
-								{
-									if(node.getId().equals("customerName"))
-									{
-										((TextField)node).setText(customersVO.getCustomerName());
-									}
-									else if(node.getId().equals("companyName"))
-									{
-										((TextField)node).setText(customersVO.getCompanyName());
-									}
-									else if(node.getId().equals("address"))
-									{
-										((TextArea)node).setText(customersVO.getAddress());
-									}
-									else if(node.getId().equals("city"))
-									{
-										((TextField)node).setText(customersVO.getCity());
-									}
-									else if(node.getId().equals("state"))
-									{
-										((TextField)node).setText(customersVO.getState());
-									}
-									else if(node.getId().equals("emailId"))
-									{
-										((TextField)node).setText(customersVO.getEmailId());
-									}
-									else if(node.getId().equals("contactNumber"))
-									{
-										((TextField)node).setText(customersVO.getContactNumber());
-									}
-									else if(node.getId().equals("tinNumber"))
-									{
-										((TextField)node).setText(customersVO.getTinNumber());
-									}
-									
-								}
-							}
-							if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-							{
-								dealer.setSelected(true);
-							}
-				
-							if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-							{
-								endUser.setSelected(true);
-							}
+							fillTextFieldValues(customersVO);
+							
 						}
 					}
-					
 				}
 			});
 			}
 			catch (Exception e) {
 				LOG.error(e.getMessage());
 			}
+		
+	}
+	public void fillTextFieldValues(CustomersVO customersVO)
+	{
+		CustomersModifyController.this.customersVO.setId(customersVO.getId());
+		customerName.setText(customersVO.getCustomerName());
+		companyName.setText(customersVO.getCompanyName());
+		address.setText(customersVO.getAddress());
+		city.setText(customersVO.getCity());
+		state.setText(customersVO.getState());
+		emailId.setText(customersVO.getEmailId());
+		contactNumber.setText(customersVO.getContactNumber());
+		tinNumber.setText(customersVO.getTinNumber());
+
+		if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
+		{
+			dealer.setSelected(true);
+		}
+
+		if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
+		{
+			endUser.setSelected(true);
+		}
 	}
 	public void modifyCustomer()
 	{
 		try
 		{
-		GridPane gridPane = (GridPane) modifyHbox.getChildren().get(0);
-		ObservableList<Node> listTextField = gridPane.getChildren();
-		CustomersVO customersVO = new CustomersVO();
-			for(Node node : listTextField)
-			{
-				if(null!=node.getId())
-				{
-					if(node.getId().equals("customerName"))
-					{
-						customersVO.setCustomerName(((TextField)node).getText());
-					}
-					else if(node.getId().equals("companyName"))
-					{
-						customersVO.setCompanyName(((TextField)node).getText());
-					}
-					else if(node.getId().equals("address"))
-					{
-						customersVO.setAddress(((TextArea)node).getText());
-					}
-					else if(node.getId().equals("city"))
-					{
-						customersVO.setCity(((TextField)node).getText());
-					}
-					else if(node.getId().equals("state"))
-					{
-						customersVO.setState(((TextField)node).getText());
-					}
-					else if(node.getId().equals("emailId"))
-					{
-						customersVO.setEmailId(((TextField)node).getText());
-					}
-					else if(node.getId().equals("contactNumber"))
-					{
-						customersVO.setContactNumber(((TextField)node).getText());
-					}
-					else if(node.getId().equals("tinNumber"))
-					{
-						customersVO.setTinNumber(((TextField)node).getText());
-					}
-				}
-			}
+			CustomersVO customersVO = new CustomersVO();
+			customersVO.setCustomerName(customerName.getText());
+			customersVO.setCompanyName(companyName.getText());
+			customersVO.setAddress(address.getText());
+			customersVO.setCity(city.getText());
+			customersVO.setState(state.getText());
+			customersVO.setEmailId(emailId.getText());
+			customersVO.setContactNumber(contactNumber.getText());
+			customersVO.setTinNumber(tinNumber.getText());
 			if(dealer.isSelected())
 			{
 				customersVO.setCustomerType("D");

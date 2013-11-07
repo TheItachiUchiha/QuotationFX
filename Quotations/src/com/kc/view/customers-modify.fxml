@@ -15,7 +15,7 @@
   <center>
     <HBox fx:id="modifyHbox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
       <children>
-        <GridPane alignment="TOP_CENTER" gridLinesVisible="false" hgap="0.0" prefHeight="331.0" prefWidth="797.9999000000025" vgap="0.0">
+        <GridPane fx:id="gridPane" alignment="TOP_CENTER" gridLinesVisible="false" hgap="0.0" prefHeight="331.0" prefWidth="797.9999000000025" vgap="0.0">
           <!-- TODO Add Nodes -->
           <children>
             <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -31,14 +31,14 @@
             <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
             <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
             <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <TextField id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <TextField id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextArea fx:id="address" maxWidth="-Infinity" prefHeight="51.0" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField id="city" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField id="state" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField id="emailId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField id="contactNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField id="tinNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="city" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="state" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="emailId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="contactNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="tinNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <HBox alignment="CENTER_LEFT" prefHeight="26.999900000002526" prefWidth="458.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="8">
               <children>
                 <RadioButton fx:id="dealer" mnemonicParsing="false" text="Dealer">

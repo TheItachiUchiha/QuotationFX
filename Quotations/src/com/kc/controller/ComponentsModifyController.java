@@ -2,31 +2,23 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
+import com.kc.model.CustomersVO;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ComponentsModifyController implements Initializable {
@@ -44,6 +36,26 @@ public class ComponentsModifyController implements Initializable {
 
 	@FXML
 	private HBox modifyHbox;
+	@FXML
+	private TextField componentName;
+	@FXML
+	private TextField componentCategory;
+	@FXML
+	private TextField subCategory;
+	@FXML
+	private TextField vendor;
+	@FXML
+	private TextField model;
+	@FXML
+	private TextField type;
+	@FXML
+	private TextField size;
+	@FXML
+	private TextField costPrice;
+	@FXML
+	private TextField dealerPrice;
+	@FXML
+	private TextField endUserPrice;
 	@FXML
 	private Label message;
 	@FXML
@@ -136,61 +148,7 @@ public class ComponentsModifyController implements Initializable {
 							if(null != t1)
 							{
 							modifyHbox.setVisible(true);
-							GridPane gridPane = (GridPane) modifyHbox
-									.getChildren().get(0);
-							ObservableList<Node> listTextField = gridPane
-									.getChildren();
-
-							ComponentsModifyController.this.componentsVO.setId(t1.getId());
-									for (Node node : listTextField) {
-										if (null != node.getId()) {
-											if (node.getId().equals(
-													"componentName")) {
-												((TextField) node).setText(t1
-														.getComponentName());
-											} else if (node.getId().equals(
-													"componentCategory")) {
-												((TextField) node).setText(t1
-														.getComponentCategory());
-											} else if (node.getId().equals(
-													"subCategory")) {
-												((TextField) node).setText(t1
-														.getSubCategory());
-											} else if (node.getId().equals(
-													"vendor")) {
-												((TextField) node)
-														.setText(t1
-																.getVendor());
-											} else if (node.getId().equals(
-													"model")) {
-												((TextField) node)
-														.setText(t1
-																.getModel());
-											} else if (node.getId().equals(
-													"type")) {
-												((TextField) node)
-														.setText(t1
-																.getType());
-											} else if (node.getId().equals(
-													"size")) {
-												((TextField) node)
-														.setText(t1
-																.getSize());
-											} else if (node.getId().equals(
-													"costPrice")) {
-												((TextField) node).setText(String.valueOf(t1
-														.getCostPrice()));
-											} else if (node.getId().equals(
-													"dealerPrice")) {
-												((TextField) node).setText(String.valueOf(t1
-														.getDealerPrice()));
-											} else if (node.getId().equals(
-													"endUserPrice")) {
-												((TextField) node).setText(String.valueOf(t1
-														.getEndUserPrice()));
-											}
-										}
-									}
+							fillTextFieldValues(t1);
 							}
 						}
 					});
@@ -198,45 +156,41 @@ public class ComponentsModifyController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 	}
+	public void fillTextFieldValues(ComponentsVO componentsVO)
+	{
+		ComponentsModifyController.this.componentsVO.setId(componentsVO.getId());
+		componentName.setText(componentsVO.getComponentName());
+		componentCategory.setText(componentsVO.getComponentCategory());
+		subCategory.setText(componentsVO.getSubCategory());
+		vendor.setText(componentsVO.getVendor());
+		model.setText(componentsVO.getModel());
+		type.setText(componentsVO.getType());
+		size.setText(componentsVO.getSize());
+		costPrice.setText(String.valueOf(componentsVO.getCostPrice()));
+		dealerPrice.setText(String.valueOf(componentsVO.getDealerPrice()));
+		endUserPrice.setText(String.valueOf(componentsVO.getEndUserPrice()));
+	}
 
 	public void modifyComponent() {
 		try {
-			GridPane gridPane = (GridPane) modifyHbox.getChildren().get(0);
-			ObservableList<Node> listTextField = gridPane.getChildren();
-			ComponentsVO componentsVO = new ComponentsVO();
-			for (Node node : listTextField) {
-				if (node.getId().equals("componentName")) {
-					componentsVO.setComponentName(((TextField) node).getText());
-				} else if (node.getId().equals("componentCategory")) {
-					componentsVO.setComponentCategory(((TextField) node)
-							.getText());
-				} else if (node.getId().equals("subCategory")) {
-					componentsVO.setSubCategory(((TextField) node).getText());
-				} else if (node.getId().equals("vendor")) {
-					componentsVO.setVendor(((TextField) node).getText());
-				} else if (node.getId().equals("model")) {
-					componentsVO.setModel(((TextField) node).getText());
-				} else if (node.getId().equals("type")) {
-					componentsVO.setType(((TextField) node).getText());
-				} else if (node.getId().equals("size")) {
-					componentsVO.setSize(((TextField) node).getText());
-				} else if (node.getId().equals("costPrice")) {
-					componentsVO.setCostPrice(Double
-							.parseDouble(((TextField) node).getText()));
-				} else if (node.getId().equals("dealerPrice")) {
-					componentsVO.setDealerPrice(Double
-							.parseDouble(((TextField) node).getText()));
-				} else if (node.getId().equals("endUserPrice")) {
-					componentsVO.setEndUserPrice(Double
-							.parseDouble(((TextField) node).getText()));
-				}
-			}
-			componentsVO.setId(this.componentsVO.getId());
-			componentsDAO.updateComponent(componentsVO);
-			message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
-			message.setVisible(true);
-			message.getStyleClass().remove("failure");
-			message.getStyleClass().add("success");
+				ComponentsVO componentsVO = new ComponentsVO();
+				componentsVO.setComponentName(componentName.getText());
+				componentsVO.setComponentCategory(componentCategory.getText());
+				componentsVO.setSubCategory(subCategory.getText());
+				componentsVO.setVendor(vendor.getText());
+				componentsVO.setModel(model.getText());
+				componentsVO.setType(type.getText());
+				componentsVO.setSize(size.getText());
+				componentsVO.setCostPrice(Double.parseDouble(costPrice.getText()));
+				componentsVO.setDealerPrice(Double.parseDouble(dealerPrice.getText()));
+				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice.getText()));
+				componentsVO.setId(this.componentsVO.getId());
+				
+				componentsDAO.updateComponent(componentsVO);
+				message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
+				message.setVisible(true);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
 		} catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
 			message.setVisible(true);
@@ -244,7 +198,5 @@ public class ComponentsModifyController implements Initializable {
 			message.getStyleClass().add("failure");
 			e.printStackTrace();
 		}
-
 	}
-
 }

@@ -1,9 +1,8 @@
 package com.kc.controller;
 
+import java.io.IOException;
 import java.net.URL;
-
 import java.util.ResourceBundle;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -12,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -27,14 +27,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
@@ -160,7 +161,8 @@ public class ComponentsViewController implements Initializable {
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1)
 	{
-			try{
+		try{
+			componentsList = componentsDAO.getComponents();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
 			if(t1.equals("Component Category"))
 	        {
@@ -244,7 +246,7 @@ public class ComponentsViewController implements Initializable {
 	private void fillTableFromData()
 	{
 		try{
-			componentsList = componentsDAO.getComponents();
+			
 			ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
 			String tempString = keyword.getText();
 			if(combo.getSelectionModel().getSelectedItem().equals("Component Category"))
@@ -394,6 +396,48 @@ public class ComponentsViewController implements Initializable {
         		 
                 @Override
                 public void handle(ActionEvent t) {
+                	try {
+						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+								.getResource("../view/components-modify.fxml"));
+						BorderPane componentModify;
+						componentModify = (BorderPane) menuLoader.load();
+						componentModify.setTop(new HBox());
+						componentModify.getCenter().setVisible(true);
+						Stage modifyStage = new Stage();
+						Scene modifyScene = new Scene(componentModify);
+						modifyStage.setResizable(false);
+						modifyStage.setHeight(500);
+						modifyStage.setWidth(600);
+						modifyStage.initModality(Modality.WINDOW_MODAL);
+						modifyStage.initOwner(LoginController.primaryStage);
+						modifyStage.setScene(modifyScene);
+						modifyStage.show();
+						((ComponentsModifyController) menuLoader.getController())
+								.fillTextFieldValues(ButtonCell.this
+										.getTableView().getItems()
+										.get(ButtonCell.this.getIndex()));
+						modifyStage
+								.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+									@Override
+									public void handle(WindowEvent paramT) {
+										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+										for (ComponentsVO componentsVO : componentsList) {
+											if (componentsVO.getId() == ButtonCell.this.getTableView()
+													.getItems()
+													.get(ButtonCell.this.getIndex())
+													.getId()) {
+												updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+											}
+										}
+										fillTableFromData();
+									}
+								});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						LOG.error(e.getMessage());
+					}
                 }
             });
         }
@@ -409,4 +453,34 @@ public class ComponentsViewController implements Initializable {
             }
         }
     }
+	private void updateAutoField(ComponentsVO componentsVO, String t1) {
+		if(t1.equals("Component Category"))
+        {
+        	keyword.setText(componentsVO.getComponentCategory());
+        }
+        else if(t1.equals("Sub Category"))
+        {
+        	keyword.setText(componentsVO.getSubCategory());
+        }
+        else if(t1.equals("Component Name"))
+        {
+        	keyword.setText(componentsVO.getComponentName());
+        }
+        else if(t1.equals("Vendor"))
+        {
+        	keyword.setText(componentsVO.getVendor());
+        }
+        else if(t1.equals("Model"))
+        {
+        	keyword.setText(componentsVO.getModel());
+        }
+        else if(t1.equals("Type"))
+        {
+        	keyword.setText(componentsVO.getType());
+        }
+        else if(t1.equals("Size"))
+        {
+        	keyword.setText(componentsVO.getSize());
+        }
+	}
 }

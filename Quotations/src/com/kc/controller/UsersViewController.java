@@ -1,6 +1,8 @@
 package com.kc.controller;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -16,7 +18,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
@@ -30,9 +34,12 @@ import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 @SuppressWarnings("rawtypes")
@@ -146,7 +153,8 @@ public class UsersViewController implements Initializable {
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1)
 	{
-			try{
+		try{
+			modulesList = usersDAO.getModules();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
 			if(t1.equals("Name"))
 	        {
@@ -163,7 +171,7 @@ public class UsersViewController implements Initializable {
 	        	}
 	        }
 	        keyword.setItems(tempList);
-	        keyword.setText("");
+	        
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -174,7 +182,6 @@ public class UsersViewController implements Initializable {
 	private void fillTableFromData()
 	{
 		try{
-			modulesList= usersDAO.getModules();
 			ObservableList<UsersVO> tempList =  FXCollections.observableArrayList();
 			String tempString = keyword.getText();
 			if(combo.getSelectionModel().getSelectedItem().equals("Name"))
@@ -223,8 +230,8 @@ public class UsersViewController implements Initializable {
 					message.setVisible(true);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
-					fillTableFromData();
 					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+					fillTableFromData();
 				}
 		}
 		catch (Exception e) {
@@ -261,6 +268,63 @@ public class UsersViewController implements Initializable {
         		 
                 @Override
                 public void handle(ActionEvent t) {
+                	try {
+						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+								.getResource("../view/users-modify.fxml"));
+						BorderPane userModify;
+						userModify = (BorderPane) menuLoader.load();
+						userModify.setTop(new HBox());
+						userModify.getCenter().setVisible(true);
+						Stage modifyStage = new Stage();
+						Scene modifyScene = new Scene(userModify);
+						modifyStage.setResizable(false);
+						modifyStage.setHeight(500);
+						modifyStage.setWidth(600);
+						modifyStage.initModality(Modality.WINDOW_MODAL);
+						modifyStage.initOwner(LoginController.primaryStage);
+						modifyStage.setScene(modifyScene);
+						modifyStage.show();
+						ObservableList<UsersVO> tempList = usersDAO.getUsers();
+						for(UsersVO usersVO : tempList)
+						{
+							if(usersVO.getId() == ButtonCell.this
+									.getTableView().getItems()
+									.get(ButtonCell.this.getIndex()).getId())
+							{
+								((UsersModifyController) menuLoader.getController())
+								.fillTextFieldValues(usersVO);
+								break;
+							}
+						}
+						
+						
+						modifyStage
+								.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+									
+									@Override
+									public void handle(WindowEvent paramT) {
+										
+										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+										for (UsersVO usersVO : modulesList) {
+											if (usersVO.getId() == ButtonCell.this.getTableView()
+													.getItems()
+													.get(ButtonCell.this.getIndex())
+													.getId()) {
+												updateAutoField(usersVO, combo.getSelectionModel().getSelectedItem());
+											}
+										}
+										fillTableFromData();
+									}
+								});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						LOG.error(e.getMessage());
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 }
             });
         }
@@ -276,4 +340,14 @@ public class UsersViewController implements Initializable {
             }
         }
     }
+	private void updateAutoField(UsersVO usersVO, String t1) {
+		if(t1.equals("Name"))
+        {
+			keyword.setText(usersVO.getName());
+        }
+        else if(t1.equals("Username"))
+        {
+        	keyword.setText(usersVO.getUsername());
+        }
+	}
 }
