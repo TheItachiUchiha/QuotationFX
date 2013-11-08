@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
+import com.kc.util.Validation;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 import javafx.collections.ObservableList;
@@ -27,10 +28,12 @@ public class CustomersModifyController implements Initializable{
 	private ObservableList<CustomersVO> customersList;
 	private CustomersDAO customersDAO;
 	private CustomersVO customersVO;
+	private Validation validation;
 	
 	public CustomersModifyController(){
 		customersDAO = new CustomersDAO();
 		customersVO = new CustomersVO();
+		validation = new Validation();
 	}
  	
 	@FXML
@@ -119,27 +122,46 @@ public class CustomersModifyController implements Initializable{
 		LOG.info("Enter : modifyCustomer");
 		try
 		{
-			CustomersVO customersVO = new CustomersVO();
-			customersVO.setCustomerName(customerName.getText());
-			customersVO.setCompanyName(companyName.getText());
-			customersVO.setAddress(address.getText());
-			customersVO.setCity(city.getText());
-			customersVO.setState(state.getText());
-			customersVO.setEmailId(emailId.getText());
-			customersVO.setContactNumber(contactNumber.getText());
-			customersVO.setTinNumber(tinNumber.getText());
-			if(dealer.isSelected())
+			if(validation.isEmpty(customerName, companyName, contactNumber, tinNumber))
 			{
-				customersVO.setCustomerType("D");
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else if(!validation.isEmail(emailId.getText()))
+			{
+				message.setText(CommonConstants.INCORRECT_EMAIL);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
 			}
 			else
 			{
-				customersVO.setCustomerType("E");
+				CustomersVO customersVO = new CustomersVO();
+				customersVO.setCustomerName(customerName.getText());
+				customersVO.setCompanyName(companyName.getText());
+				customersVO.setAddress(address.getText());
+				customersVO.setCity(city.getText());
+				customersVO.setState(state.getText());
+				customersVO.setEmailId(emailId.getText());
+				customersVO.setContactNumber(contactNumber.getText());
+				customersVO.setTinNumber(tinNumber.getText());
+				if(dealer.isSelected())
+				{
+					customersVO.setCustomerType("D");
+				}
+				else
+				{
+					customersVO.setCustomerType("E");
+				}
+				customersVO.setId(this.customersVO.getId());
+				customersDAO.updateCustomer(customersVO);
+				message.setText(CommonConstants.CUSTOMER_MODIFY_SUCCESS);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
 			}
-			customersVO.setId(this.customersVO.getId());
-			customersDAO.updateCustomer(customersVO);
-			message.setText(CommonConstants.CUSTOMER_MODIFY_SUCCESS);
-			message.setVisible(true);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

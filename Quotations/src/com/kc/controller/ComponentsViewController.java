@@ -91,6 +91,8 @@ public class ComponentsViewController implements Initializable {
 			searchByList.add("Size");
 			combo.setItems(searchByList);
 			
+			keyword.setPromptText("Type Keyword");
+			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                

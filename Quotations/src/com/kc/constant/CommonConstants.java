@@ -4,7 +4,8 @@ public class CommonConstants
 {
 	public static final String SUCCESS = "Success";
 	public static final String FAILURE = "Failure";
-	
+	public static final String MANDATORY_FIELDS = "Please fill all mandatory fields";
+	public static final String INCORRECT_EMAIL = "Incorrect Email Format";
 	public static final String COMPONENT_ADD_SUCCESS = "Component Added";
 	public static final String DUPLICATE_COMPONENT = "Duplicate Component";
 	public static final String COMPONENT_MODIFY_SUCCESS = "Component Modified";

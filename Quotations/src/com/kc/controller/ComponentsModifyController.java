@@ -18,6 +18,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
+import com.kc.util.Validation;
 
 public class ComponentsModifyController implements Initializable {
 
@@ -26,10 +27,12 @@ public class ComponentsModifyController implements Initializable {
 	private ObservableList<ComponentsVO> componentsList;
 	private ComponentsDAO componentsDAO;
 	private ComponentsVO componentsVO;
+	private Validation validation;
 
 	public ComponentsModifyController() {
 		componentsDAO = new ComponentsDAO();
 		componentsVO = new ComponentsVO();
+		validation = new Validation();
 	}
 
 	@FXML
@@ -67,26 +70,33 @@ public class ComponentsModifyController implements Initializable {
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		LOG.info("Enter : initialize");
 		try {
+
+			validation.allowAsAmount(costPrice);
+			validation.allowAsAmount(dealerPrice);
+			validation.allowAsAmount(endUserPrice);
+
 			componentsList = componentsDAO.getComponents();
-			final ObservableList<ComponentsVO> tempComponentsList = FXCollections.observableArrayList();
-			
-			ObservableList<String> tempCategoryList = FXCollections.observableArrayList();
-			final ObservableList<String> tempSubCategoryList = FXCollections.observableArrayList();
-			final ObservableList<ComponentsVO> tempComponentList = FXCollections.observableArrayList();
+			final ObservableList<ComponentsVO> tempComponentsList = FXCollections
+					.observableArrayList();
+
+			ObservableList<String> tempCategoryList = FXCollections
+					.observableArrayList();
+			final ObservableList<String> tempSubCategoryList = FXCollections
+					.observableArrayList();
+			final ObservableList<ComponentsVO> tempComponentList = FXCollections
+					.observableArrayList();
 			subcategoryCombo.setItems(tempSubCategoryList);
 			componentCombo.setItems(tempComponentList);
-			
-			
-			for(ComponentsVO componentVO : componentsList)
-			{
-				if(!tempCategoryList.contains(componentVO.getComponentCategory()))
-				{
+
+			for (ComponentsVO componentVO : componentsList) {
+				if (!tempCategoryList.contains(componentVO
+						.getComponentCategory())) {
 					tempCategoryList.add(componentVO.getComponentCategory());
 				}
 			}
 
 			categoryCombo.setItems(tempCategoryList);
-			
+
 			categoryCombo.valueProperty().addListener(
 					new ChangeListener<String>() {
 
@@ -94,26 +104,29 @@ public class ComponentsModifyController implements Initializable {
 						public void changed(ObservableValue ov, String t,
 								String t1) {
 							try {
-								
-							modifyHbox.setVisible(false);
-							componentsList.clear();
-							
-							componentsList = componentsDAO.getComponents();
-							
-							tempSubCategoryList.clear();
-							
-							tempComponentsList.clear();
-							for(ComponentsVO componentsVO : componentsList)
-							{
-								if(componentsVO.getComponentCategory().equals(t1))
-								{
-									if(!tempSubCategoryList.contains(componentsVO.getSubCategory()))
-									{
-										tempSubCategoryList.add(componentsVO.getSubCategory());
-										tempComponentsList.add(componentsVO);
+
+								modifyHbox.setVisible(false);
+								componentsList.clear();
+
+								componentsList = componentsDAO.getComponents();
+
+								tempSubCategoryList.clear();
+
+								tempComponentsList.clear();
+								for (ComponentsVO componentsVO : componentsList) {
+									if (componentsVO.getComponentCategory()
+											.equals(t1)) {
+										if (!tempSubCategoryList
+												.contains(componentsVO
+														.getSubCategory())) {
+											tempSubCategoryList
+													.add(componentsVO
+															.getSubCategory());
+											tempComponentsList
+													.add(componentsVO);
+										}
 									}
 								}
-							}
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -127,14 +140,12 @@ public class ComponentsModifyController implements Initializable {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
-							
+
 							modifyHbox.setVisible(false);
 							tempComponentList.clear();
-							
-							for(ComponentsVO componentsVO : tempComponentsList)
-							{
-								if(componentsVO.getSubCategory().equals(t1))
-								{
+
+							for (ComponentsVO componentsVO : tempComponentsList) {
+								if (componentsVO.getSubCategory().equals(t1)) {
 									tempComponentList.add(componentsVO);
 								}
 							}
@@ -148,10 +159,9 @@ public class ComponentsModifyController implements Initializable {
 						public void changed(ObservableValue ov, ComponentsVO t,
 								ComponentsVO t1) {
 
-							if(null != t1)
-							{
-							modifyHbox.setVisible(true);
-							fillTextFieldValues(t1);
+							if (null != t1) {
+								modifyHbox.setVisible(true);
+								fillTextFieldValues(t1);
 							}
 						}
 					});
@@ -160,10 +170,11 @@ public class ComponentsModifyController implements Initializable {
 		}
 		LOG.info("Exit : initialize");
 	}
-	public void fillTextFieldValues(ComponentsVO componentsVO)
-	{
+
+	public void fillTextFieldValues(ComponentsVO componentsVO) {
 		LOG.info("Enter : fillTextFieldValues");
-		ComponentsModifyController.this.componentsVO.setId(componentsVO.getId());
+		ComponentsModifyController.this.componentsVO
+				.setId(componentsVO.getId());
 		componentName.setText(componentsVO.getComponentName());
 		componentCategory.setText(componentsVO.getComponentCategory());
 		subCategory.setText(componentsVO.getSubCategory());
@@ -180,6 +191,14 @@ public class ComponentsModifyController implements Initializable {
 	public void modifyComponent() {
 		LOG.info("Enter : modifyComponent");
 		try {
+			if (validation.isEmpty(componentName, componentCategory,
+					subCategory, vendor, model, type, size, costPrice,
+					dealerPrice, endUserPrice)) {
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			} else {
 				ComponentsVO componentsVO = new ComponentsVO();
 				componentsVO.setComponentName(componentName.getText());
 				componentsVO.setComponentCategory(componentCategory.getText());
@@ -188,16 +207,20 @@ public class ComponentsModifyController implements Initializable {
 				componentsVO.setModel(model.getText());
 				componentsVO.setType(type.getText());
 				componentsVO.setSize(size.getText());
-				componentsVO.setCostPrice(Double.parseDouble(costPrice.getText()));
-				componentsVO.setDealerPrice(Double.parseDouble(dealerPrice.getText()));
-				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice.getText()));
+				componentsVO.setCostPrice(Double.parseDouble(costPrice
+						.getText()));
+				componentsVO.setDealerPrice(Double.parseDouble(dealerPrice
+						.getText()));
+				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice
+						.getText()));
 				componentsVO.setId(this.componentsVO.getId());
-				
+
 				componentsDAO.updateComponent(componentsVO);
 				message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
 				message.setVisible(true);
 				message.getStyleClass().remove("failure");
 				message.getStyleClass().add("success");
+			}
 		} catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
 			message.setVisible(true);

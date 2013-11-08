@@ -1,7 +1,11 @@
 package com.kc.controller;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -11,10 +15,12 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
+import com.kc.util.Validation;
 
-public class CustomersCreateController {
+public class CustomersCreateController implements Initializable {
 private static final Logger LOG = LogManager.getLogger(CustomersCreateController.class);
-	CustomersDAO customersDAO=new CustomersDAO();
+	CustomersDAO customersDAO;
+	Validation validation;
 	
 	@FXML
 	private TextField customerName;
@@ -33,37 +39,69 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	@FXML
 	private TextField tinNumber;
 	@FXML
+	private RadioButton dealer;
+	@FXML
 	private RadioButton endUser;
 	@FXML
 	private Label message;
+	
+	public CustomersCreateController()
+	{
+		customersDAO = new CustomersDAO();
+		validation = new Validation();
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		validation.allowAsPhoneNumber(contactNumber);
+		dealer.setSelected(true);
+	}
+	
 	
 	public void saveCustomers()
 	{
 		LOG.info("Enter : saveCustomers");
 		try
 		{
-			CustomersVO customersVO=new CustomersVO();
-			customersVO.setCustomerName(customerName.getText());
-			customersVO.setCompanyName(companyName.getText());
-			customersVO.setAddress(address.getText());
-			customersVO.setCity(city.getText());
-			customersVO.setState(state.getText());
-			customersVO.setEmailId(emailId.getText());
-			customersVO.setContactNumber(contactNumber.getText());
-			customersVO.setTinNumber(tinNumber.getText());
-			if(endUser.isSelected())
+			if(validation.isEmpty(customerName, companyName, contactNumber, tinNumber))
 			{
-				customersVO.setCustomerType("E");
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else if(!validation.isEmail(emailId.getText()))
+			{
+				message.setText(CommonConstants.INCORRECT_EMAIL);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
 			}
 			else
 			{
-				customersVO.setCustomerType("D");
+				CustomersVO customersVO=new CustomersVO();
+				customersVO.setCustomerName(customerName.getText());
+				customersVO.setCompanyName(companyName.getText());
+				customersVO.setAddress(address.getText());
+				customersVO.setCity(city.getText());
+				customersVO.setState(state.getText());
+				customersVO.setEmailId(emailId.getText());
+				customersVO.setContactNumber(contactNumber.getText());
+				customersVO.setTinNumber(tinNumber.getText());
+				if(endUser.isSelected())
+				{
+					customersVO.setCustomerType("E");
+				}
+				else
+				{
+					customersVO.setCustomerType("D");
+				}
+				customersDAO.saveCustomer(customersVO);
+				message.setText(CommonConstants.CUSTOMER_ADD_SUCCESS);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
 			}
-			customersDAO.saveCustomer(customersVO);
-			message.setText(CommonConstants.CUSTOMER_ADD_SUCCESS);
-			message.setVisible(true);
-			message.getStyleClass().remove("failure");
-			message.getStyleClass().add("success");
 		}
 		catch (SQLException s)
 		{
@@ -82,4 +120,6 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 		}
 		LOG.info("Exit : saveCustomers");
 	}
+
+	
 }
