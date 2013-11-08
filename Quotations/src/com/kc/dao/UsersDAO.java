@@ -5,22 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.kc.model.UsersVO;
 import com.kc.util.DBConnector;
 
 public class UsersDAO {
+	private static final Logger LOG = LogManager.getLogger(UsersDAO.class);
 	private Connection conn = null;
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	
-
 	public void saveUser(UsersVO usersVO) throws Exception
 	{
-		
+		LOG.info("Enter : saveUser");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -44,11 +45,14 @@ public class UsersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
 		}
+		LOG.info("Exit : saveUser");
 	}
 	public void updateUser(UsersVO usersVO)
 	{
+		LOG.info("Enter : updateUser");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -74,11 +78,13 @@ public class UsersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : updateUser");
 	}
 	public ObservableList<UsersVO> getUsers() throws SQLException
-	{		
+	{
+		LOG.info("Enter : getUsers");
 		ObservableList<UsersVO> listOfUsers = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
@@ -109,6 +115,7 @@ public class UsersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 		finally{
 			if(conn !=null)
@@ -116,10 +123,12 @@ public class UsersDAO {
 				conn.close();
 			}
 		}
+		LOG.info("Enter : getUsers");
 		return listOfUsers;
 	}
 	public ObservableList<UsersVO> getModules() throws SQLException
-	{		
+	{
+		LOG.info("Enter : getModules");
 		ObservableList<UsersVO> listOfModules = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
@@ -167,6 +176,7 @@ public class UsersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 		finally{
 			if(conn !=null)
@@ -174,17 +184,21 @@ public class UsersDAO {
 				conn.close();
 			}
 		}
+		LOG.info("Exit : getModules");
 		return listOfModules;
 	}
 	public void deleteUsers(UsersVO usersVO) throws Exception {
 		try {
+			LOG.info("Enter : deleteUsers");
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("DELETE FROM USERS WHERE ID=?");
 			preparedStatement.setInt(1, usersVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
 		}
+		LOG.info("Exit : deleteUsers");
 	}
 }

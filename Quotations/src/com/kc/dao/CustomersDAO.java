@@ -5,25 +5,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import com.kc.model.CustomersVO;
 import com.kc.model.CustomersVO;
 import com.kc.util.DBConnector;
 
 public class CustomersDAO {
+	private static final Logger LOG = LogManager.getLogger(CustomersDAO.class);
 	private Connection conn = null;
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	
-
 	public void saveCustomer(CustomersVO customersVO) throws Exception
 	{
-		
+		LOG.info("Enter : saveCustomer");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -43,14 +41,16 @@ public class CustomersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
 		}
-		
+		LOG.info("Exit : saveCustomer");
 	}
 	
 	
 	public void updateCustomer(CustomersVO customersVO)
 	{
+		LOG.info("Enter : updateCustomer");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -71,12 +71,14 @@ public class CustomersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : updateCustomer");
 	}
 	
 	public ObservableList<CustomersVO> getCustomers() throws SQLException
-	{		
+	{
+		LOG.info("Enter : getCustomers");
 		ObservableList<CustomersVO> listOfCustomers = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
@@ -109,6 +111,7 @@ public class CustomersDAO {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
 		finally{
 			if(conn !=null)
@@ -116,9 +119,11 @@ public class CustomersDAO {
 				conn.close();
 			}
 		}
+		LOG.info("Exit : getCustomers");
 		return listOfCustomers;
 	}
 	public void deleteCustomers(CustomersVO customersVO) throws Exception {
+		LOG.info("Enter : deleteCustomers");
 		try {
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("DELETE FROM CUSTOMERS WHERE ID=?");
@@ -126,8 +131,9 @@ public class CustomersDAO {
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
 		}
+		LOG.info("Exit : deleteCustomers");
 	}
-
 }

@@ -16,12 +16,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
 public class CustomersModifyController implements Initializable{
@@ -37,10 +35,8 @@ public class CustomersModifyController implements Initializable{
  	
 	@FXML
 	private AutoCompleteTextField <CustomersVO> customerNameAutoFill;
-	
 	@FXML
 	private HBox modifyHbox; 
-	
 	@FXML
 	private TextField customerName;
 	@FXML
@@ -59,25 +55,21 @@ public class CustomersModifyController implements Initializable{
 	private TextField tinNumber;
 	@FXML
     private RadioButton dealer;
-
     @FXML
     private RadioButton endUser;
-    
     @FXML
 	private Label message;
+    
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
-		// TODO Auto-generated method stub
-		
+		LOG.info("Enter : initialize");
 		try{
 			customersList = customersDAO.getCustomers();
 			
 			customerNameAutoFill.setItems(customersList);
-			
-			
-			customerNameAutoFill.setPromptText("Name Of Component");
-			
-			
+
+			customerNameAutoFill.setPromptText("Name Of Customer");
+
 			customerNameAutoFill.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -89,7 +81,6 @@ public class CustomersModifyController implements Initializable{
 							modifyHbox.setVisible(true);
 							customerNameAutoFill.setDisable(true);
 							fillTextFieldValues(customersVO);
-							
 						}
 					}
 				}
@@ -98,10 +89,11 @@ public class CustomersModifyController implements Initializable{
 			catch (Exception e) {
 				LOG.error(e.getMessage());
 			}
-		
+		LOG.info("Exit : initialize");
 	}
 	public void fillTextFieldValues(CustomersVO customersVO)
 	{
+		LOG.info("Enter : fillTextFieldValues");
 		CustomersModifyController.this.customersVO.setId(customersVO.getId());
 		customerName.setText(customersVO.getCustomerName());
 		companyName.setText(customersVO.getCompanyName());
@@ -111,7 +103,6 @@ public class CustomersModifyController implements Initializable{
 		emailId.setText(customersVO.getEmailId());
 		contactNumber.setText(customersVO.getContactNumber());
 		tinNumber.setText(customersVO.getTinNumber());
-
 		if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 		{
 			dealer.setSelected(true);
@@ -121,9 +112,11 @@ public class CustomersModifyController implements Initializable{
 		{
 			endUser.setSelected(true);
 		}
+		LOG.info("Exit : fillTextFieldValues");
 	}
 	public void modifyCustomer()
 	{
+		LOG.info("Enter : modifyCustomer");
 		try
 		{
 			CustomersVO customersVO = new CustomersVO();
@@ -143,18 +136,15 @@ public class CustomersModifyController implements Initializable{
 			{
 				customersVO.setCustomerType("E");
 			}
-			
 			customersVO.setId(this.customersVO.getId());
 			customersDAO.updateCustomer(customersVO);
 			message.setText(CommonConstants.CUSTOMER_MODIFY_SUCCESS);
 			message.setVisible(true);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : modifyCustomer");
 	}
-
-
 }

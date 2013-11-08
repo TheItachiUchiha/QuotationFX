@@ -1,17 +1,13 @@
 package com.kc.controller;
 
 import java.sql.SQLException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
@@ -37,16 +33,13 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	@FXML
 	private TextField tinNumber;
 	@FXML
-	private RadioButton dealer;
-	@FXML
 	private RadioButton endUser;
-	@FXML
-	private ToggleGroup customerType;
 	@FXML
 	private Label message;
 	
 	public void saveCustomers()
 	{
+		LOG.info("Enter : saveCustomers");
 		try
 		{
 			CustomersVO customersVO=new CustomersVO();
@@ -69,18 +62,24 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 			customersDAO.saveCustomer(customersVO);
 			message.setText(CommonConstants.CUSTOMER_ADD_SUCCESS);
 			message.setVisible(true);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
 		}
 		catch (SQLException s)
 		{
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_CUSTOMER);
 				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
 		}
+		LOG.info("Exit : saveCustomers");
 	}
-
 }

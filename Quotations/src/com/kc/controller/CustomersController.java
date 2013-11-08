@@ -13,6 +13,8 @@ public class CustomersController {
 	private static final Logger LOG = LogManager.getLogger(CustomersController.class);
 	public void newCustomer()
 	{
+
+		LOG.info("Enter : newCustomer");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -23,12 +25,13 @@ public class CustomersController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(customerCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : newCustomer");
 	}
 	public void modifyCustomer()
 	{
+		LOG.info("Enter : modifyCustomer");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -39,12 +42,13 @@ public class CustomersController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(customerCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : modifyCustomer");
 	}
 	public void viewCustomers()
 	{
+		LOG.info("Enter : viewCustomers");
 		try{
 			FXMLLoader menuLoader = new FXMLLoader(
 					this.getClass()
@@ -55,8 +59,8 @@ public class CustomersController {
 			((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(customerCreate);
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+				LOG.error(e.getMessage());
 			}
-
+		LOG.info("Exit : viewCustomers");
 	}
 }

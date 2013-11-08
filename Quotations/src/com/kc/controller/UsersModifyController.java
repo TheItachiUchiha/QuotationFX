@@ -33,7 +33,6 @@ public class UsersModifyController implements Initializable{
  	
 	@FXML
 	private AutoCompleteTextField <UsersVO> userNameAutoFill;
-	
 	@FXML
 	private HBox modifyHbox; 
 	@FXML
@@ -68,7 +67,7 @@ public class UsersModifyController implements Initializable{
 	private Label message;
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
-		// TODO Auto-generated method stub
+		LOG.info("Enter : initialize");
 		
 		try{
 			usersList = usersDAO.getUsers();
@@ -100,9 +99,11 @@ public class UsersModifyController implements Initializable{
 			catch (Exception e) {
 				LOG.error(e.getMessage());
 			}
+		LOG.info("Exit : initialize");
 	}
 	public void fillTextFieldValues(UsersVO usersVO)
 	{
+		LOG.info("Enter : fillTextFieldValues");
 		UsersModifyController.this.usersVO.setId(usersVO.getId());
 		name.setText(usersVO.getName());
 		designation.setText(usersVO.getDesignation());
@@ -154,9 +155,11 @@ public class UsersModifyController implements Initializable{
 		{
 			userType.getSelectionModel().selectLast();
 		}
+		LOG.info("Exit : fillTextFieldValues");
 	}
 	public void modifyUser()
 	{
+		LOG.info("Enter : modifyUser");
 		try
 		{
 			UsersVO usersVO = new UsersVO();
@@ -245,8 +248,9 @@ public class UsersModifyController implements Initializable{
 			message.setVisible(true);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-		}	
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : modifyUser");
 	}
 }

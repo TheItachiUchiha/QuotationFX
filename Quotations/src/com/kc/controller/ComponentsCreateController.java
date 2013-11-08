@@ -1,13 +1,11 @@
 package com.kc.controller;
 
 import java.sql.SQLException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
@@ -43,6 +41,8 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 	
 	public void saveComponents()
 	{
+		LOG.info("Enter : saveComponents");
+
 		try
 		{
 			ComponentsVO componentsVO=new ComponentsVO();
@@ -74,6 +74,6 @@ private static final Logger LOG = LogManager.getLogger(ComponentsCreateControlle
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : saveComponents");
 	}
-	
 }

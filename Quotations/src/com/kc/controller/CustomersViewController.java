@@ -3,7 +3,6 @@ package com.kc.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,16 +28,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
@@ -55,25 +51,15 @@ public class CustomersViewController implements Initializable {
 	public CustomersViewController() {
 		customersDAO = new CustomersDAO();
 	}
-
-	@FXML
-	private HBox modifyHbox;
-
-	@FXML
-	private GridPane topGrid;
-
+	
 	@FXML
 	private AutoCompleteTextField<String> keyword;
-
 	@FXML
 	private ComboBox<String> combo;
-
 	@FXML
 	private Button go;
-
 	@FXML
 	private TableView<CustomersVO> customerTable;
-
 	@FXML
 	private TableColumn<CustomersVO, String> name;
 	@FXML
@@ -100,6 +86,7 @@ public class CustomersViewController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
+		LOG.info("Enter : initialize");
 		try {
 
 			customersList = customersDAO.getCustomers();
@@ -120,6 +107,7 @@ public class CustomersViewController implements Initializable {
 				@Override
 				public void changed(ObservableValue ov, String t, String t1) {
 					fillAutoCompleteFromComboBox(t1);
+					keyword.setText("");
 				}
 			});
 
@@ -164,10 +152,12 @@ public class CustomersViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : initialize");
 	}
 
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1) {
+		LOG.info("Enter : fillAutoCompleteFromComboBox");
 		try {
 			customersList = customersDAO.getCustomers();
 			final ObservableList<String> tempList = FXCollections
@@ -206,11 +196,12 @@ public class CustomersViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : fillAutoCompleteFromComboBox");
 	}
 
 	private void fillTableFromData() {
+		LOG.info("Enter : fillTableFromData");
 		try {
-
 			ObservableList<CustomersVO> tempList = FXCollections
 					.observableArrayList();
 			String tempString = keyword.getText();
@@ -295,9 +286,11 @@ public class CustomersViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : fillTableFromData");
 	}
 
 	public void deleteCustomers(CustomersVO customersVO) {
+		LOG.info("Enter : deleteCustomers");
 		try {
 			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
 					"Do you want to delete selected customer(s)", "Confirm",
@@ -318,8 +311,9 @@ public class CustomersViewController implements Initializable {
 			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			LOG.error(e.getMessage());
 		}
-
+		LOG.info("Exit : deleteCustomers");
 	}
 
 	private class ButtonCell extends TableCell<CustomersVO, Boolean> {
@@ -351,6 +345,7 @@ public class CustomersViewController implements Initializable {
 
 				@Override
 				public void handle(ActionEvent t) {
+					LOG.info("Enter : handle");
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
 								.getResource("../view/customers-modify.fxml"));
@@ -393,6 +388,7 @@ public class CustomersViewController implements Initializable {
 						e.printStackTrace();
 						LOG.error(e.getMessage());
 					}
+					LOG.info("Exit : handle");
 				}
 			});
 		}

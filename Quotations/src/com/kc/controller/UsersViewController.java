@@ -35,7 +35,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -54,25 +53,14 @@ public class UsersViewController implements Initializable {
 		usersDAO = new UsersDAO();
 	}
 	
-	
-	@FXML
-	private HBox modifyHbox; 
-	
-	@FXML
-	private GridPane topGrid;
-	
 	@FXML
 	private AutoCompleteTextField<String> keyword;
-	
 	@FXML
 	private ComboBox<String> combo;
-	
 	@FXML
 	private Button go;
-	
 	@FXML
     private TableView<UsersVO> usersTable;
-	
 	@FXML private TableColumn<UsersVO, String> name;
     @FXML private TableColumn<UsersVO, String> username;
     @FXML private TableColumn<UsersVO, String> password;
@@ -86,6 +74,7 @@ public class UsersViewController implements Initializable {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
+		LOG.info("Enter : initialize");
 		try{
 			
 			usersList = usersDAO.getModules();
@@ -99,6 +88,7 @@ public class UsersViewController implements Initializable {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
 					 fillAutoCompleteFromComboBox(t1);
+					 keyword.setText("");
 	            }
 	        });
 			
@@ -148,11 +138,13 @@ public class UsersViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : initialize");
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1)
 	{
+		LOG.info("Enter : fillAutoCompleteFromComboBox");
 		try{
 			modulesList = usersDAO.getModules();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
@@ -174,13 +166,15 @@ public class UsersViewController implements Initializable {
 	        
 		}
 		catch (Exception e) {
-			LOG.error(e.getMessage());
 			e.printStackTrace();
-		}	
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : fillAutoCompleteFromComboBox");
 	}
 	
 	private void fillTableFromData()
 	{
+		LOG.info("Enter : fillTableFromData");
 		try{
 			ObservableList<UsersVO> tempList =  FXCollections.observableArrayList();
 			String tempString = keyword.getText();
@@ -216,10 +210,11 @@ public class UsersViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : fillTableFromData");
 	}
 	public void deleteUsers(UsersVO usersVO)
 	{
-		ObservableList<UsersVO> userList = FXCollections.observableArrayList();
+		LOG.info("Enter : deleteUsers");
 		try{
 			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
 				    "Do you want to delete selected customer(s)", "Confirm", "Delete customer", DialogOptions.OK_CANCEL);
@@ -239,8 +234,9 @@ public class UsersViewController implements Initializable {
 			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : deleteUsers");
 	}
 	private class ButtonCell extends TableCell<UsersVO, Boolean> {
 	       
@@ -268,6 +264,7 @@ public class UsersViewController implements Initializable {
         		 
                 @Override
                 public void handle(ActionEvent t) {
+                	LOG.info("Enter : handle");
                 	try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
 								.getResource("../view/users-modify.fxml"));
@@ -325,6 +322,7 @@ public class UsersViewController implements Initializable {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+                	LOG.info("Exit : handle");
                 }
             });
         }

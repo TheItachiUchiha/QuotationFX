@@ -28,7 +28,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -52,26 +51,14 @@ public class ComponentsViewController implements Initializable {
 	public ComponentsViewController(){
 		componentsDAO = new ComponentsDAO();
 	}
-	
-	
-	@FXML
-	private HBox modifyHbox; 
-	
-	@FXML
-	private GridPane topGrid;
-	
 	@FXML
 	private AutoCompleteTextField<String> keyword;
-	
 	@FXML
 	private ComboBox<String> combo;
-	
 	@FXML
 	private Button go;
-	
 	@FXML
     private TableView<ComponentsVO> componentTable;
-	
 	@FXML private TableColumn<ComponentsVO, String> name;
     @FXML private TableColumn<ComponentsVO, String> category;
     @FXML private TableColumn<ComponentsVO, String> subCategory;
@@ -91,7 +78,7 @@ public class ComponentsViewController implements Initializable {
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try{
-			
+			LOG.info("Enter : initialize");
 			componentsList = componentsDAO.getComponents();
 			componentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			searchByList = FXCollections.observableArrayList();
@@ -108,6 +95,7 @@ public class ComponentsViewController implements Initializable {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
 					 fillAutoCompleteFromComboBox(t1);
+					 keyword.setText("");
 	            }
 	        });
 			
@@ -156,11 +144,13 @@ public class ComponentsViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : initialize");
 	}
 	
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1)
 	{
+		LOG.info("Enter : fillAutoCompleteFromComboBox");
 		try{
 			componentsList = componentsDAO.getComponents();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
@@ -240,11 +230,13 @@ public class ComponentsViewController implements Initializable {
 		catch (Exception e) {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
-		}	
+		}
+		LOG.info("Exit : fillAutoCompleteFromComboBox");
 	}
 	
 	private void fillTableFromData()
 	{
+		LOG.info("Enter : fillTableFromData");
 		try{
 			
 			ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
@@ -337,15 +329,11 @@ public class ComponentsViewController implements Initializable {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
 		}
+		LOG.info("Exit : fillTableFromData");
 	}
-	
-	public void modifyComponent()
-	{
-		
-	}
-	
 	public void deleteComponents(ComponentsVO componentsVO)
 	{
+		LOG.info("Enter : deleteComponents");
 		try{
 				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
 					    "Do you want to delete selected components", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
@@ -366,8 +354,9 @@ public class ComponentsViewController implements Initializable {
 			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : deleteComponents");
 	}
 
 	private class ButtonCell extends TableCell<ComponentsVO, Boolean> {
@@ -396,6 +385,7 @@ public class ComponentsViewController implements Initializable {
         		 
                 @Override
                 public void handle(ActionEvent t) {
+                	LOG.info("Enter : handle");
                 	try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
 								.getResource("../view/components-modify.fxml"));
@@ -438,6 +428,7 @@ public class ComponentsViewController implements Initializable {
 						e.printStackTrace();
 						LOG.error(e.getMessage());
 					}
+                	LOG.info("Exit : handle");
                 }
             });
         }

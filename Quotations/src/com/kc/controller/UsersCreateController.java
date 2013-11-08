@@ -47,11 +47,12 @@ public class UsersCreateController {
 	@FXML
 	private CheckBox delete;
 	@FXML
-	private ComboBox userType;
+	private ComboBox<String> userType;
 	@FXML
 	private Label message;
 	public void saveUsers()
 	{
+		LOG.info("Enter : saveUsers");
 		try
 			{
 			UsersVO usersVO=new UsersVO();
@@ -135,6 +136,8 @@ public class UsersCreateController {
 			usersDAO.saveUser(usersVO);
 			message.setText(CommonConstants.USER_ADD_SUCCESS);
 			message.setVisible(true);
+			message.getStyleClass().add("success");
+			message.getStyleClass().remove("failure");
 		}
 			
 		catch (SQLException s)
@@ -142,12 +145,14 @@ public class UsersCreateController {
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_USER);
 				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
 			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : saveUsers");
 	}
-
 }

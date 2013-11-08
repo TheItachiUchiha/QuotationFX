@@ -5,23 +5,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.List;
-
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import com.kc.model.ComponentsVO;
 import com.kc.util.DBConnector;
 
 public class ComponentsDAO {
-
+	private static final Logger LOG = LogManager.getLogger(ComponentsDAO.class);
 	private Connection conn = null;
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 
 	public void saveComponent(ComponentsVO componentsVO) throws Exception {
-
+		LOG.info("Enter : saveComponent");
 		try {
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
@@ -41,14 +40,16 @@ public class ComponentsDAO {
 			preparedStatement.execute();
 		}  catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
+			
 		}
-		
-
+		LOG.info("Exit : saveComponent");
 	}
 
 	public void updateComponent(ComponentsVO componentsVO) throws Exception
 	{
+		LOG.info("Enter : updateComponent");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -69,11 +70,14 @@ public class ComponentsDAO {
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
+			LOG.error(e.getMessage());
 			throw e;	
 		}
+		LOG.info("Exit : updateComponent");
 	}
 
 	public ObservableList<ComponentsVO> getComponents() throws SQLException {
+		LOG.info("Enter : getComponents");
 		ObservableList<ComponentsVO> listOfComponents = FXCollections
 				.observableArrayList();
 		try {
@@ -97,16 +101,18 @@ public class ComponentsDAO {
 				listOfComponents.add(componentsVO);
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		} finally {
 			if (conn != null) {
 				conn.close();
 			}
 		}
+		LOG.info("Exit : getComponents");
 		return listOfComponents;
 	}
 
 	public void deleteComponents(ComponentsVO componentsVO) throws Exception {
+		LOG.info("Enter : deleteComponents");
 		try {
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("DELETE FROM COMPONENTS WHERE ID=?");
@@ -114,7 +120,9 @@ public class ComponentsDAO {
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 			throw e;
 		}
+		LOG.info("Exit : deleteComponents");
 	}
 }

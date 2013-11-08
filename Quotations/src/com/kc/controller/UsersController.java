@@ -15,6 +15,8 @@ public class UsersController {
 	
 	public void newUser()
 	{
+
+		LOG.info("Enter : newUser");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -25,12 +27,13 @@ public class UsersController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : newUser");
 	}
 	public void modifyUser()
 	{
+		LOG.info("Enter : modifyUser");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -42,12 +45,14 @@ public class UsersController {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : modifyUser");
 	}
 	
 	public void viewUser()
 	{
+		LOG.info("Enter : viewUser");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -58,8 +63,8 @@ public class UsersController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(userCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : viewUser");
 	}
 }

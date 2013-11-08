@@ -18,8 +18,6 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
-import com.kc.model.CustomersVO;
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ComponentsModifyController implements Initializable {
 
@@ -67,6 +65,7 @@ public class ComponentsModifyController implements Initializable {
 
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
+		LOG.info("Enter : initialize");
 		try {
 			componentsList = componentsDAO.getComponents();
 			final ObservableList<ComponentsVO> tempComponentsList = FXCollections.observableArrayList();
@@ -94,13 +93,13 @@ public class ComponentsModifyController implements Initializable {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
-							componentsList.clear();
 							try {
-								componentsList = componentsDAO.getComponents();
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
+								
+							modifyHbox.setVisible(false);
+							componentsList.clear();
+							
+							componentsList = componentsDAO.getComponents();
+							
 							tempSubCategoryList.clear();
 							
 							tempComponentsList.clear();
@@ -115,6 +114,10 @@ public class ComponentsModifyController implements Initializable {
 									}
 								}
 							}
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
 					});
 
@@ -125,7 +128,7 @@ public class ComponentsModifyController implements Initializable {
 						public void changed(ObservableValue ov, String t,
 								String t1) {
 							
-							
+							modifyHbox.setVisible(false);
 							tempComponentList.clear();
 							
 							for(ComponentsVO componentsVO : tempComponentsList)
@@ -155,9 +158,11 @@ public class ComponentsModifyController implements Initializable {
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : initialize");
 	}
 	public void fillTextFieldValues(ComponentsVO componentsVO)
 	{
+		LOG.info("Enter : fillTextFieldValues");
 		ComponentsModifyController.this.componentsVO.setId(componentsVO.getId());
 		componentName.setText(componentsVO.getComponentName());
 		componentCategory.setText(componentsVO.getComponentCategory());
@@ -169,9 +174,11 @@ public class ComponentsModifyController implements Initializable {
 		costPrice.setText(String.valueOf(componentsVO.getCostPrice()));
 		dealerPrice.setText(String.valueOf(componentsVO.getDealerPrice()));
 		endUserPrice.setText(String.valueOf(componentsVO.getEndUserPrice()));
+		LOG.info("Exit : fillTextFieldValues");
 	}
 
 	public void modifyComponent() {
+		LOG.info("Enter : modifyComponent");
 		try {
 				ComponentsVO componentsVO = new ComponentsVO();
 				componentsVO.setComponentName(componentName.getText());
@@ -196,7 +203,8 @@ public class ComponentsModifyController implements Initializable {
 			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
-			e.printStackTrace();
+			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : modifyComponent");
 	}
 }

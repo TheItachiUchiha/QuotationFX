@@ -14,6 +14,8 @@ public class ComponentsController {
 	
 	public void newComponent()
 	{
+
+		LOG.info("Enter : newComponent");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -24,12 +26,13 @@ public class ComponentsController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(componentCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : newComponent");
 	}
 	public void modifyComponent()
 	{
+		LOG.info("Enter : modifyComponent");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -40,12 +43,13 @@ public class ComponentsController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(componentCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : modifyComponent");
 	}
 	public void viewComponent()
 	{
+		LOG.info("Enter : viewComponent");
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
@@ -56,8 +60,8 @@ public class ComponentsController {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(componentCreate);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			LOG.error(e.getMessage());
 		}
-		
+		LOG.info("Exit : viewComponent");
 	}
 }
