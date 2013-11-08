@@ -6,6 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.TopMenuController">
   <!-- TODO Add Nodes -->
@@ -13,22 +14,34 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.0" prefWidth="874.0">
+    <HBox minHeight="43.0" prefHeight="43.0" prefWidth="874.0">
       <children>
-        <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" styleClass="menuButtons" text="HOME">
-          <toggleGroup>
-            <ToggleGroup fx:id="topMenu" />
-          </toggleGroup>
-        </ToggleButton>
-        <ToggleButton mnemonicParsing="false" onAction="#productsHome" prefHeight="45.0" styleClass="menuButtons" text="PRODUCTS" toggleGroup="$topMenu" />
-        <ToggleButton mnemonicParsing="false" onAction="#componentsHome" prefHeight="45.0" styleClass="menuButtons" text="COMPONENTS" toggleGroup="$topMenu" />
-        <ToggleButton mnemonicParsing="false" onAction="#customersHome" prefHeight="45.0" styleClass="menuButtons" text="CUSTOMERS" toggleGroup="$topMenu" />
-        <ToggleButton mnemonicParsing="false" onAction="#usersHome" prefHeight="45.0" styleClass="menuButtons" text="USERS" toggleGroup="$topMenu" />
-        <ToggleButton mnemonicParsing="false" onAction="#helpHome" prefHeight="45.0" styleClass="menuButtons" text="HELP" toggleGroup="$topMenu" />
+        <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.0" prefWidth="810.0">
+          <children>
+            <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" styleClass="menuButtons" text="HOME">
+              <toggleGroup>
+                <ToggleGroup fx:id="topMenu" />
+              </toggleGroup>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#productsHome" prefHeight="45.0" styleClass="menuButtons" text="PRODUCTS" toggleGroup="$topMenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#componentsHome" prefHeight="45.0" styleClass="menuButtons" text="COMPONENTS" toggleGroup="$topMenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#customersHome" prefHeight="45.0" styleClass="menuButtons" text="CUSTOMERS" toggleGroup="$topMenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#usersHome" prefHeight="45.0" styleClass="menuButtons" text="USERS" toggleGroup="$topMenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#helpHome" prefHeight="45.0" styleClass="menuButtons" text="HELP" toggleGroup="$topMenu" />
+          </children>
+          <padding>
+            <Insets left="20.0" />
+          </padding>
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </HBox>
+        <Button fx:id="logout" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" styleClass="logout" text="Logout" textFill="#ff3395">
+          <font>
+            <Font size="13.0" />
+          </font>
+        </Button>
       </children>
-      <padding>
-        <Insets left="20.0" />
-      </padding>
     </HBox>
   </top>
 </BorderPane>
