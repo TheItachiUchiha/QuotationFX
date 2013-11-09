@@ -135,18 +135,18 @@ public class UsersCreateController {
 			}	
 			usersDAO.saveUser(usersVO);
 			message.setText(CommonConstants.USER_ADD_SUCCESS);
-			message.setVisible(true);
 			message.getStyleClass().add("success");
 			message.getStyleClass().remove("failure");
+			message.setVisible(true);
 		}
 			
 		catch (SQLException s)
 		{
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_USER);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 		}
 		catch (Exception e) {
