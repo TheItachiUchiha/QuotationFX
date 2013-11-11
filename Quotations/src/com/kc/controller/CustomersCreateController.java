@@ -66,16 +66,23 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 			if(validation.isEmpty(customerName, companyName, contactNumber, tinNumber))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else if(!validation.isEmail(emailId.getText()))
 			{
 				message.setText(CommonConstants.INCORRECT_EMAIL);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(contactNumber.getText().length()<10)
+			{
+				message.setText(CommonConstants.INCORRECT_PHONE_NO);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else
 			{
@@ -107,9 +114,9 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 		{
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_CUSTOMER);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 		}
 		catch (Exception e) {

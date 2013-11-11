@@ -24,6 +24,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -330,7 +331,9 @@ public class CustomersViewController implements Initializable {
 		ButtonCell() {
 
 			cellDeleteButton.getStyleClass().add("editDeleteButton");
+			cellDeleteButton.setTooltip(new Tooltip("Delete"));
 			cellEditButton.getStyleClass().add("editDeleteButton");
+			cellEditButton.setTooltip(new Tooltip("Edit"));
 
 			cellDeleteButton.setOnAction(new EventHandler<ActionEvent>() {
 

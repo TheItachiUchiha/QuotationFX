@@ -31,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Dialogs.DialogOptions;
 import javafx.scene.control.Dialogs.DialogResponse;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -250,7 +251,9 @@ public class UsersViewController implements Initializable {
             
         	
         	cellDeleteButton.getStyleClass().add("editDeleteButton");
+        	cellDeleteButton.setTooltip(new Tooltip("Delete"));
         	cellEditButton.getStyleClass().add("editDeleteButton");
+        	cellEditButton.setTooltip(new Tooltip("Edit"));
         	
         	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
  
