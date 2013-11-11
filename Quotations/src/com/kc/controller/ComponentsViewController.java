@@ -338,7 +338,7 @@ public class ComponentsViewController implements Initializable {
 		LOG.info("Enter : deleteComponents");
 		try{
 				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-					    "Do you want to delete selected components", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
+					    "Do you want to delete selected component(s)", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
 					componentsDAO.deleteComponents(componentsVO);
@@ -388,8 +388,7 @@ public class ComponentsViewController implements Initializable {
                 @Override
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
-                	try {
-						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+                	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
 								.getResource("../view/components-modify.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
@@ -404,6 +403,7 @@ public class ComponentsViewController implements Initializable {
 						modifyStage.initOwner(LoginController.primaryStage);
 						modifyStage.setScene(modifyScene);
 						modifyStage.show();
+						
 						((ComponentsModifyController) menuLoader.getController())
 								.fillTextFieldValues(ButtonCell.this
 										.getTableView().getItems()

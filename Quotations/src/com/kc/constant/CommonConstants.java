@@ -17,6 +17,9 @@ public class CommonConstants
 	public static final String USER_ADD_SUCCESS = "User Added";
 	public static final String DUPLICATE_USER = "Username already exists";
 	public static final String USER_DELETE_SUCCESS = "User(s) Deleted";
+	public static final String USER_SELECT_MODULE = "Atleast Select One Module";
+	public static final String USER_SELECT_PERMISSION = "Atleast Select One Permission";
+	public static final String USER_SELECT_USERTYPE = "Choose a Usertype";
 	
 	
 

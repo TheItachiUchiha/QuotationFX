@@ -32,7 +32,7 @@
             <Separator prefWidth="200.0" />
             <ToggleButton mnemonicParsing="false" onAction="#modifyProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify Product" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Products" toggleGroup="$productSubmenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#viewProduct" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Products" toggleGroup="$productSubmenu" />
             <Separator prefWidth="200.0" />
           </children>
           <padding>

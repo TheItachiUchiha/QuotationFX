@@ -67,6 +67,7 @@ public class CustomersModifyController implements Initializable{
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		LOG.info("Enter : initialize");
 		try{
+			validation.allowAsPhoneNumber(contactNumber);
 			customersList = customersDAO.getCustomers();
 			
 			customerNameAutoFill.setItems(customersList);

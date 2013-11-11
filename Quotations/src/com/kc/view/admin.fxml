@@ -14,9 +14,9 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <HBox minHeight="43.0" prefHeight="43.0" prefWidth="874.0">
+    <HBox id="#menuHbox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="43.0" prefHeight="44.0" prefWidth="874.0">
       <children>
-        <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.0" prefWidth="810.0">
+        <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.000099999997474" prefWidth="807.0">
           <children>
             <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" styleClass="menuButtons" text="HOME">
               <toggleGroup>
@@ -36,7 +36,7 @@
             <Insets />
           </HBox.margin>
         </HBox>
-        <Button fx:id="logout" mnemonicParsing="false" prefHeight="43.0" prefWidth="88.0" styleClass="logout" text="Logout" textFill="#ff3395">
+        <Button fx:id="logout" mnemonicParsing="false" prefHeight="45.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="#ff3395">
           <font>
             <Font size="13.0" />
           </font>

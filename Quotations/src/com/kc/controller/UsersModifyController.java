@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.UsersDAO;
 import com.kc.model.UsersVO;
+import com.kc.util.Validation;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,10 +26,11 @@ public class UsersModifyController implements Initializable{
 	private ObservableList<UsersVO> usersList;
 	private UsersDAO usersDAO;
 	private UsersVO usersVO;
-	
+	Validation validation;
 	public UsersModifyController(){
 		usersDAO = new UsersDAO();
 		usersVO = new UsersVO();
+		validation = new Validation();
 	}
  	
 	@FXML
@@ -70,6 +72,24 @@ public class UsersModifyController implements Initializable{
 		LOG.info("Enter : initialize");
 		
 		try{
+			validation.allowAsPhoneNumber(mobileNumber);
+			userType.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					if(userType.getSelectionModel().getSelectedItem().equalsIgnoreCase("ADMIN"))
+					{
+						quotation.setSelected(true);
+						priceEstimation.setSelected(true);
+						report.setSelected(true);
+						statusReminder.setSelected(true);
+						salesOrderManagement.setSelected(true);
+						view.setSelected(true);
+						edit.setSelected(true);
+						delete.setSelected(true);
+					}
+				}
+			});
 			usersList = usersDAO.getUsers();
 			
 			userNameAutoFill.setItems(usersList);
@@ -90,8 +110,7 @@ public class UsersModifyController implements Initializable{
 							modifyHbox.setVisible(true);
 							userNameAutoFill.setDisable(true);
 							fillTextFieldValues(usersVO);
-						}
-							
+						}	
 					}
 				}
 			});
@@ -162,6 +181,36 @@ public class UsersModifyController implements Initializable{
 		LOG.info("Enter : modifyUser");
 		try
 		{
+			if(validation.isEmpty(name, designation, username, password, mobileNumber))
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else if(userType.getSelectionModel().getSelectedIndex()<0)
+			{
+				message.setText(CommonConstants.USER_SELECT_USERTYPE);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()))
+			{
+				message.setText(CommonConstants.USER_SELECT_MODULE);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else if(!(view.isSelected()||edit.isSelected()||delete.isSelected()))
+			{
+				message.setText(CommonConstants.USER_SELECT_PERMISSION);
+				message.setVisible(true);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+			}
+			else
+			{
 			UsersVO usersVO = new UsersVO();
 			
 			usersVO.setName(name.getText());
@@ -245,7 +294,10 @@ public class UsersModifyController implements Initializable{
 			usersVO.setId(this.usersVO.getId());
 			usersDAO.updateUser(usersVO);
 			message.setText(CommonConstants.USER_MODIFY_SUCCESS);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
 			message.setVisible(true);
+		}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
