@@ -13,6 +13,9 @@ import com.kc.model.ProductsVO;
 import com.kc.util.DBConnector;
 import java.sql.Statement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class ProductsDAO {
 	private static final Logger LOG = LogManager.getLogger(ProductsDAO.class);
 	private Connection conn = null;
@@ -55,5 +58,49 @@ public class ProductsDAO {
 	}
 	LOG.info("Exit : saveProducts");
 	}
+	public ObservableList<ProductsVO> getProducts() throws SQLException {
+		LOG.info("Enter : getProducts");
+		ObservableList<ProductsVO> listOfProducts = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM PRODUCTS");
 
+			while (resultSet.next()) {
+				ProductsVO productsVO = new ProductsVO();
+				productsVO.setId(resultSet.getInt(1));
+				productsVO.setProductName(resultSet.getString(2));
+				productsVO.setProductCategory(resultSet.getString(3));
+				productsVO.setProductSubCategory(resultSet.getString(4));
+				productsVO.setProductCode(resultSet.getString(5));
+				listOfProducts.add(productsVO);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getProducts");
+		return listOfProducts;
+	}
+	public void deleteProducts(ProductsVO productsVO) throws Exception {
+		LOG.info("Enter : deleteProducts");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
+			preparedStatement.setInt(1, productsVO.getId());
+			preparedStatement.execute();
+			preparedStatement=conn.prepareStatement("DELETE FROM product_component WHERE PRODUCT_ID=?");
+			preparedStatement.setInt(2, productsVO.getId());
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deleteProducts");
+	}
 }

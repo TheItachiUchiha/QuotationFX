@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 
 public class ProductsVO {
 	
+	private int id;
+	
 	private String productName;
 	
 	private String productCategory;
@@ -14,6 +16,15 @@ public class ProductsVO {
 	private String productCode;
 	
 	private ObservableList<ComponentsVO> list;
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getProductSubCategory() {
 		return productSubCategory;
@@ -53,5 +64,9 @@ public class ProductsVO {
 
 	public void setList(ObservableList<ComponentsVO> list) {
 		this.list = list;
+	}
+	public String toString()
+	{
+		return this.productName;
 	}
 }
