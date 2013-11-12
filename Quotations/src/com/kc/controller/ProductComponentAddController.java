@@ -62,7 +62,6 @@ public class ProductComponentAddController implements Initializable {
     @FXML private TableColumn<ComponentsVO, Double> costPrice;
     @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
     @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
-    @FXML private TableColumn action;
     @FXML private Label message;
 
 	public TableView<ComponentsVO> getComponentTable() {
@@ -112,30 +111,6 @@ public class ProductComponentAddController implements Initializable {
 					fillTableFromData();
 				}
 			});
-			
-			action.setSortable(false);
-	         
-	        action.setCellValueFactory(
-	                new Callback<TableColumn.CellDataFeatures<ComponentsVO, Boolean>,
-	                ObservableValue<Boolean>>() {
-	 
-	            @Override
-	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<ComponentsVO, Boolean> p) {
-	                return new SimpleBooleanProperty(p.getValue() != null);
-	            }
-	        });
-	 
-	        action.setCellFactory(
-	                new Callback<TableColumn<ComponentsVO, Boolean>, TableCell<ComponentsVO, Boolean>>() {
-	 
-	            @Override
-	            public TableCell<ComponentsVO, Boolean> call(TableColumn<ComponentsVO, Boolean> p) {
-	                return new ButtonCell();
-	            }
-	         
-	        });
-			
-			
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -332,52 +307,4 @@ public class ProductComponentAddController implements Initializable {
 	{
 		Dialogs.showInformationDialog(ProductsCreateController.stage, "Component(s) successfully added. Please close the window to continue");
 	}
-	public void deleteComponents(ComponentsVO componentsVO)
-	{
-		LOG.info("Enter : deleteComponents");
-		try{
-			componentTable.getItems().remove(componentsVO);
-		}
-		catch (Exception e) {
-			message.setText(CommonConstants.FAILURE);
-			message.setVisible(true);
-			message.getStyleClass().remove("success");
-			message.getStyleClass().add("failure");
-			LOG.error(e.getMessage());
-		}
-		LOG.info("Exit : deleteComponents");
-	}
-
-	private class ButtonCell extends TableCell<ComponentsVO, Boolean> {
-       
-		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
-		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
-       
-         
-        ButtonCell(){
-            
-        	
-        	cellDeleteButton.getStyleClass().add("editDeleteButton");
-        	
-        	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
- 
-                @Override
-                public void handle(ActionEvent t) {
-                    deleteComponents(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
-                }
-            });
-        }
- 
-        //Display button if the row is not empty
-        @Override
-        protected void updateItem(Boolean t, boolean empty) {
-            super.updateItem(t, empty);
-            if(!empty){
-            	HBox box = new HBox();
-            	box.getChildren().addAll(cellDeleteButton);
-                setGraphic(box);
-            }
-        }
-    }
-
 }
