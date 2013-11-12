@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="825.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="825.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductViewController">
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
       <children>
@@ -35,13 +35,13 @@
   <center>
     <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
       <children>
-        <TableView fx:id="componentTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="340.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
+        <TableView id="componentTable" fx:id="productsTable" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="340.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="188.0" text="Product Name" fx:id="productName" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="200.0" text="Product Category" fx:id="productCategory" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="168.0" text="ProductSubCategory" fx:id="productSubCategory" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="150.0" text="Product Code" fx:id="productCode" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="103.0" text="Action" fx:id="action" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="121.0" text="Action" fx:id="action" />
           </columns>
         </TableView>
       </children>
