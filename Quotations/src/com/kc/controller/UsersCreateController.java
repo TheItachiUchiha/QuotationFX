@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -67,11 +69,10 @@ public class UsersCreateController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		validation.allowAsPhoneNumber(mobileNumber);
-		userType.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent arg0) {
-				if(userType.getSelectionModel().getSelectedItem().equalsIgnoreCase("ADMIN"))
+		userType.valueProperty().addListener(new ChangeListener<String>() {
+            
+			@Override public void changed(ObservableValue ov, String t, String t1) {                
+				if(t1.equalsIgnoreCase("ADMIN"))
 				{
 					quotation.setSelected(true);
 					quotation.setDisable(true);
@@ -89,6 +90,25 @@ public class UsersCreateController implements Initializable {
 					edit.setDisable(true);
 					delete.setSelected(true);
 					delete.setDisable(true);
+				}
+				else if(t1.equalsIgnoreCase("NORMAL"))
+				{
+					quotation.setSelected(false);
+					quotation.setDisable(false);
+					priceEstimation.setSelected(false);
+					priceEstimation.setDisable(false);
+					report.setSelected(false);
+					report.setDisable(false);
+					statusReminder.setSelected(false);
+					statusReminder.setDisable(false);
+					salesOrderManagement.setSelected(false);
+					salesOrderManagement.setDisable(false);
+					view.setSelected(false);
+					view.setDisable(false);
+					edit.setSelected(false);
+					edit.setDisable(false);
+					delete.setSelected(false);
+					delete.setDisable(false);
 				}
 			}
 		});

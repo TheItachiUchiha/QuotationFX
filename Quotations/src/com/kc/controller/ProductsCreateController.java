@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -42,6 +43,7 @@ public class ProductsCreateController implements Initializable{
 	private static final Logger LOG = LogManager.getLogger(ProductsCreateController.class);
 	
 	public static Stage stage;
+	private ObservableList<ComponentsVO> componentsList=FXCollections.observableArrayList();
 	
 	@FXML
     private TableView<ComponentsVO> componentTable;
@@ -73,7 +75,7 @@ public class ProductsCreateController implements Initializable{
 		LOG.info("Enter : initialize");
 		try
 		{
-
+			componentTable.setItems(componentsList);
 			action.setSortable(false);
 	         
 	        action.setCellValueFactory(
@@ -140,7 +142,7 @@ public class ProductsCreateController implements Initializable{
 					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("costPrice"));
 					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("dealerPrice"));
 					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("endUserPrice"));
-					componentTable.setItems(list);
+					componentsList.addAll(list);
 				}
 					
 			});		

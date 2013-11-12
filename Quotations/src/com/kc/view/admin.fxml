@@ -36,7 +36,7 @@
             <Insets />
           </HBox.margin>
         </HBox>
-        <Button fx:id="logout" mnemonicParsing="false" prefHeight="45.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="#ff3395">
+        <Button id="logout" mnemonicParsing="false" onAction="#logout" prefHeight="45.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="RED">
           <font>
             <Font size="13.0" />
           </font>

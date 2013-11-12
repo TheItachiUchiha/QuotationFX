@@ -99,4 +99,7 @@ public class TopMenuController {
 		}
 		LOG.info("Exit : helpHome");
 	}
+	public void logout()
+	{
+	}
 }

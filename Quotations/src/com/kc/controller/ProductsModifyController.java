@@ -29,6 +29,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -55,7 +56,10 @@ public class ProductsModifyController implements Initializable {
 	private GridPane selectGrid;
 	@FXML
 	private GridPane showGrid;
-	
+	@FXML
+	private VBox tableVBox;
+	@FXML
+	private HBox modifyHBox;
 
 	@FXML
 	private Button addComponent;
@@ -136,6 +140,8 @@ public class ProductsModifyController implements Initializable {
 					if(null!=newValue)
 					{
 						showGrid.setVisible(false);
+						tableVBox.setVisible(false);
+						modifyHBox.setVisible(false);
 						tempProductSubCategoryList.clear();
 						for(ProductsVO productsVO: productsList)
 						{
@@ -160,6 +166,8 @@ public class ProductsModifyController implements Initializable {
 					if(null!=newValue)
 					{
 						showGrid.setVisible(false);
+						tableVBox.setVisible(false);
+						modifyHBox.setVisible(false);
 						tempProductList.clear();
 						for(ProductsVO productsVO: productsList)
 						{
@@ -184,6 +192,8 @@ public class ProductsModifyController implements Initializable {
 						if(null!=newValue)
 						{
 							showGrid.setVisible(true);
+							tableVBox.setVisible(true);
+							modifyHBox.setVisible(true);
 							productCategoryTextField.setText(productCategory.getValue());
 							productSubCategoryTextField.setText(productSubcategory.getValue());
 							productNameTextField.setText(newValue.getProductName());

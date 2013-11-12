@@ -13,7 +13,11 @@
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
       <children>
-        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" />
+        <HBox fx:id="modifyHBox" alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" visible="false">
+          <children>
+            <Button mnemonicParsing="false" onAction="#modifyProduct" text="Modify" />
+          </children>
+        </HBox>
         <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="800.0" spacing="10.0">
           <children>
             <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
@@ -30,7 +34,7 @@
     </VBox>
   </bottom>
   <center>
-    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0">
+    <VBox fx:id="tableVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
       <children>
         <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" VBox.vgrow="ALWAYS">
           <columns>
@@ -47,9 +51,9 @@
             <TableColumn prefWidth="75.0" text="Action" fx:id="action" />
           </columns>
         </TableView>
-        <HBox id="HBox" alignment="CENTER" spacing="5.0">
+        <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
           <children>
-            <Button mnemonicParsing="false" onAction="#modifyProduct" text="Modify" />
+            <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" text="Add Component" />
           </children>
         </HBox>
       </children>
@@ -59,7 +63,7 @@
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
   <top>
-    <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+    <VBox prefHeight="-1.0" prefWidth="-1.0">
       <children>
         <GridPane fx:id="selectGrid" hgap="20.0" prefHeight="100.0" prefWidth="414.0">
           <children>
@@ -67,9 +71,6 @@
             <Label prefWidth="93.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
             <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
-              <children>
-                <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" text="Add Component" />
-              </children>
               <GridPane.margin>
                 <Insets left="150.0" />
               </GridPane.margin>
@@ -113,29 +114,29 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
-        <GridPane fx:id="showGrid" prefHeight="100.0" prefWidth="352.0" visible="true">
+        <GridPane fx:id="showGrid" alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="-1.0" visible="false">
           <children>
-            <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-            <Label prefWidth="93.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <TextField id="productCategory" fx:id="productCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <TextField id="productSubCategory" fx:id="productSubCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField id="productName" fx:id="productNameTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField id="productCategory" fx:id="productCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <TextField id="productSubCategory" fx:id="productSubCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField id="productName" fx:id="productNameTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <TextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           </columnConstraints>
           <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           </rowConstraints>
         </GridPane>
       </children>
-    </HBox>
+    </VBox>
   </top>
 </BorderPane>
