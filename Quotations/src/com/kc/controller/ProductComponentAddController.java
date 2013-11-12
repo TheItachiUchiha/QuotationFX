@@ -330,25 +330,13 @@ public class ProductComponentAddController implements Initializable {
 	}
 	public void addComponents()
 	{
-		Dialogs.showInformationDialog(ProductsCreateController.componentAddStage, "Component(s) successfully added. Please close the window to continue");
+		Dialogs.showInformationDialog(ProductsCreateController.stage, "Component(s) successfully added. Please close the window to continue");
 	}
 	public void deleteComponents(ComponentsVO componentsVO)
 	{
 		LOG.info("Enter : deleteComponents");
 		try{
-				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-					    "Do you want to delete selected component(s)", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
-				if(response.equals(DialogResponse.OK))
-				{
-					componentsDAO.deleteComponents(componentsVO);
-					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-					message.setVisible(true);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-					fillTableFromData();
-					
-				}
+			componentTable.getItems().remove(componentsVO);
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);

@@ -6,9 +6,11 @@ public class CommonConstants
 	public static final String FAILURE = "Failure";
 	public static final String MANDATORY_FIELDS = "Please fill all mandatory fields";
 	public static final String INCORRECT_EMAIL = "Incorrect Email Format";
-	public static final String INCORRECT_PHONE_NO = "Phone number must be 10 digits";
+	public static final String INCORRECT_PHONE_NO = "Incorrect Phone Number";
 	public static final String COMPONENT_ADD_SUCCESS = "Component Added";
 	public static final String DUPLICATE_COMPONENT = "Duplicate Component";
+	public static final String DUPLICATE_PRODUCT_CODE = "Duplicate Product Code";
+	public static final String NO_PRODUCT_COMPONENT = "No Product Component(s) Added";
 	public static final String COMPONENT_MODIFY_SUCCESS = "Component Modified";
 	public static final String COMPONENT_DELETE_SUCCESS = "Component(s) Deleted";
 	public static final String CUSTOMER_MODIFY_SUCCESS = "Customer Modified";
@@ -21,6 +23,7 @@ public class CommonConstants
 	public static final String USER_SELECT_MODULE = "Atleast Select One Module";
 	public static final String USER_SELECT_PERMISSION = "Atleast Select One Permission";
 	public static final String USER_SELECT_USERTYPE = "Choose a Usertype";
+	public static final String PRODUCT_ADD_SUCCESS = "Product Added";
 	
 	
 

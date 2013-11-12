@@ -1,5 +1,7 @@
 package com.kc.model;
 
+import javafx.collections.ObservableList;
+
 
 public class ProductsVO {
 	
@@ -7,7 +9,27 @@ public class ProductsVO {
 	
 	private String productCategory;
 	
-	private String subCategory;
+	private String productSubCategory;
+	
+	private String productCode;
+	
+	private ObservableList<ComponentsVO> list;
+
+	public String getProductSubCategory() {
+		return productSubCategory;
+	}
+
+	public void setProductSubCategory(String productSubCategory) {
+		this.productSubCategory = productSubCategory;
+	}
+
+	public String getProductCode() {
+		return productCode;
+	}
+
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
 
 	public String getProductName() {
 		return productName;
@@ -25,12 +47,11 @@ public class ProductsVO {
 		this.productCategory = productCategory;
 	}
 
-	public String getSubCategory() {
-		return subCategory;
+	public ObservableList<ComponentsVO> getList() {
+		return list;
 	}
 
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
+	public void setList(ObservableList<ComponentsVO> list) {
+		this.list = list;
 	}
-
 }
