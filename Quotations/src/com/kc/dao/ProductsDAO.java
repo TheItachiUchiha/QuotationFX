@@ -90,11 +90,11 @@ public class ProductsDAO {
 		LOG.info("Enter : deleteProducts");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
+			preparedStatement=conn.prepareStatement("DELETE FROM product_component WHERE PRODUCT_ID=?");
 			preparedStatement.setInt(1, productsVO.getId());
 			preparedStatement.execute();
-			preparedStatement=conn.prepareStatement("DELETE FROM product_component WHERE PRODUCT_ID=?");
-			preparedStatement.setInt(2, productsVO.getId());
+			preparedStatement = conn.prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
+			preparedStatement.setInt(1, productsVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
