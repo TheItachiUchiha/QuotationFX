@@ -58,6 +58,45 @@ public class ProductsDAO {
 	}
 	LOG.info("Exit : saveProducts");
 	}
+	
+	public void modifyProducts(ProductsVO productsVO) throws Exception
+	{
+		LOG.info("Enter : saveProducts");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn
+					.prepareStatement("DELETE FROM PRODUCT_COMPONENT WHERE PRODUCT_ID=?");
+			preparedStatement.setInt(1, productsVO.getId());
+			preparedStatement.execute();
+			
+			preparedStatement = conn
+					.prepareStatement("UPDATE PRODUCTS SET NAME=?, CATEGORY=?, SUBCATEGORY=?, CODE=? WHERE ID=?");
+			preparedStatement.setString(1, productsVO.getProductName());
+			preparedStatement.setString(2, productsVO.getProductCategory());
+			preparedStatement.setString(3, productsVO.getProductSubCategory());
+			preparedStatement.setString(4, productsVO.getProductCode());
+			preparedStatement.setInt(5, productsVO.getId());
+			preparedStatement.execute();
+			
+			statement = conn.createStatement();
+			for(ComponentsVO component : productsVO.getList())
+			{
+				statement.addBatch("INSERT into product_component(product_id, component_id) values("+productsVO.getId()+","+component.getId()+")");
+			}
+			statement.executeBatch();
+			
+	}catch (Exception e) {
+		//e.printStackTrace();
+		LOG.error(e.getMessage());
+		throw e;
+		
+	}
+	LOG.info("Exit : saveProducts");
+	}
+	
+	
+	
 	public ObservableList<ProductsVO> getProducts() throws SQLException {
 		LOG.info("Enter : getProducts");
 		ObservableList<ProductsVO> listOfProducts = FXCollections
@@ -102,5 +141,41 @@ public class ProductsDAO {
 			throw e;
 		}
 		LOG.info("Exit : deleteProducts");
+	}
+	
+	public ObservableList<ComponentsVO> getComponentsForProduct(int productId) throws SQLException {
+		LOG.info("Enter : getComponents");
+		ObservableList<ComponentsVO> listOfComponents = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT * FROM COMPONENTS where id in (select component_id from product_component WHERE PRODUCT_ID=?)");
+			preparedStatement.setInt(1, productId);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				ComponentsVO componentsVO = new ComponentsVO();
+				componentsVO.setId(resultSet.getInt(1));
+				componentsVO.setComponentName(resultSet.getString(2));
+				componentsVO.setComponentCategory(resultSet.getString(3));
+				componentsVO.setSubCategory(resultSet.getString(4));
+				componentsVO.setVendor(resultSet.getString(5));
+				componentsVO.setModel(resultSet.getString(6));
+				componentsVO.setType(resultSet.getString(7));
+				componentsVO.setSize(resultSet.getString(8));
+				componentsVO.setCostPrice(resultSet.getDouble(9));
+				componentsVO.setEndUserPrice(resultSet.getDouble(10));
+				componentsVO.setDealerPrice(resultSet.getDouble(11));
+				listOfComponents.add(componentsVO);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponents");
+		return listOfComponents;
 	}
 }

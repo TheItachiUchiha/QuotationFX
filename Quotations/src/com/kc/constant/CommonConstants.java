@@ -24,6 +24,7 @@ public class CommonConstants
 	public static final String USER_SELECT_PERMISSION = "Atleast Select One Permission";
 	public static final String USER_SELECT_USERTYPE = "Choose a Usertype";
 	public static final String PRODUCT_ADD_SUCCESS = "Product Added";
+	public static final String PRODUCT_MODIFY_SUCCESS = "Product Modified";
 	public static final String PRODUCT_DELETE_SUCCESS = "Product(s) Deleted";
 	
 	
