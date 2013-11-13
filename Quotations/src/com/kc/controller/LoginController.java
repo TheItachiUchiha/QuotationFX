@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -25,6 +26,7 @@ public class LoginController extends Application implements Initializable{
 
 	private static final Logger LOG = LogManager.getLogger(LoginController.class);
 	public static Stage primaryStage;
+	public static Scene scene;
 	public static BorderPane home;
 	public static BorderPane login;
 	private LoginDAO loginDAO;
@@ -33,13 +35,36 @@ public class LoginController extends Application implements Initializable{
 	private TextField username;
 	@FXML
 	private TextField password;
-
+	@FXML
+	private Label message;
 	
 	public LoginController()
 	{
 		loginDAO = new LoginDAO();
 	}
-	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		username.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent event) {
+		        if(event.getCode() == KeyCode.ENTER) {
+		            doLogin();
+		        } 
+		        event.consume();
+		    }
+		});
+		
+		password.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		    @Override
+		    public void handle(KeyEvent event) {
+		        if(event.getCode() == KeyCode.ENTER) {
+		            doLogin();
+		        }
+		        event.consume();
+		    }
+		});
+		
+	}
 	@SuppressWarnings("static-access")
 	@Override
 	public void start(Stage primaryStage) {
@@ -52,7 +77,8 @@ public class LoginController extends Application implements Initializable{
 					LoginController.class.getResource("../view/root.fxml"));
 			login = (BorderPane) loader.load();
 			Scene scene = new Scene(this.login);
-			this.primaryStage.setScene(scene);
+			this.scene=scene;
+			this.primaryStage.setScene(this.scene);
 			this.primaryStage.show();
 		} catch (IOException e) {
 			LOG.error(e.getMessage());
@@ -69,6 +95,8 @@ public class LoginController extends Application implements Initializable{
 		LOG.info("Enter : doLogin");
 		try {
 			if (loginDAO.verifyUser(username.getText(), password.getText())) {
+				username.setText("");
+				password.setText("");
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
 								.getResource("../view/admin.fxml"));
@@ -81,34 +109,13 @@ public class LoginController extends Application implements Initializable{
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setScene(scene);
 			}
-
+			else
+			{
+				message.setVisible(true);
+			}
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : doLogin");
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		username.setOnKeyPressed(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent event) {
-		        if(event.getCode() == KeyCode.ENTER); {
-		            doLogin();
-		        } 
-		        event.consume();
-		    }
-		});
-		
-		password.setOnKeyPressed(new EventHandler<KeyEvent>() {
-		    @Override
-		    public void handle(KeyEvent event) {
-		        if(event.getCode() == KeyCode.ENTER); {
-		            doLogin();
-		        } 
-		        event.consume();
-		    }
-		});
-		
 	}
 }

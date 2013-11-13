@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -351,6 +352,17 @@ public class ComponentsViewController implements Initializable {
 					fillTableFromData();
 					
 				}
+		}
+		catch(SQLException s)
+		{
+			if(s.getErrorCode()==CommonConstants.FOREIGN_KEY_CONSTRAINT)
+			{
+				message.setText(CommonConstants.PRODUCT_COMPONENT_FOREIGN_KEY);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+				LOG.error(s.getMessage());
+			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);

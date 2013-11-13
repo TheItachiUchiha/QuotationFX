@@ -16,10 +16,9 @@
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
       <children>
-        <HBox alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" />
         <HBox id="HBox" alignment="CENTER" spacing="10.0">
           <children>
-            <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
+            <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false" wrapText="true" HBox.hgrow="SOMETIMES">
               <font>
                 <Font size="15.0" />
               </font>

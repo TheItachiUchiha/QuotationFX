@@ -4,6 +4,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 public class TopMenuController {
@@ -101,5 +102,6 @@ public class TopMenuController {
 	}
 	public void logout()
 	{
+		LoginController.primaryStage.setScene(LoginController.scene);
 	}
 }
