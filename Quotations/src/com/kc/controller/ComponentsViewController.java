@@ -344,9 +344,9 @@ public class ComponentsViewController implements Initializable {
 				{
 					componentsDAO.deleteComponents(componentsVO);
 					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-					message.setVisible(true);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
+					message.setVisible(true);
 					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
 					fillTableFromData();
 					
@@ -354,9 +354,9 @@ public class ComponentsViewController implements Initializable {
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
-			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			message.setVisible(true);
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : deleteComponents");

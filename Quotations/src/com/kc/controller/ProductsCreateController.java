@@ -201,9 +201,9 @@ public class ProductsCreateController implements Initializable{
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
-			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			message.setVisible(true);
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : deleteComponents");
@@ -240,6 +240,4 @@ public class ProductsCreateController implements Initializable{
 			}
 		}
 	}
-	
-	
 }

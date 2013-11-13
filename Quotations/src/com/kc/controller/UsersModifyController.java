@@ -213,30 +213,30 @@ public class UsersModifyController implements Initializable{
 			if(validation.isEmpty(name, designation, username, password, mobileNumber))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else if(userType.getSelectionModel().getSelectedIndex()<0)
 			{
 				message.setText(CommonConstants.USER_SELECT_USERTYPE);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()))
 			{
 				message.setText(CommonConstants.USER_SELECT_MODULE);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else if(!(view.isSelected()||edit.isSelected()||delete.isSelected()))
 			{
 				message.setText(CommonConstants.USER_SELECT_PERMISSION);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else
 			{

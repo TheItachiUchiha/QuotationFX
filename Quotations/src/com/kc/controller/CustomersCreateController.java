@@ -124,9 +124,8 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 			LOG.error(e.getMessage());
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			message.setVisible(true);
 		}
 		LOG.info("Exit : saveCustomers");
-	}
-
-	
+	}	
 }

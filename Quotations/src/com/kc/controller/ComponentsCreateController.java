@@ -70,9 +70,9 @@ public class ComponentsCreateController implements Initializable{
 			if(validation.isEmpty(componentName, componentCategory, subCategory, vendor, model, type, size, costPrice, dealerPrice, endUserPrice))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 			else
 			{
@@ -89,17 +89,17 @@ public class ComponentsCreateController implements Initializable{
 				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice.getText()));
 				componentsDAO.saveComponent(componentsVO);
 				message.setText(CommonConstants.COMPONENT_ADD_SUCCESS);
-				message.setVisible(true);
 				message.getStyleClass().remove("failure");
 				message.getStyleClass().add("success");
+				message.setVisible(true);
 			}
 		}
 		catch (SQLException s) {
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_COMPONENT);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 		}
 		catch (Exception e) {

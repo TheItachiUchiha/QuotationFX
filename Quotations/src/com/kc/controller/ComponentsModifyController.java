@@ -195,9 +195,9 @@ public class ComponentsModifyController implements Initializable {
 					subCategory, vendor, model, type, size, costPrice,
 					dealerPrice, endUserPrice)) {
 				message.setText(CommonConstants.MANDATORY_FIELDS);
-				message.setVisible(true);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			} else {
 				ComponentsVO componentsVO = new ComponentsVO();
 				componentsVO.setComponentName(componentName.getText());
@@ -217,15 +217,15 @@ public class ComponentsModifyController implements Initializable {
 
 				componentsDAO.updateComponent(componentsVO);
 				message.setText(CommonConstants.COMPONENT_MODIFY_SUCCESS);
-				message.setVisible(true);
 				message.getStyleClass().remove("failure");
 				message.getStyleClass().add("success");
+				message.setVisible(true);
 			}
 		} catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
-			message.setVisible(true);
 			message.getStyleClass().remove("success");
 			message.getStyleClass().add("failure");
+			message.setVisible(true);
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : modifyComponent");
