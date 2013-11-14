@@ -142,6 +142,7 @@ public class ProductsModifyController implements Initializable {
 						showGrid.setVisible(false);
 						tableVBox.setVisible(false);
 						modifyHBox.setVisible(false);
+						message.setVisible(false);
 						tempProductSubCategoryList.clear();
 						for(ProductsVO productsVO: productsList)
 						{
@@ -168,6 +169,7 @@ public class ProductsModifyController implements Initializable {
 						showGrid.setVisible(false);
 						tableVBox.setVisible(false);
 						modifyHBox.setVisible(false);
+						message.setVisible(false);
 						tempProductList.clear();
 						for(ProductsVO productsVO: productsList)
 						{
@@ -194,6 +196,7 @@ public class ProductsModifyController implements Initializable {
 							showGrid.setVisible(true);
 							tableVBox.setVisible(true);
 							modifyHBox.setVisible(true);
+							message.setVisible(false);
 							productCategoryTextField.setText(productCategory.getValue());
 							productSubCategoryTextField.setText(productSubcategory.getValue());
 							productNameTextField.setText(newValue.getProductName());

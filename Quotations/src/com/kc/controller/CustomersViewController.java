@@ -305,7 +305,6 @@ public class CustomersViewController implements Initializable {
 				fillAutoCompleteFromComboBox(combo.getSelectionModel()
 						.getSelectedItem());
 				fillTableFromData();
-				keyword.setText("");
 			}
 		} catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
@@ -339,8 +338,7 @@ public class CustomersViewController implements Initializable {
 
 				@Override
 				public void handle(ActionEvent t) {
-					deleteCustomers(ButtonCell.this.getTableView().getItems()
-							.get(ButtonCell.this.getIndex()));
+					deleteCustomers(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
 				}
 			});
 

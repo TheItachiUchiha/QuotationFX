@@ -89,7 +89,7 @@
         </Label>
         <Label font="$x1" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x2" GridPane.rowIndex="1" />
         <Label font="$x1" text="Component" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.margin="$x2" GridPane.rowIndex="2" />
-        <ComboBox fx:id="categoryCombo" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <ComboBox fx:id="categoryCombo" prefHeight="21.0" prefWidth="240.0" promptText="Select Component Category" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -98,7 +98,7 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <ComboBox fx:id="subcategoryCombo" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <ComboBox fx:id="subcategoryCombo" prefHeight="21.0" prefWidth="240.0" promptText="Select Subcategory" GridPane.columnIndex="1" GridPane.rowIndex="1">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -107,7 +107,7 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <ComboBox fx:id="componentCombo" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <ComboBox fx:id="componentCombo" prefHeight="21.0" prefWidth="240.0" promptText="Select Component Name" GridPane.columnIndex="1" GridPane.rowIndex="2">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />

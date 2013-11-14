@@ -360,6 +360,7 @@ public class ComponentsViewController implements Initializable {
 				message.setText(CommonConstants.PRODUCT_COMPONENT_FOREIGN_KEY);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
+				message.setWrapText(true);
 				message.setVisible(true);
 				LOG.error(s.getMessage());
 			}
