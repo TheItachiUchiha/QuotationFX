@@ -131,7 +131,7 @@ public class ProductsCreateController implements Initializable{
 
 				@Override
 				public void handle(WindowEvent paramT) {
-					ObservableList<ComponentsVO> list = ((ProductComponentAddController)menuLoader.getController()).getComponentTable().getItems();
+					ObservableList<ComponentsVO> list = ((ProductComponentAddController)menuLoader.getController()).getAddedComponentList();
 					name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
 					category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
 					subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));

@@ -265,7 +265,7 @@ public class ProductsModifyController implements Initializable {
 
 				@Override
 				public void handle(WindowEvent paramT) {
-					ObservableList<ComponentsVO> list = ((ProductComponentAddController)menuLoader.getController()).getComponentTable().getItems();
+					ObservableList<ComponentsVO> list = ((ProductComponentAddController)menuLoader.getController()).getAddedComponentList();
 					componentName.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
 					category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
 					subcategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));

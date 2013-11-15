@@ -37,12 +37,17 @@ import javafx.util.Callback;
 public class ProductComponentAddController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(ProductComponentAddController.class);
 	private ObservableList<ComponentsVO> componentsList;
-	private ObservableList<ComponentsVO> tableDataList;
+	private ObservableList<ComponentsVO> addedComponentList = FXCollections.observableArrayList();
 	private ObservableList<String> searchByList;
 	private ComponentsDAO componentsDAO;
 	
 	public ProductComponentAddController(){
 		componentsDAO = new ComponentsDAO();
+	}
+	
+	public ObservableList<ComponentsVO> getAddedComponentList()
+	{
+		return addedComponentList;
 	}
 	@FXML
 	private AutoCompleteTextField<String> keyword;
@@ -305,6 +310,7 @@ public class ProductComponentAddController implements Initializable {
 	}
 	public void addComponents()
 	{
+		addedComponentList.addAll(componentTable.getSelectionModel().getSelectedItems());
 		Dialogs.showInformationDialog(ProductsCreateController.stage, "Component(s) successfully added. Please close the window to continue");
 	}
 }
