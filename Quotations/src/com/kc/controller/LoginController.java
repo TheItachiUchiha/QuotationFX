@@ -77,6 +77,7 @@ public class LoginController extends Application implements Initializable{
 		try {
 			this.primaryStage = primaryStage;
 			this.primaryStage.setTitle("Quotation");
+			this.primaryStage.setResizable(false);
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(
 					LoginController.class.getResource("../view/root.fxml"));
@@ -113,6 +114,7 @@ public class LoginController extends Application implements Initializable{
 				this.home.setCenter(subMenu);
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setScene(scene);
+				this.primaryStage.setResizable(true);
 			}
 			else
 			{
