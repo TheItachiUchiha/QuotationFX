@@ -32,11 +32,16 @@ public class LoginController extends Application implements Initializable{
 	private LoginDAO loginDAO;
 
 	@FXML
-	private TextField username;
+	private static TextField username;
 	@FXML
 	private TextField password;
 	@FXML
 	private Label message;
+	
+	public static TextField getUsername()
+	{
+		return username;
+	}
 	
 	public LoginController()
 	{

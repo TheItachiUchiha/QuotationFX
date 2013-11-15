@@ -103,5 +103,6 @@ public class TopMenuController {
 	public void logout()
 	{
 		LoginController.primaryStage.setScene(LoginController.scene);
+		LoginController.getUsername().requestFocus();
 	}
 }
