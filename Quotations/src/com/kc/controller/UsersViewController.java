@@ -153,14 +153,20 @@ public class UsersViewController implements Initializable {
 	        {
 	        	for(UsersVO usersVO : usersList)
 	        	{
-	        		tempList.add(usersVO.getName());
+	        		if(!tempList.contains(usersVO.getName()))
+	        		{
+	        			tempList.add(usersVO.getName());
+	        		}
 	        	}
 	        }
 	        else if(t1.equals("Username"))
 	        {
 	        	for(UsersVO usersVO : usersList)
 	        	{
-	        		tempList.add(usersVO.getUsername());
+	        		if(!tempList.contains(usersVO.getUsername()))
+	        		{
+	        			tempList.add(usersVO.getUsername());
+	        		}
 	        	}
 	        }
 	        keyword.setItems(tempList);

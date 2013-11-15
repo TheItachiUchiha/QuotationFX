@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,8 +35,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
@@ -165,31 +168,52 @@ public class CustomersViewController implements Initializable {
 					.observableArrayList();
 			if (t1.equals("Customer Name")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getCustomerName()))
+	        		{
 					tempList.add(customersVO.getCustomerName());
+	        		}
 				}
 			} else if (t1.equals("Company Name")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getCompanyName()))
+	        		{
 					tempList.add(customersVO.getCompanyName());
+	        		}
 				}
 			} else if (t1.equals("State")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getState()))
+	        		{
 					tempList.add(customersVO.getState());
+	        		}
 				}
 			} else if (t1.equals("City")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getCity()))
+	        		{
 					tempList.add(customersVO.getCity());
+	        		}
 				}
 			} else if (t1.equals("Email Id")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getEmailId()))
+	        		{
 					tempList.add(customersVO.getEmailId());
+	        		}
 				}
 			} else if (t1.equals("TIN Number")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getTinNumber()))
+	        		{
 					tempList.add(customersVO.getTinNumber());
+	        		}
 				}
 			} else if (t1.equals("Customer Type")) {
 				for (CustomersVO customersVO : customersList) {
+					if(!tempList.contains(customersVO.getCustomerType()))
+	        		{
 					tempList.add(customersVO.getCustomerType());
+	        		}
 				}
 			}
 			keyword.setItems(tempList);
