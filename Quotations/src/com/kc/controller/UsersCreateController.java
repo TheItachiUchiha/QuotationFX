@@ -125,6 +125,13 @@ public class UsersCreateController implements Initializable {
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
+			else if(mobileNumber.getText().length()<10)
+			{
+				message.setText(CommonConstants.INCORRECT_PHONE_NO);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
 			else if(userType.getSelectionModel().getSelectedIndex()<0)
 			{
 				message.setText(CommonConstants.USER_SELECT_USERTYPE);

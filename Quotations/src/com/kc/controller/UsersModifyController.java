@@ -76,6 +76,7 @@ public class UsersModifyController implements Initializable{
 		
 		try{
 			validation.allowAsPhoneNumber(mobileNumber);
+			usersList = usersDAO.getUsers();
 			userType.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {                
@@ -100,7 +101,87 @@ public class UsersModifyController implements Initializable{
 					}
 					else if(t1.equalsIgnoreCase("NORMAL"))
 					{
-						quotation.setSelected(false);
+						String usernameTemp = userNameAutoFill.getText();
+						for(UsersVO usersVO : usersList)
+						{
+							if(usersVO.getName().equals(usernameTemp))
+							{
+								quotation.setDisable(false);
+								priceEstimation.setDisable(false);
+								statusReminder.setDisable(false);
+								report.setDisable(false);
+								salesOrderManagement.setDisable(false);
+								view.setDisable(false);
+								edit.setDisable(false);
+								delete.setDisable(false);
+								if(usersVO.getQuotation().equalsIgnoreCase("Y"))
+								{
+									quotation.setSelected(true);
+								}
+								else
+								{
+									quotation.setSelected(false);
+								}
+
+								if(usersVO.getPriceEstimation().equalsIgnoreCase("Y"))
+								{
+									priceEstimation.setSelected(true);
+								}
+								else
+								{
+									priceEstimation.setSelected(false);
+								}
+								if(usersVO.getReport().equalsIgnoreCase("Y"))
+								{
+									report.setSelected(true);
+								}
+								else
+								{
+									report.setSelected(false);
+								}
+								if(usersVO.getSalesOrderManagement().equalsIgnoreCase("Y"))
+								{
+									salesOrderManagement.setSelected(true);
+								}
+								else
+								{
+									salesOrderManagement.setSelected(false);
+								}
+								if(usersVO.getStatusReminder().equalsIgnoreCase("Y"))
+								{
+									statusReminder.setSelected(true);
+								}
+								else
+								{
+									statusReminder.setSelected(false);
+								}
+								if(usersVO.getView().equalsIgnoreCase("Y"))
+								{
+									view.setSelected(true);
+								}
+								else
+								{
+									view.setSelected(false);
+								}
+								if(usersVO.getEdit().equalsIgnoreCase("Y"))
+								{
+									edit.setSelected(true);
+								}
+								else
+								{
+									edit.setSelected(false);
+								}
+								if(usersVO.getDelete().equalsIgnoreCase("Y"))
+								{
+									delete.setSelected(true);
+								}
+								else
+								{
+									delete.setSelected(false);
+								}
+							}
+						}
+						/*quotation.setSelected(false);
 						quotation.setDisable(false);
 						priceEstimation.setSelected(false);
 						priceEstimation.setDisable(false);
@@ -115,11 +196,11 @@ public class UsersModifyController implements Initializable{
 						edit.setSelected(false);
 						edit.setDisable(false);
 						delete.setSelected(false);
-						delete.setDisable(false);
+						delete.setDisable(false);*/
 					}
 				}
 			});
-			usersList = usersDAO.getUsers();
+			
 			
 			userNameAutoFill.setItems(usersList);
 			
@@ -213,6 +294,13 @@ public class UsersModifyController implements Initializable{
 			if(validation.isEmpty(name, designation, username, password, mobileNumber))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(mobileNumber.getText().length()<10)
+			{
+				message.setText(CommonConstants.INCORRECT_PHONE_NO);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
