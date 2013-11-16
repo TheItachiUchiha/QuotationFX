@@ -104,7 +104,7 @@ public class UsersModifyController implements Initializable{
 						String usernameTemp = userNameAutoFill.getText();
 						for(UsersVO usersVO : usersList)
 						{
-							if(usersVO.getName().equals(usernameTemp))
+							if(usersVO.getName().equals(usernameTemp)||usersVO.getName().equals(UsersModifyController.this.usersVO.getName()))
 							{
 								quotation.setDisable(false);
 								priceEstimation.setDisable(false);
@@ -181,22 +181,6 @@ public class UsersModifyController implements Initializable{
 								}
 							}
 						}
-						/*quotation.setSelected(false);
-						quotation.setDisable(false);
-						priceEstimation.setSelected(false);
-						priceEstimation.setDisable(false);
-						report.setSelected(false);
-						report.setDisable(false);
-						statusReminder.setSelected(false);
-						statusReminder.setDisable(false);
-						salesOrderManagement.setSelected(false);
-						salesOrderManagement.setDisable(false);
-						view.setSelected(false);
-						view.setDisable(false);
-						edit.setSelected(false);
-						edit.setDisable(false);
-						delete.setSelected(false);
-						delete.setDisable(false);*/
 					}
 				}
 			});
@@ -234,6 +218,7 @@ public class UsersModifyController implements Initializable{
 	{
 		LOG.info("Enter : fillTextFieldValues");
 		UsersModifyController.this.usersVO.setId(usersVO.getId());
+		UsersModifyController.this.usersVO.setName(usersVO.getName());
 		name.setText(usersVO.getName());
 		designation.setText(usersVO.getDesignation());
 		mobileNumber.setText(usersVO.getMobileNumber());

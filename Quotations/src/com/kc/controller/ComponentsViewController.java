@@ -68,9 +68,9 @@ public class ComponentsViewController implements Initializable {
     @FXML private TableColumn<ComponentsVO, String> model;
     @FXML private TableColumn<ComponentsVO, String> type;
     @FXML private TableColumn<ComponentsVO, String> size;
-    @FXML private TableColumn<ComponentsVO, Double> costPrice;
-    @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
-    @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
+    @FXML private TableColumn<ComponentsVO, String> costPrice;
+    @FXML private TableColumn<ComponentsVO, String> dealerPrice;
+    @FXML private TableColumn<ComponentsVO, String> endUserPrice;
     @FXML private TableColumn action;
     @FXML private Label message;
 	
@@ -324,9 +324,9 @@ public class ComponentsViewController implements Initializable {
 			model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 			type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 			size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("costPrice"));
-			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("dealerPrice"));
-			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("endUserPrice"));
+			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
+			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
+			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
 			componentTable.setItems(tempList);
 		}
 		catch (Exception e) {

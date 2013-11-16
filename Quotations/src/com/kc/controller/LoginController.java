@@ -77,13 +77,14 @@ public class LoginController extends Application implements Initializable{
 		try {
 			this.primaryStage = primaryStage;
 			this.primaryStage.setTitle("Quotation");
-			this.primaryStage.setResizable(false);
+			//this.primaryStage.setResizable(false);
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(
 					LoginController.class.getResource("../view/root.fxml"));
 			login = (BorderPane) loader.load();
 			Scene scene = new Scene(this.login);
 			this.scene=scene;
+			this.primaryStage.setHeight(710);
 			this.primaryStage.setScene(this.scene);
 			this.primaryStage.show();
 		} catch (IOException e) {

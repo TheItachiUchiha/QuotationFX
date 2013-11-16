@@ -84,9 +84,9 @@ public class ComponentsCreateController implements Initializable{
 				componentsVO.setModel(model.getText());
 				componentsVO.setType(type.getText());
 				componentsVO.setSize(size.getText());
-				componentsVO.setCostPrice(Double.parseDouble(costPrice.getText()));
-				componentsVO.setDealerPrice(Double.parseDouble(dealerPrice.getText()));
-				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice.getText()));
+				componentsVO.setCostPrice(costPrice.getText());
+				componentsVO.setDealerPrice(dealerPrice.getText());
+				componentsVO.setEndUserPrice(endUserPrice.getText());
 				componentsDAO.saveComponent(componentsVO);
 				message.setText(CommonConstants.COMPONENT_ADD_SUCCESS);
 				message.getStyleClass().remove("failure");

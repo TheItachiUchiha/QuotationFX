@@ -163,9 +163,9 @@ public class ProductsDAO {
 				componentsVO.setModel(resultSet.getString(6));
 				componentsVO.setType(resultSet.getString(7));
 				componentsVO.setSize(resultSet.getString(8));
-				componentsVO.setCostPrice(resultSet.getDouble(9));
-				componentsVO.setEndUserPrice(resultSet.getDouble(10));
-				componentsVO.setDealerPrice(resultSet.getDouble(11));
+				componentsVO.setCostPrice(resultSet.getString(9));
+				componentsVO.setEndUserPrice(resultSet.getString(10));
+				componentsVO.setDealerPrice(resultSet.getString(11));
 				listOfComponents.add(componentsVO);
 			}
 		} catch (Exception e) {

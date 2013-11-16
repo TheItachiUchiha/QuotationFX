@@ -20,11 +20,11 @@ public class ComponentsVO {
 	
 	private String size;
 	
-	private double costPrice;
+	private String costPrice;
 	
-	private double dealerPrice;
+	private String dealerPrice;
 	
-	private double endUserPrice;
+	private String endUserPrice;
 
 	
 	public int getId() {
@@ -91,27 +91,27 @@ public class ComponentsVO {
 		this.size = size;
 	}
 
-	public double getCostPrice() {
+	public String getCostPrice() {
 		return costPrice;
 	}
 
-	public void setCostPrice(double costPrice) {
+	public void setCostPrice(String costPrice) {
 		this.costPrice = costPrice;
 	}
 
-	public double getDealerPrice() {
+	public String getDealerPrice() {
 		return dealerPrice;
 	}
 
-	public void setDealerPrice(double dealerPrice) {
+	public void setDealerPrice(String dealerPrice) {
 		this.dealerPrice = dealerPrice;
 	}
 
-	public double getEndUserPrice() {
+	public String getEndUserPrice() {
 		return endUserPrice;
 	}
 
-	public void setEndUserPrice(double endUserPrice) {
+	public void setEndUserPrice(String endUserPrice) {
 		this.endUserPrice = endUserPrice;
 	}
 	
