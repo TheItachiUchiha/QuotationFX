@@ -3,6 +3,7 @@
 <?import com.mytdev.javafx.scene.control.*?>
 <?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -88,6 +89,9 @@
       </BorderPane.margin>
     </HBox>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <HBox alignment="CENTER" prefHeight="41.0" prefWidth="600.0" spacing="15.0" BorderPane.alignment="CENTER" BorderPane.margin="$x4">
       <children>

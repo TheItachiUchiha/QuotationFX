@@ -36,9 +36,6 @@
           <padding>
             <Insets top="40.0" />
           </padding>
-          <stylesheets>
-            <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
-          </stylesheets>
         </VBox>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
           <tabs>

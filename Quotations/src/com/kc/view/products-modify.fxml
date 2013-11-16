@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -62,6 +63,9 @@
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <VBox prefHeight="-1.0" prefWidth="-1.0">
       <children>

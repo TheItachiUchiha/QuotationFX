@@ -3,6 +3,7 @@
 <?import com.mytdev.javafx.scene.control.*?>
 <?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
@@ -18,7 +19,7 @@
       <children>
         <HBox id="HBox" alignment="CENTER" spacing="10.0">
           <children>
-            <Label fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="600.0" text="" textFill="#a533ff" visible="false" HBox.hgrow="SOMETIMES" wrapText="true">
+            <Label fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="600.0" text="" textFill="#a533ff" visible="false" wrapText="true" HBox.hgrow="SOMETIMES">
               <font>
                 <Font size="15.0" />
               </font>
@@ -52,6 +53,9 @@
       </children>
     </VBox>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <GridPane fx:id="topGrid" alignment="TOP_CENTER">
       <children>

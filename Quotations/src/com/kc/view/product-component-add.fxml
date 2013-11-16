@@ -3,6 +3,7 @@
 <?import com.mytdev.javafx.scene.control.*?>
 <?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
@@ -56,6 +57,9 @@
       </children>
     </VBox>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <GridPane fx:id="topGrid" alignment="TOP_CENTER">
       <children>

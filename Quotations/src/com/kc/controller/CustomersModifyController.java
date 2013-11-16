@@ -137,6 +137,13 @@ public class CustomersModifyController implements Initializable{
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
+			else if(contactNumber.getText().length()<10)
+			{
+				message.setText(CommonConstants.INCORRECT_PHONE_NO);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
 			else
 			{
 				CustomersVO customersVO = new CustomersVO();

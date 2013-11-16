@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -91,4 +92,7 @@
     <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
   </rowConstraints>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </GridPane>
