@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import com.kc.controller.LoginController;
 import com.kc.util.DBConnector;
 
 public class LoginDAO 
@@ -28,11 +29,17 @@ public class LoginDAO
 			
 			if(resultSet.next())
 			{
+				LoginController.modulesVO.setPriceEstimation(resultSet.getString("priceestimation"));
+				LoginController.modulesVO.setQuotation(resultSet.getString("quotation"));
+				LoginController.modulesVO.setReport(resultSet.getString("report"));
+				LoginController.modulesVO.setSalesOrderManagement(resultSet.getString("salesorder"));
+				LoginController.modulesVO.setStatusReminder(resultSet.getString("statusReminder"));
+				LoginController.userType = resultSet.getString("usertype");
 				status = true;
 			}
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		finally
 		{

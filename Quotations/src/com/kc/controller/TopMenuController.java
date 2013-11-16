@@ -1,13 +1,41 @@
 package com.kc.controller;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.layout.BorderPane;
 
-public class TopMenuController {
+import com.kc.constant.CommonConstants;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+
+public class TopMenuController implements Initializable {
 
 	private static final Logger LOG = LogManager.getLogger(TopMenuController.class);
+	
+	@FXML private HBox menuHbox;
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if(LoginController.userType.equals(CommonConstants.NORMAL))
+		{
+			menuHbox.getChildren().remove(1);
+			menuHbox.getChildren().remove(1);
+			menuHbox.getChildren().remove(1);
+			menuHbox.getChildren().remove(1);
+		}
+		
+	}
+	
+	
+	
 	public void adminHome()
 	{
 		LOG.info("Enter : adminHome");
