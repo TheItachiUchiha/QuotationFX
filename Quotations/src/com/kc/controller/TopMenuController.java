@@ -130,6 +130,7 @@ public class TopMenuController implements Initializable {
 	{
 		LoginController.primaryStage.setResizable(false);
 		LoginController.primaryStage.setScene(LoginController.scene);
+		LoginController.message.setVisible(false);
 		LoginController.getUsername().requestFocus();
 	}
 }

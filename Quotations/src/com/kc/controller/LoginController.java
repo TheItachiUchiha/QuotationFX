@@ -21,6 +21,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.dao.LoginDAO;
+import com.kc.model.ModulesVO;
 
 public class LoginController extends Application implements Initializable{
 
@@ -30,13 +31,16 @@ public class LoginController extends Application implements Initializable{
 	public static BorderPane home;
 	public static BorderPane login;
 	private LoginDAO loginDAO;
+	public static ModulesVO modulesVO=new ModulesVO();
 
 	@FXML
 	private static TextField username;
 	@FXML
 	private TextField password;
 	@FXML
-	private Label message;
+	public static Label message;
+	
+	public static String userType;
 	
 	public static TextField getUsername()
 	{

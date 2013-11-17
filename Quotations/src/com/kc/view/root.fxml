@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.LoginController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" styleClass="loginBackground" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.LoginController">
   <!-- TODO Add Nodes -->
   <center>
     <GridPane alignment="CENTER" gridLinesVisible="false" prefHeight="223.0" prefWidth="874.0" snapToPixel="true">
@@ -61,4 +62,7 @@
       </rowConstraints>
     </GridPane>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </BorderPane>
