@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <center>
+    <GridPane maxHeight="-1.0" maxWidth="-1.0" minWidth="-1.0" prefHeight="488.0" prefWidth="485.0">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Label prefHeight="19.0" prefWidth="161.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Label prefHeight="35.0" prefWidth="162.0" text="Customer Requirements" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefHeight="27.0" prefWidth="161.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label prefHeight="23.0" prefWidth="161.0" text="Email Id" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+        <Label prefHeight="24.0" prefWidth="161.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+        <TextArea id="customerRequirement" fx:id="customerRequirememt" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="customerName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="companyName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="emailId" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="location" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField fx:id="contactNumber" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField id="estimatePeriod" fx:id="purchasePeriod" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <Label prefHeight="24.0" prefWidth="161.0" text="Customer File" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+        <TextField id="customerName" fx:id="productName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Date of enquiry creation" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+        <TextField id="estimatePeriod" fx:id="dateOfCreation" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextField id="estimatePeriod" fx:id="customerFile" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="50.0" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="50.0" prefWidth="415.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="63.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="44.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </center>
+</BorderPane>
