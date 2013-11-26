@@ -73,7 +73,15 @@ public class AdminHomeController implements Initializable {
 	}
 	public void quotationPreparation()
 	{
-		
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/Quotation.fxml"));
+			BorderPane quotation = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	public void salesOrder()
 	{
