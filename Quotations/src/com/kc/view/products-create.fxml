@@ -40,6 +40,7 @@
             <TableColumn prefWidth="75.0" text="Model" fx:id="model" />
             <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
             <TableColumn prefWidth="75.0" text="Size" fx:id="size" />
+            <TableColumn prefWidth="75.0" text="Quantity" fx:id="quantity" />
             <TableColumn prefWidth="75.0" text="Cost Price" fx:id="costPrice" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="78.0" text="Dealer Price" fx:id="dealerPrice" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="End User Price" fx:id="endUserPrice" />

@@ -15,6 +15,8 @@ public class AdminHomeController implements Initializable {
 	@FXML
 	private ToggleButton priceestimation;
 	@FXML
+	private ToggleButton enquiry;
+	@FXML
 	private ToggleButton sales;
 	@FXML
 	private ToggleButton quotation;
@@ -52,6 +54,18 @@ public class AdminHomeController implements Initializable {
 			BorderPane price = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(price);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	public void enquiry()
+	{
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/enquiry.fxml"));
+			BorderPane enquiry = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(enquiry);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

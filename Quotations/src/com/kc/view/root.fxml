@@ -25,13 +25,13 @@
                 <Font size="12.0" fx:id="x1" />
               </font>
             </Label>
-            <TextField id="userName" fx:id="username" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="246.0" />
+            <TextField id="userName" fx:id="username" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="246.0" text="admin" />
           </children>
         </VBox>
         <VBox id="VBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
           <children>
             <Label font="$x1" minHeight="23.0" prefHeight="23.0" prefWidth="81.0" text="Password" textFill="BLACK" />
-            <PasswordField fx:id="password" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" />
+            <PasswordField fx:id="password" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" text="admin" />
           </children>
         </VBox>
         <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
