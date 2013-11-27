@@ -46,7 +46,7 @@ public class ProductsDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : productsVO.getList())
 			{
-				statement.addBatch("INSERT into product_component(product_id, component_id) values("+id+","+component.getId()+")");
+				statement.addBatch("INSERT into product_component(product_id, component_id, quantity) values("+id+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 			
@@ -82,7 +82,7 @@ public class ProductsDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : productsVO.getList())
 			{
-				statement.addBatch("INSERT into product_component(product_id, component_id) values("+productsVO.getId()+","+component.getId()+")");
+				statement.addBatch("INSERT into product_component(product_id, component_id, quantity) values("+productsVO.getId()+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 			
@@ -149,7 +149,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT * FROM COMPONENTS where id in (select component_id from product_component WHERE PRODUCT_ID=?)");
+			preparedStatement = conn.prepareStatement("SELECT c.id, `name`, category, subcategory, vendor, model, `type`, size, costprice, enduserprice, dealerprice, quantity  FROM COMPONENTS c inner join product_component pc on (c.id = pc.component_id) where pc.PRODUCT_ID=?");
 			preparedStatement.setInt(1, productId);
 			resultSet = preparedStatement.executeQuery();
 
@@ -166,6 +166,7 @@ public class ProductsDAO {
 				componentsVO.setCostPrice(resultSet.getString(9));
 				componentsVO.setEndUserPrice(resultSet.getString(10));
 				componentsVO.setDealerPrice(resultSet.getString(11));
+				componentsVO.setQuantity(resultSet.getInt(12));
 				listOfComponents.add(componentsVO);
 			}
 		} catch (Exception e) {
