@@ -25,6 +25,8 @@ public class ComponentsVO {
 	private String dealerPrice;
 	
 	private String endUserPrice;
+	
+	private int quantity;
 
 	
 	public int getId() {
@@ -115,6 +117,20 @@ public class ComponentsVO {
 		this.endUserPrice = endUserPrice;
 	}
 	
+	/**
+	 * @return the quantity
+	 */
+	public int getQuantity() {
+		return quantity;
+	}
+
+	/**
+	 * @param quantity the quantity to set
+	 */
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
 	public String toString()
 	{
 		return this.componentName;
