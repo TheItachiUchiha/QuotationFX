@@ -2,9 +2,14 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,15 +20,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -38,12 +47,14 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.ProductsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.model.ProductsVO;
+import com.kc.util.Validation;
 
 public class ProductsCreateController implements Initializable{
 	private static final Logger LOG = LogManager.getLogger(ProductsCreateController.class);
 	
 	public static Stage stage;
 	private ObservableList<ComponentsVO> componentsList=FXCollections.observableArrayList();
+	private Validation validate;
 	
 	@FXML
     private TableView<ComponentsVO> componentTable;
@@ -54,10 +65,11 @@ public class ProductsCreateController implements Initializable{
     @FXML private TableColumn<ComponentsVO, String> model;
     @FXML private TableColumn<ComponentsVO, String> type;
     @FXML private TableColumn<ComponentsVO, String> size;
-    @FXML private TableColumn<ComponentsVO, Double> costPrice;
-    @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
-    @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
+    @FXML private TableColumn<ComponentsVO, String> costPrice;
+    @FXML private TableColumn<ComponentsVO, String> dealerPrice;
+    @FXML private TableColumn<ComponentsVO, String> endUserPrice;
     @FXML private TableColumn action;
+    @FXML private TableColumn quantity;
     @FXML
     private TextField productCategory;
     @FXML
@@ -69,6 +81,11 @@ public class ProductsCreateController implements Initializable{
     @FXML
     private Label message;
    
+    public ProductsCreateController()
+    {
+    	this.validate = new Validation();
+    }
+    
     
     @SuppressWarnings("unchecked")
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
@@ -76,6 +93,44 @@ public class ProductsCreateController implements Initializable{
 		try
 		{
 			componentTable.setItems(componentsList);
+			componentTable.setEditable(true);
+			
+			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
+				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {
+					return new EditingCell();
+				}
+			};
+
+			quantity.setCellValueFactory(new Callback<CellDataFeatures<ComponentsVO, Integer>, ObservableValue<Integer>>() {
+                @Override
+                public ObservableValue<Integer> call(CellDataFeatures<ComponentsVO, Integer> cellData) {
+                  ComponentsVO item = cellData.getValue();
+                  if (item == null) {
+                    return null;
+                  } else {
+                	  /*ObservableMap<String,ItemTypeVO> itemTypesMap = FXCollections.observableHashMap();
+		 		    	itemTypesMap = item.getListType();
+		 		    */
+		 		    	return new ReadOnlyObjectWrapper<Integer>(0);
+		 		    
+                  }
+                }
+              });
+			quantity.setCellFactory(cellFactory);
+	 		
+	 		quantity.setOnEditCommit(
+	 				new EventHandler<TableColumn.CellEditEvent<ComponentsVO, Integer>>() {
+	 				public void handle(TableColumn.CellEditEvent<ComponentsVO, Integer> t) {
+	 				((ComponentsVO)t.getTableView().getItems().get(
+	 				t.getTablePosition().getRow())).setQuantity(t.getNewValue());
+	 				}
+	 				});
+	 		
+	 		
+	 		
+	 		
+	 	//componentTable.getColumns().add(quantity);
+			
 			action.setSortable(false);
 	         
 	        action.setCellValueFactory(
@@ -139,9 +194,9 @@ public class ProductsCreateController implements Initializable{
 					model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 					type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 					size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("costPrice"));
-					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("dealerPrice"));
-					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("endUserPrice"));
+					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
+					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
+					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
 					for(ComponentsVO componentsVO : list)
 					{
 						if(componentsList.size()==0)
@@ -256,4 +311,163 @@ public class ProductsCreateController implements Initializable{
 			}
 		}
 	}
+	
+	class EditingCell extends TableCell<ComponentsVO, Integer> {
+		 
+	      private TextField textField;
+	     
+	      public EditingCell() {}
+	     
+	      @Override
+	      public void startEdit() {
+	          super.startEdit();
+	         
+	          if (textField == null) {
+	              createTextField();
+	          }
+	         
+	          setGraphic(textField);
+	          setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+	          //textField.selectAll();
+	          Platform.runLater(new Runnable() {
+		            @Override
+		            public void run() {
+		                textField.requestFocus();
+		                textField.selectAll();
+		            }
+		        });
+	      }
+	     
+	      @Override
+	      public void cancelEdit() {
+	          super.cancelEdit();
+	         
+	          setText(String.valueOf(getItem()));
+	          setContentDisplay(ContentDisplay.TEXT_ONLY);
+	      }
+	 
+	      @Override
+	      public void updateItem(Integer item, boolean empty) {
+	          super.updateItem(item, empty);
+	         
+	          if (empty) {
+	              setText(null);
+	              setGraphic(null);
+	          } else {
+	              if (isEditing()) {
+	                  if (textField != null) {
+	                      textField.setText(getString());
+	                  }
+	                  setGraphic(textField);
+	                  setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+	              } else {
+	                  setText(getString());
+	                  setContentDisplay(ContentDisplay.TEXT_ONLY);
+	              }
+	          }
+	      }
+	
+	      private void createTextField() {
+	          textField = new TextField();
+	          validate.allowDigit(textField);
+	          //textField.setText(getString());
+	          //textField.setText("0");
+	          textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
+	          
+	         /* textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+
+	        	    @Override
+	        	    public void changed(ObservableValue<? extends Boolean> arg0, Boolean arg1, Boolean arg2) {
+	        	        if (!arg2) {
+	        	            commitEdit(Integer.parseInt(textField.getText()));
+	        	        }
+	        	    }
+	        	});*/
+	          
+	          textField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		            @Override
+		            public void handle(KeyEvent t) {
+		                if (t.getCode() == KeyCode.ENTER) {
+		                	//For not allowing to commit when Enter is pressed with empty Textfield
+		                	if (!validate.isEmpty(textField)){
+			                	if (!validate.isWord(textField.getText())){
+		                    commitEdit(Integer.parseInt(textField.getText()));
+			                	}}
+		                } else if (t.getCode() == KeyCode.ESCAPE) {
+		                    cancelEdit();
+		                } else if (t.getCode() == KeyCode.TAB) {
+		                	//For not allowing to commit when TAB is pressed with empty Textfield
+		                	if (!validate.isEmpty(textField)){
+			                	if (!validate.isWord(textField.getText())){
+		                    commitEdit(Integer.parseInt(textField.getText()));
+			                	}}
+		                    TableColumn nextColumn = getNextColumn(!t.isShiftDown());
+		                    if (nextColumn != null) {
+		                        getTableView().edit(getTableRow().getIndex(), nextColumn);
+		                    }
+		                }
+		            }
+		        });
+	          textField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+		            @Override
+		            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+		                if (!newValue && textField != null) {
+		                	//For not allowing to commit when mouse is pressed with empty Textfield
+		                	if (!validate.isEmpty(textField)){
+		                	if (!validate.isWord(textField.getText())){
+		                		  commitEdit(Integer.parseInt(textField.getText()));
+		                	}
+		                	}
+		                	
+		                			                  
+		                }
+		            }
+		        });
+	      }
+	     
+	      private String getString() {
+	          return getItem() == null ? "" : getItem().toString();
+	      }
+	      
+	      private TableColumn<ComponentsVO, ?> getNextColumn(boolean forward) {
+		        List<TableColumn<ComponentsVO, ?>> columns = new ArrayList<>();
+		        for (TableColumn<ComponentsVO, ?> column : getTableView().getColumns()) {
+		            columns.addAll(getLeaves(column));
+		        }
+		        //There is no other column that supports editing.
+		        if (columns.size() < 2) {
+		            return null;
+		        }
+		        int currentIndex = columns.indexOf(getTableColumn());
+		        int nextIndex = currentIndex;
+		        if (forward) {
+		            nextIndex++;
+		            if (nextIndex > columns.size() - 1) {
+		                nextIndex = 0;
+		            }
+		        } else {
+		            nextIndex--;
+		            if (nextIndex < 0) {
+		                nextIndex = columns.size() - 1;
+		            }
+		        }
+		        return columns.get(nextIndex);
+		    }
+	      
+	      	private List<TableColumn<ComponentsVO, ?>> getLeaves(TableColumn<ComponentsVO, ?> root) {
+		        List<TableColumn<ComponentsVO, ?>> columns = new ArrayList<>();
+		        if (root.getColumns().isEmpty()) {
+		            //We only want the leaves that are editable.
+		            if (root.isEditable()) {
+		                columns.add(root);
+		            }
+		            return columns;
+		        } else {
+		            for (TableColumn<ComponentsVO, ?> column : root.getColumns()) {
+		                columns.addAll(getLeaves(column));
+		            }
+		            return columns;
+		        }
+	      	}
+	  }
 }
