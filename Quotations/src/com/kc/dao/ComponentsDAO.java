@@ -33,9 +33,9 @@ public class ComponentsDAO {
 			preparedStatement.setString(5, componentsVO.getModel());
 			preparedStatement.setString(6, componentsVO.getType());
 			preparedStatement.setString(7, componentsVO.getSize());
-			preparedStatement.setDouble(8, componentsVO.getCostPrice());
-			preparedStatement.setDouble(9, componentsVO.getDealerPrice());
-			preparedStatement.setDouble(10, componentsVO.getEndUserPrice());
+			preparedStatement.setString(8, componentsVO.getCostPrice());
+			preparedStatement.setString(9, componentsVO.getDealerPrice());
+			preparedStatement.setString(10, componentsVO.getEndUserPrice());
 
 			preparedStatement.execute();
 		}  catch (Exception e) {
@@ -62,9 +62,9 @@ public class ComponentsDAO {
 			preparedStatement.setString(5, componentsVO.getModel());
 			preparedStatement.setString(6, componentsVO.getType());
 			preparedStatement.setString(7, componentsVO.getSize());
-			preparedStatement.setDouble(8, componentsVO.getCostPrice());
-			preparedStatement.setDouble(9, componentsVO.getDealerPrice());
-			preparedStatement.setDouble(10, componentsVO.getEndUserPrice());
+			preparedStatement.setString(8, componentsVO.getCostPrice());
+			preparedStatement.setString(9, componentsVO.getDealerPrice());
+			preparedStatement.setString(10, componentsVO.getEndUserPrice());
 			preparedStatement.setInt(11, componentsVO.getId());
 			
 			preparedStatement.execute();
@@ -95,12 +95,13 @@ public class ComponentsDAO {
 				componentsVO.setModel(resultSet.getString(6));
 				componentsVO.setType(resultSet.getString(7));
 				componentsVO.setSize(resultSet.getString(8));
-				componentsVO.setCostPrice(resultSet.getInt(9));
-				componentsVO.setEndUserPrice(resultSet.getInt(10));
-				componentsVO.setDealerPrice(resultSet.getInt(11));
+				componentsVO.setCostPrice(resultSet.getString(9));
+				componentsVO.setEndUserPrice(resultSet.getString(10));
+				componentsVO.setDealerPrice(resultSet.getString(11));
 				listOfComponents.add(componentsVO);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOG.error(e.getMessage());
 		} finally {
 			if (conn != null) {
