@@ -111,7 +111,7 @@ public class ProductsCreateController implements Initializable{
                 	  /*ObservableMap<String,ItemTypeVO> itemTypesMap = FXCollections.observableHashMap();
 		 		    	itemTypesMap = item.getListType();
 		 		    */
-		 		    	return new ReadOnlyObjectWrapper<Integer>(0);
+		 		    	return new ReadOnlyObjectWrapper<Integer>(1);
 		 		    
                   }
                 }
