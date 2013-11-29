@@ -171,8 +171,10 @@ public class EnquiryNewController implements Initializable {
 			}
 		});
         try {
+        	
         	customersList = customersDAO.getCustomers();
 			productsList = productsDAO.getProducts();
+			
 			final ObservableList<ProductsVO> tempProductsList = FXCollections
 					.observableArrayList();
 
@@ -344,6 +346,12 @@ public class EnquiryNewController implements Initializable {
 	public void saveEnquiries()
 	{
 		int customerId = 0;
+		int productId = 0;
+		for (ProductsVO productsVO : productsList) {
+			if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
+				productId=productsVO.getId();
+			}
+		}
 		try
 		{
 			if(flag=='N')
@@ -356,6 +364,7 @@ public class EnquiryNewController implements Initializable {
 			}
 			EnquiryVO enquiryVO=new EnquiryVO();
 			enquiryVO.setCustomerId(customerId);
+			enquiryVO.setProductId(productId);
 			enquiryVO.setReferedBy(referedBy.getText());
 			enquiryVO.setCustomerrequirements(customerRequirements.getText());
 			enquiryVO.setPurchasePeriod(purchasePeriod.getText());
@@ -364,6 +373,7 @@ public class EnquiryNewController implements Initializable {
 			enquiryVO.setPriceEstimation("N");
 			enquiryVO.setQuotationPreparation("N");
 			enquiryVO.setEmailSent("N");
+			enquiryVO.setSales("N");
 			enquiryVO.setDate((new Date().toString()));
 			enquiryDAO.saveEnquiry(enquiryVO);
 			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);

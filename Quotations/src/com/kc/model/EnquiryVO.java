@@ -9,6 +9,7 @@ public class EnquiryVO {
 	private String emailMessage;
 	private String priceEstimation;
 	private String QuotationPreparation;
+	private String sales;
 	private String emailSent;
 	private String date;
 	private int customerId;
@@ -85,6 +86,12 @@ public class EnquiryVO {
 	}
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
 	}
 	
 }
