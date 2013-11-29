@@ -19,14 +19,14 @@ public class CustomersDAO {
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	
-	public void saveCustomer(CustomersVO customersVO) throws Exception
+	public int saveCustomer(CustomersVO customersVO) throws Exception
 	{
 		LOG.info("Enter : saveCustomer");
+		int id=0;
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			
+			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
 			preparedStatement.setString(3, customersVO.getAddress());
@@ -38,6 +38,12 @@ public class CustomersDAO {
 			preparedStatement.setString(9, customersVO.getTinNumber());
 			
 			preparedStatement.execute();
+			
+			resultSet = preparedStatement.getGeneratedKeys();
+			while(resultSet.next())
+			{
+				id=resultSet.getInt(1);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -45,6 +51,7 @@ public class CustomersDAO {
 			throw e;
 		}
 		LOG.info("Exit : saveCustomer");
+		return id;
 	}
 	
 	

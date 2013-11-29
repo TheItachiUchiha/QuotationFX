@@ -28,6 +28,7 @@ public class CommonConstants
 	public static final String PRODUCT_MODIFY_SUCCESS = "Product Modified";
 	public static final String PRODUCT_DELETE_SUCCESS = "Product(s) Deleted";
 	public static final String PRODUCT_COMPONENT_FOREIGN_KEY = "One or more products are using the component";
+	public static final String ENQUIRY_ADD_SUCCESS = "Enquiry Saved";
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;

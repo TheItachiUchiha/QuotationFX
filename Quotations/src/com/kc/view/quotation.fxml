@@ -13,14 +13,20 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryController">
+<BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationController">
   <!-- TODO Add Nodes -->
   <center>
     <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab fx:id="newTab" content="$null" text="New Enquiry" />
-        <Tab fx:id="viewTab" content="$null" text="View Enquiry" />
-        <Tab fx:id="optionTab" content="$null" text="Options" />
+        <Tab fx:id="newTab" content="$null" text="New Quotation" />
+        <Tab fx:id="modifyTab" content="$null" text="Modify Quotation" />
+        <Tab fx:id="emailTab" content="$null" text="Email Quotation" />
+        <Tab fx:id="viewTab" content="$null" text="View Sent Quotation" />
+        <Tab fx:id="optionTab" text="Option">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
       </tabs>
     </TabPane>
   </center>

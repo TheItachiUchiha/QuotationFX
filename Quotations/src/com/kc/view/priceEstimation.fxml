@@ -15,7 +15,7 @@
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
               <center>
-                <GridPane maxHeight="-1.0" maxWidth="-Infinity" minWidth="-1.0" prefHeight="423.00007792968245" prefWidth="591.0">
+                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="343.0" prefWidth="591.0">
                   <!-- TODO Add Nodes -->
                   <children>
                     <Label prefHeight="35.0" prefWidth="128.0" text="Sub Category" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -81,13 +81,13 @@
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" prefWidth="415.0" />
                   </columnConstraints>
                   <rowConstraints>
-                    <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="90.0" minHeight="0.0" prefHeight="40.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-                    <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="181.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="55.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="90.0" minHeight="0.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="167.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="185.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="188.0" minHeight="10.0" prefHeight="187.0" vgrow="SOMETIMES" />
                   </rowConstraints>
                 </GridPane>
               </center>

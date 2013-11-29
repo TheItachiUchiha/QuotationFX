@@ -21,13 +21,13 @@
               </font>
             </Label>
             <Separator prefWidth="210.0" />
-            <ToggleButton fx:id="priceestimation" mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation">
+            <ToggleButton id="priceestimation" fx:id="enquiry" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry">
               <toggleGroup>
                 <ToggleGroup fx:id="homeSubmenu" />
               </toggleGroup>
             </ToggleButton>
             <Separator prefWidth="210.0" />
-            <ToggleButton id="priceestimation" fx:id="enquiry" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry" toggleGroup="$homeSubmenu" />
+            <ToggleButton fx:id="priceestimation" mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />
             <ToggleButton fx:id="quotation" mnemonicParsing="false" onAction="#quotationPreparation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />

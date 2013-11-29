@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <center>
+    <TableView fx:id="quotationTable" maxWidth="-Infinity" prefHeight="445.0" prefWidth="850.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="56.0" text="Ref-No" fx:id="referenceNo" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="ProductName" fx:id="productName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="94.0" text="CustomerName" fx:id="customerName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Company Name" fx:id="companyName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="75.0" text="Refered By" fx:id="referedBy" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Date Of Enquiry" fx:id="dateOfEnquiry" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Date Of PE" fx:id="dateOfPe" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="81.0" text="Date Of QP" fx:id="dateOfQp" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Date Of Sent" fx:id="dateOfSent" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="66.0" text="Action" fx:id="action" />
+      </columns>
+    </TableView>
+  </center>
+  <top>
+    <HBox id="HBox" alignment="CENTER" prefHeight="50.0" prefWidth="874.0" spacing="5.0">
+      <children>
+        <Label prefHeight="20.0" prefWidth="56.0" text="Month" />
+        <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label prefHeight="20.0" prefWidth="28.0" text="Year" />
+        <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button mnemonicParsing="false" text="Search" />
+      </children>
+    </HBox>
+  </top>
+</BorderPane>
