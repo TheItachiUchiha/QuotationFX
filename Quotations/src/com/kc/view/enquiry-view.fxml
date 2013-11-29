@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryViewController">
   <!-- TODO Add Nodes -->
   <center>
     <TableView fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="850.0">
@@ -47,14 +47,13 @@
         </ComboBox>
         <HBox id="HBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
           <children>
-            <AutoCompleteTextField id="componentAutoFill" maxWidth="-Infinity" prefHeight="21.0" prefWidth="136.0" />
-            <Button id="go" alignment="CENTER" mnemonicParsing="false" text="Go" />
+            <AutoCompleteTextField id="componentAutoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="20.0" prefWidth="175.0" />
           </children>
           <padding>
             <Insets bottom="5.0" right="5.0" top="5.0" />
           </padding>
         </HBox>
-        <ComboBox id="monthOfEnquiry" fx:id="monthCombo" prefHeight="21.0" prefWidth="175.0" promptText="Select Month of Enquiry" GridPane.columnIndex="2" GridPane.rowIndex="0">
+        <ComboBox id="monthOfEnquiry" fx:id="monthCombo" prefHeight="21.0" prefWidth="175.0" promptText="Select Month of Enquiry" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -63,20 +62,11 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <HBox id="HBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-          <children>
-            <AutoCompleteTextField id="autoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="21.0" prefWidth="136.0" />
-            <Button fx:id="go" alignment="CENTER" mnemonicParsing="false" text="Go" />
-          </children>
-          <padding>
-            <Insets bottom="5.0" right="5.0" top="5.0" />
-          </padding>
-        </HBox>
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="284.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="214.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="352.0" minWidth="10.0" prefWidth="352.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
