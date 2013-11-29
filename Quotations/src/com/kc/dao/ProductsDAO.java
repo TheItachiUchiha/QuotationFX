@@ -22,12 +22,12 @@ public class ProductsDAO {
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
-	public void saveProducts(ProductsVO productsVO) throws Exception
+	public int saveProducts(ProductsVO productsVO) throws Exception
 	{
 		LOG.info("Enter : saveProducts");
+		int id=0;
 		try
 		{
-			int id=0;
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
 					.prepareStatement("INSERT INTO products(name,category,subcategory,code) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
@@ -50,13 +50,14 @@ public class ProductsDAO {
 			}
 			statement.executeBatch();
 			
-	}catch (Exception e) {
-		//e.printStackTrace();
-		LOG.error(e.getMessage());
-		throw e;
-		
-	}
-	LOG.info("Exit : saveProducts");
+		}catch (Exception e) {
+			//e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+			
+		}
+		LOG.info("Exit : saveProducts");
+		return id;
 	}
 	
 	public void modifyProducts(ProductsVO productsVO) throws Exception

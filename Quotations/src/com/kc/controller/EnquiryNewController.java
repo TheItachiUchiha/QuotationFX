@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
@@ -92,6 +93,7 @@ public class EnquiryNewController implements Initializable {
 	@FXML
 	private Label messageNewEnquiry;
 	private TextField filePath;
+	private String typeFlag;
 	
 	private ObservableList<ProductsVO> productsList;
 	private ProductsDAO productsDAO;
@@ -114,6 +116,7 @@ public class EnquiryNewController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		LOG.info("Enter : initialize");
 		
 		filePath = new TextField();
 		Button browse = new Button();
@@ -146,9 +149,11 @@ public class EnquiryNewController implements Initializable {
 					productName.setVisible(false);
 					productVbox.setVisible(true);
 					productName.setText("");
+					typeFlag="S";
 				}
 				else if(custom.isSelected())
 				{
+					typeFlag="C";
 					productVbox.setVisible(false);
 					productName.setVisible(true);
 					categoryCombo.getSelectionModel().clearSelection();
@@ -291,10 +296,11 @@ public class EnquiryNewController implements Initializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+        LOG.info("Exit : initialize");
 	}
 	public void fillTextFieldValues(CustomersVO customersVO)
 	{
+		LOG.info("Enter : fillTextFieldValues");
 		customerName.setText(customersVO.getCustomerName());
 		companyName.setText(customersVO.getCompanyName());
 		address.setText(customersVO.getAddress());
@@ -312,10 +318,12 @@ public class EnquiryNewController implements Initializable {
 		}
 		flag = 'Y';
 		this.customersVO = customersVO;
+		LOG.info("Exit : fillTextFieldValues");
 	}
 	
 	public CustomersVO fillDataFromTextFields()
 	{
+		LOG.info("Enter : fillDataFromTextFields");
 		CustomersVO customersVO = null;
 		try{
 			customersVO = new CustomersVO();
@@ -340,20 +348,31 @@ public class EnquiryNewController implements Initializable {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : fillDataFromTextFields");
 		return customersVO;
 	}
 	
 	public void saveEnquiries()
 	{
+		LOG.info("Enter : saveEnquiries");
 		int customerId = 0;
-		int productId = 0;
-		for (ProductsVO productsVO : productsList) {
-			if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
-				productId=productsVO.getId();
-			}
-		}
+		String productName = "";
+		
 		try
 		{
+			if(typeFlag.equals("S"))
+			{
+				for (ProductsVO productsVO : productsList) {
+					if (nameCombo.getSelectionModel().getSelectedItem().getProductName() == productsVO.getProductName()) {
+						productName=productsVO.getProductName();
+					}
+				}
+			}
+			else
+			{
+				productName = this.productName.getText();
+			}
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 			if(flag=='N')
 			{
 				customerId = customersDAO.saveCustomer(fillDataFromTextFields());
@@ -364,7 +383,7 @@ public class EnquiryNewController implements Initializable {
 			}
 			EnquiryVO enquiryVO=new EnquiryVO();
 			enquiryVO.setCustomerId(customerId);
-			enquiryVO.setProductId(productId);
+			enquiryVO.setProductName(productName);
 			enquiryVO.setReferedBy(referedBy.getText());
 			enquiryVO.setCustomerrequirements(customerRequirements.getText());
 			enquiryVO.setPurchasePeriod(purchasePeriod.getText());
@@ -374,7 +393,8 @@ public class EnquiryNewController implements Initializable {
 			enquiryVO.setQuotationPreparation("N");
 			enquiryVO.setEmailSent("N");
 			enquiryVO.setSales("N");
-			enquiryVO.setDate((new Date().toString()));
+			enquiryVO.setDate(simpleDateFormat.format(new Date()));
+			enquiryVO.setFlag(typeFlag);
 			enquiryDAO.saveEnquiry(enquiryVO);
 			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
 			messageNewEnquiry.getStyleClass().remove("failure");
@@ -385,5 +405,6 @@ public class EnquiryNewController implements Initializable {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : saveEnquiries");
 	}
 }

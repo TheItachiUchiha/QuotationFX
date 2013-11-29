@@ -28,7 +28,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_id,salesdone) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?,?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?)");
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -38,9 +38,9 @@ public class EnquiryDAO {
 			preparedStatement.setString(7, enquiryVO.getQuotationPreparation());
 			preparedStatement.setString(8, enquiryVO.getEmailSent());
 			preparedStatement.setString(9, enquiryVO.getDate());
-			preparedStatement.setInt(10, enquiryVO.getProductId());
+			preparedStatement.setString(10, enquiryVO.getProductName());
 			preparedStatement.setString(11, enquiryVO.getSales());
-			
+			preparedStatement.setString(12, enquiryVO.getFlag());
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -73,8 +73,9 @@ public class EnquiryDAO {
 				enquiryVO.setQuotationPreparation(resultSet.getString(8));
 				enquiryVO.setEmailSent(resultSet.getString(9));
 				enquiryVO.setDate(resultSet.getString(10));
-				enquiryVO.setProductId(resultSet.getInt(11));
+				enquiryVO.setProductName(resultSet.getString(11));
 				enquiryVO.setSales(resultSet.getString(12));
+				enquiryVO.setFlag(resultSet.getString(13));
 				
 				listOfEnquries.add(enquiryVO);
 			}

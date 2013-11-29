@@ -13,7 +13,8 @@ public class EnquiryVO {
 	private String emailSent;
 	private String date;
 	private int customerId;
-	private int productId;
+	private String productName;
+	private String flag;
 	
 	public int getId() {
 		return id;
@@ -81,17 +82,23 @@ public class EnquiryVO {
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
 	}
-	public int getProductId() {
-		return productId;
+	public String getProductName() {
+		return productName;
 	}
-	public void setProductId(int productId) {
-		this.productId = productId;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	public String getSales() {
 		return sales;
 	}
 	public void setSales(String sales) {
 		this.sales = sales;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 	
 }
