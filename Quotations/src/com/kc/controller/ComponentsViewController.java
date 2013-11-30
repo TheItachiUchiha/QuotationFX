@@ -49,6 +49,7 @@ public class ComponentsViewController implements Initializable {
 	private ObservableList<ComponentsVO> componentsList;
 	private ObservableList<String> searchByList;
 	private ComponentsDAO componentsDAO;
+	ObservableList<ComponentsVO> tempList;
 	
 	public ComponentsViewController(){
 		componentsDAO = new ComponentsDAO();
@@ -97,7 +98,8 @@ public class ComponentsViewController implements Initializable {
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
-				@Override public void changed(ObservableValue ov, String t, String t1) {                
+				@Override public void changed(ObservableValue ov, String t, String t1) {  
+					tempList =  FXCollections.observableArrayList();
 					 fillAutoCompleteFromComboBox(t1);
 					 keyword.setText("");
 	            }
@@ -107,7 +109,7 @@ public class ComponentsViewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					
+					componentTable.getItems().clear();
 					fillTableFromData();
 				}
 			});
@@ -157,7 +159,8 @@ public class ComponentsViewController implements Initializable {
 		LOG.info("Enter : fillAutoCompleteFromComboBox");
 		try{
 			componentsList = componentsDAO.getComponents();
-			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
+			final ObservableList<String> tempList = FXCollections.observableArrayList();
+			tempList.clear();
 			if(t1.equals("Component Category"))
 	        {
 	        	for(ComponentsVO componentsVO : componentsList)
@@ -243,7 +246,6 @@ public class ComponentsViewController implements Initializable {
 		LOG.info("Enter : fillTableFromData");
 		try{
 			
-			ObservableList<ComponentsVO> tempList =  FXCollections.observableArrayList();
 			String tempString = keyword.getText();
 			if(combo.getSelectionModel().getSelectedItem().equals("Component Category"))
 			{
