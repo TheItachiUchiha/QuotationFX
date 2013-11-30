@@ -376,7 +376,7 @@ public class EnquiryNewController implements Initializable {
 			{
 				productName = this.productName.getText();
 			}
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 			if(flag=='N')
 			{
 				customerId = customersDAO.saveCustomer(fillDataFromTextFields());

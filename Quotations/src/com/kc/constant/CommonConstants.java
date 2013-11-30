@@ -32,6 +32,7 @@ public class CommonConstants
 	public static final String MONTHS = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
 	public static final String PATH_ERROR = "Select a Propper path";
 	public static final String DEFAULT_PATH = "Default path Set";
+	public static final String DATE_FORMAT = "dd/MM/yyyy";
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;
