@@ -29,6 +29,7 @@ public class CommonConstants
 	public static final String PRODUCT_DELETE_SUCCESS = "Product(s) Deleted";
 	public static final String PRODUCT_COMPONENT_FOREIGN_KEY = "One or more products are using the component";
 	public static final String ENQUIRY_ADD_SUCCESS = "Enquiry Saved";
+	public static final String MONTHS = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;
