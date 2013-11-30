@@ -93,4 +93,22 @@ public class EnquiryDAO {
 		LOG.info("Exit : getEnquries");
 		return listOfEnquries;
 	}
+	public void saveEnquirylocation(String location) throws Exception
+	{
+		LOG.info("Enter : saveEnquirylocation");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=? where `key`=?");
+			preparedStatement.setString(1, location);
+			preparedStatement.setString(2, "enquiry");
+			preparedStatement.execute();
+			
+			LOG.info("Exit : saveEnquirylocation");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
 }

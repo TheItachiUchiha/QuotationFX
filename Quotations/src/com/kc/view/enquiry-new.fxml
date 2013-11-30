@@ -14,7 +14,7 @@
 <BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryNewController">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="754.0" visible="false" BorderPane.alignment="CENTER">
+    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="873.0" visible="false" BorderPane.alignment="CENTER">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="19.0" prefWidth="162.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -46,7 +46,7 @@
         <AutoCompleteTextField id="email" fx:id="emailId" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <AutoCompleteTextField id="refer" fx:id="referedBy" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField fx:id="customerName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <ComboBox fx:id="customerTypeCombo" prefHeight="21.0" prefWidth="188.99990000000253" promptText="Select Customer Type" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <ComboBox fx:id="customerTypeCombo" prefHeight="21.0" prefWidth="194.0" promptText="Select Customer Type" GridPane.columnIndex="1" GridPane.rowIndex="4">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Dealer" />
@@ -61,14 +61,10 @@
         <TextField fx:id="contactNumber" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
         <TextArea id="customerRequirement" fx:id="customerRequirements" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         <TextField id="estimatePeriod" fx:id="purchasePeriod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <Label prefHeight="24.0" prefWidth="115.0" text="Customer Document" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <HBox id="HBox" alignment="TOP_CENTER" spacing="0.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="3" GridPane.valignment="TOP">
-          <children>
-            <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="109.0" text="Email Message" />
-            <TextArea fx:id="emailMessage" maxWidth="-Infinity" prefHeight="90.0" prefWidth="209.0" wrapText="true" />
-          </children>
-        </HBox>
-        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="5" GridPane.rowSpan="2" GridPane.valignment="TOP">
+        <Label prefHeight="24.0" prefWidth="115.0" text="Customer Document" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="115.0" text="Email Message" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <TextArea fx:id="emailMessage" maxWidth="-Infinity" prefHeight="193.0" prefWidth="370.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="6" />
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.valignment="TOP">
           <children>
             <Button mnemonicParsing="false" text="Send Email" />
             <Label id="messageCustom" fx:id="messageSendMail" prefHeight="21.0" prefWidth="162.0" text="" />
@@ -76,10 +72,10 @@
         </VBox>
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="25.066489361702125" prefWidth="110.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="25.066489361702125" prefWidth="415.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="18.37765957446809" prefWidth="415.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="31.755319148936163" prefWidth="415.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="19.409403669724764" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="22.161697247706428" prefWidth="415.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="15.941674981140352" prefWidth="415.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="42.60190300051102" prefWidth="415.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="29.0" vgrow="SOMETIMES" />
@@ -87,8 +83,8 @@
         <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="184.0" minHeight="6.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="6.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
@@ -143,7 +139,12 @@
             </ComboBox>
           </children>
         </VBox>
-        <TextField id="customerName" fx:id="productName" maxWidth="-Infinity" prefHeight="24.0" prefWidth="209.0" promptText="Type Product Name" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+        <HBox id="HBox" fx:id="productHbox" alignment="CENTER" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+          <children>
+            <Label text="Product Name" />
+            <TextField id="customerName" fx:id="productName" maxWidth="-Infinity" prefHeight="24.0" prefWidth="209.0" promptText="" visible="true" />
+          </children>
+        </HBox>
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

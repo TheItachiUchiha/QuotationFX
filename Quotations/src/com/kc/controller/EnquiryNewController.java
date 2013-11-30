@@ -53,6 +53,8 @@ public class EnquiryNewController implements Initializable {
 	@FXML
 	private VBox productVbox;
 	@FXML
+	private HBox productHbox;
+	@FXML
 	private ComboBox<String> categoryCombo;
 	@FXML
 	private ComboBox<String> subcategoryCombo;
@@ -119,11 +121,13 @@ public class EnquiryNewController implements Initializable {
 		LOG.info("Enter : initialize");
 		
 		filePath = new TextField();
+		filePath.setPrefWidth(300);
 		Button browse = new Button();
         browse.setText("Browse");
+        browse.setPrefWidth(65);
         final HBox hBox =new HBox(5);
         hBox.getChildren().addAll(filePath,browse);
-        enquiryGrid.add(hBox,3,1);
+        enquiryGrid.add(hBox,3,0);
 
         browse.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -146,7 +150,7 @@ public class EnquiryNewController implements Initializable {
 				enquiryGrid.setVisible(false);
 				if(standard.isSelected())
 				{
-					productName.setVisible(false);
+					productHbox.setVisible(false);
 					productVbox.setVisible(true);
 					productName.setText("");
 					typeFlag="S";
@@ -155,7 +159,7 @@ public class EnquiryNewController implements Initializable {
 				{
 					typeFlag="C";
 					productVbox.setVisible(false);
-					productName.setVisible(true);
+					productHbox.setVisible(true);
 					categoryCombo.getSelectionModel().clearSelection();
 					enquiryGrid.setVisible(true);
 					tinNumber.setText("");
