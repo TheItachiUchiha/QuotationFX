@@ -73,7 +73,7 @@ public class EnquiryViewController implements Initializable {
     private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
     private ObservableList<ProductsVO> productList = FXCollections.observableArrayList();
     private ObservableList<EnquiryVO> enquiryListForTable = FXCollections.observableArrayList();
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 
     
     
@@ -123,11 +123,8 @@ public class EnquiryViewController implements Initializable {
 						e.printStackTrace();
 						LOG.error(e.getMessage());
 					}
-					
 				}
 			});
-			
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
