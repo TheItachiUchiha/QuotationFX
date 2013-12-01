@@ -42,6 +42,7 @@ import com.kc.model.ProductsVO;
 import com.kc.util.Validation;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
+@SuppressWarnings("rawtypes")
 public class EnquiryNewController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(EnquiryNewController.class);
 	@FXML
@@ -124,6 +125,8 @@ public class EnquiryNewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		LOG.info("Enter : initialize");
 		
+		ObservableList<String> tempTinList = FXCollections.observableArrayList();
+		ObservableList<String> tempEmailList = FXCollections.observableArrayList();
 		filePath = new TextField();
 		filePath.setPrefWidth(300);
 		Button browse = new Button();
@@ -294,12 +297,45 @@ public class EnquiryNewController implements Initializable {
 					{
 						if(customersVO.getTinNumber().equals(tinNumber.getText())){
 							fillTextFieldValues(customersVO);
+							customerRequirements.requestFocus();
+						}
+					}
+				}
+			});
+			emailId.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent arg0) {
+					
+					for(CustomersVO customersVO: customersList)
+					{
+						if(customersVO.getEmailId().equals(emailId.getText())){
+							fillTextFieldValues(customersVO);
+							customerRequirements.requestFocus();
 						}
 					}
 				}
 			});
 			customersList = customersDAO.getCustomers();
+			for(CustomersVO customersVO : customersList)
+			{
+				if(!tempTinList.contains(customersVO.getTinNumber()))
+					tempTinList.add(customersVO.getTinNumber());
+				if(!tempEmailList.contains(customersVO.getEmailId()))
+				{
+					tempEmailList.add(customersVO.getEmailId());
+				}
+			}
+			tinNumber.setItems(tempTinList);
+			emailId.setItems(tempEmailList);
 			referedBy.setItems(customersList);
+			
+			
+			validation.allowAsPhoneNumber(contactNumber);
+			
+			
+			
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
