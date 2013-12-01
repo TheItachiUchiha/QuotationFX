@@ -128,6 +128,7 @@ public class EnquiryNewController implements Initializable {
 		ObservableList<String> tempTinList = FXCollections.observableArrayList();
 		ObservableList<String> tempEmailList = FXCollections.observableArrayList();
 		filePath = new TextField();
+		filePath.setDisable(true);
 		filePath.setPrefWidth(300);
 		Button browse = new Button();
         browse.setText("Browse");
@@ -238,8 +239,8 @@ public class EnquiryNewController implements Initializable {
 								productsList = productsDAO.getProducts();
 
 								tempSubCategoryList.clear();
-
 								tempProductsList.clear();
+		
 								for (ProductsVO productsVO : productsList) {
 									if (productsVO.getProductCategory()
 											.equals(t1)) {
