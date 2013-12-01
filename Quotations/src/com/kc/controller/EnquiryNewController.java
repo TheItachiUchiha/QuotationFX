@@ -97,6 +97,7 @@ public class EnquiryNewController implements Initializable {
 	private Label messageNewEnquiry;
 	private TextField filePath;
 	private String typeFlag;
+	private int productId=0;
 	
 	private ObservableList<ProductsVO> productsList;
 	private ProductsDAO productsDAO;
@@ -127,6 +128,12 @@ public class EnquiryNewController implements Initializable {
 		
 		ObservableList<String> tempTinList = FXCollections.observableArrayList();
 		ObservableList<String> tempEmailList = FXCollections.observableArrayList();
+		ObservableList<String> tempCategoryList = FXCollections
+				.observableArrayList();
+		final ObservableList<String> tempSubCategoryList = FXCollections
+				.observableArrayList();
+		final ObservableList<ProductsVO> tempProductList = FXCollections
+				.observableArrayList();
 		filePath = new TextField();
 		filePath.setDisable(true);
 		filePath.setPrefWidth(300);
@@ -195,12 +202,7 @@ public class EnquiryNewController implements Initializable {
 			final ObservableList<ProductsVO> tempProductsList = FXCollections
 					.observableArrayList();
 
-			ObservableList<String> tempCategoryList = FXCollections
-					.observableArrayList();
-			final ObservableList<String> tempSubCategoryList = FXCollections
-					.observableArrayList();
-			final ObservableList<ProductsVO> tempProductList = FXCollections
-					.observableArrayList();
+			
 			subcategoryCombo.setItems(tempSubCategoryList);
 			nameCombo.setItems(tempProductList);
 
@@ -287,6 +289,7 @@ public class EnquiryNewController implements Initializable {
 						public void changed(ObservableValue ov, ProductsVO t,
 								ProductsVO t1) {
 							enquiryGrid.setVisible(true);
+							productId = t1.getId();
 						}
 					});
 			tinNumber.setOnAction(new EventHandler<ActionEvent>() {
@@ -408,7 +411,7 @@ public class EnquiryNewController implements Initializable {
 			if(typeFlag.equals("S"))
 			{
 				for (ProductsVO productsVO : productsList) {
-					if (nameCombo.getSelectionModel().getSelectedItem().getProductName() == productsVO.getProductName()) {
+					if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
 						productName=productsVO.getProductName();
 						productCode=productsVO.getProductCode().substring(0, 2);
 					}
@@ -446,6 +449,7 @@ public class EnquiryNewController implements Initializable {
 			enquiryVO.setSales("N");
 			enquiryVO.setDate(date);
 			enquiryVO.setFlag(typeFlag);
+			enquiryVO.setProductId(productId);
 			enquiryDAO.saveEnquiry(enquiryVO);
 			enquiryDAO.increaseEnquiryNumber(generateNewEnuiryNumber(enquiryNumber), date);
 			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);

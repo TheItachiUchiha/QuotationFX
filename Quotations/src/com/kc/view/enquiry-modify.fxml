@@ -32,7 +32,7 @@
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13">
           <children>
-            <Button mnemonicParsing="false" onAction="#saveEnquiries" text="Save" />
+            <Button mnemonicParsing="false" onAction="#modifyEnquiry" text="Save" />
             <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="162.0" text="">
               <font>
                 <Font size="15.0" />

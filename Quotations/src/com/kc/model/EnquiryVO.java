@@ -16,6 +16,7 @@ public class EnquiryVO {
 	private String productName;
 	private String flag;
 	private String refNumber;
+	private int productId;
 	
 	public int getId() {
 		return id;
@@ -106,5 +107,11 @@ public class EnquiryVO {
 	}
 	public void setRefNumber(String refNumber) {
 		this.refNumber = refNumber;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}	
 }

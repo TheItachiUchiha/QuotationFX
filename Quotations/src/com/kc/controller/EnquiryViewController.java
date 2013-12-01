@@ -527,7 +527,7 @@ public class EnquiryViewController implements Initializable {
 					enquiryViewVO.setEmailId(customersVO.getEmailId());
 					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
 					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustid(customersVO.getId());
+					enquiryViewVO.setCustomerId(customersVO.getId());
 					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 					{
 						enquiryViewVO.setCustomerType("Dealer");
@@ -536,7 +536,7 @@ public class EnquiryViewController implements Initializable {
 					{
 						enquiryViewVO.setCustomerType("End User");
 					}
-					
+					enquiryViewVO.setProductId(enquiryVO.getProductId());
 				}
 			}
 			tempList.add(enquiryViewVO);
@@ -584,6 +584,11 @@ public class EnquiryViewController implements Initializable {
 					modifyStage.initOwner(LoginController.primaryStage);
 					modifyStage.setScene(modifyScene);
 					modifyStage.show();
+					((EnquiryModifyPopUpController) menuLoader.getController())
+					.fillTextFieldValues(ButtonCell.this
+							.getTableView().getItems()
+							.get(ButtonCell.this.getIndex()));
+
 					
 				}
 					catch (Exception e) {
