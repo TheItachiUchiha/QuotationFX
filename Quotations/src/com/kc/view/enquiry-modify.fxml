@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryNewController">
+<BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryModifyPopUpController">
   <!-- TODO Add Nodes -->
   <center>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="700.0" visible="true" BorderPane.alignment="CENTER">
@@ -133,7 +133,7 @@
         <HBox id="HBox" fx:id="productHbox" alignment="CENTER" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
           <children>
             <Label text="Product Name" />
-            <AutoCompleteTextField id="prodName" fx:id="productName" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" visible="true" />
+            <TextField fx:id="productName" prefWidth="200.0" />
           </children>
         </HBox>
       </children>

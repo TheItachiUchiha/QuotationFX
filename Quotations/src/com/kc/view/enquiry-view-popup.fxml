@@ -11,7 +11,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
-<BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryNewController">
+<BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryViewPopUpController">
   <!-- TODO Add Nodes -->
   <bottom>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0000999999975" prefWidth="700.0" visible="true" BorderPane.alignment="CENTER">
@@ -40,7 +40,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
           <children>
             <TextField id="location" fx:id="customerFile" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="209.0" />
-            <Button fx:id="viewFile" mnemonicParsing="false" text="Button" />
+            <Button fx:id="viewFile" mnemonicParsing="false" text="Open" />
           </children>
         </HBox>
         <TextField id="location" fx:id="customerType" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />

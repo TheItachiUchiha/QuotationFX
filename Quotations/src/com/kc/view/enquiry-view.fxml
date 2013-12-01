@@ -16,7 +16,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryViewController">
   <!-- TODO Add Nodes -->
   <center>
-    <TableView fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="900.0">
+    <TableView fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="445.0" prefWidth="940.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="60.0" text="Ref-No" fx:id="referenceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Enquiry Type" fx:id="enquiryType" />
@@ -28,7 +28,7 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="Refered By" fx:id="referedBy" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Purchase period" fx:id="purchasePeriod" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Date Of Enquiry" fx:id="dateOfEnquiry" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="62.0" text="Action" fx:id="action" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Action" fx:id="action" />
       </columns>
     </TableView>
   </center>
@@ -37,7 +37,7 @@
       <children>
         <Label prefHeight="23.0" prefWidth="114.0" text="Search By" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="23.0" prefWidth="114.0" text="Keyword" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <ComboBox id="productCategory" fx:id="searchCombo" prefHeight="21.0" prefWidth="175.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <ComboBox id="productCategory" fx:id="searchCombo" prefHeight="21.0" prefWidth="227.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -48,7 +48,8 @@
         </ComboBox>
         <HBox id="HBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
           <children>
-            <AutoCompleteTextField id="componentAutoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="20.0" prefWidth="175.0" />
+            <AutoCompleteTextField id="componentAutoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="21.0" prefWidth="186.0" />
+            <Button fx:id="go" mnemonicParsing="false" text="Go" />
           </children>
           <padding>
             <Insets bottom="5.0" right="5.0" top="5.0" />

@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
+import com.kc.model.EnquiryViewVO;
 import com.mysql.jdbc.log.Log;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
@@ -53,9 +54,6 @@ public class EnquiryViewPopUpController {
     private TextField enquiryType;
 
     @FXML
-    private Label messageNewEnquiry;
-
-    @FXML
     private TextField purchasePeriod;
 
     @FXML
@@ -88,9 +86,8 @@ public class EnquiryViewPopUpController {
     	customerRequirements.setDisable(true);
     	customerType.setDisable(true);
     	emailId.setDisable(true);
-    	enquiryGrid.setDisable(true);
+    	//enquiryGrid.setDisable(true);
     	enquiryType.setDisable(true);
-    	messageNewEnquiry.setDisable(true);
     	purchasePeriod.setDisable(true);
     	referedBy.setDisable(true);
     	state.setDisable(true);
@@ -109,6 +106,26 @@ public class EnquiryViewPopUpController {
 				}
 			}
 		});
+    }
+    
+    public void fillTextFieldValues(EnquiryViewVO enquiryViewVO)
+    {
+    	city.setText(enquiryViewVO.getCity());
+    	companyName.setText(enquiryViewVO.getCompanyName());
+    	customerName.setText(enquiryViewVO.getCustomerName());
+    	enquiryType.setText(enquiryViewVO.getEnquiryType());
+    	purchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+    	referedBy.setText(enquiryViewVO.getReferedBy());
+    	state.setText(enquiryViewVO.getState());
+    	productName.setText(enquiryViewVO.getProductName());
+    	date.setText(enquiryViewVO.getDateOfEnquiry());
+    	address.setText(enquiryViewVO.getAddress());
+    	contactNumber.setText(enquiryViewVO.getContactNumber());
+    	customerFile.setText(enquiryViewVO.getCustomerFile());
+    	customerRequirements.setText(enquiryViewVO.getCustomerRequirement());
+    	customerType.setText(enquiryViewVO.getCustomerType());
+    	emailId.setText(enquiryViewVO.getEmailId());
+    	tinNumber.setText(enquiryViewVO.getTinNumber());
     }
 
 }

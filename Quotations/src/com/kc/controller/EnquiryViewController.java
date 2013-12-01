@@ -1,10 +1,12 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -12,13 +14,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -27,7 +43,6 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ProductsDAO;
-import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -108,37 +123,7 @@ public class EnquiryViewController implements Initializable {
 			
 			customerList = customersDAO.getCustomers();
 			enquiryList = enquiryDAO.getEnquries();
-			for(EnquiryVO enquiryVO : enquiryList)
-			{
-				EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-				enquiryViewVO.setId(enquiryVO.getId());
-				enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-				enquiryViewVO.setProductName(enquiryVO.getProductName());
-				enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-				enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-				enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-				if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-				{
-					enquiryViewVO.setEnquiryType("Custom");
-				}
-				else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-				{
-					enquiryViewVO.setEnquiryType("Standard");
-				}
-				
-				for(CustomersVO customersVO : customerList)
-				{
-					if(customersVO.getId() == enquiryVO.getCustomerId())
-					{
-						enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-						enquiryViewVO.setCity(customersVO.getCity());
-						enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-						enquiryViewVO.setState(customersVO.getState());
-						
-					}
-				}
-				enquiryViewList.add(enquiryViewVO);
-			}
+			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
 			productList = productsDAO.getProducts();
 			
 			
@@ -148,6 +133,7 @@ public class EnquiryViewController implements Initializable {
 				public void changed(ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
 					try{
+						enquiryListForTable.clear();
 						if(newValue!=null && !newValue.equals(oldValue))
 						{
 							for(EnquiryViewVO enquiryVO : enquiryViewList)
@@ -194,9 +180,37 @@ public class EnquiryViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					enquiryTable.getItems().clear();
 					fillTableFromData();
-					//tempList.clear();
 				}
 			});
+			go.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					enquiryTable.getItems().clear();
+					fillTableFromData();
+				}
+			});
+			action.setSortable(false);
+	         
+	        action.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<EnquiryViewVO, Boolean>,
+	                ObservableValue<Boolean>>() {
+	 
+	            @Override
+	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<EnquiryViewVO, Boolean> p) {
+	                return new SimpleBooleanProperty(p.getValue() != null);
+	            }
+	        });
+	 
+	        action.setCellFactory(
+	                new Callback<TableColumn<EnquiryViewVO, Boolean>, TableCell<EnquiryViewVO, Boolean>>() {
+	 
+	            @Override
+	            public TableCell<EnquiryViewVO, Boolean> call(TableColumn<EnquiryViewVO, Boolean> p) {
+	                return new ButtonCell();
+	            }
+	         
+	        });
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -325,6 +339,10 @@ public class EnquiryViewController implements Initializable {
 	private void fillTableFromData()
 	{
 		LOG.info("Enter : fillTableFromData");
+		tempList.clear();
+		enquiryViewList.clear();
+		enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+		
 		try{
 			
 			String tempString = keyword.getText();
@@ -421,6 +439,16 @@ public class EnquiryViewController implements Initializable {
 					}
 				}
 			}
+			else if(searchCombo.getSelectionModel().getSelectedItem().equals("Ref_No"))
+			{
+				for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+				{
+					if(enquiryViewVO.getReferenceNo().equalsIgnoreCase(tempString))
+					{
+						tempList.add(enquiryViewVO);
+					}
+				}
+			}
 			
 			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
 			enquiryType.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("enquiryType"));
@@ -440,5 +468,264 @@ public class EnquiryViewController implements Initializable {
 		}
 		LOG.info("Exit : fillTableFromData");
 	}
+	public void deleteEnquiry(EnquiryViewVO enquryViewVO) throws Exception
+	{
+		LOG.info("Enter : deleteEnquiry");
+		try{
+				DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+					    "Do you want to delete selected Enquiry(s)", "Confirm", "Delete Enquiry", DialogOptions.OK_CANCEL);
+				if(response.equals(DialogResponse.OK))
+				{
+					enquiryDAO.deleteEnquiry(enquryViewVO);
+					/*message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);*/
+					fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
+					fillTableFromData();
+					
+				}
+				LOG.info("Exit : deleteEnquiry");
+		}
+		catch(SQLException s)
+		{
+			s.printStackTrace();
+		}
+	}
+	
+	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
+	{
+		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
+		
+		
+		for(EnquiryVO enquiryVO : enquiryList)
+		{
+			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+			enquiryViewVO.setId(enquiryVO.getId());
+			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
+			enquiryViewVO.setProductName(enquiryVO.getProductName());
+			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
+			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
+			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
+			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
+			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
+			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
+			{
+				enquiryViewVO.setEnquiryType("Custom");
+			}
+			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
+			{
+				enquiryViewVO.setEnquiryType("Standard");
+			}
+			
+			for(CustomersVO customersVO : customerList)
+			{
+				if(customersVO.getId() == enquiryVO.getCustomerId())
+				{
+					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
+					enquiryViewVO.setCity(customersVO.getCity());
+					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
+					enquiryViewVO.setState(customersVO.getState());
+					enquiryViewVO.setAddress(customersVO.getAddress());
+					enquiryViewVO.setEmailId(customersVO.getEmailId());
+					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
+					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
+					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
+					{
+						enquiryViewVO.setCustomerType("Dealer");
+					}
+					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
+					{
+						enquiryViewVO.setCustomerType("End User");
+					}
+					
+				}
+			}
+			tempList.add(enquiryViewVO);
+		}
+		return tempList;
+	}
+	
+	
+	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
+	       
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
+		Image buttonViewImage = new Image(getClass().getResourceAsStream("../style/view.png"));
+		Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
+		final Button cellViewButton = new Button("", new ImageView(buttonViewImage));
+		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
+		final Button cellEditButton = new Button("", new ImageView(buttonEditImage));
+		
+       
+         
+        ButtonCell(){
+            
+        	
+        	cellDeleteButton.getStyleClass().add("editDeleteButton");
+        	cellDeleteButton.setTooltip(new Tooltip("Delete"));
+        	cellEditButton.getStyleClass().add("editDeleteButton");
+        	cellEditButton.setTooltip(new Tooltip("Edit"));
+        	cellViewButton.getStyleClass().add("editDeleteButton");
+        	cellViewButton.setTooltip(new Tooltip("View"));
+        	
+        	cellEditButton.setOnAction(new EventHandler<ActionEvent>() {
 
+				@Override
+				public void handle(ActionEvent paramT) {
+					try {
+						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+							.getResource("../view/enquiry-modify.fxml"));
+					BorderPane enquiryModify;
+					enquiryModify = (BorderPane) menuLoader.load();
+					Stage modifyStage = new Stage();
+					Scene modifyScene = new Scene(enquiryModify);
+					modifyStage.setResizable(false);
+					modifyStage.setHeight(650);
+					modifyStage.setWidth(600);
+					modifyStage.initModality(Modality.WINDOW_MODAL);
+					modifyStage.initOwner(LoginController.primaryStage);
+					modifyStage.setScene(modifyScene);
+					modifyStage.show();
+					
+				}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+        	cellViewButton.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent paramT) {
+					try {
+						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+							.getResource("../view/enquiry-view-popup.fxml"));
+					BorderPane enquiryView;
+					enquiryView = (BorderPane) menuLoader.load();
+					Stage viewStage = new Stage();
+					Scene viewScene = new Scene(enquiryView);
+					viewStage.setResizable(false);
+					viewStage.setHeight(650);
+					viewStage.setWidth(600);
+					viewStage.initModality(Modality.WINDOW_MODAL);
+					viewStage.initOwner(LoginController.primaryStage);
+					viewStage.setScene(viewScene);
+					viewStage.show();
+					
+					((EnquiryViewPopUpController) menuLoader.getController())
+					.fillTextFieldValues(ButtonCell.this
+							.getTableView().getItems()
+							.get(ButtonCell.this.getIndex()));
+					
+				}
+					catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+			});
+        	cellDeleteButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    try {
+						deleteEnquiry(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+                }
+            });
+        	
+        	/*cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
+        		 
+                @Override
+                public void handle(ActionEvent t) {
+                	LOG.info("Enter : handle");
+                	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+								.getResource("../view/components-modify.fxml"));
+						BorderPane componentModify;
+						componentModify = (BorderPane) menuLoader.load();
+						componentModify.setTop(new HBox());
+						componentModify.getCenter().setVisible(true);
+						Stage modifyStage = new Stage();
+						Scene modifyScene = new Scene(componentModify);
+						modifyStage.setResizable(false);
+						modifyStage.setHeight(500);
+						modifyStage.setWidth(600);
+						modifyStage.initModality(Modality.WINDOW_MODAL);
+						modifyStage.initOwner(LoginController.primaryStage);
+						modifyStage.setScene(modifyScene);
+						modifyStage.show();
+						
+						((ComponentsModifyController) menuLoader.getController())
+								.fillTextFieldValues(ButtonCell.this
+										.getTableView().getItems()
+										.get(ButtonCell.this.getIndex()));
+						modifyStage
+								.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+									@Override
+									public void handle(WindowEvent paramT) {
+										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+										for (EnquryViewVO componentsVO : componentsList) {
+											if (componentsVO.getId() == ButtonCell.this.getTableView()
+													.getItems()
+													.get(ButtonCell.this.getIndex())
+													.getId()) {
+												updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+											}
+										}
+										fillTableFromData();
+									}
+								});
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						LOG.error(e.getMessage());
+					}
+                	LOG.info("Exit : handle");
+                }
+            });*/
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+            	HBox box = new HBox();
+            	box.getChildren().addAll(cellViewButton,cellEditButton, cellDeleteButton);
+                setGraphic(box);
+            }
+        }
+    }
+	/*private void updateAutoField(EnquryViewVO componentsVO, String t1) {
+		if(t1.equals("Component Category"))
+        {
+        	keyword.setText(componentsVO.getComponentCategory());
+        }
+        else if(t1.equals("Sub Category"))
+        {
+        	keyword.setText(componentsVO.getSubCategory());
+        }
+        else if(t1.equals("Component Name"))
+        {
+        	keyword.setText(componentsVO.getComponentName());
+        }
+        else if(t1.equals("Vendor"))
+        {
+        	keyword.setText(componentsVO.getVendor());
+        }
+        else if(t1.equals("Model"))
+        {
+        	keyword.setText(componentsVO.getModel());
+        }
+        else if(t1.equals("Type"))
+        {
+        	keyword.setText(componentsVO.getType());
+        }
+        else if(t1.equals("Size"))
+        {
+        	keyword.setText(componentsVO.getSize());
+        }
+	}*/
 }

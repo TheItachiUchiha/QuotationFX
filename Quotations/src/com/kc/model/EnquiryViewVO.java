@@ -12,7 +12,13 @@ public class EnquiryViewVO {
 	private String city;
 	private String state;
 	private String enquiryType;
-	
+	private String address;
+	private String contactNumber;
+	private String customerFile;
+	private String customerRequirement;
+	private String customerType;
+	private String emailId;
+	private String tinNumber;
 	public int getId() {
 		return id;
 	}
@@ -79,5 +85,46 @@ public class EnquiryViewVO {
 	public void setEnquiryType(String enquiryType) {
 		this.enquiryType = enquiryType;
 	}
-	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	public String getCustomerFile() {
+		return customerFile;
+	}
+	public void setCustomerFile(String customerFile) {
+		this.customerFile = customerFile;
+	}
+	public String getCustomerRequirement() {
+		return customerRequirement;
+	}
+	public void setCustomerRequirement(String customerRequirement) {
+		this.customerRequirement = customerRequirement;
+	}
+	public String getCustomerType() {
+		return customerType;
+	}
+	public void setCustomerType(String customerType) {
+		this.customerType = customerType;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getTinNumber() {
+		return tinNumber;
+	}
+	public void setTinNumber(String tinNumber) {
+		this.tinNumber = tinNumber;
+	}
 }

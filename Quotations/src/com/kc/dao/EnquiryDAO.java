@@ -15,6 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.EnquiryVO;
 import com.kc.util.DBConnector;
 
@@ -189,5 +190,19 @@ public class EnquiryDAO {
 			LOG.error(e.getMessage());
 		}
 			LOG.info("Exit : getLatestEnquiryNumber");	
+	}
+	public void deleteEnquiry(EnquiryViewVO enquiryViewVO) throws Exception {
+		LOG.info("Enter : deleteEnquiry");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM ENQUIRY WHERE ID=?");
+			preparedStatement.setInt(1, enquiryViewVO.getId());
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deleteEnquiry");
 	}
 }

@@ -1,8 +1,5 @@
 package com.kc.controller;
 
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -14,6 +11,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 
 public class EnquiryModifyPopUpController {
@@ -61,7 +60,7 @@ public class EnquiryModifyPopUpController {
     private HBox productHbox;
 
     @FXML
-    private AutoCompleteTextField<?> productName;
+    private TextField productName;
 
     @FXML
     private ToggleGroup productType;
