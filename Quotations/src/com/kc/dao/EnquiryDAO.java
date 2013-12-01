@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.model.EnquiryViewVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.EnquiryVO;
 import com.kc.util.DBConnector;
 
@@ -204,5 +205,36 @@ public class EnquiryDAO {
 			throw e;
 		}
 		LOG.info("Exit : deleteEnquiry");
+	}
+	public void updateEnquiry(EnquiryViewVO enquiryViewVO)
+	{
+		LOG.info("Enter : updateEnquiry");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET cust_id=?,referedby=?,cust_req=?,purchase_period=?,cust_doc=?,priceestimation=?,quotationpreparation=?,emailsent=?,date=?,prod_name=?,salesdone=?,type=?, ref_number=? where ID=?");
+			
+			preparedStatement.setInt(1, enquiryViewVO.getCustomerId());
+			preparedStatement.setString(2, enquiryViewVO.getReferedBy());
+			preparedStatement.setString(3, enquiryViewVO.getCustomerRequirement());
+			preparedStatement.setString(4, enquiryViewVO.getPurchasePeriod());
+			preparedStatement.setString(5, enquiryViewVO.getCustomerFile());
+			preparedStatement.setString(6, enquiryViewVO.getPriceEstimation());
+			preparedStatement.setString(7, enquiryViewVO.getQuotationPreparation());
+			preparedStatement.setString(8, enquiryViewVO.getEmailSent());
+			preparedStatement.setString(9, enquiryViewVO.getDateOfEnquiry());
+			preparedStatement.setString(10, enquiryViewVO.getProductName());
+			preparedStatement.setString(11, enquiryViewVO.getSales());
+			preparedStatement.setString(12, enquiryViewVO.getEnquiryType());
+			preparedStatement.setString(13, enquiryViewVO.getReferenceNo());
+			preparedStatement.setInt(14, enquiryViewVO.getId());
+			
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : updateEnquiry");
 	}
 }
