@@ -160,7 +160,7 @@ public class EnquiryDAO {
 		String oldDate = "";
 		String newDate = new SimpleDateFormat(CommonConstants.DATE_FORMAT).format(new Date());
 		String newMonth = newDate.substring(3,5);
-		String newYear = newDate.substring(6,10);
+		String newYear = newDate.substring(8,10);
 		try
 		{
 			conn = DBConnector.getConnection();

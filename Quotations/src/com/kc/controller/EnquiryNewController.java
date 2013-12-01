@@ -393,7 +393,7 @@ public class EnquiryNewController implements Initializable {
 			}
 			String enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
 			String month = date.substring(3,5);
-			String year = date.substring(6,10);
+			String year = date.substring(8,10);
 			EnquiryVO enquiryVO=new EnquiryVO();
 			enquiryVO.setCustomerId(customerId);
 			enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);
