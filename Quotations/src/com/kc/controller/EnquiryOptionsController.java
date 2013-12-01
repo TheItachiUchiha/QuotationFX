@@ -2,6 +2,8 @@ package com.kc.controller;
 
 import java.io.File;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.LogManager;
@@ -34,6 +36,7 @@ public class EnquiryOptionsController implements Initializable {
 	private Label messageOption;
 	private TextField folderPath;
 	private EnquiryDAO enquiryDAO;
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
@@ -75,7 +78,7 @@ public class EnquiryOptionsController implements Initializable {
 		{
 			if(!folderPath.getText().equals(""))
 			{
-				enquiryDAO.saveEnquirylocation(folderPath.getText());
+				enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
 				messageOption.setText(CommonConstants.DEFAULT_PATH);
 				messageOption.getStyleClass().remove("failure");
 				messageOption.getStyleClass().add("success");
