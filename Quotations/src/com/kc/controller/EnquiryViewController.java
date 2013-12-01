@@ -194,7 +194,7 @@ public class EnquiryViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					enquiryTable.getItems().clear();
 					fillTableFromData();
-					tempList.clear();
+					//tempList.clear();
 				}
 			});
 		}
