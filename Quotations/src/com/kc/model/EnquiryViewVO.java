@@ -2,6 +2,7 @@ package com.kc.model;
 
 public class EnquiryViewVO {
 	private int id;
+	private int custid;
 	private String referenceNo;
 	private String referedBy;
 	private String purchasePeriod;
@@ -24,6 +25,13 @@ public class EnquiryViewVO {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public int getCustid() {
+		return custid;
+	}
+	public void setCustid(int custid) {
+		this.custid = custid;
 	}
 	public String getReferedBy() {
 		return referedBy;

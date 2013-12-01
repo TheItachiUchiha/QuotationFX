@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,10 +34,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
@@ -530,6 +527,7 @@ public class EnquiryViewController implements Initializable {
 					enquiryViewVO.setEmailId(customersVO.getEmailId());
 					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
 					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
+					enquiryViewVO.setCustid(customersVO.getId());
 					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 					{
 						enquiryViewVO.setCustomerType("Dealer");
