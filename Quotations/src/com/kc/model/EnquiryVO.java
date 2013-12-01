@@ -15,6 +15,7 @@ public class EnquiryVO {
 	private int customerId;
 	private String productName;
 	private String flag;
+	private String refNumber;
 	
 	public int getId() {
 		return id;
@@ -100,5 +101,10 @@ public class EnquiryVO {
 	public void setFlag(String flag) {
 		this.flag = flag;
 	}
-	
+	public String getRefNumber() {
+		return refNumber;
+	}
+	public void setRefNumber(String refNumber) {
+		this.refNumber = refNumber;
+	}	
 }

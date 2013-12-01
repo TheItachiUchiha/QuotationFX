@@ -106,6 +106,9 @@ public class EnquiryNewController implements Initializable {
 	private CustomersVO customersVO;
 	private Validation validation;
 	private char flag='N';
+	private String productCode ="";
+	private String date;
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	public EnquiryNewController() {
 		customersDAO = new CustomersDAO();
@@ -114,6 +117,7 @@ public class EnquiryNewController implements Initializable {
 		productsVO = new ProductsVO();
 		enquiryDAO = new EnquiryDAO();
 		validation = new Validation();
+		date = simpleDateFormat.format(new Date()); 
 	}
 	
 	@Override
@@ -369,14 +373,16 @@ public class EnquiryNewController implements Initializable {
 				for (ProductsVO productsVO : productsList) {
 					if (nameCombo.getSelectionModel().getSelectedItem().getProductName() == productsVO.getProductName()) {
 						productName=productsVO.getProductName();
+						productCode=productsVO.getProductCode().substring(0, 2);
 					}
 				}
 			}
 			else
 			{
 				productName = this.productName.getText();
+				productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
 			}
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+			
 			if(flag=='N')
 			{
 				customerId = customersDAO.saveCustomer(fillDataFromTextFields());
@@ -385,8 +391,12 @@ public class EnquiryNewController implements Initializable {
 			{
 				customerId = this.customersVO.getId();
 			}
+			String enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
+			String month = date.substring(3,5);
+			String year = date.substring(6,10);
 			EnquiryVO enquiryVO=new EnquiryVO();
 			enquiryVO.setCustomerId(customerId);
+			enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);
 			enquiryVO.setProductName(productName);
 			enquiryVO.setReferedBy(referedBy.getText());
 			enquiryVO.setCustomerrequirements(customerRequirements.getText());
@@ -397,9 +407,10 @@ public class EnquiryNewController implements Initializable {
 			enquiryVO.setQuotationPreparation("N");
 			enquiryVO.setEmailSent("N");
 			enquiryVO.setSales("N");
-			enquiryVO.setDate(simpleDateFormat.format(new Date()));
+			enquiryVO.setDate(date);
 			enquiryVO.setFlag(typeFlag);
 			enquiryDAO.saveEnquiry(enquiryVO);
+			enquiryDAO.increaseEnquiryNumber(generateNewEnuiryNumber(enquiryNumber), date);
 			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
 			messageNewEnquiry.getStyleClass().remove("failure");
 			messageNewEnquiry.getStyleClass().add("success");
@@ -410,5 +421,30 @@ public class EnquiryNewController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : saveEnquiries");
+	}
+	
+	private String generateNewEnuiryNumber(String oldEnquiryNumber)
+	{
+		String newEnquiryNumber="";
+		try{
+			int oldEnquiry = Integer.parseInt(oldEnquiryNumber);
+			if(oldEnquiry<10)
+			{
+				newEnquiryNumber = "00" + (oldEnquiry+1);
+			}
+			else if(oldEnquiry>=10&&oldEnquiry<100)
+			{
+				newEnquiryNumber = "0" + (oldEnquiry + 1);
+			}
+			else
+			{
+				newEnquiryNumber = String.valueOf(oldEnquiry + 1);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return newEnquiryNumber;
 	}
 }

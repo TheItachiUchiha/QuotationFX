@@ -33,6 +33,9 @@ public class CommonConstants
 	public static final String PATH_ERROR = "Select a Propper path";
 	public static final String DEFAULT_PATH = "Default path Set";
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
+	public static final String ENQUIRY_MONTHLY_NUMBER = "enquiry_monthly_number";
+	public static final String CUSTOM_PRODUCT_CODE = "CU";
+	
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;

@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.dao.EnquiryDAO;
 import com.kc.dao.LoginDAO;
 import com.kc.model.ModulesVO;
 
@@ -31,6 +32,7 @@ public class LoginController extends Application implements Initializable{
 	public static BorderPane home;
 	public static BorderPane login;
 	private LoginDAO loginDAO;
+	private EnquiryDAO enquiryDAO;
 	public static ModulesVO modulesVO=new ModulesVO();
 
 	@FXML
@@ -50,6 +52,8 @@ public class LoginController extends Application implements Initializable{
 	public LoginController()
 	{
 		loginDAO = new LoginDAO();
+		enquiryDAO = new EnquiryDAO();
+		enquiryDAO.checkAndUpdateEnquiryNumber();
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
