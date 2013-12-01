@@ -2,7 +2,8 @@ package com.kc.model;
 
 public class EnquiryViewVO {
 	private int id;
-	private int custid;
+	private int customerId;
+	private int productId;
 	private String referenceNo;
 	private String referedBy;
 	private String purchasePeriod;
@@ -20,6 +21,10 @@ public class EnquiryViewVO {
 	private String customerType;
 	private String emailId;
 	private String tinNumber;
+	private String priceEstimation;
+	private String QuotationPreparation;
+	private String sales;
+	private String emailSent;
 	public int getId() {
 		return id;
 	}
@@ -27,11 +32,18 @@ public class EnquiryViewVO {
 		this.id = id;
 	}
 	
-	public int getCustid() {
-		return custid;
+	
+	public int getCustomerId() {
+		return customerId;
 	}
-	public void setCustid(int custid) {
-		this.custid = custid;
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	public int getProductId() {
+		return productId;
+	}
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public String getReferedBy() {
 		return referedBy;
@@ -134,5 +146,29 @@ public class EnquiryViewVO {
 	}
 	public void setTinNumber(String tinNumber) {
 		this.tinNumber = tinNumber;
+	}
+	public String getPriceEstimation() {
+		return priceEstimation;
+	}
+	public void setPriceEstimation(String priceEstimation) {
+		this.priceEstimation = priceEstimation;
+	}
+	public String getQuotationPreparation() {
+		return QuotationPreparation;
+	}
+	public void setQuotationPreparation(String quotationPreparation) {
+		QuotationPreparation = quotationPreparation;
+	}
+	public String getSales() {
+		return sales;
+	}
+	public void setSales(String sales) {
+		this.sales = sales;
+	}
+	public String getEmailSent() {
+		return emailSent;
+	}
+	public void setEmailSent(String emailSent) {
+		this.emailSent = emailSent;
 	}
 }
