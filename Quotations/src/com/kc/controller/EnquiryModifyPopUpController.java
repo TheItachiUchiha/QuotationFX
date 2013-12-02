@@ -31,7 +31,6 @@ import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ProductsDAO;
 import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ProductsVO;
 import com.kc.util.Validation;
@@ -42,8 +41,9 @@ public class EnquiryModifyPopUpController {
 			.getLogger(EnquiryModifyPopUpController.class);
 
 	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-	private ObservableList<ProductsVO> productList = FXCollections
-			.observableArrayList();
+	private ObservableList<ProductsVO> productList = FXCollections.observableArrayList();
+	private ObservableList<ProductsVO> productCatList = FXCollections.observableArrayList();
+	private ObservableList<ProductsVO> productSubCatList = FXCollections.observableArrayList();
 	final ObservableList<String> tempCategoryList = FXCollections
 			.observableArrayList();
 	final ObservableList<String> tempSubCategoryList = FXCollections
@@ -57,6 +57,8 @@ public class EnquiryModifyPopUpController {
 	private ProductsDAO productsDAO;
 	private int productId=0;
 	String productNameText = "";
+	String category ="";
+	String subCategory = "";
 	
 	
 	
@@ -147,14 +149,14 @@ public class EnquiryModifyPopUpController {
     	try{
     		
     		filePath = new TextField();
-    		filePath.setDisable(true);
-    		filePath.setPrefWidth(300);
+    		filePath.setEditable(false);
+    		filePath.setPrefWidth(209.0);
     		Button browse = new Button();
             browse.setText("Browse");
             browse.setPrefWidth(65);
             final HBox hBox =new HBox(5);
             hBox.getChildren().addAll(filePath,browse);
-            enquiryGrid.add(hBox,3,0);
+            enquiryGrid.add(hBox,1,11);
 
             browse.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -175,45 +177,24 @@ public class EnquiryModifyPopUpController {
             
             
             productList = productsDAO.getProducts();
-	    	tempProductList.addAll(productList);
+	    	
 	        //get a enquiryViewVo object from the table
-	    	for(ProductsVO productsVO : productList)
-	    	{
-	    		tempCategoryList.add(productsVO.getProductCategory());
-	    		tempSubCategoryList.add(productsVO.getProductSubCategory());
-	    	}
+	    	
 	    	
 	    	categoryCombo.setItems(tempCategoryList);
 	    	subcategoryCombo.setItems(tempSubCategoryList);
-	    	nameCombo.setItems(tempProductList);
+	    	nameCombo.setItems(productSubCatList);
 	    	
 	    	categoryCombo.valueProperty().addListener(
 					new ChangeListener<String>() {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
-							tinNumber.setText("");
-							emailId.setText("");
-							referedBy.setText("");
-							customerName.setText("");
-							customerTypeCombo.getSelectionModel().clearSelection();
-							companyName.setText("");
-							address.setText("");
-							city.setText("");
-							state.setText("");
-							contactNumber.setText("");
-							customerRequirements.setText("");
-							purchasePeriod.setText("");
-							//filePath.setText("");
-							//emailMessage.setText("");
-							enquiryGrid.setVisible(false);
-							try {
-								productList.clear();
-
-								productList = productsDAO.getProducts();
-
+							
 								tempSubCategoryList.clear();
 								tempProductList.clear();
+								productCatList.clear();
+								category = t1;
 		
 								for (ProductsVO productsVO : productList) {
 									if (productsVO.getProductCategory()
@@ -224,17 +205,14 @@ public class EnquiryModifyPopUpController {
 											tempSubCategoryList
 													.add(productsVO
 															.getProductSubCategory());
-											tempProductList
-													.add(productsVO);
 										}
+										if(productsVO.getProductCategory().equals(category))
+							    		{
+							    			productCatList.add(productsVO);
+							    		}
 									}
 								}
-							} catch (SQLException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
 						}
-						
 					});
 
 			subcategoryCombo.valueProperty().addListener(
@@ -245,12 +223,15 @@ public class EnquiryModifyPopUpController {
 								String t1) {
 
 							tempProductList.clear();
-							enquiryGrid.setVisible(false);
-
-							for (ProductsVO productsVO : tempProductList) {
+							productSubCatList.clear();
+							for (ProductsVO productsVO : productCatList) {
 								if (productsVO.getProductSubCategory().equals(t1)) {
 									tempProductList.add(productsVO);
 								}
+								if(productsVO.getProductSubCategory().equals(subCategory))
+					    		{
+					    			productSubCatList.add(productsVO);
+					    		}
 							}
 						}
 					});
@@ -260,12 +241,9 @@ public class EnquiryModifyPopUpController {
 						@Override
 						public void changed(ObservableValue ov, ProductsVO t,
 								ProductsVO t1) {
-							enquiryGrid.setVisible(true);
-							productId = t1.getId();
+									productId = t1.getId();
 						}
 					});
-	    	
-	    	
     	}
     	catch (Exception e) {
 			e.printStackTrace();
@@ -276,23 +254,79 @@ public class EnquiryModifyPopUpController {
 	public void fillTextFieldValues(EnquiryViewVO enquiryViewVO)
     {
 		this.enquiryViewVO = enquiryViewVO;
+		
+		for(ProductsVO productsVO : productList)
+		{
+			if(productsVO.getId() == enquiryViewVO.getProductId())
+			{
+				category = productsVO.getProductCategory();
+				subCategory = productsVO.getProductSubCategory();
+				break;
+			}
+		}
 		if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
     	{
     		standard.selectedProperty().set(true);
     		productVbox.setVisible(true);
     		for(ProductsVO productsVO : productList)
+	    	{
+	    		if(!tempCategoryList.contains(productsVO.getProductCategory()))
+	    		{
+	    			tempCategoryList.add(productsVO.getProductCategory());
+	    		}
+	    		if(productsVO.getProductCategory().equals(category))
+	    		{
+	    			productCatList.add(productsVO);
+	    		}
+	    	}
+	    	for(ProductsVO productsVO : productCatList)
+	    	{
+	    		if(!tempSubCategoryList.contains(productsVO.getProductSubCategory()))
+	    		{
+	    			tempSubCategoryList.add(productsVO.getProductSubCategory());
+	    		}
+	    		if(productsVO.getProductSubCategory().equals(subCategory))
+	    		{
+	    			productSubCatList.add(productsVO);
+	    		}
+	    	}
+	    	tempProductList.addAll(productSubCatList);
+    		
+    		
+    		int categoryChoice=0,subCategoryChoice = 0,productChoice=0;
+    		for(ProductsVO productsVO : productList)
     		{
-    			if(enquiryViewVO.getProductId() == productsVO.getId())
-    			{
-    				categoryCombo.getSelectionModel().selectNext();
-        			subcategoryCombo.getSelectionModel().selectNext();
-        			nameCombo.getSelectionModel().selectNext();
-    				break;
-    			}
-    			categoryCombo.getSelectionModel().selectNext();
-    			subcategoryCombo.getSelectionModel().selectNext();
-    			nameCombo.getSelectionModel().selectNext();
+    			if(productsVO.getId()==enquiryViewVO.getProductId())
+        		{
+    	    		for(String category1 : tempCategoryList)
+    	    		{
+    	    			if(category1.equals(productsVO.getProductCategory()))
+    	    			{
+    	    				break;
+    	    			}
+    	    			categoryChoice++;
+    	    		}
+    	    		for(String subCategory1 : tempSubCategoryList)
+    	    		{
+    	    			if(subCategory1.equals(productsVO.getProductSubCategory()))
+    	    			{
+    	    				break;
+    	    			}
+    	    			subCategoryChoice++;
+    	    		}
+    	    		for(ProductsVO productsVO2 : productSubCatList)
+    	    		{
+    	    			if(productsVO2.getId() == productsVO.getId())
+    	    			{
+    	    				break;
+    	    			}
+    	    			productChoice++;
+    	    		}
+        		}
     		}
+			categoryCombo.getSelectionModel().select(categoryChoice);
+			subcategoryCombo.getSelectionModel().select(subCategoryChoice);
+			nameCombo.getSelectionModel().select(productChoice);
     	}
     	else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
     	{
@@ -320,7 +354,7 @@ public class EnquiryModifyPopUpController {
     	//date.setText(enquiryViewVO.getDateOfEnquiry());
     	address.setText(enquiryViewVO.getAddress());
     	contactNumber.setText(enquiryViewVO.getContactNumber());
-    	//customerFile.setText(enquiryViewVO.getCustomerFile());
+    	filePath.setText(enquiryViewVO.getCustomerFile());
     	customerRequirements.setText(enquiryViewVO.getCustomerRequirement());
     	emailId.setText(enquiryViewVO.getEmailId());
     	tinNumber.setText(enquiryViewVO.getTinNumber());
@@ -329,8 +363,6 @@ public class EnquiryModifyPopUpController {
 	public void modifyEnquiry()
 	{
 		LOG.info("Enter : saveEnquiries");
-		int customerId = 0;
-		
 		try
 		{
 			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
@@ -343,7 +375,8 @@ public class EnquiryModifyPopUpController {
 			}
 			
 			EnquiryViewVO enquiryVO=new EnquiryViewVO();
-			enquiryVO.setCustomerId(customerId);
+			enquiryVO.setId(enquiryViewVO.getId());
+			enquiryVO.setCustomerId(enquiryViewVO.getCustomerId());
 			enquiryVO.setProductName(productNameText);
 			enquiryVO.setReferedBy(referedBy.getText());
 			enquiryVO.setCustomerRequirement(customerRequirements.getText());
@@ -353,14 +386,30 @@ public class EnquiryModifyPopUpController {
 			enquiryVO.setQuotationPreparation(enquiryViewVO.getQuotationPreparation());
 			enquiryVO.setEmailSent(enquiryViewVO.getEmailSent());
 			enquiryVO.setSales(enquiryViewVO.getSales());
+			enquiryVO.setDateOfEnquiry(enquiryViewVO.getDateOfEnquiry());
 			enquiryVO.setEnquiryType(enquiryViewVO.getEnquiryType().substring(0,1));
+			enquiryVO.setReferenceNo(enquiryViewVO.getReferenceNo());
 			enquiryVO.setProductId(productId);
-			//enquiryDAO.updateEnquiry(enquiryVO);
+			
+			CustomersVO customersVO = new CustomersVO();
+			customersVO.setCustomerName(customerName.getText());
+			customersVO.setCompanyName(companyName.getText());
+			customersVO.setAddress(address.getText());
+			customersVO.setCity(city.getText());
+			customersVO.setState(state.getText());
+			customersVO.setEmailId(emailId.getText());
+			customersVO.setContactNumber(contactNumber.getText());
+			customersVO.setTinNumber(tinNumber.getText());
+			customersVO.setId(enquiryViewVO.getCustomerId());
+			
+			
+			enquiryDAO.updateEnquiry(enquiryVO, customersVO);
 			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
 			messageNewEnquiry.getStyleClass().remove("failure");
 			messageNewEnquiry.getStyleClass().add("success");
 			messageNewEnquiry.setVisible(true);
-			}
+			
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());

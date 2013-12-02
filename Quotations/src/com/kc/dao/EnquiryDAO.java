@@ -15,6 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.EnquiryVO;
@@ -26,6 +27,12 @@ public class EnquiryDAO {
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
+	private CustomersDAO customersDAO;
+	
+	public EnquiryDAO()
+	{
+		customersDAO = new CustomersDAO();
+	}
 	
 	public void saveEnquiry(EnquiryVO enquiryVO) throws Exception
 	{
@@ -208,13 +215,13 @@ public class EnquiryDAO {
 		}
 		LOG.info("Exit : deleteEnquiry");
 	}
-	public void updateEnquiry(EnquiryViewVO enquiryViewVO)
+	public void updateEnquiry(EnquiryViewVO enquiryViewVO, CustomersVO customersVO)
 	{
 		LOG.info("Enter : updateEnquiry");
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET cust_id=?,referedby=?,cust_req=?,purchase_period=?,cust_doc=?,priceestimation=?,quotationpreparation=?,emailsent=?,date=?,prod_name=?,salesdone=?,type=?, ref_number=? where ID=?");
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET cust_id=?,referedby=?,cust_req=?,purchase_period=?,cust_doc=?,priceestimation=?,quotationpreparation=?,emailsent=?,date=?,prod_name=?,salesdone=?,type=?, ref_number=?, prod_id=? where ID=?");
 			
 			preparedStatement.setInt(1, enquiryViewVO.getCustomerId());
 			preparedStatement.setString(2, enquiryViewVO.getReferedBy());
@@ -229,9 +236,14 @@ public class EnquiryDAO {
 			preparedStatement.setString(11, enquiryViewVO.getSales());
 			preparedStatement.setString(12, enquiryViewVO.getEnquiryType());
 			preparedStatement.setString(13, enquiryViewVO.getReferenceNo());
-			preparedStatement.setInt(14, enquiryViewVO.getId());
+			preparedStatement.setInt(14, enquiryViewVO.getProductId());
+			preparedStatement.setInt(15, enquiryViewVO.getId());
 			
 			preparedStatement.execute();
+			
+			customersDAO.updateCustomer(customersVO);
+			
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
