@@ -3,6 +3,7 @@
 <?import com.mytdev.javafx.scene.control.*?>
 <?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -33,7 +34,7 @@
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13">
           <children>
             <Button mnemonicParsing="false" onAction="#modifyEnquiry" text="Save" />
-            <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="162.0" text="">
+            <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="317.0" text="">
               <font>
                 <Font size="15.0" />
               </font>
@@ -85,6 +86,9 @@
       </rowConstraints>
     </GridPane>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="586.0" visible="true" BorderPane.alignment="CENTER">
       <children>

@@ -1,55 +1,44 @@
 package com.kc.controller;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.layout.BorderPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
-import com.kc.model.PriceEstimationVO;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-
-public class PriceEstimationController {
+public class PriceEstimationController implements Initializable {
 	
 	private static final Logger LOG = LogManager.getLogger(PriceEstimationController.class);
-	
 	@FXML
-	private ComboBox productCategory;
+	private Tab newTab;
 	@FXML
-	private ComboBox subCategory;
+	private Tab modifyTab;
 	@FXML
-	private ComboBox productName;
-	@FXML
-	private Label referenceNo;
-	@FXML
-	private Label date;
-	@FXML
-	private CheckBox dealer;
-	@FXML
-	private CheckBox endUser;
-	@FXML
-	private TableColumn componentName;
-	@FXML
-	private TableColumn vender;
-	@FXML
-	private TableColumn model;
-	@FXML
-	private TableColumn type;
-	@FXML
-	private TableColumn size;
-	@FXML
-	private TableColumn quantity;
-	@FXML
-	private TableColumn costPrice;
-	@FXML
-	private TableColumn dealerEndUser;
-	@FXML
-	private Label title;
-	
-	public void savePriceEstimation()
-	{
-		PriceEstimationVO priceEstimationVO=new PriceEstimationVO();
+	private Tab viewTab;
+	@Override
+	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
+		
+		LOG.info("Enter : initialize");
+		try{
+			
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-new.fxml"));
+			BorderPane newEstimation = (BorderPane) loader.load();
+			newTab.setContent(newEstimation);
+			FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-view.fxml"));
+			BorderPane viewEstimation = (BorderPane) loader2.load();
+			viewTab.setContent(viewEstimation);
+			FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-modify.fxml"));
+			BorderPane modifyEstimation = (BorderPane) loader3.load();
+			modifyTab.setContent(modifyEstimation);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		LOG.info("Exit : initialize");
 	}
+	
 }

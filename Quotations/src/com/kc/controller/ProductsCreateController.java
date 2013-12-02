@@ -251,12 +251,20 @@ public class ProductsCreateController implements Initializable{
 		}
 		}
 		catch (SQLException s) {
-			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
-				message.setText(CommonConstants.DUPLICATE_PRODUCT_CODE);
-				message.getStyleClass().remove("success");
-				message.getStyleClass().add("failure");
-				message.setVisible(true);
-			}
+				if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT)
+				{
+					message.setText(CommonConstants.DUPLICATE_PRODUCT_CODE);
+					message.getStyleClass().remove("success");
+					message.getStyleClass().add("failure");
+					message.setVisible(true);
+				}
+				else
+				{
+					message.setText(CommonConstants.OTHER_DB_ERROR);
+					message.getStyleClass().remove("success");
+					message.getStyleClass().add("failure");
+					message.setVisible(true);
+				}
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());

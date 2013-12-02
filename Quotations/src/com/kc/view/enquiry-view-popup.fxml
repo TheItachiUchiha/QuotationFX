@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.mytdev.javafx.scene.control.*?>
-<?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
@@ -9,7 +8,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
 
 <BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryViewPopUpController">
   <!-- TODO Add Nodes -->
@@ -27,9 +25,6 @@
         <Label prefHeight="24.0" prefWidth="161.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
         <Label prefHeight="21.0" prefWidth="162.0" text="Customer File" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="13" />
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="14" />
-        <AutoCompleteTextField id="tin" fx:id="tinNumber" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <AutoCompleteTextField id="email" fx:id="emailId" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <AutoCompleteTextField id="refer" fx:id="referedBy" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
         <TextArea id="customerRequirement" fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
         <TextField id="location" fx:id="city" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         <TextField id="location" fx:id="state" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
@@ -54,6 +49,9 @@
         <TextField fx:id="companyName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="15" GridPane.valignment="TOP" />
         <TextField id="estimatePeriod" fx:id="date" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="15" GridPane.valignment="TOP" />
+        <TextField id="companyName" fx:id="tinNumber" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField id="companyName" fx:id="emailId" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField id="companyName" fx:id="referedBy" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="50.0" prefWidth="110.0" />

@@ -1,7 +1,6 @@
 package com.kc.controller;
 
 import java.io.File;
-import java.sql.SQLException;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -190,7 +189,7 @@ public class EnquiryModifyPopUpController {
 						@Override
 						public void changed(ObservableValue ov, String t,
 								String t1) {
-							
+								messageNewEnquiry.setText("");
 								tempSubCategoryList.clear();
 								tempProductList.clear();
 								productCatList.clear();
@@ -244,6 +243,7 @@ public class EnquiryModifyPopUpController {
 									productId = t1.getId();
 						}
 					});
+			validation.allowAsPhoneNumber(contactNumber);
     	}
     	catch (Exception e) {
 			e.printStackTrace();
@@ -365,50 +365,76 @@ public class EnquiryModifyPopUpController {
 		LOG.info("Enter : saveEnquiries");
 		try
 		{
-			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
+			if(validation.isEmpty(customerName, companyName, city, state,purchasePeriod))
 			{
-				productNameText = nameCombo.getSelectionModel().getSelectedItem().getProductName();
+				messageNewEnquiry.setText(CommonConstants.MANDATORY_FIELDS);
+				messageNewEnquiry.getStyleClass().remove("success");
+				messageNewEnquiry.getStyleClass().add("failure");
+				messageNewEnquiry.setVisible(true);
 			}
-			else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
+			else if(customerRequirements.getText().length()==0||address.getText().length()==0)
 			{
-				productNameText = productName.getText();
+				messageNewEnquiry.setText(CommonConstants.MANDATORY_FIELDS);
+				messageNewEnquiry.getStyleClass().remove("success");
+				messageNewEnquiry.getStyleClass().add("failure");
+				messageNewEnquiry.setVisible(true);
 			}
-			
-			EnquiryViewVO enquiryVO=new EnquiryViewVO();
-			enquiryVO.setId(enquiryViewVO.getId());
-			enquiryVO.setCustomerId(enquiryViewVO.getCustomerId());
-			enquiryVO.setProductName(productNameText);
-			enquiryVO.setReferedBy(referedBy.getText());
-			enquiryVO.setCustomerRequirement(customerRequirements.getText());
-			enquiryVO.setPurchasePeriod(purchasePeriod.getText());
-			enquiryVO.setCustomerFile(filePath.getText());
-			enquiryVO.setPriceEstimation(enquiryViewVO.getPriceEstimation());
-			enquiryVO.setQuotationPreparation(enquiryViewVO.getQuotationPreparation());
-			enquiryVO.setEmailSent(enquiryViewVO.getEmailSent());
-			enquiryVO.setSales(enquiryViewVO.getSales());
-			enquiryVO.setDateOfEnquiry(enquiryViewVO.getDateOfEnquiry());
-			enquiryVO.setEnquiryType(enquiryViewVO.getEnquiryType().substring(0,1));
-			enquiryVO.setReferenceNo(enquiryViewVO.getReferenceNo());
-			enquiryVO.setProductId(productId);
-			
-			CustomersVO customersVO = new CustomersVO();
-			customersVO.setCustomerName(customerName.getText());
-			customersVO.setCompanyName(companyName.getText());
-			customersVO.setAddress(address.getText());
-			customersVO.setCity(city.getText());
-			customersVO.setState(state.getText());
-			customersVO.setEmailId(emailId.getText());
-			customersVO.setContactNumber(contactNumber.getText());
-			customersVO.setTinNumber(tinNumber.getText());
-			customersVO.setId(enquiryViewVO.getCustomerId());
-			
-			
-			enquiryDAO.updateEnquiry(enquiryVO, customersVO);
-			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
-			messageNewEnquiry.getStyleClass().remove("failure");
-			messageNewEnquiry.getStyleClass().add("success");
-			messageNewEnquiry.setVisible(true);
-			
+			else if(emailId.getText().length()!=0)
+			{
+				if(!validation.isEmail(emailId.getText()))
+				{
+					messageNewEnquiry.setText(CommonConstants.INCORRECT_EMAIL);
+					messageNewEnquiry.getStyleClass().remove("success");
+					messageNewEnquiry.getStyleClass().add("failure");
+					messageNewEnquiry.setVisible(true);
+				}
+			}
+			else
+			{
+				if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
+				{
+					productNameText = nameCombo.getSelectionModel().getSelectedItem().getProductName();
+				}
+				else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
+				{
+					productNameText = productName.getText();
+				}
+				
+				EnquiryViewVO enquiryVO=new EnquiryViewVO();
+				enquiryVO.setId(enquiryViewVO.getId());
+				enquiryVO.setCustomerId(enquiryViewVO.getCustomerId());
+				enquiryVO.setProductName(productNameText);
+				enquiryVO.setReferedBy(referedBy.getText());
+				enquiryVO.setCustomerRequirement(customerRequirements.getText());
+				enquiryVO.setPurchasePeriod(purchasePeriod.getText());
+				enquiryVO.setCustomerFile(filePath.getText());
+				enquiryVO.setPriceEstimation(enquiryViewVO.getPriceEstimation());
+				enquiryVO.setQuotationPreparation(enquiryViewVO.getQuotationPreparation());
+				enquiryVO.setEmailSent(enquiryViewVO.getEmailSent());
+				enquiryVO.setSales(enquiryViewVO.getSales());
+				enquiryVO.setDateOfEnquiry(enquiryViewVO.getDateOfEnquiry());
+				enquiryVO.setEnquiryType(enquiryViewVO.getEnquiryType().substring(0,1));
+				enquiryVO.setReferenceNo(enquiryViewVO.getReferenceNo());
+				enquiryVO.setProductId(productId);
+				
+				CustomersVO customersVO = new CustomersVO();
+				customersVO.setCustomerName(customerName.getText());
+				customersVO.setCompanyName(companyName.getText());
+				customersVO.setAddress(address.getText());
+				customersVO.setCity(city.getText());
+				customersVO.setState(state.getText());
+				customersVO.setEmailId(emailId.getText());
+				customersVO.setContactNumber(contactNumber.getText());
+				customersVO.setTinNumber(tinNumber.getText());
+				customersVO.setId(enquiryViewVO.getCustomerId());
+				
+				
+				enquiryDAO.updateEnquiry(enquiryVO, customersVO);
+				messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
+				messageNewEnquiry.getStyleClass().remove("failure");
+				messageNewEnquiry.getStyleClass().add("success");
+				messageNewEnquiry.setVisible(true);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -251,4 +251,43 @@ public class EnquiryDAO {
 		}
 		LOG.info("Exit : updateEnquiry");
 	}
+	public String getDefaultpath()
+	{
+		String defaultPath = "";
+		LOG.info("Enter : getDefaultpath");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
+			preparedStatement.setString(1, "enquiry");
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			defaultPath = resultSet.getString(1);
+			LOG.info("Exit : getDefaultpath");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return defaultPath;
+	}
+	public void saveBranchCode(String code, String date) throws Exception
+	{
+		LOG.info("Enter : saveBranchCode");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
+			preparedStatement.setString(1, code);
+			preparedStatement.setString(2, date);
+			preparedStatement.setString(3, "branch_code");
+			preparedStatement.execute();
+			
+			LOG.info("Exit : saveBranchCode");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
 }

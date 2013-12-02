@@ -31,9 +31,12 @@ public class EnquiryOptionsController implements Initializable {
 	@FXML
 	private GridPane optionsGrid;
 	@FXML
+	private TextField branchCode;
+	@FXML
 	private Button clear;
 	@FXML
-	private Label messageOption;
+	private Label message;
+	
 	private TextField folderPath;
 	private EnquiryDAO enquiryDAO;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
@@ -49,7 +52,7 @@ public class EnquiryOptionsController implements Initializable {
 	    folderPath = new TextField();
 	    folderPath.setPrefWidth(250);
 	    folderPath.setText("");
-	    folderPath.setDisable(true);
+	    folderPath.setEditable(false);
         final HBox hBox =new HBox(5);
         hBox.getChildren().addAll(folderPath,browse);
         optionsGrid.add(hBox,1,1);
@@ -70,6 +73,7 @@ public class EnquiryOptionsController implements Initializable {
 				folderPath.setText("");
 			}
 		});
+	    folderPath.setText(enquiryDAO.getDefaultpath());
 		 LOG.info("Exit : initialize");
 	}
 	public void saveDefaultLocation() throws Exception
@@ -79,18 +83,43 @@ public class EnquiryOptionsController implements Initializable {
 			if(!folderPath.getText().equals(""))
 			{
 				enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
-				messageOption.setText(CommonConstants.DEFAULT_PATH);
-				messageOption.getStyleClass().remove("failure");
-				messageOption.getStyleClass().add("success");
-				messageOption.setVisible(true);
+				message.setText(CommonConstants.DEFAULT_PATH);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
 
 			}
 			else
 			{
-				messageOption.setText(CommonConstants.PATH_ERROR);
-				messageOption.getStyleClass().remove("success");
-				messageOption.getStyleClass().add("failure");
-				messageOption.setVisible(true);
+				message.setText(CommonConstants.PATH_ERROR);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			LOG.error(e.getMessage());
+		}
+	}
+	public void saveBranchCode() throws Exception
+	{
+		try
+		{
+			if(!branchCode.getText().equals(""))
+			{
+				enquiryDAO.saveBranchCode(branchCode.getText(), simpleDateFormat.format(new Date()));
+				message.setText(CommonConstants.BRANCH_CODE);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
+
+			}
+			else
+			{
+				message.setText(CommonConstants.BRANCH_CODE_ERROR);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 		}
 		catch (Exception e) {

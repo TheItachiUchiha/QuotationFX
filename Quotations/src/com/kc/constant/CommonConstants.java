@@ -11,6 +11,7 @@ public class CommonConstants
 	public static final String COMPONENT_ADD_SUCCESS = "Component Added";
 	public static final String DUPLICATE_COMPONENT = "Duplicate Component";
 	public static final String DUPLICATE_PRODUCT_CODE = "Duplicate Product Code";
+	public static final String OTHER_DB_ERROR = "Some DataBase Error";
 	public static final String NO_PRODUCT_COMPONENT = "No Product Component(s) Added";
 	public static final String COMPONENT_MODIFY_SUCCESS = "Component Modified";
 	public static final String COMPONENT_DELETE_SUCCESS = "Component(s) Deleted";
@@ -35,6 +36,8 @@ public class CommonConstants
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
 	public static final String ENQUIRY_MONTHLY_NUMBER = "enquiry_monthly_number";
 	public static final String CUSTOM_PRODUCT_CODE = "CU";
+	public static final String BRANCH_CODE = "New Branch Code Saved";
+	public static final String BRANCH_CODE_ERROR = "Please Enter a Branch Code";
 	
 	
 	//SQL EXCEPTIONS

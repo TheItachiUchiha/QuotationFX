@@ -128,7 +128,7 @@ public class TopMenuController implements Initializable {
 	}
 	public void logout()
 	{
-		LoginController.primaryStage.setResizable(false);
+		//LoginController.primaryStage.setResizable(false);
 		LoginController.primaryStage.setScene(LoginController.scene);
 		LoginController.message.setVisible(false);
 		LoginController.getUsername().requestFocus();

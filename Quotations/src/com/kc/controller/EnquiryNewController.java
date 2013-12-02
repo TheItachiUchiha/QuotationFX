@@ -135,7 +135,7 @@ public class EnquiryNewController implements Initializable {
 		final ObservableList<ProductsVO> tempProductList = FXCollections
 				.observableArrayList();
 		filePath = new TextField();
-		filePath.setDisable(true);
+		filePath.setEditable(false);
 		filePath.setPrefWidth(300);
 		Button browse = new Button();
         browse.setText("Browse");
@@ -191,6 +191,7 @@ public class EnquiryNewController implements Initializable {
 					purchasePeriod.setText("");
 					filePath.setText("");
 					emailMessage.setText("");
+					messageNewEnquiry.setText("");
 				}
 			}
 		});
@@ -234,6 +235,7 @@ public class EnquiryNewController implements Initializable {
 							purchasePeriod.setText("");
 							filePath.setText("");
 							emailMessage.setText("");
+							messageNewEnquiry.setText("");
 							enquiryGrid.setVisible(false);
 							try {
 								productsList.clear();
@@ -339,7 +341,6 @@ public class EnquiryNewController implements Initializable {
 			
 			
 			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -408,54 +409,81 @@ public class EnquiryNewController implements Initializable {
 		
 		try
 		{
-			if(typeFlag.equals("S"))
+			if(validation.isEmpty(customerName, companyName, city, state,purchasePeriod))
 			{
-				for (ProductsVO productsVO : productsList) {
-					if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
-						productName=productsVO.getProductName();
-						productCode=productsVO.getProductCode().substring(0, 2);
-					}
+				messageNewEnquiry.setText(CommonConstants.MANDATORY_FIELDS);
+				messageNewEnquiry.getStyleClass().remove("success");
+				messageNewEnquiry.getStyleClass().add("failure");
+				messageNewEnquiry.setVisible(true);
+			}
+			else if(customerRequirements.getText().length()==0||address.getText().length()==0)
+			{
+				messageNewEnquiry.setText(CommonConstants.MANDATORY_FIELDS);
+				messageNewEnquiry.getStyleClass().remove("success");
+				messageNewEnquiry.getStyleClass().add("failure");
+				messageNewEnquiry.setVisible(true);
+			}
+			else if(emailId.getText().length()!=0)
+			{
+				if(!validation.isEmail(emailId.getText()))
+				{
+					messageNewEnquiry.setText(CommonConstants.INCORRECT_EMAIL);
+					messageNewEnquiry.getStyleClass().remove("success");
+					messageNewEnquiry.getStyleClass().add("failure");
+					messageNewEnquiry.setVisible(true);
 				}
 			}
 			else
-			{
-				productName = this.productName.getText();
-				productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
-			}
-			
-			if(flag=='N')
-			{
-				customerId = customersDAO.saveCustomer(fillDataFromTextFields());
-			}
-			else
-			{
-				customerId = this.customersVO.getId();
-			}
-			String enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
-			String month = date.substring(3,5);
-			String year = date.substring(8,10);
-			EnquiryVO enquiryVO=new EnquiryVO();
-			enquiryVO.setCustomerId(customerId);
-			enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);
-			enquiryVO.setProductName(productName);
-			enquiryVO.setReferedBy(referedBy.getText());
-			enquiryVO.setCustomerrequirements(customerRequirements.getText());
-			enquiryVO.setPurchasePeriod(purchasePeriod.getText());
-			enquiryVO.setCustomerDocument(filePath.getText());
-			enquiryVO.setEmailMessage(emailMessage.getText());
-			enquiryVO.setPriceEstimation("N");
-			enquiryVO.setQuotationPreparation("N");
-			enquiryVO.setEmailSent("N");
-			enquiryVO.setSales("N");
-			enquiryVO.setDate(date);
-			enquiryVO.setFlag(typeFlag);
-			enquiryVO.setProductId(productId);
-			enquiryDAO.saveEnquiry(enquiryVO);
-			enquiryDAO.increaseEnquiryNumber(generateNewEnuiryNumber(enquiryNumber), date);
-			messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
-			messageNewEnquiry.getStyleClass().remove("failure");
-			messageNewEnquiry.getStyleClass().add("success");
-			messageNewEnquiry.setVisible(true);
+				{
+					if(typeFlag.equals("S"))
+					{
+						for (ProductsVO productsVO : productsList) {
+							if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
+								productName=productsVO.getProductName();
+								productCode=productsVO.getProductCode().substring(0, 2);
+							}
+						}
+					}
+					else
+					{
+						productName = this.productName.getText();
+						productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
+					}
+					
+					if(flag=='N')
+					{
+						customerId = customersDAO.saveCustomer(fillDataFromTextFields());
+					}
+					else
+					{
+						customerId = this.customersVO.getId();
+					}
+					String enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
+					String month = date.substring(3,5);
+					String year = date.substring(8,10);
+					EnquiryVO enquiryVO=new EnquiryVO();
+					enquiryVO.setCustomerId(customerId);
+					enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);
+					enquiryVO.setProductName(productName);
+					enquiryVO.setReferedBy(referedBy.getText());
+					enquiryVO.setCustomerrequirements(customerRequirements.getText());
+					enquiryVO.setPurchasePeriod(purchasePeriod.getText());
+					enquiryVO.setCustomerDocument(filePath.getText());
+					enquiryVO.setEmailMessage(emailMessage.getText());
+					enquiryVO.setPriceEstimation("N");
+					enquiryVO.setQuotationPreparation("N");
+					enquiryVO.setEmailSent("N");
+					enquiryVO.setSales("N");
+					enquiryVO.setDate(date);
+					enquiryVO.setFlag(typeFlag);
+					enquiryVO.setProductId(productId);
+					enquiryDAO.saveEnquiry(enquiryVO);
+					enquiryDAO.increaseEnquiryNumber(generateNewEnuiryNumber(enquiryNumber), date);
+					messageNewEnquiry.setText(CommonConstants.ENQUIRY_ADD_SUCCESS);
+					messageNewEnquiry.getStyleClass().remove("failure");
+					messageNewEnquiry.getStyleClass().add("success");
+					messageNewEnquiry.setVisible(true);
+				}
 			}
 		catch (Exception e) {
 			e.printStackTrace();

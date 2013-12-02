@@ -45,7 +45,7 @@ public class EnquiryViewPopUpController {
     private TextField customerType;
 
     @FXML
-    private AutoCompleteTextField<?> emailId;
+    private TextField emailId;
 
     @FXML
     private GridPane enquiryGrid;
@@ -57,13 +57,13 @@ public class EnquiryViewPopUpController {
     private TextField purchasePeriod;
 
     @FXML
-    private AutoCompleteTextField<?> referedBy;
+    private TextField referedBy;
 
     @FXML
     private TextField state;
 
     @FXML
-    private AutoCompleteTextField<?> tinNumber;
+    private TextField tinNumber;
 
     @FXML
     private Button viewFile;
@@ -77,23 +77,23 @@ public class EnquiryViewPopUpController {
 
     @FXML
     void initialize() {
-    	address.setDisable(true);
-    	city.setDisable(true);
-    	companyName.setDisable(true);
-    	contactNumber.setDisable(true);
-    	customerFile.setDisable(true);
-    	customerName.setDisable(true);
-    	customerRequirements.setDisable(true);
-    	customerType.setDisable(true);
-    	emailId.setDisable(true);
+    	address.setEditable(false);
+    	city.setEditable(false);
+    	companyName.setEditable(false);
+    	contactNumber.setEditable(false);
+    	customerFile.setEditable(false);
+    	customerName.setEditable(false);
+    	customerRequirements.setEditable(false);
+    	customerType.setEditable(false);
+    	emailId.setEditable(false);
     	//enquiryGrid.setDisable(true);
-    	enquiryType.setDisable(true);
-    	purchasePeriod.setDisable(true);
-    	referedBy.setDisable(true);
-    	state.setDisable(true);
-    	tinNumber.setDisable(true);
-    	productName.setDisable(true);
-    	date.setDisable(true);
+    	enquiryType.setEditable(false);
+    	purchasePeriod.setEditable(false);
+    	referedBy.setEditable(false);
+    	state.setEditable(false);
+    	tinNumber.setEditable(false);
+    	productName.setEditable(false);
+    	date.setEditable(false);
     	
     	viewFile.setOnAction(new EventHandler<ActionEvent>() {
 			

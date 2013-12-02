@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryOptionsController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="223.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryOptionsController">
   <!-- TODO Add Nodes -->
   <top>
-    <GridPane fx:id="optionsGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="161.0" prefWidth="654.0">
+    <GridPane fx:id="optionsGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="223.0" prefWidth="654.0">
       <children>
         <Label prefHeight="22.0" text="Select a Default Folder for Customers File" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0">
           <GridPane.margin>
@@ -18,7 +18,7 @@
           </GridPane.margin>
         </Label>
         <Label prefHeight="22.0" prefWidth="103.0" text="Folder Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-        <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+        <VBox id="VBox" alignment="TOP_CENTER" prefHeight="38.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2">
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="29.0" prefWidth="654.0" spacing="5.0">
               <children>
@@ -26,7 +26,14 @@
                 <Button fx:id="clear" mnemonicParsing="false" text="Clear" />
               </children>
             </HBox>
-            <Label fx:id="messageOption" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="314.0" text="" visible="false">
+          </children>
+        </VBox>
+        <Label prefHeight="22.0" prefWidth="103.0" text="Branch Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <TextField fx:id="branchCode" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+          <children>
+            <Button id="save" mnemonicParsing="false" onAction="#saveBranchCode" text="Save" />
+            <Label id="messageBranchCode" fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="252.0" text="">
               <font>
                 <Font size="15.0" />
               </font>
@@ -39,9 +46,11 @@
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="91.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
   </top>
