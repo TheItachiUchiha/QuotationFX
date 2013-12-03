@@ -1,5 +1,8 @@
 package com.kc.controller;
 
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -9,9 +12,19 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -43,6 +56,67 @@ public class QuotationNewController implements Initializable {
 	private ComboBox<String> yearCombo;
 	@FXML
 	private ComboBox<String> referenceCombo;
+	@FXML
+	private Button enquiryDetails;
+	 @FXML
+	    private TextField customerName;
+
+	    @FXML
+	    private TextField estimatedPrice;
+
+	    @FXML
+	    private TextField ecity;
+
+	    @FXML
+	    private TextField ecompanyName;
+
+	    @FXML
+	    private TextField ecustomerName;
+
+	    @FXML
+	    private TextArea ecustomerRequirements;
+
+	    @FXML
+	    private TextField ecustomerType;
+
+	    @FXML
+	    private TextField edateOfEnquiry;
+
+	    @FXML
+	    private TextField epriceEstimation;
+
+	    @FXML
+	    private TextField eproductName;
+
+	    @FXML
+	    private TextField epurchasePeriod;
+
+	    @FXML
+	    private TextField equotationPreparation;
+
+	    @FXML
+	    private TextField ereferedBy;
+
+	    @FXML
+	    private TextField ereferenceNo;
+
+	    @FXML
+	    private Label messageNewQuotation;
+	    
+	    @FXML
+	    private TextField priceEstimationDate;
+
+	    @FXML
+	    private TextField productName;
+
+	    @FXML
+	    private TextField referenceNo;
+	    @FXML
+	    private GridPane enquiryGrid;
+	    @FXML
+	    private TextField ecustomerFile;
+	    @FXML
+	    private Button viewFile;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
@@ -55,6 +129,18 @@ public class QuotationNewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			viewFile.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					try {
+						Desktop.getDesktop().open(new File(ecustomerFile.getText()));
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
@@ -85,7 +171,33 @@ public class QuotationNewController implements Initializable {
 						LOG.error(e.getMessage());
 					}
 				}
-			});		}
+			});	
+			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					{
+						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						{
+							ereferenceNo.setText(enquiryViewVO.getReferenceNo());
+							eproductName.setText(enquiryViewVO.getProductName());
+							ecustomerType.setText(enquiryViewVO.getCustomerType());
+							ecustomerName.setText(enquiryViewVO.getCustomerName());
+							ecompanyName.setText(enquiryViewVO.getCompanyName());
+							ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
+							ereferedBy.setText(enquiryViewVO.getReferedBy());
+							edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
+							epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
+							ecity.setText(enquiryViewVO.getCity());
+							equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
+							ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+							epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+						}
+					}
+				}
+			});
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
