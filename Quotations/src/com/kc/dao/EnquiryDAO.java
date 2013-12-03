@@ -16,9 +16,8 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryViewVO;
-import com.kc.model.EnquiryViewVO;
 import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.util.DBConnector;
 
 public class EnquiryDAO {
@@ -289,5 +288,84 @@ public class EnquiryDAO {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+	}
+	public void saveDefaultCode(String code, String date) throws Exception
+	{
+		LOG.info("Enter : saveDefaultCode");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
+			preparedStatement.setString(1, code);
+			preparedStatement.setString(2, date);
+			preparedStatement.setString(3, "default_code");
+			preparedStatement.execute();
+			
+			LOG.info("Exit : saveDefaultCode");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
+	public String estimationConfirm(int id)
+	{
+		String flag = "";
+		LOG.info("Enter : estimationConfirm");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT priceestimation from ENQUIRY where id=?");
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			flag = resultSet.getString(1);
+			LOG.info("Exit : estimationConfirm");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return flag;
+	}
+	public String quotationConfirm(int id)
+	{
+		String flag = "";
+		LOG.info("Enter : quotationConfirm");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT quotationpreparation from ENQUIRY where id=?");
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			flag = resultSet.getString(1);
+			LOG.info("Exit : quotationConfirm");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return flag;
+	}
+	public String emailConfirm(int id)
+	{
+		String flag = "";
+		LOG.info("Enter : emailConfirm");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT emailsent from ENQUIRY where id=?");
+			preparedStatement.setInt(1, id);
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			flag = resultSet.getString(1);
+			LOG.info("Exit : emailConfirm");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return flag;
 	}
 }

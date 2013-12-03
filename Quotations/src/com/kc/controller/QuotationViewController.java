@@ -5,16 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -26,54 +16,33 @@ import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.Validation;
 
-public class PriceEstimationModifyController implements Initializable{
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
 
-	private static final Logger LOG = LogManager.getLogger(PriceEstimationModifyController.class);
+public class QuotationViewController implements Initializable  {
+
+	private static final Logger LOG = LogManager.getLogger(QuotationViewController.class);
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
-	public PriceEstimationModifyController()
+	public QuotationViewController()
 	{
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
 	}
+	
 	@FXML
 	private ComboBox<String> monthCombo;
 	@FXML
 	private ComboBox<String> yearCombo;
 	@FXML
 	private ComboBox<String> referenceCombo;
-	@FXML
-	private TextArea requirements;
-	@FXML
-	private TextArea address;
-	@FXML
-	private TextField enquiryType;
-	@FXML
-	private TextField productName;
-	@FXML
-	private TextField customerName;
-	@FXML
-	private TextField companyName;
-	@FXML
-	private TextField tinNumber;
-	@FXML
-	private TextField emailId;
-	@FXML
-	private TextField referedBy;
-	@FXML
-	private TextField customerType;
-	@FXML
-	private TextField state;
-	@FXML
-	private TextField city;
-	@FXML
-	private TextField contactNumber;
-	@FXML
-	private TextField purchasePeriod;
-	@FXML
-	private TextField customerFile;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
@@ -102,7 +71,7 @@ public class PriceEstimationModifyController implements Initializable{
 						{
 							for(EnquiryViewVO enquiryVO : enquiryViewList)
 							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
+								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.quotationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.emailConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
 								{
 									refList.add(enquiryVO.getReferenceNo());
 								}
@@ -116,38 +85,7 @@ public class PriceEstimationModifyController implements Initializable{
 						LOG.error(e.getMessage());
 					}
 				}
-			});
-			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
-					{
-						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
-						{
-							enquiryType.setText(enquiryViewVO.getEnquiryType());
-							productName.setText(enquiryViewVO.getProductName());
-							requirements.setText(enquiryViewVO.getCustomerRequirement());
-							customerName.setText(enquiryViewVO.getCustomerName());
-							companyName.setText(enquiryViewVO.getCompanyName());
-							tinNumber.setText(enquiryViewVO.getTinNumber());
-							emailId.setText(enquiryViewVO.getEmailId());
-							referedBy.setText(enquiryViewVO.getReferedBy());
-							customerType.setText(enquiryViewVO.getCustomerType());
-							address.setText(enquiryViewVO.getAddress());
-							state.setText(enquiryViewVO.getState());
-							city.setText(enquiryViewVO.getCity());
-							contactNumber.setText(enquiryViewVO.getContactNumber());
-							customerFile.setText(enquiryViewVO.getCustomerFile());
-							purchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
-						}
-					}
-					
-				}
-			});
-		}
+			});		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}

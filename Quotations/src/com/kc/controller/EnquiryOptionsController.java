@@ -6,12 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.EnquiryDAO;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -22,8 +16,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.EnquiryDAO;
 
 public class EnquiryOptionsController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(EnquiryNewController.class);
@@ -33,9 +31,15 @@ public class EnquiryOptionsController implements Initializable {
 	@FXML
 	private TextField branchCode;
 	@FXML
+	private TextField defaultCode;
+	@FXML
 	private Button clear;
 	@FXML
-	private Label message;
+	private Label messageLocation;
+	@FXML
+	private Label messageBranchCode;
+	@FXML
+	private Label messageDefaultCode;
 	
 	private TextField folderPath;
 	private EnquiryDAO enquiryDAO;
@@ -70,7 +74,12 @@ public class EnquiryOptionsController implements Initializable {
 			
 			@Override
 			public void handle(ActionEvent paramT) {
-				folderPath.setText("");
+				//folderPath.setText("");
+				defaultCode.setText("");
+				branchCode.setText("");
+				messageBranchCode.setText("");
+				messageDefaultCode.setText("");
+				messageLocation.setText("");
 			}
 		});
 	    folderPath.setText(enquiryDAO.getDefaultpath());
@@ -80,46 +89,66 @@ public class EnquiryOptionsController implements Initializable {
 	{
 		try
 		{
-			if(!folderPath.getText().equals(""))
-			{
-				enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
-				message.setText(CommonConstants.DEFAULT_PATH);
-				message.getStyleClass().remove("failure");
-				message.getStyleClass().add("success");
-				message.setVisible(true);
-
-			}
-			else
-			{
-				message.setText(CommonConstants.PATH_ERROR);
-				message.getStyleClass().remove("success");
-				message.getStyleClass().add("failure");
-				message.setVisible(true);
-			}
+			
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
 		}
 	}
-	public void saveBranchCode() throws Exception
+	public void saveConfigurations() throws Exception
 	{
 		try
 		{
-			if(!branchCode.getText().equals(""))
+			if(!folderPath.getText().equals("")||!branchCode.getText().equals("")||!defaultCode.getText().equals(""))
 			{
-				enquiryDAO.saveBranchCode(branchCode.getText(), simpleDateFormat.format(new Date()));
-				message.setText(CommonConstants.BRANCH_CODE);
-				message.getStyleClass().remove("failure");
-				message.getStyleClass().add("success");
-				message.setVisible(true);
-
+				if(!folderPath.getText().equals(""))
+				{
+					enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
+					messageLocation.setText(CommonConstants.DEFAULT_PATH);
+					messageLocation.getStyleClass().remove("failure");
+					messageLocation.getStyleClass().add("success");
+					messageLocation.setVisible(true);
+	
+				}
+				/*else
+				{
+					messageLocation.setText(CommonConstants.PATH_ERROR);
+					messageLocation.getStyleClass().remove("success");
+					messageLocation.getStyleClass().add("failure");
+					messageLocation.setVisible(true);
+				}*/
+				if(!branchCode.getText().equals(""))
+				{
+					enquiryDAO.saveBranchCode(branchCode.getText(), simpleDateFormat.format(new Date()));
+					messageBranchCode.setText(CommonConstants.BRANCH_CODE);
+					messageBranchCode.getStyleClass().remove("failure");
+					messageBranchCode.getStyleClass().add("success");
+					messageBranchCode.setVisible(true);
+	
+				}
+				/*else
+				{
+					messageBranchCode.setText(CommonConstants.BRANCH_CODE_ERROR);
+					messageBranchCode.getStyleClass().remove("success");
+					messageBranchCode.getStyleClass().add("failure");
+					messageBranchCode.setVisible(true);
+				}*/
+				if(!defaultCode.getText().equals(""))
+				{
+					enquiryDAO.saveDefaultCode(defaultCode.getText(), simpleDateFormat.format(new Date()));
+					messageDefaultCode.setText(CommonConstants.DEFAULT_CODE);
+					messageDefaultCode.getStyleClass().remove("failure");
+					messageDefaultCode.getStyleClass().add("success");
+					messageDefaultCode.setVisible(true);
+	
+				}
 			}
 			else
 			{
-				message.setText(CommonConstants.BRANCH_CODE_ERROR);
-				message.getStyleClass().remove("success");
-				message.getStyleClass().add("failure");
-				message.setVisible(true);
+				messageBranchCode.setText(CommonConstants.OPTION_ERROR);
+				messageBranchCode.getStyleClass().remove("success");
+				messageBranchCode.getStyleClass().add("failure");
+				messageBranchCode.setVisible(true);
 			}
 		}
 		catch (Exception e) {
