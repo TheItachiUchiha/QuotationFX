@@ -58,8 +58,8 @@ public class QuotationEmailController implements Initializable  {
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
 			customerList = customersDAO.getCustomers();
+			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
 			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
 			
 				@Override
