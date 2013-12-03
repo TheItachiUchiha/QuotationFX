@@ -432,7 +432,7 @@ public class EnquiryNewController implements Initializable {
 					messageNewEnquiry.getStyleClass().add("failure");
 					messageNewEnquiry.setVisible(true);
 				}
-			}
+			
 			else
 				{
 					if(typeFlag.equals("S"))
@@ -484,6 +484,7 @@ public class EnquiryNewController implements Initializable {
 					messageNewEnquiry.getStyleClass().add("success");
 					messageNewEnquiry.setVisible(true);
 				}
+			}
 			}
 		catch (Exception e) {
 			e.printStackTrace();
