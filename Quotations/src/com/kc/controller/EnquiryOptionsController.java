@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -22,6 +23,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.EnquiryDAO;
+import com.kc.util.Encription;
 
 public class EnquiryOptionsController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(EnquiryNewController.class);
@@ -33,9 +35,17 @@ public class EnquiryOptionsController implements Initializable {
 	@FXML
 	private TextField defaultCode;
 	@FXML
+	private TextField username;
+	@FXML
+	private PasswordField password;
+	@FXML
 	private Button clear;
 	@FXML
 	private Label messageLocation;
+	@FXML
+	private Label messageUsername;
+	@FXML
+	private Label messagePassword;
 	@FXML
 	private Label messageBranchCode;
 	@FXML
@@ -43,10 +53,12 @@ public class EnquiryOptionsController implements Initializable {
 	
 	private TextField folderPath;
 	private EnquiryDAO enquiryDAO;
+	private Encription encription;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
+		encription = new Encription();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -79,27 +91,21 @@ public class EnquiryOptionsController implements Initializable {
 				branchCode.setText("");
 				messageBranchCode.setText("");
 				messageDefaultCode.setText("");
+				username.setText("");
+				password.setText("");
+				messagePassword.setText("");
+				messageUsername.setText("");
 				messageLocation.setText("");
 			}
 		});
 	    folderPath.setText(enquiryDAO.getDefaultpath());
 		 LOG.info("Exit : initialize");
 	}
-	public void saveDefaultLocation() throws Exception
-	{
-		try
-		{
-			
-		}
-		catch (Exception e) {
-			LOG.error(e.getMessage());
-		}
-	}
 	public void saveConfigurations() throws Exception
 	{
 		try
 		{
-			if(!folderPath.getText().equals("")||!branchCode.getText().equals("")||!defaultCode.getText().equals(""))
+			if(!folderPath.getText().equals("")||!branchCode.getText().equals("")||!defaultCode.getText().equals("")||!username.getText().equals("")||!password.getText().equals(""))
 			{
 				if(!folderPath.getText().equals(""))
 				{
@@ -140,6 +146,24 @@ public class EnquiryOptionsController implements Initializable {
 					messageDefaultCode.getStyleClass().remove("failure");
 					messageDefaultCode.getStyleClass().add("success");
 					messageDefaultCode.setVisible(true);
+	
+				}
+				if(!username.getText().equals(""))
+				{
+					enquiryDAO.saveEmailUsername(username.getText(), simpleDateFormat.format(new Date()));
+					messageUsername.setText(CommonConstants.EMAIL_USERNAME);
+					messageUsername.getStyleClass().remove("failure");
+					messageUsername.getStyleClass().add("success");
+					messageUsername.setVisible(true);
+	
+				}
+				if(!password.getText().equals(""))
+				{
+					enquiryDAO.saveEmailPassword(encription.encrypt(password.getText()), simpleDateFormat.format(new Date()));
+					messagePassword.setText(CommonConstants.EMAIL_PASSWORD);
+					messagePassword.getStyleClass().remove("failure");
+					messagePassword.getStyleClass().add("success");
+					messagePassword.setVisible(true);
 	
 				}
 			}

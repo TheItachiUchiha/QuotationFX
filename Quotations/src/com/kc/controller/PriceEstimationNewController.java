@@ -51,6 +51,8 @@ public class PriceEstimationNewController implements Initializable {
 	@FXML
 	private ComboBox<String> referenceCombo;
 	@FXML
+	private Button enquiryDetails;
+	@FXML
 	private TextArea requirements;
 	@FXML
 	private TextArea address;
@@ -94,6 +96,20 @@ public class PriceEstimationNewController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			enquiryType.setEditable(false);
+			productName.setEditable(false);
+			requirements.setEditable(false);
+			customerFile.setEditable(false);
+			customerType.setEditable(false);
+			customerName.setEditable(false);
+			tinNumber.setEditable(false);
+			emailId.setEditable(false);
+			referedBy.setEditable(false);
+			address.setEditable(false);
+			state.setEditable(false);
+			city.setEditable(false);
+			contactNumber.setEditable(false);
+			purchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
@@ -125,12 +141,10 @@ public class PriceEstimationNewController implements Initializable {
 					}
 				}
 			});
-			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
-
+			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(
-						ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
+				public void handle(ActionEvent event) {
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -155,6 +169,7 @@ public class PriceEstimationNewController implements Initializable {
 					
 				}
 			});
+
 			viewFile.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override

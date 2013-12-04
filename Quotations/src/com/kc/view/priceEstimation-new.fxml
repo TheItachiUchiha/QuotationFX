@@ -115,7 +115,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Enquiry Details" />
+            <Button fx:id="enquiryDetails" mnemonicParsing="false" text="Enquiry Details" />
           </children>
         </HBox>
       </children>

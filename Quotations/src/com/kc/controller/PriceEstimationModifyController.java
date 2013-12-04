@@ -9,8 +9,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -44,6 +47,8 @@ public class PriceEstimationModifyController implements Initializable{
 	private ComboBox<String> yearCombo;
 	@FXML
 	private ComboBox<String> referenceCombo;
+	@FXML
+	private Button enquiryDetails;
 	@FXML
 	private TextArea requirements;
 	@FXML
@@ -86,6 +91,20 @@ public class PriceEstimationModifyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			enquiryType.setEditable(false);
+			productName.setEditable(false);
+			requirements.setEditable(false);
+			customerFile.setEditable(false);
+			customerType.setEditable(false);
+			customerName.setEditable(false);
+			tinNumber.setEditable(false);
+			emailId.setEditable(false);
+			referedBy.setEditable(false);
+			address.setEditable(false);
+			state.setEditable(false);
+			city.setEditable(false);
+			contactNumber.setEditable(false);
+			purchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
@@ -117,12 +136,10 @@ public class PriceEstimationModifyController implements Initializable{
 					}
 				}
 			});
-			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
-
+			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(
-						ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
+				public void handle(ActionEvent event) {
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -147,6 +164,7 @@ public class PriceEstimationModifyController implements Initializable{
 					
 				}
 			});
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();

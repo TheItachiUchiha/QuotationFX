@@ -37,6 +37,8 @@ public class CommonConstants
 	public static final String ENQUIRY_MONTHLY_NUMBER = "enquiry_monthly_number";
 	public static final String CUSTOM_PRODUCT_CODE = "CU";
 	public static final String BRANCH_CODE = "New Branch Code Saved";
+	public static final String EMAIL_USERNAME = "New Username Saved";
+	public static final String EMAIL_PASSWORD = "New Passsword Saved";
 	public static final String OPTION_ERROR = "Please atleast Fill one Field";
 	public static final String DEFAULT_CODE = "New Default Code Saved";
 	

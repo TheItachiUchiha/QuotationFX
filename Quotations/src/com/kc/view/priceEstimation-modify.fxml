@@ -27,7 +27,7 @@
         <TextField id="location" fx:id="city" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
         <TextField id="location" fx:id="state" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
         <TextField fx:id="contactNumber" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-        <TextField id="estimatePeriod" fx:id="purchaseperiod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+        <TextField id="estimatePeriod" fx:id="purchasePeriod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
         <Label prefHeight="19.0" prefWidth="162.0" text="Enquiry Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <TextField id="location" fx:id="enquiryType" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
@@ -114,7 +114,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Enquiry Details" />
+            <Button fx:id="enquiryDetails" mnemonicParsing="false" text="Enquiry Details" />
           </children>
         </HBox>
       </children>

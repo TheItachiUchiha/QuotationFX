@@ -139,6 +139,19 @@ public class QuotationModifyController implements Initializable  {
 					}
 				}
 			});
+	        eproductName.setEditable(false);
+			ereferenceNo.setEditable(false);
+			ecustomerFile.setEditable(false);
+			ecustomerType.setEditable(false);
+			ecustomerName.setEditable(false);
+			eproductName.setEditable(false);
+			ecustomerRequirements.setEditable(false);
+			ereferedBy.setEditable(false);
+			edateOfEnquiry.setEditable(false);
+			epriceEstimation.setEditable(false);
+			ecity.setEditable(false);
+			equotationPreparation.setEditable(false);
+			epurchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
