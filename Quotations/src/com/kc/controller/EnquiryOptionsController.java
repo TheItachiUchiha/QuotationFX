@@ -50,8 +50,10 @@ public class EnquiryOptionsController implements Initializable {
 	private Label messageBranchCode;
 	@FXML
 	private Label messageDefaultCode;
-	
+	@FXML
 	private TextField folderPath;
+	@FXML
+	private Button browse;
 	private EnquiryDAO enquiryDAO;
 	private Encryption encription;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
@@ -63,15 +65,7 @@ public class EnquiryOptionsController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		LOG.info("Enter : initialize");
-		Button browse = new Button();
-	    browse.setText("Browse Directory");
-	    folderPath = new TextField();
-	    folderPath.setPrefWidth(250);
-	    folderPath.setText("");
-	    folderPath.setEditable(false);
-        final HBox hBox =new HBox(5);
-        hBox.getChildren().addAll(folderPath,browse);
-        optionsGrid.add(hBox,1,1);
+		
 	    browse.setOnAction(new EventHandler<ActionEvent>() {
 	     @Override
 	     public void handle(ActionEvent event) {

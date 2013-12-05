@@ -34,6 +34,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
@@ -43,6 +44,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ProductsDAO;
+import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -102,6 +104,7 @@ public class EnquiryViewController implements Initializable {
 
     
     
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
@@ -253,7 +256,15 @@ public class EnquiryViewController implements Initializable {
 	        	{
 	        		if(!tempList2.contains(productsVO.getProductCategory()))
 	        		{
-	        			tempList2.add(productsVO.getProductCategory());
+	        			for(EnquiryVO enquiryVO : enquiryList)
+	        			{
+	        				if(enquiryVO.getProductId() == productsVO.getId())
+	        				{
+	        					tempList2.add(productsVO.getProductCategory());
+	        					break;
+	        				}
+	        			}
+	        			
 	        		}
 	        	}
 	        }
@@ -263,7 +274,14 @@ public class EnquiryViewController implements Initializable {
 	        	{
 	        		if(!tempList2.contains(customersVO.getCustomerName()))
 	        		{
-	        			tempList2.add(customersVO.getCustomerName());
+	        			for(EnquiryVO enquiryVO : enquiryList)
+	        			{
+	        				if(enquiryVO.getCustomerId() == customersVO.getId())
+	        				{
+	        					tempList2.add(customersVO.getCustomerName());
+	        					break;
+	        				}
+	        			}
 	        		}
 	        	}
 	        }
@@ -273,7 +291,14 @@ public class EnquiryViewController implements Initializable {
 	        	{
 	        		if(!tempList2.contains(customersVO.getCompanyName()))
 	        		{
-	        			tempList2.add(customersVO.getCompanyName());
+	        			for(EnquiryVO enquiryVO : enquiryList)
+	        			{
+	        				if(enquiryVO.getCustomerId() == customersVO.getId())
+	        				{
+	        					tempList2.add(customersVO.getCompanyName());
+	        					break;
+	        				}
+	        			}
 	        		}
 	        	}
 	        }
@@ -283,7 +308,14 @@ public class EnquiryViewController implements Initializable {
 	        	{
 	        		if(!tempList2.contains(customersVO.getCity()))
 	        		{
-	        			tempList2.add(customersVO.getCity());
+	        			for(EnquiryVO enquiryVO : enquiryList)
+	        			{
+	        				if(enquiryVO.getCustomerId() == customersVO.getId())
+	        				{
+	        					tempList2.add(customersVO.getCity());
+	        					break;
+	        				}
+	        			}
 	        		}
 	        	}
 	        }
@@ -293,7 +325,14 @@ public class EnquiryViewController implements Initializable {
 	        	{
 	        		if(!tempList2.contains(customersVO.getState()))
 	        		{
-	        			tempList2.add(customersVO.getState());
+	        			for(EnquiryVO enquiryVO : enquiryList)
+	        			{
+	        				if(enquiryVO.getCustomerId() == customersVO.getId())
+	        				{
+	        					tempList2.add(customersVO.getState());
+	        					break;
+	        				}
+	        			}
 	        		}
 	        	}
 	        }
@@ -328,7 +367,6 @@ public class EnquiryViewController implements Initializable {
 	        	}
 	        }
 			keyword.setItems(tempList2);
-			
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -597,6 +635,15 @@ public class EnquiryViewController implements Initializable {
 							.getTableView().getItems()
 							.get(ButtonCell.this.getIndex()));
 
+					modifyStage
+					.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+						@Override
+						public void handle(WindowEvent paramT) {
+							fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
+							fillTableFromData();
+						}
+					});
 					
 				}
 					catch (Exception e) {
