@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.EnquiryDAO;
-import com.kc.util.Encription;
+import com.kc.util.Encryption;
 
 public class EnquiryOptionsController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(EnquiryNewController.class);
@@ -53,12 +53,12 @@ public class EnquiryOptionsController implements Initializable {
 	
 	private TextField folderPath;
 	private EnquiryDAO enquiryDAO;
-	private Encription encription;
+	private Encryption encription;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
-		encription = new Encription();
+		encription = new Encryption();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
