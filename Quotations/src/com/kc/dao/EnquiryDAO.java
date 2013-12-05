@@ -147,6 +147,26 @@ public class EnquiryDAO {
 		}
 		return number;
 	}
+	public String getPassword()
+	{
+		String pass = "";
+		LOG.info("Enter : getPassword");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
+			preparedStatement.setString(1, "email_password");
+			resultSet = preparedStatement.executeQuery();
+			resultSet.next();
+			pass = resultSet.getString(1);
+			LOG.info("Exit : getPassword");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return pass;
+	}
 	public void increaseEnquiryNumber(String enquiryNumber, String date)
 	{
 		LOG.info("Enter : increaseEnquiryNumber");
@@ -308,6 +328,45 @@ public class EnquiryDAO {
 			LOG.error(e.getMessage());
 		}
 	}
+	public void saveEmailUsername(String name, String date) throws Exception
+	{
+		LOG.info("Enter : saveEmailUsername");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
+			preparedStatement.setString(1, name);
+			preparedStatement.setString(2, date);
+			preparedStatement.setString(3, "email_username");
+			preparedStatement.execute();
+			
+			LOG.info("Exit : saveEmailUsername");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
+	public void saveEmailPassword(String pwd, String date) throws Exception
+	{
+		LOG.info("Enter : saveEmailPassword");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
+			preparedStatement.setString(1, pwd);
+			preparedStatement.setString(2, date);
+			preparedStatement.setString(3, "email_password");
+			preparedStatement.execute();
+			
+			LOG.info("Exit : saveEmailPassword");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
+	
 	public String estimationConfirm(int id)
 	{
 		String flag = "";
