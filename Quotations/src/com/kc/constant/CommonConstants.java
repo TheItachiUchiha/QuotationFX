@@ -32,7 +32,7 @@ public class CommonConstants
 	public static final String ENQUIRY_ADD_SUCCESS = "Enquiry Saved";
 	public static final String MONTHS = "JAN,FEB,MAR,APR,MAY,JUN,JUL,AUG,SEP,OCT,NOV,DEC";
 	public static final String PATH_ERROR = "Select a Propper path";
-	public static final String DEFAULT_PATH = "Default path Set";
+	public static final String NEW_CONFIGURATION = "New Configuration Saved";
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
 	public static final String ENQUIRY_MONTHLY_NUMBER = "enquiry_monthly_number";
 	public static final String CUSTOM_PRODUCT_CODE = "CU";
@@ -41,7 +41,10 @@ public class CommonConstants
 	public static final String EMAIL_PASSWORD = "New Passsword Saved";
 	public static final String OPTION_ERROR = "Please atleast Fill one Field";
 	public static final String DEFAULT_CODE = "New Default Code Saved";
-	
+	public static final String KEY_ENQUIRY_PATH = "enquiry_path";
+	public static final String KEY_ENQUIRY_BRANCH_CODE = "branch_code";
+	public static final String KEY_ENQUIRY_DEFAULT_CODE = "default_code";
+	public static final String KEY_ENQUIRY_USERNAME = "email_username";
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;

@@ -4,6 +4,8 @@ import java.io.File;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -15,7 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.DirectoryChooser;
 
 import org.apache.log4j.LogManager;
@@ -41,15 +42,15 @@ public class EnquiryOptionsController implements Initializable {
 	@FXML
 	private Button clear;
 	@FXML
-	private Label messageLocation;
-	@FXML
+	private Label message;
+	/*@FXML
 	private Label messageUsername;
 	@FXML
 	private Label messagePassword;
 	@FXML
 	private Label messageBranchCode;
 	@FXML
-	private Label messageDefaultCode;
+	private Label messageDefaultCode;*/
 	@FXML
 	private TextField folderPath;
 	@FXML
@@ -61,10 +62,16 @@ public class EnquiryOptionsController implements Initializable {
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
 		encription = new Encryption();
+		
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		LOG.info("Enter : initialize");
+		
+		map.put(commonConstants.KEY_ENQUIRY_PATH,"");
+		map.put(commonConstants.KEY_ENQUIRY_BRANCH_CODE,"");
+		map.put(commonConstants.KEY_ENQUIRY_DEFAULT_CODE,"");
+		map.put(commonConstants.KEY_ENQUIRY_USERNAME,"");
 		
 	    browse.setOnAction(new EventHandler<ActionEvent>() {
 	     @Override
@@ -83,17 +90,21 @@ public class EnquiryOptionsController implements Initializable {
 				//folderPath.setText("");
 				defaultCode.setText("");
 				branchCode.setText("");
-				messageBranchCode.setText("");
-				messageDefaultCode.setText("");
+				message.setText("");
 				username.setText("");
 				password.setText("");
-				messagePassword.setText("");
-				messageUsername.setText("");
-				messageLocation.setText("");
 			}
 		});
-	    folderPath.setText(enquiryDAO.getDefaultpath());
+	    folderPath.setText(enquiryDAO.getDefault("enquiry_path"));
+	    branchCode.setText(enquiryDAO.getDefault("branch_code"));
+	    defaultCode.setText(enquiryDAO.getDefault("default_code"));
+	    
 		 LOG.info("Exit : initialize");
+	}
+	Map<String, String> getEnquiryOptionValues()
+	{
+		for()
+		
 	}
 	public void saveConfigurations() throws Exception
 	{
@@ -104,69 +115,55 @@ public class EnquiryOptionsController implements Initializable {
 				if(!folderPath.getText().equals(""))
 				{
 					enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
-					messageLocation.setText(CommonConstants.DEFAULT_PATH);
-					messageLocation.getStyleClass().remove("failure");
-					messageLocation.getStyleClass().add("success");
-					messageLocation.setVisible(true);
+					message.setText(CommonConstants.NEW_CONFIGURATION);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
 	
 				}
-				/*else
-				{
-					messageLocation.setText(CommonConstants.PATH_ERROR);
-					messageLocation.getStyleClass().remove("success");
-					messageLocation.getStyleClass().add("failure");
-					messageLocation.setVisible(true);
-				}*/
 				if(!branchCode.getText().equals(""))
 				{
 					enquiryDAO.saveBranchCode(branchCode.getText(), simpleDateFormat.format(new Date()));
-					messageBranchCode.setText(CommonConstants.BRANCH_CODE);
-					messageBranchCode.getStyleClass().remove("failure");
-					messageBranchCode.getStyleClass().add("success");
-					messageBranchCode.setVisible(true);
+					message.setText(CommonConstants.NEW_CONFIGURATION);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
 	
 				}
-				/*else
-				{
-					messageBranchCode.setText(CommonConstants.BRANCH_CODE_ERROR);
-					messageBranchCode.getStyleClass().remove("success");
-					messageBranchCode.getStyleClass().add("failure");
-					messageBranchCode.setVisible(true);
-				}*/
 				if(!defaultCode.getText().equals(""))
 				{
 					enquiryDAO.saveDefaultCode(defaultCode.getText(), simpleDateFormat.format(new Date()));
-					messageDefaultCode.setText(CommonConstants.DEFAULT_CODE);
-					messageDefaultCode.getStyleClass().remove("failure");
-					messageDefaultCode.getStyleClass().add("success");
-					messageDefaultCode.setVisible(true);
+					message.setText(CommonConstants.NEW_CONFIGURATION);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
 	
 				}
 				if(!username.getText().equals(""))
 				{
 					enquiryDAO.saveEmailUsername(username.getText(), simpleDateFormat.format(new Date()));
-					messageUsername.setText(CommonConstants.EMAIL_USERNAME);
-					messageUsername.getStyleClass().remove("failure");
-					messageUsername.getStyleClass().add("success");
-					messageUsername.setVisible(true);
+					message.setText(CommonConstants.NEW_CONFIGURATION);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
 	
 				}
 				if(!password.getText().equals(""))
 				{
 					enquiryDAO.saveEmailPassword(encription.encrypt(password.getText()), simpleDateFormat.format(new Date()));
-					messagePassword.setText(CommonConstants.EMAIL_PASSWORD);
-					messagePassword.getStyleClass().remove("failure");
-					messagePassword.getStyleClass().add("success");
-					messagePassword.setVisible(true);
+					message.setText(CommonConstants.NEW_CONFIGURATION);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
 	
 				}
 			}
 			else
 			{
-				messageBranchCode.setText(CommonConstants.OPTION_ERROR);
-				messageBranchCode.getStyleClass().remove("success");
-				messageBranchCode.getStyleClass().add("failure");
-				messageBranchCode.setVisible(true);
+				message.setText(CommonConstants.OPTION_ERROR);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
 			}
 		}
 		catch (Exception e) {

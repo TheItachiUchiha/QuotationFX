@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,10 +29,14 @@ public class EnquiryDAO {
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	private CustomersDAO customersDAO;
+	private Map<String, String> map;
+	private CommonConstants commonConstants;
 	
 	public EnquiryDAO()
 	{
 		customersDAO = new CustomersDAO();
+		map= new HashMap<>();
+		commonConstants = new CommonConstants();
 	}
 	
 	public void saveEnquiry(EnquiryVO enquiryVO) throws Exception
@@ -270,19 +276,19 @@ public class EnquiryDAO {
 		}
 		LOG.info("Exit : updateEnquiry");
 	}
-	public String getDefaultpath()
+	public String getDefault(String string )
 	{
 		String defaultPath = "";
-		LOG.info("Enter : getDefaultpath");
+		LOG.info("Enter : getDefault");
 		try
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
-			preparedStatement.setString(1, "enquiry");
+			preparedStatement.setString(1, string);
 			resultSet = preparedStatement.executeQuery();
 			resultSet.next();
 			defaultPath = resultSet.getString(1);
-			LOG.info("Exit : getDefaultpath");
+			LOG.info("Exit : getDefault");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -290,6 +296,7 @@ public class EnquiryDAO {
 		}
 		return defaultPath;
 	}
+	
 	public void saveBranchCode(String code, String date) throws Exception
 	{
 		LOG.info("Enter : saveBranchCode");
