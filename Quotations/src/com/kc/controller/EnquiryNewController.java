@@ -5,6 +5,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.LogManager;
@@ -21,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -39,6 +42,7 @@ import com.kc.dao.ProductsDAO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.ProductsVO;
+import com.kc.util.Email;
 import com.kc.util.Validation;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
@@ -98,6 +102,7 @@ public class EnquiryNewController implements Initializable {
 	private TextField filePath;
 	private String typeFlag;
 	private int productId=0;
+	private Email email;
 	
 	private ObservableList<ProductsVO> productsList;
 	private ProductsDAO productsDAO;
@@ -154,8 +159,7 @@ public class EnquiryNewController implements Initializable {
          if(tempFile!=null){
                  filePath.setText(tempFile.getPath());
          }
-        
-      }
+      	}
         });
         productType.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -516,5 +520,49 @@ public class EnquiryNewController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 		return newEnquiryNumber;
+	}
+	
+	public void sendEmail()
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		if(validation.isEmail(emailId.getText()))
+		{
+			if(!filePath.getText().equals(""))
+			{
+				if(!emailMessage.getText().equals(""))
+				{
+					map.put(CommonConstants.EMAIL_TO, emailId.getText());
+					map.put(CommonConstants.EMAIL_ATTACHMENT, filePath.getText());
+					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
+					Email email = new Email(map);
+					new Thread(email).start();
+					messageSendMail.getStyleClass().remove("failure");
+					messageSendMail.getStyleClass().add("success");
+					messageSendMail.setText("Email send successfully");
+					messageSendMail.setVisible(true);
+				}
+				else
+				{
+					messageSendMail.getStyleClass().remove("success");
+					messageSendMail.getStyleClass().add("failure");
+					messageSendMail.setText("Empty Email Body");
+					messageSendMail.setVisible(true);
+				}
+			}
+			else
+			{
+				messageSendMail.getStyleClass().remove("success");
+				messageSendMail.getStyleClass().add("failure");
+				messageSendMail.setText("Empty Attachment");
+				messageSendMail.setVisible(true);
+			}
+		}
+		else
+		{
+			messageSendMail.getStyleClass().remove("success");
+			messageSendMail.getStyleClass().add("failure");
+			messageSendMail.setText("Empty To Address");
+			messageSendMail.setVisible(true);
+		}
 	}
 }

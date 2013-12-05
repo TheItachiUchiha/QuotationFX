@@ -66,8 +66,8 @@
         <TextArea fx:id="emailMessage" maxWidth="-Infinity" prefHeight="193.0" prefWidth="370.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="6" />
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="7" GridPane.rowSpan="2" GridPane.valignment="TOP">
           <children>
-            <Button mnemonicParsing="false" text="Send Email" />
-            <Label id="messageCustom" fx:id="messageSendMail" prefHeight="21.0" prefWidth="162.0" text="" />
+            <Button id="sendEmail" fx:id="" mnemonicParsing="false" onAction="#sendEmail" text="Send Email" />
+            <Label id="messageCustom" fx:id="messageSendMail" alignment="CENTER" prefHeight="21.0" prefWidth="162.0" text="" />
           </children>
         </VBox>
       </children>

@@ -44,7 +44,12 @@ public class CommonConstants
 	public static final String KEY_ENQUIRY_PATH = "enquiry_path";
 	public static final String KEY_ENQUIRY_BRANCH_CODE = "branch_code";
 	public static final String KEY_ENQUIRY_DEFAULT_CODE = "default_code";
-	public static final String KEY_ENQUIRY_USERNAME = "email_username";
+	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
+	public static final String KEY_ENQUIRY_EMAIL_PASSWORD = "email_password";
+	public static final String EMAIL_TO = "TO";
+	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";
+	public static final String EMAIL_BODY = "BODY";
+	
 	
 	//SQL EXCEPTIONS
 	public static final int UNIQUE_CONSTRAINT = 1062;

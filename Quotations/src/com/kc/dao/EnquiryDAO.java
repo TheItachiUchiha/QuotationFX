@@ -30,13 +30,11 @@ public class EnquiryDAO {
 	private ResultSet resultSet = null;
 	private CustomersDAO customersDAO;
 	private Map<String, String> map;
-	private CommonConstants commonConstants;
 	
 	public EnquiryDAO()
 	{
 		customersDAO = new CustomersDAO();
 		map= new HashMap<>();
-		commonConstants = new CommonConstants();
 	}
 	
 	public void saveEnquiry(EnquiryVO enquiryVO) throws Exception
@@ -433,5 +431,47 @@ public class EnquiryDAO {
 			LOG.error(e.getMessage());
 		}
 		return flag;
+	}
+	
+	public Map<String, String> getEnquiryOptionDefaultValues()
+	{
+		LOG.info("Enter : getEnquiryOptionDefaultValues");
+		Map<String, String> map = new HashMap<String, String>();
+		
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT `KEY`, VALUE FROM STATIC_UTIL");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next())
+			{
+				if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_PATH))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_PATH,resultSet.getString(2));
+				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_BRANCH_CODE))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_BRANCH_CODE, resultSet.getString(2));
+				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE, resultSet.getString(2));
+				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME, resultSet.getString(2));
+				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, resultSet.getString(2));
+				}
+			}
+			LOG.info("Exit : getEnquiryOptionDefaultValues");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return map;
 	}
 }

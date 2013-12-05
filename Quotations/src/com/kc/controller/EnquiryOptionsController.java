@@ -56,56 +56,59 @@ public class EnquiryOptionsController implements Initializable {
 	@FXML
 	private Button browse;
 	private EnquiryDAO enquiryDAO;
-	private Encryption encription;
+	private Encryption encryption;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	private Map<String, String> defaultValues = new HashMap<String, String>();
+	
+	
 	
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
-		encription = new Encryption();
+		encryption = new Encryption("");
 		
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		LOG.info("Enter : initialize");
 		
-		map.put(commonConstants.KEY_ENQUIRY_PATH,"");
-		map.put(commonConstants.KEY_ENQUIRY_BRANCH_CODE,"");
-		map.put(commonConstants.KEY_ENQUIRY_DEFAULT_CODE,"");
-		map.put(commonConstants.KEY_ENQUIRY_USERNAME,"");
-		
-	    browse.setOnAction(new EventHandler<ActionEvent>() {
-	     @Override
-	     public void handle(ActionEvent event) {
-	        DirectoryChooser directoryChooser = new DirectoryChooser();
-	        File tempFile = directoryChooser.showDialog(null);
-	        if(tempFile!=null){
-	        	folderPath.setText(tempFile.getPath());
-	        }
-	     }
-	});
-	    clear.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent paramT) {
-				//folderPath.setText("");
-				defaultCode.setText("");
-				branchCode.setText("");
-				message.setText("");
-				username.setText("");
-				password.setText("");
-			}
+		try{
+		    browse.setOnAction(new EventHandler<ActionEvent>() {
+		     @Override
+		     public void handle(ActionEvent event) {
+		        DirectoryChooser directoryChooser = new DirectoryChooser();
+		        File tempFile = directoryChooser.showDialog(null);
+		        if(tempFile!=null){
+		        	folderPath.setText(tempFile.getPath());
+		        }
+		     }
 		});
-	    folderPath.setText(enquiryDAO.getDefault("enquiry_path"));
-	    branchCode.setText(enquiryDAO.getDefault("branch_code"));
-	    defaultCode.setText(enquiryDAO.getDefault("default_code"));
-	    
+		    clear.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					//folderPath.setText("");
+					defaultCode.setText("");
+					branchCode.setText("");
+					message.setText("");
+					username.setText("");
+					password.setText("");
+				}
+			});
+		    
+		    defaultValues = enquiryDAO.getEnquiryOptionDefaultValues();
+		    folderPath.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_PATH));
+		    branchCode.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE));
+		    defaultCode.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE));
+		    username.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME));
+		    password.setText(encryption.decrypt(defaultValues.get(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD)));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
 		 LOG.info("Exit : initialize");
 	}
-	Map<String, String> getEnquiryOptionValues()
-	{
-		for()
-		
-	}
+	
 	public void saveConfigurations() throws Exception
 	{
 		try
@@ -150,7 +153,7 @@ public class EnquiryOptionsController implements Initializable {
 				}
 				if(!password.getText().equals(""))
 				{
-					enquiryDAO.saveEmailPassword(encription.encrypt(password.getText()), simpleDateFormat.format(new Date()));
+					enquiryDAO.saveEmailPassword(encryption.encrypt(password.getText()), simpleDateFormat.format(new Date()));
 					message.setText(CommonConstants.NEW_CONFIGURATION);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
