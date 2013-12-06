@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <SplitPane dividerPositions="0.24426605504587157" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
+      <items>
+        <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="210.0" spacing="0.0">
+          <children>
+            <Label prefHeight="21.0" text="CUSTOMERS" textFill="#cc00ff">
+              <font>
+                <Font size="15.0" />
+              </font>
+              <VBox.margin>
+                <Insets bottom="20.0" />
+              </VBox.margin>
+            </Label>
+            <Separator prefWidth="231.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#newCustomer" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Create Customer">
+              <toggleGroup>
+                <ToggleGroup fx:id="CustomerSubmenu" />
+              </toggleGroup>
+            </ToggleButton>
+            <Separator prefWidth="200.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#modifyCustomer" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Modify Customer" toggleGroup="$CustomerSubmenu" />
+            <Separator prefWidth="200.0" />
+            <ToggleButton mnemonicParsing="false" onAction="#viewCustomers" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="View Customers" toggleGroup="$CustomerSubmenu" />
+            <Separator prefWidth="200.0" />
+          </children>
+          <padding>
+            <Insets top="40.0" />
+          </padding>
+        </VBox>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+          <tabs>
+            <Tab text="Untitled Tab 1">
+              <content>
+                <BorderPane prefHeight="200.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
+      </items>
+    </SplitPane>
+  </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+</BorderPane>

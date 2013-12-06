@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="566.0" prefWidth="874.0" styleClass="loginBackground" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.LoginController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <GridPane alignment="CENTER" gridLinesVisible="false" prefHeight="223.0" prefWidth="874.0" snapToPixel="true">
+      <children>
+        <Label prefHeight="50.000099999997474" prefWidth="80.00009999999747" text="Sign In" textFill="#606060" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <font>
+            <Font size="25.0" />
+          </font>
+        </Label>
+        <VBox id="VBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <children>
+            <Label minHeight="23.0" prefHeight="23.0" prefWidth="81.0" text="Username" textFill="BLACK">
+              <font>
+                <Font size="12.0" fx:id="x1" />
+              </font>
+            </Label>
+            <TextField id="userName" fx:id="username" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="246.0" text="admin" />
+          </children>
+        </VBox>
+        <VBox id="VBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+          <children>
+            <Label font="$x1" minHeight="23.0" prefHeight="23.0" prefWidth="81.0" text="Password" textFill="BLACK" />
+            <PasswordField fx:id="password" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0" text="admin" />
+          </children>
+        </VBox>
+        <VBox id="VBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.rowIndex="3">
+          <children>
+            <Button graphicTextGap="4.0" mnemonicParsing="false" onAction="#doLogin" prefHeight="40.0" prefWidth="110.0" text="Login" textOverrun="ELLIPSIS">
+              <font>
+                <Font size="16.0" />
+              </font>
+            </Button>
+            <Label fx:id="message" alignment="CENTER_LEFT" contentDisplay="LEFT" font="$x1" minHeight="23.0" prefHeight="23.0" prefWidth="246.0" text="Invalid Username or Password" textFill="RED" visible="false" />
+          </children>
+          <padding>
+            <Insets top="5.0" />
+          </padding>
+          <GridPane.margin>
+            <Insets top="10.0" />
+          </GridPane.margin>
+        </VBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="171.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="72.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="42.0" vgrow="ALWAYS" />
+      </rowConstraints>
+    </GridPane>
+  </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+</BorderPane>

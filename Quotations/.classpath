@@ -7,5 +7,7 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.0.8-bin.jar"/>
 	<classpathentry kind="lib" path="lib/javafx-dialogs-0.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/AutoCompleteTextField.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/java-mail-1.4.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.TopMenuController">
+  <!-- TODO Add Nodes -->
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+  <top>
+    <HBox id="#menuHbox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="43.0" prefHeight="44.0" prefWidth="-1.0">
+      <children>
+        <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.000099999997474" prefWidth="807.0" HBox.hgrow="ALWAYS">
+          <children>
+            <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" styleClass="menuButtons" text="HOME" HBox.hgrow="ALWAYS">
+              <toggleGroup>
+                <ToggleGroup fx:id="topMenu" />
+              </toggleGroup>
+            </ToggleButton>
+            <ToggleButton mnemonicParsing="false" onAction="#productsHome" prefHeight="45.0" styleClass="menuButtons" text="PRODUCTS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#componentsHome" prefHeight="45.0" styleClass="menuButtons" text="COMPONENTS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#customersHome" prefHeight="45.0" styleClass="menuButtons" text="CUSTOMERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#usersHome" prefHeight="45.0" styleClass="menuButtons" text="USERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#helpHome" prefHeight="45.0" styleClass="menuButtons" text="HELP" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+          </children>
+          <padding>
+            <Insets left="20.0" />
+          </padding>
+          <HBox.margin>
+            <Insets />
+          </HBox.margin>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" maxHeight="-1.0" maxWidth="70.0" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="70.0" spacing="0.0" HBox.hgrow="NEVER">
+          <children>
+            <Button id="logout" maxWidth="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="RED">
+              <font>
+                <Font size="13.0" />
+              </font>
+            </Button>
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+  </top>
+</BorderPane>

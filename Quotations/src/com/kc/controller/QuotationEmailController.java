@@ -23,6 +23,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 
 public class QuotationEmailController implements Initializable  {
 
@@ -43,6 +45,47 @@ public class QuotationEmailController implements Initializable  {
 	private ComboBox<String> yearCombo;
 	@FXML
 	private ComboBox<String> referenceCombo;
+	@FXML
+    private TextField estimatedPrice;
+
+    @FXML
+    private TextField ecity;
+
+    @FXML
+    private TextField ecompanyName;
+
+    @FXML
+    private TextField ecustomerName;
+
+    @FXML
+    private TextArea ecustomerRequirements;
+
+    @FXML
+    private TextField ecustomerType;
+
+    @FXML
+    private TextField edateOfEnquiry;
+
+    @FXML
+    private TextField epriceEstimation;
+
+    @FXML
+    private TextField eproductName;
+
+    @FXML
+    private TextField epurchasePeriod;
+
+    @FXML
+    private TextField equotationPreparation;
+
+    @FXML
+    private TextField ereferedBy;
+
+    @FXML
+    private TextField ereferenceNo;
+
+    @FXML
+    private TextField ecustomerFile;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();

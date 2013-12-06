@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -40,6 +42,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -49,8 +52,10 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.dao.ComponentsDAO;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
+import com.kc.dao.ProductsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
@@ -63,10 +68,15 @@ public class PriceEstimationNewController implements Initializable {
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	private Validation validate;
+	ComponentsDAO componentsDAO;
+	ProductsDAO productsDAO;
+	int productId;
 	public PriceEstimationNewController()
 	{
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
+		componentsDAO = new ComponentsDAO();
+		productsDAO = new ProductsDAO();
 		this.validate = new Validation();
 	}
 	public static Stage stage;
@@ -125,12 +135,26 @@ public class PriceEstimationNewController implements Initializable {
 	private TextField customerFile;
 	@FXML
 	private Button viewFile;
+	@FXML
+	private Button createPriceEstimation;
+	@FXML
+	private VBox estimationVBox;
+	@FXML
+	private Label dealerPriceTotal;
+	@FXML
+	private Label costPriceTotal;
+	@FXML
+	private Label endUserPriceTotal;
+	double costPriceValue=0;
+	double dealerPriceValue=0;
+	double endUserPriceValue=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
+	private ObservableList<ComponentsVO> componentList = FXCollections.observableArrayList();
 	 SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	@Override
@@ -139,12 +163,30 @@ public class PriceEstimationNewController implements Initializable {
 		{
 			componentTable.setItems(componentsList);
 			componentTable.setEditable(true);
+			
 			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
 				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {
 					return new EditingCell();
 				}
 			};
-
+			createPriceEstimation.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					
+					estimationVBox.setVisible(true);
+					try {
+							componentList = productsDAO.getComponentsForProduct(productId);
+							fillComponentTable();
+							costPriceTotal.setText(String.valueOf(costPriceValue));
+							endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
+							dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
+						} 
+					catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			});
 			quantity.setCellValueFactory(new Callback<CellDataFeatures<ComponentsVO, Integer>, ObservableValue<Integer>>() {
                 @Override
                 public ObservableValue<Integer> call(CellDataFeatures<ComponentsVO, Integer> cellData) {
@@ -196,6 +238,18 @@ public class PriceEstimationNewController implements Initializable {
 	            }
 	         
 	        });
+	        referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> arg0,
+						String arg1, String arg2) {
+					componentTable.getSelectionModel().clearSelection();
+					costPriceValue=0;
+					dealerPriceValue=0;
+					endUserPriceValue=0;
+					
+				}
+			});
 			enquiryType.setEditable(false);
 			productName.setEditable(false);
 			requirements.setEditable(false);
@@ -249,6 +303,8 @@ public class PriceEstimationNewController implements Initializable {
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
 						{
+							productId=enquiryViewVO.getProductId();
+							
 							enquiryType.setText(enquiryViewVO.getEnquiryType());
 							productName.setText(enquiryViewVO.getProductName());
 							requirements.setText(enquiryViewVO.getCustomerRequirement());
@@ -264,6 +320,7 @@ public class PriceEstimationNewController implements Initializable {
 							contactNumber.setText(enquiryViewVO.getContactNumber());
 							customerFile.setText(enquiryViewVO.getCustomerFile());
 							purchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							
 						}
 					}
 					
@@ -326,18 +383,20 @@ public class PriceEstimationNewController implements Initializable {
 					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
 					for(ComponentsVO componentsVO : list)
 					{
-						if(componentsList.size()==0)
+						if(componentList.size()==0)
 						{
-							componentsList.addAll(list);
+							componentList.addAll(list);
 						}
 						else
 						{
-							for(ComponentsVO tempC : componentsList )
+							List<Integer> ids = new ArrayList<Integer>();
+							for(ComponentsVO componentsVO2 : componentList)
 							{
-								if(tempC.getId() != componentsVO.getId())
-								{
-									componentsList.add(componentsVO);
-								}
+								ids.add(componentsVO2.getId());
+							}
+							if(!ids.contains(componentsVO.getId()))
+							{
+								componentList.add(componentsVO);
 							}
 						}
 					}
@@ -350,6 +409,31 @@ public class PriceEstimationNewController implements Initializable {
 		}
 		LOG.info("Exit : addComponent");
 	}
+	public void fillComponentTable()
+	{
+		name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
+		category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
+		subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
+		vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
+		model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
+		type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
+		size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
+		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
+		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
+		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+		quantity.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Integer>("quantity"));
+		for(ComponentsVO componentsVO : componentList)
+		{
+		costPriceValue+=Double.parseDouble(componentsVO.getCostPrice());
+		dealerPriceValue+=Double.parseDouble(componentsVO.getDealerPrice());
+		endUserPriceValue+=Double.parseDouble(componentsVO.getEndUserPrice());
+		}
+		componentTable.setItems(componentList);
+	}
+	public void savePriceEstimation()
+	{
+		
+	}
 	public void deleteComponents(ComponentsVO componentsVO)
 	{
 		LOG.info("Enter : deleteComponents");
@@ -357,10 +441,7 @@ public class PriceEstimationNewController implements Initializable {
 			componentTable.getItems().remove(componentsVO);
 		}
 		catch (Exception e) {
-			/*message.setText(CommonConstants.FAILURE);
-			message.getStyleClass().remove("success");
-			message.getStyleClass().add("failure");
-			message.setVisible(true);*/
+			
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : deleteComponents");

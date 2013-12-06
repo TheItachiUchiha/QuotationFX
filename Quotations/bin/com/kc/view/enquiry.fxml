@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.mytdev.javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="newTab" content="$null" text="New Enquiry" />
+        <Tab fx:id="viewTab" content="$null" text="View Enquiry" />
+        <Tab fx:id="optionTab" content="$null" text="Options" />
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

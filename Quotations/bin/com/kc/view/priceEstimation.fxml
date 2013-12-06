@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="newTab" text="New Price Estimation">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="modifyTab" text="Modify Price Estimation">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="viewTab" text="View Price Estimation">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

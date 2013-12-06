@@ -37,6 +37,9 @@ public class QuotationController implements Initializable {
 			FXMLLoader loaderview = new FXMLLoader(this.getClass().getResource("../view/quotation-view.fxml"));
 			BorderPane viewQuotation = (BorderPane) loaderview.load();
 			viewTab.setContent(viewQuotation);
+			FXMLLoader loaderoption = new FXMLLoader(this.getClass().getResource("../view/quotation-option.fxml"));
+			BorderPane optionQuotation = (BorderPane) loaderoption.load();
+			optionTab.setContent(optionQuotation);
 			
 		}
 		catch (Exception e) {
