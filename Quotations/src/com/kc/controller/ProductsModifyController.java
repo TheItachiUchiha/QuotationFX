@@ -334,12 +334,14 @@ public class ProductsModifyController implements Initializable {
 						}
 						else
 						{
-							for(ComponentsVO tempC : componentList )
+							List<Integer> ids = new ArrayList<Integer>();
+							for(ComponentsVO componentsVO2 : componentList)
 							{
-								if(tempC.getId() != componentsVO.getId())
-								{
-									componentList.add(componentsVO);
-								}
+								ids.add(componentsVO2.getId());
+							}
+							if(!ids.contains(componentsVO.getId()))
+							{
+								componentList.add(componentsVO);
 							}
 						}
 					}

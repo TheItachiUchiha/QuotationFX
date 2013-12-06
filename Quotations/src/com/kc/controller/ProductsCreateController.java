@@ -197,6 +197,7 @@ public class ProductsCreateController implements Initializable{
 					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
 					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
 					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+					//componentsList.addAll(list);
 					for(ComponentsVO componentsVO : list)
 					{
 						if(componentsList.size()==0)
@@ -205,12 +206,14 @@ public class ProductsCreateController implements Initializable{
 						}
 						else
 						{
-							for(ComponentsVO tempC : componentsList )
+							List<Integer> ids = new ArrayList<Integer>();
+							for(ComponentsVO componentsVO2 : componentsList)
 							{
-								if(tempC.getId() != componentsVO.getId())
-								{
-									componentsList.add(componentsVO);
-								}
+								ids.add(componentsVO2.getId());
+							}
+							if(!ids.contains(componentsVO.getId()))
+							{
+								componentsList.add(componentsVO);
 							}
 						}
 					}
