@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -117,8 +118,11 @@ public class QuotationNewController implements Initializable {
 	    private TextField ecustomerFile;
 	    @FXML
 	    private Button viewFile;
+	    @FXML
+	    private Button search;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
+	private ObservableList<String> yearList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
@@ -127,6 +131,7 @@ public class QuotationNewController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		try
 		{
 			viewFile.setOnAction(new EventHandler<ActionEvent>() {
@@ -155,36 +160,41 @@ public class QuotationNewController implements Initializable {
 			equotationPreparation.setEditable(false);
 			epurchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
+			yearCombo.setItems(yearList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-			
+			search.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-					try{
+				public void handle(ActionEvent event) {
+					try
+					{
 						refList.clear();
-						if(newValue!=null && !newValue.equals(oldValue))
+						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
-							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.quotationConfirm(enquiryVO.getId())).equalsIgnoreCase("N"))
 							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.quotationConfirm(enquiryVO.getId())).equalsIgnoreCase("N"))
-								{
-									refList.add(enquiryVO.getReferenceNo());
-								}
+								refList.add(enquiryVO.getReferenceNo());
 							}
 						}
-						referenceCombo.setItems(refList);
+						if(refList.isEmpty())
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+						}
+						else
+						{
+							referenceCombo.setItems(refList);	
+						}
 					}
-					catch(Exception e)
-					{
+					catch (Exception e) {
 						e.printStackTrace();
-						LOG.error(e.getMessage());
 					}
+					
 				}
-			});	
+			});
 			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override

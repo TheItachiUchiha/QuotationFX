@@ -20,9 +20,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
@@ -42,8 +46,10 @@ public class PriceEstimationViewController implements Initializable {
 	private ComboBox<String> monthCombo;
 	@FXML
 	private ComboBox<String> yearCombo;
+	
 	@FXML
-	private ComboBox<String> referenceCombo;
+	private Button search;
+	
 	@FXML
  	private TableView<?> priceEstimationTable;
 	@FXML private TableColumn<?, String> referenceNo;
@@ -56,6 +62,7 @@ public class PriceEstimationViewController implements Initializable {
     @FXML private TableColumn action;
 	
     private ObservableList<String> monthList = FXCollections.observableArrayList();
+    private ObservableList<String> yearList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
@@ -67,34 +74,39 @@ public class PriceEstimationViewController implements Initializable {
 		try
 		{
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
+			yearCombo.setItems(yearList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-			
+			search.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-					try{
+				public void handle(ActionEvent event) {
+					try
+					{
 						refList.clear();
-						if(newValue!=null && !newValue.equals(oldValue))
+						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
-							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
 							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
-								{
-									refList.add(enquiryVO.getReferenceNo());
-								}
+								refList.add(enquiryVO.getReferenceNo());
 							}
 						}
-						referenceCombo.setItems(refList);
+						if(refList.isEmpty())
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+						}
+						else
+						{
+							
+						}
 					}
-					catch(Exception e)
-					{
+					catch (Exception e) {
 						e.printStackTrace();
-						LOG.error(e.getMessage());
 					}
+					
 				}
 			});
 		}

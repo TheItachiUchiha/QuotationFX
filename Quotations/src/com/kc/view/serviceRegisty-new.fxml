@@ -9,7 +9,7 @@
 <BorderPane prefHeight="503.0" prefWidth="748.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" prefHeight="315.0" prefWidth="468.0">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-1.0" prefHeight="315.0" prefWidth="468.0" BorderPane.alignment="TOP_CENTER">
       <children>
         <Label prefHeight="21.0" prefWidth="156.0" text="Service Engineer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="29.0" prefWidth="156.0" text="Namture of the Complaint" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />

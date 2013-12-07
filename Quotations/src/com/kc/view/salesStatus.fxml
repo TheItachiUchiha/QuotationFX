@@ -2,14 +2,15 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="485.0" prefWidth="856.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane prefHeight="485.0" prefWidth="885.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <bottom>
-    <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="229.0" prefWidth="856.0">
+    <TableView fx:id="unsuccessTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="222.0" prefWidth="866.0" BorderPane.alignment="CENTER">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="ureferenceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Dt.of Enq" fx:id="udateOfEnquiry" />
@@ -21,10 +22,13 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="75.0" text="Location" fx:id="ulocation" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Referred By" fx:id="ureferedBy" />
       </columns>
+      <BorderPane.margin>
+        <Insets top="10.0" />
+      </BorderPane.margin>
     </TableView>
   </bottom>
   <center>
-    <TableView fx:id="successTable" maxWidth="-Infinity" prefHeight="150.0" prefWidth="856.0">
+    <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="192.5" prefWidth="866.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="referenceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Dt.of Enq" fx:id="dateOfEnquiry" />

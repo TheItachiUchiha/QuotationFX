@@ -107,6 +107,18 @@ public class AdminHomeController implements Initializable {
 			// TODO: handle exception
 		}
 	}
+	public void serviceRegistry()
+	{
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/serviceRegistry.fxml"));
+			BorderPane service = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(service);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 	public void reports()
 	{
 		try{

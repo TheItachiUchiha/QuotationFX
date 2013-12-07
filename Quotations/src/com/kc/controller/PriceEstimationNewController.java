@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -55,6 +56,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
+import com.kc.dao.PriceEstimationDAO;
 import com.kc.dao.ProductsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
@@ -70,6 +72,7 @@ public class PriceEstimationNewController implements Initializable {
 	private Validation validate;
 	ComponentsDAO componentsDAO;
 	ProductsDAO productsDAO;
+	PriceEstimationDAO priceEstimationDAO;
 	int productId;
 	public PriceEstimationNewController()
 	{
@@ -77,6 +80,7 @@ public class PriceEstimationNewController implements Initializable {
 		customersDAO = new CustomersDAO();
 		componentsDAO = new ComponentsDAO();
 		productsDAO = new ProductsDAO();
+		priceEstimationDAO = new PriceEstimationDAO();
 		this.validate = new Validation();
 	}
 	public static Stage stage;
@@ -182,6 +186,7 @@ public class PriceEstimationNewController implements Initializable {
 	double endUserPriceValue=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
+	private ObservableList<String> yearList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
@@ -299,36 +304,42 @@ public class PriceEstimationNewController implements Initializable {
 			econtactNumber.setEditable(false);
 			epurchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
+			yearCombo.setItems(yearList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-			
+			search.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-					try{
+				public void handle(ActionEvent event) {
+					try
+					{
 						refList.clear();
-						if(newValue!=null && !newValue.equals(oldValue))
+						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
-							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("N"))
 							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("N"))
-								{
-									refList.add(enquiryVO.getReferenceNo());
-								}
+								refList.add(enquiryVO.getReferenceNo());
 							}
 						}
-						referenceCombo.setItems(refList);
+						if(refList.isEmpty())
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+						}
+						else
+						{
+							referenceCombo.setItems(refList);	
+						}
 					}
-					catch(Exception e)
-					{
+					catch (Exception e) {
 						e.printStackTrace();
-						LOG.error(e.getMessage());
 					}
+					
 				}
 			});
+			
 			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -380,7 +391,7 @@ public class PriceEstimationNewController implements Initializable {
 		}
 		
 	}
-	 public TableView<ComponentsVO> getComponentTable() {
+	public TableView<ComponentsVO> getComponentTable() {
 			return componentTable;
 		}
 	public void addComponent()
@@ -445,6 +456,19 @@ public class PriceEstimationNewController implements Initializable {
 		}
 		LOG.info("Exit : addComponent");
 	}
+	public void savePriceEstimation()
+	{
+		EnquiryVO enquiryVO=new EnquiryVO();
+		enquiryVO.setList(componentTable.getItems());
+		for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+		{
+			if(enquiryViewVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
+			{
+				enquiryVO.setId(enquiryViewVO.getId());	
+			}
+		}
+		priceEstimationDAO.savePriceEstimation(enquiryVO);
+	}
 	public void fillComponentTable()
 	{
 		name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
@@ -466,10 +490,7 @@ public class PriceEstimationNewController implements Initializable {
 		}
 		componentTable.setItems(componentList);
 	}
-	public void savePriceEstimation()
-	{
-		
-	}
+	
 	public void deleteComponents(ComponentsVO componentsVO)
 	{
 		LOG.info("Enter : deleteComponents");
