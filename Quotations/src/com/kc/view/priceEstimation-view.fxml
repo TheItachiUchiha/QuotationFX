@@ -27,48 +27,30 @@
     </TableView>
   </center>
   <top>
-    <VBox prefHeight="77.0" prefWidth="813.0">
+    <HBox alignment="CENTER" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
       <children>
-        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
-          <children>
-            <Label minHeight="13.999908447265625" prefHeight="21.0" prefWidth="44.0" text="Month" />
-            <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="176.0">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <Label prefHeight="21.0" prefWidth="44.0" text="Year" />
-            <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="176.0">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </children>
-        </HBox>
-        <HBox alignment="CENTER" prefHeight="43.0" prefWidth="813.0" spacing="5.0">
-          <children>
-            <Label prefHeight="21.0" prefWidth="59.0" text="Enquiry" />
-            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="176.0" promptText="Select a Reference No">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <Button mnemonicParsing="false" text="Search" />
-          </children>
-        </HBox>
+        <Label minHeight="13.999908447265625" prefHeight="21.0" prefWidth="44.0" text="Month" />
+        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="176.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label prefHeight="21.0" prefWidth="37.0" text="Year" />
+        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="176.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button fx:id="search" mnemonicParsing="false" text="Search" />
       </children>
-    </VBox>
+    </HBox>
   </top>
 </BorderPane>

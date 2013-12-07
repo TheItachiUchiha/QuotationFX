@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="479.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <bottom>
+    <TableView fx:id="serviceTable" maxWidth="-Infinity" prefHeight="195.0" prefWidth="696.0" BorderPane.alignment="CENTER">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="153.0" text="Service Engineer Name" fx:id="name" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="156.0" text="No.of Service (This Year)" fx:id="noOfService" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Total Overall Services" fx:id="totalServices" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Service Charge" fx:id="serviceCharge" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="141.0" text="Service Rating" fx:id="serviceRating" />
+      </columns>
+    </TableView>
+  </bottom>
+  <center>
+    <TableView fx:id="salesOrderTable" prefHeight="225.0" prefWidth="865.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Ref_No" fx:id="referenceNo" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Date of Service" fx:id="dateOfService" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Product Purchased" fx:id="productPurchased" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Customer Name" fx:id="customerName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Company Name" fx:id="companyName" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Referred By" fx:id="referedBy" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Location" fx:id="location" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="98.0" text="Action" fx:id="action" />
+      </columns>
+    </TableView>
+  </center>
+  <top>
+    <HBox alignment="CENTER" prefHeight="42.0" prefWidth="831.0" spacing="5.0">
+      <children>
+        <Label text="Month" />
+        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="125.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Label text="Year" />
+        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="125.0">
+          <items>
+            <FXCollections fx:factory="observableArrayList">
+              <String fx:value="Item 1" />
+              <String fx:value="Item 2" />
+              <String fx:value="Item 3" />
+            </FXCollections>
+          </items>
+        </ComboBox>
+        <Button id="search" fx:id="view" mnemonicParsing="false" text="View" />
+      </children>
+    </HBox>
+  </top>
+</BorderPane>
