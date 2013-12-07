@@ -10,7 +10,7 @@
 <BorderPane prefHeight="559.0" prefWidth="924.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <left>
-    <GridPane maxHeight="-Infinity" prefHeight="366.0" prefWidth="401.0">
+    <GridPane maxHeight="-Infinity" prefHeight="366.0" prefWidth="378.0">
       <children>
         <Label prefHeight="21.0" prefWidth="136.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="26.0" prefWidth="136.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -39,8 +39,8 @@
         <TextField id="location" fx:id="dateOfSalesOrder" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="189.0" minWidth="10.0" prefWidth="168.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="210.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="45.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
@@ -58,7 +58,7 @@
     </GridPane>
   </left>
   <right>
-    <GridPane id="standardGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="442.0" visible="true">
+    <GridPane id="standardGrid" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="486.0" prefWidth="442.0" visible="true">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="19.0" prefWidth="162.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />

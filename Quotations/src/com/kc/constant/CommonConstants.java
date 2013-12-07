@@ -49,6 +49,7 @@ public class CommonConstants
 	public static final String EMAIL_TO = "TO";
 	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";
 	public static final String EMAIL_BODY = "BODY";
+	public static final String REMINDER_NO = "1,2,3,4,5,6,7,8,9,10";
 	
 	
 	//SQL EXCEPTIONS

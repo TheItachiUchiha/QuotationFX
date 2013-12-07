@@ -9,7 +9,7 @@
 <BorderPane prefHeight="485.0" prefWidth="856.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <bottom>
-    <TableView fx:id="unsuccessTable" prefHeight="229.0" prefWidth="748.0">
+    <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="229.0" prefWidth="856.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="ureferenceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Dt.of Enq" fx:id="udateOfEnquiry" />
@@ -24,7 +24,7 @@
     </TableView>
   </bottom>
   <center>
-    <TableView fx:id="successTable" prefHeight="150.0" prefWidth="865.0">
+    <TableView fx:id="successTable" maxWidth="-Infinity" prefHeight="150.0" prefWidth="856.0">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="referenceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Dt.of Enq" fx:id="dateOfEnquiry" />

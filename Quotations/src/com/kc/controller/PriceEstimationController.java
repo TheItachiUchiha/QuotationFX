@@ -19,6 +19,8 @@ public class PriceEstimationController implements Initializable {
 	private Tab modifyTab;
 	@FXML
 	private Tab viewTab;
+	@FXML
+	private Tab enquiryStatus;
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		
@@ -34,6 +36,9 @@ public class PriceEstimationController implements Initializable {
 			FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-modify.fxml"));
 			BorderPane modifyEstimation = (BorderPane) loader3.load();
 			modifyTab.setContent(modifyEstimation);
+			FXMLLoader loader4 = new FXMLLoader(this.getClass().getResource("../view/enquiry-status.fxml"));
+			BorderPane status = (BorderPane) loader4.load();
+			enquiryStatus.setContent(status);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

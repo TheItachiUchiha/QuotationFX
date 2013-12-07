@@ -26,7 +26,7 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="595.0" spacing="5.0">
           <children>
-            <Button mnemonicParsing="false" onAction="#addComponent" text="Add Component" />
+            <Button mnemonicParsing="false" text="Add Component" />
           </children>
         </HBox>
         <TableView id="componentTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="277.0" prefWidth="595.0">

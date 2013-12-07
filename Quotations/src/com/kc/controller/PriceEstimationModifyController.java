@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -41,44 +42,89 @@ public class PriceEstimationModifyController implements Initializable{
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
 	}
-	@FXML
-	private ComboBox<String> monthCombo;
-	@FXML
-	private ComboBox<String> yearCombo;
-	@FXML
-	private ComboBox<String> referenceCombo;
-	@FXML
-	private Button enquiryDetails;
-	@FXML
-	private TextArea requirements;
-	@FXML
-	private TextArea address;
-	@FXML
-	private TextField enquiryType;
-	@FXML
-	private TextField productName;
-	@FXML
-	private TextField customerName;
-	@FXML
-	private TextField companyName;
-	@FXML
-	private TextField tinNumber;
-	@FXML
-	private TextField emailId;
-	@FXML
-	private TextField referedBy;
-	@FXML
-	private TextField customerType;
-	@FXML
-	private TextField state;
-	@FXML
-	private TextField city;
-	@FXML
-	private TextField contactNumber;
-	@FXML
-	private TextField purchasePeriod;
-	@FXML
-	private TextField customerFile;
+	 @FXML
+	    private Label costPriceTotal;
+
+	    @FXML
+	    private Label dealerPriceTotal;
+
+	    @FXML
+	    private TextArea eaddress;
+
+	    @FXML
+	    private TextField ecity;
+
+	    @FXML
+	    private TextField ecompanyName;
+
+	    @FXML
+	    private TextField econtactNumber;
+
+	    @FXML
+	    private TextField ecustomerFile;
+
+	    @FXML
+	    private TextField ecustomerName;
+
+	    @FXML
+	    private TextField ecustomerType;
+
+	    @FXML
+	    private TextField eemailId;
+
+	    @FXML
+	    private TextField eenquiryType;
+
+	    @FXML
+	    private Label endUserPrice;
+
+	    @FXML
+	    private Button enquiryDetails;
+
+	    @FXML
+	    private TextField eproductName;
+
+	    @FXML
+	    private TextField epurchasePeriod;
+
+	    @FXML
+	    private TextField ereferedBy;
+
+	    @FXML
+	    private TextArea erequirements;
+
+	    @FXML
+	    private TextField estate;
+
+	    @FXML
+	    private TextField etinNumber;
+
+	    @FXML
+	    private TextField marginValue;
+
+	    @FXML
+	    private Button modifyPriceEstimation;
+
+	    @FXML
+	    private ComboBox<String> monthCombo;
+
+	    @FXML
+	    private TextField productName;
+
+	    @FXML
+	    private ComboBox<String> referenceCombo;
+
+	    @FXML
+	    private TextField referenceNo;
+
+	    @FXML
+	    private Button search;
+
+	    @FXML
+	    private Label totalProfit;
+
+	    @FXML
+	    private ComboBox<String> yearCombo;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
@@ -91,20 +137,22 @@ public class PriceEstimationModifyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
-			enquiryType.setEditable(false);
+			referenceNo.setEditable(false);
 			productName.setEditable(false);
-			requirements.setEditable(false);
-			customerFile.setEditable(false);
-			customerType.setEditable(false);
-			customerName.setEditable(false);
-			tinNumber.setEditable(false);
-			emailId.setEditable(false);
-			referedBy.setEditable(false);
-			address.setEditable(false);
-			state.setEditable(false);
-			city.setEditable(false);
-			contactNumber.setEditable(false);
-			purchasePeriod.setEditable(false);
+			eenquiryType.setEditable(false);
+			eproductName.setEditable(false);
+			erequirements.setEditable(false);
+			ecustomerFile.setEditable(false);
+			ecustomerType.setEditable(false);
+			ecustomerName.setEditable(false);
+			etinNumber.setEditable(false);
+			eemailId.setEditable(false);
+			ereferedBy.setEditable(false);
+			eaddress.setEditable(false);
+			estate.setEditable(false);
+			ecity.setEditable(false);
+			econtactNumber.setEditable(false);
+			epurchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
@@ -144,21 +192,23 @@ public class PriceEstimationModifyController implements Initializable{
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
 						{
-							enquiryType.setText(enquiryViewVO.getEnquiryType());
+							referenceNo.setText(enquiryViewVO.getReferenceNo());
 							productName.setText(enquiryViewVO.getProductName());
-							requirements.setText(enquiryViewVO.getCustomerRequirement());
-							customerName.setText(enquiryViewVO.getCustomerName());
-							companyName.setText(enquiryViewVO.getCompanyName());
-							tinNumber.setText(enquiryViewVO.getTinNumber());
-							emailId.setText(enquiryViewVO.getEmailId());
-							referedBy.setText(enquiryViewVO.getReferedBy());
-							customerType.setText(enquiryViewVO.getCustomerType());
-							address.setText(enquiryViewVO.getAddress());
-							state.setText(enquiryViewVO.getState());
-							city.setText(enquiryViewVO.getCity());
-							contactNumber.setText(enquiryViewVO.getContactNumber());
-							customerFile.setText(enquiryViewVO.getCustomerFile());
-							purchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							eenquiryType.setText(enquiryViewVO.getEnquiryType());
+							eproductName.setText(enquiryViewVO.getProductName());
+							erequirements.setText(enquiryViewVO.getCustomerRequirement());
+							ecustomerName.setText(enquiryViewVO.getCustomerName());
+							ecompanyName.setText(enquiryViewVO.getCompanyName());
+							etinNumber.setText(enquiryViewVO.getTinNumber());
+							eemailId.setText(enquiryViewVO.getEmailId());
+							ereferedBy.setText(enquiryViewVO.getReferedBy());
+							ecustomerType.setText(enquiryViewVO.getCustomerType());
+							eaddress.setText(enquiryViewVO.getAddress());
+							estate.setText(enquiryViewVO.getState());
+							ecity.setText(enquiryViewVO.getCity());
+							econtactNumber.setText(enquiryViewVO.getContactNumber());
+							ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+							epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 						}
 					}
 					

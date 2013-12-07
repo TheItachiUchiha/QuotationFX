@@ -85,14 +85,38 @@ public class AdminHomeController implements Initializable {
 	}
 	public void salesOrder()
 	{
-		
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/salesOrder.fxml"));
+			BorderPane quotation = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
-	public void status()
+	public void statusReminder()
 	{
-		
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/statusReminder.fxml"));
+			BorderPane quotation = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	public void reports()
 	{
-		
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/report.fxml"));
+			BorderPane quotation = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 }

@@ -31,11 +31,11 @@
             <Separator prefWidth="210.0" />
             <ToggleButton fx:id="quotation" mnemonicParsing="false" onAction="#quotationPreparation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />
-            <ToggleButton fx:id="sales" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
+            <ToggleButton fx:id="sales" mnemonicParsing="false" onAction="#salesOrder" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />
-            <ToggleButton fx:id="status" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
+            <ToggleButton fx:id="status" mnemonicParsing="false" onAction="#statusReminder" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />
-            <ToggleButton id="report" fx:id="reports" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
+            <ToggleButton id="report" fx:id="reports" mnemonicParsing="false" onAction="#reports" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" />
           </children>
           <padding>

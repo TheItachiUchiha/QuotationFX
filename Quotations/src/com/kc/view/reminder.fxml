@@ -11,7 +11,7 @@
 <BorderPane prefHeight="563.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
   <!-- TODO Add Nodes -->
   <bottom>
-    <GridPane prefHeight="350.0" prefWidth="771.0">
+    <GridPane alignment="CENTER" maxWidth="-Infinity" prefHeight="350.0" prefWidth="574.0" BorderPane.alignment="CENTER">
       <children>
         <Label prefHeight="23.0" prefWidth="83.0" text="From :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="83.0" text="Subject :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -21,7 +21,7 @@
         <TextField fx:id="receiver" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <Label prefHeight="23.0" prefWidth="36.0" text="To :" GridPane.columnIndex="2" GridPane.rowIndex="0" />
         <Label prefHeight="23.0" prefWidth="79.0" text="Message :" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="4">
+        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
           <children>
             <Button mnemonicParsing="false" prefWidth="83.0" text="Send Mail" />
             <Button mnemonicParsing="false" prefWidth="109.0" text="Stop reminder" />
@@ -30,10 +30,10 @@
         <TextArea fx:id="message" maxWidth="-Infinity" prefHeight="242.0" prefWidth="462.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="3" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="82.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="220.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="34.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="435.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="101.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="217.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="31.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="215.0" />
       </columnConstraints>
       <padding>
         <Insets left="10.0" fx:id="x1" />
@@ -51,7 +51,7 @@
     </GridPane>
   </bottom>
   <center>
-    <GridPane maxHeight="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="771.0">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="359.0">
       <children>
         <Label prefHeight="21.000099999997474" prefWidth="109.0" text="Auto Reminder" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="109.0" text="Total Reminders" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -79,10 +79,10 @@
         <Label fx:id="sentReminder" prefHeight="23.0" prefWidth="69.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="112.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="192.0" minWidth="10.0" prefWidth="110.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="73.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="476.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="121.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="82.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="85.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="80.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
@@ -92,7 +92,7 @@
     </GridPane>
   </center>
   <top>
-    <VBox prefHeight="136.0" prefWidth="771.0">
+    <VBox prefHeight="98.0" prefWidth="771.0">
       <children>
         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
           <children>
@@ -124,7 +124,7 @@
             <Font name="System Bold" size="12.0" fx:id="x2" />
           </font>
           <VBox.margin>
-            <Insets left="150.0" fx:id="x3" />
+            <Insets left="200.0" fx:id="x3" />
           </VBox.margin>
         </Label>
         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
