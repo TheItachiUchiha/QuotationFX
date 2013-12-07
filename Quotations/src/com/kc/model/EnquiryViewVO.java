@@ -25,6 +25,10 @@ public class EnquiryViewVO {
 	private String QuotationPreparation;
 	private String sales;
 	private String emailSent;
+	private double margin;
+	private String peDate;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -170,5 +174,17 @@ public class EnquiryViewVO {
 	}
 	public void setEmailSent(String emailSent) {
 		this.emailSent = emailSent;
+	}
+	public double getMargin() {
+		return margin;
+	}
+	public void setMargin(double margin) {
+		this.margin = margin;
+	}
+	public String getPeDate() {
+		return peDate;
+	}
+	public void setPeDate(String peDate) {
+		this.peDate = peDate;
 	}
 }

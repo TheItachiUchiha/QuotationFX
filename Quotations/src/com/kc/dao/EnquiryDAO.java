@@ -17,6 +17,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -95,6 +96,7 @@ public class EnquiryDAO {
 				enquiryVO.setFlag(resultSet.getString(13));
 				enquiryVO.setRefNumber(resultSet.getString(14));
 				enquiryVO.setProductId(resultSet.getInt(15));
+				enquiryVO.setMargin(resultSet.getDouble(16));
 				
 				listOfEnquries.add(enquiryVO);
 			}
@@ -473,5 +475,42 @@ public class EnquiryDAO {
 			LOG.error(e.getMessage());
 		}
 		return map;
+	}
+	
+	public ObservableList<ComponentsVO> getComponentsForEnquiry(int enquiryId) throws SQLException {
+		LOG.info("Enter : getComponents");
+		ObservableList<ComponentsVO> listOfComponents = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT c.id, `name`, category, subcategory, vendor, model, `type`, size, costprice, enduserprice, dealerprice, quantity  FROM COMPONENTS c inner join enquiry_component pc on (c.id = pc.component_id) where pc.ENQUIRY_ID=?");
+			preparedStatement.setInt(1, enquiryId);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				ComponentsVO componentsVO = new ComponentsVO();
+				componentsVO.setId(resultSet.getInt(1));
+				componentsVO.setComponentName(resultSet.getString(2));
+				componentsVO.setComponentCategory(resultSet.getString(3));
+				componentsVO.setSubCategory(resultSet.getString(4));
+				componentsVO.setVendor(resultSet.getString(5));
+				componentsVO.setModel(resultSet.getString(6));
+				componentsVO.setType(resultSet.getString(7));
+				componentsVO.setSize(resultSet.getString(8));
+				componentsVO.setCostPrice(Double.parseDouble(resultSet.getString(9)));
+				componentsVO.setEndUserPrice(Double.parseDouble(resultSet.getString(10)));
+				componentsVO.setDealerPrice(Double.parseDouble(resultSet.getString(11)));
+				componentsVO.setQuantity(resultSet.getInt(12));
+				listOfComponents.add(componentsVO);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponents");
+		return listOfComponents;
 	}
 }

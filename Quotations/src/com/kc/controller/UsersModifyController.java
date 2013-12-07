@@ -2,13 +2,6 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import com.kc.constant.CommonConstants;
-import com.kc.dao.UsersDAO;
-import com.kc.model.UsersVO;
-import com.kc.util.Validation;
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +16,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.UsersDAO;
+import com.kc.model.UsersVO;
+import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class UsersModifyController implements Initializable{
 	private static final Logger LOG = LogManager.getLogger(UsersModifyController.class);

@@ -25,10 +25,10 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -47,7 +47,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
-import com.kc.controller.ProductsCreateController.EditingCell;
 import com.kc.dao.ProductsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.model.ProductsVO;
@@ -373,7 +372,7 @@ public class ProductsModifyController implements Initializable {
 	
 	public void modifyProduct()
 	{
-		LOG.info("Enter : saveProduct");
+		LOG.info("Enter : modifyProduct");
 		try
 		{
 			if(componentTable.getItems().size()==0)
@@ -411,7 +410,7 @@ public class ProductsModifyController implements Initializable {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
-		LOG.info("Exit : saveProduct");
+		LOG.info("Exit : modifyProduct");
 	}
 	
 	

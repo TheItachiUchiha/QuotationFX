@@ -19,6 +19,8 @@ public class EnquiryVO {
 	private String flag;
 	private String refNumber;
 	private int productId;
+	private double margin;
+	private String peDate;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -122,6 +124,18 @@ public class EnquiryVO {
 	}
 	public void setList(ObservableList<ComponentsVO> list) {
 		this.list = list;
+	}
+	public double getMargin() {
+		return margin;
+	}
+	public void setMargin(double margin) {
+		this.margin = margin;
+	}
+	public String getPeDate() {
+		return peDate;
+	}
+	public void setPeDate(String peDate) {
+		this.peDate = peDate;
 	}	
 	
 }

@@ -3,14 +3,14 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.BorderPane;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class SalesOrderController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(SalesOrderController.class);

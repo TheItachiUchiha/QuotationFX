@@ -3,15 +3,6 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.CustomersDAO;
-import com.kc.model.CustomersVO;
-import com.kc.util.Validation;
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
-
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -22,6 +13,15 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.CustomersDAO;
+import com.kc.model.CustomersVO;
+import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class CustomersModifyController implements Initializable{
 	private static final Logger LOG = LogManager.getLogger(CustomersModifyController.class);

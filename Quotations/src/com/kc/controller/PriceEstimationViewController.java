@@ -5,19 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.CustomersDAO;
-import com.kc.dao.EnquiryDAO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
-import com.kc.model.EnquiryViewVO;
-import com.kc.util.Validation;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,16 +16,29 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.CustomersDAO;
+import com.kc.dao.EnquiryDAO;
+import com.kc.dao.PriceEstimationDAO;
+import com.kc.model.CustomersVO;
+import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
+import com.kc.util.Validation;
 
 public class PriceEstimationViewController implements Initializable {
 
 	private static final Logger LOG = LogManager.getLogger(PriceEstimationViewController.class);
-	EnquiryDAO enquiryDAO;
+	PriceEstimationDAO priceEstimationDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
 	public PriceEstimationViewController()
 	{
-		enquiryDAO = new EnquiryDAO();
+		priceEstimationDAO = new PriceEstimationDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
 	}
@@ -51,14 +51,14 @@ public class PriceEstimationViewController implements Initializable {
 	private Button search;
 	
 	@FXML
- 	private TableView<?> priceEstimationTable;
-	@FXML private TableColumn<?, String> referenceNo;
-    @FXML private TableColumn<?, String> productName;
-    @FXML private TableColumn<?, String> customerName;
-    @FXML private TableColumn<?, String> companyName;
-    @FXML private TableColumn<?, String> referedBy;
-    @FXML private TableColumn<?, String> dateOfEnquiry;
-    @FXML private TableColumn<?, String> dateOfPe;
+ 	private TableView<EnquiryViewVO> priceEstimationTable;
+	@FXML private TableColumn<EnquiryViewVO, String> referenceNo;
+    @FXML private TableColumn<EnquiryViewVO, String> productName;
+    @FXML private TableColumn<EnquiryViewVO, String> customerName;
+    @FXML private TableColumn<EnquiryViewVO, String> companyName;
+    @FXML private TableColumn<EnquiryViewVO, String> referedBy;
+    @FXML private TableColumn<EnquiryViewVO, String> dateOfEnquiry;
+    @FXML private TableColumn<EnquiryViewVO, String> peDate;
     @FXML private TableColumn action;
 	
     private ObservableList<String> monthList = FXCollections.observableArrayList();
@@ -77,7 +77,7 @@ public class PriceEstimationViewController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
-			enquiryList = enquiryDAO.getEnquries();
+			enquiryList = priceEstimationDAO.getPriceEstimation();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
 			search.setOnAction(new EventHandler<ActionEvent>() {
@@ -89,7 +89,7 @@ public class PriceEstimationViewController implements Initializable {
 						refList.clear();
 						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
-							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
+							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()))
 							{
 								refList.add(enquiryVO.getReferenceNo());
 							}
@@ -100,7 +100,14 @@ public class PriceEstimationViewController implements Initializable {
 						}
 						else
 						{
-							
+							priceEstimationTable.setItems(enquiryViewList);
+							referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+							productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+							companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+							customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+							referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+							dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+							peDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
 						}
 					}
 					catch (Exception e) {
@@ -136,6 +143,8 @@ public class PriceEstimationViewController implements Initializable {
 			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
 			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
 			enquiryViewVO.setSales(enquiryVO.getSales());
+			enquiryViewVO.setMargin(enquiryVO.getMargin());
+			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");

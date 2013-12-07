@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -11,10 +15,6 @@ import org.apache.log4j.Logger;
 import com.kc.model.ComponentsVO;
 import com.kc.model.ProductsVO;
 import com.kc.util.DBConnector;
-import java.sql.Statement;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class ProductsDAO {
 	private static final Logger LOG = LogManager.getLogger(ProductsDAO.class);
@@ -62,7 +62,7 @@ public class ProductsDAO {
 	
 	public void modifyProducts(ProductsVO productsVO) throws Exception
 	{
-		LOG.info("Enter : saveProducts");
+		LOG.info("Enter : modifyProduct");
 		try
 		{
 			conn = DBConnector.getConnection();
@@ -93,7 +93,7 @@ public class ProductsDAO {
 		throw e;
 		
 	}
-	LOG.info("Exit : saveProducts");
+	LOG.info("Exit : modifyProduct");
 	}
 	
 	

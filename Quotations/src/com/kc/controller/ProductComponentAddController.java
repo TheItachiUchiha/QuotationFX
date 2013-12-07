@@ -2,13 +2,7 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import com.kc.constant.CommonConstants;
-import com.kc.dao.ComponentsDAO;
-import com.kc.model.ComponentsVO;
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
-import javafx.beans.property.SimpleBooleanProperty;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -22,17 +16,16 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Dialogs.DialogOptions;
-import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.dao.ComponentsDAO;
+import com.kc.model.ComponentsVO;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ProductComponentAddController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(ProductComponentAddController.class);

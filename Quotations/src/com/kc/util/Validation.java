@@ -7,15 +7,16 @@ package com.kc.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.regex.*;
-
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 /**
  * @author Pragati

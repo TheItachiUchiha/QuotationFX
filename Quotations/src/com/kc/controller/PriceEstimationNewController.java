@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -194,6 +195,7 @@ public class PriceEstimationNewController implements Initializable {
 	private ObservableList<ComponentsVO> componentList = FXCollections.observableArrayList();
 	 SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try
@@ -215,9 +217,6 @@ public class PriceEstimationNewController implements Initializable {
 					try {
 							componentList = productsDAO.getComponentsForProduct(productId);
 							fillComponentTable();
-							costPriceTotal.setText(String.valueOf(costPriceValue));
-							endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
-							dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 						} 
 					catch (SQLException e) {
 						e.printStackTrace();
@@ -231,11 +230,7 @@ public class PriceEstimationNewController implements Initializable {
                   if (item == null) {
                     return null;
                   } else {
-                	  /*ObservableMap<String,ItemTypeVO> itemTypesMap = FXCollections.observableHashMap();
-		 		    	itemTypesMap = item.getListType();
-		 		    */
 		 		    	return new ReadOnlyObjectWrapper<Integer>(item.getQuantity());
-		 		    
                   }
                 }
               });
@@ -250,9 +245,6 @@ public class PriceEstimationNewController implements Initializable {
 	 				});
 	 		
 	 		
-	 		
-	 		
-	 	//componentTable.getColumns().add(quantity);
 			
 			action.setSortable(false);
 	         
@@ -396,8 +388,6 @@ public class PriceEstimationNewController implements Initializable {
 				  }
 			
 			});
-			
-			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -470,6 +460,8 @@ public class PriceEstimationNewController implements Initializable {
 					costPriceTotal.setText(String.valueOf(costPriceValue));
 					endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
 					dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
+					if(!marginValue.getText().equals(""))
+					totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
 				}
 			});		
 		}
@@ -487,6 +479,8 @@ public class PriceEstimationNewController implements Initializable {
 			if(enquiryViewVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
 			{
 				enquiryVO.setId(enquiryViewVO.getId());	
+				enquiryVO.setMargin(Double.parseDouble(marginValue.getText()));
+				enquiryVO.setPeDate(formatter.format(new Date()));
 			}
 		}
 		priceEstimationDAO.savePriceEstimation(enquiryVO);
@@ -504,12 +498,18 @@ public class PriceEstimationNewController implements Initializable {
 		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
 		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 		quantity.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Integer>("quantity"));
-		for(ComponentsVO componentsVO : componentList)
-		{
-			costPriceValue+=componentsVO.getTotalCostPrice();
-			dealerPriceValue+=componentsVO.getTotalDealerPrice();
-			endUserPriceValue+=componentsVO.getTotalEndUserPrice();
-		}
+		costPriceValue = dealerPriceValue = endUserPriceValue = 0;
+        for(ComponentsVO componentsVO : componentList)
+			{
+				costPriceValue+=componentsVO.getTotalCostPrice();
+				dealerPriceValue+=componentsVO.getTotalDealerPrice();
+				endUserPriceValue+=componentsVO.getTotalEndUserPrice();
+			}
+		costPriceTotal.setText(String.valueOf(costPriceValue));
+		endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
+		dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
+		if(!marginValue.getText().equals(""))
+			totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
 		componentTable.setItems(componentList);
 	}
 	
@@ -517,7 +517,8 @@ public class PriceEstimationNewController implements Initializable {
 	{
 		LOG.info("Enter : deleteComponents");
 		try{
-			componentTable.getItems().remove(componentsVO);
+			componentList.remove(componentsVO);
+			fillComponentTable();
 		}
 		catch (Exception e) {
 			
@@ -546,6 +547,8 @@ public class PriceEstimationNewController implements Initializable {
 			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
 			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
 			enquiryViewVO.setSales(enquiryVO.getSales());
+			enquiryViewVO.setMargin(enquiryVO.getMargin());
+			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
@@ -677,6 +680,8 @@ public class PriceEstimationNewController implements Initializable {
 						costPriceTotal.setText(String.valueOf(costPriceValue));
 						endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
 						dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
+						if(!marginValue.getText().equals(""))
+							totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
 	              }
 	          }
 	      }

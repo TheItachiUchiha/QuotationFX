@@ -4,18 +4,15 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
-import com.kc.model.EnquiryViewVO;
-import com.mysql.jdbc.log.Log;
-import com.mytdev.javafx.scene.control.AutoCompleteTextField;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+
+import com.kc.model.EnquiryViewVO;
 
 
 public class EnquiryViewPopUpController {

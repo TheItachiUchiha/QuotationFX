@@ -1,12 +1,13 @@
 package com.kc.controller;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 public class CustomersController {
 	

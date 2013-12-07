@@ -18,7 +18,7 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="106.0" text="Company Name" fx:id="companyName" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Refered By" fx:id="referedBy" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Date Of Enquiry" fx:id="dateOfEnquiry" />
-        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Date Of PE" fx:id="dateOfPe" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Date Of PE" fx:id="peDate" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="Action" fx:id="action" />
       </columns>
       <BorderPane.margin>

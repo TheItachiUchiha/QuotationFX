@@ -5,19 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.CustomersDAO;
-import com.kc.dao.EnquiryDAO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
-import com.kc.model.EnquiryViewVO;
-import com.kc.util.Validation;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +16,17 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.CustomersDAO;
+import com.kc.dao.EnquiryDAO;
+import com.kc.model.CustomersVO;
+import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
+import com.kc.util.Validation;
 
 public class QuotationEmailController implements Initializable  {
 

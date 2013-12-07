@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,12 +14,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
-import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 public class ComponentsModifyController implements Initializable {
