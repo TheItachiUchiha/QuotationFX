@@ -274,13 +274,29 @@ public void allowAsPercentage(final TextField fieldName){
 			 
 			 if(newValue.intValue() > oldValue.intValue()){
 				char ch = fieldName.getText().charAt(oldValue.intValue());
-				//System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);                   
-	 
-				//Check if the new character is the number or other's
-				if(!((ch >= '0' && ch <= '9' )&&(fieldName.getText().length()<=2))){       
-	                 
-					//if it's not number then just setText to previous one
+				//System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);   
+				if(fieldName.getText().length()>2)
+				{
+					if(!fieldName.getText().contains("."))
+					{
+	                	 fieldName.setText(fieldName.getText().substring(0,fieldName.getText().length()-1));
+					}
+				}
+				if(fieldName.getText().indexOf('.')!=fieldName.getText().lastIndexOf('.'))
+                {
 					fieldName.setText(fieldName.getText().substring(0,fieldName.getText().length()-1)); 
+                }
+				else if(fieldName.getText().contains("."))
+				{
+					if(fieldName.getText().length()-fieldName.getText().lastIndexOf('.')>3)
+	                {
+						fieldName.setText(fieldName.getText().substring(0,fieldName.getText().length()-1)); 
+	                }
+				}
+						
+				else if(!((ch >= '0' && ch <= '9' )||(ch=='.')&&(fieldName.getText().length()<=4)))
+				{       
+                	 fieldName.setText(fieldName.getText().substring(0,fieldName.getText().length()-1)); 
 				}
 			}
 		}
