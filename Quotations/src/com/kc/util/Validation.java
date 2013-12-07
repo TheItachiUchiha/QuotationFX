@@ -265,6 +265,29 @@ public void allowAsPhoneNumber(final TextField fieldName){
 	});
 }
 
+public void allowAsPercentage(final TextField fieldName){
+	
+	fieldName.lengthProperty().addListener(new ChangeListener<Number>(){
+		 
+		@Override
+		public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {              
+			 
+			 if(newValue.intValue() > oldValue.intValue()){
+				char ch = fieldName.getText().charAt(oldValue.intValue());
+				//System.out.println("Length:"+ oldValue+"  "+ newValue +" "+ch);                   
+	 
+				//Check if the new character is the number or other's
+				if(!((ch >= '0' && ch <= '9' )&&(fieldName.getText().length()<=2))){       
+	                 
+					//if it's not number then just setText to previous one
+					fieldName.setText(fieldName.getText().substring(0,fieldName.getText().length()-1)); 
+				}
+			}
+		}
+		
+	});
+}
+
 public void allowAsDate(final TextField fieldName){
 	
 	fieldName.lengthProperty().addListener(new ChangeListener<Number>(){

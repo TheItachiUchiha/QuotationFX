@@ -183,9 +183,9 @@ public class ComponentsModifyController implements Initializable {
 		model.setText(componentsVO.getModel());
 		type.setText(componentsVO.getType());
 		size.setText(componentsVO.getSize());
-		costPrice.setText(componentsVO.getCostPrice());
-		dealerPrice.setText(componentsVO.getDealerPrice());
-		endUserPrice.setText(componentsVO.getEndUserPrice());
+		costPrice.setText(String.valueOf(componentsVO.getCostPrice()));
+		dealerPrice.setText(String.valueOf(componentsVO.getDealerPrice()));
+		endUserPrice.setText(String.valueOf(componentsVO.getEndUserPrice()));
 		LOG.info("Exit : fillTextFieldValues");
 	}
 
@@ -208,12 +208,12 @@ public class ComponentsModifyController implements Initializable {
 				componentsVO.setModel(model.getText());
 				componentsVO.setType(type.getText());
 				componentsVO.setSize(size.getText());
-				componentsVO.setCostPrice(costPrice
-						.getText());
-				componentsVO.setDealerPrice(dealerPrice
-						.getText());
-				componentsVO.setEndUserPrice(endUserPrice
-						.getText());
+				componentsVO.setCostPrice(Double.parseDouble(costPrice
+						.getText()));
+				componentsVO.setDealerPrice(Double.parseDouble(dealerPrice
+						.getText()));
+				componentsVO.setEndUserPrice(Double.parseDouble(endUserPrice
+						.getText()));
 				componentsVO.setId(this.componentsVO.getId());
 
 				componentsDAO.updateComponent(componentsVO);

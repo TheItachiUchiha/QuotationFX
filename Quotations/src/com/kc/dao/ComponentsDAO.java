@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import javafx.beans.property.DoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import com.kc.model.ComponentsVO;
@@ -33,9 +35,9 @@ public class ComponentsDAO {
 			preparedStatement.setString(5, componentsVO.getModel());
 			preparedStatement.setString(6, componentsVO.getType());
 			preparedStatement.setString(7, componentsVO.getSize());
-			preparedStatement.setString(8, componentsVO.getCostPrice());
-			preparedStatement.setString(9, componentsVO.getDealerPrice());
-			preparedStatement.setString(10, componentsVO.getEndUserPrice());
+			preparedStatement.setString(8, String.valueOf(componentsVO.getCostPrice()));
+			preparedStatement.setString(9, String.valueOf(componentsVO.getDealerPrice()));
+			preparedStatement.setString(10, String.valueOf(componentsVO.getEndUserPrice()));
 
 			preparedStatement.execute();
 		}  catch (Exception e) {
@@ -62,9 +64,9 @@ public class ComponentsDAO {
 			preparedStatement.setString(5, componentsVO.getModel());
 			preparedStatement.setString(6, componentsVO.getType());
 			preparedStatement.setString(7, componentsVO.getSize());
-			preparedStatement.setString(8, componentsVO.getCostPrice());
-			preparedStatement.setString(9, componentsVO.getDealerPrice());
-			preparedStatement.setString(10, componentsVO.getEndUserPrice());
+			preparedStatement.setString(8, String.valueOf(componentsVO.getCostPrice()));
+			preparedStatement.setString(9, String.valueOf(componentsVO.getDealerPrice()));
+			preparedStatement.setString(10, String.valueOf(componentsVO.getEndUserPrice()));
 			preparedStatement.setInt(11, componentsVO.getId());
 			
 			preparedStatement.execute();
@@ -95,9 +97,9 @@ public class ComponentsDAO {
 				componentsVO.setModel(resultSet.getString(6));
 				componentsVO.setType(resultSet.getString(7));
 				componentsVO.setSize(resultSet.getString(8));
-				componentsVO.setCostPrice(resultSet.getString(9));
-				componentsVO.setEndUserPrice(resultSet.getString(10));
-				componentsVO.setDealerPrice(resultSet.getString(11));
+				componentsVO.setCostPrice(Double.parseDouble(resultSet.getString(9)));
+				componentsVO.setEndUserPrice(Double.parseDouble(resultSet.getString(10)));
+				componentsVO.setDealerPrice(Double.parseDouble(resultSet.getString(11)));
 				listOfComponents.add(componentsVO);
 			}
 		} catch (Exception e) {

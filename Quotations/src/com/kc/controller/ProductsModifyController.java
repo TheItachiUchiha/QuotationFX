@@ -97,11 +97,11 @@ public class ProductsModifyController implements Initializable {
 	@FXML
 	private TableColumn<ComponentsVO, String> componentName;
 	@FXML
-	private TableColumn<ComponentsVO, String> costPrice;
+	private TableColumn<ComponentsVO, Double> costPrice;
 	@FXML
-	private TableColumn<ComponentsVO, String> dealerPrice;
+	private TableColumn<ComponentsVO, Double> dealerPrice;
 	@FXML
-	private TableColumn<ComponentsVO, String> endUserPrice;
+	private TableColumn<ComponentsVO, Double> endUserPrice;
 	@FXML
 	private TableColumn<ComponentsVO, String> model;
 	@FXML
@@ -323,9 +323,9 @@ public class ProductsModifyController implements Initializable {
 					model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 					type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 					size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalCostPrice"));
+					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
+					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 					for(ComponentsVO componentsVO : list)
 					{
 						if(componentList.size()==0)
@@ -363,9 +363,9 @@ public class ProductsModifyController implements Initializable {
 		model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 		type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 		size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalCostPrice"));
+		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
+		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 		quantity.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Integer>("quantity"));
 		
 		componentTable.setItems(componentList);

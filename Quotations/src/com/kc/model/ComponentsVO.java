@@ -1,5 +1,13 @@
 package com.kc.model;
 
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.ReadOnlyDoubleProperty;
+import javafx.beans.property.ReadOnlyDoubleWrapper;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 
 
 public class ComponentsVO {
@@ -20,14 +28,36 @@ public class ComponentsVO {
 	
 	private String size;
 	
-	private String costPrice;
+	private DoubleProperty costPrice;
 	
-	private String dealerPrice;
+	private DoubleProperty dealerPrice;
 	
-	private String endUserPrice;
+	private DoubleProperty endUserPrice;
 	
-	private int quantity;
+    private final IntegerProperty quantity ;
+    
+    private final ReadOnlyDoubleWrapper totalCostPrice ;
+    private final ReadOnlyDoubleWrapper totalDealerPrice ;
+    private final ReadOnlyDoubleWrapper totalEndUserPrice ;
+    
 
+    public ComponentsVO()
+    {
+    	this.quantity = new SimpleIntegerProperty(this, "quantity", 1);
+    	this.costPrice = new SimpleDoubleProperty(this, "costPrice", 1);
+    	this.dealerPrice = new SimpleDoubleProperty(this, "dealerPrice", 1);
+    	this.endUserPrice = new SimpleDoubleProperty(this, "endUserPrice", 1);
+    	this.totalCostPrice = new ReadOnlyDoubleWrapper(this, "totalCostPrice");
+    	this.totalDealerPrice = new ReadOnlyDoubleWrapper(this, "totalDealerPrice");
+    	this.totalEndUserPrice = new ReadOnlyDoubleWrapper(this, "totalEndUserPrice");
+        
+        // bind total price to product of price and quantity:
+    	totalCostPrice.bind(costPrice.multiply(quantity));
+    	totalDealerPrice.bind(dealerPrice.multiply(quantity));
+    	totalEndUserPrice.bind(endUserPrice.multiply(quantity));
+    }
+    
+    
 	
 	public int getId() {
 		return id;
@@ -93,48 +123,81 @@ public class ComponentsVO {
 		this.size = size;
 	}
 
-	public String getCostPrice() {
-		return costPrice;
+
+
+	public Double getCostPrice() {
+		return costPrice.get();
 	}
 
-	public void setCostPrice(String costPrice) {
-		this.costPrice = costPrice;
+	public void setCostPrice(Double costPrice) {
+		this.costPrice.set(costPrice);
 	}
 
-	public String getDealerPrice() {
-		return dealerPrice;
-	}
+	 public final DoubleProperty costPriceProperty() {
+	        return costPrice ;
+	    }
 
-	public void setDealerPrice(String dealerPrice) {
-		this.dealerPrice = dealerPrice;
-	}
+	 public Double getDealerPrice() {
+			return dealerPrice.get();
+		}
 
-	public String getEndUserPrice() {
-		return endUserPrice;
-	}
 
-	public void setEndUserPrice(String endUserPrice) {
-		this.endUserPrice = endUserPrice;
+
+		public void setDealerPrice(Double dealerPrice) {
+			this.dealerPrice.set(dealerPrice);
+		}
+
+		 public final DoubleProperty dealerPriceProperty() {
+		        return dealerPrice ;
+		    }
+
+	 public Double getEndUserPrice() {
+			return endUserPrice.get();
+		}
+
+
+
+		public void setEndUserPrice(Double endUserPrice) {
+			this.endUserPrice.set(endUserPrice);
+		}
+
+	 public final DoubleProperty endUserPriceProperty() {
+	        return endUserPrice ;
+	    }
+
+
+	public final void setQuantity(int quantity) {
+	       this.quantity.set(quantity);
 	}
 	
-	/**
-	 * @return the quantity
-	 */
-	public int getQuantity() {
-		return quantity;
+	public Integer getQuantity() {
+		return quantity.get();
 	}
-
-	/**
-	 * @param quantity the quantity to set
-	 */
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
-
+	
+	public final IntegerProperty quantityProperty() {
+        return quantity ;
+    }
+	public final double getTotalCostPrice() {
+        return totalCostPrice.get();
+    }
+    public final ReadOnlyDoubleProperty totalCostPriceProperty() {
+        return totalCostPrice.getReadOnlyProperty();
+    }
+    public final double getTotalDealerPrice() {
+        return totalDealerPrice.get();
+    }
+    public final ReadOnlyDoubleProperty totalDealerPriceProperty() {
+        return totalDealerPrice.getReadOnlyProperty();
+    }
+    public final double getTotalEndUserPrice() {
+        return totalEndUserPrice.get();
+    }
+    public final ReadOnlyDoubleProperty totalEndUserPriceProperty() {
+        return totalEndUserPrice.getReadOnlyProperty();
+    }
+    
 	public String toString()
 	{
 		return this.componentName;
 	}
-	
-	
 }

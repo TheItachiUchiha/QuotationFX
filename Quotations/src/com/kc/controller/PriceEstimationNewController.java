@@ -94,9 +94,9 @@ public class PriceEstimationNewController implements Initializable {
     @FXML private TableColumn<ComponentsVO, String> model;
     @FXML private TableColumn<ComponentsVO, String> type;
     @FXML private TableColumn<ComponentsVO, String> size;
-    @FXML private TableColumn<ComponentsVO, String> costPrice;
-    @FXML private TableColumn<ComponentsVO, String> dealerPrice;
-    @FXML private TableColumn<ComponentsVO, String> endUserPrice;
+    @FXML private TableColumn<ComponentsVO, Double> costPrice;
+    @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
+    @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
     @FXML private TableColumn action;
     @FXML private TableColumn quantity;
     @FXML
@@ -234,7 +234,7 @@ public class PriceEstimationNewController implements Initializable {
                 	  /*ObservableMap<String,ItemTypeVO> itemTypesMap = FXCollections.observableHashMap();
 		 		    	itemTypesMap = item.getListType();
 		 		    */
-		 		    	return new ReadOnlyObjectWrapper<Integer>(1);
+		 		    	return new ReadOnlyObjectWrapper<Integer>(item.getQuantity());
 		 		    
                   }
                 }
@@ -385,6 +385,19 @@ public class PriceEstimationNewController implements Initializable {
 					}
 				}
 			});
+			
+			validate.allowAsPercentage(marginValue);
+			marginValue.textProperty().addListener(new ChangeListener<String>() {
+				@Override
+				  public void changed(ObservableValue<? extends String> observable,
+				          String oldValue, String newValue) {
+				      if(null!=newValue && !("".equals(newValue)))
+				    	  totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
+				  }
+			
+			});
+			
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -425,9 +438,9 @@ public class PriceEstimationNewController implements Initializable {
 					model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 					type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 					size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalCostPrice"));
+					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
+					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 					for(ComponentsVO componentsVO : list)
 					{
 						if(componentList.size()==0)
@@ -447,8 +460,17 @@ public class PriceEstimationNewController implements Initializable {
 							}
 						}
 					}
+					costPriceValue = dealerPriceValue = endUserPriceValue = 0;
+					for(ComponentsVO componentsVO : componentList)
+					{
+						costPriceValue+=componentsVO.getTotalCostPrice();
+						dealerPriceValue+=componentsVO.getTotalDealerPrice();
+						endUserPriceValue+=componentsVO.getTotalEndUserPrice();
+					}
+					costPriceTotal.setText(String.valueOf(costPriceValue));
+					endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
+					dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 				}
-					
 			});		
 		}
 		catch (Exception e) {
@@ -478,15 +500,15 @@ public class PriceEstimationNewController implements Initializable {
 		model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 		type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 		size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalCostPrice"));
+		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
+		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 		quantity.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Integer>("quantity"));
 		for(ComponentsVO componentsVO : componentList)
 		{
-		costPriceValue+=Double.parseDouble(componentsVO.getCostPrice());
-		dealerPriceValue+=Double.parseDouble(componentsVO.getDealerPrice());
-		endUserPriceValue+=Double.parseDouble(componentsVO.getEndUserPrice());
+			costPriceValue+=componentsVO.getTotalCostPrice();
+			dealerPriceValue+=componentsVO.getTotalDealerPrice();
+			endUserPriceValue+=componentsVO.getTotalEndUserPrice();
 		}
 		componentTable.setItems(componentList);
 	}
@@ -645,6 +667,16 @@ public class PriceEstimationNewController implements Initializable {
 	              } else {
 	                  setText(getString());
 	                  setContentDisplay(ContentDisplay.TEXT_ONLY);
+	                  costPriceValue = dealerPriceValue = endUserPriceValue = 0;
+	                  for(ComponentsVO componentsVO : componentList)
+						{
+							costPriceValue+=componentsVO.getTotalCostPrice();
+							dealerPriceValue+=componentsVO.getTotalDealerPrice();
+							endUserPriceValue+=componentsVO.getTotalEndUserPrice();
+						}
+						costPriceTotal.setText(String.valueOf(costPriceValue));
+						endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
+						dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 	              }
 	          }
 	      }

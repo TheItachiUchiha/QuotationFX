@@ -57,7 +57,12 @@
                 <Label id="de" fx:id="dealerPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label id="ensUserPriceTotal" fx:id="endUserPriceTotal" prefHeight="21.0" prefWidth="119.00009999999747" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label prefHeight="21.0" prefWidth="78.0" text="Margin Value" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                <TextField fx:id="marginValue" maxWidth="-Infinity" prefWidth="118.99990000000253" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <children>
+                    <TextField fx:id="marginValue" maxWidth="-Infinity" prefWidth="118.99990000000253" />
+                    <Label text="\%" />
+                  </children>
+                </HBox>
                 <Label prefHeight="21.0" prefWidth="78.0" text="Total Profit" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
                 <Label id="de" fx:id="totalProfit" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>

@@ -65,9 +65,9 @@ public class ProductsCreateController implements Initializable{
     @FXML private TableColumn<ComponentsVO, String> model;
     @FXML private TableColumn<ComponentsVO, String> type;
     @FXML private TableColumn<ComponentsVO, String> size;
-    @FXML private TableColumn<ComponentsVO, String> costPrice;
-    @FXML private TableColumn<ComponentsVO, String> dealerPrice;
-    @FXML private TableColumn<ComponentsVO, String> endUserPrice;
+    @FXML private TableColumn<ComponentsVO, Double> costPrice;
+    @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
+    @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
     @FXML private TableColumn action;
     @FXML private TableColumn quantity;
     @FXML
@@ -80,10 +80,12 @@ public class ProductsCreateController implements Initializable{
     private TextField productCode;
     @FXML
     private Label message;
+    ProductsDAO productsDAO;
    
     public ProductsCreateController()
     {
     	this.validate = new Validation();
+    	productsDAO = new ProductsDAO();
     }
     
     
@@ -108,14 +110,11 @@ public class ProductsCreateController implements Initializable{
                   if (item == null) {
                     return null;
                   } else {
-                	  /*ObservableMap<String,ItemTypeVO> itemTypesMap = FXCollections.observableHashMap();
-		 		    	itemTypesMap = item.getListType();
-		 		    */
-		 		    	return new ReadOnlyObjectWrapper<Integer>(1);
-		 		    
+		 		    	return new ReadOnlyObjectWrapper<Integer>(item.getQuantity());
                   }
                 }
               });
+               
 			quantity.setCellFactory(cellFactory);
 	 		
 	 		quantity.setOnEditCommit(
@@ -162,7 +161,7 @@ public class ProductsCreateController implements Initializable{
 		return componentTable;
 	}
     
-	ProductsDAO productsDAO=new ProductsDAO();
+	
 	public void addComponent()
 	{
 		LOG.info("Enter : addComponent");
@@ -194,9 +193,9 @@ public class ProductsCreateController implements Initializable{
 					model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
 					type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
 					size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+					costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalCostPrice"));
+					dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalDealerPrice"));
+					endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, Double>("totalEndUserPrice"));
 					//componentsList.addAll(list);
 					for(ComponentsVO componentsVO : list)
 					{
@@ -429,8 +428,6 @@ public class ProductsCreateController implements Initializable{
 		                		  commitEdit(Integer.parseInt(textField.getText()));
 		                	}
 		                	}
-		                	
-		                			                  
 		                }
 		            }
 		        });
