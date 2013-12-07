@@ -1,5 +1,7 @@
 package com.kc.model;
 
+import javafx.collections.ObservableList;
+
 public class EnquiryVO {
 	private int id;
 	private String referedBy;
@@ -17,6 +19,7 @@ public class EnquiryVO {
 	private String flag;
 	private String refNumber;
 	private int productId;
+	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
 		return id;
@@ -113,5 +116,12 @@ public class EnquiryVO {
 	}
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+	public ObservableList<ComponentsVO> getList() {
+		return list;
+	}
+	public void setList(ObservableList<ComponentsVO> list) {
+		this.list = list;
 	}	
+	
 }
