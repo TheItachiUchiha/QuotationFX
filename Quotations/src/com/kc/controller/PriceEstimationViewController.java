@@ -98,7 +98,15 @@ public class PriceEstimationViewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					fillTable();
+					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+					}
+					else
+					{
+						priceEstimationTable.setVisible(true);
+						fillTable();
+					}
 				}
 			});
 			action.setSortable(false);
@@ -145,7 +153,7 @@ public class PriceEstimationViewController implements Initializable {
 			}
 			if(refList.isEmpty())
 			{
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 			}
 			else
 			{

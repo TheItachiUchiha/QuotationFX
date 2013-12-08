@@ -127,7 +127,7 @@ public class QuotationEmailController implements Initializable  {
 						}
 						if(refList.isEmpty())
 						{
-							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 						}
 						else
 						{

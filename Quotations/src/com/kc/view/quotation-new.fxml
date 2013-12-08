@@ -10,7 +10,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationNewController">
   <!-- TODO Add Nodes -->
   <left>
-    <GridPane id="standardGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="655.0" visible="true">
+    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="655.0" visible="true">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="22.0" prefWidth="122.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -146,7 +146,7 @@
             <Insets left="100.0" fx:id="x1" />
           </GridPane.margin>
         </HBox>
-        <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
+        <HBox id="HBox" fx:id="referenceHBOx" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
           <children>
             <Label prefHeight="20.0" prefWidth="82.0" text="Select Ref. No." />
             <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="">

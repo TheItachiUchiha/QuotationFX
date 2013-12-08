@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -114,6 +115,10 @@ public class QuotationModifyController implements Initializable  {
 	    private Button viewFile;
 	    @FXML
 	    private Button search;
+	    @FXML
+	    private GridPane quotationGrid;
+	    @FXML
+	    private HBox referenceHBox;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -174,7 +179,7 @@ public class QuotationModifyController implements Initializable  {
 						}
 						if(refList.isEmpty())
 						{
-							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 						}
 						else
 						{

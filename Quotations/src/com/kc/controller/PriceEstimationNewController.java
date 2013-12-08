@@ -44,6 +44,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -185,6 +186,10 @@ public class PriceEstimationNewController implements Initializable {
 
     @FXML
     private ComboBox<String> yearCombo;
+    @FXML
+    private HBox referenceHBox;;
+    @FXML
+    private GridPane enquiryGrid;
 	double costPriceValue=0;
 	double dealerPriceValue=0;
 	double endUserPriceValue=0;
@@ -277,6 +282,24 @@ public class PriceEstimationNewController implements Initializable {
 	            }
 	         
 	        });
+	        monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> arg0,
+						String arg1, String arg2) {
+					referenceHBox.setVisible(false);
+					
+				}
+			});
+	        yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(ObservableValue<? extends String> arg0,
+						String arg1, String arg2) {
+					referenceHBox.setVisible(false);
+					
+				}
+			});
 	        referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
 
 				@Override
@@ -286,7 +309,9 @@ public class PriceEstimationNewController implements Initializable {
 					costPriceValue=0;
 					dealerPriceValue=0;
 					endUserPriceValue=0;
-					
+					enquiryGrid.setVisible(false);
+					estimationVBox.setVisible(false);
+					flag=0;
 				}
 			});
 	        referenceNo.setEditable(false);
@@ -320,6 +345,12 @@ public class PriceEstimationNewController implements Initializable {
 					{
 						clearFields();
 						flag=0;
+						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
 						refList.clear();
 						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
@@ -330,11 +361,13 @@ public class PriceEstimationNewController implements Initializable {
 						}
 						if(refList.isEmpty())
 						{
-							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.WARNING_MESSAGE);
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 						}
 						else
 						{
+							referenceHBox.setVisible(true);
 							referenceCombo.setItems(refList);	
+						}
 						}
 					}
 					catch (Exception e) {
@@ -348,10 +381,13 @@ public class PriceEstimationNewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					if(referenceCombo.getItems().isEmpty())
+					if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
 					}
+					else
+					{
+						enquiryGrid.setVisible(true);
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -379,7 +415,7 @@ public class PriceEstimationNewController implements Initializable {
 							
 						}
 					}
-					
+					}
 				}
 			});
 

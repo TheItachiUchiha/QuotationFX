@@ -35,6 +35,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -176,7 +177,10 @@ public class PriceEstimationModifyPopupController implements Initializable {
 
     @FXML
     private TableColumn<ComponentsVO,String> vendor;
-
+    @FXML
+    private HBox referenceHBox;;
+    @FXML
+    private GridPane enquiryGrid;
     
 
     double costPriceValue=0;
