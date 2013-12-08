@@ -71,7 +71,7 @@ public class QuotationViewController implements Initializable  {
 						{
 							for(EnquiryViewVO enquiryVO : enquiryViewList)
 							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryDAO.estimationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.quotationConfirm(enquiryVO.getId())).equalsIgnoreCase("Y")&&(enquiryDAO.emailConfirm(enquiryVO.getId())).equalsIgnoreCase("Y"))
+								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y")&&(enquiryVO.getEmailSent()).equalsIgnoreCase("Y"))
 								{
 									refList.add(enquiryVO.getReferenceNo());
 								}
