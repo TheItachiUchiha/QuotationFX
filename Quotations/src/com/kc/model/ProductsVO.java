@@ -15,6 +15,8 @@ public class ProductsVO {
 	
 	private String productCode;
 	
+	private String pathSet;
+	
 	private ObservableList<ComponentsVO> list;
 	
 
@@ -64,6 +66,13 @@ public class ProductsVO {
 
 	public void setList(ObservableList<ComponentsVO> list) {
 		this.list = list;
+	}
+	public String getPathSet() {
+		return pathSet;
+	}
+
+	public void setPathSet(String pathSet) {
+		this.pathSet = pathSet;
 	}
 	public String toString()
 	{
