@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.model.ComponentsVO;
 import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.util.DBConnector;
 
 
@@ -122,6 +123,28 @@ public class PriceEstimationDAO {
 		}
 		LOG.info("Exit : getEnquries");
 		return listOfEnquries;
+	}
+	public void deletePriceEstimation(EnquiryViewVO enquiryViewVO) throws Exception
+	{
+
+		LOG.info("Enter : deletePriceEstimation");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM ENQUIRY_COMPONENT WHERE ENQUIRY_ID=?");
+			preparedStatement.setInt(1, enquiryViewVO.getId());
+			preparedStatement.execute();
+			
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation=? WHERE ID=?");
+			preparedStatement.setString(1,"N");
+			preparedStatement.setInt(2, enquiryViewVO.getId());
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deletePriceEstimation");
+	
 	}
 }
 
