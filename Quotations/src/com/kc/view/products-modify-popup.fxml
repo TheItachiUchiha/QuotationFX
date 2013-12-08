@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxWidth="-Infinity" prefHeight="401.0" prefWidth="833.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyPopUpController">
+  <!-- TODO Add Nodes -->
+  <bottom>
+    <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
+      <children>
+        <HBox fx:id="modifyHBox" alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" visible="true">
+          <children>
+            <Button mnemonicParsing="false" onAction="#modifyProduct" text="Modify" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="800.0" spacing="10.0">
+          <children>
+            <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
+              <font>
+                <Font size="15.0" />
+              </font>
+            </Label>
+          </children>
+        </HBox>
+      </children>
+      <padding>
+        <Insets top="10.0" />
+      </padding>
+    </VBox>
+  </bottom>
+  <center>
+    <VBox fx:id="tableVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true">
+      <children>
+        <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" visible="true" VBox.vgrow="ALWAYS">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Component Name" fx:id="componentName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="70.0" text="Category" fx:id="category" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="SubCategory" fx:id="subcategory" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="51.0" text="Vendor" fx:id="vendor" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="57.0" text="Model" fx:id="model" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="65.0" text="Type" fx:id="type" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="61.0" text="Size" fx:id="size" />
+            <TableColumn prefWidth="75.0" text="Quantity" fx:id="quantity" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="64.0" text="Cost Price" fx:id="costPrice" />
+            <TableColumn prefWidth="75.0" text="Dealer Price" fx:id="dealerPrice" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="94.0" text="End User Price" fx:id="endUserPrice" />
+            <TableColumn prefWidth="75.0" text="Action" fx:id="action" />
+          </columns>
+        </TableView>
+        <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
+          <children>
+            <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" text="Add Component" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </center>
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+  <top>
+    <VBox prefHeight="-1.0" prefWidth="-1.0">
+      <children>
+        <GridPane fx:id="showGrid" alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="-1.0" visible="true">
+          <children>
+            <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField id="productCategory" fx:id="productCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <TextField id="productSubCategory" fx:id="productSubCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <TextField id="productName" fx:id="productNameTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <TextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+        </GridPane>
+      </children>
+    </VBox>
+  </top>
+</BorderPane>
