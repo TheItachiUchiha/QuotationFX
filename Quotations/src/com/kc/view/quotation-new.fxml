@@ -24,7 +24,7 @@
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
           <children>
             <Button mnemonicParsing="false" text="Create Quotation" />
-            <Label id="messageQuotation" fx:id="messageNewQuotation" prefWidth="185.0" text="Label" />
+            <Label id="messageQuotation" fx:id="message" prefWidth="185.0" text="Label" />
           </children>
         </VBox>
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
@@ -129,9 +129,7 @@
             <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="21.0" prefWidth="144.0" promptText="">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
+                  
                 </FXCollections>
               </items>
               <HBox.margin>
@@ -142,13 +140,11 @@
             <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
+                 
                 </FXCollections>
               </items>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Search" />
+            <Button fx:id="search" mnemonicParsing="false" text="Search" />
           </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER" prefHeight="42.0" prefWidth="874.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
@@ -157,14 +153,12 @@
             <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
+                  
                 </FXCollections>
               </items>
             </ComboBox>
             <Button fx:id="enquiryDetails" mnemonicParsing="false" text="Enquire Details" />
-            <Button mnemonicParsing="false" text="Prepare Quotation " />
+            <Button fx:id="prepareQuotation" mnemonicParsing="false" text="Prepare Quotation " />
           </children>
         </HBox>
       </children>
