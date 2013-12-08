@@ -194,6 +194,7 @@ public class PriceEstimationModifyController implements Initializable{
 	
 	public static Stage stage;
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try
@@ -428,6 +429,13 @@ public class PriceEstimationModifyController implements Initializable{
 			if(componentTable.getItems().size()==0)
 			{
 				message.setText(CommonConstants.NO_PRODUCT_COMPONENT);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(marginValue.getText().equals(""))
+			{
+				message.setText(CommonConstants.MARGIN_VALUE_ABSENT);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
 				message.setVisible(true);

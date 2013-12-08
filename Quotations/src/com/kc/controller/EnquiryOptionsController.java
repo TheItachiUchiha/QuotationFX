@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.EnquiryDAO;
 import com.kc.util.Encryption;
+import com.kc.util.Validation;
 
 public class EnquiryOptionsController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(EnquiryNewController.class);
@@ -43,20 +44,13 @@ public class EnquiryOptionsController implements Initializable {
 	private Button clear;
 	@FXML
 	private Label message;
-	/*@FXML
-	private Label messageUsername;
-	@FXML
-	private Label messagePassword;
-	@FXML
-	private Label messageBranchCode;
-	@FXML
-	private Label messageDefaultCode;*/
 	@FXML
 	private TextField folderPath;
 	@FXML
 	private Button browse;
 	private EnquiryDAO enquiryDAO;
 	private Encryption encryption;
+	private Validation validation;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	
@@ -65,7 +59,7 @@ public class EnquiryOptionsController implements Initializable {
 	public EnquiryOptionsController() {
 		enquiryDAO=new EnquiryDAO();
 		encryption = new Encryption("");
-		
+		validation = new Validation();
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -113,12 +107,26 @@ public class EnquiryOptionsController implements Initializable {
 	{
 		try
 		{
-			defaultValues.put(CommonConstants.KEY_ENQUIRY_PATH, folderPath.getText());
-			defaultValues.put(CommonConstants.KEY_ENQUIRY_BRANCH_CODE, branchCode.getText());
-			defaultValues.put(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE, defaultCode.getText());
-			defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME, username.getText());
-			defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, encryption.encrypt(password.getText()));
-			enquiryDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
+			if(validation.isEmpty(folderPath,branchCode,defaultCode,username,password))
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else
+			{
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_PATH, folderPath.getText().replace("\\", "\\\\"));
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_BRANCH_CODE, branchCode.getText());
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE, defaultCode.getText());
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME, username.getText());
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, encryption.encrypt(password.getText()));
+				enquiryDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
+				message.setText(CommonConstants.CONF_SAVED);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
+			}
 		}
 		catch (Exception e) {
 			message.setText(CommonConstants.OPTION_ERROR);

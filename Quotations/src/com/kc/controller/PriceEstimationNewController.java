@@ -518,22 +518,39 @@ public class PriceEstimationNewController implements Initializable {
 	}
 	public void savePriceEstimation()
 	{
-		EnquiryVO enquiryVO=new EnquiryVO();
-		enquiryVO.setList(componentTable.getItems());
-		for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+		if(componentTable.getItems().size()==0)
 		{
-			if(enquiryViewVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
-			{
-				enquiryVO.setId(enquiryViewVO.getId());	
-				enquiryVO.setMargin(Double.parseDouble(marginValue.getText()));
-				enquiryVO.setPeDate(formatter.format(new Date()));
-			}
+			message.setText(CommonConstants.NO_PRODUCT_COMPONENT);
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
+			message.setVisible(true);
 		}
-		priceEstimationDAO.savePriceEstimation(enquiryVO);
-		message.setText(CommonConstants.PE_SUCCESS);
-		message.getStyleClass().remove("failure");
-		message.getStyleClass().add("success");
-		message.setVisible(true);
+		else if(marginValue.getText().equals(""))
+		{
+			message.setText(CommonConstants.MARGIN_VALUE_ABSENT);
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
+			message.setVisible(true);
+		}
+		else
+		{
+			EnquiryVO enquiryVO=new EnquiryVO();
+			enquiryVO.setList(componentTable.getItems());
+			for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+			{
+				if(enquiryViewVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
+				{
+					enquiryVO.setId(enquiryViewVO.getId());	
+					enquiryVO.setMargin(Double.parseDouble(marginValue.getText()));
+					enquiryVO.setPeDate(formatter.format(new Date()));
+				}
+			}
+			priceEstimationDAO.savePriceEstimation(enquiryVO);
+			message.setText(CommonConstants.PE_SUCCESS);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
+			message.setVisible(true);
+		}
 	}
 	public void fillComponentTable()
 	{

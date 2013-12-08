@@ -310,7 +310,7 @@ public class ProductViewController implements Initializable{
                 }
             });
         	
-        	/*cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
+        	cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
         		 
                 @Override
                 public void handle(ActionEvent t) {
@@ -331,10 +331,10 @@ public class ProductViewController implements Initializable{
 						modifyStage.setScene(modifyScene);
 						modifyStage.show();
 						
-						((ComponentsModifyController) menuLoader.getController())
+						/*((ComponentsModifyController) menuLoader.getController())
 								.fillTextFieldValues(ButtonCell.this
 										.getTableView().getItems()
-										.get(ButtonCell.this.getIndex()));
+										.get(ButtonCell.this.getIndex()).getList());*/
 						modifyStage
 								.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
@@ -359,7 +359,7 @@ public class ProductViewController implements Initializable{
 					}
                 	LOG.info("Exit : handle");
                 }
-            });*/
+            });
         }
  
         //Display button if the row is not empty
@@ -373,7 +373,7 @@ public class ProductViewController implements Initializable{
             }
         }
     }
-	/*private void updateAutoField(ProductsVO productsVO, String t1) {
+	private void updateAutoField(ProductsVO productsVO, String t1) {
 		if(t1.equals("Product Category"))
         {
         	keyword.setText(productsVO.getProductCategory());
@@ -390,5 +390,5 @@ public class ProductViewController implements Initializable{
         {
         	keyword.setText(productsVO.getProductCode());
         }
-	}*/
+	}
 }

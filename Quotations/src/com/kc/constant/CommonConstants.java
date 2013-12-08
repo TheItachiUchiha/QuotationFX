@@ -57,6 +57,8 @@ public class CommonConstants
 	public static final String PE_SUCCESS = "PE Done";
 	public static final String NO_REFERENCE = "Please Select a Reference Number";
 	public static final String VIEW_ENQUIRY = "Please See Enquiry Details";
+	public static final String MARGIN_VALUE_ABSENT = "Please Provide a Margin Value";
+	public static final String CONF_SAVED = "Configuration Saved Successfully";
 
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;

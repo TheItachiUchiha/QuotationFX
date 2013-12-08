@@ -24,6 +24,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
@@ -97,6 +98,9 @@ public class PriceEstimationESController implements Initializable{
     @FXML
     private ComboBox<String> yearCombo;
     
+    @FXML
+    private GridPane gridPane;
+    
     private String flag="";
     
     private ObservableList<String> monthList = FXCollections.observableArrayList();
@@ -148,6 +152,8 @@ public class PriceEstimationESController implements Initializable{
 								totalEnquiry.setText(String.valueOf(processedEnquiryList.size()+unprocessedEnquiryList.size()));
 								processedEnquiry.setText(String.valueOf(processedEnquiryList.size()));
 								unProcessedEnquiry.setText(String.valueOf(unprocessedEnquiryList.size()));
+								gridPane.setVisible(true);
+								enquiryTable.setVisible(false);
 							}
 						}
 					}
@@ -189,6 +195,8 @@ public class PriceEstimationESController implements Initializable{
 								totalEnquiry.setText(String.valueOf(processedEnquiryList.size()+unprocessedEnquiryList.size()));
 								processedEnquiry.setText(String.valueOf(processedEnquiryList.size()));
 								unProcessedEnquiry.setText(String.valueOf(unprocessedEnquiryList.size()));
+								gridPane.setVisible(true);
+								enquiryTable.setVisible(false);
 							}
 						}
 					}
@@ -230,12 +238,14 @@ public class PriceEstimationESController implements Initializable{
 	{
 		flag = "P";
 		fillComponentTable(processedEnquiryList);
+		enquiryTable.setVisible(true);
 	}
 	
 	public void viewUnProcessedList()
 	{
 		flag = "U";
 		fillComponentTable(unprocessedEnquiryList);
+		enquiryTable.setVisible(true);
 	}
 	
 	
