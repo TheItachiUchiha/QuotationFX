@@ -30,12 +30,13 @@ public class ProductsDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO products(name,category,subcategory,code) VALUES(?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+					.prepareStatement("INSERT INTO products(name,category,subcategory,code, path_set) VALUES(?, ?, ?, ?,?)", Statement.RETURN_GENERATED_KEYS);
 	
 			preparedStatement.setString(1, productsVO.getProductName());
 			preparedStatement.setString(2, productsVO.getProductCategory());
 			preparedStatement.setString(3, productsVO.getProductSubCategory());
 			preparedStatement.setString(4, productsVO.getProductCode());
+			preparedStatement.setString(5, productsVO.getPathSet());
 			preparedStatement.execute();
 			resultSet = preparedStatement.getGeneratedKeys();
 			while(resultSet.next())

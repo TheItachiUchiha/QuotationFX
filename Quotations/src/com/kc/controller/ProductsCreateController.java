@@ -244,6 +244,7 @@ public class ProductsCreateController implements Initializable{
 			productsVO.setProductSubCategory(productSubCategory.getText());
 			productsVO.setProductName(productName.getText());
 			productsVO.setProductCode(productCode.getText());
+			productsVO.setPathSet("N");
 			productsVO.setList(componentTable.getItems());
 			productsDAO.saveProducts(productsVO);
 			message.setText(CommonConstants.PRODUCT_ADD_SUCCESS);
