@@ -58,6 +58,7 @@ public class EnquiryViewController implements Initializable {
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
+	public static Stage viewStage;
 	
 	public EnquiryViewController()
 	{
@@ -659,7 +660,7 @@ public class EnquiryViewController implements Initializable {
 							.getResource("../view/enquiry-view-popup.fxml"));
 					BorderPane enquiryView;
 					enquiryView = (BorderPane) menuLoader.load();
-					Stage viewStage = new Stage();
+					viewStage = new Stage();
 					Scene viewScene = new Scene(enquiryView);
 					viewStage.setResizable(false);
 					viewStage.setHeight(650);

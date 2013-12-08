@@ -316,25 +316,23 @@ public class ProductViewController implements Initializable{
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
                 	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/components-modify.fxml"));
+								.getResource("../view/products-modify-popup.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
-						componentModify.setTop(new HBox());
-						componentModify.getCenter().setVisible(true);
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(componentModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(500);
-						modifyStage.setWidth(600);
+						modifyStage.setHeight(600);
+						modifyStage.setWidth(925);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);
 						modifyStage.setScene(modifyScene);
 						modifyStage.show();
 						
-						/*((ComponentsModifyController) menuLoader.getController())
+						((ProductsModifyPopUpController) menuLoader.getController())
 								.fillTextFieldValues(ButtonCell.this
 										.getTableView().getItems()
-										.get(ButtonCell.this.getIndex()).getList());*/
+										.get(ButtonCell.this.getIndex()));
 						modifyStage
 								.setOnCloseRequest(new EventHandler<WindowEvent>() {
 

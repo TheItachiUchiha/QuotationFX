@@ -139,7 +139,7 @@ public class QuotationModifyController implements Initializable  {
 					try {
 						Desktop.getDesktop().open(new File(ecustomerFile.getText()));
 					} catch (IOException e) {
-						e.printStackTrace();
+							Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 					}
 				}
 			});

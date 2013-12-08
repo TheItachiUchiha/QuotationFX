@@ -8,10 +8,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
+import com.kc.constant.CommonConstants;
 import com.kc.model.EnquiryViewVO;
 
 
@@ -99,7 +101,7 @@ public class EnquiryViewPopUpController {
 				try {
 					Desktop.getDesktop().open(new File(customerFile.getText()));
 				} catch (IOException e) {
-					e.printStackTrace();
+					Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 				}
 			}
 		});
