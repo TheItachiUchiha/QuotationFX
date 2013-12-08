@@ -126,7 +126,6 @@ public class PriceEstimationDAO {
 	}
 	public void deletePriceEstimation(EnquiryViewVO enquiryViewVO) throws Exception
 	{
-
 		LOG.info("Enter : deletePriceEstimation");
 		try {
 			conn = DBConnector.getConnection();
@@ -134,7 +133,7 @@ public class PriceEstimationDAO {
 			preparedStatement.setInt(1, enquiryViewVO.getId());
 			preparedStatement.execute();
 			
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation=? WHERE ID=?");
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation=?, pe_date='N/A' WHERE ID=?");
 			preparedStatement.setString(1,"N");
 			preparedStatement.setInt(2, enquiryViewVO.getId());
 			preparedStatement.execute();
@@ -144,7 +143,6 @@ public class PriceEstimationDAO {
 			throw e;
 		}
 		LOG.info("Exit : deletePriceEstimation");
-	
 	}
 }
 

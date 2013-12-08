@@ -113,63 +113,18 @@ public class EnquiryOptionsController implements Initializable {
 	{
 		try
 		{
-			if(!folderPath.getText().equals("")||!branchCode.getText().equals("")||!defaultCode.getText().equals("")||!username.getText().equals("")||!password.getText().equals(""))
-			{
-				if(!folderPath.getText().equals(""))
-				{
-					enquiryDAO.saveEnquirylocation(folderPath.getText(), simpleDateFormat.format(new Date()));
-					message.setText(CommonConstants.NEW_CONFIGURATION);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-	
-				}
-				if(!branchCode.getText().equals(""))
-				{
-					enquiryDAO.saveBranchCode(branchCode.getText(), simpleDateFormat.format(new Date()));
-					message.setText(CommonConstants.NEW_CONFIGURATION);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-	
-				}
-				if(!defaultCode.getText().equals(""))
-				{
-					enquiryDAO.saveDefaultCode(defaultCode.getText(), simpleDateFormat.format(new Date()));
-					message.setText(CommonConstants.NEW_CONFIGURATION);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-	
-				}
-				if(!username.getText().equals(""))
-				{
-					enquiryDAO.saveEmailUsername(username.getText(), simpleDateFormat.format(new Date()));
-					message.setText(CommonConstants.NEW_CONFIGURATION);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-	
-				}
-				if(!password.getText().equals(""))
-				{
-					enquiryDAO.saveEmailPassword(encryption.encrypt(password.getText()), simpleDateFormat.format(new Date()));
-					message.setText(CommonConstants.NEW_CONFIGURATION);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-	
-				}
-			}
-			else
-			{
-				message.setText(CommonConstants.OPTION_ERROR);
-				message.getStyleClass().remove("success");
-				message.getStyleClass().add("failure");
-				message.setVisible(true);
-			}
+			defaultValues.put(CommonConstants.KEY_ENQUIRY_PATH, folderPath.getText());
+			defaultValues.put(CommonConstants.KEY_ENQUIRY_BRANCH_CODE, branchCode.getText());
+			defaultValues.put(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE, defaultCode.getText());
+			defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME, username.getText());
+			defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, encryption.encrypt(password.getText()));
+			enquiryDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
 		}
 		catch (Exception e) {
+			message.setText(CommonConstants.OPTION_ERROR);
+			message.getStyleClass().remove("success");
+			message.getStyleClass().add("failure");
+			message.setVisible(true);
 			LOG.error(e.getMessage());
 		}
 	}

@@ -8,7 +8,9 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +46,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -59,6 +61,8 @@ public class EnquiryDAO {
 			preparedStatement.setString(12, enquiryVO.getFlag());
 			preparedStatement.setString(13, enquiryVO.getRefNumber());
 			preparedStatement.setInt(14, enquiryVO.getProductId());
+			preparedStatement.setDouble(15, 0);
+			preparedStatement.setString(16, CommonConstants.NA);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -97,7 +101,7 @@ public class EnquiryDAO {
 				enquiryVO.setRefNumber(resultSet.getString(14));
 				enquiryVO.setProductId(resultSet.getInt(15));
 				enquiryVO.setMargin(resultSet.getDouble(16));
-				
+				enquiryVO.setPeDate(resultSet.getString(17));
 				listOfEnquries.add(enquiryVO);
 			}
 		}
@@ -297,76 +301,22 @@ public class EnquiryDAO {
 		return defaultPath;
 	}
 	
-	public void saveBranchCode(String code, String date) throws Exception
+	public void saveConfiguration(Map<String, String> map, String date)
 	{
-		LOG.info("Enter : saveBranchCode");
-		try
-		{
+		try{
+			Set<String> keys = map.keySet();
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
-			preparedStatement.setString(1, code);
-			preparedStatement.setString(2, date);
-			preparedStatement.setString(3, "branch_code");
-			preparedStatement.execute();
-			
-			LOG.info("Exit : saveBranchCode");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-	}
-	public void saveDefaultCode(String code, String date) throws Exception
-	{
-		LOG.info("Enter : saveDefaultCode");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
-			preparedStatement.setString(1, code);
-			preparedStatement.setString(2, date);
-			preparedStatement.setString(3, "default_code");
-			preparedStatement.execute();
-			
-			LOG.info("Exit : saveDefaultCode");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-	}
-	public void saveEmailUsername(String name, String date) throws Exception
-	{
-		LOG.info("Enter : saveEmailUsername");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
-			preparedStatement.setString(1, name);
-			preparedStatement.setString(2, date);
-			preparedStatement.setString(3, "email_username");
-			preparedStatement.execute();
-			
-			LOG.info("Exit : saveEmailUsername");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-	}
-	public void saveEmailPassword(String pwd, String date) throws Exception
-	{
-		LOG.info("Enter : saveEmailPassword");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
-			preparedStatement.setString(1, pwd);
-			preparedStatement.setString(2, date);
-			preparedStatement.setString(3, "email_password");
-			preparedStatement.execute();
-			
-			LOG.info("Exit : saveEmailPassword");
+			statement = conn.createStatement();
+			for(String key : keys)
+			{
+				String query = "UPDATE STATIC_UTIL SET `value`='";
+				query=query+map.get(key);
+				query = query + "' ,`last_updated`='";
+				query = query + date;
+				query = query + "' where `key`='" + key + "'";
+				statement.addBatch(query);
+			}
+			statement.executeBatch();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -374,66 +324,6 @@ public class EnquiryDAO {
 		}
 	}
 	
-	public String estimationConfirm(int id)
-	{
-		String flag = "";
-		LOG.info("Enter : estimationConfirm");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT priceestimation from ENQUIRY where id=?");
-			preparedStatement.setInt(1, id);
-			resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			flag = resultSet.getString(1);
-			LOG.info("Exit : estimationConfirm");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		return flag;
-	}
-	public String quotationConfirm(int id)
-	{
-		String flag = "";
-		LOG.info("Enter : quotationConfirm");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT quotationpreparation from ENQUIRY where id=?");
-			preparedStatement.setInt(1, id);
-			resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			flag = resultSet.getString(1);
-			LOG.info("Exit : quotationConfirm");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		return flag;
-	}
-	public String emailConfirm(int id)
-	{
-		String flag = "";
-		LOG.info("Enter : emailConfirm");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT emailsent from ENQUIRY where id=?");
-			preparedStatement.setInt(1, id);
-			resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			flag = resultSet.getString(1);
-			LOG.info("Exit : emailConfirm");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		return flag;
-	}
 	
 	public Map<String, String> getEnquiryOptionDefaultValues()
 	{
