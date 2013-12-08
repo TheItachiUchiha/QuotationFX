@@ -40,6 +40,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -130,6 +131,9 @@ public class PriceEstimationModifyController implements Initializable{
 	    private TextField etinNumber;
 
 	    @FXML
+	    private VBox estimationVBox;
+	    
+	    @FXML
 	    private TextField marginValue;
 
 	    @FXML
@@ -162,6 +166,7 @@ public class PriceEstimationModifyController implements Initializable{
 	    double costPriceValue=0;
 		double dealerPriceValue=0;
 		double endUserPriceValue=0;
+		int flag=0;
 	    
 	    @FXML
 	    private TableView<ComponentsVO> componentTable;
@@ -223,6 +228,8 @@ public class PriceEstimationModifyController implements Initializable{
 				public void handle(ActionEvent event) {
 					try
 					{
+						clearFields();
+						flag=0;
 						refList.clear();
 						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
@@ -251,6 +258,12 @@ public class PriceEstimationModifyController implements Initializable{
 				
 				@Override
 				public void handle(ActionEvent event) {
+					if(referenceCombo.getItems().isEmpty())
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+					}
+					else
+					{
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -272,9 +285,10 @@ public class PriceEstimationModifyController implements Initializable{
 							econtactNumber.setText(enquiryViewVO.getContactNumber());
 							ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 							epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							flag=1;
 						}
 					}
-					
+					}
 				}
 			});
 
@@ -282,6 +296,10 @@ public class PriceEstimationModifyController implements Initializable{
 				
 				@Override
 				public void handle(ActionEvent paramT) {
+					if(flag==1)
+					{
+				
+					estimationVBox.setVisible(true);
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -298,6 +316,11 @@ public class PriceEstimationModifyController implements Initializable{
 						}
 					}
 					
+					}
+					else
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.VIEW_ENQUIRY);
+					}
 				}
 			});
 			
@@ -368,7 +391,35 @@ public class PriceEstimationModifyController implements Initializable{
 		}
 		
 	}
-	
+	public void clearFields()
+	{
+		referenceNo.setText("");
+		productName.setText("");
+		eenquiryType.setText("");
+		eproductName.setText("");
+		erequirements.setText("");
+		ecustomerName.setText("");
+		ecompanyName.setText("");
+		etinNumber.setText("");
+		eemailId.setText("");
+		ereferedBy.setText("");
+		ecustomerType.setText("");
+		eaddress.setText("");
+		estate.setText("");
+		ecity.setText("");
+		econtactNumber.setText("");
+		ecustomerFile.setText("");
+		epurchasePeriod.setText("");
+		componentTable.getItems().clear();
+		costPriceTotal.setText("");
+		endUserPriceTotal.setText("");
+		dealerPriceTotal.setText("");
+		marginValue.setText("");
+		totalProfit.setText("");
+		message.setText("");
+		estimationVBox.setVisible(false);
+		
+	}
 	public void updatePriceEstimation()
 	{
 		LOG.info("Enter : updatePriceEstimation");

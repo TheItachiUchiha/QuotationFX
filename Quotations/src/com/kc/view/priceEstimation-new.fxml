@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="615.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationNewController">
+<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="654.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationNewController">
   <!-- TODO Add Nodes -->
   <center>
-    <VBox fx:id="estimationVBox" alignment="TOP_LEFT" maxWidth="-1.0" minWidth="-1.0" prefHeight="507.0" prefWidth="973.0000999999975" spacing="5.0" visible="true" BorderPane.alignment="TOP_CENTER">
+    <VBox fx:id="estimationVBox" alignment="TOP_LEFT" maxWidth="-1.0" minWidth="-1.0" prefHeight="507.0" prefWidth="973.0000999999975" spacing="5.0" visible="false" BorderPane.alignment="TOP_CENTER">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
           <children>
@@ -57,9 +57,9 @@
                 <Label id="de" fx:id="dealerPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <Label id="ensUserPriceTotal" fx:id="endUserPriceTotal" prefHeight="21.0" prefWidth="119.00009999999747" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label prefHeight="21.0" prefWidth="78.0" text="Margin Value" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="120.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <children>
-                    <TextField fx:id="marginValue" maxWidth="-Infinity" prefWidth="118.99990000000253" />
+                    <TextField fx:id="marginValue" maxWidth="-Infinity" prefWidth="43.0" />
                     <Label text="\%" />
                   </children>
                 </HBox>
@@ -80,11 +80,16 @@
             </GridPane>
           </children>
         </VBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="29.0" prefWidth="595.0" spacing="5.0">
+        <VBox id="VBox" alignment="CENTER" prefHeight="47.0" spacing="5.0">
           <children>
-            <Button id="savePriceEstimation" mnemonicParsing="false" onAction="#savePriceEstimation" text="Save and Process" />
+            <HBox id="HBox" alignment="CENTER" prefHeight="29.0" prefWidth="595.0" spacing="5.0">
+              <children>
+                <Button id="savePriceEstimation" mnemonicParsing="false" onAction="#savePriceEstimation" text="Save and Process" />
+              </children>
+            </HBox>
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="256.0" text="" />
           </children>
-        </HBox>
+        </VBox>
       </children>
       <BorderPane.margin>
         <Insets left="10.0" top="10.0" />
@@ -162,24 +167,16 @@
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
           <children>
-            <Label minHeight="13.999908447265625" prefHeight="21.0" prefWidth="59.000099999997474" text="Month" />
+            <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="50.0" text="Month" />
             <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="176.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Label prefHeight="21.0" prefWidth="43.0" text="Year" />
+            <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="50.0" text="Year" />
             <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="176.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Button fx:id="search" mnemonicParsing="false" text="Search" />
@@ -190,18 +187,14 @@
         </HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" VBox.margin="$x1">
           <children>
-            <Label prefHeight="21.0" prefWidth="59.0" text="Enquiry" />
+            <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="50.0" text="Enquiry" />
             <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="176.0" promptText="Select a Reference No">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Button fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="120.0" text="Enquiry Details" />
-            <Button fx:id="createPriceEstimation" mnemonicParsing="false" prefHeight="23.0" prefWidth="162.0" text="Create Price Estimation" />
+            <Button fx:id="createPriceEstimation" minHeight="19.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="167.0" text="Create Price Estimation" />
           </children>
         </HBox>
       </children>

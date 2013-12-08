@@ -50,11 +50,14 @@ public class CommonConstants
 	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";
 	public static final String EMAIL_BODY = "BODY";
 	public static final String REMINDER_NO = "1,2,3,4,5,6,7,8,9,10";
-	public static final String YEARS = "2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030";
+	public static final String YEARS = "2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030";
 	public static final String WARNING_MESSAGE = "Please Select Year and Month Before Proceeding";
 	public static final String PE_MODIFY_SUCCESS = "PE Modified";
-	
-	//SQL EXCEPTIONS
+	public static final String PE_SUCCESS = "PE Done";
+	public static final String NO_REFERENCE = "Please Select a Reference Number";
+	public static final String VIEW_ENQUIRY = "Please See Enquiry Details";
+
+	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
 }

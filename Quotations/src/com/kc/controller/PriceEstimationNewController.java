@@ -1,6 +1,7 @@
 package com.kc.controller;
 
 import java.awt.Desktop;
+import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -178,6 +179,8 @@ public class PriceEstimationNewController implements Initializable {
     @FXML
     private Label totalProfit;
     @FXML
+    private Label message;
+    @FXML
     private Button viewFile;
 
     @FXML
@@ -185,6 +188,7 @@ public class PriceEstimationNewController implements Initializable {
 	double costPriceValue=0;
 	double dealerPriceValue=0;
 	double endUserPriceValue=0;
+	int flag=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -212,14 +216,20 @@ public class PriceEstimationNewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					
-					estimationVBox.setVisible(true);
+					if(flag==1)
+					{
 					try {
+							estimationVBox.setVisible(true);
 							componentList = productsDAO.getComponentsForProduct(productId);
 							fillComponentTable();
 						} 
 					catch (SQLException e) {
 						e.printStackTrace();
+					}
+					}
+					else
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.VIEW_ENQUIRY);
 					}
 				}
 			});
@@ -308,6 +318,8 @@ public class PriceEstimationNewController implements Initializable {
 				public void handle(ActionEvent event) {
 					try
 					{
+						clearFields();
+						flag=0;
 						refList.clear();
 						for(EnquiryViewVO enquiryVO : enquiryViewList)
 						{
@@ -336,6 +348,10 @@ public class PriceEstimationNewController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent event) {
+					if(referenceCombo.getItems().isEmpty())
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+					}
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -359,6 +375,7 @@ public class PriceEstimationNewController implements Initializable {
 							econtactNumber.setText(enquiryViewVO.getContactNumber());
 							ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 							epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							flag=1;
 							
 						}
 					}
@@ -397,6 +414,35 @@ public class PriceEstimationNewController implements Initializable {
 	public TableView<ComponentsVO> getComponentTable() {
 			return componentTable;
 		}
+	public void clearFields()
+	{
+		referenceNo.setText("");
+		productName.setText("");
+		eenquiryType.setText("");
+		eproductName.setText("");
+		erequirements.setText("");
+		ecustomerName.setText("");
+		ecompanyName.setText("");
+		etinNumber.setText("");
+		eemailId.setText("");
+		ereferedBy.setText("");
+		ecustomerType.setText("");
+		eaddress.setText("");
+		estate.setText("");
+		ecity.setText("");
+		econtactNumber.setText("");
+		ecustomerFile.setText("");
+		epurchasePeriod.setText("");
+		componentTable.getItems().clear();
+		costPriceTotal.setText("");
+		endUserPriceTotal.setText("");
+		dealerPriceTotal.setText("");
+		marginValue.setText("");
+		totalProfit.setText("");
+		message.setText("");
+		estimationVBox.setVisible(false);
+		
+	}
 	public void addComponent()
 	{
 		LOG.info("Enter : addComponent");
@@ -484,6 +530,10 @@ public class PriceEstimationNewController implements Initializable {
 			}
 		}
 		priceEstimationDAO.savePriceEstimation(enquiryVO);
+		message.setText(CommonConstants.PE_SUCCESS);
+		message.getStyleClass().remove("failure");
+		message.getStyleClass().add("success");
+		message.setVisible(true);
 	}
 	public void fillComponentTable()
 	{
