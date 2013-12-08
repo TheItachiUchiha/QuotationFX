@@ -265,7 +265,7 @@ public class PriceEstimationViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-							.getResource("../view/priceEstimation-modify.fxml"));
+							.getResource("../view/priceEstimation-modify-popUp.fxml"));
 					BorderPane priceEstimationModify;
 					priceEstimationModify = (BorderPane) menuLoader.load();
 					Stage modifyStage = new Stage();
@@ -277,6 +277,10 @@ public class PriceEstimationViewController implements Initializable {
 					modifyStage.initOwner(LoginController.primaryStage);
 					modifyStage.setScene(modifyScene);
 					modifyStage.show();
+					((PriceEstimationModifyPopupController) menuLoader.getController())
+					.fillTextFieldValues(ButtonCell.this
+							.getTableView().getItems()
+							.get(ButtonCell.this.getIndex()));
 					modifyStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) {
