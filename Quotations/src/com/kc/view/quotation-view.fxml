@@ -47,7 +47,7 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button mnemonicParsing="false" text="Search" />
+        <Button fx:id="search" mnemonicParsing="false" text="Search" />
       </children>
     </HBox>
   </top>
