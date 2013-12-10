@@ -37,6 +37,7 @@ import com.kc.dao.QuotationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.FileUtils;
 import com.kc.util.Validation;
 
 public class QuotationEmailController implements Initializable  {
@@ -165,6 +166,7 @@ public class QuotationEmailController implements Initializable  {
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
+	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -243,6 +245,7 @@ public class QuotationEmailController implements Initializable  {
 								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
 								ecustomerDocument.setText(enquiryViewVO.getCustomerFile());
 								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+								QuotationEmailController.this.enquiryViewVO = enquiryViewVO;
 							}
 						}
 						flag=1;
@@ -393,5 +396,34 @@ public class QuotationEmailController implements Initializable  {
 			tempList.add(enquiryViewVO);
 		}
 		return tempList;
+	}
+	
+	public void createPDF()
+	{
+		try{
+			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
+			{
+				defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
+			}
+			else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("CUSTOM"))
+			{
+				defaultValues = quotationDAO.getCustomDefaultValues();
+			}
+			
+			File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+productName.getText()+".docx");
+			if(file.exists())
+			{
+				FileUtils.createPDF(file, defaultValues.get(CommonConstants.KEY_QUOTATION_PDF_PATH));
+			}
+			else
+			{
+				Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		
 	}
 }

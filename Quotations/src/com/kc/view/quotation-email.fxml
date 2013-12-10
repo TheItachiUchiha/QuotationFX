@@ -25,7 +25,7 @@
             <HBox id="HBox" alignment="CENTER" spacing="10.0">
               <children>
                 <Button fx:id="openQuotation" mnemonicParsing="false" text="Open Quotation" />
-                <Button mnemonicParsing="false" text="Create Pdf" />
+                <Button mnemonicParsing="false" onAction="#createPDF" text="Create Pdf" />
                 <Button mnemonicParsing="false" text="Open Pdf" />
                 <Button mnemonicParsing="false" text="Delete Pdf" />
               </children>
