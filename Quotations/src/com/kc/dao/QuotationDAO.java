@@ -133,15 +133,15 @@ public class QuotationDAO {
 			e.printStackTrace();
 		}
 	}
-	public void UpdateEnquiry(int id, String string)
+	public void UpdateEnquiry(int id, String status, String date )
 	{
 		try
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET quotationpreparation=?, QP_DATE=? where ID=?");
 			
-			preparedStatement.setString(1, "Y");
-			preparedStatement.setString(2, string);
+			preparedStatement.setString(1, status);
+			preparedStatement.setString(2, date);
 			preparedStatement.setInt(3, id);
 			preparedStatement.execute();
 		}

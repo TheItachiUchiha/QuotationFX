@@ -263,11 +263,11 @@ public class QuotationModifyController implements Initializable  {
 						}
 						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
 						{
-							defaultValues = quotationDAO.getCustomDefaultValues();
+							defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
 						}
 						else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
 						{
-							defaultValues=quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
+							defaultValues=quotationDAO.getCustomDefaultValues();
 						}
 					}
 					else
@@ -320,7 +320,7 @@ public class QuotationModifyController implements Initializable  {
 					{
 						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
 					}
-					catch (IOException e)
+					catch (Exception e)
 					{
 						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 					}
@@ -335,6 +335,7 @@ public class QuotationModifyController implements Initializable  {
 					if(file.exists())
 					{
 						FileUtils.deleteFile(file);
+						quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"N",CommonConstants.NA);
 					}
 					else
 					{

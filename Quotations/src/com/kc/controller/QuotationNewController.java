@@ -307,7 +307,7 @@ public class QuotationNewController implements Initializable {
 									priceEstimationDate.setText(enquiryViewVO.getPeDate());
 									estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
 									quotationGrid.setVisible(true);
-									defaultValues = quotationDAO.getCustomDefaultValues();
+									defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
 								}
 								else
 								{
@@ -345,7 +345,7 @@ public class QuotationNewController implements Initializable {
 					{			
 						Desktop.getDesktop().open(new File(newFileName));
 					}
-					catch (IOException e)
+					catch (Exception e)
 					{
 						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 					}
@@ -369,7 +369,7 @@ public class QuotationNewController implements Initializable {
 			message.getStyleClass().add("success");
 			message.setVisible(true);
 			openQuotation.setVisible(true);
-			quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),formatter.format(new Date()));
+			quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"Y",formatter.format(new Date()));
 		}
 		else
 		{
