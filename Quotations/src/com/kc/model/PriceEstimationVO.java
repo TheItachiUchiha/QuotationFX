@@ -9,7 +9,8 @@ public class PriceEstimationVO {
 	private static final Logger LOG = LogManager.getLogger(PriceEstimationVO.class);
 	
 	private String productCategory;
-private String subCategory;
+	
+	private String subCategory;
 	
 	private String productName;
 	

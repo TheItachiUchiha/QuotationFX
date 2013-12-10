@@ -196,25 +196,7 @@ public class PriceEstimationModifyPopupController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
-			
-		productName.setEditable(false);
-		referenceNo.setEditable(false);
-		eaddress.setEditable(false);
-		ecity.setEditable(false);
-		ecompanyName.setEditable(false);
-		econtactNumber.setEditable(false);
-		ecustomerFile.setEditable(false);
-		ecustomerName.setEditable(false);
-		ecustomerType.setEditable(false);
-		eemailId.setEditable(false);
-		eenquiryType.setEditable(false);
-		endUserPrice.setEditable(false);
-		eproductName.setEditable(false);
-		epurchasePeriod.setEditable(false);
-		ereferedBy.setEditable(false);
-		erequirements.setEditable(false);
-		estate.setEditable(false);
-		etinNumber.setEditable(false);
+
 		validation.allowAsPercentage(marginValue);
 		customerList = customersDAO.getCustomers();
 		enquiryList = enquiryDAO.getEnquries();

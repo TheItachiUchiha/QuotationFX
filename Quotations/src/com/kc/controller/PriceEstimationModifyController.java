@@ -207,22 +207,6 @@ public class PriceEstimationModifyController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
-			referenceNo.setEditable(false);
-			productName.setEditable(false);
-			eenquiryType.setEditable(false);
-			eproductName.setEditable(false);
-			erequirements.setEditable(false);
-			ecustomerFile.setEditable(false);
-			ecustomerType.setEditable(false);
-			ecustomerName.setEditable(false);
-			etinNumber.setEditable(false);
-			eemailId.setEditable(false);
-			ereferedBy.setEditable(false);
-			eaddress.setEditable(false);
-			estate.setEditable(false);
-			ecity.setEditable(false);
-			econtactNumber.setEditable(false);
-			epurchasePeriod.setEditable(false);
 			componentTable.setEditable(true);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));

@@ -21,6 +21,8 @@ public class EnquiryVO {
 	private int productId;
 	private double margin;
 	private String peDate;
+	private String qpDate;
+	private String mailSentDate;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -136,6 +138,18 @@ public class EnquiryVO {
 	}
 	public void setPeDate(String peDate) {
 		this.peDate = peDate;
+	}
+	public String getQpDate() {
+		return qpDate;
+	}
+	public void setQpDate(String qpDate) {
+		this.qpDate = qpDate;
+	}
+	public String getMailSentDate() {
+		return mailSentDate;
+	}
+	public void setMailSentDate(String mailSentDate) {
+		this.mailSentDate = mailSentDate;
 	}	
 	
 }

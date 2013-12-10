@@ -5,13 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -37,14 +42,47 @@ public class QuotationViewController implements Initializable  {
 		validation = new Validation();
 	}
 	
-	@FXML
-	private ComboBox<String> monthCombo;
-	@FXML
-	private ComboBox<String> yearCombo;
-	@FXML
-	private ComboBox<String> referenceCombo;
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> companyName;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> customerName;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> dateOfEnquiry;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> dateOfPe;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> dateOfQp;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> dateOfEmailSent;
+
+	    @FXML
+	    private ComboBox<String> monthCombo;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> productName;
+
+	    @FXML
+	    private TableView<EnquiryViewVO> quotationTable;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> referedBy;
+
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> referenceNo;
+
+	    @FXML
+	    private Button search;
+
+	    @FXML
+	    private ComboBox<String> yearCombo;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
+	private ObservableList<String> yearList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
@@ -56,40 +94,74 @@ public class QuotationViewController implements Initializable  {
 		try
 		{
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
+			yearCombo.setItems(yearList);
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-			
+			search.setOnAction(new EventHandler<ActionEvent>() {
+				
 				@Override
-				public void changed(ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-					try{
-						refList.clear();
-						if(newValue!=null && !newValue.equals(oldValue))
-						{
-							for(EnquiryViewVO enquiryVO : enquiryViewList)
-							{
-								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(newValue)&&(enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y")&&(enquiryVO.getEmailSent()).equalsIgnoreCase("Y"))
-								{
-									refList.add(enquiryVO.getReferenceNo());
-								}
-							}
-						}
-						referenceCombo.setItems(refList);
-					}
-					catch(Exception e)
+				public void handle(ActionEvent paramT) {
+					
+					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
-						e.printStackTrace();
-						LOG.error(e.getMessage());
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
 					}
+					else
+					{
+						quotationTable.setVisible(true);
+						fillTable();
+					}
+					
 				}
-			});		}
+			});
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+	}
+	public void fillTable()
+	{
+
+		try
+		{
+			enquiryList = enquiryDAO.getEnquries();
+			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			refList.clear();
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()) && new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()) && (enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y") && (enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y")&& (enquiryVO.getEmailSent()).equalsIgnoreCase("Y"))
+				{
+					refList.add(enquiryVO.getReferenceNo());
+				}
+			}
+			if(refList.isEmpty())
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+			}
+			else
+			{
+				quotationTable.setItems(enquiryViewList);
+				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+				productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+				dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+				dateOfPe.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
+				dateOfQp.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
+				dateOfEmailSent.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("mailSentDate"));
+			}
+		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+	
 	}
 	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
 	{
@@ -112,7 +184,11 @@ public class QuotationViewController implements Initializable  {
 			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
 			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
 			enquiryViewVO.setSales(enquiryVO.getSales());
+			enquiryViewVO.setQpDate(enquiryVO.getQpDate());
+			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
+			enquiryViewVO.setMailSentDate(enquiryVO.getMailSentDate());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
+				
 			{
 				enquiryViewVO.setEnquiryType("Custom");
 			}

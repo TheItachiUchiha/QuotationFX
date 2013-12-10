@@ -314,22 +314,7 @@ public class PriceEstimationNewController implements Initializable {
 					flag=0;
 				}
 			});
-	        referenceNo.setEditable(false);
-	        productName.setEditable(false);
-			eenquiryType.setEditable(false);
-			eproductName.setEditable(false);
-			erequirements.setEditable(false);
-			ecustomerFile.setEditable(false);
-			ecustomerType.setEditable(false);
-			ecustomerName.setEditable(false);
-			etinNumber.setEditable(false);
-			eemailId.setEditable(false);
-			ereferedBy.setEditable(false);
-			eaddress.setEditable(false);
-			estate.setEditable(false);
-			ecity.setEditable(false);
-			econtactNumber.setEditable(false);
-			epurchasePeriod.setEditable(false);
+
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
@@ -344,7 +329,6 @@ public class PriceEstimationNewController implements Initializable {
 					try
 					{
 						clearFields();
-						flag=0;
 						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 						{
 							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
@@ -367,6 +351,7 @@ public class PriceEstimationNewController implements Initializable {
 						{
 							referenceHBox.setVisible(true);
 							referenceCombo.setItems(refList);	
+							flag=0;
 						}
 						}
 					}

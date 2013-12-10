@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="654.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationNewController">
   <!-- TODO Add Nodes -->
@@ -16,13 +17,13 @@
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
           <children>
             <Label prefHeight="22.0" prefWidth="85.99990000000253" text="Ref. No" />
-            <TextField fx:id="referenceNo" prefWidth="153.0" />
+            <TextField fx:id="referenceNo" editable="false" prefWidth="153.0" />
           </children>
         </HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
           <children>
             <Label prefHeight="22.0" prefWidth="85.99990000000253" text="Product Name" />
-            <TextField fx:id="productName" prefWidth="153.0" />
+            <TextField fx:id="productName" editable="false" prefWidth="153.0" />
           </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="595.0" spacing="5.0">
@@ -48,27 +49,31 @@
         </TableView>
         <VBox alignment="CENTER_LEFT" prefHeight="133.0" prefWidth="595.0">
           <children>
-            <GridPane hgap="5.0" maxWidth="-Infinity" prefHeight="116.0" prefWidth="266.0">
+            <GridPane hgap="50.0" maxWidth="-Infinity" prefHeight="116.0" prefWidth="353.0">
               <children>
                 <Label prefHeight="21.0" prefWidth="78.0" text="Cost Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
                 <Label prefHeight="21.0" prefWidth="78.0" text="Dealer Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                 <Label prefHeight="21.0" prefWidth="78.0" text="End User Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-                <Label id="costTotal" fx:id="costPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-                <Label id="de" fx:id="dealerPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <Label id="ensUserPriceTotal" fx:id="endUserPriceTotal" prefHeight="21.0" prefWidth="119.00009999999747" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label id="costTotal" fx:id="costPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <font>
+                    <Font name="System Bold" size="12.0" fx:id="x2" />
+                  </font>
+                </Label>
+                <Label id="de" fx:id="dealerPriceTotal" font="$x2" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="ensUserPriceTotal" fx:id="endUserPriceTotal" font="$x2" prefHeight="21.0" prefWidth="119.00009999999747" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label prefHeight="21.0" prefWidth="78.0" text="Margin Value" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                 <HBox id="HBox" alignment="CENTER_LEFT" prefHeight="23.0" prefWidth="120.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                   <children>
                     <TextField fx:id="marginValue" maxWidth="-Infinity" prefWidth="43.0" />
-                    <Label text="\%" />
+                    <Label font="$x2" text="\%" />
                   </children>
                 </HBox>
                 <Label prefHeight="21.0" prefWidth="78.0" text="Total Profit" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-                <Label id="de" fx:id="totalProfit" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label id="de" fx:id="totalProfit" font="$x2" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="4" />
               </children>
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="86.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="175.0" minWidth="10.0" prefWidth="175.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="130.0" minWidth="10.0" prefWidth="101.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="202.0" minWidth="10.0" prefWidth="202.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -110,31 +115,31 @@
         <Label prefHeight="24.0" prefWidth="161.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
         <Label prefHeight="21.0" prefWidth="162.0" text="Customer File" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="13" />
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="14" />
-        <TextArea id="customerRequirement" fx:id="eaddress" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-        <TextField id="location" fx:id="ecity" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-        <TextField id="location" fx:id="estate" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <TextField id="contactNumber" fx:id="econtactNumber" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
-        <TextField id="estimatePeriod" fx:id="epurchasePeriod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+        <TextArea id="customerRequirement" fx:id="eaddress" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextField id="location" fx:id="ecity" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+        <TextField id="location" fx:id="estate" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+        <TextField id="contactNumber" fx:id="econtactNumber" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+        <TextField id="estimatePeriod" fx:id="epurchasePeriod" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
         <Label prefHeight="19.0" prefWidth="162.0" text="Enquiry Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-        <TextField id="location" fx:id="eenquiryType" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField id="location" fx:id="eenquiryType" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
           <children>
-            <TextField id="location" fx:id="ecustomerFile" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="209.0" />
+            <TextField id="location" fx:id="ecustomerFile" alignment="TOP_LEFT" editable="false" maxWidth="-Infinity" prefWidth="209.0" />
             <Button fx:id="viewFile" mnemonicParsing="false" text="Open" />
           </children>
         </HBox>
-        <TextField id="location" fx:id="ecustomerType" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextField id="location" fx:id="ecustomerType" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
         <Label prefHeight="21.0" prefWidth="162.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <TextField id="location" fx:id="eproductName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField id="location" fx:id="eproductName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label prefHeight="30.0" prefWidth="162.0" text="Requirements Description" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-        <TextArea id="customerRequirement" fx:id="erequirements" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="94.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextArea id="customerRequirement" fx:id="erequirements" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="94.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label prefHeight="27.0" prefWidth="161.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-        <TextField id="customerName" fx:id="ecustomerName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField id="customerName" fx:id="ecustomerName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Label prefHeight="23.0" prefWidth="162.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-        <TextField id="companyName" fx:id="ecompanyName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <TextField id="companyName" fx:id="etinNumber" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <TextField id="companyName" fx:id="eemailId" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <TextField id="companyName" fx:id="ereferedBy" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField id="companyName" fx:id="ecompanyName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField id="companyName" fx:id="etinNumber" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField id="companyName" fx:id="eemailId" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField id="companyName" fx:id="ereferedBy" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="40.0" prefWidth="110.0" />

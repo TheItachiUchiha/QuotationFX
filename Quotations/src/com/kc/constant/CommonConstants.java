@@ -45,6 +45,9 @@ public class CommonConstants
 	public static final String KEY_ENQUIRY_PATH = "enquiry_path";
 	public static final String KEY_ENQUIRY_BRANCH_CODE = "branch_code";
 	public static final String KEY_ENQUIRY_DEFAULT_CODE = "default_code";
+	public static final String KEY_QUOTATION_PATH = "quotation_default_path";
+	public static final String KEY_QUOTATION_WORD_PATH = "quotation_word_path";
+	public static final String KEY_QUOTATION_PDF_PATH = "quotation_pdf_path";
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
 	public static final String KEY_ENQUIRY_EMAIL_PASSWORD = "email_password";
 	public static final String EMAIL_TO = "TO";
@@ -52,7 +55,7 @@ public class CommonConstants
 	public static final String EMAIL_BODY = "BODY";
 	public static final String REMINDER_NO = "1,2,3,4,5,6,7,8,9,10";
 	public static final String YEARS = "2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030";
-	public static final String NO_ENQUIRY = "There is No Enqiry for this selection";
+	public static final String NO_ENQUIRY = "There is No Enqiry for your selection";
 	public static final String SELECT_MONTH_YEAR = "Please Select Year and Month Before Proceeding";
 	public static final String PE_MODIFY_SUCCESS = "PE Modified";
 	public static final String PE_SUCCESS = "PE Done";
@@ -61,6 +64,7 @@ public class CommonConstants
 	public static final String MARGIN_VALUE_ABSENT = "Please Provide a Margin Value";
 	public static final String CONF_SAVED = "Configuration Saved Successfully";
 	public static final String FILE_ACCESS_FAILED = "File Access Failed";
+	public static final String QUOTATION_PREPARED = "Quotation prepared";
 	public static final String FILE_ACCESS_FAILED_MSG = "Please check if file is present or your have rights to acces the file";
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;

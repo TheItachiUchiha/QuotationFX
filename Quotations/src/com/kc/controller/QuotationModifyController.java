@@ -6,8 +6,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,6 +33,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
+import com.kc.dao.QuotationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -39,11 +44,13 @@ public class QuotationModifyController implements Initializable  {
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
+	QuotationDAO quotationDAO;;
 	public QuotationModifyController()
 	{
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
+		quotationDAO= new QuotationDAO();
 	}
 	
 	@FXML
@@ -119,6 +126,17 @@ public class QuotationModifyController implements Initializable  {
 	    private GridPane quotationGrid;
 	    @FXML
 	    private HBox referenceHBox;
+	    
+	    @FXML
+	    private Button modifyQuotation;
+	    
+	    @FXML
+	    private Button openQuotation;
+	    
+	    @FXML
+	    private TextField quotationPreparationDate;
+	    
+	    int flag=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -126,7 +144,8 @@ public class QuotationModifyController implements Initializable  {
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
-	 SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	private Map<String, String> defaultValues = new HashMap<String, String>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -143,19 +162,6 @@ public class QuotationModifyController implements Initializable  {
 					}
 				}
 			});
-	        eproductName.setEditable(false);
-			ereferenceNo.setEditable(false);
-			ecustomerFile.setEditable(false);
-			ecustomerType.setEditable(false);
-			ecustomerName.setEditable(false);
-			eproductName.setEditable(false);
-			ecustomerRequirements.setEditable(false);
-			ereferedBy.setEditable(false);
-			edateOfEnquiry.setEditable(false);
-			epriceEstimation.setEditable(false);
-			ecity.setEditable(false);
-			equotationPreparation.setEditable(false);
-			epurchasePeriod.setEditable(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
@@ -170,20 +176,29 @@ public class QuotationModifyController implements Initializable  {
 					try
 					{
 						refList.clear();
-						for(EnquiryViewVO enquiryVO : enquiryViewList)
+						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 						{
-							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y"))
-							{
-								refList.add(enquiryVO.getReferenceNo());
-							}
-						}
-						if(refList.isEmpty())
-						{
-							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
 						}
 						else
 						{
-							referenceCombo.setItems(refList);	
+							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							{
+								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y"))
+								{
+									refList.add(enquiryVO.getReferenceNo());
+								}
+							}
+							if(refList.isEmpty())
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+							}
+							else
+							{
+								referenceCombo.setItems(refList);	
+								referenceHBox.setVisible(true);	
+								flag=0;
+							}
 						}
 					}
 					catch (Exception e) {
@@ -196,25 +211,113 @@ public class QuotationModifyController implements Initializable  {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
-						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+					}
+					else
+					{
+						enquiryGrid.setVisible(true);
+						for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 						{
-							ereferenceNo.setText(enquiryViewVO.getReferenceNo());
-							eproductName.setText(enquiryViewVO.getProductName());
-							ecustomerType.setText(enquiryViewVO.getCustomerType());
-							ecustomerName.setText(enquiryViewVO.getCustomerName());
-							ecompanyName.setText(enquiryViewVO.getCompanyName());
-							ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
-							ereferedBy.setText(enquiryViewVO.getReferedBy());
-							edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
-							epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
-							ecity.setText(enquiryViewVO.getCity());
-							equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
-							ecustomerFile.setText(enquiryViewVO.getCustomerFile());
-							epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+							{
+								ereferenceNo.setText(enquiryViewVO.getReferenceNo());
+								eproductName.setText(enquiryViewVO.getProductName());
+								ecustomerType.setText(enquiryViewVO.getCustomerType());
+								ecustomerName.setText(enquiryViewVO.getCustomerName());
+								ecompanyName.setText(enquiryViewVO.getCompanyName());
+								ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
+								ereferedBy.setText(enquiryViewVO.getReferedBy());
+								edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
+								epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
+								ecity.setText(enquiryViewVO.getCity());
+								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
+								ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+							}
+						}
+						flag=1;
+					}
+				}
+			});
+			modifyQuotation.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					if(flag==1)
+					{
+						quotationGrid.setVisible(true);
+						for(EnquiryViewVO enquiryViewVO :enquiryViewList)
+						{
+							if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+							{
+								
+								referenceNo.setText(enquiryViewVO.getReferenceNo());
+								customerName.setText(enquiryViewVO.getCustomerName());
+								productName.setText(enquiryViewVO.getProductName());
+								priceEstimationDate.setText(enquiryViewVO.getPeDate());
+								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								quotationPreparationDate.setText(enquiryViewVO.getQpDate());
+							}
 						}
 					}
+					else
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
+					}
+				}
+			});
+			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			openQuotation.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					
+					try
+					{
+						defaultValues = quotationDAO.getCustomDefaultValues();
+						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+productName.getText()+".docx"));
+					}
+					catch (IOException e)
+					{
+						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+					}
+					
 				}
 			});
 		}
@@ -241,9 +344,12 @@ public class QuotationModifyController implements Initializable  {
 			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
 			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
 			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
+			enquiryViewVO.setMargin(enquiryVO.getMargin());
+			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
 			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
 			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
 			enquiryViewVO.setSales(enquiryVO.getSales());
+			enquiryViewVO.setQpDate(enquiryVO.getQpDate());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
