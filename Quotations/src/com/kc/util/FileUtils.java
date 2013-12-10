@@ -2,6 +2,7 @@ package com.kc.util;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,7 +49,7 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 	}
-	public static String createPDF(File sourceFile, String destFolder) {
+	public static String createPDF(File sourceFile, String destFolder) throws Throwable {
         
 		String newFile ="";
 		try {
@@ -70,8 +71,14 @@ public class FileUtils {
             System.err.println("Generate pdf/HelloWorld.pdf with "
                     + (System.currentTimeMillis() - start) + "ms");
              
-        } catch (Throwable e) {
+        } 
+		catch(FileNotFoundException file)
+		{
+			throw file;
+		}
+		catch (Throwable e) {
             e.printStackTrace();
+            throw e;
         }
 		return newFile;
     }

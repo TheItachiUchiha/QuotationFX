@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,7 @@ import com.kc.dao.QuotationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.Email;
 import com.kc.util.FileUtils;
 import com.kc.util.Validation;
 
@@ -155,8 +157,12 @@ public class QuotationEmailController implements Initializable  {
     private TextField subject;
     @FXML
     private Button openQuotation;
+    @FXML
+    private Label attachmentLabel;
 
     int flag=0;
+    
+    String newFileName = "";
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -167,6 +173,7 @@ public class QuotationEmailController implements Initializable  {
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+	Map<String, String> emailData = new HashMap<String, String>();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -258,18 +265,27 @@ public class QuotationEmailController implements Initializable  {
 				public void handle(ActionEvent paramT) {
 					if(flag==1)
 					{
-						emailGrid.setVisible(true);
-						for(EnquiryViewVO enquiryViewVO :enquiryViewList)
+						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 						{
-							if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
-							{
 								referenceNo.setText(enquiryViewVO.getReferenceNo());
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimation.setText(enquiryViewVO.getPeDate());
 								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
 								quotationPreparation.setText(enquiryViewVO.getQpDate());
-							}
+								defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
+								emailGrid.setVisible(true);
+						}
+						else
+						{	
+							referenceNo.setText(enquiryViewVO.getReferenceNo());
+							customerName.setText(enquiryViewVO.getCustomerName());
+							productName.setText(enquiryViewVO.getProductName());
+							priceEstimation.setText(enquiryViewVO.getPeDate());
+							estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+							quotationPreparation.setText(enquiryViewVO.getQpDate());
+							defaultValues = quotationDAO.getCustomDefaultValues();
+							emailGrid.setVisible(true);
 						}
 					}
 					else
@@ -320,12 +336,12 @@ public class QuotationEmailController implements Initializable  {
 					
 					try
 					{
-						defaultValues = quotationDAO.getCustomDefaultValues();
-						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+productName.getText()+".docx"));
+						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
 					}
-					catch (IOException e)
+					catch (Exception e)
 					{
 						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+						e.printStackTrace();
 					}
 					
 				}
@@ -410,10 +426,20 @@ public class QuotationEmailController implements Initializable  {
 				defaultValues = quotationDAO.getCustomDefaultValues();
 			}
 			
-			File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+productName.getText()+".docx");
+			File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
 			if(file.exists())
 			{
-				FileUtils.createPDF(file, defaultValues.get(CommonConstants.KEY_QUOTATION_PDF_PATH));
+				try {
+					newFileName = FileUtils.createPDF(file, defaultValues.get(CommonConstants.KEY_QUOTATION_PDF_PATH));
+				} catch (Throwable e) {
+					Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.PDF_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+				}
+				emailData.put(CommonConstants.EMAIL_ATTACHMENT, newFileName );
+				attachmentLabel.setText(newFileName);
+				messageEmail.getStyleClass().remove("failure");
+				messageEmail.getStyleClass().add("success");
+				messageEmail.setText("PDF created successfully");
+				messageEmail.setVisible(true);
 			}
 			else
 			{
@@ -424,6 +450,50 @@ public class QuotationEmailController implements Initializable  {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
-		
+	}
+	
+	public void openPdf()
+	{
+		try{
+				Desktop.getDesktop().open(new File(newFileName));
+		}
+		catch (Exception e) {
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+			LOG.error(e.getMessage());
+		}
+	}
+	
+	public void deletePDF()
+	{
+		try{
+			FileUtils.deleteFile(new File(newFileName));
+			messageEmail.getStyleClass().remove("failure");
+			messageEmail.getStyleClass().add("success");
+			messageEmail.setText("PDF deleted successfully");
+			messageEmail.setVisible(true);
+		}
+		catch (Exception e) {
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+			LOG.error(e.getMessage());
+		}
+	}
+	
+	public void sendEmail()
+	{
+		try{
+			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
+			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
+			emailData.put(CommonConstants.EMAIL_SUBJECT, subject.getText());
+			Email email = new Email(emailData);
+			new Thread(email).start();
+			messageSent.getStyleClass().remove("failure");
+			messageSent.getStyleClass().add("success");
+			messageSent.setText("Email send successfully");
+			messageSent.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
 	}
 }

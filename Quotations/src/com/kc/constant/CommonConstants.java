@@ -53,6 +53,7 @@ public class CommonConstants
 	public static final String EMAIL_TO = "TO";
 	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";
 	public static final String EMAIL_BODY = "BODY";
+	public static final String EMAIL_SUBJECT = "SUBJECT";
 	public static final String REMINDER_NO = "1,2,3,4,5,6,7,8,9,10";
 	public static final String YEARS = "2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030";
 	public static final String NO_ENQUIRY = "There is No Enqiry for your selection";
@@ -66,6 +67,7 @@ public class CommonConstants
 	public static final String FILE_ACCESS_FAILED = "File Access Failed";
 	public static final String QUOTATION_PREPARED = "Quotation prepared";
 	public static final String FILE_ACCESS_FAILED_MSG = "Please check if file is present or your have rights to acces the file";
+	public static final String PDF_ACCESS_FAILED_MSG = "Please check if file/folder exists for PDF";
 	public static final String WORD_FILE = ".docx";
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;

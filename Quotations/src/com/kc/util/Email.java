@@ -56,7 +56,14 @@ public class Email extends Task
 			message.setFrom(new InternetAddress("support@kryptcode.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(data.get(CommonConstants.EMAIL_TO)));
-			message.setSubject("Testing Subject");
+			if(data.get(CommonConstants.EMAIL_SUBJECT).equals(""))
+			{
+				message.setSubject("Testing Subject");
+			}
+			else
+			{
+				message.setSubject(data.get(CommonConstants.EMAIL_SUBJECT));
+			}
 			// create the message part   
             MimeBodyPart messageBodyPart =   
               new MimeBodyPart();  
@@ -78,6 +85,7 @@ public class Email extends Task
 			Transport.send(message);
  
 		} catch (MessagingException e) {
+			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
 	}
