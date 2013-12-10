@@ -87,16 +87,10 @@ public class QuotationModifyController implements Initializable  {
 	    private TextField edateOfEnquiry;
 
 	    @FXML
-	    private TextField epriceEstimation;
-
-	    @FXML
 	    private TextField eproductName;
 
 	    @FXML
 	    private TextField epurchasePeriod;
-
-	    @FXML
-	    private TextField equotationPreparation;
 
 	    @FXML
 	    private TextField ereferedBy;
@@ -238,9 +232,7 @@ public class QuotationModifyController implements Initializable  {
 								ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
 								ereferedBy.setText(enquiryViewVO.getReferedBy());
 								edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
-								epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
 								ecity.setText(enquiryViewVO.getCity());
-								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
 								ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 							}

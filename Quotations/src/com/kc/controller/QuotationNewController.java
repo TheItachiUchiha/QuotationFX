@@ -144,7 +144,7 @@ public class QuotationNewController implements Initializable {
 	    private Button prepareQuotation;
 	    
 	    int flag=0;
-	
+	    String newFileName = "";
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
 	private ObservableList<String> refList = FXCollections.observableArrayList();
@@ -279,9 +279,7 @@ public class QuotationNewController implements Initializable {
 								ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
 								ereferedBy.setText(enquiryViewVO.getReferedBy());
 								edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
-								epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
 								ecity.setText(enquiryViewVO.getCity());
-								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
 								ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 								QuotationNewController.this.enquiryViewVO = enquiryViewVO;
@@ -299,18 +297,32 @@ public class QuotationNewController implements Initializable {
 					try{
 						if(flag==1)
 						{
-							if(quotationDAO.isProductPathSet(enquiryViewVO.getProductId()).equalsIgnoreCase("Y"))
+							if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
+							{
+								if(quotationDAO.isProductPathSet(enquiryViewVO.getProductId()).equalsIgnoreCase("Y"))
+								{
+									referenceNo.setText(enquiryViewVO.getReferenceNo());
+									customerName.setText(enquiryViewVO.getCustomerName());
+									productName.setText(enquiryViewVO.getProductName());
+									priceEstimationDate.setText(enquiryViewVO.getPeDate());
+									estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+									quotationGrid.setVisible(true);
+									defaultValues = quotationDAO.getCustomDefaultValues();
+								}
+								else
+								{
+									Dialogs.showInformationDialog(LoginController.primaryStage, "Please set the path details for the product");
+								}
+							}
+							else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
 							{
 								referenceNo.setText(enquiryViewVO.getReferenceNo());
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimationDate.setText(enquiryViewVO.getPeDate());
 								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								defaultValues=quotationDAO.getCustomDefaultValues();
 								quotationGrid.setVisible(true);
-							}
-							else
-							{
-								Dialogs.showInformationDialog(LoginController.primaryStage, "Please set the path details for the product");
 							}
 						}
 						else
@@ -331,7 +343,7 @@ public class QuotationNewController implements Initializable {
 					
 					try
 					{			
-						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
+						Desktop.getDesktop().open(new File(newFileName));
 					}
 					catch (IOException e)
 					{
@@ -348,56 +360,21 @@ public class QuotationNewController implements Initializable {
 	}
 	public void createQuotation()
 	{
-		for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+		File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
+		if(file.exists())
 		{
-			if(enquiryViewVO.getReferenceNo().equals(referenceNo.getText()))
-			{
-				if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
-				{
-					defaultValues = quotationDAO.getCustomDefaultValues();
-					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
-					if(file.exists())
-					{
-						FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file) );
-					}
-					else
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
-					}
-					
-					message.setText(CommonConstants.QUOTATION_PREPARED);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-					quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),String.valueOf(formatter.format(new Date())));
-				}
-			}
+			newFileName = FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file));
+			message.setText(CommonConstants.QUOTATION_PREPARED);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
+			message.setVisible(true);
+			openQuotation.setVisible(true);
+			quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),formatter.format(new Date()));
 		}
-		for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+		else
 		{
-			if(enquiryViewVO.getReferenceNo().equals(referenceNo.getText()))
-			{
-				if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
-				{
-					defaultValues=quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
-					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
-					if(file.exists())
-					{
-						FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file) );
-					}
-					else
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
-					}
-					message.setText(CommonConstants.QUOTATION_PREPARED);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-					quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),formatter.format(new Date()));
-				}
-			}
+			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
 		}
-		openQuotation.setVisible(true);
 	}    
 	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
 	{

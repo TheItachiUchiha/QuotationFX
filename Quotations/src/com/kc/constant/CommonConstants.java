@@ -66,6 +66,7 @@ public class CommonConstants
 	public static final String FILE_ACCESS_FAILED = "File Access Failed";
 	public static final String QUOTATION_PREPARED = "Quotation prepared";
 	public static final String FILE_ACCESS_FAILED_MSG = "Please check if file is present or your have rights to acces the file";
+	public static final String WORD_FILE = ".docx";
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;

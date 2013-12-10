@@ -12,7 +12,7 @@ public class DBConnector {
 	private static final Logger LOG = LogManager.getLogger(DBConnector.class);
 
 	private static Connection conn;
-	private static String url = "jdbc:mysql://192.168.1.5:3306/quotation";
+	private static String url = "jdbc:mysql://192.168.1.4:3306/quotation";
 	private static String user = "root";// Username of database
 	private static String pass = "root";// Password of database
 

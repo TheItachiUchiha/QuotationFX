@@ -13,7 +13,7 @@ import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 public class FileUtils {
 	
-	public static void copyFile(File source , String destination, String newFileName)
+	public static String copyFile(File source , String destination, String newFileName)
 	{
 		InputStream inStream = null;
 		OutputStream outStream = null;
@@ -36,6 +36,7 @@ public class FileUtils {
 	    	}catch(IOException e){
 	    		e.printStackTrace();
 	    	}
+	    	return destination + "\\" + newFileName;
 	}   
 	public static void deleteFile(File fileToDelete)
 	{
@@ -47,10 +48,12 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 	}
-	public static void createPDF(File sourceFile, String destFolder) {
-        try {
+	public static String createPDF(File sourceFile, String destFolder) {
+        
+		String newFile ="";
+		try {
         	
-        	
+			newFile =  destFolder + "\\" + sourceFile.getName().replace(getExtension(sourceFile), "PDF");
             long start = System.currentTimeMillis();
  
             // 1) Load DOCX into XWPFDocument
@@ -61,7 +64,7 @@ public class FileUtils {
             PdfOptions options = PdfOptions.create();
  
             // 3) Convert XWPFDocument to Pdf
-            OutputStream out = new FileOutputStream(new File(destFolder + "\\" + sourceFile.getName().replace(getExtension(sourceFile), "PDF")));
+            OutputStream out = new FileOutputStream(new File(newFile));
             PdfConverter.getInstance().convert(document, out, options);
              
             System.err.println("Generate pdf/HelloWorld.pdf with "
@@ -70,6 +73,7 @@ public class FileUtils {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+		return newFile;
     }
 	
 	public static String getExtension(File sourceFile)
