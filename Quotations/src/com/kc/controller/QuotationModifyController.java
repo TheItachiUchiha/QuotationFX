@@ -37,6 +37,7 @@ import com.kc.dao.QuotationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.FileUtils;
 import com.kc.util.Validation;
 
 public class QuotationModifyController implements Initializable  {
@@ -134,6 +135,12 @@ public class QuotationModifyController implements Initializable  {
 	    private Button openQuotation;
 	    
 	    @FXML
+	    private Button recreateQuotation;
+	    
+	    @FXML
+	    private Button  deleteQuotation;
+	    
+	    @FXML
 	    private TextField quotationPreparationDate;
 	    
 	    int flag=0;
@@ -146,6 +153,7 @@ public class QuotationModifyController implements Initializable  {
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
+	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -247,19 +255,27 @@ public class QuotationModifyController implements Initializable  {
 				public void handle(ActionEvent paramT) {
 					if(flag==1)
 					{
-						quotationGrid.setVisible(true);
 						for(EnquiryViewVO enquiryViewVO :enquiryViewList)
 						{
 							if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
 							{
-								
 								referenceNo.setText(enquiryViewVO.getReferenceNo());
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimationDate.setText(enquiryViewVO.getPeDate());
 								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
 								quotationPreparationDate.setText(enquiryViewVO.getQpDate());
+								QuotationModifyController.this.enquiryViewVO=enquiryViewVO;
+								quotationGrid.setVisible(true);
 							}
+						}
+						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
+						{
+							defaultValues = quotationDAO.getCustomDefaultValues();
+						}
+						else if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
+						{
+							defaultValues=quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
 						}
 					}
 					else
@@ -300,7 +316,7 @@ public class QuotationModifyController implements Initializable  {
 						String paramT1, String paramT2) {
 					quotationGrid.setVisible(false);
 					enquiryGrid.setVisible(false);
-					
+					recreateQuotation.setVisible(false);
 				}
 			});
 			openQuotation.setOnAction(new EventHandler<ActionEvent>() {
@@ -310,8 +326,7 @@ public class QuotationModifyController implements Initializable  {
 					
 					try
 					{
-						defaultValues = quotationDAO.getCustomDefaultValues();
-						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+productName.getText()+".docx"));
+						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
 					}
 					catch (IOException e)
 					{
@@ -319,6 +334,22 @@ public class QuotationModifyController implements Initializable  {
 					}
 					
 				}
+			});
+			deleteQuotation.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent paramT) {
+					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
+					if(file.exists())
+					{
+						FileUtils.deleteFile(file);
+					}
+					else
+					{
+						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+					}
+					
+				};
 			});
 		}
 		catch (Exception e) {

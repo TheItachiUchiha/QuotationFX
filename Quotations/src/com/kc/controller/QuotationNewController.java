@@ -154,6 +154,7 @@ public class QuotationNewController implements Initializable {
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -266,7 +267,6 @@ public class QuotationNewController implements Initializable {
 					}
 					else
 					{
-						enquiryGrid.setVisible(true);
 						for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 						{
 							if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
@@ -284,6 +284,8 @@ public class QuotationNewController implements Initializable {
 								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
 								ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+								QuotationNewController.this.enquiryViewVO = enquiryViewVO;
+								enquiryGrid.setVisible(true);
 							}
 						}
 						flag=1;
@@ -297,24 +299,18 @@ public class QuotationNewController implements Initializable {
 					try{
 						if(flag==1)
 						{
-							for(EnquiryViewVO enquiryViewVO :enquiryViewList)
+							if(quotationDAO.isProductPathSet(enquiryViewVO.getProductId()).equalsIgnoreCase("Y"))
 							{
-								if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
-								{
-									if(quotationDAO.isProductPathSet(enquiryViewVO.getProductId()).equalsIgnoreCase("Y"))
-									{
-										referenceNo.setText(enquiryViewVO.getReferenceNo());
-										customerName.setText(enquiryViewVO.getCustomerName());
-										productName.setText(enquiryViewVO.getProductName());
-										priceEstimationDate.setText(enquiryViewVO.getPeDate());
-										estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
-										quotationGrid.setVisible(true);
-									}
-									else
-									{
-										Dialogs.showInformationDialog(LoginController.primaryStage, "Please set the path details for the product");
-									}
-								}
+								referenceNo.setText(enquiryViewVO.getReferenceNo());
+								customerName.setText(enquiryViewVO.getCustomerName());
+								productName.setText(enquiryViewVO.getProductName());
+								priceEstimationDate.setText(enquiryViewVO.getPeDate());
+								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								quotationGrid.setVisible(true);
+							}
+							else
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage, "Please set the path details for the product");
 							}
 						}
 						else
@@ -359,7 +355,16 @@ public class QuotationNewController implements Initializable {
 				if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Custom"))
 				{
 					defaultValues = quotationDAO.getCustomDefaultValues();
-					FileUtils.copyFile(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH),defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
+					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
+					if(file.exists())
+					{
+						FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file) );
+					}
+					else
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
+					}
+					
 					message.setText(CommonConstants.QUOTATION_PREPARED);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");
@@ -375,7 +380,15 @@ public class QuotationNewController implements Initializable {
 				if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("Standard"))
 				{
 					defaultValues=quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
-					FileUtils.copyFile(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH),defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
+					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
+					if(file.exists())
+					{
+						FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file) );
+					}
+					else
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
+					}
 					message.setText(CommonConstants.QUOTATION_PREPARED);
 					message.getStyleClass().remove("failure");
 					message.getStyleClass().add("success");

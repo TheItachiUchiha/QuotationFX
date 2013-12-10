@@ -11,14 +11,9 @@ import org.apache.poi.xwpf.converter.pdf.PdfConverter;
 import org.apache.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
-import javafx.scene.control.Dialogs;
-
-import com.kc.constant.CommonConstants;
-import com.kc.controller.LoginController;
-
 public class FileUtils {
 	
-	public static void copyFile(File source , String destination)
+	public static void copyFile(File source , String destination, String newFileName)
 	{
 		InputStream inStream = null;
 		OutputStream outStream = null;
@@ -27,7 +22,7 @@ public class FileUtils {
 	    	    File dest =new File(destination);
 	    	    
 	    	    inStream = new FileInputStream(source);
-	    	    outStream = new FileOutputStream(dest);
+	    	    outStream = new FileOutputStream(dest + "\\" + newFileName);
 	    	    byte[] buffer = new byte[1024];
 	    	    int length; 
 	    	    while ((length = inStream.read(buffer)) > 0)
@@ -42,9 +37,20 @@ public class FileUtils {
 	    		e.printStackTrace();
 	    	}
 	}   
-	
+	public static void deleteFile(File fileToDelete)
+	{
+		try
+		{
+			fileToDelete.delete();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	public static void createPDF(File sourceFile, String destFolder) {
         try {
+        	
+        	
             long start = System.currentTimeMillis();
  
             // 1) Load DOCX into XWPFDocument
@@ -55,7 +61,7 @@ public class FileUtils {
             PdfOptions options = PdfOptions.create();
  
             // 3) Convert XWPFDocument to Pdf
-            OutputStream out = new FileOutputStream(new File(destFolder + sourceFile.getName()));
+            OutputStream out = new FileOutputStream(new File(destFolder + "\\" + sourceFile.getName().replace(getExtension(sourceFile), "PDF")));
             PdfConverter.getInstance().convert(document, out, options);
              
             System.err.println("Generate pdf/HelloWorld.pdf with "
@@ -65,5 +71,16 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+	
+	public static String getExtension(File sourceFile)
+	{
+		String extension = "";
+
+    	int i = sourceFile.getName().lastIndexOf('.');
+    	if (i > 0) {
+    	    extension = sourceFile.getName().substring(i+1);
+    	}
+    	return extension;
+	}
 
 }
