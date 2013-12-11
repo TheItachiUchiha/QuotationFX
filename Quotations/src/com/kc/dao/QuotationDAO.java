@@ -196,4 +196,20 @@ public class QuotationDAO {
 		}
 		return pathSet;
 	}
+	public void updateEnquiryEmailSentStatus(int id, String string)
+	{
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET emailsent=?, mail_sent_date=? where ID=?");
+			
+			preparedStatement.setString(1, "Y");
+			preparedStatement.setString(2, string);
+			preparedStatement.setInt(3, id);
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

@@ -65,6 +65,7 @@ import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 public class PriceEstimationNewController implements Initializable {
@@ -321,7 +322,7 @@ public class PriceEstimationNewController implements Initializable {
 			yearCombo.setItems(yearList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -422,7 +423,7 @@ public class PriceEstimationNewController implements Initializable {
 				  public void changed(ObservableValue<? extends String> observable,
 				          String oldValue, String newValue) {
 				      if(null!=newValue && !("".equals(newValue)))
-				    	  totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
+				    	  totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue/100)));
 				  }
 			
 			});

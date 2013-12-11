@@ -104,6 +104,7 @@ public class EnquiryDAO {
 				enquiryVO.setPeDate(resultSet.getString(17));
 				enquiryVO.setQpDate(resultSet.getString(18));
 				enquiryVO.setMailSentDate(resultSet.getString(19));
+				enquiryVO.setSalesDate(resultSet.getString(20));
 				listOfEnquries.add(enquiryVO);
 			}
 		}

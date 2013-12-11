@@ -23,6 +23,7 @@ public class EnquiryVO {
 	private String peDate;
 	private String qpDate;
 	private String mailSentDate;
+	private String salesDate;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -150,6 +151,11 @@ public class EnquiryVO {
 	}
 	public void setMailSentDate(String mailSentDate) {
 		this.mailSentDate = mailSentDate;
+	}
+	public String getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;
 	}	
-	
 }

@@ -38,6 +38,7 @@ import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.FileUtils;
+import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 public class QuotationModifyController implements Initializable  {
@@ -170,7 +171,7 @@ public class QuotationModifyController implements Initializable  {
 			yearCombo.setItems(yearList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -349,66 +350,5 @@ public class QuotationModifyController implements Initializable  {
 			e.printStackTrace();
 		}
 		
-	}
-	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
-	{
-		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
-		
-		
-		for(EnquiryVO enquiryVO : enquiryList)
-		{
-			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-			enquiryViewVO.setId(enquiryVO.getId());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setProductName(enquiryVO.getProductName());
-			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
-			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
-			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setMargin(enquiryVO.getMargin());
-			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
-			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
-			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
-			enquiryViewVO.setSales(enquiryVO.getSales());
-			enquiryViewVO.setQpDate(enquiryVO.getQpDate());
-			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-			{
-				enquiryViewVO.setEnquiryType("Custom");
-			}
-			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-			{
-				enquiryViewVO.setEnquiryType("Standard");
-			}
-			
-			for(CustomersVO customersVO : customerList)
-			{
-				if(customersVO.getId() == enquiryVO.getCustomerId())
-				{
-					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-					enquiryViewVO.setCity(customersVO.getCity());
-					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-					enquiryViewVO.setState(customersVO.getState());
-					enquiryViewVO.setAddress(customersVO.getAddress());
-					enquiryViewVO.setEmailId(customersVO.getEmailId());
-					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
-					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustomerId(customersVO.getId());
-					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-					{
-						enquiryViewVO.setCustomerType("Dealer");
-					}
-					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-					{
-						enquiryViewVO.setCustomerType("End User");
-					}
-					enquiryViewVO.setProductId(enquiryVO.getProductId());
-				}
-			}
-			tempList.add(enquiryViewVO);
-		}
-		return tempList;
 	}
 }

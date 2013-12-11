@@ -48,6 +48,7 @@ import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ProductsVO;
+import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
@@ -98,8 +99,8 @@ public class EnquiryViewController implements Initializable {
     private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
     private ObservableList<ProductsVO> productList = FXCollections.observableArrayList();
     private ObservableList<EnquiryViewVO> enquiryListForTable = FXCollections.observableArrayList();
-    ObservableList<EnquiryViewVO> tempList;
-    ObservableList<String> tempList2;
+    ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
+    ObservableList<String> tempList2 = FXCollections.observableArrayList();
     SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 
     
@@ -126,7 +127,7 @@ public class EnquiryViewController implements Initializable {
 			
 			customerList = customersDAO.getCustomers();
 			enquiryList = enquiryDAO.getEnquries();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			productList = productsDAO.getProducts();
 			
 			
@@ -379,7 +380,7 @@ public class EnquiryViewController implements Initializable {
 		LOG.info("Enter : fillTableFromData");
 		tempList.clear();
 		enquiryViewList.clear();
-		enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+		enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 		
 		try{
 			
@@ -529,65 +530,6 @@ public class EnquiryViewController implements Initializable {
 		{
 			s.printStackTrace();
 		}
-	}
-	
-	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
-	{
-		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
-		
-		
-		for(EnquiryVO enquiryVO : enquiryList)
-		{
-			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-			enquiryViewVO.setId(enquiryVO.getId());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setProductName(enquiryVO.getProductName());
-			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
-			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
-			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
-			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
-			enquiryViewVO.setSales(enquiryVO.getSales());
-			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-			{
-				enquiryViewVO.setEnquiryType("Custom");
-			}
-			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-			{
-				enquiryViewVO.setEnquiryType("Standard");
-			}
-			
-			for(CustomersVO customersVO : customerList)
-			{
-				if(customersVO.getId() == enquiryVO.getCustomerId())
-				{
-					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-					enquiryViewVO.setCity(customersVO.getCity());
-					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-					enquiryViewVO.setState(customersVO.getState());
-					enquiryViewVO.setAddress(customersVO.getAddress());
-					enquiryViewVO.setEmailId(customersVO.getEmailId());
-					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
-					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustomerId(customersVO.getId());
-					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-					{
-						enquiryViewVO.setCustomerType("Dealer");
-					}
-					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-					{
-						enquiryViewVO.setCustomerType("End User");
-					}
-					enquiryViewVO.setProductId(enquiryVO.getProductId());
-				}
-			}
-			tempList.add(enquiryViewVO);
-		}
-		return tempList;
 	}
 	
 	

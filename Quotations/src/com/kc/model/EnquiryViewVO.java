@@ -29,6 +29,7 @@ public class EnquiryViewVO {
 	private String peDate;
 	private String qpDate;
 	private String mailSentDate;
+	private String salesDate;
 	
 	
 	public int getId() {
@@ -201,5 +202,10 @@ public class EnquiryViewVO {
 	public void setMailSentDate(String mailSentDate) {
 		this.mailSentDate = mailSentDate;
 	}
-	
+	public String getSalesDate() {
+		return salesDate;
+	}
+	public void setSalesDate(String salesDate) {
+		this.salesDate = salesDate;
+	}
 }

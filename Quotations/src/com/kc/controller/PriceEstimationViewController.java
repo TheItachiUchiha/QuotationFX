@@ -44,6 +44,7 @@ import com.kc.dao.PriceEstimationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 public class PriceEstimationViewController implements Initializable {
@@ -142,7 +143,7 @@ public class PriceEstimationViewController implements Initializable {
 		try
 		{
 			enquiryList = priceEstimationDAO.getPriceEstimation();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			refList.clear();
 			for(EnquiryViewVO enquiryVO : enquiryViewList)
 			{
@@ -170,68 +171,6 @@ public class PriceEstimationViewController implements Initializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
-	}
-	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
-	{
-		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
-		
-		
-		for(EnquiryVO enquiryVO : enquiryList)
-		{
-			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-			enquiryViewVO.setId(enquiryVO.getId());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setProductName(enquiryVO.getProductName());
-			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
-			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
-			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
-			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
-			enquiryViewVO.setSales(enquiryVO.getSales());
-			enquiryViewVO.setMargin(enquiryVO.getMargin());
-			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
-			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-			{
-				enquiryViewVO.setEnquiryType("Custom");
-			}
-			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-			{
-				enquiryViewVO.setEnquiryType("Standard");
-			}
-			
-			for(CustomersVO customersVO : customerList)
-			{
-				if(customersVO.getId() == enquiryVO.getCustomerId())
-				{
-					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-					enquiryViewVO.setCity(customersVO.getCity());
-					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-					enquiryViewVO.setState(customersVO.getState());
-					enquiryViewVO.setAddress(customersVO.getAddress());
-					enquiryViewVO.setEmailId(customersVO.getEmailId());
-					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
-					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustomerId(customersVO.getId());
-					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-					{
-						enquiryViewVO.setCustomerType("Dealer");
-					}
-					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-					{
-						enquiryViewVO.setCustomerType("End User");
-					}
-					enquiryViewVO.setProductId(enquiryVO.getProductId());
-				}
-			}
-			tempList.add(enquiryViewVO);
-		}
-		return tempList;
 	}
 	public void deletePriceEstimation(EnquiryViewVO enquryViewVO) throws Exception
 	{
@@ -278,7 +217,7 @@ public class PriceEstimationViewController implements Initializable {
 					priceEstimationModify = (BorderPane) menuLoader.load();
 					Stage modifyStage = new Stage();
 					Scene modifyScene = new Scene(priceEstimationModify);
-					modifyStage.setResizable(false);
+					modifyStage.setResizable(true);
 					modifyStage.setHeight(650);
 					modifyStage.setWidth(900);
 					modifyStage.initModality(Modality.WINDOW_MODAL);

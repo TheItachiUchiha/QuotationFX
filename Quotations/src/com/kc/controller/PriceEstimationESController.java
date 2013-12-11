@@ -39,6 +39,7 @@ import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.QuotationUtil;
 
 public class PriceEstimationESController implements Initializable{
 	
@@ -147,8 +148,8 @@ public class PriceEstimationESController implements Initializable{
 										}
 									}
 								}
-								processedEnquiryList = fillEnquiryViewListFromEnquiryList(tempProcessedList);
-								unprocessedEnquiryList = fillEnquiryViewListFromEnquiryList(tempUnProcessedList);
+								processedEnquiryList = QuotationUtil.fillEnquiryViewListFromEnquiryList(tempProcessedList, customerList);;
+								unprocessedEnquiryList = QuotationUtil.fillEnquiryViewListFromEnquiryList(tempUnProcessedList, customerList);;
 								totalEnquiry.setText(String.valueOf(processedEnquiryList.size()+unprocessedEnquiryList.size()));
 								processedEnquiry.setText(String.valueOf(processedEnquiryList.size()));
 								unProcessedEnquiry.setText(String.valueOf(unprocessedEnquiryList.size()));
@@ -190,8 +191,8 @@ public class PriceEstimationESController implements Initializable{
 										}
 									}
 								}
-								processedEnquiryList = fillEnquiryViewListFromEnquiryList(tempProcessedList);
-								unprocessedEnquiryList = fillEnquiryViewListFromEnquiryList(tempUnProcessedList);
+								processedEnquiryList =QuotationUtil.fillEnquiryViewListFromEnquiryList(tempProcessedList, customerList);;
+								unprocessedEnquiryList = QuotationUtil.fillEnquiryViewListFromEnquiryList(tempUnProcessedList, customerList);;
 								totalEnquiry.setText(String.valueOf(processedEnquiryList.size()+unprocessedEnquiryList.size()));
 								processedEnquiry.setText(String.valueOf(processedEnquiryList.size()));
 								unProcessedEnquiry.setText(String.valueOf(unprocessedEnquiryList.size()));
@@ -246,66 +247,6 @@ public class PriceEstimationESController implements Initializable{
 		flag = "U";
 		fillComponentTable(unprocessedEnquiryList);
 		enquiryTable.setVisible(true);
-	}
-	
-	
-	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
-	{
-		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
-		for(EnquiryVO enquiryVO : enquiryList)
-		{
-			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-			enquiryViewVO.setId(enquiryVO.getId());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setProductName(enquiryVO.getProductName());
-			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
-			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
-			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
-			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
-			enquiryViewVO.setSales(enquiryVO.getSales());
-			enquiryViewVO.setMargin(enquiryVO.getMargin());
-			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
-			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-			{
-				enquiryViewVO.setEnquiryType("Custom");
-			}
-			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-			{
-				enquiryViewVO.setEnquiryType("Standard");
-			}
-			
-			for(CustomersVO customersVO : customerList)
-			{
-				if(customersVO.getId() == enquiryVO.getCustomerId())
-				{
-					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-					enquiryViewVO.setCity(customersVO.getCity());
-					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-					enquiryViewVO.setState(customersVO.getState());
-					enquiryViewVO.setAddress(customersVO.getAddress());
-					enquiryViewVO.setEmailId(customersVO.getEmailId());
-					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
-					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustomerId(customersVO.getId());
-					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-					{
-						enquiryViewVO.setCustomerType("Dealer");
-					}
-					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-					{
-						enquiryViewVO.setCustomerType("End User");
-					}
-					enquiryViewVO.setProductId(enquiryVO.getProductId());
-				}
-			}
-			tempList.add(enquiryViewVO);
-		}
-		return tempList;
 	}
 	
 	public void fillComponentTable(ObservableList<EnquiryViewVO> enquiryViewList)
@@ -383,8 +324,8 @@ public class PriceEstimationESController implements Initializable{
 					}
 				}
 			}
-			processedEnquiryList = fillEnquiryViewListFromEnquiryList(tempProcessedList);
-			unprocessedEnquiryList = fillEnquiryViewListFromEnquiryList(tempUnProcessedList);
+			processedEnquiryList = QuotationUtil.fillEnquiryViewListFromEnquiryList(tempProcessedList, customerList);
+			unprocessedEnquiryList = QuotationUtil.fillEnquiryViewListFromEnquiryList(tempUnProcessedList, customerList);
 			totalEnquiry.setText(String.valueOf(processedEnquiryList.size()+unprocessedEnquiryList.size()));
 			processedEnquiry.setText(String.valueOf(processedEnquiryList.size()));
 			unProcessedEnquiry.setText(String.valueOf(unprocessedEnquiryList.size()));

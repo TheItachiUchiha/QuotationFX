@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="505.0" prefWidth="863.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane prefHeight="505.0" prefWidth="863.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.SalesViewController">
   <!-- TODO Add Nodes -->
   <center>
     <TableView fx:id="salesOrderTable" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="261.0" prefWidth="856.0" BorderPane.alignment="CENTER">

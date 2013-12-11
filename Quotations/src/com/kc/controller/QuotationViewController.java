@@ -27,6 +27,7 @@ import com.kc.dao.EnquiryDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 public class QuotationViewController implements Initializable  {
@@ -83,11 +84,10 @@ public class QuotationViewController implements Initializable  {
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
-	private ObservableList<String> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
-	 SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -99,20 +99,26 @@ public class QuotationViewController implements Initializable  {
 			monthCombo.setItems(monthList);
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
+					try{
 					
-					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
+							quotationTable.setVisible(true);
+							fillTable();
+						}
 					}
-					else
-					{
-						quotationTable.setVisible(true);
-						fillTable();
+					catch (Exception e) {
+						e.printStackTrace();
+						LOG.error(e.getMessage());
 					}
 					
 				}
@@ -124,28 +130,28 @@ public class QuotationViewController implements Initializable  {
 		}
 		
 	}
-	public void fillTable()
+	private void fillTable()
 	{
-
+		ObservableList<EnquiryViewVO> tempEnquiryList = FXCollections.observableArrayList();
 		try
 		{
 			enquiryList = enquiryDAO.getEnquries();
-			enquiryViewList = fillEnquiryViewListFromEnquiryList(enquiryList);
-			refList.clear();
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			tempEnquiryList.clear();
 			for(EnquiryViewVO enquiryVO : enquiryViewList)
 			{
-				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()) && new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()) && (enquiryVO.getPriceEstimation()).equalsIgnoreCase("Y") && (enquiryVO.getQuotationPreparation()).equalsIgnoreCase("Y")&& (enquiryVO.getEmailSent()).equalsIgnoreCase("Y"))
+				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y"))))
 				{
-					refList.add(enquiryVO.getReferenceNo());
+					tempEnquiryList.add(enquiryVO);
 				}
 			}
-			if(refList.isEmpty())
+			if(tempEnquiryList.isEmpty())
 			{
 				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 			}
 			else
 			{
-				quotationTable.setItems(enquiryViewList);
+				quotationTable.setItems(tempEnquiryList);
 				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
 				productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
 				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
@@ -160,69 +166,5 @@ public class QuotationViewController implements Initializable  {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-	
-	}
-	public ObservableList<EnquiryViewVO> fillEnquiryViewListFromEnquiryList(ObservableList<EnquiryVO> enquiryList)
-	{
-		ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
-		
-		
-		for(EnquiryVO enquiryVO : enquiryList)
-		{
-			EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-			enquiryViewVO.setId(enquiryVO.getId());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setProductName(enquiryVO.getProductName());
-			enquiryViewVO.setPurchasePeriod(enquiryVO.getPurchasePeriod());
-			enquiryViewVO.setReferedBy(enquiryVO.getReferedBy());
-			enquiryViewVO.setReferenceNo(enquiryVO.getRefNumber());
-			enquiryViewVO.setCustomerRequirement(enquiryVO.getCustomerrequirements());
-			enquiryViewVO.setCustomerFile(enquiryVO.getCustomerDocument());
-			enquiryViewVO.setPriceEstimation(enquiryVO.getPriceEstimation());
-			enquiryViewVO.setDateOfEnquiry(enquiryVO.getDate());
-			enquiryViewVO.setQuotationPreparation(enquiryVO.getQuotationPreparation());
-			enquiryViewVO.setEmailSent(enquiryVO.getEmailSent());
-			enquiryViewVO.setSales(enquiryVO.getSales());
-			enquiryViewVO.setQpDate(enquiryVO.getQpDate());
-			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
-			enquiryViewVO.setMailSentDate(enquiryVO.getMailSentDate());
-			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
-				
-			{
-				enquiryViewVO.setEnquiryType("Custom");
-			}
-			else if(enquiryVO.getFlag().equalsIgnoreCase("S"))
-			{
-				enquiryViewVO.setEnquiryType("Standard");
-			}
-			
-			for(CustomersVO customersVO : customerList)
-			{
-				if(customersVO.getId() == enquiryVO.getCustomerId())
-				{
-					enquiryViewVO.setCustomerName(customersVO.getCustomerName());
-					enquiryViewVO.setCity(customersVO.getCity());
-					enquiryViewVO.setCompanyName(customersVO.getCompanyName());
-					enquiryViewVO.setState(customersVO.getState());
-					enquiryViewVO.setAddress(customersVO.getAddress());
-					enquiryViewVO.setEmailId(customersVO.getEmailId());
-					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
-					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
-					enquiryViewVO.setCustomerId(customersVO.getId());
-					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
-					{
-						enquiryViewVO.setCustomerType("Dealer");
-					}
-					else if(customersVO.getCustomerType().equalsIgnoreCase("End User"))
-					{
-						enquiryViewVO.setCustomerType("End User");
-					}
-					enquiryViewVO.setProductId(enquiryVO.getProductId());
-				}
-			}
-			tempList.add(enquiryViewVO);
-		}
-		return tempList;
 	}
 }
