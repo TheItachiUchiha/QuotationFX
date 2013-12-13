@@ -106,7 +106,7 @@
             </HBox>
           </children>
         </VBox>
-        <ComboBox  fx:id="autoReminderCombo" prefHeight="21.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+        <ComboBox fx:id="autoReminderCombo" prefHeight="21.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="ON" />
@@ -147,11 +147,19 @@
             <Button fx:id="search" mnemonicParsing="false" text="Search" />
           </children>
         </HBox>
-        <Label font="$x2" prefHeight="20.0" prefWidth="109.00009999999747" text="Create Reminder">
-          <VBox.margin>
-            <Insets left="200.0" fx:id="x3" />
-          </VBox.margin>
-        </Label>
+        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
+          <children>
+            <Label prefHeight="21.0" prefWidth="64.0" text="Reminder" />
+            <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="136.0">
+              <items>
+                <FXCollections fx:factory="observableArrayList" >
+	                 <String fx:value="Create Reminder" />
+	              	 <String fx:value="Modify Reminder" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+          </children>
+        </HBox>
         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
           <children>
             <Label prefHeight="21.0" prefWidth="83.0" text="Reference No" />
@@ -160,20 +168,11 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="createReminder" mnemonicParsing="false" text="Create Reminder" />
+            <Button id="createReminder" mnemonicParsing="false" onAction="#createReminder" text="Go" />
           </children>
-        </HBox>
-        <Label font="$x2" prefHeight="21.0" prefWidth="109.0" text="Modify Reminder" VBox.margin="$x3" />
-        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="6.0">
-          <children>
-            <Label prefHeight="21.0" prefWidth="83.0" text="Reference No" />
-            <ComboBox fx:id="modifyCombo" prefHeight="21.0" prefWidth="136.0">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ComboBox>
-            <Button fx:id="modifyReminder" mnemonicParsing="false" text="Modify Reminder" />
-          </children>
+          <padding>
+            <Insets left="20.0" />
+          </padding>
         </HBox>
       </children>
     </VBox>

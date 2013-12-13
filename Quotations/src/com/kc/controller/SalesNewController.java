@@ -194,13 +194,20 @@ public class SalesNewController {
     {
     	try
     	{
-    		productName.setText(enquiryViewVO.getProductName());
-    		customerName.setText(enquiryViewVO.getCustomerName());
-    		companyName.setText(enquiryViewVO.getCompanyName());
-    		city.setText(enquiryViewVO.getCity());
-    		dateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
-    		dateOfQuotation.setText(enquiryViewVO.getQpDate());
-    		salesGrid.setVisible(true);
+    		if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+			}
+			else
+			{
+	    		productName.setText(enquiryViewVO.getProductName());
+	    		customerName.setText(enquiryViewVO.getCustomerName());
+	    		companyName.setText(enquiryViewVO.getCompanyName());
+	    		city.setText(enquiryViewVO.getCity());
+	    		dateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
+	    		dateOfQuotation.setText(enquiryViewVO.getQpDate());
+	    		salesGrid.setVisible(true);
+			}
     	}
     	catch(Exception e)
     	{

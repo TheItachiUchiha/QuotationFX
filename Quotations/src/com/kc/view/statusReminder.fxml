@@ -15,7 +15,7 @@
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>
         </Tab>
-        <Tab fx:id="salesStatusTab" text="Sales Status">
+        <Tab fx:id="salesStatusTab" text="Enquiry Status">
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>

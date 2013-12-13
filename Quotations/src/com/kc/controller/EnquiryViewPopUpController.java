@@ -98,8 +98,17 @@ public class EnquiryViewPopUpController {
 			
 			@Override
 			public void handle(ActionEvent paramT) {
-				try {
-					Desktop.getDesktop().open(new File(customerFile.getText()));
+				try
+				{
+					File newFile = new File(customerFile.getText());
+					if(newFile.exists())
+					{
+						Desktop.getDesktop().open(newFile);
+					}
+					else
+					{
+						Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED_MSG);
+					}
 				} catch (IOException e) {
 					Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 				}
