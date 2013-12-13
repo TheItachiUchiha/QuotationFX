@@ -43,9 +43,6 @@ public class QuotationUtil {
 			enquiryViewVO.setPeDate(enquiryVO.getPeDate());
 			enquiryViewVO.setMailSentDate(enquiryVO.getMailSentDate());
 			enquiryViewVO.setSalesDate(enquiryVO.getSalesDate());
-			enquiryViewVO.setServiceDone(enquiryVO.getServiceDone());
-			enquiryViewVO.setServiceDate(enquiryVO.getServiceDate());
-			enquiryViewVO.setReminderCount(enquiryVO.getReminderCount());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
