@@ -30,7 +30,9 @@ public class EnquiryViewVO {
 	private String qpDate;
 	private String mailSentDate;
 	private String salesDate;
-	
+	private String serviceDate;
+	private String serviceDone;
+	private int reminderCount;
 	
 	public int getId() {
 		return id;
@@ -208,4 +210,23 @@ public class EnquiryViewVO {
 	public void setSalesDate(String salesDate) {
 		this.salesDate = salesDate;
 	}
+	public String getServiceDate() {
+		return serviceDate;
+	}
+	public void setServiceDate(String serviceDate) {
+		this.serviceDate = serviceDate;
+	}
+	public String getServiceDone() {
+		return serviceDone;
+	}
+	public void setServiceDone(String serviceDone) {
+		this.serviceDone = serviceDone;
+	}
+	public int getReminderCount() {
+		return reminderCount;
+	}
+	public void setReminderCount(int reminderCount) {
+		this.reminderCount = reminderCount;
+	}
+	
 }

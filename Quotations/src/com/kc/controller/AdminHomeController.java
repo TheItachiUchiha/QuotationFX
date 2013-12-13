@@ -123,9 +123,9 @@ public class AdminHomeController implements Initializable {
 	{
 		try{
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/report.fxml"));
-			BorderPane quotation = (BorderPane) loader.load();
+			BorderPane report = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
-			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(report);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

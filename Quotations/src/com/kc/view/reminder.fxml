@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="563.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane prefHeight="563.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderController">
   <!-- TODO Add Nodes -->
   <bottom>
     <GridPane alignment="CENTER" maxWidth="-Infinity" prefHeight="350.0" prefWidth="574.0" BorderPane.alignment="CENTER">
@@ -53,41 +53,77 @@
   <center>
     <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="359.0">
       <children>
-        <Label prefHeight="21.000099999997474" prefWidth="109.0" text="Auto Reminder" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-        <Label prefHeight="22.0" prefWidth="109.0" text="Total Reminders" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <Label prefHeight="22.0" prefWidth="109.0" text="Reminders Sent" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-        <Button fx:id="switch" mnemonicParsing="false" prefWidth="69.0" text="ON/OFF" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <ComboBox fx:id="reminderCombo" prefHeight="21.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Label prefHeight="22.0" prefWidth="98.0" text="Auto Reminder" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1">
+          <children>
+            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+              <children>
+                <Label prefHeight="22.0" prefWidth="91.0" text="Total Reminders" />
+                <ComboBox fx:id="reminderCombo" prefHeight="21.0" prefWidth="69.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="1" />
+                      <String fx:value="2" />
+                      <String fx:value="3" />
+                      <String fx:value="4" />
+                      <String fx:value="5" />
+                      <String fx:value="6" />
+                      <String fx:value="7" />
+                      <String fx:value="8" />
+                      <String fx:value="9" />
+                      <String fx:value="10" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Label prefHeight="22.0" prefWidth="64.0" text="Frequency" />
+                <ComboBox fx:id="frequencyCombo" prefHeight="21.0" prefWidth="69.0">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="1" />
+                      <String fx:value="2" />
+                      <String fx:value="3" />
+                      <String fx:value="4" />
+                      <String fx:value="5" />
+                      <String fx:value="6" />
+                      <String fx:value="7" />
+                      <String fx:value="8" />
+                      <String fx:value="9" />
+                      <String fx:value="10" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+              <children>
+                <Label prefHeight="22.0" prefWidth="91.0" text="Reminders Sent" />
+                <Label fx:id="sentReminder" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="69.0" text="">
+                  <font>
+                    <Font name="System Bold" size="12.0" fx:id="x2" />
+                  </font>
+                </Label>
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+        <ComboBox  fx:id="autoReminderCombo" prefHeight="21.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
           <items>
             <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
+              <String fx:value="ON" />
+              <String fx:value="OFF" />
             </FXCollections>
           </items>
         </ComboBox>
-        <Label prefHeight="22.0" prefWidth="109.0" text="Frequency" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-        <ComboBox fx:id="frequencyCombo" prefHeight="21.0" prefWidth="69.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-          <items>
-            <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
-            </FXCollections>
-          </items>
-        </ComboBox>
-        <Label fx:id="sentReminder" prefHeight="23.0" prefWidth="69.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="121.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="82.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="85.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="80.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="96.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="97.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="80.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="76.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
   </center>
@@ -99,30 +135,19 @@
             <Label prefHeight="21.0" prefWidth="50.0" text="Month" />
             <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="121.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Label prefHeight="21.0" prefWidth="36.0" text="Year" />
             <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="121.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Button fx:id="search" mnemonicParsing="false" text="Search" />
           </children>
         </HBox>
-        <Label prefHeight="20.0" prefWidth="109.00009999999747" text="Create Reminder">
-          <font>
-            <Font name="System Bold" size="12.0" fx:id="x2" />
-          </font>
+        <Label font="$x2" prefHeight="20.0" prefWidth="109.00009999999747" text="Create Reminder">
           <VBox.margin>
             <Insets left="200.0" fx:id="x3" />
           </VBox.margin>
@@ -130,13 +155,9 @@
         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
           <children>
             <Label prefHeight="21.0" prefWidth="83.0" text="Reference No" />
-            <ComboBox id="referenceCombo" fx:id="createCombo" prefHeight="21.0" prefWidth="138.0">
+            <ComboBox id="referenceCombo" fx:id="createCombo" prefHeight="21.0" prefWidth="136.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Button fx:id="createReminder" mnemonicParsing="false" text="Create Reminder" />
@@ -145,14 +166,10 @@
         <Label font="$x2" prefHeight="21.0" prefWidth="109.0" text="Modify Reminder" VBox.margin="$x3" />
         <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="6.0">
           <children>
-            <Label prefHeight="21.0" prefWidth="78.0" text="Reference No" />
-            <ComboBox fx:id="modifyCombo" prefHeight="21.0" prefWidth="138.0">
+            <Label prefHeight="21.0" prefWidth="83.0" text="Reference No" />
+            <ComboBox fx:id="modifyCombo" prefHeight="21.0" prefWidth="136.0">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
             <Button fx:id="modifyReminder" mnemonicParsing="false" text="Modify Reminder" />

@@ -71,6 +71,9 @@ public class CommonConstants
 	public static final String FILE_ACCESS_FAILED_MSG = "Please check if file is present or your have rights to acces the file";
 	public static final String PDF_ACCESS_FAILED_MSG = "Please check if file/folder exists for PDF";
 	public static final String WORD_FILE = ".docx";
+	public static final String SERVICE_REGISTERED = "Service Registered Successfully";
+	public static final String SERVICE_UPDATED = "Service Entry Updated Successfully";
+	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
