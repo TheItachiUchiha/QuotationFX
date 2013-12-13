@@ -13,7 +13,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.model.ReminderVO;
-import com.kc.model.ServiceVO;
 import com.kc.util.DBConnector;
 
 public class StatusReminderDAO {
