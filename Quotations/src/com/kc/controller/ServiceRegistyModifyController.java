@@ -43,6 +43,8 @@ public class ServiceRegistyModifyController implements Initializable {
 	CustomersDAO customersDAO;
 	ServiceDAO serviceDAO;
 	Validation validate;
+	String startDate;
+	String endDate;
 	
 	public ServiceRegistyModifyController() {
 		enquiryDAO = new EnquiryDAO();
@@ -112,10 +114,9 @@ public class ServiceRegistyModifyController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
-			enquiryList = serviceDAO.getServiceEnquires();
+			
 			customerList = customersDAO.getCustomers();
-			serviceList = serviceDAO.getServices();
-			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
+			
 			
 			
 		}
@@ -128,20 +129,20 @@ public class ServiceRegistyModifyController implements Initializable {
 			public void handle(ActionEvent event) {
 				try
 				{
+					startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					enquiryList = serviceDAO.getServiceEnquires(startDate, endDate);
 					refList.clear();
+					for(EnquiryVO enquiryVO : enquiryList)
+					{
+						refList.add(enquiryVO.getRefNumber());
+					}
 					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
 					}
 					else
 					{
-						for(EnquiryViewVO enquiryVO : enquiryViewList)
-						{
-							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getServiceDate())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()) && new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getServiceDate())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()) && enquiryVO.getServiceDone().equalsIgnoreCase("Y"))
-							{
-								refList.add(enquiryVO.getReferenceNo());
-							}
-						}
 						if(refList.isEmpty())
 						{
 							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
@@ -194,39 +195,46 @@ public class ServiceRegistyModifyController implements Initializable {
 	}
 	public void viewDetails()
 	{
-		if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+		try
 		{
-			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
-		}
-		else
-		{
-			for(ServiceVO serviceVO : serviceList)
+			if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
 			{
-				if(referenceCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getReferenceNo()))
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+			}
+			else
+			{
+				serviceList = serviceDAO.getServices(referenceCombo.getSelectionModel().getSelectedItem());
+				for(ServiceVO serviceVO : serviceList)
 				{
-					name.setText(serviceVO.getEngineerName());
-					complaint.setText(serviceVO.getComplaint());
-					((TextField)calendar.getChildren().get(0)).setText(serviceVO.getDate());
-					serviceCharge.setText(serviceVO.getCharge());
-					if(serviceVO.getRating().equalsIgnoreCase("Excelent"))
+					if(referenceCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getReferenceNo()))
 					{
-						ratingCombo.getSelectionModel().select(0);
-					}
-					else if(serviceVO.getRating().equalsIgnoreCase("Good"))
-					{
-						ratingCombo.getSelectionModel().select(1);
-					}
-					else if(serviceVO.getRating().equalsIgnoreCase("Average"))
-					{
-						ratingCombo.getSelectionModel().select(2);
-					}
-					else if(serviceVO.getRating().equalsIgnoreCase("Bad"))
-					{
-						ratingCombo.getSelectionModel().select(3);
+						name.setText(serviceVO.getEngineerName());
+						complaint.setText(serviceVO.getComplaint());
+						((TextField)calendar.getChildren().get(0)).setText(serviceVO.getDate());
+						serviceCharge.setText(serviceVO.getCharge());
+						if(serviceVO.getRating().equalsIgnoreCase("Excelent"))
+						{
+							ratingCombo.getSelectionModel().select(0);
+						}
+						else if(serviceVO.getRating().equalsIgnoreCase("Good"))
+						{
+							ratingCombo.getSelectionModel().select(1);
+						}
+						else if(serviceVO.getRating().equalsIgnoreCase("Average"))
+						{
+							ratingCombo.getSelectionModel().select(2);
+						}
+						else if(serviceVO.getRating().equalsIgnoreCase("Bad"))
+						{
+							ratingCombo.getSelectionModel().select(3);
+						}
 					}
 				}
+				serviceGrid.setVisible(true);
 			}
-			serviceGrid.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	public void UpdateServiceEntry()

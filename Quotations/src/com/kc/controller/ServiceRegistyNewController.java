@@ -130,7 +130,7 @@ public class ServiceRegistyNewController implements Initializable {
 			//refList.clear();
 			for(EnquiryViewVO enquiryVO : enquiryViewList)
 			{
-				if(enquiryVO.getSales().equalsIgnoreCase("Y") && enquiryVO.getServiceDone().equalsIgnoreCase("N"))
+				if(enquiryVO.getSales().equalsIgnoreCase("Y") )
 				{
 					refList.add(enquiryVO.getReferenceNo());
 				}

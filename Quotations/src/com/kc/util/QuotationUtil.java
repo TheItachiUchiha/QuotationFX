@@ -80,4 +80,62 @@ public class QuotationUtil {
 		}
 		return tempList;
 	}
+	
+	public static String monthDigitFromString(String month)
+	{
+		try{
+			if(month.equalsIgnoreCase("JAN"))
+			{
+				return "01";
+			}
+			else if(month.equalsIgnoreCase("FEB"))
+			{
+				return "02";
+			}
+			else if(month.equalsIgnoreCase("MAR"))
+			{
+				return "03";
+			}
+			else if(month.equalsIgnoreCase("APR"))
+			{
+				return "04";
+			}
+			else if(month.equalsIgnoreCase("MAY"))
+			{
+				return "05";
+			}
+			else if(month.equalsIgnoreCase("JUN"))
+			{
+				return "06";
+			}
+			else if(month.equalsIgnoreCase("JUL"))
+			{
+				return "07";
+			}
+			else if(month.equalsIgnoreCase("AUG"))
+			{
+				return "08";
+			}
+			else if(month.equalsIgnoreCase("SEP"))
+			{
+				return "09";
+			}
+			else if(month.equalsIgnoreCase("OCT"))
+			{
+				return "10";
+			}
+			else if(month.equalsIgnoreCase("NOV"))
+			{
+				return "11";
+			}
+			else if(month.equalsIgnoreCase("DEC"))
+			{
+				return "12";
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
 }
