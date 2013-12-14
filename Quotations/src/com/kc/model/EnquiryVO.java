@@ -24,6 +24,7 @@ public class EnquiryVO {
 	private String qpDate;
 	private String mailSentDate;
 	private String salesDate;
+	private int reminderSent;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -157,6 +158,12 @@ public class EnquiryVO {
 	}
 	public void setSalesDate(String salesDate) {
 		this.salesDate = salesDate;
+	}
+	public int getReminderSent() {
+		return reminderSent;
+	}
+	public void setReminderSent(int reminderSent) {
+		this.reminderSent = reminderSent;
 	}
 	
 }
