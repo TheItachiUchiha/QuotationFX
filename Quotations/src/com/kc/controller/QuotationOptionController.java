@@ -71,9 +71,10 @@ public class QuotationOptionController implements Initializable {
 	@FXML
 	private TextField pdfFormat;
 	@FXML
-	private TextField emailAddress;
-	@FXML
 	private TextField username;
+	
+	@FXML
+	private TextField emailId;
 	@FXML
 	private PasswordField password;
 	@FXML
@@ -86,6 +87,9 @@ public class QuotationOptionController implements Initializable {
 	private Label message;
 	@FXML
 	private Label messageSent;
+	
+	@FXML
+	private Label messageEmail;
 	@FXML
 	private Button clear;
 	
@@ -276,6 +280,11 @@ public class QuotationOptionController implements Initializable {
 			}
 		});
 		
+		defaultValues = quotationDAO.getEmailDetails();
+	    username.setText(defaultValues.get(CommonConstants.KEY_QUOTATION_USERNAME));
+	    emailId.setText(defaultValues.get(CommonConstants.KEY_QUOTATION_EMAIL));
+	    password.setText(encryption.decrypt(defaultValues.get(CommonConstants.KEY_QUOTATION_PASSWORD)));
+		
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -338,5 +347,41 @@ public class QuotationOptionController implements Initializable {
 			message.setVisible(true);
 			LOG.error(e.getMessage());
 		}
+	}
+	public void saveEmailDetails()
+	{
+		if(validation.isEmpty(emailId,username,password))
+		{
+			messageEmail.setText(CommonConstants.MANDATORY_FIELDS);
+			messageEmail.getStyleClass().remove("success");
+			messageEmail.getStyleClass().add("failure");
+			messageEmail.setVisible(true);
+		}
+		else if(!validation.isEmail(username.getText()))
+		{
+			messageEmail.setText(CommonConstants.INCORRECT_EMAIL);
+			messageEmail.getStyleClass().remove("success");
+			messageEmail.getStyleClass().add("failure");
+			messageEmail.setVisible(true);
+		}
+		else
+		{
+			defaultValues.put(CommonConstants.KEY_QUOTATION_USERNAME, username.getText());
+			defaultValues.put(CommonConstants.KEY_QUOTATION_EMAIL, emailId.getText());
+			defaultValues.put(CommonConstants.KEY_QUOTATION_PASSWORD, encryption.encrypt(password.getText()));
+			quotationDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
+			messageEmail.setText(CommonConstants.CONF_SAVED);
+			messageEmail.getStyleClass().remove("failure");
+			messageEmail.getStyleClass().add("success");
+			messageEmail.setVisible(true);
+		}
+		
+	}
+	public void clearFields()
+	{
+		password.setText("");
+		username.setText("");
+		emailId.setText("");
+		messageEmail.setText("");
 	}
 }
