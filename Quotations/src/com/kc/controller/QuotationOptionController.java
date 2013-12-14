@@ -348,7 +348,7 @@ public class QuotationOptionController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 	}
-	public void saveEmailDetails()
+	public void saveEmail()
 	{
 		if(validation.isEmpty(emailId,username,password))
 		{
