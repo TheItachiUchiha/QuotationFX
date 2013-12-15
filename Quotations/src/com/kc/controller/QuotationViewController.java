@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -112,14 +114,38 @@ public class QuotationViewController implements Initializable  {
 						}
 						else
 						{
-							quotationTable.setVisible(true);
+							
 							fillTable();
+							quotationTable.setVisible(true);
 						}
 					}
 					catch (Exception e) {
 						e.printStackTrace();
 						LOG.error(e.getMessage());
 					}
+					
+				}
+			});
+			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					quotationTable.setVisible(false);
+					quotationTable.getItems().clear();
+					
+					
+				}
+			});
+			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					quotationTable.setVisible(false);
+					quotationTable.getItems().clear();
 					
 				}
 			});

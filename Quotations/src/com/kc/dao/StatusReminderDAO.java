@@ -35,13 +35,41 @@ public class StatusReminderDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO REMINDER(reference_no,total_reminder,frequency,last_sent,next_send) VALUES(?, ?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO REMINDER(reference_no,total_reminder,frequency,last_sent,next_send,status,subject,message,reciever) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			preparedStatement.setString(1, reminderVO.getReferenceNo());
 			preparedStatement.setInt(2, reminderVO.getTotalReminder());
 			preparedStatement.setInt(3, reminderVO.getFrequency());
 			preparedStatement.setString(4, reminderVO.getLastSent());
 			preparedStatement.setString(5, reminderVO.getNextSend());
-			
+			preparedStatement.setString(6, reminderVO.getStatus());
+			preparedStatement.setString(7, reminderVO.getSubject());
+			preparedStatement.setString(8, reminderVO.getEmailMessage());
+			preparedStatement.setString(9, reminderVO.getReciever());
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : createReminder");
+	}
+	public void UpdateReminder(ReminderVO reminderVO, String string)
+	{
+
+		LOG.info("Enter : createReminder");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE Reminder SET total_reminder=?,frequency=?,last_sent=?,next_send=?,status=?,subject=?,message=?,reciever=? where reference_no=?");
+			preparedStatement.setInt(1, reminderVO.getTotalReminder());
+			preparedStatement.setInt(2, reminderVO.getFrequency());
+			preparedStatement.setString(3, reminderVO.getLastSent());
+			preparedStatement.setString(4, reminderVO.getNextSend());
+			preparedStatement.setString(5, reminderVO.getStatus());
+			preparedStatement.setString(6, reminderVO.getSubject());
+			preparedStatement.setString(7, reminderVO.getEmailMessage());
+			preparedStatement.setString(8, reminderVO.getReciever());
+			preparedStatement.setString(9, string);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -51,14 +79,56 @@ public class StatusReminderDAO {
 		LOG.info("Exit : createReminder");
 	}
 	
+	public ObservableList<ReminderVO> getReminderDetails() throws SQLException
+	{
+
+		LOG.info("Enter : getReminders");
+		ObservableList<ReminderVO> listOfReminders = FXCollections.observableArrayList();
+		try{
+				
+				conn = DBConnector.getConnection();
+				preparedStatement=conn.prepareStatement("SELECT * from REMINDER");
+				resultSet = preparedStatement.executeQuery();
+				
+				while(resultSet.next())
+				{
+					ReminderVO reminderVO = new ReminderVO();
+					reminderVO.setId(resultSet.getInt(1));
+					reminderVO.setReferenceNo(resultSet.getString(2));
+					reminderVO.setTotalReminder(resultSet.getInt(3));
+					reminderVO.setFrequency(resultSet.getInt(4));
+					reminderVO.setLastSent(resultSet.getString(5));
+					reminderVO.setNextSend(resultSet.getString(6));
+					reminderVO.setStatus(resultSet.getString(7));
+					reminderVO.setSubject(resultSet.getString(8));
+					reminderVO.setEmailMessage(resultSet.getString(9));
+					reminderVO.setReciever(resultSet.getString(10));
+					listOfReminders.add(reminderVO);
+				}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getReminders");
+		return listOfReminders;
+	
+		
+	}
+	
 	public ObservableList<String> getModifyReminders(String startDate,String endDate) throws SQLException
 	{
 		LOG.info("Enter : getReminders");
 		ObservableList<String> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT e.REF_NUMBER FROM quotation.ENQUIRY e ,quotation.REMINDER r WHERE e.REF_NUMBER = r.REFERENCE_NO" +
+			preparedStatement=conn.prepareStatement("SELECT e.REF_NUMBER FROM quotation.ENQUIRY e ,quotation.REMINDER r WHERE e.REF_NUMBER = r.REFERENCE_NO and " +
 					"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
 					"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
@@ -91,9 +161,8 @@ public class StatusReminderDAO {
 		ObservableList<String> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT e.REF_NUMBER FROM quotation.ENQUIRY e , quotation.REMINDER r WHERE e.salesdone='N' and e.REF_NUMBER not in (select r1.reference_no from quotation.reminder r1)" +
-							"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
+			preparedStatement = conn.prepareStatement("SELECT ref_number FROM quotation.ENQUIRY e where e.ref_number NOT IN (select r1.reference_no from quotation.reminder r1) and e.salesdone='N' and " +
+						"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " +
 							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
 			preparedStatement.setString(2, endDate);
@@ -124,8 +193,7 @@ public class StatusReminderDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn
-					.prepareStatement("select * from quotation.enquiry where salesdone=? and " +
+			preparedStatement = conn.prepareStatement("select * from quotation.enquiry where salesdone=? and " +
 							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
 							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, status);

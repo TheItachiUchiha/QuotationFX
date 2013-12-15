@@ -24,7 +24,6 @@
             <HBox id="HBox" alignment="CENTER" spacing="5.0">
               <children>
                 <Button mnemonicParsing="false" onAction="#createSaleEntry" text="Create Sale Entry" />
-                <Button mnemonicParsing="false" text="Save &amp; close" />
               </children>
             </HBox>
             <Label fx:id="message" alignment="CENTER" prefHeight="23.0" prefWidth="226.0" text="" />
