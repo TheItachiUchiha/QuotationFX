@@ -47,6 +47,12 @@ public class CommonConstants
 	public static final String KEY_ENQUIRY_DEFAULT_CODE = "default_code";
 	public static final String KEY_QUOTATION_PATH = "quotation_default_path";
 	public static final String KEY_QUOTATION_WORD_PATH = "quotation_word_path";
+	public static final String KEY_QUOTATION_USERNAME = "quotation_username";
+	public static final String KEY_QUOTATION_EMAIL = "quotation_email";
+	public static final String KEY_REMINDER_PASSWORD = "reminder_password";
+	public static final String KEY_REMINDER_USERNAME = "reminder_username";
+	public static final String KEY_REMINDER_EMAIL = "reminder_email";
+	public static final String KEY_QUOTATION_PASSWORD = "quotation_password";
 	public static final String KEY_QUOTATION_PDF_PATH = "quotation_pdf_path";
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
 	public static final String KEY_ENQUIRY_EMAIL_PASSWORD = "email_password";
