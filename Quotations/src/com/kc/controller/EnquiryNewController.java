@@ -140,6 +140,7 @@ public class EnquiryNewController implements Initializable {
 				.observableArrayList();
 		filePath = new TextField();
 		filePath.setEditable(false);
+		filePath.setText("");
 		filePath.setPrefWidth(300);
 		Button browse = new Button();
         browse.setText("Browse");
@@ -526,8 +527,6 @@ public class EnquiryNewController implements Initializable {
 		Map<String, String> map = new HashMap<String, String>();
 		if(validation.isEmail(emailId.getText()))
 		{
-			if(!filePath.getText().equals(""))
-			{
 				if(!emailMessage.getText().equals(""))
 				{
 					map.put(CommonConstants.EMAIL_TO, emailId.getText());
@@ -547,14 +546,6 @@ public class EnquiryNewController implements Initializable {
 					messageSendMail.setText("Empty Email Body");
 					messageSendMail.setVisible(true);
 				}
-			}
-			else
-			{
-				messageSendMail.getStyleClass().remove("success");
-				messageSendMail.getStyleClass().add("failure");
-				messageSendMail.setText("Empty Attachment");
-				messageSendMail.setVisible(true);
-			}
 		}
 		else
 		{

@@ -306,7 +306,7 @@ public class QuotationNewController implements Initializable {
 									customerName.setText(enquiryViewVO.getCustomerName());
 									productName.setText(enquiryViewVO.getProductName());
 									priceEstimationDate.setText(enquiryViewVO.getPeDate());
-									estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+									estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 									quotationGrid.setVisible(true);
 									defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
 								}

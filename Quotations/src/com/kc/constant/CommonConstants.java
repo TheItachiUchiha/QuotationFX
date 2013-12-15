@@ -72,6 +72,7 @@ public class CommonConstants
 	public static final String CONF_SAVED = "Configuration Saved Successfully";
 	public static final String FILE_ACCESS_FAILED = "File Access Failed";
 	public static final String QUOTATION_PREPARED = "Quotation prepared";
+	public static final String QUOTATION_DELETED = "Quotation Deleted";
 	public static final String SALES_DATE_CREATED = "Sales Date Created";
 	public static final String SALES_DATE_MODIFIED = "Sales Date Modified";
 	public static final String FILE_ACCESS_FAILED_MSG = "Please check if file is present or your have rights to acces the file";

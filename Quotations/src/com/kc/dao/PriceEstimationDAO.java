@@ -28,10 +28,12 @@ public class PriceEstimationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation = 'Y', margin=?, pe_date=? where id=? ");
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation = 'Y', margin=?, pe_date=?,total_revenue=?,customer_type=? where id=? ");
 			preparedStatement.setDouble(1, enquiryVO.getMargin());
 			preparedStatement.setString(2, enquiryVO.getPeDate());
-			preparedStatement.setInt(3, enquiryVO.getId());
+			preparedStatement.setDouble(3, enquiryVO.getTotalRevenue());
+			preparedStatement.setString(4, enquiryVO.getEnquiryCustomerType());
+			preparedStatement.setInt(5, enquiryVO.getId());
 			preparedStatement.execute();
 			statement = conn.createStatement();
 			for(ComponentsVO component : enquiryVO.getList())
@@ -108,6 +110,12 @@ public class PriceEstimationDAO {
 				enquiryVO.setProductId(resultSet.getInt(15));
 				enquiryVO.setMargin(resultSet.getDouble(16));
 				enquiryVO.setPeDate(resultSet.getString(17));
+				enquiryVO.setQpDate(resultSet.getString(18));
+				enquiryVO.setMailSentDate(resultSet.getString(19));
+				enquiryVO.setSalesDate(resultSet.getString(20));
+				enquiryVO.setReminderSent(resultSet.getInt(21));
+				enquiryVO.setTotalRevenue(resultSet.getDouble(22));
+				enquiryVO.setEnquiryCustomerType(resultSet.getString(23));
 				listOfEnquries.add(enquiryVO);
 			}
 		}

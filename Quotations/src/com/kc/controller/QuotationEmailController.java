@@ -87,16 +87,10 @@ public class QuotationEmailController implements Initializable  {
     private TextField edateOfEnquiry;
 
     @FXML
-    private TextField epriceEstimation;
-
-    @FXML
     private TextField eproductName;
 
     @FXML
     private TextField epurchasePeriod;
-
-    @FXML
-    private TextField equotationPreparation;
 
     @FXML
     private TextField ereferedBy;
@@ -251,9 +245,7 @@ public class QuotationEmailController implements Initializable  {
 								ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
 								ereferedBy.setText(enquiryViewVO.getReferedBy());
 								edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
-								epriceEstimation.setText(enquiryViewVO.getPriceEstimation());
 								ecity.setText(enquiryViewVO.getCity());
-								equotationPreparation.setText(enquiryViewVO.getQuotationPreparation());
 								ecustomerDocument.setText(enquiryViewVO.getCustomerFile());
 								epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 								QuotationEmailController.this.enquiryViewVO = enquiryViewVO;
@@ -372,9 +364,12 @@ public class QuotationEmailController implements Initializable  {
 			File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
 			if(file.exists())
 			{
-				try {
+				try
+				{
 					newFileName = FileUtils.createPDF(file, defaultValues.get(CommonConstants.KEY_QUOTATION_PDF_PATH));
-				} catch (Throwable e) {
+				}
+				catch (Throwable e)
+				{
 					Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.PDF_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 				}
 				emailData.put(CommonConstants.EMAIL_ATTACHMENT, newFileName );
@@ -414,6 +409,7 @@ public class QuotationEmailController implements Initializable  {
 			messageEmail.getStyleClass().add("success");
 			messageEmail.setText("PDF deleted successfully");
 			messageEmail.setVisible(true);
+			attachmentLabel.setText("");
 		}
 		catch (Exception e) {
 			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);

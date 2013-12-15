@@ -1,5 +1,7 @@
 package com.kc.controller;
 
+import java.awt.Desktop;
+import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -26,8 +28,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -171,6 +176,18 @@ public class PriceEstimationModifyController implements Initializable{
 	    
 	    @FXML
 	    private GridPane enquiryGrid;
+	    
+	    @FXML
+	    private Label totalrevenue;
+
+	    @FXML
+	    private RadioButton dealerRadio;
+	    
+	    @FXML
+	    private RadioButton endUserRadio;
+	    
+	    @FXML
+	    private ToggleGroup priceRadio;
 	    
 	    double costPriceValue=0;
 		double dealerPriceValue=0;
@@ -341,6 +358,15 @@ public class PriceEstimationModifyController implements Initializable{
 								componentList = enquiryDAO.getComponentsForEnquiry(enquiryViewVO.getId());
 								fillComponentTable();
 								marginValue.setText(String.valueOf(enquiryViewVO.getMargin()));
+								totalrevenue.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
+								if(enquiryViewVO.getEnquiryCustomerType().equalsIgnoreCase("D"))
+								{
+									dealerRadio.setSelected(true);
+								}
+								else if(enquiryViewVO.getEnquiryCustomerType().equalsIgnoreCase("E"))
+								{
+									endUserRadio.setSelected(true);
+								}
 							}
 							catch (Exception e) {
 								e.printStackTrace();
@@ -362,7 +388,37 @@ public class PriceEstimationModifyController implements Initializable{
 				  public void changed(ObservableValue<? extends String> observable,
 				          String oldValue, String newValue) {
 				      if(null!=newValue && !("".equals(newValue)))
-				    	  totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue/100)));
+				      {
+				    	  priceRadio.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+								@Override
+								public void changed(
+										ObservableValue<? extends Toggle> observable,
+										Toggle oldValue, Toggle newValue) {
+									if(dealerRadio.isSelected())
+									{
+										totalrevenue.setText(String.valueOf(dealerPriceValue + ((Double.parseDouble(marginValue.getText()) * dealerPriceValue)/100)));
+										totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+									}
+									else
+									{
+										totalrevenue.setText(String.valueOf(endUserPriceValue + ((Double.parseDouble(marginValue.getText()) * endUserPriceValue)/100)));
+										totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+									}
+									
+								}
+				    	  }); 
+				    	  if(dealerRadio.isSelected())
+							{
+								totalrevenue.setText(String.valueOf(dealerPriceValue + ((Double.parseDouble(marginValue.getText()) * dealerPriceValue)/100)));
+								totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+							}
+							else
+							{
+								totalrevenue.setText(String.valueOf(endUserPriceValue + ((Double.parseDouble(marginValue.getText()) * endUserPriceValue)/100)));
+								totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+							}
+				      }	  
 				  }
 			
 			});
@@ -423,6 +479,25 @@ public class PriceEstimationModifyController implements Initializable{
 		}
 		
 	}
+	public void viewFile()
+	{
+		try
+		{
+			File newFile = new File(ecustomerFile.getText());
+			if(newFile.exists())
+			{
+				Desktop.getDesktop().open(newFile);
+			}
+			else
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.FILE_ACCESS_FAILED_MSG);
+			}
+		}
+		catch (Exception e) {
+			
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+		}
+	}
 	public void clearFields()
 	{
 		referenceNo.setText("");
@@ -480,6 +555,15 @@ public class PriceEstimationModifyController implements Initializable{
 						EnquiryVO enquiryVO = new EnquiryVO();
 						enquiryVO.setId(enquiryViewVO.getId());	
 						enquiryVO.setMargin(Double.parseDouble(marginValue.getText()));
+						if(dealerRadio.isSelected())
+						{
+							enquiryVO.setEnquiryCustomerType("D");
+						}
+						else if(endUserRadio.isSelected())
+						{
+							enquiryVO.setEnquiryCustomerType("E");
+						}
+						enquiryVO.setTotalRevenue(Double.parseDouble(totalrevenue.getText()));
 						enquiryVO.setList(componentList);
 						priceEstimationDAO.modifyPriceEstimation(enquiryVO);
 						message.setText(CommonConstants.PE_MODIFY_SUCCESS);
@@ -571,7 +655,18 @@ public class PriceEstimationModifyController implements Initializable{
 					endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
 					dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 					if(!marginValue.getText().equals(""))
-						totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
+					{
+						if(dealerRadio.isSelected())
+						{
+							totalrevenue.setText(String.valueOf(dealerPriceValue + ((Double.parseDouble(marginValue.getText()) * dealerPriceValue)/100)));
+							totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+						}
+						else
+						{
+							totalrevenue.setText(String.valueOf(endUserPriceValue + ((Double.parseDouble(marginValue.getText()) * endUserPriceValue)/100)));
+							totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+						}
+					}
 				}
 			});		
 		}
@@ -605,7 +700,18 @@ public class PriceEstimationModifyController implements Initializable{
 		endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
 		dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 		if(!marginValue.getText().equals(""))
-			totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
+		{
+			if(dealerRadio.isSelected())
+			{
+				totalrevenue.setText(String.valueOf(dealerPriceValue + ((Double.parseDouble(marginValue.getText()) * dealerPriceValue)/100)));
+				totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+			}
+			else
+			{
+				totalrevenue.setText(String.valueOf(endUserPriceValue + ((Double.parseDouble(marginValue.getText()) * endUserPriceValue)/100)));
+				totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
+			}
+		}
 		componentTable.setItems(componentList);
  
 	}

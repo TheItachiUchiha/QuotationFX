@@ -100,7 +100,7 @@ public class QuotationModifyController implements Initializable  {
 	    private TextField ereferenceNo;
 
 	    @FXML
-	    private Label messageNewQuotation;
+	    private Label message;
 	    
 	    @FXML
 	    private TextField priceEstimationDate;
@@ -128,9 +128,6 @@ public class QuotationModifyController implements Initializable  {
 	    
 	    @FXML
 	    private Button openQuotation;
-	    
-	    @FXML
-	    private Button recreateQuotation;
 	    
 	    @FXML
 	    private Button  deleteQuotation;
@@ -256,7 +253,7 @@ public class QuotationModifyController implements Initializable  {
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimationDate.setText(enquiryViewVO.getPeDate());
-								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 								quotationPreparationDate.setText(enquiryViewVO.getQpDate());
 								QuotationModifyController.this.enquiryViewVO=enquiryViewVO;
 								quotationGrid.setVisible(true);
@@ -309,7 +306,6 @@ public class QuotationModifyController implements Initializable  {
 						String paramT1, String paramT2) {
 					quotationGrid.setVisible(false);
 					enquiryGrid.setVisible(false);
-					recreateQuotation.setVisible(false);
 				}
 			});
 			openQuotation.setOnAction(new EventHandler<ActionEvent>() {
@@ -337,6 +333,10 @@ public class QuotationModifyController implements Initializable  {
 					{
 						FileUtils.deleteFile(file);
 						quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"N",CommonConstants.NA);
+						message.setText(CommonConstants.QUOTATION_DELETED);
+						message.getStyleClass().remove("success");
+						message.getStyleClass().add("failure");
+						message.setVisible(true);
 					}
 					else
 					{
