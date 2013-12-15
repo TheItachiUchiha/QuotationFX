@@ -25,6 +25,8 @@ public class EnquiryVO {
 	private String mailSentDate;
 	private String salesDate;
 	private int reminderSent;
+	private double totalRevenue;
+	private String enquiryCustomerType;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -164,6 +166,18 @@ public class EnquiryVO {
 	}
 	public void setReminderSent(int reminderSent) {
 		this.reminderSent = reminderSent;
+	}
+	public double getTotalRevenue() {
+		return totalRevenue;
+	}
+	public void setTotalRevenue(double totalRevenue) {
+		this.totalRevenue = totalRevenue;
+	}
+	public String getEnquiryCustomerType() {
+		return enquiryCustomerType;
+	}
+	public void setEnquiryCustomerType(String enquiryCustomerType) {
+		this.enquiryCustomerType = enquiryCustomerType;
 	}
 	
 }

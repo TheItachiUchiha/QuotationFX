@@ -31,7 +31,8 @@ public class EnquiryViewVO {
 	private String mailSentDate;
 	private String salesDate;
 	private int reminderSent;
-	
+	private double totalRevenue;
+	private String enquiryCustomerType;
 	
 	public int getId() {
 		return id;
@@ -214,6 +215,18 @@ public class EnquiryViewVO {
 	}
 	public void setReminderSent(int reminderSent) {
 		this.reminderSent = reminderSent;
+	}
+	public double getTotalRevenue() {
+		return totalRevenue;
+	}
+	public void setTotalRevenue(double totalRevenue) {
+		this.totalRevenue = totalRevenue;
+	}
+	public String getEnquiryCustomerType() {
+		return enquiryCustomerType;
+	}
+	public void setEnquiryCustomerType(String enquiryCustomerType) {
+		this.enquiryCustomerType = enquiryCustomerType;
 	}
 	
 }
