@@ -326,7 +326,7 @@ public class PriceEstimationModifyPopupController implements Initializable {
 			}
 			else
 			{
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.FILE_ACCESS_FAILED_MSG);
+				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.FILE_ACCESS_FAILED_MSG,CommonConstants.FILE_ACCESS_FAILED);
 			}
 		}
 		catch (Exception e) {

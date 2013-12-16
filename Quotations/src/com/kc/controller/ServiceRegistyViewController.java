@@ -4,7 +4,6 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-import java.util.ServiceLoader;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -52,7 +51,7 @@ public class ServiceRegistyViewController implements Initializable  {
 		customersDAO = new CustomersDAO();
 	}
 
-	 @FXML
+	 	@FXML
 	    private TableColumn action;
 
 	    @FXML
@@ -97,14 +96,12 @@ public class ServiceRegistyViewController implements Initializable  {
 	    private TableColumn<ServiceVO, String> dateOfService;
 
 	    @FXML
-	    private Button view;
-
-	    @FXML
 	    private ComboBox<String> yearCombo;
 	    
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
+		private ObservableList<EnquiryViewVO> tableViewList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 		private ObservableList<ServiceVO> serviceList = FXCollections.observableArrayList();
@@ -120,8 +117,6 @@ public class ServiceRegistyViewController implements Initializable  {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
-			
-			
 			action.setSortable(false);
 	         
 	        action.setCellValueFactory(
@@ -153,25 +148,43 @@ public class ServiceRegistyViewController implements Initializable  {
 	{
 		try
 		{
-			startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-			endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-			enquiryList = serviceDAO.getServiceEnquires(startDate, endDate);
-			customerList = customersDAO.getCustomers();
-			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
-			
-			if(enquiryViewList.isEmpty())
+			salesOrderTable.getItems().clear();
+			if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
 			{
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
 			}
 			else
 			{
-				salesOrderTable.setItems(enquiryViewList);
-				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-				productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-				location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
+				startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				enquiryList = serviceDAO.getServiceEnquires(startDate, endDate);
+				customerList = customersDAO.getCustomers();
+				enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
+
+				if(enquiryViewList.isEmpty())
+				{
+					salesOrderTable.setVisible(false);
+					serviceTable.setVisible(false);
+					Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+				}
+				else
+				{
+					for(EnquiryViewVO enquiryViewVO : enquiryViewList)
+					{
+						if(!tableViewList.contains(enquiryViewVO))
+						{
+							tableViewList.addAll(enquiryViewVO);
+						}
+					}
+					salesOrderTable.setItems(tableViewList);
+					referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+					productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+					customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+					companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+					referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+					location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
+					salesOrderTable.setVisible(true);
+				}
 			}
 		}
 		catch (Exception e) {

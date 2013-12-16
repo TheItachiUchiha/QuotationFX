@@ -107,7 +107,7 @@ public class EnquiryViewPopUpController {
 					}
 					else
 					{
-						Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED_MSG);
+						Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 					}
 				} catch (IOException e) {
 					Dialogs.showErrorDialog(EnquiryViewController.viewStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);

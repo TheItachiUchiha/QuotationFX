@@ -39,12 +39,6 @@ public class ServiceDAO {
 			preparedStatement.setString(6, serviceVO.getCharge());
 			
 			preparedStatement.execute();
-			
-			preparedStatement = conn.prepareStatement("UPDATE enquiry SET service_done=?,service_date=? WHERE ref_number=?");
-			preparedStatement.setString(1,"Y");
-			preparedStatement.setString(2,serviceVO.getDate());
-			preparedStatement.setString(3, serviceVO.getReferenceNo());
-			preparedStatement.execute();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -161,12 +155,6 @@ public class ServiceDAO {
 			preparedStatement = conn.prepareStatement("DELETE FROM SERVICE WHERE reference_no=?");
 			
 			preparedStatement.setString(1, string);
-			preparedStatement.execute();
-			
-			preparedStatement = conn.prepareStatement("UPDATE enquiry SET service_done=?,service_date=? WHERE ref_number=?");
-			preparedStatement.setString(1,"N");
-			preparedStatement.setString(2,CommonConstants.NA);
-			preparedStatement.setString(3, string);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {

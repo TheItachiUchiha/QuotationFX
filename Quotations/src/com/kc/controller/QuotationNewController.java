@@ -167,8 +167,16 @@ public class QuotationNewController implements Initializable {
 				@Override
 				public void handle(ActionEvent paramT) {
 				try
-				{			
-					Desktop.getDesktop().open(new File(ecustomerFile.getText()));
+				{
+					File newFile = new File(ecustomerFile.getText());
+					if(newFile.exists())
+					{
+						Desktop.getDesktop().open(newFile);
+					}
+					else
+					{
+						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+					}
 				}
 				catch (IOException e)
 				{

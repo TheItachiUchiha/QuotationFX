@@ -34,7 +34,7 @@ public class QuotationController implements Initializable {
 			BorderPane newQuotation = (BorderPane) loadernew.load();
 			newTab.setContent(newQuotation);
 			
-tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
+			tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 				
 		        @Override
 		        public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
