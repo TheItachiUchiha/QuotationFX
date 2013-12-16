@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -180,5 +182,84 @@ public class ProductsDAO {
 		}
 		LOG.info("Exit : getComponents");
 		return listOfComponents;
+	}
+	
+	public ObservableList<Map<String, Object>> getCategoriesForProduct() throws SQLException {
+		LOG.info("Enter : getComponents");
+		ObservableList<Map<String, Object>> listOfCategories = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, category FROM PRODUCTS");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", resultSet.getInt(1));
+				map.put("category", resultSet.getString(2));
+				listOfCategories.add(map);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponents");
+		return listOfCategories;
+	}
+	
+	public ObservableList<Map<String, Object>> getSubCategoriesForProduct() throws SQLException {
+		LOG.info("Enter : getSubCategoriesForProduct");
+		ObservableList<Map<String, Object>> listOfCategories = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, subcategory FROM PRODUCTS");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", resultSet.getInt(1));
+				map.put("subcategory", resultSet.getString(2));
+				listOfCategories.add(map);
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getSubCategoriesForProduct");
+		return listOfCategories;
+	}
+	
+	public ObservableList<Map<String, Object>> getCustomerTypeForProduct() throws SQLException {
+		LOG.info("Enter : getSubCategoriesForProduct");
+		ObservableList<Map<String, Object>> listOfCustomerType = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, type FROM CUSTOMERS");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", resultSet.getInt(1));
+				map.put("customerType", resultSet.getString(2));
+				listOfCustomerType.add(map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getSubCategoriesForProduct");
+		return listOfCustomerType;
 	}
 }

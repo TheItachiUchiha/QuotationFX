@@ -1,12 +1,15 @@
 package com.kc.util;
 
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class CustomReportTemplate extends VBox 
 {
@@ -82,22 +85,44 @@ public class CustomReportTemplate extends VBox
 	}
 	public CustomReportTemplate(ObservableList<PieChart.Data> pieChartData)
 	{
+		firstBoldLabelLeft.setFont(Font.font("ARIAL", FontWeight.BOLD, 20));
+		firstBoldLabelRight.setFont(Font.font("ARIAL", FontWeight.BOLD, 20));
+		
+		
+		firstBox.setAlignment(Pos.CENTER);
+		secondBox.setAlignment(Pos.CENTER);
+		thirdBox.setAlignment(Pos.CENTER);
+		fourthBox.setAlignment(Pos.CENTER);
+		fifthBox.setAlignment(Pos.CENTER);
+		sixthBox.setAlignment(Pos.CENTER);
+		
+		firstBox.setSpacing(10);
+		secondBox.setSpacing(10);
+		thirdBox.setSpacing(10);
+		fourthBox.setSpacing(10);
+		fifthBox.setSpacing(10);
+		sixthBox.setSpacing(10);
+		
+		firstBox.setPadding(new Insets(20, 20, 20, 20));
+		
 		firstBox.getChildren().addAll(firstBoldLabelLeft, firstBoldLabelRight);
 		secondBox.getChildren().addAll(firstLabelLeft, firstLabelRight);
 		thirdBox.getChildren().addAll(secondLabelLeft, secondLabelRight);
 		fourthBox.getChildren().addAll(thirdLabelLeft, thirdLabelRight);
 		fifthBox.getChildren().addAll(fourthLabelLeft, fourthLabelRight);
 		sixthBox.getChildren().addAll(fifthLabelLeft, fifthLabelRight);
-		detailsBox.getChildren().addAll(firstBox, secondBox, thirdBox, fourthBox, fifthBox, sixthBox);
 		detailsBox.setAlignment(Pos.CENTER);
+		detailsBox.getChildren().addAll(firstBox, secondBox, thirdBox, fourthBox, fifthBox, sixthBox);
 		
 		pieChart = new PieChart(pieChartData);
-		pieChart.setLabelLineLength(10);
+		//pieChart.setLabelLineLength(10);
 		pieChart.setLegendSide(Side.RIGHT);
-		pieBox.getChildren().addAll(pieChart);
+		//pieBox.setMinSize(200, 200);
 		pieBox.setAlignment(Pos.CENTER);
+		pieBox.getChildren().addAll(pieChart);
 		
-		this.getChildren().addAll(detailsBox, pieBox);
 		this.setAlignment(Pos.CENTER);
+		this.getChildren().addAll(detailsBox, pieBox);
+		
 	}
 }
