@@ -13,16 +13,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.MapValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 
 import com.kc.constant.CommonConstants;
+import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ProductsDAO;
 import com.kc.dao.ReportsDAO;
 import com.kc.model.EnquiryVO;
@@ -36,12 +42,14 @@ public class ReportController implements Initializable {
 	ProductsDAO productsDAO;
 	ReportsDAO reportsDAO;
 	ReportService reportService;
+	EnquiryDAO enquiryDAO;
 	
 	public ReportController()
 	{
 		productsDAO = new ProductsDAO();
 		reportsDAO = new ReportsDAO();
 		reportService = new ReportService();
+		enquiryDAO = new EnquiryDAO();
 	}
 	/*@FXML
     private ComboBox<String> typeCombo;
@@ -381,7 +389,7 @@ public class ReportController implements Initializable {
 						
 					}
 				}
-				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer State"))
+				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Location"))
 				{
 					listOfCustomerState = reportService.getCustomerStateForProduct();
 					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
@@ -434,6 +442,55 @@ public class ReportController implements Initializable {
 				        tile.getChildren().add(chart);
 						
 					}
+				}
+			}
+			else if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Custom Report"))
+			{
+				
+				if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Service Engineer Name"))
+				{
+					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+					startDate = "01/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
+					endDate = "31/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
+				
+					
+					tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
+					final Label label = new Label("Student IDs");
+				    label.setFont(new Font("Arial", 20));
+					ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
+					TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
+			        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
+			        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
+			        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
+			        TableColumn<Map, String> location = new TableColumn<>("Location");
+			        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
+			 
+			        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
+			        ref_no.setMinWidth(130);
+			        dateOfService.setCellValueFactory(new MapValueFactory("DATE_OF_SERVICE"));
+			        dateOfService.setMinWidth(130);
+			        custName.setCellValueFactory(new MapValueFactory("CUSTOMER_NAME"));
+			        custName.setMinWidth(130);
+			        compName.setCellValueFactory(new MapValueFactory("COMPANY_NAME"));
+			        compName.setMinWidth(130);
+			        location.setCellValueFactory(new MapValueFactory("LOCATION"));
+			        location.setMinWidth(130);
+			        revenue.setCellValueFactory(new MapValueFactory("REVENUE"));
+			        revenue.setMinWidth(130);
+			        
+			 
+			        TableView table_view = new TableView<>(tableData);
+			        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);
+			        
+			 
+			        final VBox vbox = new VBox();
+			 
+			        vbox.setSpacing(5);
+			        vbox.setPadding(new Insets(10, 0, 0, 10));
+			        vbox.getChildren().addAll(label, table_view);
+				        tile.getChildren().add(vbox);
+						
+					
 				}
 			}
 		}
