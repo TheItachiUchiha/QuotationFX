@@ -85,4 +85,12 @@ public class CommonConstants
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
+	
+	//Keys for report template of service engg
+	public static final String KEY_REPORT_REF = "REFERENCE_NO";
+	public static final String KEY_REPORT_DATE = "DATE_OF_SERVICE";
+	public static final String KEY_REPORT_CUST = "CUSTOMER_NAME";
+	public static final String KEY_REPORT_COMP = "COMPANY_NAME";
+	public static final String KEY_REPORT_LOC = "LOCATION";
+	public static final String KEY_REPORT_REVENUE = "REVENUE";
 }
