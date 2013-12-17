@@ -221,9 +221,9 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select e.* from quotation.enquiry e, quotation.service s where e.ref_number=s.reference_no and " +
-							"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
-							"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+					.prepareStatement("select e.* from quotation.enquiry e where e.ref_number in (select distinct s.reference_no from quotation.service s where "+
+							"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+ 
+							"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y'))");
 			preparedStatement.setString(1, startDate);
 			preparedStatement.setString(2, endDate);
 			resultSet = preparedStatement.executeQuery();

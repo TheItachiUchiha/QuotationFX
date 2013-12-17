@@ -10,7 +10,6 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -56,7 +55,7 @@ public class Email extends Task
 			message.setFrom(new InternetAddress("support@kryptcode.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(data.get(CommonConstants.EMAIL_TO)));
-			if(data.get(CommonConstants.EMAIL_SUBJECT).equals(""))
+			if(!data.keySet().contains(CommonConstants.EMAIL_SUBJECT))
 			{
 				message.setSubject("Testing Subject");
 			}
@@ -64,30 +63,43 @@ public class Email extends Task
 			{
 				message.setSubject(data.get(CommonConstants.EMAIL_SUBJECT));
 			}
-			// create the message part   
-            MimeBodyPart messageBodyPart =   
-              new MimeBodyPart();  
-            //fill message  
-            messageBodyPart.setText(data.get(CommonConstants.EMAIL_BODY));  
+			
              
-            if(null!=data.get(CommonConstants.EMAIL_ATTACHMENT) || !data.get(CommonConstants.EMAIL_ATTACHMENT).equals(""))
+            if(data.keySet().contains(CommonConstants.EMAIL_ATTACHMENT))
             {
-            	Multipart multipart = new MimeMultipart();  
-                multipart.addBodyPart(messageBodyPart);  
-                // Part two is attachment  
-                messageBodyPart = new MimeBodyPart(); 
-            	DataSource source =   
-            			new FileDataSource(data.get(CommonConstants.EMAIL_ATTACHMENT));
-            	messageBodyPart.setDataHandler(  
-                        new DataHandler(source)); 
-            	 messageBodyPart.setFileName(data.get(CommonConstants.EMAIL_ATTACHMENT));  
-                 multipart.addBodyPart(messageBodyPart);  
-                 // Put parts in message  
-                 message.setContent(multipart);  
+            	if( !data.get(CommonConstants.EMAIL_ATTACHMENT).equals(""))
+            	{
+            		// create the message part   
+                    MimeBodyPart messageBodyPart =   
+                      new MimeBodyPart();  
+                    //fill message  
+                    messageBodyPart.setText(data.get(CommonConstants.EMAIL_BODY));  
+                    Multipart multipart = new MimeMultipart();  
+                    multipart.addBodyPart(messageBodyPart);  
+                    // Part two is attachment  
+                    messageBodyPart = new MimeBodyPart(); 
+	            	DataSource source =   
+	            			new FileDataSource(data.get(CommonConstants.EMAIL_ATTACHMENT));
+	            	messageBodyPart.setDataHandler(  
+	                        new DataHandler(source)); 
+	            	 messageBodyPart.setFileName(data.get(CommonConstants.EMAIL_ATTACHMENT));  
+	            	 multipart.addBodyPart(messageBodyPart);  
+	                 // Put parts in message  
+	                 message.setContent(multipart);
+            	}
+            	 else
+                 {
+                 	message.setText(data.get(CommonConstants.EMAIL_BODY));
+                 }
             }
+            else
+            {
+            	message.setText(data.get(CommonConstants.EMAIL_BODY));
+            }
+            
 			Transport.send(message);
  
-		} catch (MessagingException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}

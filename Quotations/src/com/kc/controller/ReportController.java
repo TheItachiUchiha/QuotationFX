@@ -7,14 +7,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import com.kc.constant.CommonConstants;
-import com.kc.dao.ProductsDAO;
-import com.kc.dao.ReportsDAO;
-import com.kc.model.EnquiryVO;
-import com.kc.service.ReportService;
-import com.kc.util.CustomReportTemplate;
-import com.kc.util.QuotationUtil;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -24,10 +16,20 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.ProductsDAO;
+import com.kc.dao.ReportsDAO;
+import com.kc.model.EnquiryVO;
+import com.kc.service.ReportService;
+import com.kc.util.CustomReportTemplate;
+import com.kc.util.QuotationUtil;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ReportController implements Initializable {
 
@@ -41,7 +43,7 @@ public class ReportController implements Initializable {
 		reportsDAO = new ReportsDAO();
 		reportService = new ReportService();
 	}
-	@FXML
+	/*@FXML
     private ComboBox<String> typeCombo;
 
     @FXML
@@ -57,7 +59,67 @@ public class ReportController implements Initializable {
     private TilePane tile;
     
     @FXML
-    private ComboBox<String> yearCombo;
+    private ComboBox<String> yearCombo;*/
+	
+	 @FXML
+	    private AutoCompleteTextField<String> customAutoFill;
+
+	    @FXML
+	    private GridPane customGrid;
+
+	    @FXML
+	    private ComboBox<String> customMonthCombo;
+
+	    @FXML
+	    private ComboBox<String> customMonthYearCombo;
+
+	    @FXML
+	    private ComboBox<String> customTypeCombo;
+
+	    @FXML
+	    private Label messageCustom;
+
+	    @FXML
+	    private Label messageStandard;
+
+	    @FXML
+	    private ComboBox<String> monthCombo;
+
+	    @FXML
+	    private HBox monthHBox;
+
+	    @FXML
+	    private ComboBox<String> monthYearCombo;
+
+	    @FXML
+	    private ComboBox<String> periodCombo;
+
+	    @FXML
+	    private VBox periodVBox;
+
+	    @FXML
+	    private ComboBox<String> reportTypeCombo;
+
+	    @FXML
+	    private GridPane standardGrid;
+
+	    @FXML
+	    private TilePane tile;
+
+	    @FXML
+	    private ComboBox<String> typeCombo;
+
+	    @FXML
+	    private ComboBox<String> yearCombo;
+
+	    @FXML
+	    private HBox yearHBox;
+
+	    @FXML
+	    private VBox reportVBox;
+
+	    @FXML
+	    private HBox customHBox;
     
     private ObservableList<String> reportTypeList = FXCollections.observableArrayList();
     private ObservableList<String> salesList = FXCollections.observableArrayList();
@@ -74,47 +136,71 @@ public class ReportController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
-		reportTypeList.add("Sales Report");
-		reportTypeList.add("Service Report");
-		reportTypeCombo.setItems(reportTypeList);
 		
-		salesList.add("Product Category");
-		salesList.add("Product Subcategory");
-		salesList.add("Customer Type");
-		salesList.add("Customer State");
-		
-		serviceList.add("Reference No");
-		serviceList.add("Service Engineer Name");
-		serviceList.add("Customer name");
-		
-		monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
-		periodList.setItems(monthList);
-		periodList.getSelectionModel().selectionModeProperty().set(SelectionMode.MULTIPLE);
-		
-		yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
-		yearCombo.setItems(yearList);
-		
-		reportTypeCombo.valueProperty().addListener(new ChangeListener<String>() {
+			reportVBox.getChildren().removeAll(standardGrid,customGrid);
+			periodVBox.getChildren().removeAll(yearHBox,monthHBox);
+			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			monthCombo.setItems(monthList);
+			customMonthCombo.setItems(monthList);
+			
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
+			yearCombo.setItems(yearList);
+			monthYearCombo.setItems(yearList);
+			customMonthYearCombo.setItems(yearList);
+			
+			reportTypeCombo.valueProperty().addListener(new ChangeListener<String>() {
+	
+				@Override
+				public void changed(ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					if(newValue.equalsIgnoreCase("Standard Report"))
+					{
+						reportVBox.getChildren().add(standardGrid);
+						reportVBox.getChildren().remove(customGrid);
+					}
+					else if(newValue.equalsIgnoreCase("Custom Report"))
+					{
+						reportVBox.getChildren().add(customGrid);
+						reportVBox.getChildren().remove(standardGrid);
+					}
+				}
+			});
+			periodCombo.valueProperty().addListener(new ChangeListener<String>() {
 
-			@Override
-			public void changed(ObservableValue<? extends String> observable,
-					String oldValue, String newValue) {
-				reportGrid.setVisible(true);
-				periodList.getSelectionModel().clearSelection();
-				
-				if(reportTypeCombo.getSelectionModel().getSelectedItem().equals("Sales Report"))
-				{
-					typeCombo.setItems(salesList);
-					periodList.getSelectionModel().clearSelection();
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String oldValue, String newValue) {
+						if(newValue.equalsIgnoreCase("Year"))
+						{
+							periodVBox.getChildren().add(yearHBox);
+							periodVBox.getChildren().remove(monthHBox);
+						}
+						else if(newValue.equalsIgnoreCase("Month"))
+						{
+							periodVBox.getChildren().add(monthHBox);
+							periodVBox.getChildren().remove(yearHBox);
+						}
 				}
-				else if (reportTypeCombo.getSelectionModel().getSelectedItem().equals("Service Report"))
-				{
-					typeCombo.setItems(serviceList);
-					periodList.getSelectionModel().clearSelection();
+			});
+			customTypeCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String oldValue, String newValue) {
+					
+					if(newValue.equalsIgnoreCase("Service Engineer Name"))
+					{
+						customHBox.setVisible(true);
+					}
+					else
+					{
+						customHBox.setVisible(false);
+					}
 				}
-				
-			}
-		});
+			});
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -130,13 +216,21 @@ public class ReportController implements Initializable {
 		Map<String, List<Integer>> listOfCustomerState = FXCollections.observableHashMap();
 		try
 		{
-			if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Sales Report"))
+			if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Standard Report"))
 			{
 				if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Category"))
 				{
 					listOfCategories = reportService.getCategoriesForProduct();
-					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
+					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+					}
+					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
+					{
+						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+					}
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCategories.keySet();
 					 
@@ -182,8 +276,16 @@ public class ReportController implements Initializable {
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Subcategory"))
 				{
 					listOfSubCategories = reportService.getSubCategoriesForProduct();
-					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
+					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+					}
+					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
+					{
+						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+					}
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfSubCategories.keySet();
 					
@@ -228,8 +330,16 @@ public class ReportController implements Initializable {
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Type"))
 				{
 					listOfCustomerType = reportService.getCustomerTypeForProduct();
-					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
+					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+					}
+					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
+					{
+						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+					}
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCustomerType.keySet();
 					
@@ -274,8 +384,16 @@ public class ReportController implements Initializable {
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer State"))
 				{
 					listOfCustomerState = reportService.getCustomerStateForProduct();
-					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
+					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+					}
+					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
+					{
+						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+					}
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCustomerState.keySet();
 					
