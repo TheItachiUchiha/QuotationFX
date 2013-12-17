@@ -67,21 +67,24 @@ public class Email extends Task
 			// create the message part   
             MimeBodyPart messageBodyPart =   
               new MimeBodyPart();  
-        //fill message  
+            //fill message  
             messageBodyPart.setText(data.get(CommonConstants.EMAIL_BODY));  
-            Multipart multipart = new MimeMultipart();  
-            multipart.addBodyPart(messageBodyPart);  
-         // Part two is attachment  
-            messageBodyPart = new MimeBodyPart();  
-            DataSource source =   
-              new FileDataSource(data.get(CommonConstants.EMAIL_ATTACHMENT));  
-            messageBodyPart.setDataHandler(  
-              new DataHandler(source));  
-            messageBodyPart.setFileName(data.get(CommonConstants.EMAIL_ATTACHMENT));  
-            multipart.addBodyPart(messageBodyPart);  
-        // Put parts in message  
-            message.setContent(multipart);  
- 
+             
+            if(null!=data.get(CommonConstants.EMAIL_ATTACHMENT) || !data.get(CommonConstants.EMAIL_ATTACHMENT).equals(""))
+            {
+            	Multipart multipart = new MimeMultipart();  
+                multipart.addBodyPart(messageBodyPart);  
+                // Part two is attachment  
+                messageBodyPart = new MimeBodyPart(); 
+            	DataSource source =   
+            			new FileDataSource(data.get(CommonConstants.EMAIL_ATTACHMENT));
+            	messageBodyPart.setDataHandler(  
+                        new DataHandler(source)); 
+            	 messageBodyPart.setFileName(data.get(CommonConstants.EMAIL_ATTACHMENT));  
+                 multipart.addBodyPart(messageBodyPart);  
+                 // Put parts in message  
+                 message.setContent(multipart);  
+            }
 			Transport.send(message);
  
 		} catch (MessagingException e) {
