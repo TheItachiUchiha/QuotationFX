@@ -208,7 +208,7 @@ public class ServiceRegistyNewController implements Initializable {
 		else
 		{
 			ServiceVO serviceVO = new ServiceVO();
-			serviceVO.setCharge(serviceCharge.getText());
+			serviceVO.setCharge(Double.parseDouble(serviceCharge.getText()));
 			serviceVO.setComplaint(complaint.getText());
 			serviceVO.setDate(((TextField)calendar.getChildren().get(0)).getText());
 			serviceVO.setEngineerName(name.getText());

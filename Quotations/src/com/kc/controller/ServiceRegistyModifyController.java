@@ -211,7 +211,7 @@ public class ServiceRegistyModifyController implements Initializable {
 						name.setText(serviceVO.getEngineerName());
 						complaint.setText(serviceVO.getComplaint());
 						((TextField)calendar.getChildren().get(0)).setText(serviceVO.getDate());
-						serviceCharge.setText(serviceVO.getCharge());
+						serviceCharge.setText(String.valueOf(serviceVO.getCharge()));
 						if(serviceVO.getRating().equalsIgnoreCase("Excelent"))
 						{
 							ratingCombo.getSelectionModel().select(0);
@@ -263,7 +263,7 @@ public class ServiceRegistyModifyController implements Initializable {
 		else
 		{
 		ServiceVO serviceVO = new ServiceVO();
-		serviceVO.setCharge(serviceCharge.getText());
+		serviceVO.setCharge(Double.parseDouble(serviceCharge.getText()));
 		serviceVO.setComplaint(complaint.getText());
 		serviceVO.setDate(((TextField)calendar.getChildren().get(0)).getText());
 		serviceVO.setEngineerName(name.getText());

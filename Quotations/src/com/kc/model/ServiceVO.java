@@ -7,7 +7,7 @@ public class ServiceVO {
 	String engineerName;
 	String complaint;
 	String rating;
-	String charge;
+	double charge;
 	String date;
 	public int getId() {
 		return id;
@@ -39,10 +39,10 @@ public class ServiceVO {
 	public void setRating(String rating) {
 		this.rating = rating;
 	}
-	public String getCharge() {
+	public double getCharge() {
 		return charge;
 	}
-	public void setCharge(String charge) {
+	public void setCharge(double charge) {
 		this.charge = charge;
 	}
 	public String getDate() {

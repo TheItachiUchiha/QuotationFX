@@ -415,4 +415,5 @@ public class EnquiryDAO {
 		LOG.info("Exit : getComponents");
 		return listOfComponents;
 	}
+	
 }

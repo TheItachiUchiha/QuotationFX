@@ -36,7 +36,7 @@ public class ServiceDAO {
 			preparedStatement.setString(3, serviceVO.getComplaint());
 			preparedStatement.setString(4, serviceVO.getDate());
 			preparedStatement.setString(5, serviceVO.getRating());
-			preparedStatement.setString(6, serviceVO.getCharge());
+			preparedStatement.setDouble(6, serviceVO.getCharge());
 			
 			preparedStatement.execute();
 		}
@@ -59,7 +59,7 @@ public class ServiceDAO {
 			preparedStatement.setString(2, serviceVO.getComplaint());
 			preparedStatement.setString(3, serviceVO.getDate());
 			preparedStatement.setString(4, serviceVO.getRating());
-			preparedStatement.setString(5, serviceVO.getCharge());
+			preparedStatement.setDouble(5, serviceVO.getCharge());
 			preparedStatement.setString(6, serviceVO.getReferenceNo());
 			
 			preparedStatement.execute();
@@ -91,7 +91,7 @@ public class ServiceDAO {
 				serviceVO.setComplaint(resultSet.getString(4));
 				serviceVO.setDate(resultSet.getString(5));
 				serviceVO.setRating(resultSet.getString(6));
-				serviceVO.setCharge(resultSet.getString(7));
+				serviceVO.setCharge(resultSet.getDouble(7));
 				
 				listOfServices.add(serviceVO);
 			}
@@ -129,7 +129,7 @@ public class ServiceDAO {
 				serviceVO.setComplaint(resultSet.getString(4));
 				serviceVO.setDate(resultSet.getString(5));
 				serviceVO.setRating(resultSet.getString(6));
-				serviceVO.setCharge(resultSet.getString(7));
+				serviceVO.setCharge(resultSet.getDouble(7));
 				
 				listOfServices.add(serviceVO);
 			}
