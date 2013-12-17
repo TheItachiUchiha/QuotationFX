@@ -4,6 +4,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -36,6 +38,7 @@ import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DateUtil;
+import com.kc.util.Email;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
@@ -50,6 +53,7 @@ public class ReminderController implements Initializable {
 		StatusReminderDAO statusReminderDAO;
 		String startDate;
 		String endDate;
+		private Email email;
 	
 		public ReminderController() {
 		enquiryDAO = new EnquiryDAO();
@@ -69,7 +73,7 @@ public class ReminderController implements Initializable {
 	    private ComboBox<Integer> frequencyCombo;
 
 	    @FXML
-	    private TextArea message;
+	    private TextArea emailMessage;
 
 	    @FXML
 	    private ComboBox<String> modifyCombo;
@@ -118,6 +122,12 @@ public class ReminderController implements Initializable {
 	    
 	    @FXML
 	    private HBox referenceHBox;
+	    
+	    @FXML
+	    private  Button stopReminder;
+	    
+	    @FXML
+	    private  Label messageSendMail;
 
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -140,11 +150,14 @@ public class ReminderController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.SELECT_MONTH_YEAR);
+					}
+					else
+					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					}
 					
 				}
@@ -161,10 +174,12 @@ public class ReminderController implements Initializable {
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
+							stopReminder.setVisible(false);
 						}
 						else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 						{
 							refList = statusReminderDAO.getModifyReminders(startDate,endDate);
+							stopReminder.setVisible(true);
 						}
 						if(refList.isEmpty())
 						{
@@ -237,63 +252,101 @@ public class ReminderController implements Initializable {
 	}
 	public void sendMail()
 	{
-		if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
+		try
 		{
-			ReminderVO reminderVO = new ReminderVO();
-			reminderVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
-			reminderVO.setLastSent(formatter.format(new Date()));
-			reminderVO.setStatus(autoReminderCombo.getSelectionModel().getSelectedItem());
-			reminderVO.setSubject(subject.getText());
-			reminderVO.setEmailMessage(message.getText());
-			reminderVO.setReciever(receiver.getText());
-			if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("ON"))
+			if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 			{
-				reminderVO.setFrequency(frequencyCombo.getSelectionModel().getSelectedItem());
-				reminderVO.setTotalReminder(reminderCombo.getSelectionModel().getSelectedItem());
-				reminderVO.setNextSend(formatter.format(DateUtil.addDays(new Date(), frequencyCombo.getSelectionModel().getSelectedItem())));
+				ReminderVO reminderVO = new ReminderVO();
+				reminderVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
+				reminderVO.setLastSent(formatter.format(new Date()));
+				reminderVO.setStatus(autoReminderCombo.getSelectionModel().getSelectedItem());
+				reminderVO.setSubject(subject.getText());
+				reminderVO.setEmailMessage(emailMessage.getText());
+				reminderVO.setReciever(receiver.getText());
+				if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("ON"))
+				{
+					reminderVO.setFrequency(frequencyCombo.getSelectionModel().getSelectedItem());
+					reminderVO.setTotalReminder(reminderCombo.getSelectionModel().getSelectedItem());
+					reminderVO.setNextSend(formatter.format(DateUtil.addDays(new Date(), frequencyCombo.getSelectionModel().getSelectedItem())));
+				}
+				else if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("OFF"))
+				{
+					reminderVO.setFrequency(0);
+					reminderVO.setTotalReminder(1);
+					reminderVO.setNextSend(CommonConstants.NA);
+				}
+				mailSending();
+				statusReminderDAO.createReminder(reminderVO);
 			}
-			else if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("OFF"))
+			else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 			{
-				reminderVO.setFrequency(0);
-				reminderVO.setTotalReminder(1);
-				reminderVO.setNextSend(CommonConstants.NA);
+				ReminderVO reminderVO = new ReminderVO();
+				reminderVO.setLastSent(formatter.format(new Date()));
+				reminderVO.setStatus(autoReminderCombo.getSelectionModel().getSelectedItem());
+				reminderVO.setSubject(subject.getText());
+				reminderVO.setEmailMessage(emailMessage.getText());
+				reminderVO.setReciever(receiver.getText());
+				if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("ON"))
+				{
+					reminderVO.setFrequency(frequencyCombo.getSelectionModel().getSelectedItem());
+					reminderVO.setTotalReminder(reminderCombo.getSelectionModel().getSelectedItem());
+					reminderVO.setNextSend(formatter.format(DateUtil.addDays(new Date(), frequencyCombo.getSelectionModel().getSelectedItem())));
+				}
+				else if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("OFF"))
+				{
+					reminderVO.setFrequency(0);
+					reminderVO.setTotalReminder(1);
+					reminderVO.setNextSend(CommonConstants.NA);
+				}
+				mailSending();
+				statusReminderDAO.UpdateReminder(reminderVO,referenceCombo.getSelectionModel().getSelectedItem());
 			}
-			
-			statusReminderDAO.createReminder(reminderVO);
 		}
-		else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
-		{
-			ReminderVO reminderVO = new ReminderVO();
-			reminderVO.setLastSent(formatter.format(new Date()));
-			reminderVO.setStatus(autoReminderCombo.getSelectionModel().getSelectedItem());
-			reminderVO.setSubject(subject.getText());
-			reminderVO.setEmailMessage(message.getText());
-			reminderVO.setReciever(receiver.getText());
-			if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("ON"))
-			{
-				reminderVO.setFrequency(frequencyCombo.getSelectionModel().getSelectedItem());
-				reminderVO.setTotalReminder(reminderCombo.getSelectionModel().getSelectedItem());
-				reminderVO.setNextSend(formatter.format(DateUtil.addDays(new Date(), frequencyCombo.getSelectionModel().getSelectedItem())));
-			}
-			else if(autoReminderCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("OFF"))
-			{
-				reminderVO.setFrequency(0);
-				reminderVO.setTotalReminder(1);
-				reminderVO.setNextSend(CommonConstants.NA);
-			}
-			statusReminderDAO.UpdateReminder(reminderVO,referenceCombo.getSelectionModel().getSelectedItem());
-			
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	public void stopReminder()
 	{
 		
 	}
+	public void mailSending()
+	{
+		Map<String, String> map = new HashMap<String, String>();
+		if(validate.isEmail(receiver.getText()))
+		{
+				if(!emailMessage.getText().equals(""))
+				{
+					map.put(CommonConstants.EMAIL_TO, receiver.getText());
+					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
+					Email email = new Email(map);
+					new Thread(email).start();
+					messageSendMail.getStyleClass().remove("failure");
+					messageSendMail.getStyleClass().add("success");
+					messageSendMail.setText("Email send successfully");
+					messageSendMail.setVisible(true);
+				}
+				else
+				{
+					messageSendMail.getStyleClass().remove("success");
+					messageSendMail.getStyleClass().add("failure");
+					messageSendMail.setText("Empty Email Body");
+					messageSendMail.setVisible(true);
+				}
+		}
+		else
+		{
+			messageSendMail.getStyleClass().remove("success");
+			messageSendMail.getStyleClass().add("failure");
+			messageSendMail.setText("Empty To Address");
+			messageSendMail.setVisible(true);
+		}
+	}
 	public void fillDetails(ReminderVO reminderVO)
 	{
 		subject.setText(reminderVO.getSubject());
 		receiver.setText(reminderVO.getReciever());
-		message.setText(reminderVO.getEmailMessage());
+		emailMessage.setText(reminderVO.getEmailMessage());
 		if(reminderVO.getStatus().equalsIgnoreCase("ON"))
 		{
 			autoReminderCombo.getSelectionModel().selectFirst();

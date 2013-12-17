@@ -101,7 +101,6 @@ public class ServiceRegistyViewController implements Initializable  {
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
-		private ObservableList<EnquiryViewVO> tableViewList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 		private ObservableList<ServiceVO> serviceList = FXCollections.observableArrayList();
@@ -169,14 +168,7 @@ public class ServiceRegistyViewController implements Initializable  {
 				}
 				else
 				{
-					for(EnquiryViewVO enquiryViewVO : enquiryViewList)
-					{
-						if(!tableViewList.contains(enquiryViewVO))
-						{
-							tableViewList.addAll(enquiryViewVO);
-						}
-					}
-					salesOrderTable.setItems(tableViewList);
+					salesOrderTable.setItems(enquiryViewList);
 					referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
 					productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
 					customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));

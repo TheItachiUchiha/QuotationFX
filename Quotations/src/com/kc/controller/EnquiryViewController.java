@@ -173,6 +173,7 @@ public class EnquiryViewController implements Initializable {
 				public void changed(ObservableValue ov, String t, String t1) {                
 				 	fillAutoCompleteFromComboBox(t1);
 				 	keyword.setText("");
+				 	monthCombo.getSelectionModel().clearSelection();
 				 	tempList = FXCollections.observableArrayList();
 				 	tempList.clear();
 				 	
@@ -191,7 +192,14 @@ public class EnquiryViewController implements Initializable {
 				@Override
 				public void handle(ActionEvent paramT) {
 					enquiryTable.getItems().clear();
-					fillTableFromData();
+					if(searchCombo.getSelectionModel().getSelectedIndex()==-1||keyword.getText().equals(""))
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_KEYWORD);
+					}
+					else
+					{
+						fillTableFromData();
+					}
 				}
 			});
 			action.setSortable(false);
@@ -401,8 +409,9 @@ public class EnquiryViewController implements Initializable {
 				{
 					for(EnquiryViewVO enquiryViewVO : enquiryViewList)
 					{
-						if(productsVO.getProductName().equals(enquiryViewVO.getProductName()))
+						if(productsVO.getId()==enquiryViewVO.getProductId())
 						{
+							if(productsVO.getProductCategory().equalsIgnoreCase(tempString))
 							tempList.add(enquiryViewVO);
 						}
 					}

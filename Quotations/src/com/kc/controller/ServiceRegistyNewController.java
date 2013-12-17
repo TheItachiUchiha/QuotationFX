@@ -146,6 +146,10 @@ public class ServiceRegistyNewController implements Initializable {
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 					}
+					else if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_REFERENCE);
+					}
 					else
 					{
 						serviceGrid.setVisible(true);

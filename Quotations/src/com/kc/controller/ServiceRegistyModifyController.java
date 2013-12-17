@@ -129,20 +129,20 @@ public class ServiceRegistyModifyController implements Initializable {
 			public void handle(ActionEvent event) {
 				try
 				{
-					startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-					enquiryList = serviceDAO.getServiceEnquires(startDate, endDate);
-					refList.clear();
-					for(EnquiryVO enquiryVO : enquiryList)
-					{
-						refList.add(enquiryVO.getRefNumber());
-					}
 					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
 					}
 					else
 					{
+						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+						enquiryList = serviceDAO.getServiceEnquires(startDate, endDate);
+						refList.clear();
+						for(EnquiryVO enquiryVO : enquiryList)
+						{
+							refList.add(enquiryVO.getRefNumber());
+						}
 						if(refList.isEmpty())
 						{
 							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);

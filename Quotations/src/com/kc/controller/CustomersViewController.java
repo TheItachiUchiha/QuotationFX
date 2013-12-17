@@ -128,8 +128,14 @@ public class CustomersViewController implements Initializable {
 
 				@Override
 				public void handle(ActionEvent paramT) {
-
-					fillTableFromData();
+					if(combo.getSelectionModel().getSelectedIndex()==-1||keyword.getText().equals(""))
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_KEYWORD);
+					}
+					else
+					{
+						fillTableFromData();
+					}
 				}
 			});
 			action.setSortable(false);

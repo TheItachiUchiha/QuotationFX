@@ -81,6 +81,7 @@ public class CommonConstants
 	public static final String SERVICE_REGISTERED = "Service Registered Successfully";
 	public static final String SERVICE_UPDATED = "Service Entry Updated Successfully";
 	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
+	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";
 	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
