@@ -2,13 +2,16 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ProductsDAO;
 import com.kc.dao.ReportsDAO;
 import com.kc.model.EnquiryVO;
+import com.kc.service.ReportService;
 import com.kc.util.CustomReportTemplate;
 import com.kc.util.QuotationUtil;
 
@@ -30,11 +33,13 @@ public class ReportController implements Initializable {
 
 	ProductsDAO productsDAO;
 	ReportsDAO reportsDAO;
+	ReportService reportService;
 	
 	public ReportController()
 	{
 		productsDAO = new ProductsDAO();
 		reportsDAO = new ReportsDAO();
+		reportService = new ReportService();
 	}
 	@FXML
     private ComboBox<String> typeCombo;
@@ -119,22 +124,23 @@ public class ReportController implements Initializable {
 	
 	public void createReport()
 	{
-		ObservableList<Map<String, Object>> listOfCategories = FXCollections.observableArrayList();
-		ObservableList<Map<String, Object>> listOfSubCategories = FXCollections.observableArrayList();
-		ObservableList<Map<String, Object>> listOfCustomerType = FXCollections.observableArrayList();
-		//ObservableList<Map<String, Object>> listOfSubCategories = FXCollections.observableArrayList();
+		Map<String, List<Integer>> listOfCategories = FXCollections.observableHashMap();
+		Map<String, List<Integer>> listOfSubCategories = FXCollections.observableHashMap();
+		Map<String, List<Integer>> listOfCustomerType = FXCollections.observableHashMap();
+		Map<String, List<Integer>> listOfCustomerState = FXCollections.observableHashMap();
 		try
 		{
 			if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Sales Report"))
 			{
 				if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Category"))
 				{
-					listOfCategories = productsDAO.getCategoriesForProduct();
+					listOfCategories = reportService.getCategoriesForProduct();
 					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
-					
-					for(Map<String, Object> category : listOfCategories)
+					Set<String> keySet = listOfCategories.keySet();
+					 
+					for(String category : keySet)
 					{
 						int totalEnquiries = 0;
 						int totalSuccessfulEnquiries = 0;
@@ -142,7 +148,7 @@ public class ReportController implements Initializable {
 						int serviceCount = 0;
 						for(EnquiryVO enquiryVO : listOfEnquiries)
 						{
-							if(enquiryVO.getProductId() == (Integer)category.get("id"))
+							if(listOfCategories.get(category).contains(enquiryVO.getProductId()))
 							{
 								totalEnquiries++;
 								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
@@ -159,7 +165,7 @@ public class ReportController implements Initializable {
 						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
 				        chart.getPieChart().setTitle("Enquiry vs Sales");
 				        chart.setFirstBoldLabelLeft("Category Name");
-				        chart.setFirstBoldLabelRight(category.get("category").toString());
+				        chart.setFirstBoldLabelRight(category);
 				        chart.setFirstLabelLeft("Total Enquiries");
 				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
 				        chart.setSecondLabelLeft("Total Successful Leads");
@@ -175,12 +181,13 @@ public class ReportController implements Initializable {
 				}
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Subcategory"))
 				{
-					listOfSubCategories = productsDAO.getSubCategoriesForProduct();
+					listOfSubCategories = reportService.getSubCategoriesForProduct();
 					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
+					Set<String> keySet = listOfSubCategories.keySet();
 					
-					for(Map<String, Object> category : listOfSubCategories)
+					for(String subCategory : keySet)
 					{
 						int totalEnquiries = 0;
 						int totalSuccessfulEnquiries = 0;
@@ -188,7 +195,7 @@ public class ReportController implements Initializable {
 						int serviceCount = 0;
 						for(EnquiryVO enquiryVO : listOfEnquiries)
 						{
-							if(enquiryVO.getProductId() == (Integer)category.get("id"))
+							if(listOfSubCategories.get(subCategory).contains(enquiryVO.getProductId()))
 							{
 								totalEnquiries++;
 								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
@@ -204,7 +211,7 @@ public class ReportController implements Initializable {
 						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
 				        chart.getPieChart().setTitle("Enquiry vs Sales");
 				        chart.setFirstBoldLabelLeft("SubCategory Name : ");
-				        chart.setFirstBoldLabelRight(category.get("subcategory").toString());
+				        chart.setFirstBoldLabelRight(subCategory);
 				        chart.setFirstLabelLeft("Total Enquiries");
 				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
 				        chart.setSecondLabelLeft("Total Successful Leads");
@@ -220,12 +227,13 @@ public class ReportController implements Initializable {
 				}
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Type"))
 				{
-					listOfCustomerType = productsDAO.getCustomerTypeForProduct();
+					listOfCustomerType = reportService.getCustomerTypeForProduct();
 					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
+					Set<String> keySet = listOfCustomerType.keySet();
 					
-					for(Map<String, Object> customers : listOfCustomerType)
+					for(String customer : keySet)
 					{
 						int totalEnquiries = 0;
 						int totalSuccessfulEnquiries = 0;
@@ -233,7 +241,7 @@ public class ReportController implements Initializable {
 						int serviceCount = 0;
 						for(EnquiryVO enquiryVO : listOfEnquiries)
 						{
-							if(enquiryVO.getCustomerId() == (Integer)customers.get("id"))
+							if(listOfCustomerType.get(customer).contains(enquiryVO.getCustomerId()))
 							{
 								totalEnquiries++;
 								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
@@ -248,8 +256,54 @@ public class ReportController implements Initializable {
 				                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
 						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
 				        chart.getPieChart().setTitle("Enquiry vs Sales");
-				        chart.setFirstBoldLabelLeft("SubCategory Name : ");
-				        chart.setFirstBoldLabelRight((null!=customers.get("customerType"))?customers.get("customerType").toString():"");
+				        chart.setFirstBoldLabelLeft("Customer Type : ");
+				        chart.setFirstBoldLabelRight(null!=customer?customer:"");
+				        chart.setFirstLabelLeft("Total Enquiries");
+				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
+				        chart.setSecondLabelLeft("Total Successful Leads");
+				        chart.setSecondLabelRight(String.valueOf(totalSuccessfulEnquiries));
+				        chart.setThirdLabelLeft("Total Un-Successful Enquiries");
+				        chart.setThirdLabelRight(String.valueOf(totalEnquiries - totalSuccessfulEnquiries));
+				        chart.setThirdLabelLeft("Total Revenue");
+				        chart.setThirdLabelRight(String.valueOf(totalRevenue));
+				        chart.setAlignment(Pos.CENTER);
+				        tile.getChildren().add(chart);
+						
+					}
+				}
+				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer State"))
+				{
+					listOfCustomerState = reportService.getCustomerStateForProduct();
+					startDate = "01/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(0)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					endDate = "31/" + QuotationUtil.monthDigitFromString(periodList.getSelectionModel().getSelectedItems().get(periodList.getSelectionModel().getSelectedItems().size()-1)) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
+					Set<String> keySet = listOfCustomerState.keySet();
+					
+					for(String state : keySet)
+					{
+						int totalEnquiries = 0;
+						int totalSuccessfulEnquiries = 0;
+						double totalRevenue = 0;
+						int serviceCount = 0;
+						for(EnquiryVO enquiryVO : listOfEnquiries)
+						{
+							if(listOfCustomerState.get(state).contains(enquiryVO.getCustomerId()))
+							{
+								totalEnquiries++;
+								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
+								{
+									totalSuccessfulEnquiries++;
+									totalRevenue = totalRevenue + enquiryVO.getTotalRevenue();
+								}
+							}
+						}
+						ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+				                new PieChart.Data("Total Enquiries", totalEnquiries),
+				                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
+						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
+				        chart.getPieChart().setTitle("Enquiry vs Sales");
+				        chart.setFirstBoldLabelLeft("Customer State : ");
+				        chart.setFirstBoldLabelRight(null!=state?state:"");
 				        chart.setFirstLabelLeft("Total Enquiries");
 				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
 				        chart.setSecondLabelLeft("Total Successful Leads");

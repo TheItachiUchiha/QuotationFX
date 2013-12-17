@@ -184,9 +184,9 @@ public class ProductsDAO {
 		return listOfComponents;
 	}
 	
-	public ObservableList<Map<String, Object>> getCategoriesForProduct() throws SQLException {
+	public ObservableList<Map<String, Integer>> getCategoriesForProduct() throws SQLException {
 		LOG.info("Enter : getComponents");
-		ObservableList<Map<String, Object>> listOfCategories = FXCollections
+		ObservableList<Map<String, Integer>> listOfCategories = FXCollections
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
@@ -194,9 +194,8 @@ public class ProductsDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("id", resultSet.getInt(1));
-				map.put("category", resultSet.getString(2));
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				map.put(resultSet.getString(2),resultSet.getInt(1));
 				listOfCategories.add(map);
 			}
 		} catch (Exception e) {
@@ -210,9 +209,9 @@ public class ProductsDAO {
 		return listOfCategories;
 	}
 	
-	public ObservableList<Map<String, Object>> getSubCategoriesForProduct() throws SQLException {
+	public ObservableList<Map<String, Integer>> getSubCategoriesForProduct() throws SQLException {
 		LOG.info("Enter : getSubCategoriesForProduct");
-		ObservableList<Map<String, Object>> listOfCategories = FXCollections
+		ObservableList<Map<String, Integer>> listOfCategories = FXCollections
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
@@ -220,9 +219,8 @@ public class ProductsDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("id", resultSet.getInt(1));
-				map.put("subcategory", resultSet.getString(2));
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				map.put(resultSet.getString(2),resultSet.getInt(1));
 				listOfCategories.add(map);
 			}
 		} catch (Exception e) {
@@ -236,9 +234,9 @@ public class ProductsDAO {
 		return listOfCategories;
 	}
 	
-	public ObservableList<Map<String, Object>> getCustomerTypeForProduct() throws SQLException {
+	public ObservableList<Map<String, Integer>> getCustomerTypeForProduct() throws SQLException {
 		LOG.info("Enter : getSubCategoriesForProduct");
-		ObservableList<Map<String, Object>> listOfCustomerType = FXCollections
+		ObservableList<Map<String, Integer>> listOfCustomerType = FXCollections
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
@@ -246,9 +244,8 @@ public class ProductsDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				Map<String, Object> map = new HashMap<String, Object>();
-				map.put("id", resultSet.getInt(1));
-				map.put("customerType", resultSet.getString(2));
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				map.put(resultSet.getString(2),resultSet.getInt(1));
 				listOfCustomerType.add(map);
 			}
 		} catch (Exception e) {
@@ -261,5 +258,30 @@ public class ProductsDAO {
 		}
 		LOG.info("Exit : getSubCategoriesForProduct");
 		return listOfCustomerType;
+	}
+	public ObservableList<Map<String, Integer>> getCustomerStateForProduct() throws SQLException {
+		LOG.info("Enter : getCustomerStateForProduct");
+		ObservableList<Map<String, Integer>> listOfCustomerState = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, state FROM CUSTOMERS");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				Map<String, Integer> map = new HashMap<String, Integer>();
+				map.put(resultSet.getString(2),resultSet.getInt(1));
+				listOfCustomerState.add(map);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getCustomerStateForProduct");
+		return listOfCustomerState;
 	}
 }
