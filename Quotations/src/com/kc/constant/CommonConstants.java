@@ -93,4 +93,12 @@ public class CommonConstants
 	public static final String KEY_REPORT_COMP = "COMPANY_NAME";
 	public static final String KEY_REPORT_LOC = "LOCATION";
 	public static final String KEY_REPORT_REVENUE = "REVENUE";
+	public static final String KEY_REPORT_DATE_ENQUIRY = "ENQUIRY_DATE";
+	public static final String KEY_REPORT_DATE_QUOTATION = "QUOTATION_DATE";
+	public static final String KEY_REPORT_DATE_SALES = "SALES_DATE";
+	public static final String KEY_REPORT_PROD = "PRODUCT_NAME";
+	public static final String KEY_REPORT_REFD = "REFFERED_BY";
+	public static final String KEY_REPORT_SERV_NO = "NO_OF_SERVICES";
+	public static final String KEY_REPORT_SERV = "REVENUE_SERVICE";
+	public static final String KEY_REPORT_SALE = "REVENUE_SALES";
 }
