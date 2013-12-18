@@ -11,7 +11,7 @@
 <BorderPane prefHeight="587.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderController">
   <!-- TODO Add Nodes -->
   <bottom>
-    <GridPane fx:id="emailGrid" alignment="CENTER" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="true" BorderPane.alignment="CENTER">
+    <GridPane fx:id="emailGrid" alignment="CENTER" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="false" BorderPane.alignment="CENTER">
       <children>
         <Label prefHeight="22.0" prefWidth="83.0" text="Subject :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
         <TextField fx:id="subject" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -156,7 +156,7 @@
             <Button fx:id="search" mnemonicParsing="false" text="Search" />
           </children>
         </HBox>
-        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
+        <HBox fx:id="actionHBox" alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0" visible="false">
           <children>
             <Label prefHeight="21.0" prefWidth="64.0" text="Reminder" />
             <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="136.0">

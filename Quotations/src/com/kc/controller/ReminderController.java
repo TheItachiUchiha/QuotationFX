@@ -109,6 +109,9 @@ public class ReminderController implements Initializable {
 	    private HBox referenceHBox;
 	    
 	    @FXML
+	    private HBox actionHBox;
+	    
+	    @FXML
 	    private  Button stopReminder;
 	    
 	    @FXML
@@ -142,6 +145,7 @@ public class ReminderController implements Initializable {
 					{
 						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+						actionHBox.setVisible(true);
 					}
 					
 				}
