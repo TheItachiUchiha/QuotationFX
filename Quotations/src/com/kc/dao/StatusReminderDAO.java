@@ -16,6 +16,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DBConnector;
@@ -295,5 +296,19 @@ public class StatusReminderDAO {
 			LOG.error(e.getMessage());
 		}
 		return map;
+	}
+	public void deleteReminder(String ref) throws Exception {
+		LOG.info("Enter : deleteReminder");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM REMINDER WHERE reference_no=?");
+			preparedStatement.setString(1, ref);
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deleteReminder");
 	}
 }

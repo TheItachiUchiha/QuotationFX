@@ -19,12 +19,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -34,8 +37,6 @@ import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ServiceDAO;
 import com.kc.dao.StatusReminderDAO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DateUtil;
 import com.kc.util.Email;
@@ -53,7 +54,6 @@ public class ReminderController implements Initializable {
 		StatusReminderDAO statusReminderDAO;
 		String startDate;
 		String endDate;
-		private Email email;
 	
 		public ReminderController() {
 		enquiryDAO = new EnquiryDAO();
@@ -67,19 +67,10 @@ public class ReminderController implements Initializable {
 	    private ComboBox<String> referenceCombo;
 
 	    @FXML
-	    private Button createReminder;
-
-	    @FXML
 	    private ComboBox<Integer> frequencyCombo;
 
 	    @FXML
 	    private TextArea emailMessage;
-
-	    @FXML
-	    private ComboBox<String> modifyCombo;
-
-	    @FXML
-	    private Button modifyReminder;
 
 	    @FXML
 	    private ComboBox<String> monthCombo;
@@ -92,13 +83,7 @@ public class ReminderController implements Initializable {
 
 	    @FXML
 	    private Button search;
-
-	    @FXML
-	    private TextField sender;
-
-	    @FXML
-	    private Label sentReminder;
-
+	    
 	    @FXML
 	    private TextField subject;
 
@@ -132,15 +117,14 @@ public class ReminderController implements Initializable {
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
 		private ObservableList<ReminderVO> reminderList = FXCollections.observableArrayList();
-		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 		private ObservableList<String> refList = FXCollections.observableArrayList();
 		SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
-		private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
-	    
+		
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			LOG.info("Enter : initialize");
 		
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
@@ -171,6 +155,9 @@ public class ReminderController implements Initializable {
 						String oldValue, String newValue) {
 					try
 					{
+						refList.clear();
+						autoReminderCombo.getSelectionModel().clearSelection();
+						autoReminderHBox.setVisible(false);
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
@@ -189,7 +176,6 @@ public class ReminderController implements Initializable {
 						{
 							referenceCombo.setItems(refList);
 							referenceHBox.setVisible(true);
-							autoReminderHBox.setVisible(true);
 						}
 					}
 					catch (Exception e) {
@@ -223,7 +209,7 @@ public class ReminderController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					
+					autoReminderHBox.setVisible(true);
 					if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 					{
 						try
@@ -249,6 +235,7 @@ public class ReminderController implements Initializable {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		LOG.info("Exit : initialize");
 	}
 	public void sendMail()
 	{
@@ -308,7 +295,22 @@ public class ReminderController implements Initializable {
 	}
 	public void stopReminder()
 	{
-		
+		try
+		{
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+				    "Do you want to delete this Reminder", "Confirm", "Delete Reminder", DialogOptions.OK_CANCEL);
+			if(response.equals(DialogResponse.OK))
+			{
+				statusReminderDAO.deleteReminder(referenceCombo.getSelectionModel().getSelectedItem());
+				messageSendMail.getStyleClass().remove("failure");
+				messageSendMail.getStyleClass().add("success");
+				messageSendMail.setText(CommonConstants.REMINDER_DELETED);
+				messageSendMail.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void mailSending()
 	{

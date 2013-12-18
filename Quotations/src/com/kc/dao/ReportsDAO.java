@@ -203,7 +203,7 @@ public class ReportsDAO
 		LOG.info("Exit : getEnquriesFromReferredBy");
 		return listOfEnquries;
 	}
-	public ObservableList<Map<String, Object>> getEnquriesFromCustomerId(int customer_id) throws SQLException
+	public ObservableList<Map<String, Object>> getEnquriesFromCustomerName(String customerName) throws SQLException
 	{
 		LOG.info("Enter : getEnquriesFromCustomerId");
 		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
@@ -212,8 +212,8 @@ public class ReportsDAO
 			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
 					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
 					"SUM(s.charge) FROM quotation.ENQUIRY e,"+
-					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.cust_id=?");
-			preparedStatement.setInt(1, customer_id);
+					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.customername=?");
+			preparedStatement.setString(1, customerName);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next())
@@ -246,5 +246,139 @@ public class ReportsDAO
 		}
 		LOG.info("Exit : getEnquriesFromCustomerId");
 		return listOfEnquries;
+	}
+	
+	public ObservableList<Map<String, Object>> getEnquriesFromCompanyName(String companyName) throws SQLException
+	{
+		LOG.info("Enter : getEnquriesFromCustomerId");
+		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
+					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
+					"SUM(s.charge) FROM quotation.ENQUIRY e,"+
+					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.companyname=?");
+			preparedStatement.setString(1, companyName);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				Map<String, Object> map = new HashMap<>();
+				map.put(CommonConstants.KEY_REPORT_REF, resultSet.getString(1));
+				map.put(CommonConstants.KEY_REPORT_DATE_ENQUIRY, resultSet.getString(2));
+				map.put(CommonConstants.KEY_REPORT_DATE_QUOTATION, resultSet.getString(3));
+				map.put(CommonConstants.KEY_REPORT_DATE_SALES, resultSet.getString(4));
+				map.put(CommonConstants.KEY_REPORT_PROD, resultSet.getString(5));
+				map.put(CommonConstants.KEY_REPORT_CUST, resultSet.getString(6));
+				map.put(CommonConstants.KEY_REPORT_COMP, resultSet.getString(7));
+				map.put(CommonConstants.KEY_REPORT_LOC, resultSet.getString(8));
+				map.put(CommonConstants.KEY_REPORT_REFD, resultSet.getString(9));
+				map.put(CommonConstants.KEY_REPORT_SERV_NO, resultSet.getString(10));
+				map.put(CommonConstants.KEY_REPORT_REVENUE, resultSet.getString(11));
+				map.put(CommonConstants.KEY_REPORT_SERV, resultSet.getString(12));
+				listOfEnquries.add(map);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getEnquriesFromCustomerId");
+		return listOfEnquries;
+	}
+	public ObservableList<String> getReferenceNos() throws SQLException
+	{
+		LOG.info("Enter : getReferenceNos");
+		ObservableList<String> listOfReference = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT ref_number FROM ENQUIRY");
+			
+			while(resultSet.next())
+			{
+				listOfReference.add(resultSet.getString(1));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		LOG.info("Exit : getReferenceNos");
+		return listOfReference;
+	}
+	public ObservableList<String> getReferedBy() throws SQLException
+	{
+		LOG.info("Enter : getReferenceNos");
+		ObservableList<String> listOfReferedby = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT referedby FROM ENQUIRY");
+			
+			while(resultSet.next())
+			{
+				if(!listOfReferedby.contains(resultSet.getString(1)))
+				{
+					listOfReferedby.add(resultSet.getString(1));
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		LOG.info("Exit : getReferenceNos");
+		return listOfReferedby;
+	}
+	public ObservableList<String> getCompany() throws SQLException
+	{
+		LOG.info("Enter : getCompany");
+		ObservableList<String> listOfCompany = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT companyname FROM CUSTOMERS");
+			
+			while(resultSet.next())
+			{
+				if(!listOfCompany.contains(resultSet.getString(1)))
+				{
+					listOfCompany.add(resultSet.getString(1));
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		LOG.info("Exit : getCompany");
+		return listOfCompany;
+	}
+	public ObservableList<String> getCustomers() throws SQLException
+	{
+		LOG.info("Enter : getCustomers");
+		ObservableList<String> listOfCustomer = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT customername FROM CUSTOMERS");
+			
+			while(resultSet.next())
+			{
+				if(!listOfCustomer.contains(resultSet.getString(1)))
+				{
+					listOfCustomer.add(resultSet.getString(1));
+				}
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		LOG.info("Exit : getCustomers");
+		return listOfCustomer;
 	}
 }

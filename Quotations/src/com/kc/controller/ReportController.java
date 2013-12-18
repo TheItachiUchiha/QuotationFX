@@ -28,6 +28,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import com.kc.constant.CommonConstants;
+import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ProductsDAO;
 import com.kc.dao.ReportsDAO;
@@ -43,6 +44,7 @@ public class ReportController implements Initializable {
 	ReportsDAO reportsDAO;
 	ReportService reportService;
 	EnquiryDAO enquiryDAO;
+	CustomersDAO customersDAO;
 	
 	public ReportController()
 	{
@@ -50,26 +52,9 @@ public class ReportController implements Initializable {
 		reportsDAO = new ReportsDAO();
 		reportService = new ReportService();
 		enquiryDAO = new EnquiryDAO();
+		customersDAO = new CustomersDAO();
 	}
-	/*@FXML
-    private ComboBox<String> typeCombo;
-
-    @FXML
-    private ListView<String> periodList;
-
-    @FXML
-    private ComboBox<String> reportTypeCombo;
-    
-    @FXML
-    private GridPane reportGrid;
-    
-    @FXML
-    private TilePane tile;
-    
-    @FXML
-    private ComboBox<String> yearCombo;*/
-	
-	 @FXML
+	 	@FXML
 	    private AutoCompleteTextField<String> customAutoFill;
 
 	    @FXML
@@ -129,16 +114,17 @@ public class ReportController implements Initializable {
 	    @FXML
 	    private HBox customHBox;
     
-    private ObservableList<String> reportTypeList = FXCollections.observableArrayList();
-    private ObservableList<String> salesList = FXCollections.observableArrayList();
-    private ObservableList<String> serviceList = FXCollections.observableArrayList();
     private ObservableList<String> monthList = FXCollections.observableArrayList();
-    private ObservableList<CustomReportTemplate> listOfTemplate = FXCollections.observableArrayList();
     private ObservableList<EnquiryVO> listOfEnquiries = FXCollections.observableArrayList();
     private ObservableList<String> yearList = FXCollections.observableArrayList();
+    private ObservableList<String> customerList = FXCollections.observableArrayList();
+    private ObservableList<String> companyList = FXCollections.observableArrayList();
+    private ObservableList<String> referenceList = FXCollections.observableArrayList();
+    private ObservableList<String> referedByList = FXCollections.observableArrayList();
     String startDate;
 	String endDate;
-    
+	private int customerId=0;
+	TableView table_view = new TableView<>();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -161,15 +147,24 @@ public class ReportController implements Initializable {
 				@Override
 				public void changed(ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					if(newValue.equalsIgnoreCase("Standard Report"))
-					{
-						reportVBox.getChildren().add(standardGrid);
-						reportVBox.getChildren().remove(customGrid);
+					try{
+						if(newValue.equalsIgnoreCase("Standard Report"))
+						{
+							reportVBox.getChildren().add(standardGrid);
+							reportVBox.getChildren().remove(customGrid);
+						}
+						else if(newValue.equalsIgnoreCase("Custom Report"))
+						{
+							referedByList = reportsDAO.getReferedBy();
+							referenceList = reportsDAO.getReferenceNos();
+							companyList = reportsDAO.getCompany();
+							customerList = reportsDAO.getCustomers();
+							reportVBox.getChildren().add(customGrid);
+							reportVBox.getChildren().remove(standardGrid);
+						}
 					}
-					else if(newValue.equalsIgnoreCase("Custom Report"))
-					{
-						reportVBox.getChildren().add(customGrid);
-						reportVBox.getChildren().remove(standardGrid);
+					catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -208,6 +203,34 @@ public class ReportController implements Initializable {
 					}
 				}
 			});
+			customTypeCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String oldValue, String newValue) {
+					if(newValue.equalsIgnoreCase("Reference No"))
+					{
+						customAutoFill.setText("");
+						customAutoFill.setItems(referenceList);
+					}
+					else if(newValue.equalsIgnoreCase("Customer Name"))
+					{
+						customAutoFill.setText("");
+						customAutoFill.setItems(customerList);
+					}
+					else if(newValue.equalsIgnoreCase("Company Name"))
+					{
+						customAutoFill.setText("");
+						customAutoFill.setItems(companyList);
+					}
+					else if(newValue.equalsIgnoreCase("Refered By"))
+					{
+						customAutoFill.setText("");
+						customAutoFill.setItems(referedByList);
+					}
+				}
+			});
 			
 		}
 		catch (Exception e) {
@@ -218,6 +241,10 @@ public class ReportController implements Initializable {
 	
 	public void createReport()
 	{
+		if(tile.getChildren().size()>0)
+		{
+			tile.getChildren().remove(0);
+		}
 		Map<String, List<Integer>> listOfCategories = FXCollections.observableHashMap();
 		Map<String, List<Integer>> listOfSubCategories = FXCollections.observableHashMap();
 		Map<String, List<Integer>> listOfCustomerType = FXCollections.observableHashMap();
@@ -446,7 +473,8 @@ public class ReportController implements Initializable {
 			}
 			else if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Custom Report"))
 			{
-				
+				final Label label = new Label("Student IDs");
+				label.setFont(new Font("Arial", 20));
 				if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Service Engineer Name"))
 				{
 					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
@@ -455,8 +483,6 @@ public class ReportController implements Initializable {
 				
 					
 					tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
-					final Label label = new Label("Student IDs");
-				    label.setFont(new Font("Arial", 20));
 					ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
 					TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
 			        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
@@ -466,33 +492,120 @@ public class ReportController implements Initializable {
 			        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
 			 
 			        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
-			        ref_no.setMinWidth(130);
+			        ref_no.setMinWidth(100);
 			        dateOfService.setCellValueFactory(new MapValueFactory("DATE_OF_SERVICE"));
-			        dateOfService.setMinWidth(130);
+			        dateOfService.setMinWidth(100);
 			        custName.setCellValueFactory(new MapValueFactory("CUSTOMER_NAME"));
-			        custName.setMinWidth(130);
+			        custName.setMinWidth(100);
 			        compName.setCellValueFactory(new MapValueFactory("COMPANY_NAME"));
-			        compName.setMinWidth(130);
+			        compName.setMinWidth(100);
 			        location.setCellValueFactory(new MapValueFactory("LOCATION"));
-			        location.setMinWidth(130);
+			        location.setMinWidth(100);
 			        revenue.setCellValueFactory(new MapValueFactory("REVENUE"));
-			        revenue.setMinWidth(130);
+			        revenue.setMinWidth(100);
 			        
 			 
-			        TableView table_view = new TableView<>(tableData);
-			        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);
 			        
-			 
-			        final VBox vbox = new VBox();
-			 
-			        vbox.setSpacing(5);
-			        vbox.setPadding(new Insets(10, 0, 0, 10));
-			        vbox.getChildren().addAll(label, table_view);
-				        tile.getChildren().add(vbox);
-						
+			        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);			
 					
 				}
+				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference No"))
+				{
+					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					{
+						tableData = reportsDAO.getEnquriesFromReference(customAutoFill.getText());
+						createCustomReport(tableData);
+					}
+					
+				}
+				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Name"))
+				{
+					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					{
+						tableData = reportsDAO.getEnquriesFromCustomerName(customAutoFill.getText());
+						createCustomReport(tableData);
+					}
+					
+				}
+				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Company Name"))
+				{
+					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					{
+						tableData = reportsDAO.getEnquriesFromCompanyName(customAutoFill.getText());
+						createCustomReport(tableData);
+					}
+				}
+				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Refered By"))
+				{
+					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					{
+						tableData = reportsDAO.getEnquriesFromReferredBy(customAutoFill.getText());
+						createCustomReport(tableData);
+					}
+					
+				}
+				final VBox vbox = new VBox();
+				 
+				vbox.setSpacing(5);
+		        vbox.setPadding(new Insets(10, 0, 0, 10));
+		        vbox.getChildren().addAll(label, table_view);
+			    tile.getChildren().add(vbox);
 			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void createCustomReport(ObservableList<Map<String, Object>> tableData)
+	{
+		try
+		{
+			ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
+			TableColumn<Map, String> ref_no = new TableColumn<>("Reference No");
+			TableColumn<Map, String> dateOfEnquiry = new TableColumn<>("Date of Enquiry");
+			TableColumn<Map, String> dateOfQuotation = new TableColumn<>("Date of Quotation");
+	        TableColumn<Map, String> dateOfSales = new TableColumn<>("Date of Sales");
+	        TableColumn<Map, String> ProductName = new TableColumn<>("Product Name");
+	        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
+	        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
+	        TableColumn<Map, String> location = new TableColumn<>("Location");
+	        TableColumn<Map, String> referedBy = new TableColumn<>("Refered By");
+	        TableColumn<Map, String> serviceCount = new TableColumn<>("No Of Services");
+	        TableColumn<Map, String> revenueSale = new TableColumn<>("Sales Revenue");
+	        TableColumn<Map, String> revenueService = new TableColumn<>("Service Revenue");
+	 
+	        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
+	        ref_no.setMinWidth(90);
+	        dateOfEnquiry.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE_ENQUIRY));
+	        dateOfEnquiry.setMinWidth(95);
+	        dateOfQuotation.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE_QUOTATION));
+	        dateOfQuotation.setMinWidth(100);
+	        dateOfSales.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE_SALES));
+	        dateOfSales.setMinWidth(90);
+	        ProductName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_PROD));
+	        ProductName.setMinWidth(90);
+	        custName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_CUST));
+	        custName.setMinWidth(100);
+	        compName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_COMP));
+	        compName.setMinWidth(100);
+	        location.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_LOC));
+	        location.setMinWidth(80);
+	        referedBy.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REFD));
+	        referedBy.setMinWidth(85);
+	        serviceCount.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SERV_NO));
+	        serviceCount.setMinWidth(90);
+	        revenueSale.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SALE));
+	        revenueSale.setMinWidth(90);
+	        revenueService.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SERV));
+	        revenueService.setMinWidth(100);
+	 
+	        table_view.setItems(tableData);
+	        table_view.getColumns().setAll(ref_no, dateOfEnquiry,dateOfQuotation,dateOfSales,ProductName ,custName, compName, location, referedBy,serviceCount,revenueSale,revenueService);
+	        
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -134,7 +134,7 @@
                                   <String fx:value="Reference No" />
                                   <String fx:value="Customer Name" />
                                   <String fx:value="Company Name" />
-                                  <String fx:value="refered By" />
+                                  <String fx:value="Refered By" />
                                   <String fx:value="Service Engineer Name" />
                                 </FXCollections>
                               </items>
@@ -149,7 +149,7 @@
                                 <Label fx:id="messageCustom" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="256.0" text="" />
                               </children>
                             </VBox>
-                            <HBox fx:id="customHBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="385.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                            <HBox fx:id="customHBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="385.0" spacing="5.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                               <children>
                                 <ComboBox id="yearCombo" fx:id="customMonthCombo" prefHeight="21.0" prefWidth="63.0" promptText="Month">
                                   <items>
