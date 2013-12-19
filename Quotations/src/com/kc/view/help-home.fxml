@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="566.0" prefWidth="874.0" styleClass="loginBackground" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpController">
   <!-- TODO Add Nodes -->
   <center>
     <SplitPane dividerPositions="0.24426605504587157" focusTraversable="true" prefHeight="160.0" prefWidth="200.0">
@@ -41,7 +41,11 @@
           <tabs>
             <Tab text="Untitled Tab 1">
               <content>
-                <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background">
+                  <stylesheets>
+                    <URL value="@../style/gui.css" />
+                  </stylesheets>
+                </BorderPane>
               </content>
             </Tab>
           </tabs>
