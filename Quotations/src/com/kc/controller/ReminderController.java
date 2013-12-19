@@ -164,6 +164,7 @@ public class ReminderController implements Initializable {
 					{
 						refList.clear();
 						autoReminderCombo.getSelectionModel().clearSelection();
+						referenceCombo.getSelectionModel().clearSelection();
 						autoReminderHBox.setVisible(false);
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
@@ -196,17 +197,19 @@ public class ReminderController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					if(newValue.equalsIgnoreCase("ON"))
+					if(null!=newValue)
 					{
-						autoReminderVBox.setVisible(true);
-						emailGrid.setVisible(true);
+						if(newValue.equalsIgnoreCase("ON"))
+						{
+							autoReminderVBox.setVisible(true);
+							emailGrid.setVisible(true);
+						}
+						else if(newValue.equalsIgnoreCase("OFF"))
+						{
+							autoReminderVBox.setVisible(false);
+							emailGrid.setVisible(true);
+						}
 					}
-					else if(newValue.equalsIgnoreCase("OFF"))
-					{
-						autoReminderVBox.setVisible(false);
-						emailGrid.setVisible(true);
-					}
-						
 				}
 				
 			});
@@ -224,9 +227,12 @@ public class ReminderController implements Initializable {
 							reminderList=statusReminderDAO.getReminderDetails();
 							for(ReminderVO reminderVO :reminderList)
 							{
-								if(newValue.equals(reminderVO.getReferenceNo()))
+								if(null!=newValue)
 								{
-									fillDetails(reminderVO);
+									if(newValue.equals(reminderVO.getReferenceNo()))
+									{
+										fillDetails(reminderVO);
+									}
 								}
 							}
 						}
