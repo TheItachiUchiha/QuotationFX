@@ -290,7 +290,7 @@ public class ReminderController implements Initializable {
 					reminderVO.setNextSend(CommonConstants.NA);
 				}
 				mailSending();
-				statusReminderDAO.UpdateReminder(reminderVO,referenceCombo.getSelectionModel().getSelectedItem());
+				statusReminderDAO.updateReminder(reminderVO,referenceCombo.getSelectionModel().getSelectedItem());
 			}
 		}
 		catch (Exception e) {

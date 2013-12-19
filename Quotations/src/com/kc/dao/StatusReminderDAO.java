@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -54,7 +56,7 @@ public class StatusReminderDAO {
 		}
 		LOG.info("Exit : createReminder");
 	}
-	public void UpdateReminder(ReminderVO reminderVO, String string)
+	public void updateReminder(ReminderVO reminderVO, String string)
 	{
 
 		LOG.info("Enter : createReminder");
@@ -289,12 +291,12 @@ public class StatusReminderDAO {
 					map.put(CommonConstants.KEY_REMINDER_USERNAME, resultSet.getString(2));
 				}
 			}
-			LOG.info("Exit : getReminderMailDetails");
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
+		LOG.info("Exit : getReminderMailDetails");
 		return map;
 	}
 	public void deleteReminder(String ref) throws Exception {
@@ -310,5 +312,39 @@ public class StatusReminderDAO {
 			throw e;
 		}
 		LOG.info("Exit : deleteReminder");
+	}
+	
+	public List<ReminderVO> getReminderDetailsForSendingEmail(String date)
+	{
+		LOG.info("Enter : getReminderDetailsForSendingEmail");
+		List<ReminderVO> list = new ArrayList<ReminderVO>();
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT * FROM quotation.reminder q where status='ON' and next_send=? and q.total_reminder>(select reminder_sent from quotation.enquiry e where e.ref_number = q.reference_no);");
+			preparedStatement.setString(1, date);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next())
+			{
+				ReminderVO reminderVO = new ReminderVO();
+				reminderVO.setId(resultSet.getInt(1));
+				reminderVO.setReferenceNo(resultSet.getString(2));
+				reminderVO.setTotalReminder(resultSet.getInt(3));
+				reminderVO.setFrequency(resultSet.getInt(4));
+				reminderVO.setLastSent(resultSet.getString(5));
+				reminderVO.setNextSend(resultSet.getString(6));
+				reminderVO.setStatus(resultSet.getString(7));
+				reminderVO.setSubject(resultSet.getString(8));
+				reminderVO.setEmailMessage(resultSet.getString(9));
+				reminderVO.setReciever(resultSet.getString(10));
+				list.add(reminderVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : getReminderMailDetails");
+		return list;
 	}
 }

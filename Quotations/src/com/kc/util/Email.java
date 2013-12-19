@@ -28,6 +28,8 @@ public class Email extends Task
 	Encryption encryption = new Encryption("");
 	Map<String, String> data = new HashMap<String, String>();
 	
+	public Email()
+	{}
 	public Email(Map<String, String> data)
 	{
 		this.data = data;

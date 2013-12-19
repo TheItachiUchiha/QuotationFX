@@ -209,26 +209,26 @@ public class ReportController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> paramObservableValue,
 						String oldValue, String newValue) {
+					customAutoFill.setText("");
+					customGrid.getChildren().remove(customAutoFill);
+					customAutoFill = new AutoCompleteTextField<String>();
 					if(newValue.equalsIgnoreCase("Reference No"))
 					{
-						customAutoFill.setText("");
 						customAutoFill.setItems(referenceList);
 					}
 					else if(newValue.equalsIgnoreCase("Customer Name"))
 					{
-						customAutoFill.setText("");
 						customAutoFill.setItems(customerList);
 					}
 					else if(newValue.equalsIgnoreCase("Company Name"))
 					{
-						customAutoFill.setText("");
 						customAutoFill.setItems(companyList);
 					}
 					else if(newValue.equalsIgnoreCase("Refered By"))
 					{
-						customAutoFill.setText("");
 						customAutoFill.setItems(referedByList);
 					}
+					customGrid.add(customAutoFill, 1, 1);
 				}
 			});
 			
@@ -598,7 +598,7 @@ public class ReportController implements Initializable {
 	        referedBy.setMinWidth(85);
 	        serviceCount.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SERV_NO));
 	        serviceCount.setMinWidth(90);
-	        revenueSale.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SALE));
+	        revenueSale.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REVENUE));
 	        revenueSale.setMinWidth(90);
 	        revenueService.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_SERV));
 	        revenueService.setMinWidth(100);
