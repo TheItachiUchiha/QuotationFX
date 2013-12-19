@@ -267,7 +267,7 @@ public class QuotationEmailController implements Initializable  {
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimation.setText(enquiryViewVO.getPeDate());
-								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 								quotationPreparation.setText(enquiryViewVO.getQpDate());
 								defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
 								emailGrid.setVisible(true);
@@ -278,7 +278,7 @@ public class QuotationEmailController implements Initializable  {
 							customerName.setText(enquiryViewVO.getCustomerName());
 							productName.setText(enquiryViewVO.getProductName());
 							priceEstimation.setText(enquiryViewVO.getPeDate());
-							estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+							estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 							quotationPreparation.setText(enquiryViewVO.getQpDate());
 							defaultValues = quotationDAO.getCustomDefaultValues();
 							emailGrid.setVisible(true);
@@ -420,9 +420,13 @@ public class QuotationEmailController implements Initializable  {
 	public void sendEmail()
 	{
 		try{
+			Map<String,String> emailMap = new HashMap<String,String>();
+			emailMap = quotationDAO.getEmailDetails();
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
 			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, subject.getText());
+			emailData.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_QUOTATION_EMAIL));
+			emailData.put(CommonConstants.EMAIL_PASSWORD, emailMap.get(CommonConstants.KEY_QUOTATION_PASSWORD));
 			Email email = new Email(emailData);
 			new Thread(email).start();
 			quotationDAO.updateEnquiryEmailSentStatus(enquiryViewVO.getId(), formatter.format(new Date()));

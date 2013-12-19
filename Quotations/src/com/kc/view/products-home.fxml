@@ -43,7 +43,11 @@
           <tabs>
             <Tab text="Untitled Tab 1">
               <content>
-                <BorderPane prefHeight="200.0" prefWidth="200.0" />
+                <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background">
+                  <stylesheets>
+                    <URL value="@../style/gui.css" />
+                  </stylesheets>
+                </BorderPane>
               </content>
             </Tab>
           </tabs>

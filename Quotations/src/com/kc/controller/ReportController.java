@@ -17,6 +17,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -258,13 +259,27 @@ public class ReportController implements Initializable {
 					listOfCategories = reportService.getCategoriesForProduct();
 					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
 					{
-						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						if(monthCombo.getSelectionModel().getSelectedIndex()==-1||monthYearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
+							startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+							endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+						}
 					}
 					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
 					{
-						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+						if(yearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
+							startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
+							endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+						}
 					}
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCategories.keySet();
@@ -473,41 +488,48 @@ public class ReportController implements Initializable {
 			}
 			else if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Custom Report"))
 			{
-				final Label label = new Label("Student IDs");
+				final Label label = new Label(customTypeCombo.getSelectionModel().getSelectedItem()+" : "+customAutoFill.getText());
 				label.setFont(new Font("Arial", 20));
 				if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Service Engineer Name"))
 				{
-					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-					startDate = "01/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
-					endDate = "31/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
-				
+					if(customMonthCombo.getSelectionModel().getSelectedIndex()==-1||customMonthYearCombo.getSelectionModel().getSelectedIndex()==-1)
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+					}
+					else
+					{
+						ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+						startDate = "01/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
+						endDate = "31/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
 					
-					tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
-					ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
-					TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
-			        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
-			        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
-			        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
-			        TableColumn<Map, String> location = new TableColumn<>("Location");
-			        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
-			 
-			        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
-			        ref_no.setMinWidth(100);
-			        dateOfService.setCellValueFactory(new MapValueFactory("DATE_OF_SERVICE"));
-			        dateOfService.setMinWidth(100);
-			        custName.setCellValueFactory(new MapValueFactory("CUSTOMER_NAME"));
-			        custName.setMinWidth(100);
-			        compName.setCellValueFactory(new MapValueFactory("COMPANY_NAME"));
-			        compName.setMinWidth(100);
-			        location.setCellValueFactory(new MapValueFactory("LOCATION"));
-			        location.setMinWidth(100);
-			        revenue.setCellValueFactory(new MapValueFactory("REVENUE"));
-			        revenue.setMinWidth(100);
-			        
-			 
-			        
-			        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);			
-					
+						
+						tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
+						ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
+						TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
+				        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
+				        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
+				        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
+				        TableColumn<Map, String> location = new TableColumn<>("Location");
+				        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
+				 
+				        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
+				        ref_no.setMinWidth(100);
+				        dateOfService.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE));
+				        dateOfService.setMinWidth(100);
+				        custName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_CUST));
+				        custName.setMinWidth(100);
+				        compName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_COMP));
+				        compName.setMinWidth(100);
+				        location.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_LOC));
+				        location.setMinWidth(100);
+				        revenue.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REVENUE));
+				        revenue.setMinWidth(100);
+				        
+				 
+				        table_view.setItems(tableData);
+				        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);			
+
+					}
 				}
 				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference No"))
 				{

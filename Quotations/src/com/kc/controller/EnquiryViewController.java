@@ -78,6 +78,8 @@ public class EnquiryViewController implements Initializable {
 	@FXML
 	private Button go;
 	@FXML
+	private HBox autoHBox;
+	@FXML
     private TableView<EnquiryViewVO> enquiryTable;
 	@FXML private TableColumn<EnquiryViewVO, String> referenceNo;
     @FXML private TableColumn<EnquiryViewVO, String> productName;
@@ -170,7 +172,8 @@ public class EnquiryViewController implements Initializable {
 			searchCombo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override
-				public void changed(ObservableValue ov, String t, String t1) {                
+				public void changed(ObservableValue ov, String t, String t1) { 
+					autoHBox.getChildren().removeAll(keyword,go);
 				 	fillAutoCompleteFromComboBox(t1);
 				 	keyword.setText("");
 				 	monthCombo.getSelectionModel().clearSelection();
@@ -375,6 +378,11 @@ public class EnquiryViewController implements Initializable {
 	        		}
 	        	}
 	        }
+			keyword = new AutoCompleteTextField<String>();
+			go = new Button();
+			go.setText("Go");
+			autoHBox.getChildren().addAll(keyword,go);
+			keyword.setPrefWidth(208);
 			keyword.setItems(tempList2);
 		}
 		catch (Exception e) {

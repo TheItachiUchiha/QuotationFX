@@ -64,6 +64,8 @@ public class ComponentsViewController implements Initializable {
 	@FXML
 	private Button go;
 	@FXML
+	private HBox autoHBox;
+	@FXML
     private TableView<ComponentsVO> componentTable;
 	@FXML private TableColumn<ComponentsVO, String> name;
     @FXML private TableColumn<ComponentsVO, String> category;
@@ -101,7 +103,8 @@ public class ComponentsViewController implements Initializable {
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
-				@Override public void changed(ObservableValue ov, String t, String t1) {  
+				@Override public void changed(ObservableValue ov, String t, String t1) {
+					autoHBox.getChildren().removeAll(keyword,go);
 					tempList =  FXCollections.observableArrayList();
 					 fillAutoCompleteFromComboBox(t1);
 					 keyword.setText("");
@@ -240,6 +243,11 @@ public class ComponentsViewController implements Initializable {
 	        		}
 	        	}
 	        }
+			keyword = new AutoCompleteTextField<String>();
+			go = new Button();
+			go.setText("Go");
+			autoHBox.getChildren().addAll(keyword,go);
+			keyword.setPrefWidth(208);
 			keyword.setItems(tempList);
 			
 		}

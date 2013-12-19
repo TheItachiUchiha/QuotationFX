@@ -60,6 +60,8 @@ public class ProductViewController implements Initializable{
 	@FXML
 	private Button go;
 	@FXML
+	private HBox autoHBox;
+	@FXML
     private TableView<ProductsVO> productsTable;
 	@FXML private TableColumn<ProductsVO, String> productName;
     @FXML private TableColumn<ProductsVO, String> productCategory;
@@ -88,7 +90,8 @@ public class ProductViewController implements Initializable{
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
-				@Override public void changed(ObservableValue ov, String t, String t1) {                
+				@Override public void changed(ObservableValue ov, String t, String t1) {   
+					autoHBox.getChildren().removeAll(keyword,go);
 					 fillAutoCompleteFromComboBox(t1);
 					 keyword.setText("");
 	            }
@@ -195,6 +198,11 @@ public class ProductViewController implements Initializable{
 	        		}
 	        	}
 	        }
+			keyword = new AutoCompleteTextField<String>();
+			go = new Button();
+			go.setText("Go");
+			autoHBox.getChildren().addAll(keyword,go);
+			keyword.setPrefWidth(208);
 			keyword.setItems(tempList);
 			
 		}

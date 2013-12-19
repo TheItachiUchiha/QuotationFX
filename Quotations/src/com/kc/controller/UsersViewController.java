@@ -63,6 +63,9 @@ public class UsersViewController implements Initializable {
 	private ComboBox<String> combo;
 	@FXML
 	private Button go;
+	
+	@FXML
+	private HBox autoHBox;
 	@FXML
     private TableView<UsersVO> usersTable;
 	@FXML private TableColumn<UsersVO, String> name;
@@ -81,6 +84,7 @@ public class UsersViewController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{
 			
+			//autoHBox.getChildren().removeAll(keyword,go);
 			usersList = usersDAO.getModules();
 			usersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			searchByList = FXCollections.observableArrayList();
@@ -90,7 +94,9 @@ public class UsersViewController implements Initializable {
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
-				@Override public void changed(ObservableValue ov, String t, String t1) {                
+				@Override public void changed(ObservableValue ov, String t, String t1) {
+					
+					autoHBox.getChildren().removeAll(keyword,go);
 					 fillAutoCompleteFromComboBox(t1);
 					 keyword.setText("");
 	            }
@@ -178,7 +184,13 @@ public class UsersViewController implements Initializable {
 	        		}
 	        	}
 	        }
+			keyword = new AutoCompleteTextField<String>();
+			go = new Button();
+			go.setText("Go");
+			autoHBox.getChildren().addAll(keyword,go);
+			keyword.setPrefWidth(208);
 	        keyword.setItems(tempList);
+	        
 	        
 		}
 		catch (Exception e) {

@@ -68,7 +68,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
           </GridPane.margin>
         </ComboBox>
-        <HBox id="HBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+        <HBox id="HBox" fx:id="autoHBox" alignment="TOP_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
           <children>
             <AutoCompleteTextField id="componentAutoFill" fx:id="keyword" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" />
             <Button fx:id="go" alignment="CENTER" mnemonicParsing="false" text="Go" />

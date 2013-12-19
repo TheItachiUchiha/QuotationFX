@@ -525,6 +525,8 @@ public class EnquiryNewController implements Initializable {
 	public void sendEmail()
 	{
 		Map<String, String> map = new HashMap<String, String>();
+		Map<String,String> emailMap = new HashMap<String,String>();
+		emailMap = enquiryDAO.getEnquiryOptionDefaultValues();
 		if(validation.isEmail(emailId.getText()))
 		{
 				if(!emailMessage.getText().equals(""))
@@ -532,6 +534,8 @@ public class EnquiryNewController implements Initializable {
 					map.put(CommonConstants.EMAIL_TO, emailId.getText());
 					map.put(CommonConstants.EMAIL_ATTACHMENT, filePath.getText());
 					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
+					map.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME));
+					map.put(CommonConstants.EMAIL_BODY, emailMap.get(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD));
 					Email email = new Email(map);
 					new Thread(email).start();
 					messageSendMail.getStyleClass().remove("failure");

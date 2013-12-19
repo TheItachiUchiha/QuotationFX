@@ -357,7 +357,7 @@ public class QuotationOptionController implements Initializable {
 			messageEmail.getStyleClass().add("failure");
 			messageEmail.setVisible(true);
 		}
-		else if(!validation.isEmail(username.getText()))
+		else if(!validation.isEmail(emailId.getText()))
 		{
 			messageEmail.setText(CommonConstants.INCORRECT_EMAIL);
 			messageEmail.getStyleClass().remove("success");

@@ -329,7 +329,7 @@ public class QuotationNewController implements Initializable {
 								customerName.setText(enquiryViewVO.getCustomerName());
 								productName.setText(enquiryViewVO.getProductName());
 								priceEstimationDate.setText(enquiryViewVO.getPeDate());
-								estimatedPrice.setText(String.valueOf(enquiryViewVO.getMargin()));
+								estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 								defaultValues=quotationDAO.getCustomDefaultValues();
 								quotationGrid.setVisible(true);
 							}

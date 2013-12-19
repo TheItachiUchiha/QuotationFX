@@ -63,6 +63,8 @@ public class CustomersViewController implements Initializable {
 	@FXML
 	private Button go;
 	@FXML
+	private HBox autoHBox;
+	@FXML
 	private TableView<CustomersVO> customerTable;
 	@FXML
 	private TableColumn<CustomersVO, String> name;
@@ -110,6 +112,7 @@ public class CustomersViewController implements Initializable {
 
 				@Override
 				public void changed(ObservableValue ov, String t, String t1) {
+					autoHBox.getChildren().removeAll(keyword,go);
 					fillAutoCompleteFromComboBox(t1);
 					keyword.setText("");
 				}
@@ -222,6 +225,11 @@ public class CustomersViewController implements Initializable {
 	        		}
 				}
 			}
+			keyword = new AutoCompleteTextField<String>();
+			go = new Button();
+			go.setText("Go");
+			autoHBox.getChildren().addAll(keyword,go);
+			keyword.setPrefWidth(208);
 			keyword.setItems(tempList);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
