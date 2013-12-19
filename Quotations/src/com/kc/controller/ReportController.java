@@ -114,6 +114,8 @@ public class ReportController implements Initializable {
 
 	    @FXML
 	    private HBox customHBox;
+	    
+	    int flag=0;
     
     private ObservableList<String> monthList = FXCollections.observableArrayList();
     private ObservableList<EnquiryVO> listOfEnquiries = FXCollections.observableArrayList();
@@ -254,9 +256,13 @@ public class ReportController implements Initializable {
 		{
 			if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Standard Report"))
 			{
-				if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Category"))
+				if(typeCombo.getSelectionModel().getSelectedIndex()==-1||periodCombo.getSelectionModel().getSelectedIndex()==-1)
 				{
-					listOfCategories = reportService.getCategoriesForProduct();
+					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_TYPE_PERIOD);
+				}
+				else
+				{
+					flag=0;
 					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
 					{
 						if(monthCombo.getSelectionModel().getSelectedIndex()==-1||monthYearCombo.getSelectionModel().getSelectedIndex()==-1)
@@ -267,129 +273,120 @@ public class ReportController implements Initializable {
 						{
 							startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
 							endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
+							flag=1;
 						}
 					}
 					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
 					{
 						if(yearCombo.getSelectionModel().getSelectedIndex()==-1)
 						{
-							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_YEAR);
 						}
 						else
 						{
 							startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
 							endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
+							flag=1;
 						}
-					}
-					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
-					Set<String> keySet = listOfCategories.keySet();
-					 
-					for(String category : keySet)
-					{
-						int totalEnquiries = 0;
-						int totalSuccessfulEnquiries = 0;
-						double totalRevenue = 0;
-						int serviceCount = 0;
-						for(EnquiryVO enquiryVO : listOfEnquiries)
-						{
-							if(listOfCategories.get(category).contains(enquiryVO.getProductId()))
-							{
-								totalEnquiries++;
-								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
-								{
-									totalSuccessfulEnquiries++;
-									totalRevenue = totalRevenue + enquiryVO.getTotalRevenue();
-								}
-							}
-						}
-						ObservableList<PieChart.Data> pieChartData =
-				                FXCollections.observableArrayList(
-				                new PieChart.Data("Total Enquiries", totalEnquiries),
-				                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
-						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
-				        chart.getPieChart().setTitle("Enquiry vs Sales");
-				        chart.setFirstBoldLabelLeft("Category Name");
-				        chart.setFirstBoldLabelRight(category);
-				        chart.setFirstLabelLeft("Total Enquiries");
-				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
-				        chart.setSecondLabelLeft("Total Successful Leads");
-				        chart.setSecondLabelRight(String.valueOf(totalSuccessfulEnquiries));
-				        chart.setThirdLabelLeft("Total Un-Successful Enquiries");
-				        chart.setThirdLabelRight(String.valueOf(totalEnquiries - totalSuccessfulEnquiries));
-				        chart.setThirdLabelLeft("Total Revenue");
-				        chart.setThirdLabelRight(String.valueOf(totalRevenue));
-				        chart.setAlignment(Pos.CENTER);
-				        tile.getChildren().add(chart);
-						
 					}
 				}
-				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Subcategory"))
-				{
-					listOfSubCategories = reportService.getSubCategoriesForProduct();
-					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
+					if(flag==1)
 					{
-						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-					}
-					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
-					{
-						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
-					}
-					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
-					Set<String> keySet = listOfSubCategories.keySet();
-					
-					for(String subCategory : keySet)
-					{
-						int totalEnquiries = 0;
-						int totalSuccessfulEnquiries = 0;
-						double totalRevenue = 0;
-						int serviceCount = 0;
-						for(EnquiryVO enquiryVO : listOfEnquiries)
+						if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Category"))
 						{
-							if(listOfSubCategories.get(subCategory).contains(enquiryVO.getProductId()))
+							listOfCategories = reportService.getCategoriesForProduct();
+							listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
+							Set<String> keySet = listOfCategories.keySet();
+							 
+							for(String category : keySet)
 							{
-								totalEnquiries++;
-								if(enquiryVO.getSales().equalsIgnoreCase("Y"))
+								int totalEnquiries = 0;
+								int totalSuccessfulEnquiries = 0;
+								double totalRevenue = 0;
+								int serviceCount = 0;
+								for(EnquiryVO enquiryVO : listOfEnquiries)
 								{
-									totalSuccessfulEnquiries++;
-									totalRevenue = totalRevenue + enquiryVO.getTotalRevenue();
+									if(listOfCategories.get(category).contains(enquiryVO.getProductId()))
+									{
+										totalEnquiries++;
+										if(enquiryVO.getSales().equalsIgnoreCase("Y"))
+										{
+											totalSuccessfulEnquiries++;
+											totalRevenue = totalRevenue + enquiryVO.getTotalRevenue();
+										}
+									}
 								}
+								ObservableList<PieChart.Data> pieChartData =
+						                FXCollections.observableArrayList(
+						                new PieChart.Data("Total Enquiries", totalEnquiries),
+						                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
+								CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
+						        chart.getPieChart().setTitle("Enquiry vs Sales");
+						        chart.setFirstBoldLabelLeft("Category Name");
+						        chart.setFirstBoldLabelRight(category);
+						        chart.setFirstLabelLeft("Total Enquiries");
+						        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
+						        chart.setSecondLabelLeft("Total Successful Leads");
+						        chart.setSecondLabelRight(String.valueOf(totalSuccessfulEnquiries));
+						        chart.setThirdLabelLeft("Total Un-Successful Enquiries");
+						        chart.setThirdLabelRight(String.valueOf(totalEnquiries - totalSuccessfulEnquiries));
+						        chart.setThirdLabelLeft("Total Revenue");
+						        chart.setThirdLabelRight(String.valueOf(totalRevenue));
+						        chart.setAlignment(Pos.CENTER);
+						        tile.getChildren().add(chart);
+								
 							}
 						}
-						ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-				                new PieChart.Data("Total Enquiries", totalEnquiries),
-				                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
-						CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
-				        chart.getPieChart().setTitle("Enquiry vs Sales");
-				        chart.setFirstBoldLabelLeft("SubCategory Name : ");
-				        chart.setFirstBoldLabelRight(subCategory);
-				        chart.setFirstLabelLeft("Total Enquiries");
-				        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
-				        chart.setSecondLabelLeft("Total Successful Leads");
-				        chart.setSecondLabelRight(String.valueOf(totalSuccessfulEnquiries));
-				        chart.setThirdLabelLeft("Total Un-Successful Enquiries");
-				        chart.setThirdLabelRight(String.valueOf(totalEnquiries - totalSuccessfulEnquiries));
-				        chart.setThirdLabelLeft("Total Revenue");
-				        chart.setThirdLabelRight(String.valueOf(totalRevenue));
-				        chart.setAlignment(Pos.CENTER);
-				        tile.getChildren().add(chart);
-						
-					}
+						else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product Subcategory"))
+						{
+							listOfSubCategories = reportService.getSubCategoriesForProduct();
+							
+							listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
+							Set<String> keySet = listOfSubCategories.keySet();
+							
+							for(String subCategory : keySet)
+							{
+								int totalEnquiries = 0;
+								int totalSuccessfulEnquiries = 0;
+								double totalRevenue = 0;
+								int serviceCount = 0;
+								for(EnquiryVO enquiryVO : listOfEnquiries)
+								{
+									if(listOfSubCategories.get(subCategory).contains(enquiryVO.getProductId()))
+									{
+										totalEnquiries++;
+										if(enquiryVO.getSales().equalsIgnoreCase("Y"))
+										{
+											totalSuccessfulEnquiries++;
+											totalRevenue = totalRevenue + enquiryVO.getTotalRevenue();
+										}
+									}
+								}
+								ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
+						                new PieChart.Data("Total Enquiries", totalEnquiries),
+						                new PieChart.Data("Total Successful Leads", totalSuccessfulEnquiries));
+								CustomReportTemplate chart = new CustomReportTemplate(pieChartData);
+						        chart.getPieChart().setTitle("Enquiry vs Sales");
+						        chart.setFirstBoldLabelLeft("SubCategory Name : ");
+						        chart.setFirstBoldLabelRight(subCategory);
+						        chart.setFirstLabelLeft("Total Enquiries");
+						        chart.setFirstLabelRight(String.valueOf(totalEnquiries));
+						        chart.setSecondLabelLeft("Total Successful Leads");
+						        chart.setSecondLabelRight(String.valueOf(totalSuccessfulEnquiries));
+						        chart.setThirdLabelLeft("Total Un-Successful Enquiries");
+						        chart.setThirdLabelRight(String.valueOf(totalEnquiries - totalSuccessfulEnquiries));
+						        chart.setThirdLabelLeft("Total Revenue");
+						        chart.setThirdLabelRight(String.valueOf(totalRevenue));
+						        chart.setAlignment(Pos.CENTER);
+						        tile.getChildren().add(chart);
+								
+							}
+						}
 				}
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Type"))
 				{
 					listOfCustomerType = reportService.getCustomerTypeForProduct();
-					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
-					{
-						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-					}
-					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
-					{
-						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
-					}
+					
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCustomerType.keySet();
 					
@@ -434,16 +431,7 @@ public class ReportController implements Initializable {
 				else if(typeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Location"))
 				{
 					listOfCustomerState = reportService.getCustomerStateForProduct();
-					if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Month"))
-					{
-						startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + monthYearCombo.getSelectionModel().getSelectedItem();
-					}
-					else if(periodCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Year"))
-					{
-						startDate = "01/" + "01/" + yearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + "12/" + yearCombo.getSelectionModel().getSelectedItem();
-					}
+					
 					listOfEnquiries = reportsDAO.salesReport(startDate, endDate);
 					Set<String> keySet = listOfCustomerState.keySet();
 					
@@ -485,97 +473,105 @@ public class ReportController implements Initializable {
 						
 					}
 				}
+					
 			}
 			else if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Custom Report"))
 			{
-				final Label label = new Label(customTypeCombo.getSelectionModel().getSelectedItem()+" : "+customAutoFill.getText());
-				label.setFont(new Font("Arial", 20));
-				if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Service Engineer Name"))
+				if(customTypeCombo.getSelectionModel().getSelectedIndex()==-1)
 				{
-					if(customMonthCombo.getSelectionModel().getSelectedIndex()==-1||customMonthYearCombo.getSelectionModel().getSelectedIndex()==-1)
+					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_TYPE);
+				}
+				else
+				{
+					final Label label = new Label(customTypeCombo.getSelectionModel().getSelectedItem()+" : "+customAutoFill.getText());
+					label.setFont(new Font("Arial", 20));
+					if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Service Engineer Name"))
 					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						if(customMonthCombo.getSelectionModel().getSelectedIndex()==-1||customMonthYearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
+							ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+							startDate = "01/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
+							endDate = "31/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
+						
+							
+							tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
+							ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
+							TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
+					        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
+					        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
+					        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
+					        TableColumn<Map, String> location = new TableColumn<>("Location");
+					        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
+					 
+					        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
+					        ref_no.setMinWidth(100);
+					        dateOfService.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE));
+					        dateOfService.setMinWidth(100);
+					        custName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_CUST));
+					        custName.setMinWidth(100);
+					        compName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_COMP));
+					        compName.setMinWidth(100);
+					        location.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_LOC));
+					        location.setMinWidth(100);
+					        revenue.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REVENUE));
+					        revenue.setMinWidth(100);
+					        
+					 
+					        table_view.setItems(tableData);
+					        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);			
+	
+						}
 					}
-					else
+					else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference No"))
 					{
 						ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-						startDate = "01/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
-						endDate = "31/" + QuotationUtil.monthDigitFromString(customMonthCombo.getSelectionModel().getSelectedItem()) + "/" + customMonthYearCombo.getSelectionModel().getSelectedItem();
-					
+						if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+						{
+							tableData = reportsDAO.getEnquriesFromReference(customAutoFill.getText());
+							createCustomReport(tableData);
+						}
 						
-						tableData = reportsDAO.getServicingEngineerDetails(startDate, endDate, customAutoFill.getText());
-						ObservableList<Map<String, Object>> tableList = FXCollections.observableArrayList();
-						TableColumn<Map, String> ref_no = new TableColumn<>("Product Ref_No");
-				        TableColumn<Map, String> dateOfService = new TableColumn<>("Date of Service");
-				        TableColumn<Map, String> custName = new TableColumn<>("Customer Name");
-				        TableColumn<Map, String> compName = new TableColumn<>("Company Name");
-				        TableColumn<Map, String> location = new TableColumn<>("Location");
-				        TableColumn<Map, String> revenue = new TableColumn<>("Service Revenue");
-				 
-				        ref_no.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REF));
-				        ref_no.setMinWidth(100);
-				        dateOfService.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_DATE));
-				        dateOfService.setMinWidth(100);
-				        custName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_CUST));
-				        custName.setMinWidth(100);
-				        compName.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_COMP));
-				        compName.setMinWidth(100);
-				        location.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_LOC));
-				        location.setMinWidth(100);
-				        revenue.setCellValueFactory(new MapValueFactory(CommonConstants.KEY_REPORT_REVENUE));
-				        revenue.setMinWidth(100);
-				        
-				 
-				        table_view.setItems(tableData);
-				        table_view.getColumns().setAll(ref_no, dateOfService, custName, compName, location, revenue);			
-
 					}
-				}
-				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference No"))
-				{
-					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Name"))
 					{
-						tableData = reportsDAO.getEnquriesFromReference(customAutoFill.getText());
-						createCustomReport(tableData);
+						ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+						if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+						{
+							tableData = reportsDAO.getEnquriesFromCustomerName(customAutoFill.getText());
+							createCustomReport(tableData);
+						}
+						
 					}
-					
-				}
-				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Name"))
-				{
-					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Company Name"))
 					{
-						tableData = reportsDAO.getEnquriesFromCustomerName(customAutoFill.getText());
-						createCustomReport(tableData);
+						ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+						if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+						{
+							tableData = reportsDAO.getEnquriesFromCompanyName(customAutoFill.getText());
+							createCustomReport(tableData);
+						}
 					}
-					
-				}
-				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Company Name"))
-				{
-					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+					else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Refered By"))
 					{
-						tableData = reportsDAO.getEnquriesFromCompanyName(customAutoFill.getText());
-						createCustomReport(tableData);
+						ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
+						if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
+						{
+							tableData = reportsDAO.getEnquriesFromReferredBy(customAutoFill.getText());
+							createCustomReport(tableData);
+						}
+						
 					}
+					final VBox vbox = new VBox();
+					 
+					vbox.setSpacing(5);
+			        vbox.setPadding(new Insets(10, 0, 0, 10));
+			        vbox.getChildren().addAll(label, table_view);
+				    tile.getChildren().add(vbox);
 				}
-				else if(customTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Refered By"))
-				{
-					ObservableList<Map<String, Object>> tableData = FXCollections.observableArrayList();
-					if(null!=customAutoFill.getText() && !customAutoFill.getText().equals(""))
-					{
-						tableData = reportsDAO.getEnquriesFromReferredBy(customAutoFill.getText());
-						createCustomReport(tableData);
-					}
-					
-				}
-				final VBox vbox = new VBox();
-				 
-				vbox.setSpacing(5);
-		        vbox.setPadding(new Insets(10, 0, 0, 10));
-		        vbox.getChildren().addAll(label, table_view);
-			    tile.getChildren().add(vbox);
 			}
 		}
 		catch (Exception e) {

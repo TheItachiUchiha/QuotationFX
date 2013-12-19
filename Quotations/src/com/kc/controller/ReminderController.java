@@ -119,6 +119,9 @@ public class ReminderController implements Initializable {
 	    
 	    @FXML
 	    private Label sentReminder;
+	    
+	    @FXML
+	    private HBox sentHBox;
 
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -164,8 +167,12 @@ public class ReminderController implements Initializable {
 					{
 						refList.clear();
 						autoReminderCombo.getSelectionModel().clearSelection();
+						reminderCombo.getSelectionModel().clearSelection();
+						frequencyCombo.getSelectionModel().clearSelection();
 						referenceCombo.getSelectionModel().clearSelection();
+						emailGrid.setVisible(false);
 						autoReminderHBox.setVisible(false);
+						autoReminderVBox.setVisible(false);
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
@@ -197,6 +204,8 @@ public class ReminderController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
+					reminderCombo.getSelectionModel().clearSelection();
+					frequencyCombo.getSelectionModel().clearSelection();
 					if(null!=newValue)
 					{
 						if(newValue.equalsIgnoreCase("ON"))
