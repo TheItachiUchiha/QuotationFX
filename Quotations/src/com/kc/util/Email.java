@@ -26,16 +26,22 @@ public class Email extends Task
 {
 	EnquiryDAO enquiryDAO = new EnquiryDAO();
 	Encryption encryption = new Encryption("");
-	Map<String, String> data = new HashMap<String, String>();
+	static Map<String, String> data;
 	
 	public Email()
 	{}
 	public Email(Map<String, String> data)
 	{
+		data = new HashMap<String, String>();
 		this.data = data;
 	}
 	public void sendEmailFromGmail(Map<String, String> data)
 	{
+		if(null==this.data)
+		{
+			Email.data = new HashMap<String, String>();
+			Email.data = data;
+		}
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -46,11 +52,11 @@ public class Email extends Task
 
 		try {
  
-			final Map<String, String> map = enquiryDAO.getEnquiryOptionDefaultValues();
+			
 			Session session = Session.getDefaultInstance(props,
 					new javax.mail.Authenticator() {
 						protected PasswordAuthentication getPasswordAuthentication() {
-							return new PasswordAuthentication(map.get(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME), encryption.decrypt(map.get(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD)));
+							return new PasswordAuthentication(Email.data.get(CommonConstants.EMAIL_USERNAME), encryption.decrypt(Email.data.get(CommonConstants.EMAIL_PASSWORD)));
 						}
 					});
 			Message message = new MimeMessage(session);

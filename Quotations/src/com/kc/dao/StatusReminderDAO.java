@@ -347,4 +347,42 @@ public class StatusReminderDAO {
 		LOG.info("Exit : getReminderMailDetails");
 		return list;
 	}
+	
+	public void updateNoOfReminderSent(String ref) throws Exception {
+		LOG.info("Enter : updateNoOfReminderSent");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET REMINDER_SENT = REMINDER_SENT + 1 where REF_NUMBER=?");
+			preparedStatement.setString(1, ref);
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : updateNoOfReminderSent");
+	}
+	
+	public int getNoOfReminderSent(String refNumber)
+	{
+		LOG.info("Enter : getReminderDetailsForSendingEmail");
+		int number = 0;
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT reminder_sent FROM quotation.enquiry where ref_number=?");
+			preparedStatement.setString(1, refNumber);
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next())
+			{
+				number = resultSet.getInt(1);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : getReminderMailDetails");
+		return number;
+	}
 }

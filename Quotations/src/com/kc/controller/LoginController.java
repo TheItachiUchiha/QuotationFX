@@ -9,12 +9,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
@@ -23,11 +31,13 @@ import org.apache.log4j.Logger;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.LoginDAO;
 import com.kc.model.ModulesVO;
+import com.kc.service.ReminderEmailSendService;
 
 public class LoginController extends Application implements Initializable{
 
 	private static final Logger LOG = LogManager.getLogger(LoginController.class);
 	public static Stage primaryStage;
+	public static Stage emailStage; 
 	public static Scene scene;
 	public static BorderPane home;
 	public static BorderPane login;
@@ -48,6 +58,8 @@ public class LoginController extends Application implements Initializable{
 	{
 		return username;
 	}
+	
+	public static Label emailLabel;
 	
 	public LoginController()
 	{
@@ -124,14 +136,53 @@ public class LoginController extends Application implements Initializable{
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setScene(scene);
 				this.primaryStage.setResizable(true);
+				sendEmails();
 			}
 			else
 			{
 				message.setVisible(true);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : doLogin");
+	}
+	
+	public void sendEmails()
+	{
+		//Creating a new stage for sending emails
+		ReminderEmailSendService emailSendService = new ReminderEmailSendService();
+		Thread th = new Thread(emailSendService);
+	    th.setDaemon(true);
+	    th.start();
+		ProgressBar bar = new ProgressBar();
+		bar.setPrefSize(200, 24);
+		bar.progressProperty().bind(emailSendService.progressProperty());
+	    emailStage = new Stage();
+	    emailStage.setTitle("Sending Reminder Emails");
+	    emailStage.setWidth(400);
+	    emailStage.setHeight(200);
+	    emailStage.initModality(Modality.WINDOW_MODAL);
+	    emailStage.initOwner(LoginController.primaryStage);
+	    GridPane layout = new GridPane();
+	    layout.setAlignment(Pos.CENTER);
+	    layout.setPadding(new Insets(15));
+	    layout.setVgap(15);
+	    layout.getStylesheets().add(
+	            getClass().getResource(
+	                "../style/gui.css"
+	            ).toExternalForm()
+	        );
+	    Label label = new Label("Sending Email to : ");
+	    label.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+	    emailLabel = new Label();
+	    
+	    layout.add(label, 0, 0);
+	    layout.add(emailLabel, 1, 0);
+	    layout.add(bar, 0, 1, 2, 2);
+	    Scene newScene = new Scene(layout);
+	    emailStage.setScene(newScene);
+	    emailStage.show();
 	}
 }

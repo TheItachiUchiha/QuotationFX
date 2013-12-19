@@ -116,6 +116,9 @@ public class ReminderController implements Initializable {
 	    
 	    @FXML
 	    private  Label messageSendMail;
+	    
+	    @FXML
+	    private Label sentReminder;
 
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -319,12 +322,16 @@ public class ReminderController implements Initializable {
 	public void mailSending()
 	{
 		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> emailMap = statusReminderDAO.getReminderMailDetails();
 		if(validate.isEmail(receiver.getText()))
 		{
 				if(!emailMessage.getText().equals(""))
 				{
 					map.put(CommonConstants.EMAIL_TO, receiver.getText());
 					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
+					map.put(CommonConstants.EMAIL_SUBJECT, subject.getText());
+					map.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_REMINDER_EMAIL));
+					map.put(CommonConstants.EMAIL_PASSWORD, emailMap.get(CommonConstants.KEY_REMINDER_PASSWORD));
 					Email email = new Email(map);
 					new Thread(email).start();
 					messageSendMail.getStyleClass().remove("failure");
@@ -368,6 +375,8 @@ public class ReminderController implements Initializable {
 					frequencyCombo.getSelectionModel().select(i-1);
 				}
 			}
+			
+			sentReminder.setText(String.valueOf(statusReminderDAO.getNoOfReminderSent(reminderVO.getReferenceNo())));
 			
 		}
 		else if(reminderVO.getStatus().equalsIgnoreCase("OFF"))
