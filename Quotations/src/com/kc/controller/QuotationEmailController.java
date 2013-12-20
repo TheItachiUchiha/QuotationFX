@@ -26,8 +26,11 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -332,7 +335,15 @@ public class QuotationEmailController implements Initializable  {
 					
 					try
 					{
-						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
+						File newFile = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
+						if(newFile.exists())
+						{
+							Desktop.getDesktop().open(newFile);
+						}
+						else
+						{
+							Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+						}
 					}
 					catch (Exception e)
 					{
@@ -404,12 +415,18 @@ public class QuotationEmailController implements Initializable  {
 	public void deletePDF()
 	{
 		try{
-			FileUtils.deleteFile(new File(newFileName));
-			messageEmail.getStyleClass().remove("failure");
-			messageEmail.getStyleClass().add("success");
-			messageEmail.setText("PDF deleted successfully");
-			messageEmail.setVisible(true);
-			attachmentLabel.setText("");
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+					"Do you want to delete this Pdf", "Confirm",
+					"Delete Pdf", DialogOptions.OK_CANCEL);
+			if (response.equals(DialogResponse.OK))
+			{
+				FileUtils.deleteFile(new File(newFileName));
+				messageEmail.getStyleClass().remove("failure");
+				messageEmail.getStyleClass().add("success");
+				messageEmail.setText("PDF deleted successfully");
+				messageEmail.setVisible(true);
+				attachmentLabel.setText("");
+			}
 		}
 		catch (Exception e) {
 			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);

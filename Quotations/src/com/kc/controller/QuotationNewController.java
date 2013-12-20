@@ -382,7 +382,7 @@ public class QuotationNewController implements Initializable {
 		}
 		else
 		{
-			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 		}
 	}    
 }

@@ -2,7 +2,6 @@ package com.kc.controller;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -24,8 +23,11 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -155,10 +157,21 @@ public class QuotationModifyController implements Initializable  {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					try {
-						Desktop.getDesktop().open(new File(ecustomerFile.getText()));
-					} catch (IOException e) {
+					try
+					{
+						File newFile = new File(ecustomerFile.getText());
+						if(newFile.exists())
+						{
+							Desktop.getDesktop().open(newFile);
+						}
+						else
+						{
 							Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+						}
+					}
+					catch (Exception e) {
+						Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+						e.printStackTrace();
 					}
 				}
 			});
@@ -315,7 +328,15 @@ public class QuotationModifyController implements Initializable  {
 					
 					try
 					{
-						Desktop.getDesktop().open(new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx"));
+						File newFile= new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
+						if(newFile.exists())
+						{
+							Desktop.getDesktop().open(newFile);
+						}
+						else
+						{
+							Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+						}
 					}
 					catch (Exception e)
 					{
@@ -331,12 +352,18 @@ public class QuotationModifyController implements Initializable  {
 					File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH)+"\\"+referenceNo.getText()+"_"+customerName.getText()+".docx");
 					if(file.exists())
 					{
-						FileUtils.deleteFile(file);
-						quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"N",CommonConstants.NA);
-						message.setText(CommonConstants.QUOTATION_DELETED);
-						message.getStyleClass().remove("success");
-						message.getStyleClass().add("failure");
-						message.setVisible(true);
+						DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+								"Do you want to delete this Quotation", "Confirm",
+								"Delete Quotation", DialogOptions.OK_CANCEL);
+						if (response.equals(DialogResponse.OK))
+						{
+							FileUtils.deleteFile(file);
+							quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"N",CommonConstants.NA);
+							message.setText(CommonConstants.QUOTATION_DELETED);
+							message.getStyleClass().remove("success");
+							message.getStyleClass().add("failure");
+							message.setVisible(true);
+						}
 					}
 					else
 					{
