@@ -16,6 +16,8 @@ import com.sun.glass.events.KeyEvent;
 
 import eu.schudt.javafx.controls.calendar.DatePicker;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,6 +29,9 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
 public class SalesNewController {
@@ -40,6 +45,12 @@ public class SalesNewController {
 		customersDAO = new CustomersDAO();
 	}
 	
+	@FXML
+    private  ToggleButton viewEnquiry;
+    
+    @FXML
+	 private ToggleGroup buttonToggle;
+    
     @FXML
     private TextField city;
 
@@ -149,13 +160,55 @@ public class SalesNewController {
     		((TextField)calendar.getChildren().get(0)).setEditable(false);
     		salesGrid.add(calendar, 1, 6);
     		
+    		buttonToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+			    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				        if (old_toggle !=null)
+				        {
+				        	enquiryGrid.setVisible(false);
+				        }
+				        else if (new_toggle !=null) {
+							if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+							}
+							else
+							{
+								for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+								{
+									if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+									{
+										eproductName.setText(enquiryViewVO.getProductName());
+										ecustomerType.setText(enquiryViewVO.getCustomerType());
+										ecustomerName.setText(enquiryViewVO.getCustomerName());
+										ecomapanyName.setText(enquiryViewVO.getCompanyName());
+										erequirements.setText(enquiryViewVO.getCustomerRequirement());
+										eaddress.setText(enquiryViewVO.getAddress());
+										eemailId.setText(enquiryViewVO.getEmailId());
+										ereferedBy.setText(enquiryViewVO.getReferedBy());
+										eenquiryType.setText(enquiryViewVO.getEnquiryType());
+										estate.setText(enquiryViewVO.getState());
+										econatctNumber.setText(enquiryViewVO.getContactNumber());
+										etinNumber.setText(enquiryViewVO.getTinNumber());
+										ecity.setText(enquiryViewVO.getCity());
+										ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+										enquiryGrid.setVisible(true);
+										SalesNewController.this.enquiryViewVO = enquiryViewVO;
+										break;
+									}
+								}
+							}
+				    }
+				    }
+				});	
     	}
     	catch (Exception e) {
     		e.printStackTrace();
 		}
     }
     
-    public void viewEnquiry()
+    /*public void viewEnquiry()
     {
 			if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
 			{
@@ -188,7 +241,7 @@ public class SalesNewController {
 					}
 				}
 			}
-    }
+    }*/
     
     public void createSalesOrder()
     {

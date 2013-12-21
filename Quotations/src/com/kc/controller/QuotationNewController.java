@@ -29,6 +29,9 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
@@ -71,7 +74,7 @@ public class QuotationNewController implements Initializable {
 	@FXML
 	private ComboBox<String> referenceCombo;
 	@FXML
-	private Button enquiryDetails;
+	private ToggleButton enquiryDetails;
 	 @FXML
 	    private TextField customerName;
 
@@ -143,6 +146,9 @@ public class QuotationNewController implements Initializable {
 	    
 	    @FXML
 	    private Button prepareQuotation;
+	    
+	    @FXML
+	    private ToggleGroup buttonToggle;
 	    
 	    int flag=0;
 	    String newFileName = "";
@@ -266,7 +272,7 @@ public class QuotationNewController implements Initializable {
 					
 				}
 			});
-			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
+			/*enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent event) {
@@ -298,7 +304,45 @@ public class QuotationNewController implements Initializable {
 						flag=1;
 					}
 				}
-			});
+			});*/
+			buttonToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+			    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				        if (old_toggle !=null)
+				        {
+				        	enquiryGrid.setVisible(false);
+				        }
+				        else if (new_toggle !=null) {
+							if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+							}
+							else
+							{
+								for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+								{
+									if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+									{
+										ereferenceNo.setText(enquiryViewVO.getReferenceNo());
+										eproductName.setText(enquiryViewVO.getProductName());
+										ecustomerType.setText(enquiryViewVO.getCustomerType());
+										ecustomerName.setText(enquiryViewVO.getCustomerName());
+										ecompanyName.setText(enquiryViewVO.getCompanyName());
+										ecustomerRequirements.setText(enquiryViewVO.getCustomerRequirement());
+										ereferedBy.setText(enquiryViewVO.getReferedBy());
+										edateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
+										ecity.setText(enquiryViewVO.getCity());
+										ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+										QuotationNewController.this.enquiryViewVO = enquiryViewVO;
+										enquiryGrid.setVisible(true);
+									}
+								}
+								flag=1;
+							}
+						}
+				    }
+				});
 			prepareQuotation.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override

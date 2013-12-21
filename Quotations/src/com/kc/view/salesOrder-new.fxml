@@ -134,7 +134,11 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Button mnemonicParsing="false" onAction="#viewEnquiry" text="View Enquiry" />
+        <ToggleButton fx:id="viewEnquiry" mnemonicParsing="false" text="View Enquiry">
+          <toggleGroup>
+            <ToggleGroup fx:id="buttonToggle" />
+          </toggleGroup>
+        </ToggleButton>
         <Button mnemonicParsing="false" onAction="#createSalesOrder" text="Create Sales Order" />
       </children>
       <padding>

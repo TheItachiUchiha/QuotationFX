@@ -107,7 +107,11 @@
           </items>
         </ComboBox>
         <Button fx:id="createService" mnemonicParsing="false" text="Create Service" />
-        <Button id="customerInfo" mnemonicParsing="false" onAction="#viewCustomerInfo" text="Customer Info" />
+        <ToggleButton fx:id="viewCustomerInfo" mnemonicParsing="false" text="Customer Info">
+          <toggleGroup>
+            <ToggleGroup fx:id="buttonToggle" />
+          </toggleGroup>
+        </ToggleButton>
       </children>
     </HBox>
   </top>

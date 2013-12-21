@@ -39,6 +39,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -156,7 +157,7 @@ public class PriceEstimationNewController implements Initializable {
     private Label endUserPriceTotal;
 
     @FXML
-    private Button enquiryDetails;
+    private ToggleButton enquiryDetails;
 
     @FXML
     private TextField eproductName;
@@ -206,6 +207,8 @@ public class PriceEstimationNewController implements Initializable {
     private HBox referenceHBox;;
     @FXML
     private GridPane enquiryGrid;
+    @FXML
+    private ToggleGroup buttonToggle;
 	double costPriceValue=0;
 	double dealerPriceValue=0;
 	double endUserPriceValue=0;
@@ -378,7 +381,7 @@ public class PriceEstimationNewController implements Initializable {
 				}
 			});
 			
-			enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
+			/*enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent event) {
@@ -418,7 +421,53 @@ public class PriceEstimationNewController implements Initializable {
 					}
 					}
 				}
-			});
+			});*/
+			buttonToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+			    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				        if (old_toggle !=null)
+				        {
+				        	enquiryGrid.setVisible(false);
+				        }
+				        else if (new_toggle !=null) {
+							if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+							}
+							else
+							{
+								enquiryGrid.setVisible(true);
+							for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+							{
+								if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+								{
+									productId=enquiryViewVO.getProductId();
+									
+									referenceNo.setText(enquiryViewVO.getReferenceNo());
+									productName.setText(enquiryViewVO.getProductName());
+									eenquiryType.setText(enquiryViewVO.getEnquiryType());
+									eproductName.setText(enquiryViewVO.getProductName());
+									erequirements.setText(enquiryViewVO.getCustomerRequirement());
+									ecustomerName.setText(enquiryViewVO.getCustomerName());
+									ecompanyName.setText(enquiryViewVO.getCompanyName());
+									etinNumber.setText(enquiryViewVO.getTinNumber());
+									eemailId.setText(enquiryViewVO.getEmailId());
+									ereferedBy.setText(enquiryViewVO.getReferedBy());
+									ecustomerType.setText(enquiryViewVO.getCustomerType());
+									eaddress.setText(enquiryViewVO.getAddress());
+									estate.setText(enquiryViewVO.getState());
+									ecity.setText(enquiryViewVO.getCity());
+									econtactNumber.setText(enquiryViewVO.getContactNumber());
+									ecustomerFile.setText(enquiryViewVO.getCustomerFile());
+									epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
+									flag=1;
+									
+								}
+							}
+							}
+						}
+				    }
+				});
 
 			viewFile.setOnAction(new EventHandler<ActionEvent>() {
 				

@@ -140,7 +140,11 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="118.0" text="Enquire Details" />
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" text="Enquire Details">
+              <toggleGroup>
+                <ToggleGroup fx:id="buttonToggle" />
+              </toggleGroup>
+            </ToggleButton>
             <Button fx:id="modifyQuotation" mnemonicParsing="false" prefWidth="125.0" text="Modify Quotation " />
           </children>
         </HBox>

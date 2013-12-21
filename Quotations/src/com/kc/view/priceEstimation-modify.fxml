@@ -207,7 +207,11 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="120.0" text="Enquiry Details" />
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" text="Enquiry details">
+              <toggleGroup>
+                <ToggleGroup fx:id="buttonToggle" />
+              </toggleGroup>
+            </ToggleButton>
             <Button fx:id="modifyPriceEstimation" mnemonicParsing="false" prefWidth="169.0" text="Modify Price Estimation" />
           </children>
         </HBox>

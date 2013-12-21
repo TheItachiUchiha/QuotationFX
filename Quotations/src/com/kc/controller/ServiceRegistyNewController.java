@@ -19,6 +19,9 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 
 import com.kc.constant.CommonConstants;
@@ -56,7 +59,10 @@ public class ServiceRegistyNewController implements Initializable {
 	    private Button createService;
 
 	    @FXML
-	    private Button customerInfo;
+	    private  ToggleButton viewCustomerInfo;
+	    
+	    @FXML
+		 private ToggleGroup buttonToggle;
 
 	    @FXML
 	    private TextField dateOfService;
@@ -175,6 +181,32 @@ public class ServiceRegistyNewController implements Initializable {
 					
 				}
 			});
+			buttonToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
+			    public void changed(ObservableValue<? extends Toggle> ov,
+				        Toggle old_toggle, Toggle new_toggle) {
+				        if (old_toggle !=null)
+				        {
+				        	customerGrid.setVisible(false);
+				        }
+				        else if (new_toggle !=null) {
+				    		if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+				    		{
+				    			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+				    		}
+				    		else
+				    		{
+				    			companyName.setText(enquiryViewVO.getCompanyName());
+				    			customerName.setText(enquiryViewVO.getCustomerName());
+				    			emailId.setText(enquiryViewVO.getEmailId());
+				    			tinNumber.setText(enquiryViewVO.getTinNumber());
+				    			city.setText(enquiryViewVO.getCity());
+				    			state.setText(enquiryViewVO.getState());
+				    			customerType.setText(enquiryViewVO.getCustomerType());
+				    			customerGrid.setVisible(true);
+				    		}
+				    	}
+				    }
+				});
 			validate.allowAsAmount(serviceCharge);
 		}
 		catch (Exception e) {
@@ -221,7 +253,7 @@ public class ServiceRegistyNewController implements Initializable {
 			message.setVisible(true);
 		}
 	}
-	public void viewCustomerInfo()
+	/*public void viewCustomerInfo()
 	{
 		if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
 		{
@@ -238,6 +270,6 @@ public class ServiceRegistyNewController implements Initializable {
 			customerType.setText(enquiryViewVO.getCustomerType());
 			customerGrid.setVisible(true);
 		}
-	}
+	}*/
 	
 }
