@@ -139,16 +139,16 @@
   <top>
     <VBox alignment="CENTER" prefHeight="98.0" prefWidth="771.0">
       <children>
-        <HBox alignment="CENTER" prefHeight="33.0" prefWidth="771.0" spacing="5.0">
+        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="771.0" spacing="5.0">
           <children>
-            <Label prefHeight="21.0" prefWidth="50.0" text="Month" />
-            <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="121.0">
+            <Label prefHeight="20.0" prefWidth="50.0" text="Month" />
+            <ComboBox fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Label prefHeight="21.0" prefWidth="36.0" text="Year" />
-            <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="121.0">
+            <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+            <ComboBox fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
@@ -183,6 +183,9 @@
           </padding>
         </HBox>
       </children>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </VBox>
   </top>
 </BorderPane>

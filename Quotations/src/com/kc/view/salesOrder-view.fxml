@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -21,13 +22,16 @@
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Referred By" fx:id="referedBy" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="76.0" text="Action" fx:id="action" />
       </columns>
+      <BorderPane.margin>
+        <Insets left="20.0" />
+      </BorderPane.margin>
     </TableView>
   </center>
   <top>
-    <HBox alignment="CENTER" prefHeight="44.0" prefWidth="790.0" spacing="10.0">
+    <HBox alignment="CENTER_LEFT" prefHeight="32.999900000002526" prefWidth="863.0" spacing="10.0" BorderPane.alignment="CENTER_LEFT">
       <children>
-        <Label prefHeight="22.0" prefWidth="45.0" text="Month" />
-        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="124.0">
+        <Label prefHeight="20.0" prefWidth="50.0" text="Month" />
+        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -36,8 +40,8 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Label prefHeight="22.0" prefWidth="33.0" text="Year" />
-        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="124.0">
+        <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+        <ComboBox fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -48,6 +52,9 @@
         </ComboBox>
         <Button fx:id="view" mnemonicParsing="false" text="View" />
       </children>
+      <BorderPane.margin>
+        <Insets left="100.0" top="20.0" />
+      </BorderPane.margin>
     </HBox>
   </top>
 </BorderPane>

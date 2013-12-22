@@ -114,14 +114,14 @@
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
-            <Label prefHeight="20.0" prefWidth="82.0" text="Month" />
-            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+            <Label prefHeight="20.0" prefWidth="80.0" text="Month" />
+            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" promptText="">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Label prefHeight="20.0" prefWidth="28.0" text="Year" />
-            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+            <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" promptText="">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
@@ -157,6 +157,9 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
       </rowConstraints>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </GridPane>
   </top>
 </BorderPane>

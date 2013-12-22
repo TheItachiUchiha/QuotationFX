@@ -51,7 +51,7 @@
         <RowConstraints maxHeight="183.0" minHeight="10.0" prefHeight="181.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets left="10.0" top="10.0" />
+        <Insets left="20.0" top="10.0" />
       </BorderPane.margin>
     </GridPane>
   </left>
@@ -124,8 +124,8 @@
   <top>
     <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="829.0" spacing="10.0">
       <children>
-        <Label prefHeight="21.0" prefWidth="50.0" text="Ref. No" />
-        <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="155.0">
+        <Label prefHeight="20.0" prefWidth="50.0" text="Ref. No" />
+        <ComboBox fx:id="referenceCombo" prefHeight="20.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -142,8 +142,11 @@
         <Button mnemonicParsing="false" onAction="#createSalesOrder" text="Create Sales Order" />
       </children>
       <padding>
-        <Insets left="50.0" />
+        <Insets left="100.0" />
       </padding>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </HBox>
   </top>
 </BorderPane>

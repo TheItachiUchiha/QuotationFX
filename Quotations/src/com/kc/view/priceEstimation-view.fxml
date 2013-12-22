@@ -51,6 +51,9 @@
         </ComboBox>
         <Button fx:id="search" mnemonicParsing="false" text="Search" />
       </children>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </HBox>
   </top>
 </BorderPane>

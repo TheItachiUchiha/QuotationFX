@@ -61,6 +61,9 @@
         <Button id="success" mnemonicParsing="false" onAction="#viewSuccess" text="View Successful" />
         <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" text="View Unsuccessful" />
       </children>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </HBox>
   </top>
 </BorderPane>

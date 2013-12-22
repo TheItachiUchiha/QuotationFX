@@ -59,10 +59,10 @@
     </VBox>
   </center>
   <top>
-    <HBox alignment="CENTER" prefHeight="38.0" prefWidth="871.0" spacing="5.0">
+    <HBox alignment="CENTER" prefHeight="30.999900000002526" prefWidth="896.0" spacing="5.0">
       <children>
-        <Label minHeight="13.999908447265625" prefHeight="21.0" prefWidth="44.0" text="Month" />
-        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="176.0">
+        <Label minHeight="13.999908447265625" prefHeight="20.0" prefWidth="50.0" text="Month" />
+        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -71,8 +71,8 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <Label prefHeight="21.0" prefWidth="37.0" text="Year" />
-        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="176.0">
+        <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+        <ComboBox fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -82,6 +82,9 @@
           </items>
         </ComboBox>
       </children>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </HBox>
   </top>
 </BorderPane>

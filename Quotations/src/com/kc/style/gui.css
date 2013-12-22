@@ -15,22 +15,22 @@
 }
 
 
-.toggle-button {
+.toggle-buttons {
   -fx-color: paleturquoise;
 }
 
-.toggle-button:hover {
+.toggle-buttons:hover {
   -fx-background-color: paleturquoise;
 }
 
-.toggle-button:selected {
+.toggle-buttons:selected {
     -fx-background-color:
         -fx-shadow-highlight-color,
         linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
         linear-gradient(to bottom, derive(-fx-color,-15%) 0%, derive(-fx-color,-10%) 50%, derive(-fx-color,-8%) 98%, derive(-fx-color,-12%) 100%);
 }
 
-.toggle-button:selected:focused {
+.toggle-buttons:selected:focused {
     -fx-background-color:
         -fx-focus-color,
         linear-gradient(to bottom, derive(-fx-color,-22%) 0%, derive(-fx-color,-15%) 100%),
@@ -84,4 +84,9 @@
         linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
         linear-gradient(#dddddd 0%, #f6f6f6 50%);
         -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+.separator-style
+{
+	-fx-border-style: solid ;
+	-fx-border-width: 20px;
 }

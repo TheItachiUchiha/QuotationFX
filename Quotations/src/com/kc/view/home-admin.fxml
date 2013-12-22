@@ -20,25 +20,25 @@
                 <Font size="15.0" />
               </font>
             </Label>
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" rotate="0.0" styleClass="separator-style" />
             <ToggleButton id="priceestimation" fx:id="enquiry" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry">
               <toggleGroup>
                 <ToggleGroup fx:id="homeSubmenu" />
               </toggleGroup>
             </ToggleButton>
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton fx:id="priceestimation" mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton fx:id="quotation" mnemonicParsing="false" onAction="#quotationPreparation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Quotation Preparation" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton fx:id="sales" mnemonicParsing="false" onAction="#salesOrder" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Order" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton fx:id="status" mnemonicParsing="false" onAction="#statusReminder" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton id="report" fx:id="service" mnemonicParsing="false" onAction="#serviceRegistry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Service / Registry" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton id="report" fx:id="reports" mnemonicParsing="false" onAction="#reports" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />
-            <Separator prefWidth="210.0" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
           </children>
           <padding>
             <Insets top="40.0" />

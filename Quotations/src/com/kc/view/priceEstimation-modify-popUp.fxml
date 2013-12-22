@@ -109,6 +109,9 @@
       <padding>
         <Insets left="10.0" top="10.0" />
       </padding>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </VBox>
   </center>
   <right>
