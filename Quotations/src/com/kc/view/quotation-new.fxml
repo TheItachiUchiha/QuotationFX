@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -19,13 +20,13 @@
         <Label prefHeight="24.0" prefWidth="122.0" text="Estimated Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
           <children>
-            <Button mnemonicParsing="false" onAction="#createQuotation" text="Create Quotation" />
+            <Button mnemonicParsing="false" onAction="#createQuotation" styleClass="button-style" text="Create Quotation" />
             <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="200.0" text="" />
           </children>
         </VBox>
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
           <children>
-            <Button fx:id="openQuotation" mnemonicParsing="false" text="Open Quotation" visible="false" />
+            <Button fx:id="openQuotation" mnemonicParsing="false" styleClass="button-style" text="Open Quotation" visible="false" />
           </children>
         </VBox>
         <TextField id="customerName" fx:id="referenceNo" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
@@ -82,7 +83,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
           <children>
             <TextField id="companyName" fx:id="ecustomerFile" editable="false" maxWidth="-Infinity" prefWidth="200.0" />
-            <Button fx:id="viewFile" mnemonicParsing="false" text="Open" />
+            <Button fx:id="viewFile" mnemonicParsing="false" styleClass="button-style" text="Open" />
           </children>
         </HBox>
       </children>
@@ -108,13 +109,16 @@
       </BorderPane.margin>
     </GridPane>
   </right>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <GridPane prefHeight="72.0" prefWidth="874.0">
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
             <Label prefHeight="20.0" prefWidth="80.0" text="Month" />
-            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" promptText="">
+            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
@@ -123,12 +127,12 @@
               </HBox.margin>
             </ComboBox>
             <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
-            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" promptText="">
+            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="search" mnemonicParsing="false" text="Search" />
+            <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
           <GridPane.margin>
             <Insets left="100.0" fx:id="x1" />
@@ -137,17 +141,17 @@
         <HBox id="HBox" fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
           <children>
             <Label prefHeight="20.0" prefWidth="82.0" text="Select Ref. No." />
-            <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+            <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" text="Enquire Details">
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquire Details">
               <toggleGroup>
                 <ToggleGroup fx:id="buttonToggle" />
               </toggleGroup>
             </ToggleButton>
-            <Button fx:id="prepareQuotation" mnemonicParsing="false" prefWidth="126.0" text="Prepare Quotation " />
+            <Button fx:id="prepareQuotation" mnemonicParsing="false" prefWidth="126.0" styleClass="button-style" text="Prepare Quotation " />
           </children>
         </HBox>
       </children>

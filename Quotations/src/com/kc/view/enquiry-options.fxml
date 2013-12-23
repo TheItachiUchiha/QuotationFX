@@ -28,8 +28,8 @@
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="41.0" prefWidth="458.0" spacing="5.0">
               <children>
-                <Button id="save" mnemonicParsing="false" onAction="#saveConfigurations" text="Save" />
-                <Button fx:id="clear" mnemonicParsing="false" text="Clear" />
+                <Button id="save" mnemonicParsing="false" onAction="#saveConfigurations" styleClass="button-style" text="Save" />
+                <Button fx:id="clear" mnemonicParsing="false" styleClass="button-style" text="Clear" />
               </children>
             </HBox>
             <Label id="messageLocation" fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="297.0" text="" />
@@ -40,7 +40,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
           <children>
             <TextField fx:id="folderPath" editable="false" prefWidth="252.0" />
-            <Button fx:id="browse" mnemonicParsing="false" text="Browse File" />
+            <Button fx:id="browse" mnemonicParsing="false" styleClass="button-style" text="Browse File" />
           </children>
           <padding>
             <Insets />

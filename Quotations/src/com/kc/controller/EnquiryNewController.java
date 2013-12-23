@@ -144,6 +144,7 @@ public class EnquiryNewController implements Initializable {
 		filePath.setPrefWidth(300);
 		Button browse = new Button();
         browse.setText("Browse");
+        browse.getStyleClass().add("button-style");
         browse.setPrefWidth(65);
         final HBox hBox =new HBox(5);
         hBox.getChildren().addAll(filePath,browse);

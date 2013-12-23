@@ -175,7 +175,7 @@ public class EnquiryViewController implements Initializable {
 				public void changed(ObservableValue ov, String t, String t1) { 
 					autoHBox.getChildren().removeAll(keyword,go);
 				 	fillAutoCompleteFromComboBox(t1);
-				 	keyword.setText("");
+				 	//keyword.setText("");
 				 	monthCombo.getSelectionModel().clearSelection();
 				 	tempList = FXCollections.observableArrayList();
 				 	tempList.clear();
@@ -382,7 +382,7 @@ public class EnquiryViewController implements Initializable {
 			go = new Button();
 			go.setText("Go");
 			autoHBox.getChildren().addAll(keyword,go);
-			keyword.setPrefWidth(208);
+			keyword.setPrefWidth(190);
 			keyword.setItems(tempList2);
 		}
 		catch (Exception e) {

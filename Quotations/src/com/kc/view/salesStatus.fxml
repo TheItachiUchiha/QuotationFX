@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -12,7 +13,7 @@
   <center>
     <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="415.0" prefWidth="867.0" spacing="5.0" BorderPane.alignment="CENTER">
       <children>
-        <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="390.0" prefWidth="866.0">
+        <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="390.0" prefWidth="866.0" styleClass="table-style">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="referenceNo" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Dt.of Enq" fx:id="dateOfEnquiry" />
@@ -25,7 +26,7 @@
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Referred By" fx:id="referedBy" />
           </columns>
         </TableView>
-        <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="390.0" prefWidth="866.0000999999975">
+        <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="390.0" prefWidth="866.0000999999975" styleClass="table-style">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="85.0" text="Ref_No" fx:id="ureferenceNo" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Dt.of Enq" fx:id="udateOfEnquiry" />
@@ -43,23 +44,26 @@
       </BorderPane.margin>
     </VBox>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="748.0" spacing="5.0">
       <children>
         <Label prefHeight="21.0" prefWidth="56.0" text="Month" />
-        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="128.0">
+        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
         <Label prefHeight="21.0" prefWidth="56.0" text="Year" />
-        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="128.0">
+        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
-        <Button id="success" mnemonicParsing="false" onAction="#viewSuccess" text="View Successful" />
-        <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" text="View Unsuccessful" />
+        <Button id="success" mnemonicParsing="false" onAction="#viewSuccess" styleClass="button-style" text="View Successful" />
+        <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" styleClass="button-style" text="View Unsuccessful" />
       </children>
       <BorderPane.margin>
         <Insets top="20.0" />

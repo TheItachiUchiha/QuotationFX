@@ -16,7 +16,7 @@
       <children>
         <HBox fx:id="modifyHBox" alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" visible="true">
           <children>
-            <Button mnemonicParsing="false" onAction="#modifyProduct" text="Modify" />
+            <Button mnemonicParsing="false" onAction="#modifyProduct" styleClass="button-style" text="Modify" />
           </children>
         </HBox>
         <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="800.0" spacing="10.0">
@@ -37,7 +37,7 @@
   <center>
     <VBox fx:id="tableVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true">
       <children>
-        <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" visible="true" VBox.vgrow="ALWAYS">
+        <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" styleClass="table-style" visible="true" VBox.vgrow="ALWAYS">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Component Name" fx:id="componentName" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="70.0" text="Category" fx:id="category" />
@@ -55,7 +55,7 @@
         </TableView>
         <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
           <children>
-            <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" text="Add Component" />
+            <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" styleClass="button-style" text="Add Component" />
           </children>
         </HBox>
       </children>

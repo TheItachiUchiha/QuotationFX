@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -23,7 +24,7 @@
           <children>
             <HBox id="HBox" alignment="CENTER" spacing="5.0">
               <children>
-                <Button mnemonicParsing="false" onAction="#createSaleEntry" text="Create Sale Entry" />
+                <Button mnemonicParsing="false" onAction="#createSaleEntry" styleClass="button-style" text="Create Sale Entry" />
               </children>
             </HBox>
             <Label fx:id="message" alignment="CENTER" prefHeight="23.0" prefWidth="226.0" text="" />
@@ -79,7 +80,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
           <children>
             <TextField id="location" fx:id="ecustomerFile" alignment="TOP_LEFT" maxWidth="-Infinity" prefWidth="209.0" />
-            <Button fx:id="viewFile" mnemonicParsing="false" text="Open" />
+            <Button fx:id="viewFile" mnemonicParsing="false" styleClass="button-style" text="Open" />
           </children>
         </HBox>
         <TextField id="location" fx:id="ecustomerType" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
@@ -121,11 +122,14 @@
       </rowConstraints>
     </GridPane>
   </right>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="829.0" spacing="10.0">
       <children>
         <Label prefHeight="20.0" prefWidth="50.0" text="Ref. No" />
-        <ComboBox fx:id="referenceCombo" prefHeight="20.0" prefWidth="150.0">
+        <ComboBox fx:id="referenceCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Item 1" />
@@ -134,12 +138,12 @@
             </FXCollections>
           </items>
         </ComboBox>
-        <ToggleButton fx:id="viewEnquiry" mnemonicParsing="false" text="View Enquiry">
+        <ToggleButton fx:id="viewEnquiry" mnemonicParsing="false" styleClass="button-style" text="View Enquiry">
           <toggleGroup>
             <ToggleGroup fx:id="buttonToggle" />
           </toggleGroup>
         </ToggleButton>
-        <Button mnemonicParsing="false" onAction="#createSalesOrder" text="Create Sales Order" />
+        <Button mnemonicParsing="false" onAction="#createSalesOrder" styleClass="button-style" text="Create Sales Order" />
       </children>
       <padding>
         <Insets left="100.0" />

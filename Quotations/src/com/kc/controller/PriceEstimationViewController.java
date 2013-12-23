@@ -147,13 +147,14 @@ public class PriceEstimationViewController implements Initializable {
 			refList.clear();
 			for(EnquiryViewVO enquiryVO : enquiryViewList)
 			{
-				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()))
+				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
 				{
 					refList.add(enquiryVO.getReferenceNo());
 				}
 			}
 			if(refList.isEmpty())
 			{
+				priceEstimationTable.getItems().clear();
 				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
 			}
 			else

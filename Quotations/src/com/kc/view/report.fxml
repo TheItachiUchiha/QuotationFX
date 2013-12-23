@@ -3,6 +3,7 @@
 <?import com.mytdev.javafx.scene.control.*?>
 <?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -31,7 +32,7 @@
                     <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="766.0">
                       <children>
                         <Label prefHeight="26.0" prefWidth="84.0" text="Report Type" />
-                        <ComboBox id="reportType" fx:id="reportTypeCombo" prefHeight="21.0" prefWidth="147.0">
+                        <ComboBox id="reportType" fx:id="reportTypeCombo" prefHeight="21.0" prefWidth="147.0" styleClass="combo-style">
                           <items>
                             <FXCollections fx:factory="observableArrayList">
                               <String fx:value="Standard report" />
@@ -55,7 +56,7 @@
                                 <HBox fx:id="yearHBox" prefHeight="26.0" prefWidth="325.0" spacing="5.0">
                                   <children>
                                     <Label prefHeight="21.0" prefWidth="77.0" text="Select Year" />
-                                    <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="68.0" promptText="Year">
+                                    <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="68.0" promptText="Year" styleClass="combo-style">
                                       <items>
                                         <FXCollections fx:factory="observableArrayList" />
                                       </items>
@@ -65,12 +66,12 @@
                                 <HBox fx:id="monthHBox" prefHeight="21.0" prefWidth="325.0" spacing="5.0">
                                   <children>
                                     <Label prefHeight="21.0" prefWidth="76.0" text="Select Month" />
-                                    <ComboBox id="yearCombo" fx:id="monthCombo" promptText="Month">
+                                    <ComboBox id="yearCombo" fx:id="monthCombo" promptText="Month" styleClass="combo-style">
                                       <items>
                                         <FXCollections fx:factory="observableArrayList" />
                                       </items>
                                     </ComboBox>
-                                    <ComboBox id="yearCombo" fx:id="monthYearCombo" prefHeight="21.0" prefWidth="66.0" promptText="Year">
+                                    <ComboBox id="yearCombo" fx:id="monthYearCombo" prefHeight="21.0" prefWidth="66.0" promptText="Year" styleClass="combo-style">
                                       <items>
                                         <FXCollections fx:factory="observableArrayList" />
                                       </items>
@@ -86,13 +87,13 @@
                               <children>
                                 <HBox id="HBox" alignment="CENTER" spacing="5.0">
                                   <children>
-                                    <Button mnemonicParsing="false" onAction="#createReport" text="Create Report" />
+                                    <Button mnemonicParsing="false" onAction="#createReport" styleClass="button-style" text="Create Report" />
                                   </children>
                                 </HBox>
                                 <Label fx:id="messageStandard" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="256.0" text="" />
                               </children>
                             </VBox>
-                            <ComboBox id="TypeCombo" fx:id="typeCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Type" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <ComboBox id="TypeCombo" fx:id="typeCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Type" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="0">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Product Category" />
@@ -102,7 +103,7 @@
                                 </FXCollections>
                               </items>
                             </ComboBox>
-                            <ComboBox id="TypeCombo" fx:id="periodCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Period" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <ComboBox id="TypeCombo" fx:id="periodCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Period" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="1">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Year" />
@@ -133,7 +134,7 @@
                               <children>
                                 <HBox id="HBox" alignment="CENTER" spacing="5.0">
                                   <children>
-                                    <Button mnemonicParsing="false" onAction="#createReport" text="Create Report" />
+                                    <Button mnemonicParsing="false" onAction="#createReport" styleClass="button-style" text="Create Report" />
                                   </children>
                                 </HBox>
                                 <Label fx:id="messageCustom" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="256.0" text="" />
@@ -142,7 +143,7 @@
                                 <Insets top="10.0" />
                               </GridPane.margin>
                             </VBox>
-                            <ComboBox id="TypeCombo" fx:id="customTypeCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Type" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <ComboBox id="TypeCombo" fx:id="customTypeCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Type" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="0">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Reference No" />
@@ -200,4 +201,7 @@
       </tabs>
     </TabPane>
   </center>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </BorderPane>
