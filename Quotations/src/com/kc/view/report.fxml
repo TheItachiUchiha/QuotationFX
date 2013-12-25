@@ -22,7 +22,7 @@
               <center>
                 <ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="766.0">
                   <content>
-                    <TilePane fx:id="tile" prefHeight="247.0" prefWidth="765.0" />
+                   <TilePane fx:id="tile" hgap="15.0" prefHeight="247.0" prefWidth="765.0" vgap="15.0" />
                   </content>
                 </ScrollPane>
               </center>

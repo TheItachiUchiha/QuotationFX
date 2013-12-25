@@ -63,16 +63,18 @@ public class BackupExportController implements Initializable {
     	try
     	  {
     	       byte[] data = export.getData(CommonConstants.DB_HOST, CommonConstants.DB_PORT, CommonConstants.DB_USER, CommonConstants.DB_PASSWORD, CommonConstants.DB_NAME).getBytes();
-    	       File filedst = new File(exportDB.getText()+"Database"+".zip");
+    	       File filedst = new File(exportDB.getText()+"\\Database"+".sql");
     	       FileOutputStream dest = new FileOutputStream(filedst);
-    	       ZipOutputStream zip = new ZipOutputStream(
-    	       new BufferedOutputStream(dest));
-    	       zip.setMethod(ZipOutputStream.DEFLATED);
-    	       zip.setLevel(Deflater.BEST_COMPRESSION);
-    	       zip.putNextEntry(new ZipEntry("data.sql"));
-    	       zip.write(data);
-    	       zip.close();
-    	       dest.close();
+    	       
+	    	    // if file doesnt exists, then create it
+	   			if (!filedst.exists()) {
+	   				filedst.createNewFile();
+	   			}
+	    
+	   			dest.write(data);
+	   			dest.flush();
+	   			dest.close();
+
     	       	messageExport.setText(CommonConstants.DB_EXPORT_SUCCESS);
 				messageExport.getStyleClass().remove("failure");
 				messageExport.getStyleClass().add("success");

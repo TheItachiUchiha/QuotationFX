@@ -17,106 +17,175 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.kc.constant.CommonConstants;
 
 public class ExportDB {
+
+	private static ResultSet res;
+	private static Connection con;
+	private Statement st;
+	private int BUFFER = 99999;
+
+	public String getData(String host, String port, String user,
+			String password, String db) {
+		String Mysqlpath = getMysqlBinPath(user, password, db);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print("yaha dekho");
+		}
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"
+					+ CommonConstants.DB_NAME, CommonConstants.DB_USER,
+					CommonConstants.DB_PASSWORD);
+			st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+
+		} catch (Exception e) {
+
+			System.out.print("I am here yaaar");
+			e.printStackTrace();
+		}
+
+		System.out.println(Mysqlpath);
+		Process run = null;
+		try {
+			System.out.println(Mysqlpath + "mysqldump --host="
+					+ CommonConstants.DB_HOST + " --port="
+					+ CommonConstants.DB_PORT + " --user="
+					+ CommonConstants.DB_USER + " --password="
+					+ CommonConstants.DB_PASSWORD
+					+ " --add-drop-database --compact --complete-insert --extended-insert "
+					+ "--skip-comments --skip-triggers "
+					+ CommonConstants.DB_NAME);
+			run = Runtime.getRuntime().exec(
+					Mysqlpath + "mysqldump --host=" + CommonConstants.DB_HOST
+							+ " --port=" + CommonConstants.DB_PORT + " --user="
+							+ CommonConstants.DB_USER + " --password="
+							+ CommonConstants.DB_PASSWORD + "  "
+							+ "--add-drop-database -B "
+							+ CommonConstants.DB_NAME);
+		} catch (IOException ex) {
+			// Logger.getLogger(Backup.class.getName()).log(Level.SEVERE, null,
+			// ex);
+		}
+
+		InputStream in = run.getInputStream();
+		BufferedReader br = new BufferedReader(new InputStreamReader(in));
+
+		StringBuffer temp = new StringBuffer();
+
+		int count;
+		char[] cbuf = new char[BUFFER];
+
+		try {
+
+			while ((count = br.read(cbuf, 0, BUFFER)) != -1) {
+				temp.append(cbuf, 0, count);
+			}
+		} catch (IOException ex) {
+			Logger.getLogger(ExportDB.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		try {
+
+			br.close();
+			in.close();
+		} catch (IOException ex) {
+			Logger.getLogger(ExportDB.class.getName()).log(Level.SEVERE, null,
+					ex);
+		}
+		return temp.toString();
+	}
 	
+	
+	public void setDataToDatabase(String host, String port, String user,
+			String password, String db, String file) {
+		String Mysqlpath = getMysqlBinPath(user, password, db);
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print("yaha dekho");
+		}
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"
+					+ CommonConstants.DB_NAME, CommonConstants.DB_USER,
+					CommonConstants.DB_PASSWORD);
+			st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
 
-	    private static ResultSet res;
-	    private static Connection con;
-	    private Statement st;
-	    private int BUFFER = 99999;
+		} catch (Exception e) {
 
-	    public String getData(String host, String port, String user, String password, String db) {
-	        String Mysqlpath = getMysqlBinPath(user, password, db);
-	        try {
-	            Class.forName("com.mysql.jdbc.Driver");
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            System.out.print("yaha dekho");
-	        }
-	        try {
-	            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + CommonConstants.DB_NAME, CommonConstants.DB_USER, CommonConstants.DB_PASSWORD);
-	            st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			System.out.print("I am here yaaar");
+			e.printStackTrace();
+		}
 
-	        } catch (Exception e) {
+		System.out.println(Mysqlpath);
+		Process run = null;
+		try {
+			System.out.println(Mysqlpath + "mysql --host="
+					+ CommonConstants.DB_HOST + " --port="
+					+ CommonConstants.DB_PORT + " --user="
+					+ CommonConstants.DB_USER + " --password="
+					+ CommonConstants.DB_PASSWORD
+					+ " --compact --complete-insert --extended-insert "
+					+ "--skip-comments --skip-triggers "
+					+ "abc"
+					+ " < " + file );
+			run = Runtime.getRuntime().exec(
+					Mysqlpath+"mysql --host=" + CommonConstants.DB_HOST
+							+ " --port=" + CommonConstants.DB_PORT + " --user="
+							+ CommonConstants.DB_USER + " --password="
+							+ CommonConstants.DB_PASSWORD + " "
+							+ "abc"
+							+ " < " + file );
+			int processComplete = run.waitFor();
 
-	            System.out.print("I am here yaaar");
-	            e.printStackTrace();
-	        }
+            if (processComplete == 0) {
+                System.out.println("Backup restored successfully");
+             
+            } else {
+                System.out.println("Could not restore the backup");
+            }
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
+	public String getMysqlBinPath(String user, String password, String db) {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print("yaha dekho");
+		}
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"
+					+ db, user, password);
+			st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
 
+		} catch (Exception e) {
 
-	        System.out.println(Mysqlpath);
-	        Process run = null;
-	        try {
-	            System.out.println(Mysqlpath + "mysqldump --host=" + CommonConstants.DB_HOST + " --port=" + CommonConstants.DB_PORT + " --user=" + CommonConstants.DB_USER + " --password=" + CommonConstants.DB_PASSWORD + " --compact --complete-insert --extended-insert " + "--skip-comments --skip-triggers " + CommonConstants.DB_NAME);
-	            run = Runtime.getRuntime().exec(Mysqlpath + "mysqldump --host=" + CommonConstants.DB_HOST + " --port=" + CommonConstants.DB_PORT + " --user=" + CommonConstants.DB_USER + " --password=" + CommonConstants.DB_PASSWORD + "  " + "--skip-comments --skip-triggers " + CommonConstants.DB_NAME);
-	        } catch (IOException ex) {
-	            // Logger.getLogger(Backup.class.getName()).log(Level.SEVERE, null, ex);
-	        }
+			System.out.print("I am here yaaar");
+			e.printStackTrace();
+		}
 
+		String a = "";
 
+		try {
+			res = st.executeQuery("select @@basedir");
+			while (res.next()) {
+				a = res.getString(1);
+			}
+		} catch (Exception eee) {
+			eee.printStackTrace();
+		}
+		a = a + "bin\\";
+		System.err.println("Mysql path is :" + a);
+		return a;
 
-	        InputStream in = run.getInputStream();
-	        BufferedReader br = new BufferedReader(new InputStreamReader(in));
-
-	        StringBuffer temp = new StringBuffer();
-
-
-	        int count;
-	        char[] cbuf = new char[BUFFER];
-
-	        try {
-
-	            while ((count = br.read(cbuf, 0, BUFFER)) != -1) {
-	                temp.append(cbuf, 0, count);
-	            }
-	        } catch (IOException ex) {
-	            Logger.getLogger(ExportDB.class.getName()).log(Level.SEVERE, null, ex);
-	        }
-	        try {
-
-	            br.close();
-	            in.close();
-	        } catch (IOException ex) {
-	            Logger.getLogger(ExportDB.class.getName()).log(Level.SEVERE, null, ex);
-	        }
-	        return temp.toString();
-	    }
-
-	    public String getMysqlBinPath(String user, String password, String db) {
-	        try {
-	            Class.forName("com.mysql.jdbc.Driver");
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            System.out.print("yaha dekho");
-	        }
-	        try {
-	            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + db, user, password);
-	            st = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-
-	        } catch (Exception e) {
-
-	            System.out.print("I am here yaaar");
-	            e.printStackTrace();
-	        }
-
-
-
-	        String a = "";
-
-
-	        try {
-	            res = st.executeQuery("select @@basedir");
-	            while (res.next()) {
-	                a = res.getString(1);
-	            }
-	        } catch (Exception eee) {
-	            eee.printStackTrace();
-	        }
-	        a = a + "bin\\";
-	        System.err.println("Mysql path is :" + a);
-	        return a;
-
-	    }
+	}
 }

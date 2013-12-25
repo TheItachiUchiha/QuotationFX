@@ -23,6 +23,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
@@ -104,7 +105,9 @@ public class LoginController extends Application implements Initializable{
 			login = (BorderPane) loader.load();
 			Scene scene = new Scene(this.login);
 			this.scene=scene;
-			this.primaryStage.setHeight(710);
+			this.primaryStage.setHeight(566);
+			this.primaryStage.setWidth(874);
+			this.primaryStage.setResizable(false);
 			this.primaryStage.setScene(this.scene);
 			this.primaryStage.show();
 		} catch (IOException e) {
@@ -134,6 +137,10 @@ public class LoginController extends Application implements Initializable{
 				BorderPane subMenu = (BorderPane) subMenuLoader.load();
 				this.home.setCenter(subMenu);
 				Scene scene = new Scene(this.home);
+				this.primaryStage.setX(0);
+				primaryStage.setY(0);
+				primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+			    primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
 				this.primaryStage.setScene(scene);
 				this.primaryStage.setResizable(true);
 				sendEmails();
