@@ -27,6 +27,7 @@ public class TopMenuController implements Initializable {
 			menuHbox.getChildren().remove(1);
 			menuHbox.getChildren().remove(1);
 			menuHbox.getChildren().remove(1);
+			menuHbox.getChildren().remove(1);
 		}
 		
 	}
@@ -107,6 +108,21 @@ public class TopMenuController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : customersHome");
+	}
+	public void backupHome()
+	{
+		LOG.info("Enter : backupHome");
+		try{
+		FXMLLoader menuLoader = new FXMLLoader(
+				LoginController.class
+						.getResource("../view/backup-home.fxml"));
+		BorderPane subMenu = (BorderPane) menuLoader.load();
+		LoginController.home.setCenter(subMenu);
+		}
+		catch (Exception e) {
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : backupHome");
 	}
 	public void helpHome()
 	{

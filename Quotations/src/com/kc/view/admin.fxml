@@ -18,7 +18,7 @@
       <children>
         <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="44.000099999997474" prefWidth="807.0" HBox.hgrow="ALWAYS">
           <children>
-            <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="HOME" HBox.hgrow="ALWAYS">
+            <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" selected="true" styleClass="menuButtons, toggle-buttons" text="HOME" HBox.hgrow="ALWAYS">
               <toggleGroup>
                 <ToggleGroup fx:id="topMenu" />
               </toggleGroup>
@@ -27,6 +27,7 @@
             <ToggleButton mnemonicParsing="false" onAction="#componentsHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="COMPONENTS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
             <ToggleButton mnemonicParsing="false" onAction="#customersHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="CUSTOMERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
             <ToggleButton mnemonicParsing="false" onAction="#usersHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="USERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <ToggleButton mnemonicParsing="false" onAction="#backupHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="BACKUP" toggleGroup="$topMenu" />
             <ToggleButton mnemonicParsing="false" onAction="#helpHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="HELP" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
           </children>
           <padding>

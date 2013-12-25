@@ -90,6 +90,14 @@ public class CommonConstants
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
 	
+	public static final String DB_USER ="root";
+	public static final String DB_PASSWORD = "root";
+	public static final String DB_PORT = "3306";
+	public static final String DB_HOST = "localhost";
+	public static final String DB_NAME = "quotation";
+	public static final String DB_EXPORT_SUCCESS = "DB Exported Successfully";
+	public static final String DB_IMPORT_SUCCESS = "DB Imported Successfully";
+	
 	//Keys for report template of service engg
 	public static final String KEY_REPORT_REF = "REFERENCE_NO";
 	public static final String KEY_REPORT_DATE = "DATE_OF_SERVICE";
