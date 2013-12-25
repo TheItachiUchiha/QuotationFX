@@ -115,14 +115,17 @@ public class CustomReportTemplate extends VBox
 		detailsBox.getChildren().addAll(firstBox, secondBox, thirdBox, fourthBox, fifthBox, sixthBox);
 		
 		pieChart = new PieChart(pieChartData);
-		//pieChart.setLabelLineLength(10);
+		pieChart.setPrefSize(150, 150);
 		pieChart.setLegendSide(Side.RIGHT);
-		//pieBox.setMinSize(200, 200);
+		detailsBox.setPrefSize(200, 200);
+		pieBox.setPrefSize(370, 250);
 		pieBox.setAlignment(Pos.CENTER);
 		pieBox.getChildren().addAll(pieChart);
 		
 		this.setAlignment(Pos.CENTER);
 		this.getChildren().addAll(detailsBox, pieBox);
+		
+		this.setId("pieBox");
 		
 	}
 }
