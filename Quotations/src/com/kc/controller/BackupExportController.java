@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
@@ -23,11 +24,12 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.util.ExportDB;
+import com.kc.util.Validation;
 
 public class BackupExportController implements Initializable {
 	
 	private static final Logger LOG = LogManager.getLogger(BackupExportController.class);
-	
+	Validation  validation;
 	ExportDB export;
 	@FXML
     private Button browse;
@@ -40,6 +42,7 @@ public class BackupExportController implements Initializable {
     
     public BackupExportController() {
     	export = new ExportDB();
+    	validation = new Validation();
 	}
 
 	@Override
@@ -62,6 +65,12 @@ public class BackupExportController implements Initializable {
 
     	try
     	  {
+    		if(validation.isEmpty(exportDB))
+    		{
+    			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.BROWSE_PATH);
+    		}
+    		else
+    		{
     	       byte[] data = export.getData(CommonConstants.DB_HOST, CommonConstants.DB_PORT, CommonConstants.DB_USER, CommonConstants.DB_PASSWORD, CommonConstants.DB_NAME).getBytes();
     	       File filedst = new File(exportDB.getText()+"\\Database"+".sql");
     	       FileOutputStream dest = new FileOutputStream(filedst);
@@ -79,6 +88,7 @@ public class BackupExportController implements Initializable {
 				messageExport.getStyleClass().remove("failure");
 				messageExport.getStyleClass().add("success");
 				messageExport.setVisible(true);
+    		}
     	   }catch (Exception ex){
     	    ex.printStackTrace();
     	  }

@@ -104,7 +104,6 @@ public class ComponentsViewController implements Initializable {
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {
-					autoHBox.getChildren().removeAll(keyword,go);
 					tempList =  FXCollections.observableArrayList();
 					 fillAutoCompleteFromComboBox(t1);
 					 keyword.setText("");
@@ -243,9 +242,10 @@ public class ComponentsViewController implements Initializable {
 	        		}
 	        	}
 	        }
+			autoHBox.getChildren().removeAll(keyword,go);
 			keyword = new AutoCompleteTextField<String>();
-			go = new Button();
-			go.setText("Go");
+			//go = new Button();
+			//go.setText("Go");
 			autoHBox.getChildren().addAll(keyword,go);
 			keyword.setPrefWidth(208);
 			keyword.setItems(tempList);

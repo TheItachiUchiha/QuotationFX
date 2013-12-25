@@ -110,7 +110,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
           <children>
             <TextField id="companyName" fx:id="ecustomerDocument" editable="false" maxWidth="-Infinity" prefWidth="200.0" />
-            <Button id="viewFile" mnemonicParsing="false" styleClass="button-style" text="Open" />
+            <Button id="viewFile" mnemonicParsing="false" onAction="#viewFile" styleClass="button-style" text="Open" />
           </children>
         </HBox>
       </children>

@@ -30,7 +30,7 @@
               </toggleGroup>
             </ToggleButton>
             <Separator prefWidth="200.0" />
-            <ToggleButton mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="About" toggleGroup="$helpSubmenu" />
+            <ToggleButton mnemonicParsing="false" onAction="#about" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="About" toggleGroup="$helpSubmenu" />
             <Separator prefWidth="200.0" />
           </children>
           <padding>

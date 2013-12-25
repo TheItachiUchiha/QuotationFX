@@ -112,7 +112,6 @@ public class CustomersViewController implements Initializable {
 
 				@Override
 				public void changed(ObservableValue ov, String t, String t1) {
-					autoHBox.getChildren().removeAll(keyword,go);
 					fillAutoCompleteFromComboBox(t1);
 					keyword.setText("");
 				}
@@ -225,9 +224,10 @@ public class CustomersViewController implements Initializable {
 	        		}
 				}
 			}
+			autoHBox.getChildren().removeAll(keyword,go);
 			keyword = new AutoCompleteTextField<String>();
-			go = new Button();
-			go.setText("Go");
+			//go = new Button();
+			//go.setText("Go");
 			autoHBox.getChildren().addAll(keyword,go);
 			keyword.setPrefWidth(208);
 			keyword.setItems(tempList);

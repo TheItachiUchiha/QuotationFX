@@ -177,11 +177,13 @@ public class ReminderController implements Initializable {
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
 							stopReminder.setVisible(false);
+							sentHBox.setVisible(false);
 						}
 						else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 						{
 							refList = statusReminderDAO.getModifyReminders(startDate,endDate);
 							stopReminder.setVisible(true);
+							sentHBox.setVisible(true);
 						}
 						if(refList.isEmpty())
 						{

@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -500,6 +501,24 @@ public class QuotationEmailSendController implements Initializable {
 			LOG.error(e.getMessage());
 		}
 	}
+	public void viewFile()
+	{
 
+		try
+		{
+			File newFile = new File(ecustomerDocument.getText());
+			if(newFile.exists())
+			{
+				Desktop.getDesktop().open(newFile);
+			}
+			else
+			{
+				Dialogs.showErrorDialog(LoginController.primaryStage,CommonConstants.FILE_ACCESS_FAILED_MSG,CommonConstants.FILE_ACCESS_FAILED);
+			}
+		} catch (IOException e) {
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+		}
+	
+	}
 
 }
