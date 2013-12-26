@@ -141,14 +141,14 @@ public class ExportDB {
 							+ CommonConstants.DB_PASSWORD + " "
 							+ "abc"
 							+ " < " + file );
-			int processComplete = run.waitFor();
+			/*int processComplete = run.waitFor();
 
             if (processComplete == 0) {
                 System.out.println("Backup restored successfully");
              
             } else {
                 System.out.println("Could not restore the backup");
-            }
+            }*/
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
