@@ -3,23 +3,35 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
+
 public class HelpController implements Initializable {
 	
 	private static final Logger LOG = LogManager.getLogger(HelpController.class);
-	
+
+    @FXML
+    private VBox companyVBox;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		if(LoginController.userType.equals(CommonConstants.NORMAL))
+		{
+			companyVBox.getChildren().remove(1);
+			companyVBox.getChildren().remove(1);
+		}
 		
 	}
 	public void companyDetails()
