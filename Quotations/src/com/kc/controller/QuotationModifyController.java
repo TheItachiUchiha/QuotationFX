@@ -142,7 +142,7 @@ public class QuotationModifyController implements Initializable  {
 	    @FXML
 	    private TextField quotationPreparationDate;
 	    
-	    int flag=0;
+	    //int flag=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -215,7 +215,7 @@ public class QuotationModifyController implements Initializable  {
 							{
 								referenceCombo.setItems(refList);	
 								referenceHBox.setVisible(true);	
-								flag=0;
+								//flag=0;
 							}
 						}
 					}
@@ -223,6 +223,47 @@ public class QuotationModifyController implements Initializable  {
 						e.printStackTrace();
 					}
 					
+				}
+			});
+			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					quotationGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					{
+						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						{
+							QuotationModifyController.this.enquiryViewVO = enquiryViewVO;
+						}
+					}
 				}
 			});
 			/*enquiryDetails.setOnAction(new EventHandler<ActionEvent>() {
@@ -289,7 +330,7 @@ public class QuotationModifyController implements Initializable  {
 										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 									}
 								}
-								flag=1;
+								//flag=1;
 							}
 						}
 				    }
@@ -298,7 +339,13 @@ public class QuotationModifyController implements Initializable  {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					if(flag==1)
+					/*if(flag==1)
+					{*/
+					if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+					}
+					else
 					{
 						for(EnquiryViewVO enquiryViewVO :enquiryViewList)
 						{
@@ -310,7 +357,7 @@ public class QuotationModifyController implements Initializable  {
 								priceEstimationDate.setText(enquiryViewVO.getPeDate());
 								estimatedPrice.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
 								quotationPreparationDate.setText(enquiryViewVO.getQpDate());
-								QuotationModifyController.this.enquiryViewVO=enquiryViewVO;
+								//QuotationModifyController.this.enquiryViewVO=enquiryViewVO;
 								quotationGrid.setVisible(true);
 							}
 						}
@@ -323,46 +370,14 @@ public class QuotationModifyController implements Initializable  {
 							defaultValues=quotationDAO.getCustomDefaultValues();
 						}
 					}
+					/*}
 					else
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
-					}
+					}*/
 				}
 			});
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					referenceHBox.setVisible(false);
-					quotationGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-					
-				}
-			});
-			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					referenceHBox.setVisible(false);
-					quotationGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-					
-				}
-			});
-			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					quotationGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-				}
-			});
+			
 			openQuotation.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override

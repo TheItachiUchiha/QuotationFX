@@ -150,7 +150,7 @@ public class QuotationNewController implements Initializable {
 	    @FXML
 	    private ToggleGroup buttonToggle;
 	    
-	    int flag=0;
+	    //int flag=0;
 	    String newFileName = "";
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
 	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -231,6 +231,13 @@ public class QuotationNewController implements Initializable {
 					enquiryGrid.setVisible(false);
 					message.setText("");
 					openQuotation.setVisible(false);
+					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					{
+						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						{
+							QuotationNewController.this.enquiryViewVO = enquiryViewVO;
+						}
+					}
 					
 				}
 			});
@@ -262,7 +269,7 @@ public class QuotationNewController implements Initializable {
 							{
 								referenceHBox.setVisible(true);
 								referenceCombo.setItems(refList);	
-								flag=0;
+								//flag=0;
 							}
 						}
 					}
@@ -334,11 +341,11 @@ public class QuotationNewController implements Initializable {
 										ecity.setText(enquiryViewVO.getCity());
 										ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
-										QuotationNewController.this.enquiryViewVO = enquiryViewVO;
+										//QuotationNewController.this.enquiryViewVO = enquiryViewVO;
 										enquiryGrid.setVisible(true);
 									}
 								}
-								flag=1;
+								//flag=1;
 							}
 						}
 				    }
@@ -348,7 +355,13 @@ public class QuotationNewController implements Initializable {
 				@Override
 				public void handle(ActionEvent paramT) {
 					try{
-						if(flag==1)
+						/*if(flag==1)
+						{*/
+						if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+						}
+						else
 						{
 							if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 							{
@@ -378,10 +391,11 @@ public class QuotationNewController implements Initializable {
 								quotationGrid.setVisible(true);
 							}
 						}
+						/*}
 						else
 						{
 							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
-						}
+						}*/
 					}
 					catch (Exception e) {
 						e.printStackTrace();

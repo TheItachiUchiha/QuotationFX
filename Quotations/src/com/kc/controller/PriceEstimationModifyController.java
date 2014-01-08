@@ -195,7 +195,7 @@ public class PriceEstimationModifyController implements Initializable{
 	    double costPriceValue=0;
 		double dealerPriceValue=0;
 		double endUserPriceValue=0;
-		int flag=0;
+		//int flag=0;
 	    
 	    @FXML
 	    private TableView<ComponentsVO> componentTable;
@@ -243,7 +243,7 @@ public class PriceEstimationModifyController implements Initializable{
 					try
 					{
 						clearFields();
-						flag=0;
+						//flag=0;
 						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
 						{
 							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
@@ -301,7 +301,7 @@ public class PriceEstimationModifyController implements Initializable{
 						componentTable.getSelectionModel().clearSelection();
 						enquiryGrid.setVisible(false);
 						estimationVBox.setVisible(false);
-						flag=0;
+						//flag=0;
 						
 					}
 				});
@@ -379,7 +379,7 @@ public class PriceEstimationModifyController implements Initializable{
 									econtactNumber.setText(enquiryViewVO.getContactNumber());
 									ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 									epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
-									flag=1;
+									//flag=1;
 								}
 							}
 							}
@@ -391,16 +391,23 @@ public class PriceEstimationModifyController implements Initializable{
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					if(flag==1)
-					{
-				
+					
+				if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+				{
+					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+				}
+				else
+				{
 					estimationVBox.setVisible(true);
+					
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
 						{
 							try
 							{
+								referenceNo.setText(enquiryViewVO.getReferenceNo());
+								productName.setText(enquiryViewVO.getProductName());
 								componentList = enquiryDAO.getComponentsForEnquiry(enquiryViewVO.getId());
 								fillComponentTable();
 								marginValue.setText(String.valueOf(enquiryViewVO.getMargin()));
@@ -419,12 +426,7 @@ public class PriceEstimationModifyController implements Initializable{
 							}
 						}
 					}
-					
-					}
-					else
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.VIEW_ENQUIRY);
-					}
+				}
 				}
 			});
 			

@@ -30,6 +30,9 @@
             </HBox>
             <Label id="messageRecreateQuotation" fx:id="messageEmail" prefHeight="24.0" prefWidth="221.0" text="" visible="false" />
           </children>
+          <GridPane.margin>
+            <Insets top="5.0" />
+          </GridPane.margin>
         </VBox>
         <Label prefHeight="26.0" prefWidth="120.0" text="Email Settings" GridPane.columnIndex="0" GridPane.rowIndex="4">
           <font>
@@ -110,7 +113,7 @@
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
           <children>
             <TextField id="companyName" fx:id="ecustomerDocument" editable="false" maxWidth="-Infinity" prefWidth="200.0" />
-            <Button id="viewFile" mnemonicParsing="false" onAction="#viewFile" styleClass="button-style" text="Open" />
+            <Button id="viewFile" mnemonicParsing="false" styleClass="button-style" text="Open" />
           </children>
         </HBox>
       </children>

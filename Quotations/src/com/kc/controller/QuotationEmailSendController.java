@@ -165,7 +165,7 @@ public class QuotationEmailSendController implements Initializable {
     @FXML
     private Label attachmentLabel;
 
-    int flag=0;
+    //int flag=0;
     
     String newFileName = "";
 	
@@ -221,12 +221,54 @@ public class QuotationEmailSendController implements Initializable {
 							{
 								referenceCombo.setItems(refList);
 								referenceHBox.setVisible(true);	
-								flag=0;
+								//flag=0;
 							}
 						}
 					}
 					catch (Exception e) {
 						e.printStackTrace();
+					}
+					
+				}
+			});
+			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					emailGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					referenceHBox.setVisible(false);
+					emailGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					
+				}
+			});
+			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					emailGrid.setVisible(false);
+					enquiryGrid.setVisible(false);
+					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					{
+						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						{
+							QuotationEmailSendController.this.enquiryViewVO = enquiryViewVO;
+						}
 					}
 					
 				}
@@ -297,7 +339,7 @@ public class QuotationEmailSendController implements Initializable {
 										QuotationEmailSendController.this.enquiryViewVO = enquiryViewVO;
 									}
 								}
-								flag=1;
+								//flag=1;
 							}
 						}
 				    }
@@ -306,7 +348,13 @@ public class QuotationEmailSendController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					if(flag==1)
+					/*if(flag==1)
+					{*/
+					if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+					}
+					else
 					{
 						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 						{
@@ -331,47 +379,14 @@ public class QuotationEmailSendController implements Initializable {
 							emailGrid.setVisible(true);
 						}
 					}
+					/*}
 					else
 					{
 						Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.VIEW_ENQUIRY);
-					}
+					}*/
 				}
 			});
-			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					referenceHBox.setVisible(false);
-					emailGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-					
-				}
-			});
-			yearCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					referenceHBox.setVisible(false);
-					emailGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-					
-				}
-			});
-			referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
-
-				@Override
-				public void changed(
-						ObservableValue<? extends String> paramObservableValue,
-						String paramT1, String paramT2) {
-					emailGrid.setVisible(false);
-					enquiryGrid.setVisible(false);
-					
-				}
-			});
+			
 			openQuotation.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
