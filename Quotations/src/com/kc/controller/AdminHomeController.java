@@ -3,11 +3,17 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.kc.dao.HelpDAO;
+import com.kc.model.HelpVO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class AdminHomeController implements Initializable {

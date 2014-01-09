@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
@@ -13,14 +16,30 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.dao.HelpDAO;
+import com.kc.model.HelpVO;
 
 public class TopMenuController implements Initializable {
+	
+	HelpDAO helpDAO;
+	public TopMenuController() {
+		helpDAO = new HelpDAO();
+	}
 
 	private static final Logger LOG = LogManager.getLogger(TopMenuController.class);
 	
+	@FXML
+	private Label companyLable;
+	@FXML
+	private ImageView comLogo;
 	@FXML private HBox menuHbox;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		HelpVO helpVO = new HelpVO();
+		helpVO = helpDAO.getCompanyDetails();
+		Image image = new Image("file:"+helpVO.getCompanyLogo().getPath());
+		comLogo.setImage(image);
+		companyLable.setText(helpVO.getName());
 		if(LoginController.userType.equals(CommonConstants.NORMAL))
 		{
 			menuHbox.getChildren().remove(1);

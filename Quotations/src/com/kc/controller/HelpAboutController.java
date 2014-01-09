@@ -48,8 +48,10 @@ public class HelpAboutController implements Initializable {
 			description.setText(helpVO.getDescription());
 			address.setText(helpVO.getAddress());
 			contact.setText(helpVO.getContact());
-			/*companyLogo.setImage(new Image(helpVO.getCompanyLogo()));
-			homeLogo.setImage(new Image(helpVO.getHomeLogo()));*/
+			Image image = new Image("file:"+helpVO.getCompanyLogo().getPath());
+			companyLogo.setImage(image);
+			Image image2 = new Image("file:"+helpVO.getHomeLogo().getPath());
+			homeLogo.setImage(image2);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
