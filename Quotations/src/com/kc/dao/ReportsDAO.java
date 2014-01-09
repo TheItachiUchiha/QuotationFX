@@ -33,7 +33,7 @@ public class ReportsDAO
 		ObservableList<EnquiryVO> listOfEnquiries = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("select ref_number,salesdone,prod_id,cust_id from quotation.enquiry e where STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
+			preparedStatement = conn.prepareStatement("select ref_number,salesdone,prod_id,cust_id,total_revenue from quotation.enquiry e where STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
 			preparedStatement.setString(2, endDate);
@@ -46,6 +46,7 @@ public class ReportsDAO
 				enquiryVO.setSales(resultSet.getString(2));
 				enquiryVO.setProductId(resultSet.getInt(3));
 				enquiryVO.setCustomerId(resultSet.getInt(4));
+				enquiryVO.setTotalRevenue(resultSet.getDouble(5));
 				listOfEnquiries.add(enquiryVO);
 			}
 		}

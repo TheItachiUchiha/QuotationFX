@@ -1,6 +1,10 @@
 package com.kc.dao;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
@@ -8,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -69,10 +75,20 @@ public class HelpDAO {
 				helpVO.setDescription(resultSet.getString(3));
 				helpVO.setAddress(resultSet.getString(4));
 				helpVO.setContact(resultSet.getString(5));
-				/*Blob companyBlob = resultSet.getBlob(6);
-				helpVO.setCompanyLogo(companyBlob.getBinaryStream(0, companyBlob.length()));
+				
+				Blob companyBlob = resultSet.getBlob(6);
+				int blobLength = (int) companyBlob.length();
+				byte[] blobAsBytes = companyBlob.getBytes(1, blobLength);
+				BufferedImage image = ImageIO.read( new ByteArrayInputStream( blobAsBytes ) );
+				ImageIO.write(image, "png", new File("E:\\companylogo.png"));
+				helpVO.setCompanyLogo(new File("E:\\companylogo.png"));
+				
 				Blob homeBlob = resultSet.getBlob(7);
-				helpVO.setHomeLogo(homeBlob.getBinaryStream(0, homeBlob.length()))d;*/
+				int blobLengthHome = (int) homeBlob.length();
+				byte[] blobAsBytesHome = homeBlob.getBytes(1, blobLengthHome);
+				BufferedImage imageHome = ImageIO.read( new ByteArrayInputStream( blobAsBytesHome ) );
+				ImageIO.write(imageHome, "png", new File("E:\\homelogo.png"));
+				helpVO.setHomeLogo(new File("E:\\homelogo.png"));
 			}
 		} 
 		catch (Exception e) {
