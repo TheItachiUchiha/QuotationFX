@@ -216,7 +216,7 @@
 }
 
 .text-field {
-    -fx-skin: "com.sun.javafx.scene.control.skin.TextFieldSkin";
+    /*-fx-skin: "com.sun.javafx.scene.control.skin.TextFieldSkin";*/
     -fx-background-color: linear-gradient(to bottom, #898989 0%, #ACACAC 100%), #DCDCDC, #F2F2F2, #FFFFFF;
 
     -fx-background-insets: 0, 1 1 1 1, 2 1 1 1, 3 2 1 2;
