@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -27,9 +28,11 @@ public class HelpCompanyDetailsController implements Initializable {
 private static final Logger LOG = LogManager.getLogger(HelpCompanyDetailsController.class);
 HelpDAO helpDAO;
 Validation validation;
+HelpVO helpVO;
 public HelpCompanyDetailsController() {
 	validation = new Validation();
 	helpDAO = new HelpDAO();
+	helpVO = new HelpVO();
 }
 
 @FXML
@@ -61,6 +64,15 @@ private Button hLogoButton;
 
 @Override
 public void initialize(URL location, ResourceBundle resources) {
+	helpVO = helpDAO.getCompanyDetails();
+	description.setWrapText(true);
+	address.setWrapText(true);
+	companyName.setText(helpVO.getName());
+	description.setText(helpVO.getDescription());
+	address.setText(helpVO.getAddress());
+	contactDetails.setText(helpVO.getContact());
+	companyLogo.setText(helpVO.getCompanyLogo().getPath());
+	homeLogo.setText(helpVO.getHomeLogo().getPath());
 	cLogoButton.setOnAction(new EventHandler<ActionEvent>() {
 	     @Override
 	     public void handle(ActionEvent event) {
