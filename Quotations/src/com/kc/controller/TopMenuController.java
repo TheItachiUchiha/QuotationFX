@@ -35,6 +35,7 @@ public class TopMenuController implements Initializable {
 	@FXML private HBox menuHbox;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		try{
 		HelpVO helpVO = new HelpVO();
 		helpVO = helpDAO.getCompanyDetails();
 		Image image = new Image("file:"+helpVO.getCompanyLogo().getPath());
@@ -47,6 +48,10 @@ public class TopMenuController implements Initializable {
 			menuHbox.getChildren().remove(1);
 			menuHbox.getChildren().remove(1);
 			menuHbox.getChildren().remove(1);
+		}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}

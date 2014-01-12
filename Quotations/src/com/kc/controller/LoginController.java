@@ -101,7 +101,7 @@ public class LoginController extends Application implements Initializable{
 			//this.primaryStage.setResizable(false);
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(
-					LoginController.class.getResource("../view/root.fxml"));
+					LoginController.class.getResource("/com/kc/view/root.fxml"));
 			login = (BorderPane) loader.load();
 			Scene scene = new Scene(this.login);
 			this.scene=scene;
@@ -129,10 +129,10 @@ public class LoginController extends Application implements Initializable{
 				password.setText("");
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
-								.getResource("../view/admin.fxml"));
+								.getResource("/com/kc/view/admin.fxml"));
 				FXMLLoader subMenuLoader = new FXMLLoader(
 						LoginController.class
-								.getResource("../view/home-admin.fxml"));
+								.getResource("/com/kc/view/home-admin.fxml"));
 				this.home = (BorderPane) loader.load();
 				BorderPane subMenu = (BorderPane) subMenuLoader.load();
 				this.home.setCenter(subMenu);
