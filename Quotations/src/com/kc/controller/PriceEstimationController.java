@@ -34,7 +34,7 @@ public class PriceEstimationController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{
 			
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-new.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-new.fxml"));
 			final BorderPane newEstimation = (BorderPane) loader.load();
 			newTab.setContent(newEstimation);
 			
@@ -46,25 +46,25 @@ public class PriceEstimationController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
-						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-new.fxml"));
+						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-new.fxml"));
 						BorderPane newEstimation = (BorderPane) loader.load();
 						newTab.setContent(newEstimation);
 					}
 					else if(t1.equals(viewTab))
 					{
-						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-view.fxml"));
+						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-view.fxml"));
 						BorderPane viewEstimation = (BorderPane) loader2.load();
 						viewTab.setContent(viewEstimation);
 					}
 					else if(t1.equals(modifyTab))
 					{
-						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/priceEstimation-modify.fxml"));
+						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-modify.fxml"));
 						BorderPane modifyEstimation = (BorderPane) loader3.load();
 						modifyTab.setContent(modifyEstimation);
 					}
 					else
 					{
-						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/enquiry-status.fxml"));
+						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-status.fxml"));
 						BorderPane status = (BorderPane) loader3.load();
 						enquiryStatus.setContent(status);
 					}

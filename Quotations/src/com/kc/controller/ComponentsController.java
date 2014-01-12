@@ -20,7 +20,7 @@ public class ComponentsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/components-create.fxml"));
+						.getResource("/com/kc/view/components-create.fxml"));
 		GridPane componentCreate = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create Component");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -37,7 +37,7 @@ public class ComponentsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/components-modify.fxml"));
+						.getResource("/com/kc/view/components-modify.fxml"));
 		BorderPane componentCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify Component");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -54,7 +54,7 @@ public class ComponentsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/components-view.fxml"));
+						.getResource("/com/kc/view/components-view.fxml"));
 		BorderPane componentCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Component");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);

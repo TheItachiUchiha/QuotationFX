@@ -297,7 +297,7 @@ public class UsersViewController implements Initializable {
                 	LOG.info("Enter : handle");
                 	try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/users-modify.fxml"));
+								.getResource("/com/kc/view/users-modify.fxml"));
 						BorderPane userModify;
 						userModify = (BorderPane) menuLoader.load();
 						userModify.setTop(new HBox());

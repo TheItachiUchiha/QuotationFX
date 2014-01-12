@@ -213,7 +213,7 @@ public class PriceEstimationViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-							.getResource("../view/priceEstimation-modify-popUp.fxml"));
+							.getResource("/com/kc/view/priceEstimation-modify-popUp.fxml"));
 					BorderPane priceEstimationModify;
 					priceEstimationModify = (BorderPane) menuLoader.load();
 					Stage modifyStage = new Stage();

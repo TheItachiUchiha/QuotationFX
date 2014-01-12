@@ -35,7 +35,7 @@ public class SalesOrderController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{
 			
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/salesOrder-new.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-new.fxml"));
 			BorderPane newSalesOrder = (BorderPane) loader.load();
 			newTab.setContent(newSalesOrder);
 			
@@ -46,19 +46,19 @@ public class SalesOrderController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
-						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/salesOrder-new.fxml"));
+						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-new.fxml"));
 						BorderPane newSalesOrder = (BorderPane) loader.load();
 						newTab.setContent(newSalesOrder);
 					}
 					else if(t1.equals(viewTab))
 					{
-						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/salesOrder-view.fxml"));
+						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-view.fxml"));
 						BorderPane viewSalesOrder = (BorderPane) loader3.load();
 						viewTab.setContent(viewSalesOrder);
 					}
 					else
 					{
-						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/salesOrder-modify.fxml"));
+						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-modify.fxml"));
 						BorderPane modifySalesOrder = (BorderPane) loader2.load();
 						modifyTab.setContent(modifySalesOrder);
 					}
@@ -73,10 +73,10 @@ public class SalesOrderController implements Initializable {
 
 			
 			
-			FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/salesOrder-modify.fxml"));
+			FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-modify.fxml"));
 			BorderPane modifySalesOrder = (BorderPane) loader2.load();
 			modifyTab.setContent(modifySalesOrder);
-			FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/salesOrder-view.fxml"));
+			FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-view.fxml"));
 			BorderPane viewSalesOrder = (BorderPane) loader3.load();
 			viewTab.setContent(viewSalesOrder);
 		}

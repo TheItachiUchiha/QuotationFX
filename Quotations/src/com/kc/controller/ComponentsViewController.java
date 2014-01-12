@@ -424,7 +424,7 @@ public class ComponentsViewController implements Initializable {
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
                 	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/components-modify.fxml"));
+								.getResource("/com/kc/view/components-modify.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
 						componentModify.setTop(new HBox());

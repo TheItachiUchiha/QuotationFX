@@ -31,7 +31,7 @@ public class EnquiryController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{			
 			
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/enquiry-new.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-new.fxml"));
 			BorderPane newEnquiry = (BorderPane) loader.load();
 			newTab.setContent(newEnquiry);
 			
@@ -42,19 +42,19 @@ public class EnquiryController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
-						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/enquiry-new.fxml"));
+						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-new.fxml"));
 						BorderPane newEnquiry = (BorderPane) loader.load();
 						newTab.setContent(newEnquiry);
 					}
 					else if(t1.equals(viewTab))
 					{
-						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/enquiry-view.fxml"));
+						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-view.fxml"));
 						BorderPane viewEnquiry = (BorderPane) loader2.load();
 						viewTab.setContent(viewEnquiry);
 					}
 					else
 					{
-						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/enquiry-options.fxml"));
+						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-options.fxml"));
 						BorderPane optionsEnquiry = (BorderPane) loader3.load();
 						optionTab.setContent(optionsEnquiry);
 					}

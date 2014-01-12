@@ -19,7 +19,7 @@ public class BackupController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/backup-import.fxml"));
+						.getResource("/com/kc/view/backup-import.fxml"));
 		GridPane importb = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Import");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -37,7 +37,7 @@ public class BackupController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/backup-export.fxml"));
+						.getResource("/com/kc/view/backup-export.fxml"));
 		GridPane exportb = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Export");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);

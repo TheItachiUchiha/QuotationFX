@@ -26,7 +26,7 @@ public class QuotationEmailController implements Initializable  {
 		
 		try
 		{
-		FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("../view/quotation-email-send.fxml"));
+		FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-send.fxml"));
 		BorderPane send = (BorderPane) loadernew.load();
 		sendQuotTab.setContent(send);
 		tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -37,13 +37,13 @@ public class QuotationEmailController implements Initializable  {
 				try{
 					if(newValue.equals(sendQuotTab))
 					{
-						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("../view/quotation-email-send.fxml"));
+						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-send.fxml"));
 						BorderPane send = (BorderPane) loadernew.load();
 						sendQuotTab.setContent(send);
 					}
 					else if(newValue.equals(resendQuotTab))
 					{
-						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("../view/quotation-email-resend.fxml"));
+						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-resend.fxml"));
 						BorderPane resend = (BorderPane) loadernew.load();
 						resendQuotTab.setContent(resend);
 					}

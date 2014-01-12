@@ -330,7 +330,7 @@ public class ProductViewController implements Initializable{
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
                 	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/products-modify-popup.fxml"));
+								.getResource("/com/kc/view/products-modify-popup.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
 						Stage modifyStage = new Stage();

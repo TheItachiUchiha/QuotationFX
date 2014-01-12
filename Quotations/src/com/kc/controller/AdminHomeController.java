@@ -56,7 +56,7 @@ public class AdminHomeController implements Initializable {
 	public void priceEstimation()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/priceEstimation.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation.fxml"));
 			BorderPane price = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(price);
@@ -68,7 +68,7 @@ public class AdminHomeController implements Initializable {
 	public void enquiry()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/enquiry.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry.fxml"));
 			BorderPane enquiry = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(enquiry);
@@ -80,7 +80,7 @@ public class AdminHomeController implements Initializable {
 	public void quotationPreparation()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/quotation.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation.fxml"));
 			BorderPane quotation = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
@@ -92,7 +92,7 @@ public class AdminHomeController implements Initializable {
 	public void salesOrder()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/salesOrder.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder.fxml"));
 			BorderPane quotation = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
@@ -104,7 +104,7 @@ public class AdminHomeController implements Initializable {
 	public void statusReminder()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/statusReminder.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/statusReminder.fxml"));
 			BorderPane quotation = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
@@ -116,7 +116,7 @@ public class AdminHomeController implements Initializable {
 	public void serviceRegistry()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/serviceRegistry.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/serviceRegistry.fxml"));
 			BorderPane service = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(service);
@@ -128,7 +128,7 @@ public class AdminHomeController implements Initializable {
 	public void reports()
 	{
 		try{
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/report.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/report.fxml"));
 			BorderPane report = (BorderPane) loader.load();
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(report);

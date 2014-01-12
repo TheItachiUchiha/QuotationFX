@@ -39,7 +39,7 @@ public class HelpController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/help-companyDetails.fxml"));
+						.getResource("/com/kc/view/help-companyDetails.fxml"));
 		GridPane companyDetails = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Company Details");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -55,7 +55,7 @@ public class HelpController implements Initializable {
 		try{
 			FXMLLoader menuLoader = new FXMLLoader(
 					LoginController.class
-							.getResource("../view/help-about.fxml"));
+							.getResource("/com/kc/view/help-about.fxml"));
 			GridPane about = (GridPane) menuLoader.load();
 			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("About");
 			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);

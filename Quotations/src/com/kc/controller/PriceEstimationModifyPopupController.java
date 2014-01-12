@@ -442,7 +442,7 @@ public class PriceEstimationModifyPopupController implements Initializable {
 		LOG.info("Enter : addComponent");
 		try{
 			final FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-					.getResource("../view/product-component-add.fxml"));
+					.getResource("/com/kc/view/product-component-add.fxml"));
 			BorderPane componentadd;
 			Stage componentAddStage = new Stage();
 			stage = componentAddStage;

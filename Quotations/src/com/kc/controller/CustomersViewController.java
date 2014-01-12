@@ -387,7 +387,7 @@ public class CustomersViewController implements Initializable {
 					LOG.info("Enter : handle");
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/customers-modify.fxml"));
+								.getResource("/com/kc/view/customers-modify.fxml"));
 						BorderPane customerModify;
 						customerModify = (BorderPane) menuLoader.load();
 						customerModify.setTop(new HBox());

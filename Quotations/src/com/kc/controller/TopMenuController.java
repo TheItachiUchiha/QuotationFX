@@ -64,7 +64,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/home-admin.fxml"));
+						.getResource("/com/kc/view/home-admin.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -79,7 +79,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/products-home.fxml"));
+						.getResource("/com/kc/view/products-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -94,7 +94,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/components-home.fxml"));
+						.getResource("/com/kc/view/components-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -109,7 +109,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/users-home.fxml"));
+						.getResource("/com/kc/view/users-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -124,7 +124,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/customers-home.fxml"));
+						.getResource("/com/kc/view/customers-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -139,7 +139,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/backup-home.fxml"));
+						.getResource("/com/kc/view/backup-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}
@@ -154,7 +154,7 @@ public class TopMenuController implements Initializable {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
-						.getResource("../view/help-home.fxml"));
+						.getResource("/com/kc/view/help-home.fxml"));
 		BorderPane subMenu = (BorderPane) menuLoader.load();
 		LoginController.home.setCenter(subMenu);
 		}

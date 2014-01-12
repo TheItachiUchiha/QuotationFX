@@ -577,7 +577,7 @@ public class EnquiryViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-							.getResource("../view/enquiry-modify.fxml"));
+							.getResource("/com/kc/view/enquiry-modify.fxml"));
 					BorderPane enquiryModify;
 					enquiryModify = (BorderPane) menuLoader.load();
 					Stage modifyStage = new Stage();
@@ -616,7 +616,7 @@ public class EnquiryViewController implements Initializable {
 				public void handle(ActionEvent paramT) {
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-							.getResource("../view/enquiry-view-popup.fxml"));
+							.getResource("/com/kc/view/enquiry-view-popup.fxml"));
 					BorderPane enquiryView;
 					enquiryView = (BorderPane) menuLoader.load();
 					viewStage = new Stage();
@@ -658,7 +658,7 @@ public class EnquiryViewController implements Initializable {
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
                 	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/components-modify.fxml"));
+								.getResource("/com/kc/view/components-modify.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
 						componentModify.setTop(new HBox());

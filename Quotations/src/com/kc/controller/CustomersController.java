@@ -19,7 +19,7 @@ public class CustomersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/customers-create.fxml"));
+						.getResource("/com/kc/view/customers-create.fxml"));
 		GridPane customerCreate = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create Customer");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -36,7 +36,7 @@ public class CustomersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/customers-modify.fxml"));
+						.getResource("/com/kc/view/customers-modify.fxml"));
 		BorderPane customerCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify Customer");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -53,7 +53,7 @@ public class CustomersController {
 		try{
 			FXMLLoader menuLoader = new FXMLLoader(
 					this.getClass()
-							.getResource("../view/customers-view.fxml"));
+							.getResource("/com/kc/view/customers-view.fxml"));
 			BorderPane customerCreate = (BorderPane) menuLoader.load();
 			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Customers");
 			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);

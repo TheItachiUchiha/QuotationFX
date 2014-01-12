@@ -20,7 +20,7 @@ public class UsersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/users-create.fxml"));
+						.getResource("/com/kc/view/users-create.fxml"));
 		GridPane userCreate = (GridPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create User");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -37,7 +37,7 @@ public class UsersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/users-modify.fxml"));
+						.getResource("/com/kc/view/users-modify.fxml"));
 		BorderPane userCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify User");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -56,7 +56,7 @@ public class UsersController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/users-view.fxml"));
+						.getResource("/com/kc/view/users-view.fxml"));
 		BorderPane userCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Users");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);

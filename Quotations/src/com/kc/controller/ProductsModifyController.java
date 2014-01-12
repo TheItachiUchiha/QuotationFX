@@ -297,7 +297,7 @@ public class ProductsModifyController implements Initializable {
 		LOG.info("Enter : addComponent");
 		try{
 			final FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-					.getResource("../view/product-component-add.fxml"));
+					.getResource("/com/kc/view/product-component-add.fxml"));
 			BorderPane componentadd;
 			Stage componentAddStage = new Stage();
 			stage = componentAddStage;
@@ -446,7 +446,7 @@ public class ProductsModifyController implements Initializable {
                 public void handle(ActionEvent t) {
                 	LOG.info("Enter : handle");
                 	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("../view/components-modify.fxml"));
+								.getResource("/com/kc/view/components-modify.fxml"));
 						BorderPane componentModify;
 						componentModify = (BorderPane) menuLoader.load();
 						componentModify.setTop(new HBox());

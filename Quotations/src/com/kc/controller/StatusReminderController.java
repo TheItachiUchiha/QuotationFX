@@ -35,7 +35,7 @@ public class StatusReminderController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{
 			
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/reminder.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/reminder.fxml"));
 			BorderPane newreminder = (BorderPane) loader.load();
 			reminderTab.setContent(newreminder);
 			tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
@@ -47,19 +47,19 @@ public class StatusReminderController implements Initializable {
 					try{
 							if(newValue.equals(reminderTab))
 							{
-								FXMLLoader loader = new FXMLLoader(this.getClass().getResource("../view/reminder.fxml"));
+								FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/reminder.fxml"));
 								BorderPane newreminder = (BorderPane) loader.load();
 								reminderTab.setContent(newreminder);
 							}
 							else if(newValue.equals(salesStatusTab))
 							{
-								FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("../view/salesStatus.fxml"));
+								FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesStatus.fxml"));
 								BorderPane SalesStatus = (BorderPane) loader2.load();
 								salesStatusTab.setContent(SalesStatus);
 							}
 							else if(newValue.equals(optionTab))
 							{
-								FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("../view/statusReminder-option.fxml"));
+								FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/statusReminder-option.fxml"));
 								BorderPane option = (BorderPane) loader3.load();
 								optionTab.setContent(option);
 							}

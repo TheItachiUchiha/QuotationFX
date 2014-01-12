@@ -17,7 +17,7 @@ public class ProductsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/products-create.fxml"));
+						.getResource("/com/kc/view/products-create.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Create Product");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -34,7 +34,7 @@ public class ProductsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/products-modify.fxml"));
+						.getResource("/com/kc/view/products-modify.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Modify Product");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
@@ -52,7 +52,7 @@ public class ProductsController {
 		try{
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
-						.getResource("../view/products-view.fxml"));
+						.getResource("/com/kc/view/products-view.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("View Products");
 		((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
