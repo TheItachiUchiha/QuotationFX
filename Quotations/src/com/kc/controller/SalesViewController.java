@@ -1,6 +1,7 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -11,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
+import com.kc.dao.SalesDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
@@ -32,21 +34,26 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class SalesViewController {
 
 	private static final Logger LOG = LogManager.getLogger(SalesViewController.class);
 	private EnquiryDAO enquiryDAO;
+	private SalesDAO salesDAO;
 	private CustomersDAO customersDAO;
 	private Validation validation;
 	
 	public SalesViewController()
 	{
+		salesDAO = new SalesDAO();
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
@@ -212,8 +219,15 @@ private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 
 			@Override
 			public void handle(ActionEvent t) {
-				//deleteSales(ButtonCell.this.getTableView().getItems()
-					//	.get(ButtonCell.this.getIndex()));
+				try
+				{
+					deleteSales(ButtonCell.this.getTableView().getItems()
+						.get(ButtonCell.this.getIndex()));
+					fillTable();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
@@ -227,6 +241,23 @@ private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 			box.getChildren().addAll(cellDeleteButton);
 			setGraphic(box);
 		}
+	}
+}
+public void deleteSales(EnquiryViewVO enquiryViewVO) throws Exception
+{
+	LOG.info("Enter : deleteSales");
+	try{
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+				    "Do you want to delete selected Sales Order", "Confirm", "Delete Sales Order", DialogOptions.OK_CANCEL);
+			if(response.equals(DialogResponse.OK))
+			{
+				salesDAO.deleteSales(enquiryViewVO.getId());
+			}
+			LOG.info("Exit : deleteSales");
+	}
+	catch(SQLException s)
+	{
+		s.printStackTrace();
 	}
 }
     

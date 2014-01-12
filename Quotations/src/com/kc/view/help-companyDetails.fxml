@@ -36,7 +36,7 @@
     <TextField fx:id="contactDetails" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
       <children>
-        <TextField id="contactDetails" fx:id="companyLogo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" />
+        <TextField id="contactDetails" fx:id="companyLogo" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" />
         <Button fx:id="cLogoButton" contentDisplay="TOP" mnemonicParsing="false" text="Browse">
           <font>
             <Font size="12.0" fx:id="x3" />
@@ -46,7 +46,7 @@
     </HBox>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
       <children>
-        <TextField id="contactDetails" fx:id="homeLogo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" />
+        <TextField id="contactDetails" fx:id="homeLogo" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" />
         <Button fx:id="hLogoButton" contentDisplay="TOP" font="$x3" mnemonicParsing="false" text="Browse" />
       </children>
     </HBox>

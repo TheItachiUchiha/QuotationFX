@@ -12,7 +12,9 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.util.DBConnector;
 
 public class SalesDAO {
@@ -96,6 +98,22 @@ public class SalesDAO {
 			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=? where ID=?");
 			preparedStatement.setString(1, date);
 			preparedStatement.setInt(2, id);
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+	public void deleteSales(int id) throws Exception
+	{
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=? where ID=?");
+			preparedStatement.setString(1, CommonConstants.NA);
+			preparedStatement.setString(2, "N");
+			preparedStatement.setInt(3, id);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
