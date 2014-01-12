@@ -552,9 +552,9 @@ public class EnquiryViewController implements Initializable {
 	
 	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 	       
-		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
-		Image buttonViewImage = new Image(getClass().getResourceAsStream("../style/view.png"));
-		Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("/com/kc/style/delete.png"));
+		Image buttonViewImage = new Image(getClass().getResourceAsStream("/com/kc/style/view.png"));
+		Image buttonEditImage = new Image(getClass().getResourceAsStream("/com/kc/style/edit.png"));
 		final Button cellViewButton = new Button("", new ImageView(buttonViewImage));
 		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
 		final Button cellEditButton = new Button("", new ImageView(buttonEditImage));

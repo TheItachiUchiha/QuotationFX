@@ -186,7 +186,7 @@ public class ServiceRegistyViewController implements Initializable  {
 	
 	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 	       
-		Image buttonViewImage = new Image(getClass().getResourceAsStream("../style/view.png"));
+		Image buttonViewImage = new Image(getClass().getResourceAsStream("/com/kc/style/view.png"));
 		final Button cellViewButton = new Button("", new ImageView(buttonViewImage));
 		
         ButtonCell(){

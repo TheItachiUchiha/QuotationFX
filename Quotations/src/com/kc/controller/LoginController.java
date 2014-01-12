@@ -142,7 +142,7 @@ public class LoginController extends Application implements Initializable{
 				primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
 			    primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
 				this.primaryStage.setScene(scene);
-				this.primaryStage.setResizable(true);
+				//this.primaryStage.setResizable(true);
 				sendEmails();
 			}
 			else
@@ -178,7 +178,7 @@ public class LoginController extends Application implements Initializable{
 	    layout.setVgap(15);
 	    layout.getStylesheets().add(
 	            getClass().getResource(
-	                "../style/gui.css"
+	                "/com/kc/style/gui.css"
 	            ).toExternalForm()
 	        );
 	    Label label = new Label("Sending Email to : ");

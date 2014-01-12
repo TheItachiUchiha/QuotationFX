@@ -357,9 +357,9 @@ public class CustomersViewController implements Initializable {
 	private class ButtonCell extends TableCell<CustomersVO, Boolean> {
 
 		Image buttonDeleteImage = new Image(getClass().getResourceAsStream(
-				"../style/delete.png"));
+				"/com/kc/style/delete.png"));
 		Image buttonEditImage = new Image(getClass().getResourceAsStream(
-				"../style/edit.png"));
+				"/com/kc/style/edit.png"));
 		final Button cellDeleteButton = new Button("", new ImageView(
 				buttonDeleteImage));
 		final Button cellEditButton = new Button("", new ImageView(
