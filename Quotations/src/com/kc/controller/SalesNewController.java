@@ -145,6 +145,24 @@ public class SalesNewController {
     		enquiryList = salesDAO.getListOfEnquiresForSales();
     		customerList = customersDAO.getCustomers();
     		enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+    		referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					
+					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
+					{
+						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
+						{
+							SalesNewController.this.enquiryViewVO = enquiryViewVO;
+							break;
+						}
+					}
+					
+				}
+			});
     		
     		for(EnquiryViewVO enquiryViewVO : enquiryViewList)
     		{
@@ -194,7 +212,7 @@ public class SalesNewController {
 										ecustomerFile.setText(enquiryViewVO.getCustomerFile());
 										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
 										enquiryGrid.setVisible(true);
-										SalesNewController.this.enquiryViewVO = enquiryViewVO;
+										//SalesNewController.this.enquiryViewVO = enquiryViewVO;
 										break;
 									}
 								}

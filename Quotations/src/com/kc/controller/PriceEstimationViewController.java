@@ -80,7 +80,7 @@ public class PriceEstimationViewController implements Initializable {
 	
     private ObservableList<String> monthList = FXCollections.observableArrayList();
     private ObservableList<String> yearList = FXCollections.observableArrayList();
-	private ObservableList<String> refList = FXCollections.observableArrayList();
+	private ObservableList<EnquiryViewVO> refList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
@@ -149,7 +149,7 @@ public class PriceEstimationViewController implements Initializable {
 			{
 				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
 				{
-					refList.add(enquiryVO.getReferenceNo());
+					refList.add(enquiryVO);
 				}
 			}
 			if(refList.isEmpty())
@@ -159,7 +159,7 @@ public class PriceEstimationViewController implements Initializable {
 			}
 			else
 			{
-				priceEstimationTable.setItems(enquiryViewList);
+				priceEstimationTable.setItems(refList);
 				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
 				productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
 				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));

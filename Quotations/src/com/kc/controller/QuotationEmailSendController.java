@@ -336,7 +336,7 @@ public class QuotationEmailSendController implements Initializable {
 										ecity.setText(enquiryViewVO.getCity());
 										ecustomerDocument.setText(enquiryViewVO.getCustomerFile());
 										epurchasePeriod.setText(enquiryViewVO.getPurchasePeriod());
-										QuotationEmailSendController.this.enquiryViewVO = enquiryViewVO;
+										//QuotationEmailSendController.this.enquiryViewVO = enquiryViewVO;
 									}
 								}
 								//flag=1;

@@ -767,7 +767,7 @@ public class PriceEstimationModifyController implements Initializable{
 	private class ButtonCell extends TableCell<ComponentsVO, Boolean> {
 
 		Image buttonDeleteImage = new Image(getClass().getResourceAsStream(
-				"../style/delete.png"));
+				"/com/kc/style/delete.png"));
 		final Button cellDeleteButton = new Button("", new ImageView(
 				buttonDeleteImage));
 		ButtonCell() {

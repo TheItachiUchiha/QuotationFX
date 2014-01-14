@@ -417,7 +417,7 @@ public class ProductsModifyController implements Initializable {
 	
 	private class ButtonCell extends TableCell<ComponentsVO, Boolean> {
 	       
-		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("../style/delete.png"));
+		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("/com/kc/style/delete.png"));
 		//Image buttonEditImage = new Image(getClass().getResourceAsStream("../style/edit.png"));
 		final Button cellDeleteButton = new Button("", new ImageView(buttonDeleteImage));
 		//final Button cellEditButton = new Button("", new ImageView(buttonEditImage));

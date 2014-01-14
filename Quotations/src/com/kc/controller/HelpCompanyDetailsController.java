@@ -102,20 +102,37 @@ public void initialize(URL location, ResourceBundle resources) {
 	{
 		try
 		{
-			HelpVO helpVO = new HelpVO();
-			helpVO.setName(companyName.getText());
-			helpVO.setDescription(description.getText());
-			helpVO.setAddress(address.getText());
-			helpVO.setContact(contactDetails.getText());
-			helpVO.setCompanyLogo(new File (companyLogo.getText()));
-			helpVO.setHomeLogo(new File (homeLogo.getText()));
-			
-			helpDAO.updateCompanyDetails(helpVO);
-			
-			message.setText(CommonConstants.CONF_SAVED);
-			message.getStyleClass().remove("failure");
-			message.getStyleClass().add("success");
-			message.setVisible(true);
+			if(validation.isEmpty(companyName, contactDetails, companyLogo,homeLogo))
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(description.getText()==""||address.getText()=="")
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else
+			{
+				HelpVO helpVO = new HelpVO();
+				helpVO.setName(companyName.getText());
+				helpVO.setDescription(description.getText());
+				helpVO.setAddress(address.getText());
+				helpVO.setContact(contactDetails.getText());
+				helpVO.setCompanyLogo(new File (companyLogo.getText()));
+				helpVO.setHomeLogo(new File (homeLogo.getText()));
+				
+				helpDAO.updateCompanyDetails(helpVO);
+				
+				message.setText(CommonConstants.CONF_SAVED);
+				message.getStyleClass().remove("failure");
+				message.getStyleClass().add("success");
+				message.setVisible(true);
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
