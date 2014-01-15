@@ -412,6 +412,7 @@ public class PriceEstimationModifyController implements Initializable{
 								fillComponentTable();
 								marginValue.setText(String.valueOf(enquiryViewVO.getMargin()));
 								totalrevenue.setText(String.valueOf(enquiryViewVO.getTotalRevenue()));
+								totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
 								if(enquiryViewVO.getEnquiryCustomerType().equalsIgnoreCase("D"))
 								{
 									dealerRadio.setSelected(true);
@@ -420,6 +421,7 @@ public class PriceEstimationModifyController implements Initializable{
 								{
 									endUserRadio.setSelected(true);
 								}
+								break;
 							}
 							catch (Exception e) {
 								e.printStackTrace();

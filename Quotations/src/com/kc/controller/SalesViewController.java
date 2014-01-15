@@ -223,6 +223,7 @@ private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 				{
 					deleteSales(ButtonCell.this.getTableView().getItems()
 						.get(ButtonCell.this.getIndex()));
+					salesOrderTable.getItems().clear();
 					fillTable();
 				}
 				catch (Exception e) {

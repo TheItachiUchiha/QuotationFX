@@ -477,6 +477,7 @@ public class ReportController implements Initializable {
 			}
 			else if(reportTypeCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Custom Report"))
 			{
+				tile.getChildren().clear();
 				if(customTypeCombo.getSelectionModel().getSelectedIndex()==-1)
 				{
 					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_TYPE);

@@ -262,7 +262,7 @@ public class ComponentsViewController implements Initializable {
 	{
 		LOG.info("Enter : fillTableFromData");
 		try{
-			
+			componentTable.getItems().clear();
 			String tempString = keyword.getText();
 			if(combo.getSelectionModel().getSelectedItem().equals("Component Category"))
 			{
