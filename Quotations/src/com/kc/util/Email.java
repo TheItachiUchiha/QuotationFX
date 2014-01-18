@@ -32,7 +32,7 @@ public class Email extends Task
 	{}
 	public Email(Map<String, String> data)
 	{
-		data = new HashMap<String, String>();
+		this.data = new HashMap<String, String>();
 		this.data = data;
 	}
 	public void sendEmailFromGmail(Map<String, String> data)
