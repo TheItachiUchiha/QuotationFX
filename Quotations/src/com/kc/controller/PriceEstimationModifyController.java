@@ -861,7 +861,7 @@ public class PriceEstimationModifyController implements Initializable{
 						endUserPriceTotal.setText(String.valueOf(endUserPriceValue));
 						dealerPriceTotal.setText(String.valueOf(dealerPriceValue));
 						if(!marginValue.getText().equals(""))
-							totalProfit.setText(String.valueOf(dealerPriceValue + (Double.parseDouble(marginValue.getText()) * dealerPriceValue)));
+							totalProfit.setText(String.valueOf((Double.parseDouble(totalrevenue.getText()))-costPriceValue));
 	              }
 	          }
 	      }
@@ -869,7 +869,7 @@ public class PriceEstimationModifyController implements Initializable{
 	      private void createTextField() {
 	          textField = new TextField();
 	          validation.allowDigit(textField);
-	          //textField.setText(getString());
+	          //textField.setTextssss(getString());
 	          //textField.setText("0");
 	          textField.setMinWidth(this.getWidth() - this.getGraphicTextGap()*2);
 	          
