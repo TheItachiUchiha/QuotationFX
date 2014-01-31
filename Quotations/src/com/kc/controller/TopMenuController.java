@@ -31,11 +31,14 @@ public class TopMenuController implements Initializable {
 	@FXML
 	private Label companyLable;
 	@FXML
+	private Label currentUser;
+	@FXML
 	private ImageView comLogo;
 	@FXML private HBox menuHbox;
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try{
+			currentUser.setText("Welcome "+LoginController.currentUser);
 		HelpVO helpVO = new HelpVO();
 		helpVO = helpDAO.getCompanyDetails();
 		Image image = new Image("file:"+helpVO.getCompanyLogo().getPath());

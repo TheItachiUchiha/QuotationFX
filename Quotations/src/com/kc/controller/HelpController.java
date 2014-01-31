@@ -31,8 +31,22 @@ public class HelpController implements Initializable {
 		{
 			companyVBox.getChildren().remove(1);
 			companyVBox.getChildren().remove(1);
+			companyVBox.getChildren().remove(1);
+			companyVBox.getChildren().remove(1);
 		}
 		
+	}
+	public void employees()
+	{
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees.fxml"));
+			BorderPane employe = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(employe);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	public void companyDetails()
 	{
@@ -46,7 +60,7 @@ public class HelpController implements Initializable {
 		((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(companyDetails);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		
 	}
@@ -62,7 +76,7 @@ public class HelpController implements Initializable {
 			((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(about);
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 			
 	}

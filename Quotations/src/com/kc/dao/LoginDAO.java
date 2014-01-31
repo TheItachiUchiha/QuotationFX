@@ -35,6 +35,7 @@ public class LoginDAO
 				LoginController.modulesVO.setSalesOrderManagement(resultSet.getString("salesorder"));
 				LoginController.modulesVO.setStatusReminder(resultSet.getString("statusReminder"));
 				LoginController.userType = resultSet.getString("usertype");
+				LoginController.currentUser = resultSet.getString("name");
 				status = true;
 			}
 		}

@@ -55,6 +55,8 @@ public class LoginController extends Application implements Initializable{
 	
 	public static String userType;
 	
+	public static String currentUser;
+	
 	public static TextField getUsername()
 	{
 		return username;

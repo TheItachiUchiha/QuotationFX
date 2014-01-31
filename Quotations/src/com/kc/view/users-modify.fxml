@@ -20,18 +20,18 @@
         <GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-1.0" prefHeight="504.0" prefWidth="661.0">
           <!-- TODO Add Nodes -->
           <children>
-            <Label prefHeight="35.0" prefWidth="115.0" text="Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+            <Label prefHeight="35.0" prefWidth="115.0" text="Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <font>
                 <Font name="Calibri" size="15.0" fx:id="x1" />
               </font>
             </Label>
-            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Designation" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Mobile Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label font="$x1" prefHeight="34.999900000002526" prefWidth="115.0" text="Username" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Password" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Label font="$x1" prefHeight="41.0" prefWidth="115.0" text="User Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Module" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label font="$x1" prefHeight="41.0" prefWidth="115.0" text="Permissions" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Designation *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Mobile Number *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label font="$x1" prefHeight="34.999900000002526" prefWidth="115.0" text="Username *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Password *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label font="$x1" prefHeight="41.0" prefWidth="115.0" text="User Type *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Module *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label font="$x1" prefHeight="41.0" prefWidth="115.0" text="Permissions *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <TextField fx:id="name" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <TextField fx:id="designation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="mobileNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />

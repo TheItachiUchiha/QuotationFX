@@ -13,11 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import javax.imageio.ImageIO;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.model.ComponentsVO;
+import com.kc.model.CustomersVO;
+import com.kc.model.EmployeeVO;
 import com.kc.model.HelpVO;
 import com.kc.util.DBConnector;
 
@@ -106,5 +112,98 @@ public class HelpDAO {
 		LOG.info("Exit : getCompanyDetails");
 		return helpVO;
 	}
-
+	public void saveEmployee(EmployeeVO employeeVO) throws Exception
+	{
+		LOG.info("Enter : saveEmployee");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("INSERT INTO employee(name,designation,mobileno,address,rating) VALUES(?, ?, ?, ?, ?)");
+			preparedStatement.setString(1, employeeVO.getName());
+			preparedStatement.setString(2, employeeVO.getDesignation());
+			preparedStatement.setString(3, employeeVO.getMobileNo());
+			preparedStatement.setString(4, employeeVO.getAddress());
+			preparedStatement.setString(5, employeeVO.getServiceRating());
+						
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : saveEmployee");
+	}
+	public ObservableList<EmployeeVO> getEmployees() throws SQLException
+	{
+		LOG.info("Enter : getEMployees");
+		ObservableList<EmployeeVO> listOfCustomers = FXCollections.observableArrayList();
+		try{
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM employee");
+			
+			while(resultSet.next())
+			{
+				EmployeeVO employeeVO = new EmployeeVO();
+				employeeVO.setId(resultSet.getInt(1));
+				employeeVO.setName(resultSet.getString(2));
+				employeeVO.setDesignation(resultSet.getString(3));
+				employeeVO.setMobileNo(resultSet.getString(4));
+				employeeVO.setAddress(resultSet.getString(5));
+				employeeVO.setServiceRating(resultSet.getString(6));
+						
+				listOfCustomers.add(employeeVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getEMployees");
+		return listOfCustomers;
+	}
+	public void updateEmployee(EmployeeVO employeeVO)
+	{
+		LOG.info("Enter : updateEmployee");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE employee SET name=?,designation=?,mobileno=?,address=?,rating=? where ID=?");
+			
+			preparedStatement.setString(1, employeeVO.getName());
+			preparedStatement.setString(2, employeeVO.getDesignation());
+			preparedStatement.setString(3, employeeVO.getMobileNo());
+			preparedStatement.setString(4, employeeVO.getAddress());
+			preparedStatement.setString(5, employeeVO.getServiceRating());
+			preparedStatement.setInt(6, employeeVO.getId());
+			
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : updateEmployee");
+	}
+	public void deleteEmployees(EmployeeVO employeeVO) throws Exception {
+		LOG.info("Enter : deleteEmployees");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM employee WHERE ID=?");
+			preparedStatement.setInt(1, employeeVO.getId());
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deleteEmployees");
+	}
 }

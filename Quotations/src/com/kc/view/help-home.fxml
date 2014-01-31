@@ -24,11 +24,13 @@
               </VBox.margin>
             </Label>
             <Separator prefWidth="200.0" />
-            <ToggleButton id="companyDetails" mnemonicParsing="false" onAction="#companyDetails" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Company Details">
+            <ToggleButton id="about" mnemonicParsing="false" onAction="#employees" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Employees">
               <toggleGroup>
                 <ToggleGroup fx:id="helpSubmenu" />
               </toggleGroup>
             </ToggleButton>
+            <Separator prefWidth="200.0" />
+            <ToggleButton id="companyDetails" mnemonicParsing="false" onAction="#companyDetails" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Company Details" toggleGroup="$helpSubmenu" />
             <Separator prefWidth="200.0" />
             <ToggleButton id="about" mnemonicParsing="false" onAction="#about" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="About" toggleGroup="$helpSubmenu" />
             <Separator prefWidth="200.0" />
