@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -10,35 +11,30 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationNewController">
   <!-- TODO Add Nodes -->
   <left>
-    <GridPane id="standardGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="242.0" prefWidth="655.0" visible="true">
+    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="655.0" visible="false">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="22.0" prefWidth="122.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="24.0" prefWidth="122.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <Label prefHeight="23.0" prefWidth="122.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
         <Label prefHeight="24.0" prefWidth="122.0" text="Estimated Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-        <TextField id="customerName" fx:id="referenceNo" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField fx:id="customerName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField id="companyName" fx:id="productName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField id="companyName" fx:id="estimatedPrice" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="CENTER">
           <children>
-            <Button mnemonicParsing="false" text="Create Quotation" />
-            <Label id="messageQuotation" fx:id="messageNewQuotation" prefWidth="185.0" text="Label" />
-          </children>
-        </VBox>
-        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
-          <children>
-            <Button mnemonicParsing="false" text="Save &amp; Clear" />
+            <Button mnemonicParsing="false" onAction="#createQuotation" styleClass="button-style" text="Create Quotation" />
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="200.0" text="" />
           </children>
         </VBox>
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="5">
           <children>
-            <Button mnemonicParsing="false" text="Open Quotation" />
+            <Button fx:id="openQuotation" mnemonicParsing="false" styleClass="button-style" text="Open Quotation" visible="false" />
           </children>
         </VBox>
+        <TextField id="customerName" fx:id="referenceNo" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="customerName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField id="companyName" fx:id="productName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField id="companyName" fx:id="estimatedPrice" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <Label prefHeight="24.0" prefWidth="122.0" text="Price Estimation Date" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-        <TextField id="customerName" fx:id="priceEstimationDate" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <TextField id="customerName" fx:id="priceEstimationDate" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
       </children>
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="16.81289674127497" prefWidth="110.0" />
@@ -53,7 +49,6 @@
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
         <Insets left="10.0" top="10.0" />
@@ -61,17 +56,17 @@
     </GridPane>
   </left>
   <right>
-    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="386.0" prefWidth="432.0" visible="true">
+    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="432.0" visible="false">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="19.0" prefWidth="161.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
         <Label prefHeight="35.0" prefWidth="162.0" text="Customer Requirements" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
         <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Refered by" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-        <TextArea id="customerRequirement" fx:id="ecustomerRequirements" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <TextField id="customerName" fx:id="ereferedBy" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <TextField id="customerName" fx:id="ecity" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <TextField id="companyName" fx:id="edateOfEnquiry" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-        <TextField id="companyName" fx:id="epurchasePeriod" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextArea id="customerRequirement" fx:id="ecustomerRequirements" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField id="customerName" fx:id="ereferedBy" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField id="customerName" fx:id="ecity" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <TextField id="companyName" fx:id="edateOfEnquiry" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextField id="companyName" fx:id="epurchasePeriod" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
         <Label prefHeight="23.0" prefWidth="161.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label minWidth="3.9998779296875" prefHeight="19.0" prefWidth="161.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <Label prefHeight="24.0" prefWidth="161.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
@@ -80,19 +75,15 @@
         <Label prefHeight="23.0" prefWidth="162.0" text="Date Of Enquiry" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
         <Label prefHeight="24.0" prefWidth="161.0" text="Customer Document" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
-        <Label prefHeight="24.0" prefWidth="162.0" text="Price Estimation Done" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
-        <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Quotation Preparation Done" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
-        <TextField id="customerName" fx:id="ereferenceNo" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField id="customerName" fx:id="ecustomerName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField id="customerName" fx:id="eproductName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField id="customerName" fx:id="ecustomerType" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField id="customerName" fx:id="ecompanyName" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <TextField id="emailId" fx:id="epriceEstimation" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
-        <TextField id="emailId" fx:id="equotationPreparation" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+        <TextField id="customerName" fx:id="ereferenceNo" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField id="customerName" fx:id="ecustomerName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField id="customerName" fx:id="eproductName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField id="customerName" fx:id="ecustomerType" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField id="customerName" fx:id="ecompanyName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
           <children>
-            <TextField id="companyName" fx:id="ecustomerFile" maxWidth="-Infinity" prefWidth="200.0" />
-            <Button fx:id="viewFile" mnemonicParsing="false" text="Open" />
+            <TextField id="companyName" fx:id="ecustomerFile" editable="false" maxWidth="-Infinity" prefWidth="200.0" />
+            <Button fx:id="viewFile" mnemonicParsing="false" styleClass="button-style" text="Open" />
           </children>
         </HBox>
       </children>
@@ -112,59 +103,55 @@
         <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
         <Insets top="10.0" />
       </BorderPane.margin>
     </GridPane>
   </right>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
   <top>
     <GridPane prefHeight="72.0" prefWidth="874.0">
       <children>
-        <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
-            <Label prefHeight="20.0" prefWidth="72.0" text="Month" />
-            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="21.0" prefWidth="144.0" promptText="">
+            <Label prefHeight="20.0" prefWidth="80.0" text="Month" />
+            <ComboBox id="productCategory" fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" promptText="" styleClass="combo-style">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
               <HBox.margin>
                 <Insets />
               </HBox.margin>
             </ComboBox>
-            <Label prefHeight="20.0" prefWidth="28.0" text="Year" />
-            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+            <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+            <ComboBox id="productCategory" fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" promptText="" styleClass="combo-style">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button mnemonicParsing="false" text="Search" />
+            <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
+          <GridPane.margin>
+            <Insets left="100.0" fx:id="x1" />
+          </GridPane.margin>
         </HBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="42.0" prefWidth="874.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+        <HBox id="HBox" fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
           <children>
             <Label prefHeight="20.0" prefWidth="82.0" text="Select Ref. No." />
-            <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="">
+            <ComboBox id="productCategory" fx:id="referenceCombo" prefHeight="21.0" prefWidth="153.0" promptText="" styleClass="combo-style">
               <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
+                <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="enquiryDetails" mnemonicParsing="false" text="Enquire Details" />
-            <Button mnemonicParsing="false" text="Prepare Quotation " />
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquire Details">
+              <toggleGroup>
+                <ToggleGroup fx:id="buttonToggle" />
+              </toggleGroup>
+            </ToggleButton>
+            <Button fx:id="prepareQuotation" mnemonicParsing="false" prefWidth="126.0" styleClass="button-style" text="Prepare Quotation " />
           </children>
         </HBox>
       </children>
@@ -176,6 +163,9 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
       </rowConstraints>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
     </GridPane>
   </top>
 </BorderPane>

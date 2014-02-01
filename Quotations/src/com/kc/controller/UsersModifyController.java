@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -70,6 +71,8 @@ public class UsersModifyController implements Initializable{
     private CheckBox delete;
     @FXML
     private ComboBox<String> userType;
+    @FXML
+    private Button go;
     @FXML
 	private Label message;
 	@Override
@@ -205,6 +208,23 @@ public class UsersModifyController implements Initializable{
 						{
 							modifyHbox.setVisible(true);
 							userNameAutoFill.setDisable(true);
+							go.setDisable(true);
+							fillTextFieldValues(usersVO);
+						}	
+					}
+				}
+			});
+			go.setOnAction(new EventHandler<ActionEvent>() {
+				
+				@Override
+				public void handle(ActionEvent event) {
+					for(UsersVO usersVO: usersList)
+					{
+						if(usersVO.getName().equals(userNameAutoFill.getText()))
+						{
+							modifyHbox.setVisible(true);
+							userNameAutoFill.setDisable(true);
+							go.setDisable(true);
 							fillTextFieldValues(usersVO);
 						}	
 					}

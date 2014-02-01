@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
-<?scenebuilder-classpath-element ../../../../lib/jfx-autocomplete-textfield-0.0.1.jar?>
+<?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
 <BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryModifyPopUpController">
   <!-- TODO Add Nodes -->
@@ -33,7 +33,7 @@
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13">
           <children>
-            <Button mnemonicParsing="false" onAction="#modifyEnquiry" text="Save" />
+            <Button mnemonicParsing="false" onAction="#modifyEnquiry" styleClass="button-style" text="Save" />
             <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="317.0" text="">
               <font>
                 <Font size="15.0" />
@@ -48,7 +48,7 @@
         <AutoCompleteTextField id="email" fx:id="emailId" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <AutoCompleteTextField id="refer" fx:id="referedBy" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField fx:id="customerName" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <ComboBox fx:id="customerTypeCombo" prefHeight="21.0" prefWidth="209.0" promptText="Select Customer Type" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <ComboBox fx:id="customerTypeCombo" prefHeight="21.0" prefWidth="209.0" promptText="Select Customer Type" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="4">
           <items>
             <FXCollections fx:factory="observableArrayList">
               <String fx:value="Dealer" />
@@ -105,7 +105,7 @@
         </HBox>
         <VBox id="VBox" fx:id="productVbox" alignment="CENTER" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
           <children>
-            <ComboBox id="productCategory" fx:id="categoryCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select Product Category">
+            <ComboBox id="productCategory" fx:id="categoryCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select Product Category" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -114,7 +114,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <ComboBox id="subcategory" fx:id="subcategoryCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select SubCategory">
+            <ComboBox id="subcategory" fx:id="subcategoryCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select SubCategory" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -123,7 +123,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <ComboBox id="productName" fx:id="nameCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select Product Name">
+            <ComboBox id="productName" fx:id="nameCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select Product Name" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />

@@ -9,5 +9,22 @@
 	<classpathentry kind="lib" path="lib/AutoCompleteTextField.jar"/>
 	<classpathentry kind="lib" path="lib/commons-codec-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/java-mail-1.4.4.jar"/>
+	<classpathentry kind="lib" path="libpdf/commons-codec-1.5.jar"/>
+	<classpathentry kind="lib" path="libpdf/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="libpdf/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="libpdf/itext-2.1.7.jar"/>
+	<classpathentry kind="lib" path="libpdf/itextpdf-5.4.5.jar"/>
+	<classpathentry kind="lib" path="libpdf/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="libpdf/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="libpdf/ooxml-schemas-1.1.jar"/>
+	<classpathentry kind="lib" path="libpdf/poi-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="libpdf/poi-examples-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="libpdf/poi-excelant-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="libpdf/poi-ooxml-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="libpdf/poi-scratchpad-3.9-20121203.jar"/>
+	<classpathentry kind="lib" path="libpdf/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="libpdf/xmlbeans-2.3.0.jar"/>
+	<classpathentry kind="lib" path="libpdf/xdocreport-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-datepicker-0.0.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
