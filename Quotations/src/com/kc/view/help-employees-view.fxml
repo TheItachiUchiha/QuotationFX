@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="754.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeViewController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="779.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeViewController">
   <center>
     <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
       <children>
@@ -33,6 +33,9 @@
           </font>
         </Label>
       </children>
+      <BorderPane.margin>
+        <Insets left="30.0" top="30.0" />
+      </BorderPane.margin>
     </VBox>
   </center>
   <stylesheets>

@@ -34,7 +34,7 @@
     <TextField id="companyName" fx:id="designation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <TextField id="contactDetails" fx:id="mobileNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <TextArea fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="234.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <ComboBox fx:id="serviceRating" prefHeight="21.0" prefWidth="234.00009999999747" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <ComboBox fx:id="serviceRating" prefHeight="21.0" prefWidth="234.00009999999747" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="4">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Excelent" />

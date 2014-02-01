@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeCreateController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeCreateController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="35.0" prefWidth="115.0" text="Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -34,7 +34,7 @@
     <TextField id="companyName" fx:id="designation" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <TextField id="contactDetails" fx:id="mobileNo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="234.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
     <TextArea fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="234.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <ComboBox fx:id="serviceRating" prefHeight="21.0" prefWidth="234.00009999999747" GridPane.columnIndex="1" GridPane.rowIndex="4">
+    <ComboBox fx:id="serviceRating" prefHeight="21.0" prefWidth="234.00009999999747" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="4">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Excelent" />
@@ -51,7 +51,7 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="68.63116920152115" />
   </columnConstraints>
   <padding>
-    <Insets />
+    <Insets left="30.0" top="30.0" />
   </padding>
   <rowConstraints>
     <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />

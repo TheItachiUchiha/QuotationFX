@@ -41,8 +41,9 @@ public class HelpController implements Initializable {
 		try{
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees.fxml"));
 			BorderPane employe = (BorderPane) loader.load();
-			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
-			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(employe);
+			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).setText("Employee Details");
+			((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).setVisible(true);
+			((BorderPane)((TabPane)((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().get(1)).getTabs().get(0).getContent()).setCenter(employe);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
