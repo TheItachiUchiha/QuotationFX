@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="616.0" prefWidth="845.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationModifyPopupController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <VBox fx:id="estimationVBox" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="616.0" prefWidth="549.0" spacing="5.0" visible="true">
+      <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
+          <children>
+            <Label prefHeight="22.0" prefWidth="85.99990000000253" text="Ref. No" />
+            <TextField fx:id="referenceNo" editable="false" prefWidth="153.0" />
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
+          <children>
+            <Label prefHeight="22.0" prefWidth="85.99990000000253" text="Product Name" />
+            <TextField fx:id="productName" editable="false" prefWidth="153.0" />
+          </children>
+        </HBox>
+        <HBox id="HBox" alignment="CENTER_RIGHT" prefHeight="23.0" prefWidth="595.0" spacing="5.0">
+          <children>
+            <Button mnemonicParsing="false" onAction="#addComponent" styleClass="button-style" text="Add Component" />
+          </children>
+        </HBox>
+        <TableView fx:id="componentTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="277.0" prefWidth="595.0" styleClass="table-style">
+          <columns>
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="118.0" text="Component Name" fx:id="name" />
+            <TableColumn prefWidth="75.0" text="Category" fx:id="category" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="SubCategory" fx:id="subCategory" />
+            <TableColumn prefWidth="75.0" text="Vendor" fx:id="vendor" />
+            <TableColumn prefWidth="75.0" text="Model" fx:id="model" />
+            <TableColumn prefWidth="75.0" text="Type" fx:id="type" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="53.0" text="Size" fx:id="size" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="55.0" text="Quantity" fx:id="quantity" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="82.0" text="Cost Price" fx:id="costPrice" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="99.0" text="Dealer Price" fx:id="dealerPrice" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="98.0" text="End User Price" fx:id="endUserPrice" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Action" fx:id="action" />
+          </columns>
+        </TableView>
+        <VBox alignment="CENTER_LEFT" prefHeight="120.0" prefWidth="393.0">
+          <children>
+            <GridPane hgap="0.0" maxWidth="-Infinity" prefHeight="120.0" prefWidth="497.0">
+              <children>
+                <Label prefHeight="21.0" prefWidth="78.0" text="Cost Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                <Label prefHeight="21.0" prefWidth="78.0" text="Dealer Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+                <Label prefHeight="21.0" prefWidth="78.0" text="End User Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                <Label id="costTotal" fx:id="costPriceTotal" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                  <font>
+                    <Font name="System Bold" size="12.0" fx:id="x1" />
+                  </font>
+                </Label>
+                <Label id="de" fx:id="dealerPriceTotal" font="$x1" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label id="ensUserPriceTotal" fx:id="endUserPriceTotal" font="$x1" prefHeight="21.0" prefWidth="119.00009999999747" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label prefHeight="21.0" prefWidth="78.0" text="Margin Value" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                  <children>
+                    <TextField fx:id="marginValue" maxWidth="-Infinity" prefHeight="21.0" prefWidth="44.000099999997474" />
+                    <Label font="$x1" prefHeight="21.0" prefWidth="44.0" text="\%" />
+                  </children>
+                </HBox>
+                <Label prefHeight="21.0" prefWidth="78.0" text="Total Profit" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+                <Label id="de" fx:id="totalProfit" font="$x1" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <Label prefHeight="21.0" prefWidth="78.0" text="Total Revenue" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                <Label id="de" fx:id="totalrevenue" font="$x1" prefHeight="21.0" prefWidth="119.0" text="" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                  <children>
+                    <RadioButton fx:id="dealerRadio" mnemonicParsing="false" text="Dealer Price">
+                      <toggleGroup>
+                        <ToggleGroup fx:id="priceRadio" />
+                      </toggleGroup>
+                    </RadioButton>
+                    <RadioButton fx:id="endUserRadio" mnemonicParsing="false" text="End User Price" toggleGroup="$priceRadio" />
+                  </children>
+                </HBox>
+              </children>
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="129.0" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="108.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="87.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="193.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="24.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+          </children>
+        </VBox>
+        <VBox alignment="CENTER" prefHeight="59.0" prefWidth="393.0">
+          <children>
+            <Button id="savePriceEstimation" mnemonicParsing="false" onAction="#updatePriceEstimation" styleClass="button-style" text="Update" />
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="239.0" text="Label" visible="false" />
+          </children>
+        </VBox>
+      </children>
+      <padding>
+        <Insets left="10.0" top="10.0" />
+      </padding>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
+    </VBox>
+  </center>
+  <right>
+    <GridPane id="standardGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="442.0" visible="true">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Label prefHeight="19.0" prefWidth="162.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+        <Label prefHeight="23.0" prefWidth="161.0" text="Email Id" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Refered by" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+        <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="City" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="State" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
+        <Label prefHeight="24.0" prefWidth="161.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
+        <Label prefHeight="21.0" prefWidth="162.0" text="Customer File" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="13" />
+        <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="14" />
+        <TextArea id="customerRequirement" fx:id="eaddress" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="47.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+        <TextField id="location" fx:id="ecity" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+        <TextField id="location" fx:id="estate" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+        <TextField id="contactNumber" fx:id="econtactNumber" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
+        <TextField id="estimatePeriod" fx:id="epurchasePeriod" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+        <Label prefHeight="19.0" prefWidth="162.0" text="Enquiry Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <TextField id="location" fx:id="eenquiryType" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+          <children>
+            <TextField id="location" fx:id="ecustomerFile" alignment="TOP_LEFT" editable="false" maxWidth="-Infinity" prefWidth="209.0" />
+            <Button id="viewFile" mnemonicParsing="false" onAction="#viewFile" styleClass="button-style" text="Open" />
+          </children>
+        </HBox>
+        <TextField id="location" fx:id="ecustomerType" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <Label prefHeight="19.0" prefWidth="162.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <TextField id="location" fx:id="eproductName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label prefHeight="30.0" prefWidth="162.0" text="Requirements Description" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <TextArea id="customerRequirement" fx:id="erequirements" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="94.0" prefWidth="209.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <Label prefHeight="27.0" prefWidth="161.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <TextField id="customerName" fx:id="ecustomerName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <Label prefHeight="23.0" prefWidth="162.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+        <TextField id="companyName" fx:id="ecompanyName" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField id="companyName" fx:id="etinNumber" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <TextField id="companyName" fx:id="eemailId" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField id="companyName" fx:id="ereferedBy" editable="false" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="40.0" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="60.0" prefWidth="415.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="22.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="3.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="95.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="22.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="9.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <BorderPane.margin>
+        <Insets left="10.0" top="20.0" />
+      </BorderPane.margin>
+    </GridPane>
+  </right>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+</BorderPane>

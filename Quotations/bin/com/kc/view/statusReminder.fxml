@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane prefHeight="387.0" prefWidth="727.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.StatusReminderController">
+  <!-- TODO Add Nodes -->
+  <center>
+    <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <tabs>
+        <Tab fx:id="reminderTab" text="Reminder">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="salesStatusTab" text="Enquiry Status">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab fx:id="optionTab" text="Option">
+          <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </center>
+</BorderPane>

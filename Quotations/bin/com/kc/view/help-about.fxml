@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpAboutController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Label prefHeight="35.0" prefWidth="115.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+      <font>
+        <Font name="Calibri" size="15.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Description" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+    <Label font="$x1" prefHeight="34.0" prefWidth="115.0" text="Contact details" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+    <Label font="$x1" prefHeight="35.0" prefWidth="115.0" text="Company Logo" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+    <Label font="$x1" prefHeight="41.0" prefWidth="115.0" text="Home Page logo" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+    <Label fx:id="name" font="$x1" prefHeight="25.0" prefWidth="333.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <Label fx:id="description" font="$x1" prefHeight="25.0" prefWidth="333.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <Label fx:id="address" font="$x1" prefHeight="25.0" prefWidth="347.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <Label fx:id="contact" font="$x1" prefHeight="25.0" prefWidth="319.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <ImageView id="cmpanyLogo" fx:id="companyLogo" fitHeight="65.75" fitWidth="87.66666882422662" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <ImageView fx:id="homeLogo" fitHeight="65.75" fitWidth="87.66666666666666" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="31.749039923954612" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="68.63116920152115" />
+  </columnConstraints>
+  <padding>
+    <Insets />
+  </padding>
+  <rowConstraints>
+    <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="162.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+</GridPane>
