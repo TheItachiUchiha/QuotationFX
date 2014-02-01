@@ -51,9 +51,9 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" maxHeight="-1.0" maxWidth="368.0" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="368.0" spacing="10.0" HBox.hgrow="NEVER">
           <children>
-            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#00ff29">
+            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#14b65d">
               <font>
-                <Font size="14.0" />
+                <Font name="System Bold" size="15.0" />
               </font>
             </Label>
             <Button id="logout" maxWidth="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="RED">

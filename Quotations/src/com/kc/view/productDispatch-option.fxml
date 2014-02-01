@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.mytdev.javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="575.0" prefWidth="781.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <!-- TODO Add Nodes -->
+  <padding>
+    <Insets left="30.0" top="30.0" />
+  </padding>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+  <top>
+    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="205.0" prefWidth="442.0" visible="true">
+      <!-- TODO Add Nodes -->
+      <children>
+        <Label prefHeight="19.0" prefWidth="162.0" text="Email Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Label prefHeight="21.0" prefWidth="162.0" text="User Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefHeight="30.0" prefWidth="162.0" text="Password" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <Label prefHeight="23.0" prefWidth="161.0" text="Default Message" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
+          <children>
+            <Button mnemonicParsing="false" text="Save" />
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="239.0" text="Label" />
+          </children>
+        </VBox>
+        <TextField id="location" fx:id="emailId" editable="true" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField id="location" fx:id="username" editable="true" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <PasswordField fx:id="password" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField id="companyName" fx:id="defaultMessage" editable="true" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="40.0" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="60.0" prefWidth="415.0" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="3.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="29.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="9.0" prefHeight="89.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <BorderPane.margin>
+        <Insets top="20.0" />
+      </BorderPane.margin>
+    </GridPane>
+  </top>
+</BorderPane>

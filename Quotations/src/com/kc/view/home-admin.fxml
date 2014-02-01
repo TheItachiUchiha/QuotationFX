@@ -35,6 +35,8 @@
             <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton fx:id="status" mnemonicParsing="false" onAction="#statusReminder" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" styleClass="separator-style" />
+            <ToggleButton id="status" mnemonicParsing="false" onAction="#productDispatch" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Product Dispatch" toggleGroup="$homeSubmenu" />
+            <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton id="report" fx:id="service" mnemonicParsing="false" onAction="#serviceRegistry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Service / Registry" toggleGroup="$homeSubmenu" />
             <Separator prefWidth="210.0" styleClass="separator-style" />
             <ToggleButton id="report" fx:id="reports" mnemonicParsing="false" onAction="#reports" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$homeSubmenu" />

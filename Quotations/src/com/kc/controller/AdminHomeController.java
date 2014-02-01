@@ -62,7 +62,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(price);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void enquiry()
@@ -74,7 +74,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(enquiry);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void quotationPreparation()
@@ -86,7 +86,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void salesOrder()
@@ -98,7 +98,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void statusReminder()
@@ -110,7 +110,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(quotation);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void serviceRegistry()
@@ -122,7 +122,7 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(service);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
 	public void reports()
@@ -134,7 +134,20 @@ public class AdminHomeController implements Initializable {
 			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(report);
 		}
 		catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+	
+	public void productDispatch()
+	{
+		try{
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch.fxml"));
+			BorderPane report = (BorderPane) loader.load();
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().remove(1);
+			((SplitPane)((BorderPane)LoginController.home.getCenter()).getCenter()).getItems().add(report);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }
