@@ -29,7 +29,7 @@ public class CustomersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber,telephone,website) VALUES(?, ?, ?,?,?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
 			preparedStatement.setString(3, customersVO.getAddress());
@@ -39,6 +39,8 @@ public class CustomersDAO {
 			preparedStatement.setString(7, customersVO.getContactNumber());
 			preparedStatement.setString(8, customersVO.getCustomerType());
 			preparedStatement.setString(9, customersVO.getTinNumber());
+			preparedStatement.setString(10, customersVO.getTelephone());
+			preparedStatement.setString(11, customersVO.getWebsite());
 			
 			preparedStatement.execute();
 			
@@ -64,7 +66,7 @@ public class CustomersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE customers SET customername=?,companyname=?,address=?,city=?,state=?,email=?,contactnumber=?,type=?,tinnumber=? where ID=?");
+			preparedStatement = conn.prepareStatement("UPDATE customers SET customername=?,companyname=?,address=?,city=?,state=?,email=?,contactnumber=?,type=?,tinnumber=?,telephone=?,website=? where ID=?");
 			
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
@@ -75,7 +77,9 @@ public class CustomersDAO {
 			preparedStatement.setString(7, customersVO.getContactNumber());
 			preparedStatement.setString(8, customersVO.getCustomerType());
 			preparedStatement.setString(9, customersVO.getTinNumber());
-			preparedStatement.setInt(10, customersVO.getId());
+			preparedStatement.setString(10, customersVO.getTelephone());
+			preparedStatement.setString(11, customersVO.getWebsite());
+			preparedStatement.setInt(12, customersVO.getId());
 			
 			preparedStatement.execute();
 		}
@@ -115,6 +119,8 @@ public class CustomersDAO {
 					customersVO.setCustomerType("End User");
 				}
 				customersVO.setTinNumber(resultSet.getString(10));
+				customersVO.setTelephone(resultSet.getString(11));
+				customersVO.setWebsite(resultSet.getString(12));
 				
 				listOfCustomers.add(customersVO);
 			}

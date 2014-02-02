@@ -57,6 +57,10 @@ public class CustomersModifyController implements Initializable{
 	@FXML
 	private TextField tinNumber;
 	@FXML
+	private TextField telephone;
+	@FXML
+	private TextField website;
+	@FXML
     private RadioButton dealer;
     @FXML
     private RadioButton endUser;
@@ -107,6 +111,8 @@ public class CustomersModifyController implements Initializable{
 		emailId.setText(customersVO.getEmailId());
 		contactNumber.setText(customersVO.getContactNumber());
 		tinNumber.setText(customersVO.getTinNumber());
+		telephone.setText(customersVO.getTelephone());
+		website.setText(customersVO.getWebsite());
 		if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 		{
 			dealer.setSelected(true);
@@ -155,6 +161,8 @@ public class CustomersModifyController implements Initializable{
 				customersVO.setEmailId(emailId.getText());
 				customersVO.setContactNumber(contactNumber.getText());
 				customersVO.setTinNumber(tinNumber.getText());
+				customersVO.setTelephone(telephone.getText());
+				customersVO.setWebsite(website.getText());
 				if(dealer.isSelected())
 				{
 					customersVO.setCustomerType("D");

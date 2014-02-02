@@ -41,6 +41,10 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	@FXML
 	private TextField tinNumber;
 	@FXML
+	private TextField telephone;
+	@FXML
+	private TextField website;
+	@FXML
 	private RadioButton dealer;
 	@FXML
 	private RadioButton endUser;
@@ -97,6 +101,8 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 				customersVO.setEmailId(emailId.getText());
 				customersVO.setContactNumber(contactNumber.getText());
 				customersVO.setTinNumber(tinNumber.getText());
+				customersVO.setTelephone(telephone.getText());
+				customersVO.setWebsite(website.getText());
 				if(endUser.isSelected())
 				{
 					customersVO.setCustomerType("E");

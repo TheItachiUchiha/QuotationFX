@@ -23,6 +23,10 @@ public class CustomersVO {
 	private String tinNumber;
 	
 	
+	private String telephone;
+	
+	private String website;
+	
 	public int getId() {
 		return id;
 	}
@@ -86,6 +90,18 @@ public class CustomersVO {
 	public String toString()
 	{
 		return this.customerName;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 }

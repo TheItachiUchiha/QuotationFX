@@ -85,6 +85,10 @@ public class CustomersViewController implements Initializable {
 	@FXML
 	private TableColumn<CustomersVO, String> customerType;
 	@FXML
+	private TableColumn<CustomersVO, String> telephone;
+	@FXML
+	private TableColumn<CustomersVO, String> website;
+	@FXML
 	private TableColumn action;
 	@FXML
 	private Label message;
@@ -320,6 +324,12 @@ public class CustomersViewController implements Initializable {
 			customerType
 					.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
 							"customerType"));
+			telephone
+			.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
+					"telephone"));
+	website
+			.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
+					"website"));
 			customerTable.setItems(tempList);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());

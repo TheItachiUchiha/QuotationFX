@@ -156,7 +156,7 @@ public class QuotationEmailResendController implements Initializable {
     private TextField referenceNo;
     
     @FXML
-    private TextField sender;
+    private TextField cc;
 
     @FXML
     private TextField subject;
@@ -356,6 +356,7 @@ public class QuotationEmailResendController implements Initializable {
 					}
 					else
 					{
+						receiver.setText(enquiryViewVO.getEmailId());
 						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 						{
 								referenceNo.setText(enquiryViewVO.getReferenceNo());

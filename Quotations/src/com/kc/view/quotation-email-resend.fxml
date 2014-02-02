@@ -12,7 +12,7 @@
 <BorderPane prefHeight="578.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationEmailResendController">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane id="standardGrid" fx:id="emailGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="656.0" visible="false" BorderPane.alignment="TOP_LEFT">
+    <GridPane id="standardGrid" fx:id="emailGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="509.0" prefWidth="656.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="24.0" prefWidth="161.9998779296875" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -40,9 +40,10 @@
           </font>
         </Label>
         <Label prefHeight="25.0" prefWidth="37.0" text="To:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
-        <Label prefHeight="26.0" prefWidth="120.0" text="Subject:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
-        <Label prefHeight="26.0" prefWidth="120.0" text="Attach File:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
-        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="9">
+        <Label prefHeight="25.0" prefWidth="37.0" text="CC:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <Label prefHeight="26.0" prefWidth="120.0" text="Subject:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+        <Label prefHeight="26.0" prefWidth="120.0" text="Attach File:" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="10">
           <children>
             <Button mnemonicParsing="false" onAction="#sendEmail" prefWidth="49.9998779296875" styleClass="button-style" text="Send" />
             <Label fx:id="messageSent" alignment="CENTER" contentDisplay="CENTER" prefHeight="19.0" prefWidth="258.0" text="Label" visible="false" />
@@ -52,9 +53,10 @@
         <TextField fx:id="customerName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <TextField id="companyName" fx:id="productName" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <TextField id="customerName" fx:id="receiver" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <TextField id="customerName" fx:id="subject" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Label fx:id="attachmentLabel" prefWidth="200.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-        <TextArea fx:id="message" maxWidth="-Infinity" prefHeight="181.0" prefWidth="447.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="8" />
+        <TextField id="customerName" fx:id="cc" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <TextField id="customerName" fx:id="subject" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Label fx:id="attachmentLabel" prefWidth="200.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+        <TextArea fx:id="message" maxWidth="-Infinity" prefHeight="181.0" prefWidth="447.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="9" />
         <Label prefHeight="24.0" prefWidth="153.0" text="Price Estimation Date" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="24.0" prefWidth="153.0" text="Quotation Preparation Date" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <Label prefHeight="24.0" prefWidth="153.0" text="Estimated Price" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
@@ -75,6 +77,7 @@
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="259.0" minHeight="10.0" prefHeight="181.0" vgrow="SOMETIMES" />
