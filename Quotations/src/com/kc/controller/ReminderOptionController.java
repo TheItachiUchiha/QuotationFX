@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import org.apache.log4j.LogManager;
@@ -45,6 +46,9 @@ public class ReminderOptionController implements Initializable {
 	    @FXML
 	    private TextField username;
 	    
+	    @FXML
+	    private TextArea defaultMessage;
+	    
 	    private Map<String, String> defaultValues = new HashMap<String, String>();
 	    SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
@@ -53,6 +57,7 @@ public class ReminderOptionController implements Initializable {
 		
 		defaultValues = statusReminderDAO.getReminderMailDetails();
 	    username.setText(defaultValues.get(CommonConstants.KEY_REMINDER_USERNAME));
+	    defaultMessage.setText(defaultValues.get(CommonConstants.KEY_REMINDER_MESSAGE));
 	    emailid.setText(defaultValues.get(CommonConstants.KEY_REMINDER_EMAIL));
 	    password.setText(encryption.decrypt(defaultValues.get(CommonConstants.KEY_REMINDER_PASSWORD)));
 		
@@ -64,6 +69,7 @@ public class ReminderOptionController implements Initializable {
 		 password.setText("");
 		 username.setText("");
 		 message.setText("");
+		 defaultMessage.setText("");
 	 }
 
 	 public void saveEmail()
@@ -89,6 +95,7 @@ public class ReminderOptionController implements Initializable {
 				{
 					defaultValues.put(CommonConstants.KEY_REMINDER_EMAIL, emailid.getText());
 					defaultValues.put(CommonConstants.KEY_REMINDER_USERNAME, username.getText());
+					defaultValues.put(CommonConstants.KEY_REMINDER_MESSAGE, defaultMessage.getText());
 					defaultValues.put(CommonConstants.KEY_REMINDER_PASSWORD, encryption.encrypt(password.getText()));
 					statusReminderDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
 					message.setText(CommonConstants.CONF_SAVED);

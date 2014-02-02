@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
@@ -36,6 +37,8 @@ public class EnquiryOptionsController implements Initializable {
 	private TextField branchCode;
 	@FXML
 	private TextField defaultCode;
+	@FXML
+	private TextArea defaultMessage;
 	@FXML
 	private TextField username;
 	@FXML
@@ -80,7 +83,7 @@ public class EnquiryOptionsController implements Initializable {
 				
 				@Override
 				public void handle(ActionEvent paramT) {
-					//folderPath.setText("");
+					defaultMessage.setText("");
 					defaultCode.setText("");
 					branchCode.setText("");
 					message.setText("");
@@ -94,6 +97,7 @@ public class EnquiryOptionsController implements Initializable {
 		    branchCode.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE));
 		    defaultCode.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE));
 		    username.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME));
+		    defaultMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
 		    password.setText(encryption.decrypt(defaultValues.get(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD)));
 		}
 		catch (Exception e) {
@@ -120,6 +124,7 @@ public class EnquiryOptionsController implements Initializable {
 				defaultValues.put(CommonConstants.KEY_ENQUIRY_BRANCH_CODE, branchCode.getText());
 				defaultValues.put(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE, defaultCode.getText());
 				defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME, username.getText());
+				defaultValues.put(CommonConstants.KEY_ENQUIRY_MESSAGE, defaultMessage.getText());
 				defaultValues.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, encryption.encrypt(password.getText()));
 				enquiryDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
 				message.setText(CommonConstants.CONF_SAVED);

@@ -236,6 +236,10 @@ public class QuotationDAO {
 				{
 					map.put(CommonConstants.KEY_QUOTATION_EMAIL, resultSet.getString(2));
 				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_QUOTATION_MESSAGE))
+				{
+					map.put(CommonConstants.KEY_QUOTATION_MESSAGE, resultSet.getString(2));
+				}
 			}
 			LOG.info("Exit : getEmailDetails");
 		}

@@ -65,6 +65,8 @@ public class QuotationOptionController implements Initializable {
 	@FXML
 	private TextArea productArea;
 	@FXML
+	private TextArea defaultMessage;
+	@FXML
 	private TextField defaultQuotationFile;
 	@FXML
 	private TextField wordFormat;
@@ -281,6 +283,7 @@ public class QuotationOptionController implements Initializable {
 		});
 		
 		defaultValues = quotationDAO.getEmailDetails();
+		defaultMessage.setText(defaultValues.get(CommonConstants.KEY_QUOTATION_MESSAGE));
 	    username.setText(defaultValues.get(CommonConstants.KEY_QUOTATION_USERNAME));
 	    emailId.setText(defaultValues.get(CommonConstants.KEY_QUOTATION_EMAIL));
 	    password.setText(encryption.decrypt(defaultValues.get(CommonConstants.KEY_QUOTATION_PASSWORD)));
@@ -368,6 +371,7 @@ public class QuotationOptionController implements Initializable {
 		{
 			defaultValues.put(CommonConstants.KEY_QUOTATION_USERNAME, username.getText());
 			defaultValues.put(CommonConstants.KEY_QUOTATION_EMAIL, emailId.getText());
+			defaultValues.put(CommonConstants.KEY_QUOTATION_MESSAGE, defaultMessage.getText());
 			defaultValues.put(CommonConstants.KEY_QUOTATION_PASSWORD, encryption.encrypt(password.getText()));
 			quotationDAO.saveConfiguration(defaultValues, simpleDateFormat.format(new Date()));
 			messageEmail.setText(CommonConstants.CONF_SAVED);
@@ -383,5 +387,6 @@ public class QuotationOptionController implements Initializable {
 		username.setText("");
 		emailId.setText("");
 		messageEmail.setText("");
+		defaultMessage.setText("");
 	}
 }

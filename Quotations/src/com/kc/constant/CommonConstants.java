@@ -48,15 +48,22 @@ public class CommonConstants
 	public static final String OPTION_ERROR = "Please atleast Fill one Field";
 	public static final String DEFAULT_CODE = "New Default Code Saved";
 	public static final String KEY_ENQUIRY_PATH = "enquiry_path";
+	public static final String KEY_ENQUIRY_MESSAGE = "enquiry_message";
 	public static final String KEY_ENQUIRY_BRANCH_CODE = "branch_code";
 	public static final String KEY_ENQUIRY_DEFAULT_CODE = "default_code";
 	public static final String KEY_QUOTATION_PATH = "quotation_default_path";
+	public static final String KEY_QUOTATION_MESSAGE = "quotation_message";
 	public static final String KEY_QUOTATION_WORD_PATH = "quotation_word_path";
 	public static final String KEY_QUOTATION_USERNAME = "quotation_username";
 	public static final String KEY_QUOTATION_EMAIL = "quotation_email";
 	public static final String KEY_REMINDER_PASSWORD = "reminder_password";
 	public static final String KEY_REMINDER_USERNAME = "reminder_username";
 	public static final String KEY_REMINDER_EMAIL = "reminder_email";
+	public static final String KEY_REMINDER_MESSAGE = "reminder_message";
+	public static final String KEY_DISPATCH_PASSWORD = "dispatch_password";
+	public static final String KEY_DISPATCH_USERNAME = "dispatch_username";
+	public static final String KEY_DISPATCH_EMAIL = "dispatch_email";
+	public static final String KEY_DISPATCH_MESSAGE = "dispatch_message";
 	public static final String KEY_QUOTATION_PASSWORD = "quotation_password";
 	public static final String KEY_QUOTATION_PDF_PATH = "quotation_pdf_path";
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
@@ -91,7 +98,7 @@ public class CommonConstants
 	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
 	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";
 	public static final String REMINDER_DELETED = "Reminder Deleted Successfully";
-	//SQL EXCEPTIONS2000,2001,2002,2003,2004,2005,2006,2007,2008,2009,
+
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;
 	

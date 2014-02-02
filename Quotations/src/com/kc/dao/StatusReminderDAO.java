@@ -290,6 +290,10 @@ public class StatusReminderDAO {
 				{
 					map.put(CommonConstants.KEY_REMINDER_USERNAME, resultSet.getString(2));
 				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_REMINDER_MESSAGE))
+				{
+					map.put(CommonConstants.KEY_REMINDER_MESSAGE, resultSet.getString(2));
+				}
 			}
 		}
 		catch (Exception e) {

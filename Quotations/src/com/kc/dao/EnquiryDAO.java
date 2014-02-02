@@ -369,6 +369,10 @@ public class EnquiryDAO {
 				{
 					map.put(CommonConstants.KEY_ENQUIRY_EMAIL_PASSWORD, resultSet.getString(2));
 				}
+				else if(resultSet.getString(1).equals(CommonConstants.KEY_ENQUIRY_MESSAGE))
+				{
+					map.put(CommonConstants.KEY_ENQUIRY_MESSAGE, resultSet.getString(2));
+				}
 			}
 			LOG.info("Exit : getEnquiryOptionDefaultValues");
 		}
