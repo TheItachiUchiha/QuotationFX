@@ -127,6 +127,7 @@ public class ReminderController implements Initializable {
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
 		private ObservableList<ReminderVO> reminderList = FXCollections.observableArrayList();
 		private ObservableList<String> refList = FXCollections.observableArrayList();
+		private Map<String, String> defaultValues = new HashMap<String, String>();
 		SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 		
 	@Override
@@ -139,6 +140,7 @@ public class ReminderController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
+			defaultValues = statusReminderDAO.getReminderMailDetails();
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -176,6 +178,7 @@ public class ReminderController implements Initializable {
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
+							emailMessage.setText(defaultValues.get(CommonConstants.KEY_REMINDER_MESSAGE));
 							stopReminder.setVisible(false);
 							sentHBox.setVisible(false);
 						}

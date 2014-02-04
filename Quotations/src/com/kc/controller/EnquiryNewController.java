@@ -115,6 +115,7 @@ public class EnquiryNewController implements Initializable {
 	private String productCode ="";
 	private String date;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	private Map<String, String> defaultValues = new HashMap<String, String>();
 	
 	public EnquiryNewController() {
 		customersDAO = new CustomersDAO();
@@ -138,6 +139,7 @@ public class EnquiryNewController implements Initializable {
 				.observableArrayList();
 		final ObservableList<ProductsVO> tempProductList = FXCollections
 				.observableArrayList();
+		defaultValues = enquiryDAO.getEnquiryOptionDefaultValues();
 		filePath = new TextField();
 		filePath.setEditable(false);
 		filePath.setText("");
@@ -195,8 +197,9 @@ public class EnquiryNewController implements Initializable {
 					customerRequirements.setText("");
 					purchasePeriod.setText("");
 					filePath.setText("");
-					emailMessage.setText("");
+					emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
 					messageNewEnquiry.setText("");
+					
 				}
 			}
 		});
@@ -297,6 +300,7 @@ public class EnquiryNewController implements Initializable {
 								ProductsVO t1) {
 							enquiryGrid.setVisible(true);
 							productId = t1.getId();
+							emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
 						}
 					});
 			tinNumber.setOnAction(new EventHandler<ActionEvent>() {

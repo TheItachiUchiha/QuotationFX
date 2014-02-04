@@ -177,6 +177,7 @@ public class QuotationEmailSendController implements Initializable {
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
+	private Map<String, String> emailDetails = new HashMap<String, String>();
 	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	Map<String, String> emailData = new HashMap<String, String>();
 	
@@ -188,7 +189,7 @@ public class QuotationEmailSendController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
-			
+			emailDetails = quotationDAO.getEmailDetails();
 			customerList = customersDAO.getCustomers();
 			
 			search.setOnAction(new EventHandler<ActionEvent>() {
@@ -356,6 +357,7 @@ public class QuotationEmailSendController implements Initializable {
 					}
 					else
 					{
+						message.setText(emailDetails.get(CommonConstants.KEY_QUOTATION_MESSAGE));
 						receiver.setText(enquiryViewVO.getEmailId());
 						if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 						{
