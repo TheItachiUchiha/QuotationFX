@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="654.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="654.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductDispatchCreateController">
   <!-- TODO Add Nodes -->
   <left>
-    <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+    <VBox fx:id="mainBox" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="false">
       <children>
-        <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" padding="$x2" prefHeight="398.0" prefWidth="747.0" visible="true">
+        <GridPane id="standardGrid" fx:id="dispatchGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" padding="$x2" prefHeight="398.0" prefWidth="747.0" visible="true">
           <!-- TODO Add Nodes -->
           <children>
             <Label prefHeight="19.0" prefWidth="104.0" text="Invoice No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -111,38 +111,38 @@
         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="15.0">
           <children>
             <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="77.0" text="Select a Type" />
-            <RadioButton mnemonicParsing="false" text="Create a New Dispatch">
+            <RadioButton fx:id="createDispatch" mnemonicParsing="false" text="Create a New Dispatch">
               <toggleGroup>
-                <ToggleGroup fx:id="dispatchGroup" />
+                <ToggleGroup fx:id="dispatchToggle" />
               </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="View Dispatch Details" toggleGroup="$dispatchGroup" />
+            <RadioButton fx:id="viewDispatch" mnemonicParsing="false" text="View Dispatch Details" toggleGroup="$dispatchToggle" />
           </children>
           <padding>
             <Insets left="50.0" fx:id="x1" />
           </padding>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
+        <HBox fx:id="monthHBox" alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="5.0" visible="true">
           <children>
-            <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="92.0" text="Month" />
+            <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="89.0" text="Month" />
             <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="77.0" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="50.0" text="Year" />
+            <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="45.0" text="Year" />
             <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="77.0" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
+            <Button id="search" mnemonicParsing="false" onAction="#search" styleClass="button-style" text="Search" />
           </children>
           <padding>
             <Insets left="50.0" fx:id="x1" />
           </padding>
         </HBox>
-        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" visible="true" VBox.margin="$x1">
+        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" visible="false" VBox.margin="$x1">
           <children>
             <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="92.0" text="Select Ref_No" />
             <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="176.0" promptText="Select a Reference No" styleClass="combo-style">
@@ -150,6 +150,7 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
+            <Button mnemonicParsing="false" onAction="#go" text="Go" />
           </children>
         </HBox>
       </children>

@@ -3,6 +3,9 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -12,38 +15,31 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-public class ServiceRegistryController implements Initializable {
+public class ServiceRCController implements Initializable {
 	
 	private static final Logger LOG = LogManager.getLogger(ServiceRegistryController.class);
 
-		@FXML
-	    private Tab complaintTab;
-
-	    @FXML
-	    private Tab modifyTab;
-
-	    @FXML
+	 	@FXML
 	    private Tab newTab;
+
+	    @FXML
+	    private Tab optionTab;
 
 	    @FXML
 	    private TabPane tabPane;
 
 	    @FXML
 	    private Tab viewTab;
-
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		LOG.info("Enter : initialize");
 		try{
 			
-			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-registerComplaint.fxml"));
+			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-newComplaint.fxml"));
 			BorderPane newService = (BorderPane) loader.load();
-			complaintTab.setContent(newService);
+			newTab.setContent(newService);
 			
 			tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 
@@ -52,27 +48,21 @@ public class ServiceRegistryController implements Initializable {
 						Tab oldValue, Tab newValue) {
 					
 					try{
-						if(newValue.equals(complaintTab))
+						if(newValue.equals(newTab))
 						{
-							FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-registerComplaint.fxml"));
+							FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-newComplaint.fxml"));
 							BorderPane newService = (BorderPane) loader.load();
-							complaintTab.setContent(newService);
+							newTab.setContent(newService);
 						}
-						else if(newValue.equals(newTab))
+						else if(newValue.equals(optionTab))
 						{
-							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceRegister.fxml"));
+							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-option.fxml"));
 							BorderPane modifyService = (BorderPane) loader3.load();
-							newTab.setContent(modifyService);
-						}
-						else if(newValue.equals(modifyTab))
-						{
-							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceModify.fxml"));
-							BorderPane modifyService = (BorderPane) loader3.load();
-							modifyTab.setContent(modifyService);
+							optionTab.setContent(modifyService);
 						}
 						else if(newValue.equals(viewTab))
 						{
-							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/serviceRegistry-view.fxml"));
+							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-viewComplaint.fxml"));
 							BorderPane viewService = (BorderPane) loader2.load();
 							viewTab.setContent(viewService);
 						}

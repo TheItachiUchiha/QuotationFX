@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.mytdev.javafx.scene.control.*?>
+<?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
+
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="807.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+  <left>
+    <GridPane fx:id="nameGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="763.0">
+      <children>
+        <Label prefHeight="22.0" prefWidth="140.0" text="Contact number:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <TextField fx:id="contactNo" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Email Address:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="TO:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="CC:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="Message:" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+        <TextField id="receiver" fx:id="receiverInName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <TextField id="cc" fx:id="ccInName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Customer Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <TextField fx:id="emailId" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="customerName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="8">
+          <children>
+            <Button mnemonicParsing="false" text="Register Service" />
+            <Label id="messageName" fx:id="registerConfirmInName" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="Label" />
+          </children>
+        </VBox>
+        <Label prefHeight="22.0" prefWidth="140.0" text="Nature of the complaint:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" GridPane.valignment="TOP" />
+        <TextArea fx:id="natureOfComplaintInName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="136.0" prefWidth="225.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Company Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Product Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Customer Location:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Total Services:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+        <TextField fx:id="companyName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField id="productName" fx:id="productNameInName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <TextField fx:id="customerLocation" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+        <Label fx:id="totalServiceInName" prefHeight="22.0" prefWidth="47.0" text="count" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="7">
+          <children>
+            <Button mnemonicParsing="false" text="Send" />
+            <Label id="messageSent" fx:id="emailSentInName" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="Label" />
+          </children>
+          <padding>
+            <Insets top="10.0" />
+          </padding>
+        </VBox>
+        <TextArea id="message" fx:id="messageAreaInName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="320.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="5" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="144.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="231.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="54.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="334.0" />
+      </columnConstraints>
+      <padding>
+        <Insets top="20.0" />
+      </padding>
+      <rowConstraints>
+        <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="161.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="0.0" prefHeight="140.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+    </GridPane>
+  </left>
+  <padding>
+    <Insets left="30.0" />
+  </padding>
+  <right>
+    <GridPane fx:id="referenceGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="763.0" BorderPane.alignment="TOP_LEFT">
+      <children>
+        <Label prefHeight="22.0" prefWidth="140.0" text="Product Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Nature of the complaint:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+        <TextArea fx:id="natureOfComplaint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="225.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="productName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <Label prefHeight="22.0" prefWidth="140.0" text="Total Services:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
+          <children>
+            <Button mnemonicParsing="false" text="Register Service" />
+            <Label fx:id="registerConfirm" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="Label" />
+          </children>
+        </VBox>
+        <Label fx:id="totalService" prefHeight="22.0" prefWidth="47.0" text="count" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="TO:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="CC:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Label prefHeight="22.0" prefWidth="52.0" text="Message:" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="320.0" text="" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+        <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+          <children>
+            <Button mnemonicParsing="false" text="Send" />
+            <Label fx:id="emailSent" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="Label" />
+          </children>
+        </VBox>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="144.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="231.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="54.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="334.0" />
+      </columnConstraints>
+      <padding>
+        <Insets top="20.0" />
+      </padding>
+      <rowConstraints>
+        <RowConstraints maxHeight="84.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="115.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="160.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="58.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="112.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+      </rowConstraints>
+      <BorderPane.margin>
+        <Insets />
+      </BorderPane.margin>
+    </GridPane>
+  </right>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
+  <top>
+    <VBox prefHeight="65.00009999999747" prefWidth="600.0">
+      <children>
+        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+          <children>
+            <Label prefHeight="26.0" text="Select a Customer with:" />
+            <RadioButton mnemonicParsing="false" prefHeight="26.0" text="Reference Number">
+              <toggleGroup>
+                <ToggleGroup fx:id="customerToggle" />
+              </toggleGroup>
+            </RadioButton>
+            <RadioButton mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
+          </children>
+        </HBox>
+        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+          <children>
+            <Label prefHeight="26.0" text="Enter / Select a Ref_No:" />
+            <AutoCompleteTextField fx:id="customerNameAutoFill" maxWidth="-Infinity" prefHeight="31.0" prefWidth="148.0" />
+            <Button mnemonicParsing="false" prefWidth="108.0" text="Create a Service" />
+            <Button mnemonicParsing="false" text="Customer Info" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </top>
+</BorderPane>

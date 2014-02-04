@@ -64,6 +64,10 @@ public class CommonConstants
 	public static final String KEY_DISPATCH_USERNAME = "dispatch_username";
 	public static final String KEY_DISPATCH_EMAIL = "dispatch_email";
 	public static final String KEY_DISPATCH_MESSAGE = "dispatch_message";
+	public static final String KEY_SERVICE_PASSWORD = "service_password";
+	public static final String KEY_SERVICE_USERNAME = "service_username";
+	public static final String KEY_SERVICE_EMAIL = "service_email";
+	public static final String KEY_SERVICE_MESSAGE = "service_message";
 	public static final String KEY_QUOTATION_PASSWORD = "quotation_password";
 	public static final String KEY_QUOTATION_PDF_PATH = "quotation_pdf_path";
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
