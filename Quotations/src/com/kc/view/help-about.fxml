@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="294.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpAboutController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="304.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpAboutController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="35.0" prefWidth="115.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -30,11 +31,11 @@
     <ImageView fx:id="homeLogo" fitHeight="65.75" fitWidth="87.66666666666666" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="31.749039923954612" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="68.63116920152115" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.862848734215735" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="76.34246954093878" />
   </columnConstraints>
   <padding>
-    <Insets />
+    <Insets left="40.0" top="40.0" />
   </padding>
   <rowConstraints>
     <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -44,4 +45,7 @@
     <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="80.0" vgrow="SOMETIMES" />
   </rowConstraints>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </GridPane>

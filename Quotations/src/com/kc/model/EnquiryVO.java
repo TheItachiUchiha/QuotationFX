@@ -27,6 +27,7 @@ public class EnquiryVO {
 	private int reminderSent;
 	private double totalRevenue;
 	private String enquiryCustomerType;
+	private int complaintCount;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -178,6 +179,12 @@ public class EnquiryVO {
 	}
 	public void setEnquiryCustomerType(String enquiryCustomerType) {
 		this.enquiryCustomerType = enquiryCustomerType;
+	}
+	public int getComplaintCount() {
+		return complaintCount;
+	}
+	public void setComplaintCount(int complaintCount) {
+		this.complaintCount = complaintCount;
 	}
 	
 }

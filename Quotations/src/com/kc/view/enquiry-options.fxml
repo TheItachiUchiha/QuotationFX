@@ -10,15 +10,15 @@
 
 <BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="390.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryOptionsController">
   <!-- TODO Add Nodes -->
-  <center>
-    <GridPane fx:id="optionsGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="367.0" prefWidth="694.0" BorderPane.alignment="CENTER">
+  <left>
+    <GridPane fx:id="optionsGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="367.0" prefWidth="446.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="249.0" text="Select a Default Folder for Customers File :" GridPane.columnIndex="0" GridPane.columnSpan="1" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="249.0" text="Select a Default Folder for Customers File :" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0">
           <font>
             <Font name="System Bold" size="12.0" />
           </font>
           <GridPane.margin>
-            <Insets left="30.0" />
+            <Insets />
           </GridPane.margin>
         </Label>
         <Label prefHeight="32.0" prefWidth="103.0" text="Folder Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
@@ -54,8 +54,8 @@
         <Label prefHeight="32.0" prefWidth="103.0" text="Default Messsage" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.47828902632516" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="76.74643007479844" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
@@ -68,7 +68,10 @@
         <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
       </rowConstraints>
     </GridPane>
-  </center>
+  </left>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>

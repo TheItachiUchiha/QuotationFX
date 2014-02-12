@@ -72,7 +72,7 @@ public class ServiceRegistryController implements Initializable {
 						}
 						else if(newValue.equals(viewTab))
 						{
-							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/serviceRegistry-view.fxml"));
+							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceView.fxml"));
 							BorderPane viewService = (BorderPane) loader2.load();
 							viewTab.setContent(viewService);
 						}

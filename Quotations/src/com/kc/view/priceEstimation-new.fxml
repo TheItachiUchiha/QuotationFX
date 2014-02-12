@@ -112,10 +112,13 @@
         </VBox>
       </children>
       <BorderPane.margin>
-        <Insets left="10.0" top="10.0" />
+        <Insets top="10.0" />
       </BorderPane.margin>
     </VBox>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <right>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="442.0" visible="false">
       <!-- TODO Add Nodes -->
@@ -186,7 +189,7 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="77.0" prefWidth="813.0" BorderPane.alignment="TOP_LEFT">
+    <VBox alignment="TOP_LEFT" prefHeight="77.0" prefWidth="813.0" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x1">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
           <children>
@@ -205,7 +208,7 @@
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
           <padding>
-            <Insets left="50.0" fx:id="x1" />
+            <Insets fx:id="x1" />
           </padding>
         </HBox>
         <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" visible="false" VBox.margin="$x1">
@@ -225,9 +228,6 @@
           </children>
         </HBox>
       </children>
-      <BorderPane.margin>
-        <Insets top="20.0" />
-      </BorderPane.margin>
     </VBox>
   </top>
 </BorderPane>

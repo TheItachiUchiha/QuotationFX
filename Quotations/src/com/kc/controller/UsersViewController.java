@@ -92,6 +92,13 @@ public class UsersViewController implements Initializable {
 			searchByList.add("Username");
 			combo.setItems(searchByList);
 			
+			name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
+			username.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("username"));
+			password.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("password"));
+			modules.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("quotation"));
+			userType.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("userType"));
+			usersTable.setItems(usersList);
+			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {
@@ -332,16 +339,20 @@ public class UsersViewController implements Initializable {
 									@Override
 									public void handle(WindowEvent paramT) {
 										
-										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-										for (UsersVO usersVO : modulesList) {
-											if (usersVO.getId() == ButtonCell.this.getTableView()
-													.getItems()
-													.get(ButtonCell.this.getIndex())
-													.getId()) {
-												updateAutoField(usersVO, combo.getSelectionModel().getSelectedItem());
+										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										{
+											
+											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+											for (UsersVO usersVO : modulesList) {
+												if (usersVO.getId() == ButtonCell.this.getTableView()
+														.getItems()
+														.get(ButtonCell.this.getIndex())
+														.getId()) {
+													updateAutoField(usersVO, combo.getSelectionModel().getSelectedItem());
+												}
 											}
+											fillTableFromData();
 										}
-										fillTableFromData();
 									}
 								});
 					} catch (IOException e) {

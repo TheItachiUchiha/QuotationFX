@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="579.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
+<GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="421.0" prefWidth="461.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsCreateController">
   <!-- TODO Add Nodes -->
   <children>
     <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -51,8 +51,8 @@
     </HBox>
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="34.20454545454545" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="66.02272727272728" />
   </columnConstraints>
   <padding>
     <Insets />

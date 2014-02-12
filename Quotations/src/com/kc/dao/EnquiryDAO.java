@@ -46,7 +46,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type) VALUES(?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,complaint_count) VALUES(?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -69,6 +69,7 @@ public class EnquiryDAO {
 			preparedStatement.setInt(20, 0);
 			preparedStatement.setDouble(21, 0);
 			preparedStatement.setString(22, CommonConstants.NA);
+			preparedStatement.setInt(23, 0);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -114,6 +115,7 @@ public class EnquiryDAO {
 				enquiryVO.setReminderSent(resultSet.getInt(21));
 				enquiryVO.setTotalRevenue(resultSet.getDouble(22));
 				enquiryVO.setEnquiryCustomerType(resultSet.getString(23));
+				enquiryVO.setComplaintCount(resultSet.getInt(24));
 				listOfEnquries.add(enquiryVO);
 			}
 		}

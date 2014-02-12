@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxWidth="-Infinity" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsCreateController">
+<BorderPane maxWidth="-Infinity" prefWidth="1013.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsCreateController">
   <!-- TODO Add Nodes -->
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
@@ -29,7 +29,7 @@
     </VBox>
   </bottom>
   <center>
-    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" padding="$x1" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="179.0" prefWidth="657.0" styleClass="table-style" VBox.vgrow="ALWAYS">
           <columns>
@@ -56,13 +56,16 @@
           </padding>
         </HBox>
       </children>
+      <padding>
+        <Insets left="40.0" top="10.0" />
+      </padding>
     </VBox>
   </center>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <GridPane hgap="20.0" BorderPane.alignment="TOP_LEFT">
+    <GridPane hgap="20.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="735.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefWidth="93.0" text="Sub Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -82,10 +85,10 @@
         </HBox>
       </children>
       <columnConstraints>
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="14.436474039914533" prefWidth="100.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.36293160644505" prefWidth="100.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="22.548291233283813" prefWidth="100.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="32.949479940564636" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -93,7 +96,7 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets right="60.0" top="20.0" />
+        <Insets left="40.0" top="40.0" />
       </BorderPane.margin>
     </GridPane>
   </top>

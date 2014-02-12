@@ -15,7 +15,7 @@
 <BorderPane prefWidth="731.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryModifyPopUpController">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="700.0" visible="true" BorderPane.alignment="CENTER">
+    <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="443.0" prefWidth="444.0" visible="true" BorderPane.alignment="TOP_LEFT">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="19.0" prefWidth="162.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -65,8 +65,8 @@
         <TextField id="estimatePeriod" fx:id="purchasePeriod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="12" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="50.0" prefWidth="110.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="50.0" prefWidth="415.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="36.362028157217516" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="63.86370547709398" prefWidth="415.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="29.0" vgrow="SOMETIMES" />
@@ -84,26 +84,32 @@
         <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
       </rowConstraints>
+      <BorderPane.margin>
+        <Insets top="30.0" />
+      </BorderPane.margin>
     </GridPane>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="586.0" visible="true" BorderPane.alignment="CENTER">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="586.0" visible="true" BorderPane.alignment="TOP_LEFT">
       <children>
-        <HBox alignment="CENTER" prefHeight="47.0" prefWidth="874.0" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
+        <HBox alignment="CENTER_LEFT" prefHeight="47.0" prefWidth="874.0" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
             <Label prefHeight="24.0" prefWidth="80.0" text="Product Type" />
-            <RadioButton fx:id="standard" mnemonicParsing="false" text="Standard">
+            <RadioButton fx:id="standard" mnemonicParsing="false" prefWidth="83.0" text="Standard">
               <toggleGroup>
                 <ToggleGroup fx:id="productType" />
               </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="custom" mnemonicParsing="false" text="Custom" toggleGroup="$productType" />
+            <RadioButton fx:id="custom" mnemonicParsing="false" prefWidth="60.0" text="Custom" toggleGroup="$productType" />
           </children>
         </HBox>
-        <VBox id="VBox" fx:id="productVbox" alignment="CENTER" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
+        <VBox id="VBox" fx:id="productVbox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.rowSpan="3">
           <children>
             <ComboBox id="productCategory" fx:id="categoryCombo" prefHeight="21.0" prefWidth="153.0" promptText="Select Product Category" styleClass="combo-style">
               <items>
@@ -133,11 +139,14 @@
               </items>
             </ComboBox>
           </children>
+          <padding>
+            <Insets left="90.0" />
+          </padding>
         </VBox>
-        <HBox id="HBox" fx:id="productHbox" alignment="CENTER" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+        <HBox id="HBox" fx:id="productHbox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
           <children>
             <Label text="Product Name" />
-            <TextField fx:id="productName" prefWidth="200.0" />
+            <TextField fx:id="productName" prefWidth="161.0" />
           </children>
         </HBox>
       </children>

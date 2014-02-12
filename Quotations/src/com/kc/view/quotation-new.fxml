@@ -11,7 +11,7 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationNewController">
   <!-- TODO Add Nodes -->
   <left>
-    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="655.0" visible="false">
+    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="655.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <!-- TODO Add Nodes -->
       <children>
         <Label prefHeight="22.0" prefWidth="122.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -51,10 +51,13 @@
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets left="10.0" top="10.0" />
+        <Insets top="20.0" />
       </BorderPane.margin>
     </GridPane>
   </left>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <right>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="311.0" prefWidth="432.0" visible="false">
       <!-- TODO Add Nodes -->
@@ -113,7 +116,7 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <GridPane prefHeight="72.0" prefWidth="874.0">
+    <GridPane prefHeight="72.0" prefWidth="874.0" BorderPane.margin="$x1">
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
@@ -123,7 +126,7 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
               <HBox.margin>
-                <Insets />
+                <Insets fx:id="x1" />
               </HBox.margin>
             </ComboBox>
             <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
@@ -135,7 +138,7 @@
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
           <GridPane.margin>
-            <Insets left="100.0" fx:id="x1" />
+            <Insets fx:id="x1" />
           </GridPane.margin>
         </HBox>
         <HBox id="HBox" fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
@@ -146,7 +149,7 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquire Details">
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="110.0" styleClass="button-style" text="Enquire Details">
               <toggleGroup>
                 <ToggleGroup fx:id="buttonToggle" />
               </toggleGroup>
@@ -163,9 +166,6 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
       </rowConstraints>
-      <BorderPane.margin>
-        <Insets top="20.0" />
-      </BorderPane.margin>
     </GridPane>
   </top>
 </BorderPane>

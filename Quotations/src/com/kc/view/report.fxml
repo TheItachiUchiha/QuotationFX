@@ -20,16 +20,19 @@
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
               <center>
-                <ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="766.0">
+                <ScrollPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="766.0" BorderPane.alignment="TOP_LEFT">
                   <content>
-                   <TilePane fx:id="tile" hgap="15.0" prefHeight="247.0" prefWidth="765.0" vgap="15.0" />
+                    <TilePane fx:id="tile" hgap="15.0" prefHeight="247.0" prefWidth="765.0" vgap="15.0" />
                   </content>
                 </ScrollPane>
               </center>
+              <padding>
+                <Insets left="40.0" top="40.0" />
+              </padding>
               <top>
-                <VBox alignment="TOP_CENTER" prefHeight="247.0" prefWidth="766.0" spacing="15.0" BorderPane.alignment="TOP_CENTER">
+                <VBox alignment="TOP_CENTER" prefHeight="306.0" prefWidth="766.0" spacing="15.0" BorderPane.alignment="TOP_LEFT">
                   <children>
-                    <HBox alignment="TOP_CENTER" prefHeight="42.0" prefWidth="766.0">
+                    <HBox alignment="CENTER_LEFT" prefHeight="26.0" prefWidth="766.0">
                       <children>
                         <Label prefHeight="26.0" prefWidth="84.0" text="Report Type" />
                         <ComboBox id="reportType" fx:id="reportTypeCombo" prefHeight="21.0" prefWidth="147.0" styleClass="combo-style">
@@ -42,16 +45,16 @@
                         </ComboBox>
                       </children>
                       <padding>
-                        <Insets top="10.0" />
+                        <Insets fx:id="x1" />
                       </padding>
                     </HBox>
-                    <VBox id="VBox" fx:id="reportVBox" alignment="CENTER" spacing="5.0">
+                    <VBox id="VBox" fx:id="reportVBox" alignment="CENTER_LEFT" prefHeight="265.0" prefWidth="766.0" spacing="5.0">
                       <children>
-                        <GridPane id="reportGrid" fx:id="standardGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="385.0" visible="true">
+                        <GridPane id="reportGrid" fx:id="standardGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="171.0" prefWidth="231.0" visible="true" VBox.margin="$x1">
                           <children>
                             <Label prefHeight="23.0" prefWidth="81.0" text="Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
                             <Label prefHeight="26.0" prefWidth="81.0" text="Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-                            <VBox fx:id="periodVBox" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="26.0" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                            <VBox fx:id="periodVBox" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="26.0" padding="$x1" prefHeight="26.0" prefWidth="385.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                               <children>
                                 <HBox fx:id="yearHBox" prefHeight="26.0" prefWidth="325.0" spacing="5.0">
                                   <children>
@@ -79,9 +82,6 @@
                                   </children>
                                 </HBox>
                               </children>
-                              <padding>
-                                <Insets left="60.0" />
-                              </padding>
                             </VBox>
                             <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
                               <children>
@@ -113,18 +113,15 @@
                             </ComboBox>
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" percentWidth="36.84895833333333" prefWidth="75.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="63.411458333333336" prefWidth="193.39999999999998" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" percentWidth="35.434782608695656" prefWidth="75.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="65.0" prefWidth="193.39999999999998" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="48.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="154.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="151.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
                           </rowConstraints>
-                          <VBox.margin>
-                            <Insets left="40.0" />
-                          </VBox.margin>
                         </GridPane>
                         <GridPane id="reportGrid" fx:id="customGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="105.0" prefWidth="485.0" visible="true">
                           <children>
@@ -143,7 +140,7 @@
                                 <Insets top="10.0" />
                               </GridPane.margin>
                             </VBox>
-                            <ComboBox id="TypeCombo" fx:id="customTypeCombo" prefHeight="21.0" prefWidth="147.0" promptText="Select Type" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <ComboBox id="TypeCombo" fx:id="customTypeCombo" prefHeight="21.0" prefWidth="169.0" promptText="Select Type" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="0">
                               <items>
                                 <FXCollections fx:factory="observableArrayList">
                                   <String fx:value="Reference No" />
@@ -155,28 +152,28 @@
                               </items>
                             </ComboBox>
                             <AutoCompleteTextField fx:id="customAutoFill" maxWidth="-Infinity" prefHeight="26.0" prefWidth="168.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                            <HBox fx:id="customHBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="385.0" spacing="5.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                            <HBox fx:id="customHBox" alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="385.0" spacing="5.0" visible="false" GridPane.columnIndex="2" GridPane.margin="$x1" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                               <children>
-                                <ComboBox id="yearCombo" fx:id="customMonthCombo" prefHeight="21.0" prefWidth="63.0" promptText="Month">
+                                <ComboBox id="yearCombo" fx:id="customMonthCombo" prefHeight="21.0" prefWidth="63.0" promptText="Month" styleClass="combo-style">
                                   <items>
                                     <FXCollections fx:factory="observableArrayList" />
                                   </items>
                                 </ComboBox>
-                                <ComboBox id="yearCombo" fx:id="customMonthYearCombo" prefHeight="21.0" prefWidth="61.0" promptText="Year">
+                                <ComboBox id="yearCombo" fx:id="customMonthYearCombo" prefHeight="21.0" prefWidth="61.0" promptText="Year" styleClass="combo-style">
                                   <items>
                                     <FXCollections fx:factory="observableArrayList" />
                                   </items>
                                 </ComboBox>
                               </children>
-                              <GridPane.margin>
+                              <padding>
                                 <Insets left="5.0" />
-                              </GridPane.margin>
+                              </padding>
                             </HBox>
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" percentWidth="30.79943818762954" prefWidth="75.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="35.707627665705914" prefWidth="193.39999999999998" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="33.90701282161278" prefWidth="193.39999999999998" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" percentWidth="24.381218725931827" prefWidth="75.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="35.70762766570591" prefWidth="193.39999999999998" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="225.0" minWidth="10.0" percentWidth="40.325232283310505" prefWidth="193.39999999999998" />
                           </columnConstraints>
                           <padding>
                             <Insets fx:id="x1" />
@@ -191,7 +188,7 @@
                     </VBox>
                   </children>
                   <BorderPane.margin>
-                    <Insets top="20.0" />
+                    <Insets fx:id="x1" />
                   </BorderPane.margin>
                 </VBox>
               </top>

@@ -12,7 +12,7 @@
 <BorderPane prefHeight="616.0" prefWidth="845.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationModifyController">
   <!-- TODO Add Nodes -->
   <center>
-    <VBox fx:id="estimationVBox" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="529.0" spacing="5.0" visible="false">
+    <VBox fx:id="estimationVBox" alignment="TOP_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="539.0" prefWidth="529.0" spacing="5.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="595.0">
           <children>
@@ -107,10 +107,13 @@
         </VBox>
       </children>
       <padding>
-        <Insets left="10.0" top="10.0" />
+        <Insets top="10.0" />
       </padding>
     </VBox>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <right>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="442.0" visible="false">
       <!-- TODO Add Nodes -->
@@ -181,7 +184,7 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="77.0" prefWidth="813.0">
+    <VBox prefHeight="77.0" prefWidth="813.0" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x1">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="813.0" spacing="5.0">
           <children>
@@ -200,7 +203,7 @@
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
           <VBox.margin>
-            <Insets left="50.0" fx:id="x1" />
+            <Insets fx:id="x1" />
           </VBox.margin>
         </HBox>
         <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" visible="false" VBox.margin="$x1">
@@ -211,7 +214,7 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquiry details">
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="118.0" styleClass="button-style" text="Enquiry details">
               <toggleGroup>
                 <ToggleGroup fx:id="buttonToggle" />
               </toggleGroup>
@@ -220,9 +223,6 @@
           </children>
         </HBox>
       </children>
-      <BorderPane.margin>
-        <Insets top="20.0" />
-      </BorderPane.margin>
     </VBox>
   </top>
 </BorderPane>

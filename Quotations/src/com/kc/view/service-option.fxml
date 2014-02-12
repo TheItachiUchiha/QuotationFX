@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="390.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceRegistryOptionController">
+<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="390.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceOptionController">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane fx:id="optionsGrid" alignment="CENTER" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="496.0" prefHeight="367.0" prefWidth="560.0" BorderPane.alignment="CENTER">
+    <GridPane fx:id="optionsGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="357.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label prefHeight="32.0" prefWidth="103.0" text="Email Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
         <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.valignment="TOP">
@@ -33,8 +33,8 @@
         <Label prefHeight="32.0" prefWidth="103.0" text="Default Messsage" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="28.83778089887641" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="71.44311797752808" prefWidth="100.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
@@ -45,6 +45,9 @@
       </rowConstraints>
     </GridPane>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>

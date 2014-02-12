@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="0.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="297.0" prefWidth="586.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersCreateController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="0.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="297.0" prefWidth="586.0" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceCustomerInfoController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -27,24 +27,24 @@
     <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Website" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
     <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
     <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
-    <TextField fx:id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    <TextField fx:id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextArea fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="48.000099999997474" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <TextField fx:id="city" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <TextField fx:id="state" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <TextField fx:id="emailId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <TextField fx:id="contactNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-    <TextField id="contactNumber" fx:id="telephone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-    <TextField id="contactNumber" fx:id="website" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-    <TextField fx:id="tinNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+    <TextField fx:id="customerName" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+    <TextField fx:id="companyName" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+    <TextArea fx:id="address" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="48.000099999997474" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+    <TextField fx:id="city" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <TextField fx:id="state" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    <TextField fx:id="emailId" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+    <TextField fx:id="contactNumber" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+    <TextField id="contactNumber" fx:id="telephone" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+    <TextField id="contactNumber" fx:id="website" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+    <TextField fx:id="tinNumber" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
     <HBox alignment="CENTER_LEFT" prefHeight="26.999900000002526" prefWidth="458.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
       <children>
-        <RadioButton fx:id="dealer" mnemonicParsing="false" text="Dealer">
+        <RadioButton fx:id="dealer" disable="true" mnemonicParsing="false" text="Dealer">
           <toggleGroup>
             <ToggleGroup fx:id="customerType" />
           </toggleGroup>
         </RadioButton>
-        <RadioButton fx:id="endUser" mnemonicParsing="false" text="End User" toggleGroup="$customerType" />
+        <RadioButton fx:id="endUser" disable="true" mnemonicParsing="false" text="End User" toggleGroup="$customerType" />
       </children>
     </HBox>
   </children>

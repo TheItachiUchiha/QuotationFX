@@ -33,6 +33,7 @@ public class EnquiryViewVO {
 	private int reminderSent;
 	private double totalRevenue;
 	private String enquiryCustomerType;
+	private int complaintCount;
 	
 	public int getId() {
 		return id;
@@ -227,6 +228,12 @@ public class EnquiryViewVO {
 	}
 	public void setEnquiryCustomerType(String enquiryCustomerType) {
 		this.enquiryCustomerType = enquiryCustomerType;
+	}
+	public int getComplaintCount() {
+		return complaintCount;
+	}
+	public void setComplaintCount(int complaintCount) {
+		this.complaintCount = complaintCount;
 	}
 	
 }

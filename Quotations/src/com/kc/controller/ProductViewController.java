@@ -88,6 +88,13 @@ public class ProductViewController implements Initializable{
 			
 			keyword.setPromptText("Type Keyword");
 			
+			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
+			productCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCategory"));
+			productSubCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productSubCategory"));
+			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
+			productCode.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCode"));
+			productsTable.setItems(productsList);
+			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
 				@Override public void changed(ObservableValue ov, String t, String t1) {   
@@ -352,16 +359,19 @@ public class ProductViewController implements Initializable{
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-										for (ProductsVO productsVO : productsList) {
-											if (productsVO.getId() == ButtonCell.this.getTableView()
-													.getItems()
-													.get(ButtonCell.this.getIndex())
-													.getId()) {
-												updateAutoField(productsVO, combo.getSelectionModel().getSelectedItem());
+										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										{
+											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+											for (ProductsVO productsVO : productsList) {
+												if (productsVO.getId() == ButtonCell.this.getTableView()
+														.getItems()
+														.get(ButtonCell.this.getIndex())
+														.getId()) {
+													updateAutoField(productsVO, combo.getSelectionModel().getSelectedItem());
+												}
 											}
+											fillTableFromData();
 										}
-										fillTableFromData();
 									}
 								});
 					} catch (IOException e) {

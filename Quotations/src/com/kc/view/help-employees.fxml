@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,12 +14,16 @@
       <tabs>
         <Tab fx:id="newTab" text="Add Employee">
           <content>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+              <padding>
+                <Insets left="40.0" top="40.0" fx:id="x1" />
+              </padding>
+            </BorderPane>
           </content>
         </Tab>
         <Tab fx:id="viewTab" text="View Employees">
           <content>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane padding="$x1" prefHeight="200.0" prefWidth="200.0" />
           </content>
         </Tab>
       </tabs>

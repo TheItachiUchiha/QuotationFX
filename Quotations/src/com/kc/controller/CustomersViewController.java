@@ -111,6 +111,18 @@ public class CustomersViewController implements Initializable {
 			searchByList.add("TIN Number");
 			searchByList.add("Customer Type");
 			combo.setItems(searchByList);
+			name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("companyName"));
+			address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("address"));
+			city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("city"));
+			state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("state"));
+			emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("emailId"));
+			contactNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("contactNumber"));
+			tinNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("tinNumber"));
+			customerType.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerType"));
+			telephone.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("telephone"));
+			website.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("website"));
+			customerTable.setItems(customersList);
 
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -302,34 +314,17 @@ public class CustomersViewController implements Initializable {
 				}
 			}
 
-			name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"customerName"));
-			companyName
-					.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-							"companyName"));
-			address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"address"));
-			city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"city"));
-			state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"state"));
-			emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"emailId"));
-			contactNumber
-					.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-							"contactNumber"));
-			tinNumber
-					.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-							"tinNumber"));
-			customerType
-					.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-							"customerType"));
-			telephone
-			.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"telephone"));
-	website
-			.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>(
-					"website"));
+			name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("companyName"));
+			address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("address"));
+			city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("city"));
+			state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("state"));
+			emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("emailId"));
+			contactNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("contactNumber"));
+			tinNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("tinNumber"));
+			customerType.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerType"));
+			telephone.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("telephone"));
+			website.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("website"));
 			customerTable.setItems(tempList);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -420,16 +415,19 @@ public class CustomersViewController implements Initializable {
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-										for (CustomersVO customersVO : customersList) {
-											if (customersVO.getId() == ButtonCell.this.getTableView()
-													.getItems()
-													.get(ButtonCell.this.getIndex())
-													.getId()) {
-												updateAutoField(customersVO, combo.getSelectionModel().getSelectedItem());
+										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										{
+											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+											for (CustomersVO customersVO : customersList) {
+												if (customersVO.getId() == ButtonCell.this.getTableView()
+														.getItems()
+														.get(ButtonCell.this.getIndex())
+														.getId()) {
+													updateAutoField(customersVO, combo.getSelectionModel().getSelectedItem());
+												}
 											}
+											fillTableFromData();
 										}
-										fillTableFromData();
 									}
 								});
 					} catch (IOException e) {

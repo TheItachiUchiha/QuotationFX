@@ -99,6 +99,18 @@ public class ComponentsViewController implements Initializable {
 			searchByList.add("Size");
 			combo.setItems(searchByList);
 			
+			name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
+			category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
+			subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
+			vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
+			model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
+			type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
+			size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
+			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
+			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
+			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+			componentTable.setItems(componentsList);
+			
 			keyword.setPromptText("Type Keyword");
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
@@ -448,16 +460,19 @@ public class ComponentsViewController implements Initializable {
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-										for (ComponentsVO componentsVO : componentsList) {
-											if (componentsVO.getId() == ButtonCell.this.getTableView()
-													.getItems()
-													.get(ButtonCell.this.getIndex())
-													.getId()) {
-												updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										{
+											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+											for (ComponentsVO componentsVO : componentsList) {
+												if (componentsVO.getId() == ButtonCell.this.getTableView()
+														.getItems()
+														.get(ButtonCell.this.getIndex())
+														.getId()) {
+													updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+												}
 											}
+											fillTableFromData();
 										}
-										fillTableFromData();
 									}
 								});
 					} catch (IOException e) {

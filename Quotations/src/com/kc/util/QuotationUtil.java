@@ -5,9 +5,11 @@ import java.text.DecimalFormat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import com.kc.model.ComplaintVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
+import com.kc.model.ServiceVO;
 
 public class QuotationUtil {
 
@@ -46,6 +48,7 @@ public class QuotationUtil {
 			enquiryViewVO.setReminderSent(enquiryVO.getReminderSent());
 			enquiryViewVO.setTotalRevenue(enquiryVO.getTotalRevenue());
 			enquiryViewVO.setEnquiryCustomerType(enquiryVO.getEnquiryCustomerType());
+			enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
@@ -80,6 +83,32 @@ public class QuotationUtil {
 				}
 			}
 			tempList.add(enquiryViewVO);
+		}
+		return tempList;
+	}
+	
+	public static ObservableList<ComplaintVO> fillComplaintListFromService(ObservableList<ServiceVO> serviceList, ObservableList<CustomersVO> customerList)
+	{
+		ObservableList<ComplaintVO> tempList = FXCollections.observableArrayList();
+
+		for(ServiceVO serviceVO : serviceList)
+		{
+			ComplaintVO complaintVO =new ComplaintVO();
+			complaintVO.setId(serviceVO.getId());
+			complaintVO.setDateOfComplaint(serviceVO.getComplaintDate());
+			complaintVO.setProductName(serviceVO.getProductName());
+			complaintVO.setReferenceNo(serviceVO.getReferenceNo());
+			
+			for(CustomersVO customersVO : customerList)
+			{
+				if(customersVO.getId() == serviceVO.getCustomerId())
+				{
+					complaintVO.setCustomerCity(customersVO.getCity());
+					complaintVO.setCustomerName(customersVO.getCustomerName());
+					complaintVO.setProductName(serviceVO.getProductName());
+				}
+			}
+			tempList.add(complaintVO);
 		}
 		return tempList;
 	}

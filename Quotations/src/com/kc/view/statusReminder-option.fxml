@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,9 +11,9 @@
 <BorderPane prefHeight="426.0" prefWidth="615.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderOptionController">
   <!-- TODO Add Nodes -->
   <center>
-    <GridPane alignment="CENTER" maxHeight="-Infinity" prefHeight="271.0" prefWidth="615.0">
+    <GridPane alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="271.0" prefWidth="342.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <Label prefHeight="26.0" prefWidth="200.0" text="Default Email Account : " GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+        <Label prefHeight="26.0" prefWidth="200.0" text="Default Email Account : " GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0">
           <font>
             <Font name="System Bold" size="12.0" />
           </font>
@@ -38,8 +39,8 @@
         <Label prefHeight="25.0" prefWidth="114.0" text="Default Message" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="TOP" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="115.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="461.0" minWidth="10.0" prefWidth="227.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
@@ -51,6 +52,9 @@
       </rowConstraints>
     </GridPane>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>

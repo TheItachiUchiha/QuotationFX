@@ -44,6 +44,9 @@
             <Tab text="Untitled Tab 1">
               <content>
                 <BorderPane prefHeight="200.0" prefWidth="200.0" styleClass="background">
+                  <padding>
+                    <Insets />
+                  </padding>
                   <stylesheets>
                     <URL value="@../style/gui.css" />
                   </stylesheets>

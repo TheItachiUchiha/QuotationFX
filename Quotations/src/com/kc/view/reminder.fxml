@@ -12,7 +12,7 @@
 <BorderPane prefHeight="587.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderController">
   <!-- TODO Add Nodes -->
   <bottom>
-    <GridPane fx:id="emailGrid" alignment="CENTER" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="false" BorderPane.alignment="CENTER">
+    <GridPane fx:id="emailGrid" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label prefHeight="23.000099999997474" prefWidth="31.0" text="To :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="83.0" text="Subject :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -44,7 +44,7 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="164.0" />
       </columnConstraints>
       <padding>
-        <Insets left="10.0" fx:id="x1" />
+        <Insets fx:id="x1" />
       </padding>
       <rowConstraints>
         <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
@@ -60,7 +60,7 @@
     </GridPane>
   </bottom>
   <center>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="359.0" visible="true">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="359.0" visible="true" BorderPane.alignment="TOP_LEFT">
       <children>
         <HBox id="HBox" fx:id="autoReminderHBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
           <children>
@@ -138,17 +138,23 @@
         <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
       </rowConstraints>
+      <BorderPane.margin>
+        <Insets top="10.0" />
+      </BorderPane.margin>
     </GridPane>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox alignment="CENTER" prefHeight="98.0" prefWidth="771.0">
+    <VBox alignment="CENTER" prefHeight="98.0" prefWidth="771.0" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x1">
       <children>
-        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="771.0" spacing="5.0">
+        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="771.0" spacing="5.0">
           <children>
-            <Label prefHeight="20.0" prefWidth="50.0" text="Month" />
+            <Label prefHeight="20.0" prefWidth="91.0" text="Month" />
             <ComboBox fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
@@ -163,10 +169,10 @@
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
         </HBox>
-        <HBox fx:id="actionHBox" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="344.0" spacing="5.0" visible="false">
+        <HBox fx:id="actionHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" prefHeight="33.0" prefWidth="344.0" spacing="5.0" visible="false">
           <children>
-            <Label prefHeight="21.0" prefWidth="93.0" text="Reminder" />
-            <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="136.0" styleClass="combo-style">
+            <Label prefHeight="21.0" prefWidth="91.0" text="Reminder" />
+            <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Create Reminder" />
@@ -176,23 +182,17 @@
             </ComboBox>
           </children>
         </HBox>
-        <HBox id="referenceHbox" fx:id="referenceHBox" alignment="CENTER_LEFT" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="363.0" spacing="5.0" visible="false">
+        <HBox id="referenceHbox" fx:id="referenceHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" padding="$x1" prefHeight="33.0" prefWidth="363.0" spacing="5.0" visible="false">
           <children>
-            <Label prefHeight="21.0" prefWidth="93.0" text="Reference No" />
-            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="136.0" styleClass="combo-style">
+            <Label prefHeight="21.0" prefWidth="91.0" text="Reference No" />
+            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
           </children>
-          <padding>
-            <Insets left="10.0" fx:id="x1" />
-          </padding>
         </HBox>
       </children>
-      <BorderPane.margin>
-        <Insets top="20.0" />
-      </BorderPane.margin>
     </VBox>
   </top>
 </BorderPane>

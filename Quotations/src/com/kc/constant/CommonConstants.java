@@ -79,6 +79,7 @@ public class CommonConstants
 	public static final String REMINDER_NO = "1,2,3,4,5,6,7,8,9,10";
 	public static final String YEARS = "2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030";
 	public static final String NO_ENQUIRY = "There is No Enqiry for your selection";
+	public static final String NO_COMPLAINT = "There is No Complaint for your selection";
 	public static final String SELECT_MONTH_YEAR = "Please Select Year and Month Before Proceeding";
 	public static final String SELECT_TYPE_PERIOD = "Please Select Type and Period Before Proceeding";
 	public static final String SELECT_TYPE = "Please Select Type Before Proceeding";
@@ -98,6 +99,7 @@ public class CommonConstants
 	public static final String PDF_ACCESS_FAILED_MSG = "Please check if file/folder exists for PDF";
 	public static final String WORD_FILE = ".docx";
 	public static final String SERVICE_REGISTERED = "Service Registered Successfully";
+	public static final String COMPLAINT_REGISTERED = "Complaint Registered Successfully";
 	public static final String SERVICE_UPDATED = "Service Entry Updated Successfully";
 	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
 	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";

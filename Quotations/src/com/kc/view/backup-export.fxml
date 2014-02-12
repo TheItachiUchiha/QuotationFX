@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
@@ -19,12 +20,15 @@
     <Label id="message" fx:id="messageExport" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="212.0" text="" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" percentWidth="22.96116504854369" prefWidth="89.0" />
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" percentWidth="77.28155339805825" prefWidth="324.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" percentWidth="21.2621359223301" prefWidth="89.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" percentWidth="78.98058252427184" prefWidth="324.0" />
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="14.0" vgrow="SOMETIMES" />
   </rowConstraints>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </GridPane>

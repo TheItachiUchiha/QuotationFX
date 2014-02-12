@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.mytdev.javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
@@ -8,10 +9,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="706.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="706.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceModifyController">
   <center>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="486.0" BorderPane.alignment="TOP_LEFT">
+    <GridPane fx:id="serviceGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="351.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label prefHeight="22.0" prefWidth="140.0" text="Service Engineer Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Nature of the complaint:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
@@ -19,35 +21,35 @@
         <Label prefHeight="22.0" prefWidth="140.0" text="Date of Service:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Service Rating:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Service Charge:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-        <ComboBox prefHeight="21.0" prefWidth="210.0" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="4">
+        <ComboBox fx:id="ratingCombo" prefHeight="21.0" prefWidth="210.0" styleClass="combo-style" GridPane.columnIndex="1" GridPane.rowIndex="4">
           <items>
             <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
+              <String fx:value="Excelent" />
+              <String fx:value="Average" />
+              <String fx:value="Good" />
+              <String fx:value="Bad" />
             </FXCollections>
           </items>
         </ComboBox>
-        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="210.0" text="featch " wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextArea maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="210.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextArea fx:id="natureOfComplaint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="210.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextArea fx:id="feedback" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="107.0" prefWidth="210.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="engineerName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="charge" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="210.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
         <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="6">
           <children>
             <HBox id="HBox" alignment="CENTER" spacing="10.0">
               <children>
-                <Button mnemonicParsing="false" text="Save" />
-                <Button mnemonicParsing="false" text="Delete Entry" />
+                <Button mnemonicParsing="false" onAction="#save" text="Save" />
+                <Button mnemonicParsing="false" onAction="#deleteEntry" text="Delete Entry" />
               </children>
             </HBox>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="Label" />
+            <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="" />
           </children>
         </VBox>
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="250.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="350.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="298.0" minWidth="10.0" prefWidth="141.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="373.0" minWidth="10.0" prefWidth="210.0" />
       </columnConstraints>
       <padding>
         <Insets top="20.0" />
@@ -67,18 +69,18 @@
     </GridPane>
   </center>
   <padding>
-    <Insets left="30.0" />
+    <Insets left="40.0" top="40.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="101.0" prefWidth="676.0">
+    <VBox prefHeight="130.0" prefWidth="666.0" spacing="5.0">
       <children>
         <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
           <children>
-            <Label text="Month:" />
-            <ComboBox minHeight="16.0" prefHeight="21.0" prefWidth="134.0" promptText="Month of Service Entry" styleClass="combo-style">
+            <Label prefHeight="21.0" prefWidth="131.0" text="Month:" />
+            <ComboBox fx:id="monthCombo" minHeight="16.0" prefHeight="21.0" prefWidth="104.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -87,8 +89,8 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Label text="Year:" />
-            <ComboBox minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="Year of Service Entry" styleClass="combo-style">
+            <Label prefHeight="21.0" prefWidth="45.0" text="Year:" />
+            <ComboBox fx:id="yearCombo" minHeight="16.0" prefHeight="21.0" prefWidth="104.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -101,20 +103,43 @@
         </HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
           <children>
-            <Label prefHeight="26.0" text="Select a Customer with:" />
-            <RadioButton mnemonicParsing="false" prefHeight="26.0" text="Reference Number">
+            <Label prefHeight="26.0" prefWidth="131.0" text="Select a Customer with:" />
+            <RadioButton fx:id="referenceNo" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Reference Number">
               <toggleGroup>
                 <ToggleGroup fx:id="customerToggle" />
               </toggleGroup>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
+            <RadioButton fx:id="customerName" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
           </children>
         </HBox>
         <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
           <children>
-            <Label prefHeight="26.0" text="Enter / Select a Ref_No:" />
-            <TextField fx:id="change" prefHeight="26.0" prefWidth="160.0" text="" />
-            <Button mnemonicParsing="false" prefWidth="108.0" text="View Details" />
+            <Label prefHeight="26.0" prefWidth="131.0" text="Enter / Select a Ref_No:" />
+            <ComboBox id="monthCombo" fx:id="referenceCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Button mnemonicParsing="false" onAction="#viewComplaints" prefWidth="117.0" text="View Complaints" />
+          </children>
+        </HBox>
+        <HBox fx:id="complaintHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
+          <children>
+            <Label prefHeight="26.0" prefWidth="131.0" text="Complaint:" />
+            <ComboBox id="monthCombo" fx:id="complaintCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+            <Button mnemonicParsing="false" onAction="#viewDetails" prefWidth="117.0" text="View Details" />
           </children>
         </HBox>
       </children>

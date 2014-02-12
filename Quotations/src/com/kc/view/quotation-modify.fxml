@@ -11,13 +11,13 @@
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="528.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.QuotationModifyController">
   <!-- TODO Add Nodes -->
   <left>
-    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="664.0" visible="false">
+    <GridPane id="standardGrid" fx:id="quotationGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="182.0" prefWidth="664.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <!-- TODO Add Nodes -->
       <children>
-        <Label prefHeight="24.0" prefWidth="88.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-        <Label prefHeight="24.0" prefWidth="88.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <Label prefHeight="23.0" prefWidth="88.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-        <Label prefHeight="24.0" prefWidth="88.0" text="Estimated Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+        <Label prefHeight="24.0" prefWidth="97.0" text="Reference No." GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+        <Label prefHeight="24.0" prefWidth="97.0" text="Customer Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+        <Label prefHeight="23.0" prefWidth="97.0" text="Product Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+        <Label prefHeight="24.0" prefWidth="97.0" text="Estimated Price" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
         <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="4">
           <children>
             <HBox id="HBox" alignment="CENTER" spacing="5.0">
@@ -39,8 +39,8 @@
         <TextField id="customerName" fx:id="quotationPreparationDate" editable="false" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="15.513778379020312" prefWidth="110.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="31.148611938680148" prefWidth="415.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="252.0" minWidth="10.0" percentWidth="14.606062796569482" prefWidth="110.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="32.056327521130974" prefWidth="415.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="23.720170803364443" prefWidth="415.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="30.071296670160514" prefWidth="415.0" />
       </columnConstraints>
@@ -52,10 +52,13 @@
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets left="10.0" top="10.0" />
+        <Insets top="20.0" />
       </BorderPane.margin>
     </GridPane>
   </left>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <right>
     <GridPane id="standardGrid" fx:id="enquiryGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="452.0" visible="false">
       <!-- TODO Add Nodes -->
@@ -114,7 +117,7 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <GridPane prefHeight="72.0" prefWidth="874.0">
+    <GridPane prefHeight="72.0" prefWidth="874.0" BorderPane.margin="$x1">
       <children>
         <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0">
           <children>
@@ -133,7 +136,7 @@
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
           </children>
           <GridPane.margin>
-            <Insets left="100.0" fx:id="x1" />
+            <Insets fx:id="x1" />
           </GridPane.margin>
         </HBox>
         <HBox id="HBox" fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="42.0" prefWidth="874.0" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.margin="$x1" GridPane.rowIndex="1">
@@ -144,12 +147,12 @@
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquire Details">
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="110.0" styleClass="button-style" text="Enquire Details">
               <toggleGroup>
                 <ToggleGroup fx:id="buttonToggle" />
               </toggleGroup>
             </ToggleButton>
-            <Button fx:id="modifyQuotation" mnemonicParsing="false" prefWidth="125.0" styleClass="button-style" text="Modify Quotation " />
+            <Button fx:id="modifyQuotation" mnemonicParsing="false" prefWidth="126.0" styleClass="button-style" text="Modify Quotation " />
           </children>
         </HBox>
       </children>
@@ -161,9 +164,6 @@
         <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
       </rowConstraints>
-      <BorderPane.margin>
-        <Insets top="20.0" />
-      </BorderPane.margin>
     </GridPane>
   </top>
 </BorderPane>

@@ -11,7 +11,7 @@
 <BorderPane prefHeight="485.0" prefWidth="885.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.SaleStatusController">
   <!-- TODO Add Nodes -->
   <center>
-    <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="415.0" prefWidth="867.0" spacing="5.0" BorderPane.alignment="CENTER">
+    <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="415.0" prefWidth="867.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="390.0" prefWidth="866.0" styleClass="table-style">
           <columns>
@@ -44,19 +44,22 @@
       </BorderPane.margin>
     </VBox>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="748.0" spacing="5.0">
+    <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="845.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <Label prefHeight="21.0" prefWidth="56.0" text="Month" />
+        <Label prefHeight="21.0" prefWidth="53.0" text="Month" />
         <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
         </ComboBox>
-        <Label prefHeight="21.0" prefWidth="56.0" text="Year" />
+        <Label prefHeight="21.0" prefWidth="44.0" text="Year" />
         <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList" />
@@ -66,7 +69,7 @@
         <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" styleClass="button-style" text="View Unsuccessful" />
       </children>
       <BorderPane.margin>
-        <Insets top="20.0" />
+        <Insets />
       </BorderPane.margin>
     </HBox>
   </top>

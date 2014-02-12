@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="807.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceNewComplaint">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="571.0" prefWidth="807.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceModifyComplaintController">
   <bottom>
     <GridPane fx:id="nameGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="763.0" visible="false">
       <children>
@@ -78,7 +78,7 @@
     </GridPane>
   </bottom>
   <center>
-    <GridPane fx:id="referenceGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="763.0" visible="false" BorderPane.alignment="TOP_LEFT">
+    <GridPane fx:id="referenceGrid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="763.0" visible="true" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label prefHeight="22.0" prefWidth="140.0" text="Product Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Nature of the complaint:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
@@ -87,7 +87,7 @@
         <Label prefHeight="22.0" prefWidth="140.0" text="Total Services:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
           <children>
-            <Button mnemonicParsing="false" onAction="#registerComplaint" text="Register" />
+            <Button mnemonicParsing="false" onAction="#UpdateComplaint" text="Update" />
             <Label fx:id="registerConfirm" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="" />
           </children>
         </VBox>
@@ -134,29 +134,4 @@
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
-  <top>
-    <VBox prefHeight="65.00009999999747" prefWidth="600.0">
-      <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
-          <children>
-            <Label prefHeight="26.0" prefWidth="132.0" text="Select a Customer with:" />
-            <RadioButton mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" text="Reference Number">
-              <toggleGroup>
-                <ToggleGroup fx:id="customerToggle" />
-              </toggleGroup>
-            </RadioButton>
-            <RadioButton mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
-          </children>
-        </HBox>
-        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
-          <children>
-            <Label prefHeight="26.0" prefWidth="132.0" text="Enter / Select a Ref_No:" />
-            <AutoCompleteTextField id="customerNameAutoFill" fx:id="referenceAutoFill" maxWidth="-Infinity" prefHeight="31.0" prefWidth="148.0" />
-            <Button mnemonicParsing="false" onAction="#createComplaint" prefWidth="132.0" text="Create Complaint" />
-            <Button mnemonicParsing="false" onAction="#customerInfo" text="Customer Info" />
-          </children>
-        </HBox>
-      </children>
-    </VBox>
-  </top>
 </BorderPane>
