@@ -34,6 +34,7 @@ public class EnquiryViewVO {
 	private double totalRevenue;
 	private String enquiryCustomerType;
 	private int complaintCount;
+	private String dispatchDone;
 	
 	public int getId() {
 		return id;
@@ -234,6 +235,12 @@ public class EnquiryViewVO {
 	}
 	public void setComplaintCount(int complaintCount) {
 		this.complaintCount = complaintCount;
+	}
+	public String getDispatchDone() {
+		return dispatchDone;
+	}
+	public void setDispatchDone(String dispatchDone) {
+		this.dispatchDone = dispatchDone;
 	}
 	
 }

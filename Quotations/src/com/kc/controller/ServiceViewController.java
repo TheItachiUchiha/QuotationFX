@@ -9,16 +9,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ServiceDAO;
+import com.kc.model.ComplaintVO;
+import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
+import com.kc.util.QuotationUtil;
 
 public class ServiceViewController implements Initializable {
 	
@@ -74,8 +79,12 @@ public class ServiceViewController implements Initializable {
 	    
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 	   	private ObservableList<String> yearList = FXCollections.observableArrayList();
+	   	private ObservableList<EnquiryViewVO> listOfServices = FXCollections.observableArrayList();
 	   	
+	   	String startDate;
+	   	String endDate;
 	   	ServiceDAO serviceDAO;
+	   	
 	   	
 	   	public ServiceViewController() {
 	   		serviceDAO = new ServiceDAO();
@@ -98,6 +107,31 @@ public class ServiceViewController implements Initializable {
 	}
 	public void viewDetails()
 	{
+		if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
+		{
+			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+		}
+		else
+		{
+			try
+			{
+				serviceTable.getItems().clear();
+				listOfServices.clear();
+				startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				listOfServices=serviceDAO.getServiceHistory(startDate, endDate);
+				salesOrderTable.setItems(listOfServices);
+				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+				productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+				location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
+				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 	}
 

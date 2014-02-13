@@ -77,7 +77,7 @@
   <top>
     <VBox prefHeight="130.0" prefWidth="666.0" spacing="5.0">
       <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <HBox id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
           <children>
             <Label prefHeight="21.0" prefWidth="131.0" text="Month:" />
             <ComboBox fx:id="monthCombo" minHeight="16.0" prefHeight="21.0" prefWidth="104.0" promptText="" styleClass="combo-style">
@@ -89,7 +89,7 @@
                 </FXCollections>
               </items>
             </ComboBox>
-            <Label prefHeight="21.0" prefWidth="45.0" text="Year:" />
+            <Label prefHeight="21.0" prefWidth="36.0" text="Year:" />
             <ComboBox fx:id="yearCombo" minHeight="16.0" prefHeight="21.0" prefWidth="104.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
@@ -99,9 +99,10 @@
                 </FXCollections>
               </items>
             </ComboBox>
+            <Button mnemonicParsing="false" onAction="#search" prefWidth="60.0" text="Search" />
           </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="26.0" prefWidth="131.0" text="Select a Customer with:" />
             <RadioButton fx:id="referenceNo" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Reference Number">
@@ -112,7 +113,7 @@
             <RadioButton fx:id="customerName" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
           </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="26.0" prefWidth="131.0" text="Enter / Select a Ref_No:" />
             <ComboBox id="monthCombo" fx:id="referenceCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">

@@ -49,6 +49,7 @@ public class QuotationUtil {
 			enquiryViewVO.setTotalRevenue(enquiryVO.getTotalRevenue());
 			enquiryViewVO.setEnquiryCustomerType(enquiryVO.getEnquiryCustomerType());
 			enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
+			enquiryViewVO.setDispatchDone(enquiryVO.getDispatchDone());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
@@ -98,14 +99,14 @@ public class QuotationUtil {
 			complaintVO.setDateOfComplaint(serviceVO.getComplaintDate());
 			complaintVO.setProductName(serviceVO.getProductName());
 			complaintVO.setReferenceNo(serviceVO.getReferenceNo());
-			
+			complaintVO.setComplaint(serviceVO.getComplaint());
 			for(CustomersVO customersVO : customerList)
 			{
 				if(customersVO.getId() == serviceVO.getCustomerId())
 				{
 					complaintVO.setCustomerCity(customersVO.getCity());
 					complaintVO.setCustomerName(customersVO.getCustomerName());
-					complaintVO.setProductName(serviceVO.getProductName());
+					complaintVO.setEmailId(customersVO.getEmailId());
 				}
 			}
 			tempList.add(complaintVO);

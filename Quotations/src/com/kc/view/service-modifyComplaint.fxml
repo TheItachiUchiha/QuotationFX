@@ -83,7 +83,7 @@
         <Label prefHeight="22.0" prefWidth="140.0" text="Product Name:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Nature of the complaint:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
         <TextArea fx:id="natureOfComplaint" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="225.0" text="" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField fx:id="productName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <TextField fx:id="productName" editable="false" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="225.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="140.0" text="Total Services:" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
         <VBox id="VBox" alignment="TOP_CENTER" prefHeight="66.0" prefWidth="370.0" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="3">
           <children>

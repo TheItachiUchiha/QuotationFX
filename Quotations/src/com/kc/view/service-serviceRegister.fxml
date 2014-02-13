@@ -72,7 +72,7 @@
   <top>
     <VBox prefHeight="65.00009999999747" prefWidth="600.0" spacing="5.0">
       <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="26.0" prefWidth="132.0" text="Select a Customer with:" />
             <RadioButton fx:id="referenceNo" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" text="Reference Number">

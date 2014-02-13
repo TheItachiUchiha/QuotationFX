@@ -8,6 +8,9 @@ public class ComplaintVO {
 	private String customerName;
 	private String customerCity;
 	private String dateOfComplaint;
+	private String emailId;
+	private String complaint;
+	private String contactNo;
 	private int ServiceCount;
 	public int getId() {
 		return id;
@@ -50,6 +53,24 @@ public class ComplaintVO {
 	}
 	public void setServiceCount(int serviceCount) {
 		ServiceCount = serviceCount;
+	}
+	public String getComplaint() {
+		return complaint;
+	}
+	public void setComplaint(String complaint) {
+		this.complaint = complaint;
+	}
+	public String getEmailId() {
+		return emailId;
+	}
+	public void setEmailId(String emailId) {
+		this.emailId = emailId;
+	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
 	}
 	
 }

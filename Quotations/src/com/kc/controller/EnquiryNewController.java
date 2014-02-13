@@ -483,6 +483,7 @@ public class EnquiryNewController implements Initializable {
 					enquiryVO.setQuotationPreparation("N");
 					enquiryVO.setEmailSent("N");
 					enquiryVO.setSales("N");
+					enquiryVO.setDispatchDone("N");
 					enquiryVO.setDate(date);
 					enquiryVO.setFlag(typeFlag);
 					enquiryVO.setProductId(productId);

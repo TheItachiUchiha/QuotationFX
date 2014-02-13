@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -89,19 +90,26 @@ public class ServiceModifyController implements Initializable {
 	    @FXML
 	    private HBox complaintHBox;
 	    
+	    @FXML
+	    private HBox referenceHBox;
+	    
 	    Validation validation;
 	    private DatePicker calendar;
 	    ServiceDAO serviceDAO;
 	    EnquiryDAO enquiryDAO;
 	    CustomersDAO customersDAO;
+	    String startDate;
+	    String endDate;
 	    
-	    private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
+	   /* private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
-		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
+		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();*/
 	    private ObservableList<ServiceVO> refList = FXCollections.observableArrayList();
 	    private ObservableList<ServiceVO> serviceList = FXCollections.observableArrayList();
 	    private ObservableList<String> uniqueRefList = FXCollections.observableArrayList();
 	    private ObservableList<String> complaintList = FXCollections.observableArrayList();
+	    private ObservableList<String> monthList = FXCollections.observableArrayList();
+	   	private ObservableList<String> yearList = FXCollections.observableArrayList();
 	    public ServiceModifyController() {
 	    	validation = new Validation();
 			serviceDAO = new ServiceDAO();
@@ -114,6 +122,10 @@ public class ServiceModifyController implements Initializable {
 		
 		try
 		{
+			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
+			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
+			yearCombo.setItems(yearList);
+			monthCombo.setItems(monthList);
 			validation.allowAsAmount(charge);
 			calendar = new DatePicker(Locale.ENGLISH);
     		calendar.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
@@ -124,21 +136,33 @@ public class ServiceModifyController implements Initializable {
     		((TextField)calendar.getChildren().get(0)).setPrefWidth(100);
     		serviceGrid.add(calendar, 1, 3);
     		
-    		enquiryList = enquiryDAO.getEnquries();
+    		/*enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
-			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
-    		refList=serviceDAO.getServiceList();
-    		serviceList=serviceDAO.getServiceDetails();
-    		
-    		for(ServiceVO serviceVO : refList)
-    		{
-    			if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
-    			{
-    				uniqueRefList.add(serviceVO.getReferenceNo());
-    			}
-    		}
-    		referenceCombo.setItems(uniqueRefList);
-    		
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);*/
+    		monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					
+						serviceGrid.setVisible(false);
+						complaintHBox.setVisible(false);
+						referenceHBox.setVisible(false);
+				}
+			});
+    		yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					
+						serviceGrid.setVisible(false);
+						complaintHBox.setVisible(false);
+						referenceHBox.setVisible(false);
+				}
+			});
     		referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
 
 				@Override
@@ -148,8 +172,6 @@ public class ServiceModifyController implements Initializable {
 					
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
-					
-					
 				}
 			});
     		complaintCombo.valueProperty().addListener(new ChangeListener<String>() {
@@ -160,13 +182,53 @@ public class ServiceModifyController implements Initializable {
 						String oldValue, String newValue) {
 					
 						serviceGrid.setVisible(false);
-					
-					
 				}
 			});
 		}
 		catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	//search reference No for selected Month and Year
+	public void search()
+	{
+		if(monthCombo.getSelectionModel().getSelectedIndex()==-1 || yearCombo.getSelectionModel().getSelectedIndex()==-1)
+		{
+			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+		}
+		else
+		{
+		
+			try
+			{
+				refList.clear();
+				uniqueRefList.clear();
+				startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
+				refList=serviceDAO.getServiceList(startDate, endDate);
+				if(refList.isEmpty())
+				{
+					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
+				}
+				else
+				{
+					serviceList=serviceDAO.getServiceDetails();
+					
+					for(ServiceVO serviceVO : refList)
+					{
+						if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
+						{
+							uniqueRefList.add(serviceVO.getReferenceNo());
+						}
+					}
+					referenceCombo.setItems(uniqueRefList);
+					referenceHBox.setVisible(true);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	// Fill the ComplaintCombo for a Reference Number
@@ -208,27 +270,7 @@ public class ServiceModifyController implements Initializable {
    				
    				if(complaintCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getComplaintId()))
    				{
-   					engineerName.setText(serviceVO.getEngineerName());
-   					natureOfComplaint.setText(serviceVO.getComplaint());
-   					feedback.setText(serviceVO.getFeedback());
-   					((TextField)calendar.getChildren().get(0)).setText(serviceVO.getDate());
-   					charge.setText(String.valueOf(serviceVO.getCharge()));
-   					if(serviceVO.getRating().equalsIgnoreCase("Excelent"))
-   					{
-   						ratingCombo.getSelectionModel().select(0);
-   					}
-   					else if(serviceVO.getRating().equalsIgnoreCase("Average"))
-   					{
-   						ratingCombo.getSelectionModel().select(1);
-   					}
-   					else if(serviceVO.getRating().equalsIgnoreCase("Good"))
-   					{
-   						ratingCombo.getSelectionModel().select(2);
-   					}
-   					else if(serviceVO.getRating().equalsIgnoreCase("Bad"))
-   					{
-   						ratingCombo.getSelectionModel().select(3);
-   					}
+   					fillTextFieldValues(serviceVO);
    					break;
    				}
    				
@@ -239,6 +281,31 @@ public class ServiceModifyController implements Initializable {
 	   catch (Exception e) {
 		e.printStackTrace();
 	}
+   }
+   
+   public void fillTextFieldValues(ServiceVO serviceVO)
+   {
+   		engineerName.setText(serviceVO.getEngineerName());
+		natureOfComplaint.setText(serviceVO.getComplaint());
+		feedback.setText(serviceVO.getFeedback());
+		((TextField)calendar.getChildren().get(0)).setText(serviceVO.getDate());
+		charge.setText(String.valueOf(serviceVO.getCharge()));
+		if(serviceVO.getRating().equalsIgnoreCase("Excelent"))
+		{
+			ratingCombo.getSelectionModel().select(0);
+		}
+		else if(serviceVO.getRating().equalsIgnoreCase("Average"))
+		{
+			ratingCombo.getSelectionModel().select(1);
+		}
+		else if(serviceVO.getRating().equalsIgnoreCase("Good"))
+		{
+			ratingCombo.getSelectionModel().select(2);
+		}
+		else if(serviceVO.getRating().equalsIgnoreCase("Bad"))
+		{
+			ratingCombo.getSelectionModel().select(3);
+		}
    }
 	 // Register Service
    public void save() 

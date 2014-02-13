@@ -27,6 +27,7 @@ public class EnquiryVO {
 	private int reminderSent;
 	private double totalRevenue;
 	private String enquiryCustomerType;
+	private String dispatchDone;
 	private int complaintCount;
 	private ObservableList<ComponentsVO> list;
 	
@@ -185,6 +186,12 @@ public class EnquiryVO {
 	}
 	public void setComplaintCount(int complaintCount) {
 		this.complaintCount = complaintCount;
+	}
+	public String getDispatchDone() {
+		return dispatchDone;
+	}
+	public void setDispatchDone(String dispatchDone) {
+		this.dispatchDone = dispatchDone;
 	}
 	
 }

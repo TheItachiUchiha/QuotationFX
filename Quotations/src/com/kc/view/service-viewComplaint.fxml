@@ -39,9 +39,7 @@
         <ComboBox fx:id="monthCombo" minHeight="16.0" prefHeight="21.0" prefWidth="137.0" promptText="Month of Complaint" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
+              
             </FXCollections>
           </items>
         </ComboBox>
@@ -49,9 +47,7 @@
         <ComboBox fx:id="yearCombo" minHeight="16.0" prefHeight="21.0" prefWidth="137.0" promptText="Year of Complaint" styleClass="combo-style">
           <items>
             <FXCollections fx:factory="observableArrayList">
-              <String fx:value="Item 1" />
-              <String fx:value="Item 2" />
-              <String fx:value="Item 3" />
+              
             </FXCollections>
           </items>
         </ComboBox>

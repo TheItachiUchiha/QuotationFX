@@ -2,6 +2,7 @@ package com.kc.model;
 
 public class DispatchVO {
 	private int id;
+	private String referenceNo;
 	private String invoiceNo;
 	private String invoiceDate;
 	private String billingName;
@@ -10,14 +11,21 @@ public class DispatchVO {
 	private String transporter;
 	private String dispatchDate;
 	private String trackingNo;
-	private String noOfItems;
+	private int noOfItems;
 	private String freightMode;
-	private String freightAmount;
+	private Double freightAmount;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getReferenceNo() {
+		return referenceNo;
+	}
+	public void setReferenceNo(String referenceNo) {
+		this.referenceNo = referenceNo;
 	}
 	public String getInvoiceNo() {
 		return invoiceNo;
@@ -67,10 +75,10 @@ public class DispatchVO {
 	public void setTrackingNo(String trackingNo) {
 		this.trackingNo = trackingNo;
 	}
-	public String getNoOfItems() {
+	public int getNoOfItems() {
 		return noOfItems;
 	}
-	public void setNoOfItems(String noOfItems) {
+	public void setNoOfItems(int noOfItems) {
 		this.noOfItems = noOfItems;
 	}
 	public String getFreightMode() {
@@ -79,10 +87,10 @@ public class DispatchVO {
 	public void setFreightMode(String freightMode) {
 		this.freightMode = freightMode;
 	}
-	public String getFreightAmount() {
+	public Double getFreightAmount() {
 		return freightAmount;
 	}
-	public void setFreightAmount(String freightAmount) {
+	public void setFreightAmount(Double freightAmount) {
 		this.freightAmount = freightAmount;
 	}
 	

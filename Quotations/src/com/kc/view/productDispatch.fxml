@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -13,7 +14,27 @@
       <tabs>
         <Tab fx:id="dispatchTab" text="Product Dispatch">
           <content>
-            <BorderPane prefHeight="200.0" prefWidth="200.0" />
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+              <padding>
+                <Insets left="40.0" top="40.0" />
+              </padding>
+              <top>
+                <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="834.0" spacing="15.0" visible="true">
+                  <children>
+                    <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="77.0" text="Select a Type" />
+                    <RadioButton id="createDispatch" fx:id="createRadio" mnemonicParsing="false" text="Create a New Dispatch">
+                      <toggleGroup>
+                        <ToggleGroup fx:id="dispatchToggle" />
+                      </toggleGroup>
+                    </RadioButton>
+                    <RadioButton id="viewDispatch" fx:id="viewRadio" mnemonicParsing="false" text="View Dispatch Details" toggleGroup="$dispatchToggle" />
+                  </children>
+                  <padding>
+                    <Insets />
+                  </padding>
+                </HBox>
+              </top>
+            </BorderPane>
           </content>
         </Tab>
         <Tab fx:id="optionTab" text="Option">

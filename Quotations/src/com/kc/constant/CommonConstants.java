@@ -100,10 +100,12 @@ public class CommonConstants
 	public static final String WORD_FILE = ".docx";
 	public static final String SERVICE_REGISTERED = "Service Registered Successfully";
 	public static final String COMPLAINT_REGISTERED = "Complaint Registered Successfully";
+	public static final String COMPLAINT_UPDATE = "Complaint Updated Successfully";
 	public static final String SERVICE_UPDATED = "Service Entry Updated Successfully";
 	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
 	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";
 	public static final String REMINDER_DELETED = "Reminder Deleted Successfully";
+	public static final String DISPATCH_DONE = "Dispatch Done Successfully";
 
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;

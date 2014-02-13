@@ -19,6 +19,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.model.ComplaintVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.DBConnector;
 
@@ -49,7 +50,7 @@ public class ServiceDAO {
 			}
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO service(reference_no,engineer_name,complaint,date,rating,charge,complaint_date,feedback,complaint_id,product_name,customer_id) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO service(reference_no,engineer_name,complaint,date,rating,charge,complaint_date,feedback,complaint_id,product_name,customer_id,customer_name,contact_no) VALUES(?,?,?,?,?,?,?, ?, ?, ?, ?, ?,?)");
 			preparedStatement.setString(1, serviceVO.getReferenceNo());
 			preparedStatement.setString(2, serviceVO.getEngineerName());
 			preparedStatement.setString(3, serviceVO.getComplaint());
@@ -61,6 +62,8 @@ public class ServiceDAO {
 			preparedStatement.setString(9, serviceVO.getReferenceNo()+"-"+count);
 			preparedStatement.setString(10, serviceVO.getProductName());
 			preparedStatement.setInt(11, serviceVO.getCustomerId());
+			preparedStatement.setString(12, serviceVO.getCustomerName());
+			preparedStatement.setString(13, serviceVO.getContactNo());
 			
 			preparedStatement.execute();
 		}
@@ -70,6 +73,81 @@ public class ServiceDAO {
 		}
 		LOG.info("Exit : newComplaint");
 	}
+	
+	public void updateComplaint(ComplaintVO complaintVO)
+	{
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET complaint=?,complaint_date=? where id=?");
+			preparedStatement.setString(1, complaintVO.getComplaint());
+			preparedStatement.setString(2, complaintVO.getDateOfComplaint());
+			preparedStatement.setInt(3, complaintVO.getId());
+			
+			preparedStatement.execute();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
+	
+	public ObservableList<ServiceVO> getComplaintList() throws Exception
+	{
+		LOG.info("Enter : getComplaintList");
+		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn
+					.prepareStatement("select id,reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date=?");
+			preparedStatement.setString(1, CommonConstants.NA);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				ServiceVO serviceVO = new ServiceVO();
+				serviceVO.setId(resultSet.getInt(1));
+				serviceVO.setReferenceNo(resultSet.getString(2));
+				serviceVO.setComplaint(resultSet.getString(3));
+				serviceVO.setComplaintDate(resultSet.getString(4));
+				serviceVO.setComplaintId(resultSet.getString(5));
+				serviceVO.setProductName(resultSet.getString(6));
+				serviceVO.setCustomerId(resultSet.getInt(7));
+				
+				listOfEnquries.add(serviceVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComplaintList");
+		return listOfEnquries;
+	}
+	
+	public void deleteComplaint(ComplaintVO complaintVO) throws Exception
+	{
+		LOG.info("Enter : deleteComplaint");
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("DELETE FROM Service WHERE ID=?");
+			preparedStatement.setInt(1, complaintVO.getId());
+			preparedStatement.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+			throw e;
+		}
+		LOG.info("Exit : deleteComplaint");
+	}
+	
 	public void newService(ServiceVO serviceVO,String complaintId)
 	{
 		LOG.info("Enter : newService");
@@ -94,21 +172,136 @@ public class ServiceDAO {
 		LOG.info("Exit : newService");
 	}
 	
-	public void deleteComplaint(ComplaintVO complaintVO) throws Exception
+	public ObservableList<ServiceVO> getServiceList(String startDate, String endDate) throws Exception
 	{
-		LOG.info("Enter : deleteComplaint");
-		try {
+		LOG.info("Enter : getComplaintList");
+		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
+		try
+		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM Service WHERE ID=?");
-			preparedStatement.setInt(1, complaintVO.getId());
-			preparedStatement.execute();
-		} catch (Exception e) {
+			preparedStatement = conn
+					.prepareStatement("select reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date!=? and "+
+							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
+							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+			preparedStatement.setString(1, CommonConstants.NA);
+			preparedStatement.setString(2, startDate);
+			preparedStatement.setString(3, endDate);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				ServiceVO serviceVO = new ServiceVO();
+				serviceVO.setReferenceNo(resultSet.getString(1));
+				serviceVO.setComplaint(resultSet.getString(2));
+				serviceVO.setComplaintDate(resultSet.getString(3));
+				serviceVO.setComplaintId(resultSet.getString(4));
+				serviceVO.setProductName(resultSet.getString(5));
+				serviceVO.setCustomerId(resultSet.getInt(6));
+				
+				listOfEnquries.add(serviceVO);
+			}
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());
-			throw e;
 		}
-		LOG.info("Exit : deleteComplaint");
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComplaintList");
+		return listOfEnquries;
 	}
+	
+	public ObservableList<ServiceVO> getServiceDetails() throws Exception
+	{
+		LOG.info("Enter : getServiceDetails");
+		ObservableList<ServiceVO> listOfServices = FXCollections.observableArrayList();
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn
+					.prepareStatement("select * from quotation.SERVICE where date!=?");
+			preparedStatement.setString(1, CommonConstants.NA);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				ServiceVO serviceVO = new ServiceVO();
+				serviceVO.setId(resultSet.getInt(1));
+				serviceVO.setReferenceNo(resultSet.getString(2));
+				serviceVO.setEngineerName(resultSet.getString(3));
+				serviceVO.setComplaint(resultSet.getString(4));
+				serviceVO.setDate(resultSet.getString(5));
+				serviceVO.setRating(resultSet.getString(6));
+				serviceVO.setCharge(resultSet.getDouble(7));
+				serviceVO.setComplaintDate(resultSet.getString(8));
+				serviceVO.setFeedback(resultSet.getString(9));
+				serviceVO.setComplaintId(resultSet.getString(10));
+				
+				listOfServices.add(serviceVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getServiceDetails");
+		return listOfServices;
+	}
+	
+	public ObservableList<EnquiryViewVO> getServiceHistory(String startDate , String endDate) throws Exception
+	{
+		LOG.info("Enter : getServiceHistory");
+		ObservableList<EnquiryViewVO> listOfServices = FXCollections.observableArrayList();
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn
+					.prepareStatement("SELECT s.reference_no , s.product_name, s.customer_name, c.companyname, c.state , e.referedby FROM quotation.SERVICE s, "+
+			"quotation.Customers c, quotation.enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.date!=? and "+
+			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
+			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+			preparedStatement.setString(1, CommonConstants.NA);
+			preparedStatement.setString(2, startDate);
+			preparedStatement.setString(3, endDate);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				EnquiryViewVO viewVO = new EnquiryViewVO();
+				viewVO.setReferenceNo(resultSet.getString(1));
+				viewVO.setProductName(resultSet.getString(2));
+				viewVO.setCustomerName(resultSet.getString(3));
+				viewVO.setCompanyName(resultSet.getString(4));
+				viewVO.setState(resultSet.getString(5));
+				viewVO.setReferedBy(resultSet.getString(6));
+				
+				listOfServices.add(viewVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getServiceHistory");
+		return listOfServices;
+	}
+	
 	public void deleteService(ServiceVO serviceVO)
 	{
 		try
@@ -153,7 +346,6 @@ public class ServiceDAO {
 		}
 	}
 	
-	
 	public Map<String, String> getServiceOptionDefaultValues()
 	{
 		LOG.info("Enter : getServiceOptionDefaultValues");
@@ -190,125 +382,6 @@ public class ServiceDAO {
 			LOG.error(e.getMessage());
 		}
 		return map;
-	}
-	
-	public ObservableList<ServiceVO> getComplaintList() throws Exception
-	{
-		LOG.info("Enter : getComplaintList");
-		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn
-					.prepareStatement("select reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date=?");
-			preparedStatement.setString(1, CommonConstants.NA);
-			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next())
-			{
-				ServiceVO serviceVO = new ServiceVO();
-				serviceVO.setReferenceNo(resultSet.getString(1));
-				serviceVO.setComplaint(resultSet.getString(2));
-				serviceVO.setComplaintDate(resultSet.getString(3));
-				serviceVO.setComplaintId(resultSet.getString(4));
-				serviceVO.setProductName(resultSet.getString(5));
-				serviceVO.setCustomerId(resultSet.getInt(6));
-				
-				listOfEnquries.add(serviceVO);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		finally{
-			if(conn !=null)
-			{
-				conn.close();
-			}
-		}
-		LOG.info("Exit : getComplaintList");
-		return listOfEnquries;
-	}
-	public ObservableList<ServiceVO> getServiceList() throws Exception
-	{
-		LOG.info("Enter : getComplaintList");
-		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn
-					.prepareStatement("select reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date!=?");
-			preparedStatement.setString(1, CommonConstants.NA);
-			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next())
-			{
-				ServiceVO serviceVO = new ServiceVO();
-				serviceVO.setReferenceNo(resultSet.getString(1));
-				serviceVO.setComplaint(resultSet.getString(2));
-				serviceVO.setComplaintDate(resultSet.getString(3));
-				serviceVO.setComplaintId(resultSet.getString(4));
-				serviceVO.setProductName(resultSet.getString(5));
-				serviceVO.setCustomerId(resultSet.getInt(6));
-				
-				listOfEnquries.add(serviceVO);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		finally{
-			if(conn !=null)
-			{
-				conn.close();
-			}
-		}
-		LOG.info("Exit : getComplaintList");
-		return listOfEnquries;
-	}
-	public ObservableList<ServiceVO> getServiceDetails() throws Exception
-	{
-		LOG.info("Enter : getServiceDetails");
-		ObservableList<ServiceVO> listOfServices = FXCollections.observableArrayList();
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn
-					.prepareStatement("select * from quotation.SERVICE where date!=?");
-			preparedStatement.setString(1, CommonConstants.NA);
-			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next())
-			{
-				ServiceVO serviceVO = new ServiceVO();
-				serviceVO.setId(resultSet.getInt(1));
-				serviceVO.setReferenceNo(resultSet.getString(2));
-				serviceVO.setEngineerName(resultSet.getString(3));
-				serviceVO.setComplaint(resultSet.getString(4));
-				serviceVO.setDate(resultSet.getString(5));
-				serviceVO.setRating(resultSet.getString(6));
-				serviceVO.setCharge(resultSet.getDouble(7));
-				serviceVO.setComplaintDate(resultSet.getString(8));
-				serviceVO.setFeedback(resultSet.getString(9));
-				serviceVO.setComplaintId(resultSet.getString(10));
-				
-				listOfServices.add(serviceVO);
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		finally{
-			if(conn !=null)
-			{
-				conn.close();
-			}
-		}
-		LOG.info("Exit : getServiceDetails");
-		return listOfServices;
 	}
 	
 }

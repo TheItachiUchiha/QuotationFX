@@ -241,6 +241,8 @@ public class ServiceNewComplaint implements Initializable {
 			if(enquiryVO.getReferenceNo().equals(referenceAutoFill.getText()) )
 			{
 				serviceVO.setCustomerId(enquiryVO.getCustomerId());
+				serviceVO.setCustomerName(enquiryVO.getCustomerName());
+				serviceVO.setContactNo(enquiryVO.getContactNumber());
 				break;
 			}
 		}
@@ -255,13 +257,11 @@ public class ServiceNewComplaint implements Initializable {
     public void sendMail()
     {
 		try{
-			Map<String,String> emailMap = new HashMap<String,String>();
-			emailMap = serviceDAO.getServiceOptionDefaultValues();
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
 			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, "New Complaint");
-			emailData.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_SERVICE_EMAIL));
-			emailData.put(CommonConstants.EMAIL_PASSWORD, emailMap.get(CommonConstants.KEY_QUOTATION_PASSWORD));
+			emailData.put(CommonConstants.EMAIL_USERNAME, emailDetails.get(CommonConstants.KEY_SERVICE_EMAIL));
+			emailData.put(CommonConstants.EMAIL_PASSWORD, emailDetails.get(CommonConstants.KEY_SERVICE_PASSWORD));
 			Email email = new Email(emailData);
 			new Thread(email).start();
 			emailSent.getStyleClass().remove("failure");

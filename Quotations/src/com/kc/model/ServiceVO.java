@@ -13,6 +13,8 @@ public class ServiceVO {
 	String feedback;
 	String complaintId;
 	String productName;
+	private String contactNo;
+	private String customerName;
 	int customerId;
 	public int getId() {
 		return id;
@@ -85,6 +87,18 @@ public class ServiceVO {
 	}
 	public void setCustomerId(int customerId) {
 		this.customerId = customerId;
+	}
+	public String getContactNo() {
+		return contactNo;
+	}
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 }

@@ -189,18 +189,24 @@ public class ServiceViewComplaint implements Initializable {
 		}
 	}
 	
-	public void deleteComplaint(ComplaintVO complaintVO) throws Exception
+	public void deleteComplaint(ComplaintVO complaintVO)
 	{
-		LOG.info("Enter : deleteComplaint");
-		DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-			    "Do you want to delete selected Complaint", "Confirm", "Delete Complaint", DialogOptions.OK_CANCEL);
-		if(response.equals(DialogResponse.OK))
+		try
 		{
-			serviceDAO.deleteComplaint(complaintVO);
-			fillTable();
-			
+			LOG.info("Enter : deleteComplaint");
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+				    "Do you want to delete selected Complaint", "Confirm", "Delete Complaint", DialogOptions.OK_CANCEL);
+			if(response.equals(DialogResponse.OK))
+			{
+				serviceDAO.deleteComplaint(complaintVO);
+				fillTable();
+				
+			}
+			LOG.info("Exit : deleteComplaint");
 		}
-		LOG.info("Exit : deleteComplaint");
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private class ButtonCell extends TableCell<ComplaintVO, Boolean> {
