@@ -16,12 +16,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.Dialogs.DialogOptions;
-import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,7 +36,6 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.dao.DispatchDAO;
-import com.kc.model.ComplaintVO;
 import com.kc.model.DispatchVO;
 
 public class ProductDispatchViewController implements Initializable {
@@ -62,7 +61,7 @@ public class ProductDispatchViewController implements Initializable {
 	    private HBox referenceHBox;
 
 	    @FXML
-	    private TableColumn<DispatchVO , String> customerName;
+	    private TableColumn<DispatchVO , String> companyName;
 
 	    @FXML
 	    private TableColumn<DispatchVO , String> dispatchDate;
@@ -135,7 +134,7 @@ public class ProductDispatchViewController implements Initializable {
 			invoiceNo.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("invoiceNo"));
 			invoiceDate.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("invoiceDate"));
 			invoiceValue.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("noOfItems"));
-			//customerName.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("customerName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("companyName"));
 			shippingTo.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("shippingTo"));
 			transporter.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("transporter"));
 			frieghtAmount.setCellValueFactory(new PropertyValueFactory<DispatchVO, Double>("freightAmount"));
