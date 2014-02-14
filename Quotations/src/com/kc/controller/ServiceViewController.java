@@ -4,23 +4,32 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ServiceDAO;
-import com.kc.model.ComplaintVO;
-import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
@@ -46,6 +55,12 @@ public class ServiceViewController implements Initializable {
 
 	    @FXML
 	    private ComboBox<String> monthCombo;
+	    
+	    @FXML
+	    private ComboBox<String> keyCombo;
+	    
+	    @FXML
+	    private ComboBox<String> searchCombo;
 
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> productPurchased;
@@ -100,11 +115,43 @@ public class ServiceViewController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			yearCombo.setItems(yearList);
 			monthCombo.setItems(monthList);
+			
+			action.setSortable(false);
+	        
+	        action.setCellValueFactory(
+	                new Callback<TableColumn.CellDataFeatures<EnquiryViewVO, Boolean>,
+	                ObservableValue<Boolean>>() {
+	 
+	            @Override
+	            public ObservableValue<Boolean> call(TableColumn.CellDataFeatures<EnquiryViewVO, Boolean> p) {
+	                return new SimpleBooleanProperty(p.getValue() != null);
+	            }
+	        });
+	        action.setCellFactory(
+	                new Callback<TableColumn<EnquiryViewVO, Boolean>, TableCell<EnquiryViewVO, Boolean>>() {
+	 
+	            @Override
+	            public TableCell<EnquiryViewVO, Boolean> call(TableColumn<EnquiryViewVO, Boolean> p) {
+	                return new ButtonCell();
+	            }
+	         
+	        });
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+	
+	public void go()
+	{
+		
+	}
+	
+	public void search()
+	{
+		
+	}
+	
 	public void viewDetails()
 	{
 		if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
@@ -134,5 +181,42 @@ public class ServiceViewController implements Initializable {
 		}
 		
 	}
+	
+	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
+	       
+		Image buttonViewImage = new Image(getClass().getResourceAsStream("/com/kc/style/view.png"));
+		final Button cellViewButton = new Button("", new ImageView(buttonViewImage));
+		
+        ButtonCell(){
+            
+        	cellViewButton.getStyleClass().add("editDeleteButton");
+        	cellViewButton.setTooltip(new Tooltip("View"));
+        	
+        	cellViewButton.setOnAction(new EventHandler<ActionEvent>(){
+ 
+                @Override
+                public void handle(ActionEvent t) {
+                    try {
+                    	serviceTable.setVisible(true);
+                    	
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+                }
+            });
+        	
+        }
+ 
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+            	HBox box = new HBox();
+            	box.getChildren().addAll(cellViewButton);
+                setGraphic(box);
+            }
+        }
+    }
 
 }

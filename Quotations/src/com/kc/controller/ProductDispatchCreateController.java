@@ -224,6 +224,8 @@ public class ProductDispatchCreateController implements Initializable {
 			dispatchGrid.setVisible(true);
 		}
 	}
+	
+	//create a product Dispatch Entry
 	public void saveDispatch()
 	{
 		DispatchVO dispatchVO = new DispatchVO();
@@ -245,12 +247,14 @@ public class ProductDispatchCreateController implements Initializable {
 		message.getStyleClass().add("success");
 		message.setVisible(true);
 	}
+	
+	//Send a Mail
 	public void sendMail()
 	{
 		try{
 			
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
-			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
+			emailData.put(CommonConstants.EMAIL_BODY, body.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, "Dispatch Details");
 			emailData.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_DISPATCH_EMAIL));
 			emailData.put(CommonConstants.EMAIL_PASSWORD, emailMap.get(CommonConstants.KEY_DISPATCH_PASSWORD));

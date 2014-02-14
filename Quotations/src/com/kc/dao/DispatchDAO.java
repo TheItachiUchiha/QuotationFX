@@ -107,7 +107,7 @@ public class DispatchDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("Update dispatch SET invoice_no=?,invoice_date=?,billing_name=?,shipping_to=?,transporter=?,dispatch_date=?,tracking_no=?,items=?,freight_mode=?,freight_amount=? company_name=? where id=?");
+			preparedStatement = conn.prepareStatement("Update dispatch SET invoice_no=?,invoice_date=?,billing_name=?,shipping_to=?,transporter=?,dispatch_date=?,tracking_no=?,items=?,freight_mode=?,freight_amount=?, company_name=? where id=?");
 			
 			preparedStatement.setString(1, dispatchVO.getInvoiceNo());
 			preparedStatement.setString(2, dispatchVO.getInvoiceDate());

@@ -125,6 +125,7 @@ public class ProductDispatchViewController implements Initializable {
 		
 	}
 	
+	//fill the ProductDispatch table 
 	public void fillTable()
 	{
 		try
@@ -144,16 +145,17 @@ public class ProductDispatchViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+	//Code not Written 
 	public void search()
 	{
 		
 	}
-	
+	//Code not Written
 	public void go()
 	{
 		
 	}
+	// delete the selected product Dispatch Entry
 	public void deleteDispatch(DispatchVO dispatchVO)
 	{
 		try

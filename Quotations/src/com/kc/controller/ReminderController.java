@@ -121,6 +121,9 @@ public class ReminderController implements Initializable {
 	    private Label sentReminder;
 	    
 	    @FXML
+	    private Label message;
+	    
+	    @FXML
 	    private HBox sentHBox;
 
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
@@ -175,6 +178,7 @@ public class ReminderController implements Initializable {
 						emailGrid.setVisible(false);
 						autoReminderHBox.setVisible(false);
 						autoReminderVBox.setVisible(false);
+						messageSendMail.setText("");
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
@@ -234,6 +238,7 @@ public class ReminderController implements Initializable {
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
 					autoReminderHBox.setVisible(true);
+					messageSendMail.setText("");
 					if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 					{
 						try
@@ -264,7 +269,8 @@ public class ReminderController implements Initializable {
 		}
 		LOG.info("Exit : initialize");
 	}
-	public void sendMail()
+	
+	public void saveReminder()
 	{
 		try
 		{
@@ -289,8 +295,11 @@ public class ReminderController implements Initializable {
 					reminderVO.setTotalReminder(1);
 					reminderVO.setNextSend(CommonConstants.NA);
 				}
-				mailSending();
 				statusReminderDAO.createReminder(reminderVO);
+				messageSendMail.getStyleClass().remove("failure");
+				messageSendMail.getStyleClass().add("success");
+				messageSendMail.setText("Reminder Created Successfully");
+				messageSendMail.setVisible(true);
 			}
 			else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 			{
@@ -312,26 +321,10 @@ public class ReminderController implements Initializable {
 					reminderVO.setTotalReminder(1);
 					reminderVO.setNextSend(CommonConstants.NA);
 				}
-				mailSending();
 				statusReminderDAO.updateReminder(reminderVO,referenceCombo.getSelectionModel().getSelectedItem());
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	public void stopReminder()
-	{
-		try
-		{
-			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
-				    "Do you want to delete this Reminder", "Confirm", "Delete Reminder", DialogOptions.OK_CANCEL);
-			if(response.equals(DialogResponse.OK))
-			{
-				statusReminderDAO.deleteReminder(referenceCombo.getSelectionModel().getSelectedItem());
 				messageSendMail.getStyleClass().remove("failure");
 				messageSendMail.getStyleClass().add("success");
-				messageSendMail.setText(CommonConstants.REMINDER_DELETED);
+				messageSendMail.setText("Reminder Updated Successfully");
 				messageSendMail.setVisible(true);
 			}
 		}
@@ -339,7 +332,8 @@ public class ReminderController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	public void mailSending()
+	
+	public void sendMail()
 	{
 		Map<String, String> map = new HashMap<String, String>();
 		Map<String, String> emailMap = statusReminderDAO.getReminderMailDetails();
@@ -375,6 +369,26 @@ public class ReminderController implements Initializable {
 			messageSendMail.setVisible(true);
 		}
 	}
+	public void stopReminder()
+	{
+		try
+		{
+			DialogResponse response = Dialogs.showConfirmDialog(new Stage(),
+				    "Do you want to delete this Reminder", "Confirm", "Delete Reminder", DialogOptions.OK_CANCEL);
+			if(response.equals(DialogResponse.OK))
+			{
+				statusReminderDAO.deleteReminder(referenceCombo.getSelectionModel().getSelectedItem());
+				messageSendMail.getStyleClass().remove("failure");
+				messageSendMail.getStyleClass().add("success");
+				messageSendMail.setText(CommonConstants.REMINDER_DELETED);
+				messageSendMail.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void fillDetails(ReminderVO reminderVO)
 	{
 		subject.setText(reminderVO.getSubject());

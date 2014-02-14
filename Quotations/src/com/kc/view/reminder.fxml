@@ -25,6 +25,9 @@
             <Button mnemonicParsing="false" onAction="#sendMail" prefWidth="83.0" styleClass="button-style" text="Send Mail" />
             <Button fx:id="stopReminder" mnemonicParsing="false" onAction="#stopReminder" prefWidth="109.0" styleClass="button-style" text="Stop reminder" visible="false" />
           </children>
+          <padding>
+            <Insets top="2.0" />
+          </padding>
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
           <children>
@@ -47,20 +50,20 @@
         <Insets fx:id="x1" />
       </padding>
       <rowConstraints>
-        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="203.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets top="10.0" />
+        <Insets top="5.0" fx:id="x3" />
       </BorderPane.margin>
     </GridPane>
   </bottom>
   <center>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="82.0" prefWidth="359.0" visible="true" BorderPane.alignment="TOP_LEFT">
+    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="105.0" prefWidth="359.0" visible="true" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x3">
       <children>
         <HBox id="HBox" fx:id="autoReminderHBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
           <children>
@@ -96,7 +99,7 @@
                     </FXCollections>
                   </items>
                 </ComboBox>
-                <Label prefHeight="22.0" prefWidth="64.0" text="Frequency" />
+                <Label prefHeight="22.0" prefWidth="76.0" text="   Frequency" />
                 <ComboBox fx:id="frequencyCombo" prefHeight="21.0" prefWidth="69.0" promptText="Days" styleClass="combo-style">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -115,7 +118,7 @@
                 </ComboBox>
               </children>
             </HBox>
-            <HBox id="HBox" fx:id="sentHBox" alignment="CENTER_LEFT" spacing="5.0" visible="true">
+            <HBox id="HBox" fx:id="sentHBox" alignment="CENTER_LEFT" prefHeight="20.000099999997474" prefWidth="359.0" spacing="5.0" visible="true">
               <children>
                 <Label prefHeight="22.0" prefWidth="91.0" text="Reminders Sent" />
                 <Label fx:id="sentReminder" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="69.0" text="">
@@ -123,6 +126,12 @@
                     <Font name="System Bold" size="12.0" fx:id="x2" />
                   </font>
                 </Label>
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
+              <children>
+                <Button mnemonicParsing="false" onAction="#saveReminder" text="Save" />
+                <Label fx:id="message" prefHeight="22.0" prefWidth="161.0" text="" />
               </children>
             </HBox>
           </children>
@@ -135,12 +144,9 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="76.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="59.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
       </rowConstraints>
-      <BorderPane.margin>
-        <Insets top="10.0" />
-      </BorderPane.margin>
     </GridPane>
   </center>
   <padding>

@@ -106,6 +106,7 @@ public class CommonConstants
 	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";
 	public static final String REMINDER_DELETED = "Reminder Deleted Successfully";
 	public static final String DISPATCH_DONE = "Dispatch Done Successfully";
+	public static final String DISPATCH_UPDATE = "Dispatch Updated Successfully";
 
 	public static final int UNIQUE_CONSTRAINT = 1062;
 	public static final int FOREIGN_KEY_CONSTRAINT = 1451;

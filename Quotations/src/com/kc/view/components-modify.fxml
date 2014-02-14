@@ -13,27 +13,27 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="467.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsModifyController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsModifyController">
   <center>
-    <HBox fx:id="modifyHbox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
+    <HBox fx:id="modifyHbox" prefHeight="376.0" prefWidth="600.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <children>
-        <GridPane id="message" fx:id="gridPane" alignment="CENTER" prefHeight="362.0" prefWidth="428.0" visible="true" HBox.hgrow="NEVER">
+        <GridPane id="message" fx:id="gridPane" alignment="CENTER" prefHeight="337.0" prefWidth="408.0" visible="true" HBox.hgrow="NEVER">
           <!-- TODO Add Nodes -->
           <children>
-            <Label id="title" prefHeight="28.0" prefWidth="149.0" text="Component Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+            <Label id="title" prefHeight="28.0" prefWidth="165.0" text="Component Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <font>
                 <Font size="15.0" fx:id="x1" />
               </font>
             </Label>
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Component Category *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Sub Category *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Vender *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Model *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Type *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Size *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Cost Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="Dealer Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="149.0" text="End User Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label id="title" font="$x1" prefHeight="27.0" prefWidth="165.0" text="Component Category *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Sub Category *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Vender *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Model *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Type *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Size *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Cost Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Dealer Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="End User Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <TextField fx:id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <TextField fx:id="componentCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="subCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -48,6 +48,9 @@
               <children>
                 <Button font="$x1" mnemonicParsing="false" onAction="#modifyComponent" prefWidth="65.0" styleClass="button-style" text="Save" />
               </children>
+              <padding>
+                <Insets top="5.0" />
+              </padding>
             </HBox>
             <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
               <children>
@@ -56,8 +59,8 @@
             </HBox>
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="34.81308411214954" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="65.18691588785047" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.84594364968197" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="59.39975659601827" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
@@ -84,7 +87,7 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <GridPane alignment="TOP_LEFT" hgap="15.0" padding="$x2" vgap="5.0" BorderPane.alignment="CENTER">
+    <GridPane alignment="TOP_LEFT" hgap="15.0" maxWidth="-Infinity" minWidth="-Infinity" padding="$x2" prefHeight="85.0" prefWidth="408.0" vgap="5.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <Label font="$x1" prefWidth="105.0" text="Category" GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="0">
           <GridPane.margin>
@@ -122,8 +125,8 @@
         </ComboBox>
       </children>
       <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="10.0" prefWidth="134.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="451.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="337.0" minWidth="10.0" prefWidth="152.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="462.0" minWidth="10.0" prefWidth="241.0" />
       </columnConstraints>
       <rowConstraints>
         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

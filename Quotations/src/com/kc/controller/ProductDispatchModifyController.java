@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.DispatchDAO;
 import com.kc.model.DispatchVO;
+import com.kc.util.Email;
 import com.kc.util.Validation;
 
 import eu.schudt.javafx.controls.calendar.DatePicker;
@@ -78,11 +79,13 @@ public class ProductDispatchModifyController implements Initializable {
    	private DatePicker calendar2;
     Validation validation;
     Map<String, String> emailData = new HashMap<String, String>();
-   	Map<String,String> emailMap = new HashMap<String,String>();
+   	private Map<String, String> emailDetails = new HashMap<String, String>();
    	private DispatchVO dispatchVO = new DispatchVO();
     
     
     public ProductDispatchModifyController() {
+    	
+    	dispatchDAO = new DispatchDAO();
 		validation = new Validation();
 	}
 
@@ -118,6 +121,8 @@ public class ProductDispatchModifyController implements Initializable {
 		}
 	}
 	
+	//fill the form for selected Dispatch table row
+	
 	public void fillTextFieldValues(DispatchVO dispatchVO)
 	{
 		try
@@ -136,8 +141,8 @@ public class ProductDispatchModifyController implements Initializable {
 			
 			ProductDispatchModifyController.this.dispatchVO=dispatchVO;
 			
-			/*emailMap = dispatchDAO.getDispatchOptionDefaultValues();
-			body.setText(emailMap.get(CommonConstants.KEY_DISPATCH_MESSAGE));*/
+			emailDetails = dispatchDAO.getDispatchOptionDefaultValues();
+			body.setText(emailDetails.get(CommonConstants.KEY_DISPATCH_MESSAGE));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -145,6 +150,7 @@ public class ProductDispatchModifyController implements Initializable {
 		
 	}
 	
+	// update the product dispatch Entry 
 	public void updateDispatch()
 	{
 		try
@@ -163,7 +169,7 @@ public class ProductDispatchModifyController implements Initializable {
 			dispatchVO.setTransporter(transporter.getText());
 			dispatchVO.setId(ProductDispatchModifyController.this.dispatchVO.getId());
 			dispatchDAO.updateDispatch(dispatchVO);
-			message.setText(CommonConstants.DISPATCH_DONE);
+			message.setText(CommonConstants.DISPATCH_UPDATE);
 			message.getStyleClass().remove("failure");
 			message.getStyleClass().add("success");
 			message.setVisible(true);
@@ -174,9 +180,26 @@ public class ProductDispatchModifyController implements Initializable {
 		
     }
 
+	//Send a Mail
     public void sendMail()
     {
-    	
-    }
+		try{
+			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
+			emailData.put(CommonConstants.EMAIL_BODY, body.getText());
+			emailData.put(CommonConstants.EMAIL_SUBJECT, "Dispatch Details");
+			emailData.put(CommonConstants.EMAIL_USERNAME, emailDetails.get(CommonConstants.KEY_DISPATCH_EMAIL));
+			emailData.put(CommonConstants.EMAIL_PASSWORD, emailDetails.get(CommonConstants.KEY_DISPATCH_PASSWORD));
+			Email email = new Email(emailData);
+			new Thread(email).start();
+			messageMail.getStyleClass().remove("failure");
+			messageMail.getStyleClass().add("success");
+			messageMail.setText("Email send successfully");
+			messageMail.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
 
 }
