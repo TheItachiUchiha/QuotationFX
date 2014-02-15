@@ -50,6 +50,7 @@ public class QuotationUtil {
 			enquiryViewVO.setEnquiryCustomerType(enquiryVO.getEnquiryCustomerType());
 			enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
 			enquiryViewVO.setDispatchDone(enquiryVO.getDispatchDone());
+			enquiryViewVO.setServiceCount(enquiryVO.getServiceCount());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");
@@ -100,6 +101,7 @@ public class QuotationUtil {
 			complaintVO.setProductName(serviceVO.getProductName());
 			complaintVO.setReferenceNo(serviceVO.getReferenceNo());
 			complaintVO.setComplaint(serviceVO.getComplaint());
+			complaintVO.setServiceCount(serviceVO.getServiceCount());
 			for(CustomersVO customersVO : customerList)
 			{
 				if(customersVO.getId() == serviceVO.getCustomerId())

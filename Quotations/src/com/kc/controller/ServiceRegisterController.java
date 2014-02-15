@@ -252,8 +252,9 @@ public class ServiceRegisterController implements Initializable {
 	public void registerService()
 	{
 		ServiceVO serviceVO = new ServiceVO();
+		serviceVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
 		serviceVO.setCharge(Double.parseDouble(charge.getText()));
-		serviceVO.setCharge(Double.parseDouble(natureOfComplaint.getText()));
+		serviceVO.setComplaint(natureOfComplaint.getText());
 		serviceVO.setDate(((TextField)calendar.getChildren().get(0)).getText());
 		serviceVO.setEngineerName(engineerName.getText());
 		serviceVO.setFeedback(feedback.getText());

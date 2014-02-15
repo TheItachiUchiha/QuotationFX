@@ -11,7 +11,7 @@ public class ComplaintVO {
 	private String emailId;
 	private String complaint;
 	private String contactNo;
-	private int ServiceCount;
+	int serviceCount;
 	public int getId() {
 		return id;
 	}
@@ -48,12 +48,6 @@ public class ComplaintVO {
 	public void setDateOfComplaint(String dateOfComplaint) {
 		this.dateOfComplaint = dateOfComplaint;
 	}
-	public int getServiceCount() {
-		return ServiceCount;
-	}
-	public void setServiceCount(int serviceCount) {
-		ServiceCount = serviceCount;
-	}
 	public String getComplaint() {
 		return complaint;
 	}
@@ -71,6 +65,12 @@ public class ComplaintVO {
 	}
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
+	}
+	public int getServiceCount() {
+		return serviceCount;
+	}
+	public void setServiceCount(int serviceCount) {
+		this.serviceCount = serviceCount;
 	}
 	
 }

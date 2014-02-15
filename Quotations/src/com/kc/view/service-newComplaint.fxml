@@ -91,7 +91,7 @@
             <Label fx:id="registerConfirm" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="243.0" text="" />
           </children>
         </VBox>
-        <Label fx:id="totalService" prefHeight="22.0" prefWidth="38.0" text="count" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <Label fx:id="totalService" prefHeight="22.0" prefWidth="38.0" text="" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label prefHeight="22.0" prefWidth="52.0" text="TO:" GridPane.columnIndex="2" GridPane.rowIndex="0" />
         <Label prefHeight="22.0" prefWidth="52.0" text="CC:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Label prefHeight="22.0" prefWidth="52.0" text="Message:" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />

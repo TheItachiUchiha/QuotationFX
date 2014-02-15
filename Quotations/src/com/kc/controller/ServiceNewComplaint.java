@@ -186,6 +186,7 @@ public class ServiceNewComplaint implements Initializable {
 			{
 				if(enquiryVO.getReferenceNo().equals(referenceAutoFill.getText()) )
 				{
+					totalService.setText(String.valueOf(enquiryVO.getServiceCount()));
 					productName.setText(enquiryVO.getProductName());
 					receiver.setText(enquiryVO.getEmailId());
 					message.setText(emailDetails.get(CommonConstants.KEY_SERVICE_MESSAGE));

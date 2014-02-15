@@ -149,6 +149,7 @@ public class ServiceModifyController implements Initializable {
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
 						referenceHBox.setVisible(false);
+						message.setText("");
 				}
 			});
     		yearCombo.valueProperty().addListener(new ChangeListener<String>() {
@@ -161,6 +162,7 @@ public class ServiceModifyController implements Initializable {
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
 						referenceHBox.setVisible(false);
+						message.setText("");
 				}
 			});
     		referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
@@ -172,6 +174,7 @@ public class ServiceModifyController implements Initializable {
 					
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
+						message.setText("");
 				}
 			});
     		complaintCombo.valueProperty().addListener(new ChangeListener<String>() {
@@ -182,6 +185,7 @@ public class ServiceModifyController implements Initializable {
 						String oldValue, String newValue) {
 					
 						serviceGrid.setVisible(false);
+						message.setText("");
 				}
 			});
 		}
@@ -362,11 +366,11 @@ public class ServiceModifyController implements Initializable {
    //clear all the fields After deleting a Service
    public void clearFields()
    {
-	   referenceCombo.getSelectionModel().clearSelection();
+	   //referenceCombo.getSelectionModel().clearSelection();
 	   engineerName.setText("");
 	   natureOfComplaint.setText("");
 	   charge.setText("");
-	   complaintCombo.getSelectionModel().clearSelection();
+	   //complaintCombo.getSelectionModel().clearSelection();
 	   feedback.setText("");
 	   ratingCombo.getSelectionModel().clearSelection();
 	   ((TextField)calendar.getChildren().get(0)).setText("");

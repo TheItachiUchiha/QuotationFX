@@ -16,6 +16,7 @@ public class ServiceVO {
 	private String contactNo;
 	private String customerName;
 	int customerId;
+	int serviceCount;
 	public int getId() {
 		return id;
 	}
@@ -99,6 +100,12 @@ public class ServiceVO {
 	}
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
+	}
+	public int getServiceCount() {
+		return serviceCount;
+	}
+	public void setServiceCount(int serviceCount) {
+		this.serviceCount = serviceCount;
 	}
 
 }

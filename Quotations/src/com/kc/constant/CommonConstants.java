@@ -104,6 +104,7 @@ public class CommonConstants
 	public static final String SERVICE_UPDATED = "Service Entry Updated Successfully";
 	public static final String SERVICE_DELETED = "Service Entry Deleted Successfully";
 	public static final String SELECT_KEYWORD = "Select a keyword Before Proceeding";
+	public static final String SELECT_SEARCH_TYPE = "Select a Search Type Before Proceeding";
 	public static final String REMINDER_DELETED = "Reminder Deleted Successfully";
 	public static final String DISPATCH_DONE = "Dispatch Done Successfully";
 	public static final String DISPATCH_UPDATE = "Dispatch Updated Successfully";

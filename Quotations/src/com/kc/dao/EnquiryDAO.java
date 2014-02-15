@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,12 +31,10 @@ public class EnquiryDAO {
 	private Statement statement = null;
 	private ResultSet resultSet = null;
 	private CustomersDAO customersDAO;
-	private Map<String, String> map;
 	
 	public EnquiryDAO()
 	{
 		customersDAO = new CustomersDAO();
-		map= new HashMap<>();
 	}
 	
 	public void saveEnquiry(EnquiryVO enquiryVO) throws Exception
@@ -46,7 +43,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,complaint_count,dispatch_done) VALUES(?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,complaint_count,dispatch_done,service_count) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -71,6 +68,7 @@ public class EnquiryDAO {
 			preparedStatement.setString(22, CommonConstants.NA);
 			preparedStatement.setInt(23, 0);
 			preparedStatement.setString(24, enquiryVO.getDispatchDone());
+			preparedStatement.setInt(25, 0);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -118,6 +116,7 @@ public class EnquiryDAO {
 				enquiryVO.setEnquiryCustomerType(resultSet.getString(23));
 				enquiryVO.setComplaintCount(resultSet.getInt(24));
 				enquiryVO.setDispatchDone(resultSet.getString(25));
+				enquiryVO.setServiceCount(resultSet.getInt(26));
 				listOfEnquries.add(enquiryVO);
 			}
 		}
@@ -173,26 +172,7 @@ public class EnquiryDAO {
 		}
 		return number;
 	}
-	public String getPassword()
-	{
-		String pass = "";
-		LOG.info("Enter : getPassword");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
-			preparedStatement.setString(1, "email_password");
-			resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			pass = resultSet.getString(1);
-			LOG.info("Exit : getPassword");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		return pass;
-	}
+
 	public void increaseEnquiryNumber(String enquiryNumber, String date)
 	{
 		LOG.info("Enter : increaseEnquiryNumber");

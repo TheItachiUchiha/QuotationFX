@@ -13,7 +13,7 @@
 <BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="654.0" prefWidth="1047.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductDispatchViewController">
   <!-- TODO Add Nodes -->
   <left>
-    <TableView fx:id="dispatchTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="909.0" visible="true">
+    <TableView fx:id="dispatchTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="909.0" visible="false">
       <columns>
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="102.0" text="Invoice Number" fx:id="invoiceNo" />
         <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Invoice Date" fx:id="invoiceDate" />
@@ -37,9 +37,9 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="66.0" prefWidth="1047.0" visible="true" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x1">
+    <VBox prefHeight="66.0" prefWidth="1047.0" visible="true" BorderPane.alignment="TOP_LEFT">
       <children>
-        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="1047.0" spacing="5.0" visible="true">
+        <HBox id="referenceHBox" fx:id="searchHBox" alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="1047.0" spacing="5.0" visible="true">
           <children>
             <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="90.0" text="Search By" />
             <ComboBox id="referenceCombo" fx:id="searchCombo" prefHeight="21.0" prefWidth="168.0" promptText="" styleClass="combo-style">
@@ -48,7 +48,7 @@
                   <String fx:value="Calender" />
                   <String fx:value="Invoice Number" />
                   <String fx:value="Invoice Date" />
-                  <String fx:value="Customer Name" />
+                  <String fx:value="Company Name" />
                   <String fx:value="Shipping To" />
                   <String fx:value="Transporter" />
                   <String fx:value="Dispatch Date" />
@@ -61,18 +61,33 @@
             <Insets fx:id="x1" />
           </VBox.margin>
         </HBox>
-        <HBox fx:id="monthHBox" alignment="CENTER_LEFT" padding="$x1" prefHeight="33.000099999997474" prefWidth="1047.0" spacing="5.0" visible="true" VBox.margin="$x1">
+        <VBox fx:id="keyVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="324.0" visible="false">
           <children>
-            <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="90.0" text="Keyword" />
-            <ComboBox id="monthCombo" fx:id="keyCombo" prefHeight="21.0" prefWidth="168.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ComboBox>
-            <Button id="search" mnemonicParsing="false" onAction="#search" styleClass="button-style" text="Search" />
+            <HBox id="monthHBox" fx:id="keyHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" padding="$x1" prefHeight="34.0" prefWidth="324.0" spacing="5.0" visible="true" VBox.margin="$x1">
+              <children>
+                <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="90.0" text="Keyword" />
+                <ComboBox id="monthCombo" fx:id="keyCombo" prefHeight="21.0" prefWidth="168.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                  </items>
+                </ComboBox>
+                <Button id="search" mnemonicParsing="false" onAction="#search" styleClass="button-style" text="Search" />
+              </children>
+            </HBox>
+            <HBox id="monthHBox" fx:id="calenderBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="168.0" spacing="5.0" visible="true">
+              <padding>
+                <Insets fx:id="x1" />
+              </padding>
+              <VBox.margin>
+                <Insets left="95.0" />
+              </VBox.margin>
+            </HBox>
           </children>
-        </HBox>
+        </VBox>
       </children>
+      <BorderPane.margin>
+        <Insets fx:id="x1" />
+      </BorderPane.margin>
     </VBox>
   </top>
 </BorderPane>

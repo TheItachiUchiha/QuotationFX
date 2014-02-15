@@ -181,7 +181,7 @@ public class ServiceViewComplaint implements Initializable {
 				customerCity.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerCity"));
 				customerName.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerName"));
 				dateOfComplaint.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("dateOfComplaint"));
-				//serviceCount.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>(""));
+				serviceCount.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("serviceCount"));
 			}
 		}
 		catch (Exception e) {

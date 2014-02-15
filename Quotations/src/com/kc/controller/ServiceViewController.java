@@ -1,10 +1,13 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,11 +21,13 @@ import javafx.scene.control.Dialogs;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
@@ -30,9 +35,12 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ServiceDAO;
+import com.kc.model.DispatchVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
+
+import eu.schudt.javafx.controls.calendar.DatePicker;
 
 public class ServiceViewController implements Initializable {
 	
@@ -88,18 +96,35 @@ public class ServiceViewController implements Initializable {
 
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> totalService;
+	    
+	    @FXML
+	    private TableColumn<EnquiryViewVO, String> serviceDate;
 
 	    @FXML
 	    private ComboBox<String> yearCombo;
 	    
+	    @FXML
+	    private HBox calanderBox;
+	    
+	    @FXML
+	    private HBox keyHBox;
+	    
+	    @FXML
+	    private HBox searchBox;
+	    
+	    @FXML
+	    private VBox keyVBox;
+	    
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 	   	private ObservableList<String> yearList = FXCollections.observableArrayList();
+		private ObservableList<String> keyList = FXCollections.observableArrayList();
 	   	private ObservableList<EnquiryViewVO> listOfServices = FXCollections.observableArrayList();
+	   	private ObservableList<EnquiryViewVO> finalListOfServices = FXCollections.observableArrayList();
 	   	
 	   	String startDate;
 	   	String endDate;
 	   	ServiceDAO serviceDAO;
-	   	
+	   	private DatePicker calendar;
 	   	
 	   	public ServiceViewController() {
 	   		serviceDAO = new ServiceDAO();
@@ -115,6 +140,17 @@ public class ServiceViewController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			yearCombo.setItems(yearList);
 			monthCombo.setItems(monthList);
+			
+			keyVBox.getChildren().removeAll(keyHBox,calanderBox);
+			
+			calendar = new DatePicker(Locale.ENGLISH);
+    		calendar.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
+    		calendar.getCalendarView().todayButtonTextProperty().set("Today");
+    		calendar.getCalendarView().setShowWeeks(false);
+    		calendar.getStylesheets().add("com/kc/style/DatePicker.css");
+    		((TextField)calendar.getChildren().get(0)).setEditable(false);
+    		((TextField)calendar.getChildren().get(0)).setPrefWidth(200);
+    		calanderBox.getChildren().add(calendar);
 			
 			action.setSortable(false);
 	        
@@ -136,20 +172,96 @@ public class ServiceViewController implements Initializable {
 	            }
 	         
 	        });
+	        
+	        searchCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+						if(newValue.equalsIgnoreCase("Complaint By Calender"))
+						{
+							keyVBox.getChildren().clear();
+							keyVBox.getChildren().add(calanderBox);
+						}
+						else
+						{
+							keyVBox.getChildren().clear();
+							keyVBox.getChildren().add(keyHBox);
+						}
+						salesOrderTable.setVisible(false);
+						serviceTable.setVisible(false);
+						keyVBox.setVisible(false);
+				}
+			});
+	        
+	        keyCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+						salesOrderTable.setVisible(false);
+						serviceTable.setVisible(false);
+					
+				}
+			});
+	        monthCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					salesOrderTable.setVisible(false);
+					serviceTable.setVisible(false);
+					keyVBox.setVisible(false);
+					searchBox.setVisible(false);
+					
+				}
+			});
+	        yearCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					salesOrderTable.setVisible(false);
+					serviceTable.setVisible(false);
+					keyVBox.setVisible(false);
+					searchBox.setVisible(false);
+					
+				}
+			});
+	        ((TextField)calendar.getChildren().get(0)).textProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					finalListOfServices.clear();
+					for(EnquiryViewVO enquiryViewVO : listOfServices)
+					{
+						if(((TextField)calendar.getChildren().get(0)).getText().equals(enquiryViewVO.getComplaintDate()))
+						{
+							finalListOfServices.add(enquiryViewVO);
+						}
+					}
+					if(finalListOfServices.isEmpty())
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
+					}
+					else
+					{
+						fillTable(finalListOfServices);
+						salesOrderTable.setVisible(true);
+					}
+					
+				}
+			});
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public void go()
-	{
-		
-	}
-	
-	public void search()
-	{
-		
 	}
 	
 	public void viewDetails()
@@ -167,19 +279,121 @@ public class ServiceViewController implements Initializable {
 				startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 				endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 				listOfServices=serviceDAO.getServiceHistory(startDate, endDate);
-				salesOrderTable.setItems(listOfServices);
-				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-				productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-				location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
-				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+				if(listOfServices.isEmpty())
+				{
+					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
+				}
+				else
+				{
+					searchBox.setVisible(true);
+				}
+				
 			}
 			catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
 		
+	}
+	
+	public void go()
+	{
+		try
+		{
+			if(searchCombo.getSelectionModel().getSelectedIndex()==-1)
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_SEARCH_TYPE);
+			}
+			else
+			{
+				keyList.clear();
+				for(EnquiryViewVO enquiryViewVO : listOfServices)
+				{
+					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference Number"))
+					{
+						if(!keyList.contains(enquiryViewVO.getReferenceNo()))
+						{
+							keyList.add(enquiryViewVO.getReferenceNo());
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product name"))
+					{
+						if(!keyList.contains(enquiryViewVO.getProductName()))
+						{
+							keyList.add(enquiryViewVO.getProductName());
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Name"))
+					{
+						if(!keyList.contains(enquiryViewVO.getCustomerName()))
+						{
+							keyList.add(enquiryViewVO.getCustomerName());
+						}
+					}
+				}
+				keyCombo.setItems(keyList);
+				keyVBox.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void search()
+	{
+		try
+		{
+			if(keyCombo.getSelectionModel().getSelectedIndex()==-1)
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_KEYWORD);
+			}
+			else
+			{
+				finalListOfServices.clear();
+				for(EnquiryViewVO enquiryViewVO : listOfServices)
+				{
+					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Reference Number"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(enquiryViewVO.getReferenceNo()))
+						{
+							finalListOfServices.add(enquiryViewVO);
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Product name"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(enquiryViewVO.getProductName()))
+						{
+							finalListOfServices.add(enquiryViewVO);
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Customer Name"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(enquiryViewVO.getCustomerName()))
+						{
+							finalListOfServices.add(enquiryViewVO);
+						}
+					}
+				}
+				fillTable(finalListOfServices);
+				salesOrderTable.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	public void fillTable(ObservableList<EnquiryViewVO> tempList)
+	{
+		salesOrderTable.setItems(tempList);
+		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+		productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+		serviceDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("serviceDate"));
+		location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
+		customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+		companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+		referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
 	}
 	
 	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {

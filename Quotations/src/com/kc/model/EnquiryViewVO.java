@@ -35,6 +35,9 @@ public class EnquiryViewVO {
 	private String enquiryCustomerType;
 	private int complaintCount;
 	private String dispatchDone;
+	private String complaintDate;
+	private String serviceDate;
+	private int serviceCount;
 	
 	public int getId() {
 		return id;
@@ -42,8 +45,6 @@ public class EnquiryViewVO {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	
 	public int getCustomerId() {
 		return customerId;
 	}
@@ -241,6 +242,24 @@ public class EnquiryViewVO {
 	}
 	public void setDispatchDone(String dispatchDone) {
 		this.dispatchDone = dispatchDone;
+	}
+	public String getComplaintDate() {
+		return complaintDate;
+	}
+	public void setComplaintDate(String complaintDate) {
+		this.complaintDate = complaintDate;
+	}
+	public String getServiceDate() {
+		return serviceDate;
+	}
+	public void setServiceDate(String serviceDate) {
+		this.serviceDate = serviceDate;
+	}
+	public int getServiceCount() {
+		return serviceCount;
+	}
+	public void setServiceCount(int serviceCount) {
+		this.serviceCount = serviceCount;
 	}
 	
 }

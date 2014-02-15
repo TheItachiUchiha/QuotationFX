@@ -100,7 +100,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select id,reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date=?");
+					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id, e.service_count from quotation.service s, quotation.enquiry e where e.ref_number=s.reference_no and s.date=?");
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -114,6 +114,7 @@ public class ServiceDAO {
 				serviceVO.setComplaintId(resultSet.getString(5));
 				serviceVO.setProductName(resultSet.getString(6));
 				serviceVO.setCustomerId(resultSet.getInt(7));
+				serviceVO.setServiceCount(resultSet.getInt(8));
 				
 				listOfEnquries.add(serviceVO);
 			}
@@ -163,6 +164,11 @@ public class ServiceDAO {
 			preparedStatement.setString(6, serviceVO.getFeedback());
 			preparedStatement.setString(7, complaintId);
 			
+			preparedStatement.execute();
+			
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count + 1 where REF_NUMBER=?");
+			preparedStatement.setString(1, serviceVO.getReferenceNo());
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -266,7 +272,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT s.reference_no , s.product_name, s.customer_name, c.companyname, c.state , e.referedby FROM quotation.SERVICE s, "+
+					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date, c.customername, c.companyname, c.state , e.referedby FROM quotation.SERVICE s, "+
 			"quotation.Customers c, quotation.enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.date!=? and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
@@ -280,10 +286,12 @@ public class ServiceDAO {
 				EnquiryViewVO viewVO = new EnquiryViewVO();
 				viewVO.setReferenceNo(resultSet.getString(1));
 				viewVO.setProductName(resultSet.getString(2));
-				viewVO.setCustomerName(resultSet.getString(3));
-				viewVO.setCompanyName(resultSet.getString(4));
-				viewVO.setState(resultSet.getString(5));
-				viewVO.setReferedBy(resultSet.getString(6));
+				viewVO.setComplaintDate(resultSet.getString(3));
+				viewVO.setServiceDate(resultSet.getString(4));
+				viewVO.setCustomerName(resultSet.getString(5));
+				viewVO.setCompanyName(resultSet.getString(6));
+				viewVO.setState(resultSet.getString(7));
+				viewVO.setReferedBy(resultSet.getString(8));
 				
 				listOfServices.add(viewVO);
 			}
@@ -316,6 +324,12 @@ public class ServiceDAO {
 			preparedStatement.setString(6, serviceVO.getComplaintId());
 			
 			preparedStatement.execute();
+			
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count + -1 where REF_NUMBER=?");
+			preparedStatement.setString(1, serviceVO.getReferenceNo());
+			preparedStatement.execute();
+			
 		}
 		catch (Exception e) {
 			e.printStackTrace();

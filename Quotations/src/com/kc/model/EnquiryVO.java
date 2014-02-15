@@ -29,6 +29,7 @@ public class EnquiryVO {
 	private String enquiryCustomerType;
 	private String dispatchDone;
 	private int complaintCount;
+	private int serviceCount;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -192,6 +193,12 @@ public class EnquiryVO {
 	}
 	public void setDispatchDone(String dispatchDone) {
 		this.dispatchDone = dispatchDone;
+	}
+	public int getServiceCount() {
+		return serviceCount;
+	}
+	public void setServiceCount(int serviceCount) {
+		this.serviceCount = serviceCount;
 	}
 	
 }

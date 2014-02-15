@@ -1,9 +1,12 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,12 +24,14 @@ import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -35,8 +40,11 @@ import javafx.util.Callback;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.dao.DispatchDAO;
 import com.kc.model.DispatchVO;
+
+import eu.schudt.javafx.controls.calendar.DatePicker;
 
 public class ProductDispatchViewController implements Initializable {
 	
@@ -52,13 +60,19 @@ public class ProductDispatchViewController implements Initializable {
 	    private ComboBox<String> keyCombo;
 
 	    @FXML
-	    private HBox monthHBox;
+	    private HBox calenderBox;
+	    
+	    @FXML
+	    private HBox keyHBox;
+	    
+	    @FXML
+	    private VBox keyVBox;
 
 	    @FXML
 	    private ComboBox<String> searchCombo;
 
 	    @FXML
-	    private HBox referenceHBox;
+	    private HBox searchHBox;
 
 	    @FXML
 	    private TableColumn<DispatchVO , String> companyName;
@@ -85,7 +99,11 @@ public class ProductDispatchViewController implements Initializable {
 	    private TableColumn<DispatchVO , String> transporter;
 	    
 	    DispatchDAO dispatchDAO;
+	    private DatePicker calendar;
+	    
 	    private ObservableList<DispatchVO> dispatchList = FXCollections.observableArrayList();
+	    private ObservableList<DispatchVO> finalDispatchList = FXCollections.observableArrayList();
+	    private ObservableList<String> keyList = FXCollections.observableArrayList();
 	    
 	    public ProductDispatchViewController() {
 			dispatchDAO = new DispatchDAO();
@@ -97,7 +115,18 @@ public class ProductDispatchViewController implements Initializable {
 		
 		try
 		{
-			fillTable();
+			keyVBox.getChildren().removeAll(keyHBox,calenderBox);
+			
+			calendar = new DatePicker(Locale.ENGLISH);
+    		calendar.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
+    		calendar.getCalendarView().todayButtonTextProperty().set("Today");
+    		calendar.getCalendarView().setShowWeeks(false);
+    		calendar.getStylesheets().add("com/kc/style/DatePicker.css");
+    		((TextField)calendar.getChildren().get(0)).setEditable(false);
+    		((TextField)calendar.getChildren().get(0)).setPrefWidth(200);
+    		calenderBox.getChildren().add(calendar);
+			
+			dispatchList = dispatchDAO.getProductDispatch();
 			action.setSortable(false);
 	        
 	        action.setCellValueFactory(
@@ -118,6 +147,76 @@ public class ProductDispatchViewController implements Initializable {
 	            }
 	         
 	        });
+	        
+	        searchCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+						if(newValue.equalsIgnoreCase("Calender") || newValue.equalsIgnoreCase("Invoice Date") || newValue.equalsIgnoreCase("Dispatch Date"))
+						{
+							keyVBox.getChildren().clear();
+							keyVBox.getChildren().add(calenderBox);
+						}
+						else
+						{
+							keyVBox.getChildren().clear();
+							keyVBox.getChildren().add(keyHBox);
+						}
+						keyVBox.setVisible(false);
+						dispatchTable.setVisible(false);
+				}
+			});
+	        keyCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					dispatchTable.setVisible(false);
+				}
+			});
+	        ((TextField)calendar.getChildren().get(0)).textProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> observable,
+						String oldValue, String newValue) {
+					finalDispatchList.clear();
+					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice Date"))
+					{
+						for(DispatchVO dispatchVO : dispatchList)
+						{
+							if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getInvoiceDate()))
+							{
+								finalDispatchList.add(dispatchVO);
+							}
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch Date"))
+					{
+						for(DispatchVO dispatchVO : dispatchList)
+						{
+							if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getDispatchDate()))
+							{
+								finalDispatchList.add(dispatchVO);
+							}
+						}
+					}
+					
+					if(finalDispatchList.isEmpty())
+					{
+						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
+					}
+					else
+					{
+						fillTable(finalDispatchList);
+						dispatchTable.setVisible(true);
+					}
+					
+				}
+			});
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -126,12 +225,11 @@ public class ProductDispatchViewController implements Initializable {
 	}
 	
 	//fill the ProductDispatch table 
-	public void fillTable()
+	public void fillTable(ObservableList<DispatchVO> tempList)
 	{
 		try
 		{
-			dispatchList = dispatchDAO.getProductDispatch();
-			dispatchTable.setItems(dispatchList);
+			dispatchTable.setItems(tempList);
 			invoiceNo.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("invoiceNo"));
 			invoiceDate.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("invoiceDate"));
 			invoiceValue.setCellValueFactory(new PropertyValueFactory<DispatchVO, String>("noOfItems"));
@@ -145,16 +243,112 @@ public class ProductDispatchViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	//Code not Written 
-	public void search()
-	{
-		
-	}
-	//Code not Written
+	
 	public void go()
 	{
-		
+
+		try
+		{
+			if(searchCombo.getSelectionModel().getSelectedIndex()==-1)
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_SEARCH_TYPE);
+			}
+			else
+			{
+				keyList.clear();
+				for(DispatchVO dispatchVO : dispatchList)
+				{
+					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice Number"))
+					{
+						if(!keyList.contains(dispatchVO.getInvoiceNo()))
+						{
+							keyList.add(dispatchVO.getInvoiceNo());
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Shipping To"))
+					{
+						if(!keyList.contains(dispatchVO.getShippingTo()))
+						{
+							keyList.add(dispatchVO.getShippingTo());
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Company Name"))
+					{
+						if(!keyList.contains(dispatchVO.getCompanyName()))
+						{
+							keyList.add(dispatchVO.getCompanyName());
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Transporter"))
+					{
+						if(!keyList.contains(dispatchVO.getTransporter()))
+						{
+							keyList.add(dispatchVO.getTransporter());
+						}
+					}
+				}
+				keyCombo.setItems(keyList);
+				keyVBox.setVisible(true);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 	}
+	
+	public void search()
+	{
+		try
+		{
+			if(keyCombo.getSelectionModel().getSelectedIndex()==-1)
+			{
+				Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_KEYWORD);
+			}
+			else
+			{
+				finalDispatchList.clear();
+				for(DispatchVO dispatchVO : dispatchList)
+				{
+					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice Number"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(dispatchVO.getInvoiceNo()))
+						{
+							finalDispatchList.add(dispatchVO);
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Shipping To"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(dispatchVO.getShippingTo()))
+						{
+							finalDispatchList.add(dispatchVO);
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Company Name"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(dispatchVO.getCompanyName()))
+						{
+							finalDispatchList.add(dispatchVO);
+						}
+					}
+					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Transporter"))
+					{
+						if(keyCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase(dispatchVO.getTransporter()))
+						{
+							finalDispatchList.add(dispatchVO);
+						}
+					}
+				}
+				fillTable(finalDispatchList);
+				dispatchTable.setVisible(true);
+				
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+		
 	// delete the selected product Dispatch Entry
 	public void deleteDispatch(DispatchVO dispatchVO)
 	{
@@ -165,8 +359,16 @@ public class ProductDispatchViewController implements Initializable {
 				    "Do you want to delete selected Product Dispatch", "Confirm", "Delete Product Dispatch", DialogOptions.OK_CANCEL);
 			if(response.equals(DialogResponse.OK))
 			{
+				for(DispatchVO  dispatchVO2 : finalDispatchList)
+				{
+					if(dispatchVO2.getId()==dispatchVO.getId())
+					{
+						finalDispatchList.remove(dispatchVO2);
+					}
+				}
 				dispatchDAO.deleteDispatch(dispatchVO);
-				fillTable();
+				
+				fillTable(finalDispatchList);
 				
 			}
 			LOG.info("Exit : deleteDispatch");
@@ -218,7 +420,7 @@ public class ProductDispatchViewController implements Initializable {
 
 						@Override
 						public void handle(WindowEvent paramT) {
-							fillTable();
+							fillTable(finalDispatchList);
 						}
 					});
 					
