@@ -26,7 +26,7 @@
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>
         </Tab>
-        <Tab fx:id="viewTab" text="View Service Histry">
+        <Tab fx:id="viewTab" text="View Service History">
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>
