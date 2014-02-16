@@ -14,6 +14,7 @@ import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.QuotationUtil;
+import com.kc.util.Validation;
 
 import eu.schudt.javafx.controls.calendar.DatePicker;
 
@@ -54,6 +55,12 @@ public class SalesModifyController {
 
     @FXML
     private TextField dateOfQuotation;
+    
+    @FXML
+    private TextField productQuantity;
+    
+    @FXML
+    private TextField purchaseOrderNo;
 
     @FXML
     private ComboBox<String> monthCombo;
@@ -81,6 +88,7 @@ public class SalesModifyController {
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	Validation validation = new Validation();
 	
     @FXML
     void initialize() {
@@ -94,7 +102,7 @@ public class SalesModifyController {
     		((TextField)calendar.getChildren().get(0)).setEditable(false);
     		salesGrid.add(calendar, 1, 6);
     		
-    		
+    		validation.allowDigit(productQuantity);
 	    	monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			monthCombo.setItems(monthList);
@@ -201,6 +209,9 @@ public class SalesModifyController {
 	    		dateOfEnquiry.setText(enquiryViewVO.getDateOfEnquiry());
 	    		dateOfQuotation.setText(enquiryViewVO.getQpDate());
 	    		calendar.setSelectedDate(formatter.parse(enquiryViewVO.getSalesDate()));
+	    		productQuantity.setText(String.valueOf(enquiryViewVO.getProductQuantity()));
+	    		purchaseOrderNo.setText(enquiryViewVO.getPurchaseOrderNo());
+	    		
 	    		salesGrid.setVisible(true);
 			}
     	}
@@ -214,7 +225,12 @@ public class SalesModifyController {
     {
     	try
     	{
-    		salesDAO.updateSalesDate(enquiryViewVO.getId(), formatter.format(calendar.getSelectedDate()));
+    		EnquiryViewVO viewVO = new EnquiryViewVO();
+    		viewVO.setProductQuantity(Integer.parseInt(productQuantity.getText()));
+    		viewVO.setPurchaseOrderNo(purchaseOrderNo.getText());
+    		viewVO.setSalesDate(formatter.format(calendar.getSelectedDate()));
+    		viewVO.setId(enquiryViewVO.getId());
+    		salesDAO.saveSalesDate(viewVO);
     		message.setText(CommonConstants.SALES_DATE_MODIFIED);
 			message.getStyleClass().remove("failure");
 			message.getStyleClass().add("success");

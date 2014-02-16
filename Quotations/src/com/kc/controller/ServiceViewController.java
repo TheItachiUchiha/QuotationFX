@@ -35,7 +35,6 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ServiceDAO;
-import com.kc.model.DispatchVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
@@ -56,7 +55,7 @@ public class ServiceViewController implements Initializable {
 	    private TableColumn<EnquiryViewVO, String> customerName;
 
 	    @FXML
-	    private TableColumn<EnquiryViewVO, String> engineerName;
+	    private TableColumn<ServiceVO, String> engineerName;
 
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> location;
@@ -74,7 +73,7 @@ public class ServiceViewController implements Initializable {
 	    private TableColumn<EnquiryViewVO, String> productPurchased;
 
 	    @FXML
-	    private TableColumn<EnquiryViewVO, String> rating;
+	    private TableColumn<ServiceVO, String> rating;
 
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> referedBy;
@@ -89,13 +88,13 @@ public class ServiceViewController implements Initializable {
 	    private TableView<ServiceVO> serviceTable;
 
 	    @FXML
-	    private TableColumn<EnquiryViewVO, String> serviceCharge;
+	    private TableColumn<ServiceVO, String> serviceCharge;
 
 	    @FXML
-	    private TableColumn<EnquiryViewVO, String> thisYearService;
+	    private TableColumn<ServiceVO, String> thisYearService;
 
 	    @FXML
-	    private TableColumn<EnquiryViewVO, String> totalService;
+	    private TableColumn<ServiceVO, String> totalService;
 	    
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> serviceDate;
@@ -386,14 +385,46 @@ public class ServiceViewController implements Initializable {
 	}
 	public void fillTable(ObservableList<EnquiryViewVO> tempList)
 	{
-		salesOrderTable.setItems(tempList);
-		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-		productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-		serviceDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("serviceDate"));
-		location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
-		customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-		companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-		referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+		try
+		{
+			ObservableList<EnquiryViewVO> finalTemplist = FXCollections.observableArrayList();
+			for(EnquiryViewVO enquiryViewVO : tempList)
+			{
+				if(!finalTemplist.contains(enquiryViewVO))
+				{
+					finalTemplist.add(enquiryViewVO);
+				}
+			}
+			salesOrderTable.setItems(finalTemplist);
+			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+			productPurchased.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+			serviceDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("serviceDate"));
+			location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
+			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateServiceTable(String reference)
+	{
+		try
+		{
+			ObservableList<ServiceVO> listOfServicesForReference = FXCollections.observableArrayList();
+			listOfServicesForReference = serviceDAO.getServicesForReference(reference);
+			serviceTable.setItems(listOfServicesForReference);
+			engineerName.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("engineerName"));
+			totalService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("serviceCount"));
+			serviceCharge.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("charge"));
+			rating.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("rating"));
+			//thisYearService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("thisYearService"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
@@ -411,7 +442,8 @@ public class ServiceViewController implements Initializable {
                 @Override
                 public void handle(ActionEvent t) {
                     try {
-                    	serviceTable.setVisible(true);
+                    		updateServiceTable(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()).getReferenceNo());
+                    		serviceTable.setVisible(true);
                     	
 					} catch (Exception e) {
 						e.printStackTrace();

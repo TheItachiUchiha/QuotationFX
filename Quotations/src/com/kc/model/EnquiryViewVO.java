@@ -37,6 +37,8 @@ public class EnquiryViewVO {
 	private String dispatchDone;
 	private String complaintDate;
 	private String serviceDate;
+	private String purchaseOrderNo;
+	private int productQuantity;
 	private int serviceCount;
 	
 	public int getId() {
@@ -260,6 +262,18 @@ public class EnquiryViewVO {
 	}
 	public void setServiceCount(int serviceCount) {
 		this.serviceCount = serviceCount;
+	}
+	public String getPurchaseOrderNo() {
+		return purchaseOrderNo;
+	}
+	public void setPurchaseOrderNo(String purchaseOrderNo) {
+		this.purchaseOrderNo = purchaseOrderNo;
+	}
+	public int getProductQuantity() {
+		return productQuantity;
+	}
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 	
 }

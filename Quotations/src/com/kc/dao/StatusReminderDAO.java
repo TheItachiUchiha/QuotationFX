@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DBConnector;
 
@@ -125,10 +126,10 @@ public class StatusReminderDAO {
 		
 	}
 	
-	public ObservableList<String> getModifyReminders(String startDate,String endDate) throws SQLException
+	public ObservableList<EnquiryViewVO> getModifyReminders(String startDate,String endDate) throws SQLException
 	{
-		LOG.info("Enter : getReminders");
-		ObservableList<String> listOfReminders = FXCollections.observableArrayList();
+		LOG.info("Enter : getModifyReminders");
+		ObservableList<EnquiryViewVO> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
 			preparedStatement=conn.prepareStatement("SELECT e.REF_NUMBER FROM quotation.ENQUIRY e ,quotation.REMINDER r WHERE e.REF_NUMBER = r.REFERENCE_NO and " +
@@ -141,7 +142,9 @@ public class StatusReminderDAO {
 			
 			while(resultSet.next())
 			{
-				listOfReminders.add(resultSet.getString(1));
+				EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+				enquiryViewVO.setReferenceNo(resultSet.getString(1));
+				listOfReminders.add(enquiryViewVO);
 			}
 		}
 		catch (Exception e) {
@@ -154,17 +157,17 @@ public class StatusReminderDAO {
 				conn.close();
 			}
 		}
-		LOG.info("Exit : getReminders");
+		LOG.info("Exit : getModifyReminders");
 		return listOfReminders;
 	}
 
-	public ObservableList<String> getCreateReminders(String startDate,String endDate ) throws SQLException
+	public ObservableList<EnquiryViewVO> getCreateReminders(String startDate,String endDate ) throws SQLException
 	{
-		LOG.info("Enter : getReminders");
-		ObservableList<String> listOfReminders = FXCollections.observableArrayList();
+		LOG.info("Enter : getCreateReminders");
+		ObservableList<EnquiryViewVO> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT ref_number FROM quotation.ENQUIRY e where e.ref_number NOT IN (select r1.reference_no from quotation.reminder r1) and e.salesdone='N' and " +
+			preparedStatement = conn.prepareStatement("SELECT ref_number, c.email FROM quotation.ENQUIRY e, quotation.customers c where e.cust_id=c.id and e.ref_number NOT IN (select r1.reference_no from quotation.reminder r1) and e.salesdone='N' and " +
 						"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " +
 							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
@@ -173,7 +176,10 @@ public class StatusReminderDAO {
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
 			{
-				listOfReminders.add(resultSet.getString(1));
+				EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+				enquiryViewVO.setReferenceNo(resultSet.getString(1));
+				enquiryViewVO.setEmailId(resultSet.getString(2));
+				listOfReminders.add(enquiryViewVO);
 			}
 		}
 		catch (Exception e) {
@@ -186,7 +192,7 @@ public class StatusReminderDAO {
 				conn.close();
 			}
 		}
-		LOG.info("Exit : getReminders");
+		LOG.info("Exit : getCreateReminders");
 		return listOfReminders;
 	}
 	public ObservableList<EnquiryVO> getStatusEnquires(String startDate, String endDate, String status) throws Exception

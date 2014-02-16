@@ -73,15 +73,23 @@ public class SalesDAO {
 		return listOfEnquries;
 	}
 	
-	public void saveSalesDate(int id, String date ) throws Exception
+	public void saveSalesDate(EnquiryViewVO enquiryViewVO) throws Exception
 	{
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=? where ID=?");
-			preparedStatement.setString(1, date);
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=?,purchase_order_no=?,product_quantity=? where ID=?");
+			preparedStatement.setString(1, enquiryViewVO.getSalesDate());
 			preparedStatement.setString(2, "Y");
-			preparedStatement.setInt(3, id);
+			preparedStatement.setString(3, enquiryViewVO.getPurchaseOrderNo());
+			preparedStatement.setInt(4, enquiryViewVO.getProductQuantity());
+			preparedStatement.setInt(5, enquiryViewVO.getId());
+			preparedStatement.execute();
+			
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE REMINDER SET status =? where REF_NUMBER=?");
+			preparedStatement.setString(1, "OFF");
+			preparedStatement.setString(2, enquiryViewVO.getReferenceNo());
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -110,10 +118,12 @@ public class SalesDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=? where ID=?");
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=?,purchase_order_no=?,product_quantity=? where ID=?");
 			preparedStatement.setString(1, CommonConstants.NA);
 			preparedStatement.setString(2, "N");
-			preparedStatement.setInt(3, id);
+			preparedStatement.setString(3, CommonConstants.NA);
+			preparedStatement.setInt(4, 0);
+			preparedStatement.setInt(5, id);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {

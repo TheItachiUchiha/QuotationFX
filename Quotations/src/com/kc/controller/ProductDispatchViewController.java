@@ -364,9 +364,11 @@ public class ProductDispatchViewController implements Initializable {
 					if(dispatchVO2.getId()==dispatchVO.getId())
 					{
 						finalDispatchList.remove(dispatchVO2);
+						dispatchDAO.deleteDispatch(dispatchVO2);
+						break;
 					}
 				}
-				dispatchDAO.deleteDispatch(dispatchVO);
+				
 				
 				fillTable(finalDispatchList);
 				
@@ -378,6 +380,64 @@ public class ProductDispatchViewController implements Initializable {
 		}
 	}
 	
+	public void filtaerTableByKey(ObservableList<DispatchVO> tempList,String type , String key)
+	{
+		ObservableList<DispatchVO> finalTempList = FXCollections.observableArrayList();
+		for(DispatchVO dispatchVO : tempList)
+		{
+			if(type.equalsIgnoreCase("Invoice Number"))
+			{
+				if(dispatchVO.getInvoiceNo().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+			else if(type.equalsIgnoreCase("Company Name"))
+			{
+				if(dispatchVO.getCompanyName().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+			else if(type.equalsIgnoreCase("Shipping To"))
+			{
+				if(dispatchVO.getShippingTo().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+			else if(type.equalsIgnoreCase("Transporter"))
+			{
+				if(dispatchVO.getTransporter().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+		}
+		fillTable(finalTempList);
+	}
+	public void filtaerTableByDate(ObservableList<DispatchVO> tempList,String type,String key)
+	{
+		ObservableList<DispatchVO> finalTempList = FXCollections.observableArrayList();
+		for(DispatchVO dispatchVO : tempList)
+		{
+			if(type.equalsIgnoreCase("Invoice Date"))
+			{
+				if(dispatchVO.getInvoiceDate().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+			else if(type.equalsIgnoreCase("Dispatch Date"))
+			{
+				if(dispatchVO.getDispatchDate().equals(key))
+				{
+					finalTempList.add(dispatchVO);
+				}
+			}
+		}
+		fillTable(finalTempList);
+	}
 	private class ButtonCell extends TableCell<DispatchVO, Boolean> {
 	       
 		Image buttonDeleteImage = new Image(getClass().getResourceAsStream("/com/kc/style/delete.png"));
@@ -420,7 +480,21 @@ public class ProductDispatchViewController implements Initializable {
 
 						@Override
 						public void handle(WindowEvent paramT) {
-							fillTable(finalDispatchList);
+							try
+							{
+								finalDispatchList = dispatchDAO.getProductDispatch();
+								if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice date") || searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch date"))
+								{
+									filtaerTableByDate(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(),((TextField)calendar.getChildren().get(0)).getText());
+								}
+								else
+								{
+									filtaerTableByKey(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(), keyCombo.getSelectionModel().getSelectedItem());
+								}
+							}
+							catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 					});
 					

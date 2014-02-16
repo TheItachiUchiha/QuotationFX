@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -67,6 +68,10 @@ public class EnquiryNewController implements Initializable {
 	@FXML
 	private TextField productName;
 	@FXML
+	private Label standardRef;
+	@FXML
+	private Label customRef;
+	@FXML
 	private GridPane enquiryGrid;
 	@FXML
 	private AutoCompleteTextField<String> tinNumber;
@@ -99,7 +104,7 @@ public class EnquiryNewController implements Initializable {
 	@FXML
 	private Label messageNewEnquiry;
 	private TextField filePath;
-	private String typeFlag;
+	private String typeFlag="S";
 	private int productId=0;
 	private Email email;
 	
@@ -114,6 +119,9 @@ public class EnquiryNewController implements Initializable {
 	private char flag='N';
 	private String productCode ="";
 	private String date;
+	private String month;
+	private String year;
+	private String enquiryNumber;
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	
@@ -129,7 +137,14 @@ public class EnquiryNewController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+	try {
 		LOG.info("Enter : initialize");
+		
+        customersList = customersDAO.getCustomers();
+		productsList = productsDAO.getProducts();
+		
+		month = date.substring(3,5);
+		year = date.substring(8,10);
 		
 		ObservableList<String> tempTinList = FXCollections.observableArrayList();
 		ObservableList<String> tempEmailList = FXCollections.observableArrayList();
@@ -150,6 +165,7 @@ public class EnquiryNewController implements Initializable {
         browse.setPrefWidth(65);
         final HBox hBox =new HBox(5);
         hBox.getChildren().addAll(filePath,browse);
+        hBox.setAlignment(Pos.CENTER_LEFT);
         enquiryGrid.add(hBox,3,0);
 
         browse.setOnAction(new EventHandler<ActionEvent>() {
@@ -168,14 +184,15 @@ public class EnquiryNewController implements Initializable {
 
 			@Override
 			public void changed(ObservableValue<? extends Toggle> arg0,
-					Toggle arg1, Toggle arg2) {
+					Toggle oldValue, Toggle newValue) {
 				enquiryGrid.setVisible(false);
 				if(standard.isSelected())
 				{
-					productHbox.setVisible(false);
-					productVbox.setVisible(true);
-					productName.setText("");
-					typeFlag="S";
+						productHbox.setVisible(false);
+						productVbox.setVisible(true);
+						productName.setText("");
+						typeFlag="S";
+						customRef.setVisible(false);
 				}
 				else if(custom.isSelected())
 				{
@@ -199,14 +216,25 @@ public class EnquiryNewController implements Initializable {
 					filePath.setText("");
 					emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
 					messageNewEnquiry.setText("");
+					standardRef.setVisible(false);
+					productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
+					enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
+					customRef.setText(productCode + month + year + enquiryNumber);
 					
 				}
 			}
 		});
-        try {
-        	
-        	customersList = customersDAO.getCustomers();
-			productsList = productsDAO.getProducts();
+        
+        productName.textProperty().addListener(new ChangeListener<String>() {
+
+			@Override
+			public void changed(ObservableValue<? extends String> observable,
+					String oldValue, String newValue) {
+					
+				customRef.setText("Ref No. : "+productCode + month + year + enquiryNumber);
+				customRef.setVisible(true);
+			}
+		});
 			
 			final ObservableList<ProductsVO> tempProductsList = FXCollections
 					.observableArrayList();
@@ -244,6 +272,7 @@ public class EnquiryNewController implements Initializable {
 							filePath.setText("");
 							emailMessage.setText("");
 							messageNewEnquiry.setText("");
+							standardRef.setText("");
 							enquiryGrid.setVisible(false);
 							try {
 								productsList.clear();
@@ -284,6 +313,7 @@ public class EnquiryNewController implements Initializable {
 
 							tempProductList.clear();
 							enquiryGrid.setVisible(false);
+							standardRef.setText("");
 
 							for (ProductsVO productsVO : tempProductsList) {
 								if (productsVO.getProductSubCategory().equals(t1)) {
@@ -298,9 +328,16 @@ public class EnquiryNewController implements Initializable {
 						@Override
 						public void changed(ObservableValue ov, ProductsVO t,
 								ProductsVO t1) {
-							enquiryGrid.setVisible(true);
-							productId = t1.getId();
-							emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
+							if(null!=t1)
+							{
+								enquiryGrid.setVisible(true);
+								productId = t1.getId();
+								emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
+								productCode=t1.getProductCode().substring(0, 2);
+								enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
+								standardRef.setText("Ref No. : "+productCode + month + year + enquiryNumber);
+								standardRef.setVisible(true);
+							}
 						}
 					});
 			tinNumber.setOnAction(new EventHandler<ActionEvent>() {
@@ -449,14 +486,14 @@ public class EnquiryNewController implements Initializable {
 						for (ProductsVO productsVO : productsList) {
 							if (nameCombo.getSelectionModel().getSelectedItem().getId() == productsVO.getId()) {
 								productName=productsVO.getProductName();
-								productCode=productsVO.getProductCode().substring(0, 2);
+								//productCode=productsVO.getProductCode().substring(0, 2);
 							}
 						}
 					}
 					else
 					{
 						productName = this.productName.getText();
-						productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
+						//productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
 					}
 					
 					if(flag=='N')
@@ -467,9 +504,9 @@ public class EnquiryNewController implements Initializable {
 					{
 						customerId = this.customersVO.getId();
 					}
-					String enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
-					String month = date.substring(3,5);
-					String year = date.substring(8,10);
+					enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
+					//String month = date.substring(3,5);
+					//String year = date.substring(8,10);
 					EnquiryVO enquiryVO=new EnquiryVO();
 					enquiryVO.setCustomerId(customerId);
 					enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);

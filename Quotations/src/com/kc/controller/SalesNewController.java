@@ -1,29 +1,13 @@
 package com.kc.controller;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
-import java.util.ResourceBundle;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.CustomersDAO;
-import com.kc.dao.SalesDAO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
-import com.kc.model.EnquiryViewVO;
-import com.kc.util.QuotationUtil;
-import com.sun.glass.events.KeyEvent;
-
-import eu.schudt.javafx.controls.calendar.DatePicker;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
 import javafx.scene.control.Label;
@@ -33,6 +17,17 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.CustomersDAO;
+import com.kc.dao.SalesDAO;
+import com.kc.model.CustomersVO;
+import com.kc.model.EnquiryVO;
+import com.kc.model.EnquiryViewVO;
+import com.kc.util.QuotationUtil;
+import com.kc.util.Validation;
+
+import eu.schudt.javafx.controls.calendar.DatePicker;
 
 public class SalesNewController {
 
@@ -113,6 +108,12 @@ public class SalesNewController {
 
     @FXML
     private TextField etinNumber;
+    
+    @FXML
+    private TextField productQuantity;
+    
+    @FXML
+    private TextField purchaseOrderNo;
 
     @FXML
     private Label message;
@@ -130,6 +131,7 @@ public class SalesNewController {
     private GridPane salesGrid;
     
 	private DatePicker calendar;
+	Validation validation = new Validation();
     private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
     private ObservableList<String> refList = FXCollections.observableArrayList();
     private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
@@ -142,6 +144,7 @@ public class SalesNewController {
     @FXML
     void initialize() {
     	try{
+    		validation.allowDigit(productQuantity);
     		enquiryList = salesDAO.getListOfEnquiresForSales();
     		customerList = customersDAO.getCustomers();
     		enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
@@ -290,7 +293,13 @@ public class SalesNewController {
     public void createSaleEntry()
     {
     	try{
-    		salesDAO.saveSalesDate(enquiryViewVO.getId(), formatter.format(calendar.getSelectedDate()));
+    		EnquiryViewVO viewVO = new EnquiryViewVO();
+    		viewVO.setReferenceNo(enquiryViewVO.getReferenceNo());
+    		viewVO.setProductQuantity(Integer.parseInt(productQuantity.getText()));
+    		viewVO.setPurchaseOrderNo(purchaseOrderNo.getText());
+    		viewVO.setSalesDate(formatter.format(calendar.getSelectedDate()));
+    		viewVO.setId(enquiryViewVO.getId());
+    		salesDAO.saveSalesDate(viewVO);
     		message.setText(CommonConstants.SALES_DATE_CREATED);
 			message.getStyleClass().remove("failure");
 			message.getStyleClass().add("success");

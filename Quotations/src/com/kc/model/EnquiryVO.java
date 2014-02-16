@@ -28,6 +28,8 @@ public class EnquiryVO {
 	private double totalRevenue;
 	private String enquiryCustomerType;
 	private String dispatchDone;
+	private String purchaseOrderNo;
+	private int productQuantity;
 	private int complaintCount;
 	private int serviceCount;
 	private ObservableList<ComponentsVO> list;
@@ -199,6 +201,18 @@ public class EnquiryVO {
 	}
 	public void setServiceCount(int serviceCount) {
 		this.serviceCount = serviceCount;
+	}
+	public String getPurchaseOrderNo() {
+		return purchaseOrderNo;
+	}
+	public void setPurchaseOrderNo(String purchaseOrderNo) {
+		this.purchaseOrderNo = purchaseOrderNo;
+	}
+	public int getProductQuantity() {
+		return productQuantity;
+	}
+	public void setProductQuantity(int productQuantity) {
+		this.productQuantity = productQuantity;
 	}
 	
 }

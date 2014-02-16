@@ -132,20 +132,6 @@ public class EnquiryViewController implements Initializable {
 			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			productList = productsDAO.getProducts();
 			
-			enquiryTable.setItems(enquiryViewList);
-			
-			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-			enquiryType.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("enquiryType"));
-			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-			city.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
-			state.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
-			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-			purchasePeriod.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("purchasePeriod"));
-			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-			
-			
 			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
 
 				@Override

@@ -51,6 +51,8 @@ public class QuotationUtil {
 			enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
 			enquiryViewVO.setDispatchDone(enquiryVO.getDispatchDone());
 			enquiryViewVO.setServiceCount(enquiryVO.getServiceCount());
+			enquiryViewVO.setPurchaseOrderNo(enquiryVO.getPurchaseOrderNo());
+			enquiryViewVO.setProductQuantity(enquiryVO.getProductQuantity());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
 			{
 				enquiryViewVO.setEnquiryType("Custom");

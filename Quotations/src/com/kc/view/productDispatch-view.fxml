@@ -45,7 +45,6 @@
             <ComboBox id="referenceCombo" fx:id="searchCombo" prefHeight="21.0" prefWidth="168.0" promptText="" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Calender" />
                   <String fx:value="Invoice Number" />
                   <String fx:value="Invoice Date" />
                   <String fx:value="Company Name" />

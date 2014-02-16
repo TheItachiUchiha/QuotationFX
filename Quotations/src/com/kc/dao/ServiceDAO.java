@@ -3,7 +3,6 @@ package com.kc.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +16,6 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.model.ComplaintVO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.DBConnector;
@@ -272,7 +269,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date, c.customername, c.companyname, c.state , e.referedby FROM quotation.SERVICE s, "+
+					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date, c.customername, c.companyname, c.state , e.referedby,e.id FROM quotation.SERVICE s, "+
 			"quotation.Customers c, quotation.enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.date!=? and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
@@ -292,6 +289,7 @@ public class ServiceDAO {
 				viewVO.setCompanyName(resultSet.getString(6));
 				viewVO.setState(resultSet.getString(7));
 				viewVO.setReferedBy(resultSet.getString(8));
+				viewVO.setId(resultSet.getInt(9));
 				
 				listOfServices.add(viewVO);
 			}
@@ -310,6 +308,43 @@ public class ServiceDAO {
 		return listOfServices;
 	}
 	
+	public ObservableList<ServiceVO> getServicesForReference(String reference) throws Exception
+	{
+		LOG.info("Enter : getServicesForReference");
+		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn
+					.prepareStatement("SELECT e.service_count, s.engineer_name,s.charge,s.rating FROM quotation.enquiry e ,quotation.service s where e.ref_number=s.reference_no and s.date!='N/A' and e.ref_number=?");
+			preparedStatement.setString(1, reference);
+			resultSet = preparedStatement.executeQuery();
+			
+			while(resultSet.next())
+			{
+				ServiceVO serviceVO = new ServiceVO();
+				serviceVO.setServiceCount(resultSet.getInt(1));
+				serviceVO.setEngineerName(resultSet.getString(2));
+				serviceVO.setCharge(resultSet.getDouble(3));
+				serviceVO.setRating(resultSet.getString(4));
+ 
+				listOfEnquries.add(serviceVO);
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		finally{
+			if(conn !=null)
+			{
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getServicesForReference");
+		return listOfEnquries;
+	}
+	
 	public void deleteService(ServiceVO serviceVO)
 	{
 		try
@@ -326,7 +361,7 @@ public class ServiceDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count + -1 where REF_NUMBER=?");
+			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count - 1 where REF_NUMBER=?");
 			preparedStatement.setString(1, serviceVO.getReferenceNo());
 			preparedStatement.execute();
 			

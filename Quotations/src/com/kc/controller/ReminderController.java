@@ -37,6 +37,7 @@ import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ServiceDAO;
 import com.kc.dao.StatusReminderDAO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DateUtil;
 import com.kc.util.Email;
@@ -129,7 +130,8 @@ public class ReminderController implements Initializable {
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 		private ObservableList<String> yearList = FXCollections.observableArrayList();
 		private ObservableList<ReminderVO> reminderList = FXCollections.observableArrayList();
-		private ObservableList<String> refList = FXCollections.observableArrayList();
+		private ObservableList<EnquiryViewVO> refList = FXCollections.observableArrayList();
+		private ObservableList<String> finalRefList = FXCollections.observableArrayList();
 		private Map<String, String> defaultValues = new HashMap<String, String>();
 		SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 		
@@ -179,16 +181,26 @@ public class ReminderController implements Initializable {
 						autoReminderHBox.setVisible(false);
 						autoReminderVBox.setVisible(false);
 						messageSendMail.setText("");
+						refList.clear();
+						finalRefList.clear();
 						if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
 						{
 							refList = statusReminderDAO.getCreateReminders(startDate,endDate);
 							emailMessage.setText(defaultValues.get(CommonConstants.KEY_REMINDER_MESSAGE));
+							for(EnquiryViewVO enquiryViewVO : refList)
+							{
+								finalRefList.add(enquiryViewVO.getReferenceNo());
+							}
 							stopReminder.setVisible(false);
 							sentHBox.setVisible(false);
 						}
 						else if (actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 						{
 							refList = statusReminderDAO.getModifyReminders(startDate,endDate);
+							for(EnquiryViewVO enquiryViewVO : refList)
+							{
+								finalRefList.add(enquiryViewVO.getReferenceNo());
+							}
 							stopReminder.setVisible(true);
 							sentHBox.setVisible(true);
 						}
@@ -198,7 +210,7 @@ public class ReminderController implements Initializable {
 						}
 						else
 						{
-							referenceCombo.setItems(refList);
+							referenceCombo.setItems(finalRefList);
 							referenceHBox.setVisible(true);
 						}
 					}
@@ -239,7 +251,21 @@ public class ReminderController implements Initializable {
 						String oldValue, String newValue) {
 					autoReminderHBox.setVisible(true);
 					messageSendMail.setText("");
-					if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
+					if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Create Reminder"))
+					{
+						for(EnquiryViewVO enquiryViewVO :refList)
+						{
+							if(null!=newValue)
+							{
+								if(newValue.equals(enquiryViewVO.getReferenceNo()))
+								{
+									receiver.setText(enquiryViewVO.getEmailId());
+									break;
+								}
+							}
+						}
+					}
+					else if(actionCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Modify Reminder"))
 					{
 						try
 						{
@@ -251,6 +277,7 @@ public class ReminderController implements Initializable {
 									if(newValue.equals(reminderVO.getReferenceNo()))
 									{
 										fillDetails(reminderVO);
+										break;
 									}
 								}
 							}

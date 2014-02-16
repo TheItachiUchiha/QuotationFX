@@ -116,6 +116,7 @@ public class ServiceModifyComplaintController implements Initializable {
 	{
 		productName.setText(complaintVO.getProductName());
 		natureOfComplaint.setText(complaintVO.getComplaint());
+		totalService.setText(String.valueOf(complaintVO.getServiceCount()));
 		receiver.setText(complaintVO.getEmailId());
 		message.setText(emailDetails.get(CommonConstants.KEY_SERVICE_MESSAGE));
 		ServiceModifyComplaintController.this.complaintVO=complaintVO;

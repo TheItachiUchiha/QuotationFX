@@ -314,7 +314,7 @@ public class ServiceModifyController implements Initializable {
 	 // Register Service
    public void save() 
    {
-	   ServiceVO serviceVO = new ServiceVO();
+	   	ServiceVO serviceVO = new ServiceVO();
 		serviceVO.setCharge(Double.parseDouble(charge.getText()));
 		serviceVO.setComplaint(natureOfComplaint.getText());
 		serviceVO.setDate(((TextField)calendar.getChildren().get(0)).getText());
@@ -350,6 +350,7 @@ public class ServiceModifyController implements Initializable {
 					serviceVO.setFeedback(CommonConstants.NA);
 					serviceVO.setRating(CommonConstants.NA);
 					serviceVO.setComplaintId(complaintCombo.getSelectionModel().getSelectedItem());
+					serviceVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
 					serviceDAO.deleteService(serviceVO);
 					clearFields();
 					message.setText(CommonConstants.SERVICE_DELETED);
