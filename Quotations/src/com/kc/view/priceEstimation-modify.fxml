@@ -176,7 +176,7 @@
         <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
-        <Insets top="20.0" />
+        <Insets fx:id="x1" />
       </BorderPane.margin>
     </GridPane>
   </right>

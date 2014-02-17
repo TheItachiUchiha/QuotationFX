@@ -132,12 +132,12 @@ public class LoginController extends Application implements Initializable{
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
 								.getResource("/com/kc/view/admin.fxml"));
-				FXMLLoader subMenuLoader = new FXMLLoader(
+				/*FXMLLoader subMenuLoader = new FXMLLoader(
 						LoginController.class
-								.getResource("/com/kc/view/home-admin.fxml"));
+								.getResource("/com/kc/view/home-admin.fxml"));*/
 				this.home = (BorderPane) loader.load();
-				BorderPane subMenu = (BorderPane) subMenuLoader.load();
-				this.home.setCenter(subMenu);
+				//BorderPane subMenu = (BorderPane) subMenuLoader.load();
+				//this.home.setCenter(subMenu);
 				Scene scene = new Scene(this.home);
 				this.primaryStage.setX(0);
 				primaryStage.setY(0);

@@ -18,7 +18,7 @@
         <Label fx:id="companyLable" alignment="CENTER_LEFT" contentDisplay="LEFT" prefHeight="30.0" prefWidth="345.0" text="" />
       </children>
       <padding>
-        <Insets left="20.0" />
+        <Insets left="30.0" />
       </padding>
     </HBox>
   </bottom>
@@ -26,21 +26,67 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <HBox id="#menuHbox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="43.0" prefHeight="44.0" prefWidth="-1.0">
+    <HBox id="#menuHbox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="30.0" prefHeight="30.0" prefWidth="-1.0" styleClass="background-hbox" BorderPane.alignment="TOP_CENTER">
       <children>
-        <HBox fx:id="menuHbox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="45.0" prefWidth="524.0" HBox.hgrow="ALWAYS">
+        <HBox fx:id="menuHbox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-1.0" prefHeight="30.0" prefWidth="578.0" HBox.hgrow="ALWAYS">
           <children>
-            <ToggleButton mnemonicParsing="false" onAction="#adminHome" prefHeight="45.0" selected="true" styleClass="menuButtons, toggle-buttons" text="HOME" HBox.hgrow="ALWAYS">
-              <toggleGroup>
-                <ToggleGroup fx:id="topMenu" />
-              </toggleGroup>
-            </ToggleButton>
-            <ToggleButton mnemonicParsing="false" onAction="#productsHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="PRODUCTS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
-            <ToggleButton mnemonicParsing="false" onAction="#componentsHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="COMPONENTS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
-            <ToggleButton mnemonicParsing="false" onAction="#customersHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="CUSTOMERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
-            <ToggleButton mnemonicParsing="false" onAction="#usersHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="USERS" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
-            <ToggleButton mnemonicParsing="false" onAction="#backupHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="BACKUP" toggleGroup="$topMenu" />
-            <ToggleButton mnemonicParsing="false" onAction="#helpHome" prefHeight="45.0" styleClass="menuButtons, toggle-buttons" text="ABOUT" toggleGroup="$topMenu" HBox.hgrow="ALWAYS" />
+            <MenuBar fx:id="menu" prefHeight="30.0" prefWidth="558.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="HOME" fx:id="homeMenu">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#enquiry" text="Enquiry" fx:id="enquiry" />
+                    <MenuItem mnemonicParsing="false" onAction="#priceEstimation" text="Price Estimation" fx:id="priceEstimation" />
+                    <MenuItem mnemonicParsing="false" onAction="#quotationPreparation" text="Quotation Preparation" fx:id="quotation" />
+                    <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="Sales Order" fx:id="sales" />
+                    <MenuItem mnemonicParsing="false" onAction="#statusReminder" text="Status / Reminde" fx:id="status" />
+                    <MenuItem mnemonicParsing="false" onAction="#productDispatch" text="Product Dispatch" fx:id="dispatch" />
+                    <MenuItem mnemonicParsing="false" onAction="#serviceRegistry" text="Service / registry" fx:id="service" />
+                    <MenuItem mnemonicParsing="false" onAction="#reports" text="Reports" fx:id="report" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="PRODUCTS">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newProduct" text="Create Product" />
+                    <MenuItem mnemonicParsing="false" onAction="#modifyProduct" text="Modify Product" />
+                    <MenuItem mnemonicParsing="false" onAction="#viewProduct" text="View Products" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="COMPONENTS">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newComponent" text="Create Component" />
+                    <MenuItem mnemonicParsing="false" onAction="#modifyComponent" text="Modify Component" />
+                    <MenuItem mnemonicParsing="false" onAction="#viewComponent" text="View Components" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="CUSTOMERS">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newCustomer" text="Create Customer" />
+                    <MenuItem mnemonicParsing="false" onAction="#modifyCustomer" text="Modify Customer" />
+                    <MenuItem mnemonicParsing="false" onAction="#viewCustomers" text="View Customer" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="USERS">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#newUser" text="Create User" />
+                    <MenuItem mnemonicParsing="false" onAction="#modifyUser" text="Modify User" />
+                    <MenuItem mnemonicParsing="false" onAction="#viewUser" text="View Users" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="BACKUP">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#exportDB" text="Export" />
+                    <MenuItem mnemonicParsing="false" onAction="#importDB" text="Import" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="ABOUT">
+                  <items>
+                    <MenuItem mnemonicParsing="false" onAction="#employees" text="Employees" />
+                    <MenuItem mnemonicParsing="false" onAction="#companyDetails" text="Company Details" />
+                    <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
           </children>
           <padding>
             <Insets left="20.0" />
@@ -51,7 +97,7 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" maxHeight="-1.0" maxWidth="368.0" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="368.0" spacing="10.0" HBox.hgrow="NEVER">
           <children>
-            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#14b65d">
+            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#00ff66">
               <font>
                 <Font name="System Bold" size="15.0" />
               </font>

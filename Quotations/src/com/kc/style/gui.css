@@ -316,7 +316,7 @@
  *                                                                             *
  ******************************************************************************/
 
-.button, .menu-button, .toggle-button {
+.button, .toggle-button {
 
     -fx-background-color: 
         rgb(112,112,112),
@@ -342,7 +342,7 @@
     -fx-content-display: LEFT;
 }
 
-.button:focused, .menu-button:focused, .toggle-button:focused {
+.button:focused, .toggle-button:focused {
     
     -fx-background-color: rgb(60,127,177),
     linear-gradient(
@@ -368,7 +368,7 @@
     -fx-background-radius: 3, 2, 2, 1;
 }
 
-.button:hover, .menu-button:hover, .toggle-button:hover {
+.button:hover, .toggle-button:hover {
     
     -fx-background-color: rgb(60, 127, 177),
     linear-gradient(
@@ -385,7 +385,7 @@
         rgb(167, 217, 245) 100%); 
 }
 
-.button:armed, .menu-button:armed, .toggle-button:armed {
+.button:armed, .toggle-button:armed {
     
     -fx-background-color: rgb(44, 98, 139),
     linear-gradient(
@@ -433,9 +433,6 @@
     Operating Systems?
 
     Should left and right padding be the same as a button? */
-.menu-button {
-    -fx-padding: 0.244444em 0.633333em 0.211111em 0.633333em;
-}
 
 /*******************************************************************************
  *                                                                             *
@@ -719,213 +716,7 @@
  ******************************************************************************/
 
 /* Each Top Level Menu Item: File, Edit, About, Etc...*/
-.menu {
-    -fx-background-color: transparent;
-    -fx-padding: 0.42em 0.4em 0.3em 0.4em; /* 4 8 4 8 */
-    -fx-text-fill: rgb(0,0,0);
-}
 
-.menu:disabled {
-    -fx-opacity: -fx-disabled-opacity;
-}
-
-.menu:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-}
-
-/* This hides the down arrow that would show on a menu placed in a menubar */
-.menu-bar .menu .arrow {
-    -fx-padding: 0;
-    -fx-background-color: transparent;
-    -fx-shape: null;
-}
-
-.menu-bar .menu .arrow-button {
-    -fx-padding: 0;
-}
-
-.menu .arrow {
-    -fx-background-color: rgb(40,40,40);
-    -fx-shape: "M0,-4L4,0L0,4Z";
-    -fx-scale-shape: false;
-}
-
-.menu:focused:showing .arrow, .menu:hover:showing .arrow, .menu:focused .arrow, .menu:showing .arrow {
-    -fx-background-color: black;
-}
-
-.menu-up-arrow {
-    -fx-padding: 0.666667em 0.416667em 0.0em 0.416667em;  /* 8 5 0 5 */
-    -fx-background-color: derive(-fx-color,-2%);
-    -fx-shape: "M0 1 L1 1 L.5 0 Z";
-    -fx-effect: innershadow( two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0 , 1 );
-}
-
-.menu-down-arrow {
-    -fx-background-color: derive(-fx-color,-2%);
-    -fx-padding: 0.666667em 0.416667em 0.0em 0.416667em;  /* 8 5 0 5 */
-    -fx-shape: "M0 0 L1 0 L.5 1 Z";
-    -fx-effect: innershadow( two-pass-box , rgba(0,0,0,0.6) , 4, 0.0 , 0 , 1 );
-}
-
-/*******************************************************************************
- *                                                                             *
- * MenuBar                                                                     *
- *                                                                             *
- ******************************************************************************/
-
-.menu-bar {
-    
-    /*-fx-padding: 0.0em 0.666667em 0.0em 0.666667em;*/
-    -fx-padding: 0 0 0 0; 
-    -fx-spacing: 0.166667em; 
-  
-    -fx-background-color: 
-        rgb(182,188,204),
-        linear-gradient(
-            to bottom,
-            rgb(254,254,255) 0%,
-            rgb(242,244,250) 35%,
-            rgb(233,236,246) 35%,
-            rgb(240,242,250) 100%),
-        linear-gradient(
-            to bottom, 
-            rgb(254,254,255) 0%,
-            rgb(229,234,245) 35%,
-            rgb(212,219,237) 35%,
-            rgb(225,230,246) 100%);
-            
-    -fx-background-insets: 0, 0 0 1 0, 0 1 1 1;
-    -fx-background-radius: 0, 0, 0;
-}
-
-/* Show nothing for background of normal menu button in a menu bar */
-.menu-bar .menu-button {
-    -fx-background-radius: 0;
-    -fx-background-color: transparent;
-    -fx-background-insets: 0; 
-}
-
-/* Change padding of menu buttons when in menu bar */
-.menu-bar .menu-button .label {
-    -fx-padding: 0.1em 0.5em 0.2em 0.5em;
-}
-
-.menu-bar .menu-button:hover {
-    -fx-text-fill: rgb(0,0,0);
-    -fx-background-color: 
-        linear-gradient(
-            to bottom,
-            rgb(176,177,177) 0%,
-            rgb(160,163,171) 40%,
-            rgb(148,153,165) 40%,
-            rgb(127,131,142) 100%),
-        linear-gradient(
-            to bottom,
-            rgb(253,253,254) 0%,
-            rgb(244,246,251) 30%,
-            rgb(236,239,247) 30%,
-            rgb(213,216,224) 60%,
-            rgb(239,241,249) 100%),
-        linear-gradient(
-            to bottom,
-            rgba(246,248,250,0.2),
-            rgba(229,233,240,0.2),
-            rgba(215,220,233,0.2));
-    
-    -fx-background-insets: 3,4,5,5;
-    -fx-background-radius: 3,2,2,2;
-}
-
-.menu-bar .menu-button:focused, .menu-bar .menu-button:showing {
-    -fx-text-fill: rgb(0,0,0);
-    -fx-background-color: 
-        linear-gradient(
-            rgb(88,88,89) 0%,
-            rgb(64,66,71) 100%),
-        linear-gradient(
-            rgb(159,160,162) 0%,
-            rgb(173,176,187) 100%),
-        linear-gradient(
-            rgb(182,184,187) 0%,
-            rgb(200,205,218) 100%),
-        linear-gradient(
-            rgb(200,202,208) 0%,
-            rgb(205,209,219) 35%,
-            rgb(194,200,217) 35%,
-            rgb(213,218,233) 100%);
-    
-    -fx-background-insets: 3,4,5,5;
-    -fx-background-radius: 3,2,2,2;
-}
-
-.menu-bar:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-}
-
-/*******************************************************************************
- *                                                                             *
- * MenuItem                                                                    *
- *                                                                             *
- ******************************************************************************/
-
-.menu-item {
-    
-    /*-fx-padding: 0.333333em 0.41777em 0.333333em 0.41777em;*/   /* 4 5 4 5 */
-    -fx-padding: 0.6em 0.41777em 0.6em 0.41777em;
-}
-
-.menu-item .left-container {
-    -fx-padding: 0.458em 0.791em 0.458em 0.458em;
-    -fx-background-color: #ffffff;
-}
-
-.menu-item .graphic-container {
-    -fx-padding: 0em 0.333em 0em 0em;
-}
-
-/* Adds padding to the label text. For ex, adds .05em spacing b/n label text
-    and Shortcut accelerator text. */
-.menu-item .label {
-    -fx-padding: 0em 0.5em 0em 0em;
-    -fx-text-fill: rgb(0,0,0); /* Menu Item Text Color */
-    
-}
-
-.menu-item:disabled .label {
-    -fx-opacity: -fx-disabled-opacity;
-}
-
-/* Menu Item Hover */
-.menu-item:focused {
-     -fx-background: -fx-accent;
-     -fx-background-color:
-         rgb(174,207,247),
-         linear-gradient(
-            to bottom,
-            rgb(248,248,250) 0%,
-            rgb(239,244,250) 100%),
-         linear-gradient(
-            to bottom,
-            rgb(243,248,247) 0%,
-            rgb(231,238,247) 100%);
-
-     -fx-background-insets: 3, 4, 5;
-     -fx-background-radius: 3, 2, 1 ;
-     -fx-text-fill: rgb(0,0,0);
-     
-}
-
-.menu-item:focused .label {
-    -fx-text-fill: rgb(0,0,0);
-}
-.menu-item .right-container {
-    -fx-padding: 0em 0em 0em 0.5em;
-}
-
-.menu-item:show-mnemonics .mnemonic-underline {
-    -fx-stroke: -fx-text-fill;
-} 
 
 
 .radio-menu-item:checked .radio {
@@ -948,20 +739,6 @@
     -fx-background-color: white;
 }
 
-.menu .arrow {
-    -fx-padding: 0.458em 0.167em 0.458em 0.167em; /* 4.5 2 4.5 2 */
-    -fx-background-color: -fx-mark-color;
-    -fx-shape: "M0,-4L4,0L0,4Z";
-    -fx-scale-shape: false;
-}
-
-.menu:selected .arrow {
-    -fx-background-color: rgb(40,40,40);
-}
-
-.menu-item:disabled {
-    -fx-opacity: -fx-disabled-opacity;
-}
 
 /*******************************************************************************
  *                                                                             *
@@ -1224,6 +1001,7 @@
 	-fx-background-color: transparent;
 }
 
+
 .combo-style{
 	-fx-background-color:
         #c3c4c4,
@@ -1307,11 +1085,19 @@
 -fx-border-width: 2px;
 
 }
-/*.separator{
-   	-fx-border-color: transparent -fx-base transparent -fx-base;
-	-fx-background-color: transparent, derive(-fx-base,20%);
-	-fx-background-insets: 0, 0 0 0 0;
-	-fx-border-style: solid;
-	-fx-border-width: 10px;
+
+.menu-bar {
+    -fx-background-color: #D6D2D3;
+    -fx-selection-bar: derive(-fx-background,-7%);
 }
-*/
+
+.menu-bar .label {
+    -fx-font-size: 14pt;
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: white;
+    -fx-opacity: 0.9;
+}
+
+.background-hbox{
+	-fx-background-color: #D6D2D3 ;
+}

@@ -47,7 +47,7 @@
             <Insets fx:id="x2" />
           </VBox.margin>
         </GridPane>
-        <TableView id="priceEstimationTable" fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="872.0" styleClass="table-style" visible="false">
+        <TableView id="priceEstimationTable" fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="872.0" styleClass="table-style" visible="false">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Ref_No" fx:id="referenceNo" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Product Name" fx:id="productName" />

@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 public class ProductsController {
 	
 	private static final Logger LOG = LogManager.getLogger(ProductsController.class);
+	
 	public void newProduct()
 	{
 		LOG.info("Enter : newProduct");

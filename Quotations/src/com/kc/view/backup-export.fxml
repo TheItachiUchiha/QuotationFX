@@ -2,11 +2,12 @@
 
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="89.0" prefWidth="413.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.BackupExportController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="122.0" prefWidth="449.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.BackupExportController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="19.0" prefWidth="88.0" text="Take Backup *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -23,6 +24,9 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" percentWidth="21.2621359223301" prefWidth="89.0" />
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" percentWidth="78.98058252427184" prefWidth="324.0" />
   </columnConstraints>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
   <rowConstraints>
     <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="31.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
