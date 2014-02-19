@@ -34,6 +34,9 @@ public class LoginDAO
 				LoginController.modulesVO.setReport(resultSet.getString("report"));
 				LoginController.modulesVO.setSalesOrderManagement(resultSet.getString("salesorder"));
 				LoginController.modulesVO.setStatusReminder(resultSet.getString("statusReminder"));
+				LoginController.modulesVO.setEnquiry(resultSet.getString("enquiry"));
+				LoginController.modulesVO.setProductDispatch(resultSet.getString("product_dispatch"));
+				LoginController.modulesVO.setService(resultSet.getString("service_registry"));
 				LoginController.userType = resultSet.getString("usertype");
 				LoginController.currentUser = resultSet.getString("name");
 				status = true;

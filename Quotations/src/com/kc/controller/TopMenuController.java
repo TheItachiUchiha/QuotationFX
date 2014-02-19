@@ -51,6 +51,12 @@ public class TopMenuController implements Initializable {
 
 	    @FXML
 	    private MenuItem enquiry;
+	    
+	    @FXML
+	    private MenuItem companyDetails;
+	    
+	    @FXML
+	    private MenuItem employee;
 
 	    @FXML
 	    private Menu homeMenu;
@@ -97,6 +103,8 @@ public class TopMenuController implements Initializable {
 					menu.getMenus().remove(1);
 					menu.getMenus().remove(1);
 					menu.getMenus().remove(1);
+					companyDetails.setDisable(true);
+					employee.setDisable(true);
 				}
 				
 				if(LoginController.modulesVO.getPriceEstimation().equalsIgnoreCase("N"))
@@ -118,6 +126,18 @@ public class TopMenuController implements Initializable {
 				if(LoginController.modulesVO.getReport().equalsIgnoreCase("N"))
 				{
 					report.setDisable(true);
+				}
+				if(LoginController.modulesVO.getEnquiry().equalsIgnoreCase("N"))
+				{
+					enquiry.setDisable(true);
+				}
+				if(LoginController.modulesVO.getProductDispatch().equalsIgnoreCase("N"))
+				{
+					dispatch.setDisable(true);
+				}
+				if(LoginController.modulesVO.getService().equalsIgnoreCase("N"))
+				{
+					service.setDisable(true);
 				}
 		}
 		catch (Exception e) {

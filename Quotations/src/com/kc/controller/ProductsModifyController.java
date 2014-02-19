@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ChangeListener;
@@ -21,7 +20,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -32,8 +30,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -52,6 +48,7 @@ import com.kc.model.ComponentsVO;
 import com.kc.model.ProductsVO;
 import com.kc.util.EditingCell;
 import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 @SuppressWarnings("unchecked")
 public class ProductsModifyController implements Initializable {
@@ -59,6 +56,9 @@ public class ProductsModifyController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(ProductsModifyController.class);
 	private ObservableList<ProductsVO> productsList;
 	private ObservableList<ComponentsVO> componentList;
+	private ObservableList<String> categorylist=FXCollections.observableArrayList();
+	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
 	private ProductsDAO productsDAO;
 	public static Stage stage;
 	private Validation validate;
@@ -82,11 +82,11 @@ public class ProductsModifyController implements Initializable {
 	private ComboBox<String> productSubcategory;
 
 	@FXML
-	private TextField productCategoryTextField;
+	private AutoCompleteTextField<String> productCategoryTextField;
 	@FXML
-	private TextField productNameTextField;
+	private AutoCompleteTextField<String> productNameTextField;
 	@FXML
-	private TextField productSubCategoryTextField;
+	private AutoCompleteTextField<String> productSubCategoryTextField;
 	@FXML
 	private TextField productCodeTextField;
 
@@ -138,6 +138,13 @@ public class ProductsModifyController implements Initializable {
 			productSubcategory.setItems(tempProductSubCategoryList);
 			productName.setItems(tempProductList);
 			componentTable.setEditable(true);
+			
+			categorylist = productsDAO.getProductCategoryList();
+			subcategorylist = productsDAO.getProductSubcategoryList();
+			namelist = productsDAO.getProductNameList();
+			productCategoryTextField.setItems(categorylist);
+			productSubCategoryTextField.setItems(subcategorylist);
+			productNameTextField.setItems(namelist);
 			
 			
 			for(ProductsVO productsVO: productsList)

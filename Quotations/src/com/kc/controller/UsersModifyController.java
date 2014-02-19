@@ -64,6 +64,12 @@ public class UsersModifyController implements Initializable{
     @FXML
     private CheckBox statusReminder;
     @FXML
+    private CheckBox enquiry;
+    @FXML
+    private CheckBox productDispatch;
+    @FXML
+    private CheckBox service;
+    @FXML
     private CheckBox view;
     @FXML
     private CheckBox edit;
@@ -93,6 +99,12 @@ public class UsersModifyController implements Initializable{
 						priceEstimation.setDisable(true);
 						report.setSelected(true);
 						report.setDisable(true);
+						service.setDisable(true);;
+						service.setSelected(true);
+						productDispatch.setDisable(true);
+						productDispatch.setSelected(true);
+						enquiry.setDisable(true);
+						enquiry.setSelected(true);
 						statusReminder.setSelected(true);
 						statusReminder.setDisable(true);
 						salesOrderManagement.setSelected(true);
@@ -115,6 +127,12 @@ public class UsersModifyController implements Initializable{
 								priceEstimation.setDisable(false);
 								statusReminder.setDisable(false);
 								report.setDisable(false);
+								service.setDisable(false);
+								service.setSelected(false);
+								productDispatch.setDisable(false);
+								productDispatch.setSelected(false);
+								enquiry.setDisable(false);
+								enquiry.setSelected(false);
 								salesOrderManagement.setDisable(false);
 								view.setDisable(false);
 								edit.setDisable(false);
@@ -127,7 +145,30 @@ public class UsersModifyController implements Initializable{
 								{
 									quotation.setSelected(false);
 								}
-
+								if(usersVO.getEnquiry().equalsIgnoreCase("Y"))
+								{
+									enquiry.setSelected(true);
+								}
+								else
+								{
+									enquiry.setSelected(false);
+								}
+								if(usersVO.getService().equalsIgnoreCase("Y"))
+								{
+									service.setSelected(true);
+								}
+								else
+								{
+									service.setSelected(false);
+								}
+								if(usersVO.getProductDispatch().equalsIgnoreCase("Y"))
+								{
+									productDispatch.setSelected(true);
+								}
+								else
+								{
+									productDispatch.setSelected(false);
+								}
 								if(usersVO.getPriceEstimation().equalsIgnoreCase("Y"))
 								{
 									priceEstimation.setSelected(true);
@@ -251,6 +292,18 @@ public class UsersModifyController implements Initializable{
 		{
 			quotation.setSelected(true);
 		}
+		if(usersVO.getEnquiry().equalsIgnoreCase("Y"))
+		{
+			enquiry.setSelected(true);
+		}
+		if(usersVO.getService().equalsIgnoreCase("Y"))
+		{
+			service.setSelected(true);
+		}
+		if(usersVO.getProductDispatch().equalsIgnoreCase("Y"))
+		{
+			productDispatch.setSelected(true);
+		}
 
 		if(usersVO.getPriceEstimation().equalsIgnoreCase("Y"))
 		{
@@ -319,7 +372,7 @@ public class UsersModifyController implements Initializable{
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()))
+			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()||service.isSelected()||enquiry.isSelected()||productDispatch.isSelected()))
 			{
 				message.setText(CommonConstants.USER_SELECT_MODULE);
 				message.getStyleClass().remove("success");
@@ -342,7 +395,30 @@ public class UsersModifyController implements Initializable{
 			usersVO.setMobileNumber(mobileNumber.getText());
 			usersVO.setUsername(username.getText());
 			usersVO.setPassword(password.getText());
-			
+			if(enquiry.isSelected())
+			{
+				usersVO.setEnquiry("Y");
+			}
+			else
+			{
+				usersVO.setEnquiry("N");
+			}
+			if(service.isSelected())
+			{
+				usersVO.setService("Y");
+			}
+			else
+			{
+				usersVO.setService("N");
+			}
+			if(productDispatch.isSelected())
+			{
+				usersVO.setProductDispatch("Y");
+			}
+			else
+			{
+				usersVO.setProductDispatch("N");
+			}
 			if(quotation.isSelected())
 			{
 				usersVO.setQuotation("Y");

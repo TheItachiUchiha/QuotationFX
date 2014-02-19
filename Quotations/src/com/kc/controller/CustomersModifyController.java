@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,15 +42,15 @@ public class CustomersModifyController implements Initializable{
 	@FXML
 	private HBox modifyHbox; 
 	@FXML
-	private TextField customerName;
+	private AutoCompleteTextField<String> customerName;
 	@FXML
-	private TextField companyName;
+	private AutoCompleteTextField<String> companyName;
 	@FXML
 	private TextArea address;
 	@FXML
-	private TextField city;
+	private AutoCompleteTextField<String> city;
 	@FXML
-	private TextField state;
+	private AutoCompleteTextField<String> state;
 	@FXML
 	private TextField emailId;
 	@FXML
@@ -67,12 +68,26 @@ public class CustomersModifyController implements Initializable{
     @FXML
 	private Label message;
     
+    private ObservableList<String> cityList=FXCollections.observableArrayList();
+	private ObservableList<String> stateList=FXCollections.observableArrayList();
+	private ObservableList<String> companylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
+    
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		LOG.info("Enter : initialize");
 		try{
 			validation.allowAsPhoneNumber(contactNumber);
 			customersList = customersDAO.getCustomers();
+			
+			cityList = customersDAO.getCustomerCityList();
+			namelist = customersDAO.getCustomerNameList();
+			companylist = customersDAO.getCustomerCompanyList();
+			stateList = customersDAO.getCustomerStateList();
+			companyName.setItems(companylist);
+			customerName.setItems(namelist);
+			city.setItems(cityList);
+			state.setItems(stateList);
 			
 			customerNameAutoFill.setItems(customersList);
 

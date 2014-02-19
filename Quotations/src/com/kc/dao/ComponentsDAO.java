@@ -129,4 +129,158 @@ public class ComponentsDAO {
 		}
 		LOG.info("Exit : deleteComponents");
 	}
+	public ObservableList<String> getComponentCategoryList() throws SQLException {
+		LOG.info("Enter : getComponentCategoryList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct category FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentCategoryList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentSubcategoryList() throws SQLException {
+		LOG.info("Enter : getComponentSubcategoryList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct subcategory FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentSubcategoryList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentNameList() throws SQLException {
+		LOG.info("Enter : getComponentNameList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct name FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentNameList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentModelList() throws SQLException {
+		LOG.info("Enter : getComponentModelList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct model FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentModelList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentVendorList() throws SQLException {
+		LOG.info("Enter : getComponentVendorList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct vendor FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentVendorList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentTypeList() throws SQLException {
+		LOG.info("Enter : getComponentTypeList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct type FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentTypeList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getComponentSizeList() throws SQLException {
+		LOG.info("Enter : getComponentSizeList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct size FROM quotation.components");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getComponentSizeList");
+		return listOfCategory;
+	}
 }

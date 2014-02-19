@@ -22,6 +22,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ComponentsModifyController implements Initializable {
 
@@ -41,19 +42,19 @@ public class ComponentsModifyController implements Initializable {
 	@FXML
 	private HBox modifyHbox;
 	@FXML
-	private TextField componentName;
+	private AutoCompleteTextField<String> componentName;
 	@FXML
-	private TextField componentCategory;
+	private AutoCompleteTextField<String> componentCategory;
 	@FXML
-	private TextField subCategory;
+	private AutoCompleteTextField<String> subCategory;
 	@FXML
-	private TextField vendor;
+	private AutoCompleteTextField<String> vendor;
 	@FXML
-	private TextField model;
+	private AutoCompleteTextField<String> model;
 	@FXML
-	private TextField type;
+	private AutoCompleteTextField<String> type;
 	@FXML
-	private TextField size;
+	private AutoCompleteTextField<String> size;
 	@FXML
 	private TextField costPrice;
 	@FXML
@@ -68,6 +69,14 @@ public class ComponentsModifyController implements Initializable {
 	private ComboBox<String> subcategoryCombo;
 	@FXML
 	private ComboBox<ComponentsVO> componentCombo;
+	
+	private ObservableList<String> categorylist=FXCollections.observableArrayList();
+	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	private ObservableList<String> vendorlist=FXCollections.observableArrayList();
+	private ObservableList<String> Modellist=FXCollections.observableArrayList();
+	private ObservableList<String> typelist=FXCollections.observableArrayList();
+	private ObservableList<String> sizelist=FXCollections.observableArrayList();
 
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
@@ -77,6 +86,22 @@ public class ComponentsModifyController implements Initializable {
 			validation.allowAsAmount(costPrice);
 			validation.allowAsAmount(dealerPrice);
 			validation.allowAsAmount(endUserPrice);
+			
+			categorylist = componentsDAO.getComponentCategoryList();
+			subcategorylist = componentsDAO.getComponentSubcategoryList();
+			namelist = componentsDAO.getComponentNameList();
+			vendorlist = componentsDAO.getComponentVendorList();
+			Modellist = componentsDAO.getComponentModelList();
+			typelist = componentsDAO.getComponentTypeList();
+			sizelist = componentsDAO.getComponentSizeList();
+			
+			componentCategory.setItems(categorylist);
+			subCategory.setItems(subcategorylist);
+			componentName.setItems(namelist);
+			vendor.setItems(vendorlist);
+			model.setItems(Modellist);
+			type.setItems(typelist);
+			size.setItems(sizelist);
 
 			componentsList = componentsDAO.getComponents();
 			final ObservableList<ComponentsVO> tempComponentsList = FXCollections

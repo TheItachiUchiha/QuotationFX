@@ -17,6 +17,12 @@ public class UsersVO {
 
 	private String quotation;
 	
+	private String enquiry;
+	
+	private String productDispatch;
+	
+	private String service;
+	
 	private String priceEstimation;
 
 	private String salesOrderManagement;
@@ -158,4 +164,29 @@ public class UsersVO {
 	{
 		return this.name;
 	}
+
+	public String getEnquiry() {
+		return enquiry;
+	}
+
+	public void setEnquiry(String enquiry) {
+		this.enquiry = enquiry;
+	}
+
+	public String getProductDispatch() {
+		return productDispatch;
+	}
+
+	public void setProductDispatch(String productDispatch) {
+		this.productDispatch = productDispatch;
+	}
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
+	}
+	
 }

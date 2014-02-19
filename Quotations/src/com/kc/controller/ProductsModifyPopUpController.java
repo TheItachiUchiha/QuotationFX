@@ -6,20 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import com.kc.constant.CommonConstants;
-import com.kc.dao.ProductsDAO;
-import com.kc.model.ComponentsVO;
-import com.kc.model.EnquiryViewVO;
-import com.kc.model.ProductsVO;
-import com.kc.util.EditingCell;
-import com.kc.util.Validation;
-
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -32,10 +22,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,11 +38,25 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.ProductsDAO;
+import com.kc.model.ComponentsVO;
+import com.kc.model.ProductsVO;
+import com.kc.util.EditingCell;
+import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
+
 public class ProductsModifyPopUpController implements Initializable {
 
 	private static final Logger LOG = LogManager.getLogger(ProductsModifyController.class);
 	private ProductsVO productsVO;
 	private ObservableList<ComponentsVO> componentList;
+	private ObservableList<String> categorylist=FXCollections.observableArrayList();
+	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
 	private ProductsDAO productsDAO;
 	public static Stage stage;
 	private Validation validate;
@@ -93,16 +97,16 @@ public class ProductsModifyPopUpController implements Initializable {
     private HBox modifyHBox;
 
     @FXML
-    private TextField productCategoryTextField;
+	private AutoCompleteTextField<String> productCategoryTextField;
+    
+	@FXML
+	private AutoCompleteTextField<String> productNameTextField;
+	
+	@FXML
+	private AutoCompleteTextField<String> productSubCategoryTextField;
 
     @FXML
     private TextField productCodeTextField;
-
-    @FXML
-    private TextField productNameTextField;
-
-    @FXML
-    private TextField productSubCategoryTextField;
 
     @FXML
     private TableColumn<ComponentsVO, Integer> quantity;
@@ -130,6 +134,14 @@ public class ProductsModifyPopUpController implements Initializable {
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try{
 			componentTable.setEditable(true);
+			
+			categorylist = productsDAO.getProductCategoryList();
+			subcategorylist = productsDAO.getProductSubcategoryList();
+			namelist = productsDAO.getProductNameList();
+			productCategoryTextField.setItems(categorylist);
+			productSubCategoryTextField.setItems(subcategorylist);
+			productNameTextField.setItems(namelist);
+			
 			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
 				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {
 					return new EditingCell();

@@ -11,6 +11,12 @@ public class ModulesVO {
 	private String statusReminder;
 	
 	private String report;
+	
+	private String enquiry;
+	
+	private String productDispatch;
+	
+	private String service;
 
 	public String getQuotation() {
 		return quotation;
@@ -50,6 +56,30 @@ public class ModulesVO {
 
 	public void setReport(String report) {
 		this.report = report;
+	}
+
+	public String getEnquiry() {
+		return enquiry;
+	}
+
+	public void setEnquiry(String enquiry) {
+		this.enquiry = enquiry;
+	}
+
+	public String getProductDispatch() {
+		return productDispatch;
+	}
+
+	public void setProductDispatch(String productDispatch) {
+		this.productDispatch = productDispatch;
+	}
+
+	public String getService() {
+		return service;
+	}
+
+	public void setService(String service) {
+		this.service = service;
 	}
 
 }

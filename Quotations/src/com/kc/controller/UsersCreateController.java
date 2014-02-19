@@ -48,6 +48,12 @@ public class UsersCreateController implements Initializable {
 	@FXML
 	private CheckBox report;
 	@FXML
+    private CheckBox enquiry;
+    @FXML
+    private CheckBox productDispatch;
+    @FXML
+	private CheckBox service;
+	@FXML
 	private CheckBox view;
 	@FXML
 	private CheckBox edit;
@@ -76,6 +82,12 @@ public class UsersCreateController implements Initializable {
 					quotation.setDisable(true);
 					priceEstimation.setSelected(true);
 					priceEstimation.setDisable(true);
+					service.setDisable(true);;
+					service.setSelected(true);
+					productDispatch.setDisable(true);
+					productDispatch.setSelected(true);
+					enquiry.setDisable(true);
+					enquiry.setSelected(true);
 					report.setSelected(true);
 					report.setDisable(true);
 					statusReminder.setSelected(true);
@@ -95,6 +107,12 @@ public class UsersCreateController implements Initializable {
 					quotation.setDisable(false);
 					priceEstimation.setSelected(false);
 					priceEstimation.setDisable(false);
+					service.setDisable(false);
+					service.setSelected(false);
+					productDispatch.setDisable(false);
+					productDispatch.setSelected(false);
+					enquiry.setDisable(false);
+					enquiry.setSelected(false);
 					report.setSelected(false);
 					report.setDisable(false);
 					statusReminder.setSelected(false);
@@ -137,7 +155,7 @@ public class UsersCreateController implements Initializable {
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()))
+			else if(!(quotation.isSelected()||priceEstimation.isSelected()||report.isSelected()||statusReminder.isSelected()||salesOrderManagement.isSelected()||service.isSelected()||enquiry.isSelected()||productDispatch.isSelected()))
 			{
 				message.setText(CommonConstants.USER_SELECT_MODULE);
 				message.getStyleClass().remove("success");
@@ -159,6 +177,30 @@ public class UsersCreateController implements Initializable {
 			usersVO.setMobileNumber(mobileNumber.getText());
 			usersVO.setUsername(username.getText());
 			usersVO.setPassword(password.getText());
+			if(enquiry.isSelected())
+			{
+				usersVO.setEnquiry("Y");
+			}
+			else
+			{
+				usersVO.setEnquiry("N");
+			}
+			if(service.isSelected())
+			{
+				usersVO.setService("Y");
+			}
+			else
+			{
+				usersVO.setService("N");
+			}
+			if(productDispatch.isSelected())
+			{
+				usersVO.setProductDispatch("Y");
+			}
+			else
+			{
+				usersVO.setProductDispatch("N");
+			}
 			if(quotation.isSelected())
 			{
 				usersVO.setQuotation("Y");

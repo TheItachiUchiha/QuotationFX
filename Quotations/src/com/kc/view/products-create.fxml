@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.mytdev.javafx.scene.control.*?>
+<?import com.mytdev.javafx.scene.control.AutoCompleteTextField?>
 <?import java.lang.*?>
 <?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
+<?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
 <BorderPane maxWidth="-Infinity" prefWidth="1013.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsCreateController">
   <!-- TODO Add Nodes -->
@@ -69,11 +74,11 @@
       <children>
         <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefWidth="93.0" text="Sub Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <TextField fx:id="productCategory" maxWidth="-Infinity" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField id="subCategory" fx:id="productSubCategory" maxWidth="-Infinity" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <AutoCompleteTextField fx:id="productCategory" maxWidth="-Infinity" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        <AutoCompleteTextField fx:id="productSubCategory" maxWidth="-Infinity" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
         <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-        <TextField fx:id="productName" maxWidth="-Infinity" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+        <AutoCompleteTextField fx:id="productName" maxWidth="-Infinity" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
         <TextField fx:id="productCode" maxWidth="-Infinity" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
         <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
           <children>

@@ -13,11 +13,11 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="537.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsModifyController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ComponentsModifyController">
   <center>
-    <HBox fx:id="modifyHbox" prefHeight="376.0" prefWidth="600.0" visible="false" BorderPane.alignment="TOP_LEFT">
+    <HBox fx:id="modifyHbox" prefHeight="341.0" prefWidth="560.0" visible="false" BorderPane.alignment="TOP_LEFT">
       <children>
-        <GridPane id="message" fx:id="gridPane" alignment="CENTER" prefHeight="337.0" prefWidth="408.0" visible="true" HBox.hgrow="NEVER">
+        <GridPane id="message" fx:id="gridPane" alignment="CENTER" prefHeight="349.0" prefWidth="408.0" visible="true" HBox.hgrow="NEVER">
           <!-- TODO Add Nodes -->
           <children>
             <Label id="title" prefHeight="28.0" prefWidth="165.0" text="Component Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -34,16 +34,16 @@
             <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Cost Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
             <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="Dealer Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
             <Label id="title" font="$x1" prefHeight="28.0" prefWidth="165.0" text="End User Price *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
-            <TextField fx:id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <TextField fx:id="componentCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="subCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="vendor" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="model" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="type" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="size" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-            <TextField fx:id="costPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <TextField fx:id="dealerPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-            <TextField fx:id="endUserPrice" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <AutoCompleteTextField fx:id="componentName" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <AutoCompleteTextField fx:id="componentCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <AutoCompleteTextField fx:id="subCategory" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <AutoCompleteTextField fx:id="vendor" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <AutoCompleteTextField fx:id="model" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <AutoCompleteTextField fx:id="type" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <AutoCompleteTextField fx:id="size" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="costPrice" maxWidth="-Infinity" prefHeight="23.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="dealerPrice" maxWidth="-Infinity" prefHeight="23.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="endUserPrice" maxWidth="-Infinity" prefHeight="23.0" prefWidth="240.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="10">
               <children>
                 <Button font="$x1" mnemonicParsing="false" onAction="#modifyComponent" prefWidth="65.0" styleClass="button-style" text="Save" />

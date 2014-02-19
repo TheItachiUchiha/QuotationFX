@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -18,6 +20,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.model.CustomersVO;
 import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class CustomersCreateController implements Initializable {
 private static final Logger LOG = LogManager.getLogger(CustomersCreateController.class);
@@ -25,15 +28,15 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	Validation validation;
 	
 	@FXML
-	private TextField customerName;
+	private AutoCompleteTextField<String> customerName;
 	@FXML
-	private TextField companyName;
+	private AutoCompleteTextField<String> companyName;
 	@FXML
 	private TextArea address;
 	@FXML
-	private TextField city;
+	private AutoCompleteTextField<String> city;
 	@FXML
-	private TextField state;
+	private AutoCompleteTextField<String> state;
 	@FXML
 	private TextField emailId;
 	@FXML
@@ -51,6 +54,11 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	@FXML
 	private Label message;
 	
+	private ObservableList<String> cityList=FXCollections.observableArrayList();
+	private ObservableList<String> stateList=FXCollections.observableArrayList();
+	private ObservableList<String> companylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	
 	public CustomersCreateController()
 	{
 		customersDAO = new CustomersDAO();
@@ -59,8 +67,22 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		validation.allowAsPhoneNumber(contactNumber);
-		dealer.setSelected(true);
+		try
+		{
+			validation.allowAsPhoneNumber(contactNumber);
+			dealer.setSelected(true);
+			cityList = customersDAO.getCustomerCityList();
+			namelist = customersDAO.getCustomerNameList();
+			companylist = customersDAO.getCustomerCompanyList();
+			stateList = customersDAO.getCustomerStateList();
+			companyName.setItems(companylist);
+			customerName.setItems(namelist);
+			city.setItems(cityList);
+			state.setItems(stateList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

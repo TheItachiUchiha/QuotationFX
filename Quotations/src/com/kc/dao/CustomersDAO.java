@@ -152,4 +152,92 @@ public class CustomersDAO {
 		}
 		LOG.info("Exit : deleteCustomers");
 	}
+	public ObservableList<String> getCustomerNameList() throws SQLException {
+		LOG.info("Enter : getCustomerNameList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct customername FROM quotation.customers");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getCustomerNameList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getCustomerCompanyList() throws SQLException {
+		LOG.info("Enter : getCustomerCompanyList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct companyname FROM quotation.customers");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getCustomerCompanyList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getCustomerCityList() throws SQLException {
+		LOG.info("Enter : getCustomerCityList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct city FROM quotation.customers");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getCustomerCityList");
+		return listOfCategory;
+	}
+	public ObservableList<String> getCustomerStateList() throws SQLException {
+		LOG.info("Enter : getCustomerStateList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct state FROM quotation.customers");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getCustomerStateList");
+		return listOfCategory;
+	}
 }

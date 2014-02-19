@@ -4,6 +4,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -16,6 +18,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.ComponentsDAO;
 import com.kc.model.ComponentsVO;
 import com.kc.util.Validation;
+import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 
 public class ComponentsCreateController implements Initializable{
 	
@@ -25,19 +28,19 @@ public class ComponentsCreateController implements Initializable{
 	private Validation validation;
 
 	@FXML
-	private TextField componentName;
+	private AutoCompleteTextField<String> componentName;
 	@FXML
-	private TextField componentCategory;
+	private AutoCompleteTextField<String> componentCategory;
 	@FXML
-	private TextField subCategory;
+	private AutoCompleteTextField<String> subCategory;
 	@FXML
-	private TextField vendor;
+	private AutoCompleteTextField<String> vendor;
 	@FXML
-	private TextField model;
+	private AutoCompleteTextField<String> model;
 	@FXML
-	private TextField type;
+	private AutoCompleteTextField<String> type;
 	@FXML
-	private TextField size;
+	private AutoCompleteTextField<String> size;
 	@FXML
 	private TextField costPrice;
 	@FXML
@@ -46,6 +49,14 @@ public class ComponentsCreateController implements Initializable{
 	private TextField endUserPrice;
 	@FXML
 	private Label message;
+	
+	private ObservableList<String> categorylist=FXCollections.observableArrayList();
+	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	private ObservableList<String> vendorlist=FXCollections.observableArrayList();
+	private ObservableList<String> Modellist=FXCollections.observableArrayList();
+	private ObservableList<String> typelist=FXCollections.observableArrayList();
+	private ObservableList<String> sizelist=FXCollections.observableArrayList();
 	
 	public ComponentsCreateController()
 	{
@@ -56,10 +67,32 @@ public class ComponentsCreateController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
-		validation.allowAsAmount(costPrice);
-		validation.allowAsAmount(dealerPrice);
-		validation.allowAsAmount(endUserPrice);
+		try
+		{
+			validation.allowAsAmount(costPrice);
+			validation.allowAsAmount(dealerPrice);
+			validation.allowAsAmount(endUserPrice);
+			
+			categorylist = componentsDAO.getComponentCategoryList();
+			subcategorylist = componentsDAO.getComponentSubcategoryList();
+			namelist = componentsDAO.getComponentNameList();
+			vendorlist = componentsDAO.getComponentVendorList();
+			Modellist = componentsDAO.getComponentModelList();
+			typelist = componentsDAO.getComponentTypeList();
+			sizelist = componentsDAO.getComponentSizeList();
+			
+			componentCategory.setItems(categorylist);
+			subCategory.setItems(subcategorylist);
+			componentName.setItems(namelist);
+			vendor.setItems(vendorlist);
+			model.setItems(Modellist);
+			type.setItems(typelist);
+			size.setItems(sizelist);
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

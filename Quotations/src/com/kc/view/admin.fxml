@@ -80,8 +80,8 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="ABOUT">
                   <items>
-                    <MenuItem mnemonicParsing="false" onAction="#employees" text="Employees" />
-                    <MenuItem mnemonicParsing="false" onAction="#companyDetails" text="Company Details" />
+                    <MenuItem mnemonicParsing="false" onAction="#employees" text="Employees" fx:id="employee" />
+                    <MenuItem mnemonicParsing="false" onAction="#companyDetails" text="Company Details" fx:id="companyDetails" />
                     <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
                   </items>
                 </Menu>

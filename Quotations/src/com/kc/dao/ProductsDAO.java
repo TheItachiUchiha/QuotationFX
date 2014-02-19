@@ -284,4 +284,73 @@ public class ProductsDAO {
 		LOG.info("Exit : getCustomerStateForProduct");
 		return listOfCustomerState;
 	}
+	
+	public ObservableList<String> getProductCategoryList() throws SQLException {
+		LOG.info("Enter : getProductCategoryList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct category FROM quotation.products");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getProductCategoryList");
+		return listOfCategory;
+	}
+	
+	public ObservableList<String> getProductSubcategoryList() throws SQLException {
+		LOG.info("Enter : getProductSubcategoryList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct subcategory FROM quotation.products");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getProductSubcategoryList");
+		return listOfCategory;
+	}
+	
+	public ObservableList<String> getProductNameList() throws SQLException {
+		LOG.info("Enter : getProductNameList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT distinct name FROM quotation.products");
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getProductNameList");
+		return listOfCategory;
+	}
 }

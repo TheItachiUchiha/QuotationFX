@@ -28,7 +28,7 @@ public class UsersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO users(name,designation,mobilenumber,username,password,quotation,priceestimation,report,salesorder,statusreminder,view,`edit`,`delete`,usertype) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");			
+			preparedStatement = conn.prepareStatement("INSERT INTO users(name,designation,mobilenumber,username,password,quotation,priceestimation,report,salesorder,statusreminder,view,`edit`,`delete`,usertype,enquiry,product_dispatch,service_registry) VALUES(?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");			
 			preparedStatement.setString(1, usersVO.getName());
 			preparedStatement.setString(2, usersVO.getDesignation());
 			preparedStatement.setString(3, usersVO.getMobileNumber());
@@ -43,6 +43,9 @@ public class UsersDAO {
 			preparedStatement.setString(12, usersVO.getEdit());
 			preparedStatement.setString(13, usersVO.getDelete());
 			preparedStatement.setString(14, usersVO.getUserType());
+			preparedStatement.setString(15, usersVO.getEnquiry());
+			preparedStatement.setString(16, usersVO.getProductDispatch());
+			preparedStatement.setString(17, usersVO.getService());
 			
 			preparedStatement.execute();
 		}
@@ -59,7 +62,7 @@ public class UsersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE users SET name=?,designation=?,mobilenumber=?,username=?,password=?,quotation=?,priceestimation=?,report=?,salesorder=?,statusreminder=?,view=?,`edit`=?,`delete`=?,usertype=? where ID=?");
+			preparedStatement = conn.prepareStatement("UPDATE users SET name=?,designation=?,mobilenumber=?,username=?,password=?,quotation=?,priceestimation=?,report=?,salesorder=?,statusreminder=?,view=?,`edit`=?,`delete`=?,usertype=?,enquiry=?,product_dispatch=?,service_registry=? where ID=?");
 			
 			preparedStatement.setString(1, usersVO.getName());
 			preparedStatement.setString(2, usersVO.getDesignation());
@@ -75,7 +78,10 @@ public class UsersDAO {
 			preparedStatement.setString(12, usersVO.getEdit());
 			preparedStatement.setString(13, usersVO.getDelete());
 			preparedStatement.setString(14, usersVO.getUserType());
-			preparedStatement.setInt(15, usersVO.getId());
+			preparedStatement.setString(15, usersVO.getEnquiry());
+			preparedStatement.setString(16, usersVO.getProductDispatch());
+			preparedStatement.setString(17, usersVO.getService());
+			preparedStatement.setInt(18, usersVO.getId());
 			
 			preparedStatement.execute();
 		}
@@ -112,6 +118,9 @@ public class UsersDAO {
 				usersVO.setEdit(resultSet.getString(13));
 				usersVO.setDelete(resultSet.getString(14));
 				usersVO.setUserType(resultSet.getString(15));
+				usersVO.setEnquiry(resultSet.getString(16));
+				usersVO.setProductDispatch(resultSet.getString(17));
+				usersVO.setService(resultSet.getString(18));
 				
 				listOfUsers.add(usersVO);
 			}
@@ -168,12 +177,23 @@ public class UsersDAO {
 				{
 					modules = modules.concat("Status / Reminder\n");
 				}
-				usersVO.setQuotation(modules);
 				usersVO.setView(resultSet.getString(12));
 				usersVO.setEdit(resultSet.getString(13));
 				usersVO.setDelete(resultSet.getString(14));
 				usersVO.setUserType(resultSet.getString(15));
-				
+				if("Y".equalsIgnoreCase(resultSet.getString(16)))
+				{
+					modules = modules.concat("Enquiry\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(17)))
+				{
+					modules = modules.concat("Product Dispatch\n");
+				}
+				if("Y".equalsIgnoreCase(resultSet.getString(18)))
+				{
+					modules = modules.concat("Service / Registry\n");
+				}
+				usersVO.setQuotation(modules);
 				listOfModules.add(usersVO);
 			}
 		}
