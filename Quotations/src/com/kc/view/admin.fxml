@@ -102,7 +102,7 @@
                 <Font name="System Bold" size="15.0" />
               </font>
             </Label>
-            <Button id="logout" maxWidth="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="44.0" prefWidth="70.0" styleClass="logout" text="Logout" textFill="RED">
+            <Button id="logout" maxWidth="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="30.0" styleClass="logout" text="" textFill="RED">
               <font>
                 <Font size="13.0" />
               </font>

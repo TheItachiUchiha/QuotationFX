@@ -83,6 +83,7 @@ public class TopMenuController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		try{
+			
 				currentUser.setText("Welcome "+LoginController.currentUser);
 				HelpVO helpVO = new HelpVO();
 				helpVO = helpDAO.getCompanyDetails();
