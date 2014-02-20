@@ -10,17 +10,17 @@
   <center>
     <TabPane fx:id="tabPane" prefHeight="441.0" prefWidth="674.0" tabClosingPolicy="UNAVAILABLE">
       <tabs>
-        <Tab fx:id="newTab" text="New Sales Order">
+        <Tab fx:id="newTab" text="New Sales Lead">
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>
         </Tab>
-        <Tab fx:id="modifyTab" text="Modify Sales Order">
+        <Tab fx:id="modifyTab" text="Modify Sales Lead">
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>
         </Tab>
-        <Tab fx:id="viewTab" text="View Sales Order">
+        <Tab fx:id="viewTab" text="View Sales Lead">
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0" />
           </content>

@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.DispatchDAO;
 import com.kc.model.DispatchVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.util.Email;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
@@ -97,10 +98,12 @@ public class ProductDispatchCreateController implements Initializable {
     
     private ObservableList<String> monthList = FXCollections.observableArrayList();
    	private ObservableList<String> yearList = FXCollections.observableArrayList();
+   	private ObservableList<EnquiryViewVO> mainList = FXCollections.observableArrayList();
    	private ObservableList<String> reflist = FXCollections.observableArrayList();
    	Map<String, String> emailData = new HashMap<String, String>();
    	Map<String,String> emailMap = new HashMap<String,String>();
    	
+   	String emailId="";
    	String startDate;
    	String endDate;
    	DispatchDAO dispatchDAO;
@@ -175,6 +178,14 @@ public class ProductDispatchCreateController implements Initializable {
 				@Override
 				public void changed(ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
+					for(EnquiryViewVO enquiryViewVO : mainList)
+					{
+						if(newValue.equals(enquiryViewVO.getReferenceNo()))
+						{
+							receiver.setText(enquiryViewVO.getEmailId());
+							emailId = enquiryViewVO.getEmailId();
+						}
+					}
 					dispatchGrid.setVisible(false);
 					
 				}
@@ -197,14 +208,18 @@ public class ProductDispatchCreateController implements Initializable {
 			{
 				startDate = "01/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
 				endDate = "31/" + QuotationUtil.monthDigitFromString(monthCombo.getSelectionModel().getSelectedItem()) + "/" + yearCombo.getSelectionModel().getSelectedItem();
-				reflist=dispatchDAO.getDispatchEnquiryList(startDate, endDate);
-				referenceCombo.setItems(reflist);
-				if(reflist.isEmpty())
+				mainList=dispatchDAO.getDispatchEnquiryList(startDate, endDate);
+				if(mainList.isEmpty())
 				{
 					Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
 				}
 				else
 				{
+					for(EnquiryViewVO enquiryViewVO : mainList)
+					{
+						reflist.add(enquiryViewVO.getReferenceNo());
+					}
+					referenceCombo.setItems(reflist);
 					referenceHBox.setVisible(true);
 				}
 			}
@@ -241,6 +256,7 @@ public class ProductDispatchCreateController implements Initializable {
 		dispatchVO.setShippingTo(shippingTo.getText());
 		dispatchVO.setTrackingNo(trackingNo.getText());
 		dispatchVO.setTransporter(transporter.getText());
+		dispatchVO.setCustomerEmail(emailId);
 		dispatchDAO.newDispatch(dispatchVO);
 		message.setText(CommonConstants.DISPATCH_DONE);
 		message.getStyleClass().remove("failure");

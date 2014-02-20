@@ -37,7 +37,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#enquiry" text="Enquiry" fx:id="enquiry" />
                     <MenuItem mnemonicParsing="false" onAction="#priceEstimation" text="Price Estimation" fx:id="priceEstimation" />
                     <MenuItem mnemonicParsing="false" onAction="#quotationPreparation" text="Quotation Preparation" fx:id="quotation" />
-                    <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="Sales Order" fx:id="sales" />
+                    <MenuItem mnemonicParsing="false" onAction="#salesOrder" text="Sales Lead" fx:id="sales" />
                     <MenuItem mnemonicParsing="false" onAction="#statusReminder" text="Status / Reminde" fx:id="status" />
                     <MenuItem mnemonicParsing="false" onAction="#productDispatch" text="Product Dispatch" fx:id="dispatch" />
                     <MenuItem mnemonicParsing="false" onAction="#serviceRegistry" text="Service / registry" fx:id="service" />

@@ -214,17 +214,17 @@
         <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="813.0" spacing="5.0" visible="false" VBox.margin="$x1">
           <children>
             <Label maxWidth="-Infinity" prefHeight="21.0" prefWidth="50.0" text="Enquiry" />
-            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="176.0" promptText="Select a Reference No" styleClass="combo-style">
+            <ComboBox fx:id="referenceCombo" prefHeight="21.000099999997474" prefWidth="176.0" promptText="Select a Reference No" styleClass="combo-style">
               <items>
                 <FXCollections fx:factory="observableArrayList" />
               </items>
             </ComboBox>
-            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" styleClass="button-style" text="Enquiry Details">
+            <ToggleButton fx:id="enquiryDetails" mnemonicParsing="false" prefWidth="120.0" styleClass="button-style" text="Enquiry Details">
               <toggleGroup>
                 <ToggleGroup fx:id="buttonToggle" />
               </toggleGroup>
             </ToggleButton>
-            <Button fx:id="createPriceEstimation" minHeight="19.0" mnemonicParsing="false" prefHeight="21.0" prefWidth="167.0" styleClass="button-style" text="Create Price Estimation" />
+            <Button fx:id="createPriceEstimation" minHeight="19.0" mnemonicParsing="false" prefHeight="26.000099999997474" prefWidth="167.0" styleClass="button-style" text="Create Price Estimation" />
           </children>
         </HBox>
       </children>

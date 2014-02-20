@@ -19,6 +19,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.model.ComplaintVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.DispatchVO;
+import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.DBConnector;
 
@@ -31,15 +32,15 @@ public class DispatchDAO {
 	private ResultSet resultSet = null;
 	private Map<String, String> map;
 	
-	public ObservableList<String> getDispatchEnquiryList(String startDate , String endDate) throws Exception
+	public ObservableList<EnquiryViewVO> getDispatchEnquiryList(String startDate , String endDate) throws Exception
 	{
 		LOG.info("Enter : getDispatchEnquiryList");
-		ObservableList<String> listOfEnquries = FXCollections.observableArrayList();
+		ObservableList<EnquiryViewVO> listOfEnquries = FXCollections.observableArrayList();
 		try
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select ref_number from quotation.enquiry where salesdone=? and dispatch_done=? and "+
+					.prepareStatement("select e.ref_number,c.email from quotation.enquiry e , quotation.customers c where e.salesdone=? and e.dispatch_done=? and e.cust_id=c.id and "+
 							"STR_TO_DATE(`sales_date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(`sales_date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, "Y");
@@ -50,7 +51,10 @@ public class DispatchDAO {
 			
 			while(resultSet.next())
 			{
-				listOfEnquries.add(resultSet.getString(1));
+				EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+				enquiryViewVO.setReferenceNo(resultSet.getString(1));
+				enquiryViewVO.setEmailId(resultSet.getString(2));
+				listOfEnquries.add(enquiryViewVO);
 			}
 		}
 		catch (Exception e) {
@@ -73,7 +77,7 @@ public class DispatchDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO dispatch(reference_no,invoice_no,invoice_date,billing_name,shipping_to,transporter,dispatch_date,tracking_no,items,freight_mode,freight_amount,company_name) VALUES(?,?,?,?,?,?,?,?, ?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO dispatch(reference_no,invoice_no,invoice_date,billing_name,shipping_to,transporter,dispatch_date,tracking_no,items,freight_mode,freight_amount,company_name,cust_email) VALUES(?,?,?,?,?,?,?,?,?, ?, ?, ?, ?)");
 			preparedStatement.setString(1, dispatchVO.getReferenceNo());
 			preparedStatement.setString(2, dispatchVO.getInvoiceNo());
 			preparedStatement.setString(3, dispatchVO.getInvoiceDate());
@@ -86,6 +90,7 @@ public class DispatchDAO {
 			preparedStatement.setString(10, dispatchVO.getFreightMode());
 			preparedStatement.setDouble(11, dispatchVO.getFreightAmount());
 			preparedStatement.setString(12, dispatchVO.getCompanyName());
+			preparedStatement.setString(13, dispatchVO.getCustomerEmail());
 			
 			preparedStatement.execute();
 			
@@ -156,6 +161,7 @@ public class DispatchDAO {
 				dispatchVO.setFreightMode(resultSet.getString(11));
 				dispatchVO.setFreightAmount(resultSet.getDouble(12));
 				dispatchVO.setCompanyName(resultSet.getString(13));
+				dispatchVO.setCustomerEmail(resultSet.getString(14));
 				
 				listOfDispatch.add(dispatchVO);
 			}

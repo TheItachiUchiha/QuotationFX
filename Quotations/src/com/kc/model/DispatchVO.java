@@ -14,6 +14,7 @@ public class DispatchVO {
 	private int noOfItems;
 	private String freightMode;
 	private Double freightAmount;
+	private String customerEmail;
 	public int getId() {
 		return id;
 	}
@@ -92,6 +93,12 @@ public class DispatchVO {
 	}
 	public void setFreightAmount(Double freightAmount) {
 		this.freightAmount = freightAmount;
+	}
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
 	}
 	
 }

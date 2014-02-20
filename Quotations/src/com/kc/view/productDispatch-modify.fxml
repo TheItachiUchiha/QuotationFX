@@ -23,7 +23,7 @@
         <Label prefHeight="21.0" prefWidth="104.0" text="Company Name" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
         <Label prefHeight="21.0" prefWidth="104.0" text="Transporter" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
         <Label prefHeight="21.0" prefWidth="104.0" text="Dispatch Date" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-        <Label prefHeight="21.0" prefWidth="104.0" text="Tracking No" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+        <Label prefHeight="21.0" prefWidth="104.0" text="Docket No" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
         <Label prefHeight="21.0" prefWidth="104.0" text="Number Of Items" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
         <Label prefHeight="21.0" prefWidth="104.0" text="Freight Mode" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
         <Label prefHeight="21.0" prefWidth="104.0" text="Freight Amount" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />

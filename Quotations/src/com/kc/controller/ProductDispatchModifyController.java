@@ -138,6 +138,7 @@ public class ProductDispatchModifyController implements Initializable {
 			shippingTo.setText(dispatchVO.getShippingTo());
 			trackingNo.setText(dispatchVO.getTrackingNo());
 			transporter.setText(dispatchVO.getTransporter());
+			receiver.setText(dispatchVO.getCustomerEmail());
 			
 			ProductDispatchModifyController.this.dispatchVO=dispatchVO;
 			

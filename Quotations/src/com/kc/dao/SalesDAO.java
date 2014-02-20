@@ -87,7 +87,7 @@ public class SalesDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE REMINDER SET status =? where REF_NUMBER=?");
+			preparedStatement = conn.prepareStatement("UPDATE REMINDER SET status =? where reference_no=?");
 			preparedStatement.setString(1, "OFF");
 			preparedStatement.setString(2, enquiryViewVO.getReferenceNo());
 			preparedStatement.execute();
