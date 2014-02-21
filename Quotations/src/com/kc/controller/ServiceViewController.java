@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -119,14 +120,17 @@ public class ServiceViewController implements Initializable {
 		private ObservableList<String> keyList = FXCollections.observableArrayList();
 	   	private ObservableList<EnquiryViewVO> listOfServices = FXCollections.observableArrayList();
 	   	private ObservableList<EnquiryViewVO> finalListOfServices = FXCollections.observableArrayList();
+	   	SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
 	   	
 	   	String startDate;
 	   	String endDate;
 	   	ServiceDAO serviceDAO;
 	   	private DatePicker calendar;
+	   	String currentYear="";
 	   	
 	   	public ServiceViewController() {
 	   		serviceDAO = new ServiceDAO();
+	   		currentYear = yearFormat.format(new Date());
 		}
 
 
@@ -139,6 +143,11 @@ public class ServiceViewController implements Initializable {
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			yearCombo.setItems(yearList);
 			monthCombo.setItems(monthList);
+			startDate =	"01/01/"+currentYear;
+			endDate = "31/12/"+currentYear;
+			listOfServices=serviceDAO.getServiceHistory(startDate, endDate);
+			fillTable(listOfServices);
+			salesOrderTable.setVisible(true);
 			
 			keyVBox.getChildren().removeAll(keyHBox,calanderBox);
 			
@@ -408,7 +417,7 @@ public class ServiceViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-	
+	//Fill the Service Details In the Service Table
 	public void updateServiceTable(String reference)
 	{
 		try

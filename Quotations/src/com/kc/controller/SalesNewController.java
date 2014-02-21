@@ -274,6 +274,9 @@ public class SalesNewController {
 			}
 			else
 			{
+				((TextField)calendar.getChildren().get(0)).setText("");
+				productQuantity.setText("");
+				purchaseOrderNo.setText("");
 	    		productName.setText(enquiryViewVO.getProductName());
 	    		customerName.setText(enquiryViewVO.getCustomerName());
 	    		companyName.setText(enquiryViewVO.getCompanyName());

@@ -348,7 +348,7 @@ public class PriceEstimationModifyPopupController implements Initializable {
 			{
 				dealerRadio.setSelected(true);
 			}
-			else if(enquiryViewVO.getEnquiryCustomerType().equalsIgnoreCase("E"))
+			else
 			{
 				endUserRadio.setSelected(true);
 			}

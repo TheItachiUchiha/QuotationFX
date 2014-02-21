@@ -219,7 +219,7 @@ public class EnquiryNewController implements Initializable {
 					standardRef.setVisible(false);
 					productCode = CommonConstants.CUSTOM_PRODUCT_CODE;
 					enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
-					customRef.setText(productCode + month + year + enquiryNumber);
+					customRef.setText("Ref No. : "+defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE)+defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE)+productCode + month + year + enquiryNumber);
 					
 				}
 			}
@@ -231,7 +231,7 @@ public class EnquiryNewController implements Initializable {
 			public void changed(ObservableValue<? extends String> observable,
 					String oldValue, String newValue) {
 					
-				customRef.setText("Ref No. : "+productCode + month + year + enquiryNumber);
+				customRef.setText("Ref No. : "+defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE)+defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE)+productCode + month + year + enquiryNumber);
 				customRef.setVisible(true);
 			}
 		});
@@ -335,7 +335,7 @@ public class EnquiryNewController implements Initializable {
 								emailMessage.setText(defaultValues.get(CommonConstants.KEY_ENQUIRY_MESSAGE));
 								productCode=t1.getProductCode().substring(0, 2);
 								enquiryNumber = enquiryDAO.getLatestEnquiryNumber();
-								standardRef.setText("Ref No. : "+productCode + month + year + enquiryNumber);
+								standardRef.setText("Ref No. : "+defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE)+defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE)+productCode + month + year + enquiryNumber);
 								standardRef.setVisible(true);
 							}
 						}
@@ -509,7 +509,7 @@ public class EnquiryNewController implements Initializable {
 					//String year = date.substring(8,10);
 					EnquiryVO enquiryVO=new EnquiryVO();
 					enquiryVO.setCustomerId(customerId);
-					enquiryVO.setRefNumber(productCode + month + year + enquiryNumber);
+					enquiryVO.setRefNumber(defaultValues.get(CommonConstants.KEY_ENQUIRY_BRANCH_CODE)+defaultValues.get(CommonConstants.KEY_ENQUIRY_DEFAULT_CODE)+productCode + month + year + enquiryNumber);
 					enquiryVO.setProductName(productName);
 					enquiryVO.setReferedBy(referedBy.getText());
 					enquiryVO.setCustomerrequirements(customerRequirements.getText());

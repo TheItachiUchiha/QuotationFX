@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -38,11 +39,13 @@ public class QuotationViewController implements Initializable  {
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
+	String currentYear="";
 	public QuotationViewController()
 	{
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
+		currentYear = yearFormat.format(new Date());
 	}
 	
 	    @FXML
@@ -89,6 +92,8 @@ public class QuotationViewController implements Initializable  {
 	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
+	private ObservableList<EnquiryViewVO> tempEnquiryList = FXCollections.observableArrayList();
+	SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	
 	@Override
@@ -102,6 +107,17 @@ public class QuotationViewController implements Initializable  {
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear)&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y"))))
+				{
+					tempEnquiryList.add(enquiryVO);
+				}
+			}
+			fillTable(tempEnquiryList);
+			quotationTable.setVisible(true);
+			
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
@@ -114,9 +130,25 @@ public class QuotationViewController implements Initializable  {
 						}
 						else
 						{
-							
-							fillTable();
-							quotationTable.setVisible(true);
+							enquiryList = enquiryDAO.getEnquries();
+							enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+							tempEnquiryList.clear();
+							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							{
+								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y"))))
+								{
+									tempEnquiryList.add(enquiryVO);
+								}
+							}
+							if(tempEnquiryList.isEmpty())
+							{
+								Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+							}
+							else
+							{
+								fillTable(tempEnquiryList);
+								quotationTable.setVisible(true);
+							}
 						}
 					}
 					catch (Exception e) {
@@ -156,38 +188,20 @@ public class QuotationViewController implements Initializable  {
 		}
 		
 	}
-	private void fillTable()
+	private void fillTable(ObservableList<EnquiryViewVO> tempEnquiryList)
 	{
-		ObservableList<EnquiryViewVO> tempEnquiryList = FXCollections.observableArrayList();
 		try
 		{
-			enquiryList = enquiryDAO.getEnquries();
-			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
-			tempEnquiryList.clear();
-			for(EnquiryViewVO enquiryVO : enquiryViewList)
-			{
-				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y"))))
-				{
-					tempEnquiryList.add(enquiryVO);
-				}
-			}
-			if(tempEnquiryList.isEmpty())
-			{
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
-			}
-			else
-			{
-				quotationTable.setItems(tempEnquiryList);
-				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-				productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-				dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-				dateOfPe.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
-				dateOfQp.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
-				dateOfEmailSent.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("mailSentDate"));
-			}
+			quotationTable.setItems(tempEnquiryList);
+			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+			dateOfPe.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
+			dateOfQp.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
+			dateOfEmailSent.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("mailSentDate"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

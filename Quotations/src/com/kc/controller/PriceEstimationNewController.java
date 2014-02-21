@@ -685,7 +685,11 @@ public class PriceEstimationNewController implements Initializable {
 					else if(endUserRadio.isSelected())
 					{
 						enquiryVO.setEnquiryCustomerType("E");
-					} 
+					}
+					else
+					{
+						enquiryVO.setEnquiryCustomerType("E");
+					}
 					enquiryVO.setPeDate(formatter.format(new Date()));
 				}
 			}

@@ -23,7 +23,7 @@
         </Label>
         <Label prefHeight="32.0" prefWidth="103.0" text="Folder Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
         <Label prefHeight="31.999900000002526" prefWidth="103.0" text="Branch Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Label prefHeight="32.0" prefWidth="103.0" text="Default Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+        <Label prefHeight="32.0" prefWidth="103.0" text="Device Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
         <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
           <children>
             <HBox id="HBox" alignment="CENTER" prefHeight="41.0" prefWidth="458.0" spacing="5.0">

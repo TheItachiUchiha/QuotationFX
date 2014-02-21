@@ -13,17 +13,17 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="781.999977929685" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeViewController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="978.0000779296824" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeViewController">
   <center>
     <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="5.0" BorderPane.alignment="CENTER">
       <children>
         <TableView id="customerTable" fx:id="employeeTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" styleClass="table-style" VBox.vgrow="ALWAYS">
           <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Name" fx:id="name" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="123.0" text="Designation" fx:id="designation" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Mobile No" fx:id="mobileNo" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="134.0" text="Address" fx:id="address" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="130.0" text="Service Rating" fx:id="serviceRating" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="192.0" text="Name" fx:id="name" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="174.0" text="Designation" fx:id="designation" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="157.0" text="Mobile No" fx:id="mobileNo" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="184.0" text="Address" fx:id="address" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="133.0" text="Service Rating" fx:id="serviceRating" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Action" fx:id="action" />
           </columns>
         </TableView>

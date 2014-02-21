@@ -154,6 +154,7 @@ public class SaleStatusController implements Initializable {
 					companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
 					location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
 					referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+					tableVBox.getChildren().clear();
 					tableVBox.getChildren().add(successTable);
 				}
 			}
@@ -194,6 +195,7 @@ public class SaleStatusController implements Initializable {
 					ucompanyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
 					ureferedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
 					utotalReminderSent.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("reminderSent"));
+					tableVBox.getChildren().clear();
 					tableVBox.getChildren().add(unsuccessTable);
 				}
 			}

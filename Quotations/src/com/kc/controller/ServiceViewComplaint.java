@@ -3,6 +3,7 @@ package com.kc.controller;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -83,21 +84,24 @@ public class ServiceViewComplaint implements Initializable {
     
     private ObservableList<String> monthList = FXCollections.observableArrayList();
    	private ObservableList<String> yearList = FXCollections.observableArrayList();
-   	private ObservableList<ComplaintVO> ComplaintList = FXCollections.observableArrayList();
    	private ObservableList<ServiceVO> tempList = FXCollections.observableArrayList();
    	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
+   	private ObservableList<ComplaintVO> tempcomplaintList = FXCollections.observableArrayList();
+   	private ObservableList<ComplaintVO> complaintList = FXCollections.observableArrayList();
    	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+   	SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
    	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	ServiceDAO serviceDAO;
 	String startDate;
 	String endDate;
-   	
+	String currentYear="";
    	public ServiceViewComplaint() {
 		
    		enquiryDAO = new EnquiryDAO();
    		customersDAO = new CustomersDAO();
    		serviceDAO = new ServiceDAO();
+   		currentYear = yearFormat.format(new Date());
 	}
 
 	@Override
@@ -110,7 +114,17 @@ public class ServiceViewComplaint implements Initializable {
 			monthCombo.setItems(monthList);
 			tempList = serviceDAO.getComplaintList();
 			customerList = customersDAO.getCustomers();
-			ComplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
+			tempcomplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
+			
+			for(ComplaintVO complaintVO : tempcomplaintList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(currentYear))
+				{
+					complaintList.add(complaintVO);
+				}
+			}
+			fillTable(complaintList);
+			
 			
 			action.setSortable(false);
 	        
@@ -143,46 +157,51 @@ public class ServiceViewComplaint implements Initializable {
 	
 	public void search()
 	{
-		if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
-		{
-			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.SELECT_MONTH_YEAR);
-		}
-		else
-		{
-			fillTable(); 
-		}
-	}
-	private void fillTable()
-	{
-		ObservableList<ComplaintVO> tempcomplaintList = FXCollections.observableArrayList();
 		try
 		{
-			tempList = serviceDAO.getComplaintList();
-			tempcomplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
-			complaintTable.getItems().clear();
-			ObservableList<ComplaintVO> complaintList = FXCollections.observableArrayList();
-			complaintList.clear();
-			for(ComplaintVO complaintVO : tempcomplaintList)
+			if(monthCombo.getSelectionModel().getSelectedIndex()==-1||yearCombo.getSelectionModel().getSelectedIndex()==-1)
 			{
-				if(new SimpleDateFormat("MMM").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
-				{
-					complaintList.add(complaintVO);
-				}
-			}
-			if(complaintList.isEmpty())
-			{
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_COMPLAINT);
+				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.SELECT_MONTH_YEAR);
 			}
 			else
 			{
-				complaintTable.setItems(complaintList);
-				referenceNo.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("referenceNo"));
-				productName.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("productName"));
-				customerCity.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerCity"));
-				customerName.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerName"));
-				dateOfComplaint.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("dateOfComplaint"));
-				serviceCount.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("serviceCount"));
+				tempList = serviceDAO.getComplaintList();
+				tempcomplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
+				complaintTable.getItems().clear();
+				complaintList.clear();
+				for(ComplaintVO complaintVO : tempcomplaintList)
+				{
+					if(new SimpleDateFormat("MMM").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
+					{
+						complaintList.add(complaintVO);
+					}
+				}
+				if(complaintList.isEmpty())
+				{
+					Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_COMPLAINT);
+				}
+				else
+				{
+					fillTable(complaintList);
+				}
 			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	private void fillTable(ObservableList<ComplaintVO> tableList)
+	{
+		
+		try
+		{
+			complaintTable.setItems(tableList);
+			referenceNo.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("referenceNo"));
+			productName.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("productName"));
+			customerCity.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerCity"));
+			customerName.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("customerName"));
+			dateOfComplaint.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("dateOfComplaint"));
+			serviceCount.setCellValueFactory(new PropertyValueFactory<ComplaintVO, String>("serviceCount"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -198,8 +217,16 @@ public class ServiceViewComplaint implements Initializable {
 				    "Do you want to delete selected Complaint", "Confirm", "Delete Complaint", DialogOptions.OK_CANCEL);
 			if(response.equals(DialogResponse.OK))
 			{
-				serviceDAO.deleteComplaint(complaintVO);
-				fillTable();
+				for(ComplaintVO complaintVO2 : tempcomplaintList)
+				{
+					if(complaintVO.getId()==complaintVO2.getId())
+					{
+						tempcomplaintList.remove(complaintVO2);
+						serviceDAO.deleteComplaint(complaintVO2);
+						break;
+					}
+				}
+				fillTable(tempcomplaintList);
 				
 			}
 			LOG.info("Exit : deleteComplaint");
@@ -254,7 +281,15 @@ public class ServiceViewComplaint implements Initializable {
 
 						@Override
 						public void handle(WindowEvent paramT) {
-							fillTable();
+							try
+							{
+								tempList = serviceDAO.getComplaintList();
+								tempcomplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
+								fillTable(tempcomplaintList);
+							}
+							catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 					});
 					

@@ -1,10 +1,32 @@
 package com.kc.controller;
 
-import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.ResourceBundle;
+import java.util.Date;
+
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -20,29 +42,6 @@ import com.kc.model.EnquiryViewVO;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialogs;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
-import javafx.scene.control.Dialogs.DialogOptions;
-import javafx.scene.control.Dialogs.DialogResponse;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-
 public class SalesViewController {
 
 	private static final Logger LOG = LogManager.getLogger(SalesViewController.class);
@@ -50,6 +49,7 @@ public class SalesViewController {
 	private SalesDAO salesDAO;
 	private CustomersDAO customersDAO;
 	private Validation validation;
+	String currentYear="";
 	
 	public SalesViewController()
 	{
@@ -57,6 +57,7 @@ public class SalesViewController {
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
+		currentYear = yearFormat.format(new Date());
 	}
 
     @FXML
@@ -105,7 +106,9 @@ public class SalesViewController {
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
-
+	SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
+	ObservableList<EnquiryViewVO> tempEnquiryList = FXCollections.observableArrayList();
+	
 
     @FXML
     void initialize() {
@@ -117,6 +120,17 @@ public class SalesViewController {
 		enquiryList = enquiryDAO.getEnquries();
 		customerList = customersDAO.getCustomers();
 		enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+		
+		tempEnquiryList.clear();
+		for(EnquiryViewVO enquiryVO : enquiryViewList)
+		{
+			if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear)&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y") && enquiryVO.getSales().equalsIgnoreCase("Y"))))
+			{
+				tempEnquiryList.add(enquiryVO);
+			}
+		}
+		fillTable(tempEnquiryList);
+		
 		view.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
@@ -129,8 +143,25 @@ public class SalesViewController {
 					}
 					else
 					{
-						salesOrderTable.setVisible(true);
-						fillTable();
+						enquiryList = enquiryDAO.getEnquries();
+						enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+						tempEnquiryList.clear();
+						for(EnquiryViewVO enquiryVO : enquiryViewList)
+						{
+							if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y") && enquiryVO.getSales().equalsIgnoreCase("Y"))))
+							{
+								tempEnquiryList.add(enquiryVO);
+							}
+						}
+						if(tempEnquiryList.isEmpty())
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+						}
+						else
+						{
+							fillTable(tempEnquiryList);
+							salesOrderTable.setVisible(true);
+						}
 					}
 				}
 				catch (Exception e) {
@@ -168,37 +199,19 @@ public class SalesViewController {
 	}
     }
 
-private void fillTable()
+private void fillTable(ObservableList<EnquiryViewVO> tempEnquiryList)
 {
-	ObservableList<EnquiryViewVO> tempEnquiryList = FXCollections.observableArrayList();
 	try
 	{
-		enquiryList = enquiryDAO.getEnquries();
-		enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
-		tempEnquiryList.clear();
-		for(EnquiryViewVO enquiryVO : enquiryViewList)
-		{
-			if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem())&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y") && enquiryVO.getSales().equalsIgnoreCase("Y"))))
-			{
-				tempEnquiryList.add(enquiryVO);
-			}
-		}
-		if(tempEnquiryList.isEmpty())
-		{
-			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
-		}
-		else
-		{
-			salesOrderTable.setItems(tempEnquiryList);
-			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-			dateOfSalesOrder.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("salesDate"));
-			dateOfQuotation.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
-		}
+		salesOrderTable.setItems(tempEnquiryList);
+		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+		productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+		companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+		customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+		referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+		dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+		dateOfSalesOrder.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("salesDate"));
+		dateOfQuotation.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
 	}
 	catch (Exception e) {
 		e.printStackTrace();
@@ -223,8 +236,6 @@ private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 				{
 					deleteSales(ButtonCell.this.getTableView().getItems()
 						.get(ButtonCell.this.getIndex()));
-					salesOrderTable.getItems().clear();
-					fillTable();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -252,7 +263,16 @@ public void deleteSales(EnquiryViewVO enquiryViewVO) throws Exception
 				    "Do you want to delete selected Sales Order", "Confirm", "Delete Sales Order", DialogOptions.OK_CANCEL);
 			if(response.equals(DialogResponse.OK))
 			{
-				salesDAO.deleteSales(enquiryViewVO.getId());
+				for(EnquiryViewVO enquiryViewVO2 : tempEnquiryList)
+				{
+					if(enquiryViewVO.getId()==enquiryViewVO2.getId())
+					{
+						tempEnquiryList.remove(enquiryViewVO2);
+						salesDAO.deleteSales(enquiryViewVO2.getId());
+						break;
+					}
+				}
+				fillTable(tempEnquiryList);
 			}
 			LOG.info("Exit : deleteSales");
 	}

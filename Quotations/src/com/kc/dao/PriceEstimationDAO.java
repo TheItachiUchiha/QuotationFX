@@ -60,10 +60,11 @@ public class PriceEstimationDAO {
 			preparedStatement.execute();
 			
 			preparedStatement = conn
-					.prepareStatement("UPDATE ENQUIRY SET MARGIN=?,total_revenue=? WHERE ID=?");
+					.prepareStatement("UPDATE ENQUIRY SET MARGIN=?,total_revenue=?, customer_type=? WHERE ID=?");
 			preparedStatement.setDouble(1, enquiryVO.getMargin());
 			preparedStatement.setDouble(2, enquiryVO.getTotalRevenue());
-			preparedStatement.setInt(3, enquiryVO.getId());
+			preparedStatement.setString(3, enquiryVO.getEnquiryCustomerType());
+			preparedStatement.setInt(4, enquiryVO.getId());
 			preparedStatement.execute();
 			
 			statement = conn.createStatement();

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -53,11 +54,13 @@ public class PriceEstimationViewController implements Initializable {
 	PriceEstimationDAO priceEstimationDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
+	String currentYear="";
 	public PriceEstimationViewController()
 	{
 		priceEstimationDAO = new PriceEstimationDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
+		currentYear = yearFormat.format(new Date());
 	}
 	@FXML
 	private ComboBox<String> monthCombo;
@@ -85,6 +88,7 @@ public class PriceEstimationViewController implements Initializable {
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
 	 SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+	 SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -95,18 +99,55 @@ public class PriceEstimationViewController implements Initializable {
 			monthCombo.setItems(monthList);
 			yearCombo.setItems(yearList);
 			customerList = customersDAO.getCustomers();
+			
+			enquiryList = priceEstimationDAO.getPriceEstimation();
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+				{
+					refList.add(enquiryVO);
+				}
+			}
+			fillTable(refList);
+			priceEstimationTable.setVisible(true);
+			
 			search.setOnAction(new EventHandler<ActionEvent>() {
 				
 				@Override
 				public void handle(ActionEvent event) {
-					if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
+					try
 					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						if(monthCombo.getSelectionModel().getSelectedIndex()==-1|| yearCombo.getSelectionModel().getSelectedIndex()==-1)
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.SELECT_MONTH_YEAR);
+						}
+						else
+						{
+							enquiryList = priceEstimationDAO.getPriceEstimation();
+							enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+							refList.clear();
+							for(EnquiryViewVO enquiryVO : enquiryViewList)
+							{
+								if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
+								{
+									refList.add(enquiryVO);
+								}
+							}
+							if(refList.isEmpty())
+							{
+								priceEstimationTable.getItems().clear();
+								Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
+							}
+							else
+							{
+								fillTable(refList);
+								priceEstimationTable.setVisible(true);
+							}
+						}
 					}
-					else
-					{
-						priceEstimationTable.setVisible(true);
-						fillTable();
+					catch (Exception e) {
+						e.printStackTrace();
 					}
 				}
 			});
@@ -137,37 +178,19 @@ public class PriceEstimationViewController implements Initializable {
 		}
 		
 	}
-	public void fillTable()
+	public void fillTable(ObservableList<EnquiryViewVO> refList)
 	{
 
 		try
 		{
-			enquiryList = priceEstimationDAO.getPriceEstimation();
-			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
-			refList.clear();
-			for(EnquiryViewVO enquiryVO : enquiryViewList)
-			{
-				if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
-				{
-					refList.add(enquiryVO);
-				}
-			}
-			if(refList.isEmpty())
-			{
-				priceEstimationTable.getItems().clear();
-				Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);
-			}
-			else
-			{
-				priceEstimationTable.setItems(refList);
-				referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-				productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-				companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-				customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-				referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-				dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-				peDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
-			}
+			priceEstimationTable.setItems(refList);
+			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+			peDate.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("peDate"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -181,7 +204,15 @@ public class PriceEstimationViewController implements Initializable {
 					    "Do you want to delete selected Price Estimation(s)", "Confirm", "Delete PE", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					priceEstimationDAO.deletePriceEstimation(enquryViewVO);
+					for(EnquiryViewVO enquiryViewVO2 : refList)
+					{
+						if(enquryViewVO.getId()==enquiryViewVO2.getId())
+						{
+							refList.remove(enquiryViewVO2);
+							priceEstimationDAO.deletePriceEstimation(enquiryViewVO2);
+							break;
+						}
+					}
 				}
 				LOG.info("Exit : deletePriceEstimation");
 		}
@@ -220,7 +251,7 @@ public class PriceEstimationViewController implements Initializable {
 					Scene modifyScene = new Scene(priceEstimationModify);
 					modifyStage.setResizable(true);
 					modifyStage.setHeight(650);
-					modifyStage.setWidth(900);
+					modifyStage.setWidth(1100);
 					modifyStage.initModality(Modality.WINDOW_MODAL);
 					modifyStage.initOwner(LoginController.primaryStage);
 					modifyStage.setScene(modifyScene);
@@ -232,7 +263,39 @@ public class PriceEstimationViewController implements Initializable {
 					modifyStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 						@Override
 						public void handle(WindowEvent event) {
-							fillTable();
+							try
+							{
+								refList.clear();
+								if(monthCombo.getSelectionModel().getSelectedIndex()==-1 || yearCombo.getSelectionModel().getSelectedIndex()==-1)
+								{
+									enquiryList = priceEstimationDAO.getPriceEstimation();
+									enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+									for(EnquiryViewVO enquiryVO : enquiryViewList)
+									{
+										if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+										{
+											refList.add(enquiryVO);
+										}
+									}
+								}
+								else
+								{
+									enquiryList = priceEstimationDAO.getPriceEstimation();
+									enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+									refList.clear();
+									for(EnquiryViewVO enquiryVO : enquiryViewList)
+									{
+										if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem())&&new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(yearCombo.getSelectionModel().getSelectedItem()))
+										{
+											refList.add(enquiryVO);
+										}
+									}
+								}
+								fillTable(refList);
+							}
+							catch (Exception e) {
+								e.printStackTrace();
+							}
 							
 						}
 					});					
@@ -248,9 +311,8 @@ public class PriceEstimationViewController implements Initializable {
                 public void handle(ActionEvent t) {
                     try {
 							deletePriceEstimation(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()));
-							enquiryList.remove(ButtonCell.this.getIndex());
-							fillTable();
-						
+							fillTable(refList);
+							
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

@@ -2,6 +2,7 @@ package com.kc.controller;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -100,13 +101,17 @@ public class ProductDispatchViewController implements Initializable {
 	    
 	    DispatchDAO dispatchDAO;
 	    private DatePicker calendar;
+	    String currentYear="";
 	    
 	    private ObservableList<DispatchVO> dispatchList = FXCollections.observableArrayList();
 	    private ObservableList<DispatchVO> finalDispatchList = FXCollections.observableArrayList();
 	    private ObservableList<String> keyList = FXCollections.observableArrayList();
+	    SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
+	    SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	    
 	    public ProductDispatchViewController() {
 			dispatchDAO = new DispatchDAO();
+			currentYear = yearFormat.format(new Date());
 		}
 
 
@@ -127,6 +132,15 @@ public class ProductDispatchViewController implements Initializable {
     		calenderBox.getChildren().add(calendar);
 			
 			dispatchList = dispatchDAO.getProductDispatch();
+			for(DispatchVO dispatchVO : dispatchList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(dispatchVO.getInvoiceDate())).equalsIgnoreCase(currentYear))
+				{
+					finalDispatchList.add(dispatchVO);
+				}
+			}
+			fillTable(finalDispatchList);
+			dispatchTable.setVisible(true);
 			action.setSortable(false);
 	        
 	        action.setCellValueFactory(
@@ -482,14 +496,28 @@ public class ProductDispatchViewController implements Initializable {
 						public void handle(WindowEvent paramT) {
 							try
 							{
-								finalDispatchList = dispatchDAO.getProductDispatch();
-								if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice date") || searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch date"))
+								if(searchCombo.getSelectionModel().getSelectedIndex()==-1)
 								{
-									filtaerTableByDate(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(),((TextField)calendar.getChildren().get(0)).getText());
+									dispatchList = dispatchDAO.getProductDispatch();
+									for(DispatchVO dispatchVO : dispatchList)
+									{
+										if(new SimpleDateFormat("yyyy").format(formatter.parse(dispatchVO.getInvoiceDate())).equalsIgnoreCase(currentYear))
+										{
+											finalDispatchList.add(dispatchVO);
+										}
+									}
 								}
 								else
 								{
-									filtaerTableByKey(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(), keyCombo.getSelectionModel().getSelectedItem());
+									finalDispatchList = dispatchDAO.getProductDispatch();
+									if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice date") || searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch date"))
+									{
+										filtaerTableByDate(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(),((TextField)calendar.getChildren().get(0)).getText());
+									}
+									else
+									{
+										filtaerTableByKey(finalDispatchList, searchCombo.getSelectionModel().getSelectedItem(), keyCombo.getSelectionModel().getSelectedItem());
+									}
 								}
 							}
 							catch (Exception e) {

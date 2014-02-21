@@ -111,7 +111,7 @@ public class EnquiryOptionsController implements Initializable {
 	{
 		try
 		{
-			if(validation.isEmpty(folderPath,branchCode,defaultCode,username,password))
+			if(validation.isEmpty(folderPath,username,password))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
 				message.getStyleClass().remove("success");

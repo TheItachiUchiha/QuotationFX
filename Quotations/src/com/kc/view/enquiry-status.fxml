@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefWidth="896.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationESController">
+<BorderPane prefWidth="1169.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.PriceEstimationESController">
   <!-- TODO Add Nodes -->
   <center>
     <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="896.0000999999975" BorderPane.alignment="TOP_CENTER">
@@ -47,13 +47,13 @@
             <Insets fx:id="x2" />
           </VBox.margin>
         </GridPane>
-        <TableView id="priceEstimationTable" fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="872.0" styleClass="table-style" visible="false">
+        <TableView id="priceEstimationTable" fx:id="enquiryTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="351.0" prefWidth="1129.0" styleClass="table-style" visible="false">
           <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="101.0" text="Ref_No" fx:id="referenceNo" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="97.0" text="Product Name" fx:id="productName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="104.0" text="Customer Name" fx:id="customerName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="106.0" text="Company Name" fx:id="companyName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="84.0" text="Refered By" fx:id="referedBy" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="137.0" text="Ref_No" fx:id="referenceNo" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="155.0" text="Product Name" fx:id="productName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="152.0" text="Customer Name" fx:id="customerName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="157.0" text="Company Name" fx:id="companyName" />
+            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="146.0" text="Refered By" fx:id="referedBy" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="105.0" text="Date Of Enquiry" fx:id="dateOfEnquiry" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="Date Of PE" fx:id="dateOfPe" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="96.0" text="PE Done" fx:id="peDone" />
