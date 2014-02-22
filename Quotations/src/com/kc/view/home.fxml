@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.*?>
+
+<VBox styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3d00" height="122.00000762939453" stroke="BLACK" strokeType="INSIDE" width="252.0" />
+    <StackPane prefHeight="150.0" prefWidth="200.0">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#92ded4" height="511.0" opacity="0.42" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="252.0" />
+        <VBox alignment="CENTER" disable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="210.0" spacing="5.0">
+          <children>
+            <ToggleButton id="priceestimation" fx:id="enquiry" focusTraversable="true" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry" textAlignment="LEFT">
+              <toggleGroup>
+                <ToggleGroup fx:id="submenuButtons" />
+              </toggleGroup>
+            </ToggleButton>
+            <ToggleButton id="priceestimation" fx:id="priceEstimation" mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation" toggleGroup="$submenuButtons" />
+            <ToggleButton fx:id="quotation" mnemonicParsing="false" onAction="#quotation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Email Quotation" toggleGroup="$submenuButtons" />
+            <ToggleButton fx:id="sales" mnemonicParsing="false" onAction="#sales" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Leads" toggleGroup="$submenuButtons" />
+            <ToggleButton fx:id="status" mnemonicParsing="false" onAction="#status" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$submenuButtons" />
+            <ToggleButton id="status" fx:id="service" mnemonicParsing="false" onAction="#service" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Service Register" toggleGroup="$submenuButtons" />
+            <ToggleButton id="report" fx:id="dispatch" mnemonicParsing="false" onAction="#dispatch" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Material Dispatch" toggleGroup="$submenuButtons" />
+            <ToggleButton id="status" fx:id="report" mnemonicParsing="false" onAction="#report" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$submenuButtons" />
+          </children>
+          <padding>
+            <Insets bottom="10.0" top="10.0" />
+          </padding>
+        </VBox>
+      </children>
+    </StackPane>
+  </children>
+</VBox>

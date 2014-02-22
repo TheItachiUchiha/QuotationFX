@@ -23,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
@@ -142,14 +143,14 @@ public class LoginController extends Application implements Initializable{
 				FXMLLoader loader = new FXMLLoader(
 						LoginController.class
 								.getResource("/com/kc/view/admin.fxml"));
-				/*FXMLLoader subMenuLoader = new FXMLLoader(
+				FXMLLoader subMenuLoader = new FXMLLoader(
 						LoginController.class
-								.getResource("/com/kc/view/home-admin.fxml"));*/
+								.getResource("/com/kc/view/home.fxml"));
 				this.home = (BorderPane) loader.load();
 				this.home.setPrefHeight(Screen.getPrimary().getBounds().getHeight());
 				this.home.setPrefWidth(Screen.getPrimary().getBounds().getWidth()-17);
-				//BorderPane subMenu = (BorderPane) subMenuLoader.load();
-				//this.home.setCenter(subMenu);
+				VBox subMenu = (VBox) subMenuLoader.load();
+				this.home.setLeft(subMenu);
 				Scene scene = new Scene(this.home);
 				/*this.primaryStage.setX(0);
 				primaryStage.setY(0);
