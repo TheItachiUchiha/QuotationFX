@@ -78,6 +78,9 @@ public class ReminderController implements Initializable {
 
 	    @FXML
 	    private TextField receiver;
+	    
+	    @FXML
+	    private TextField cc;
 
 	    @FXML
 	    private ComboBox<Integer> reminderCombo;
@@ -369,6 +372,7 @@ public class ReminderController implements Initializable {
 				if(!emailMessage.getText().equals(""))
 				{
 					map.put(CommonConstants.EMAIL_TO, receiver.getText());
+					map.put(CommonConstants.EMAIL_CC, cc.getText());
 					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
 					map.put(CommonConstants.EMAIL_SUBJECT, subject.getText());
 					map.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_REMINDER_EMAIL));

@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.*?>
 
-<VBox styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
+<VBox minHeight="652.0" prefHeight="652.0" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
   <!-- TODO Add Nodes -->
   <children>
-    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff3d00" height="122.00000762939453" stroke="BLACK" strokeType="INSIDE" width="252.0" />
-    <StackPane prefHeight="150.0" prefWidth="200.0">
+    <Label prefHeight="128.0" prefWidth="252.0" text="" />
+    <StackPane prefHeight="543.0" prefWidth="252.0">
       <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#92ded4" height="511.0" opacity="0.42" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="252.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="529.0" opacity="0.42" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="252.0" />
         <VBox alignment="CENTER" disable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="210.0" spacing="5.0">
           <children>
             <ToggleButton id="priceestimation" fx:id="enquiry" focusTraversable="true" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry" textAlignment="LEFT">

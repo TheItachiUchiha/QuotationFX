@@ -63,6 +63,11 @@ public class Email extends Task
 			message.setFrom(new InternetAddress("support@kryptcode.com"));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(data.get(CommonConstants.EMAIL_TO)));
+			if(!data.get(CommonConstants.EMAIL_CC).equalsIgnoreCase(""))
+			{
+				message.setRecipients(Message.RecipientType.CC,
+						InternetAddress.parse(data.get(CommonConstants.EMAIL_CC)));
+			}
 			if(!data.keySet().contains(CommonConstants.EMAIL_SUBJECT))
 			{
 				message.setSubject("Testing Subject");

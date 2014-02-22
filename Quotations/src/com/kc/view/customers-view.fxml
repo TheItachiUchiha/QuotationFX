@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="1055.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersViewController">
+<BorderPane id="transperent-bg" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="638.0" prefWidth="1186.0" visible="true" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersViewController">
   <bottom>
     <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
       <children>
@@ -33,7 +33,7 @@
     </VBox>
   </bottom>
   <center>
-    <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+    <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="1012.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <TableView fx:id="customerTable" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" prefHeight="390.0" prefWidth="580.0" styleClass="table-style" VBox.vgrow="ALWAYS">
           <columns>

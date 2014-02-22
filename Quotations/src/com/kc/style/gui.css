@@ -1102,3 +1102,6 @@
 .background-hbox{
 	-fx-background-color: #D6D2D3 ;
 }
+#admin-bg{
+	-fx-background-image: url("bg-pink.jpg");
+}

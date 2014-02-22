@@ -259,6 +259,7 @@ public class ServiceNewComplaint implements Initializable {
     {
 		try{
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
+			emailData.put(CommonConstants.EMAIL_CC, cc.getText());
 			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, "New Complaint");
 			emailData.put(CommonConstants.EMAIL_USERNAME, emailDetails.get(CommonConstants.KEY_SERVICE_EMAIL));

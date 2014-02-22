@@ -423,6 +423,7 @@ public class TopMenuController implements Initializable {
 					this.getClass()
 							.getResource("/com/kc/view/customers-view.fxml"));
 			BorderPane customerCreate = (BorderPane) menuLoader.load();
+			
 			tab = new Tab();
 			tabPane = new TabPane();
 			tab.setContent(customerCreate);
@@ -430,6 +431,7 @@ public class TopMenuController implements Initializable {
 			tab.setText("View Customers");
 			tabPane.getTabs().add(tab);
 			LoginController.home.setCenter(tabPane);
+			
 			}
 			catch (Exception e) {
 				LOG.error(e.getMessage());

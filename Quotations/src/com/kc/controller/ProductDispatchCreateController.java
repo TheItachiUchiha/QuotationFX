@@ -270,6 +270,7 @@ public class ProductDispatchCreateController implements Initializable {
 		try{
 			
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
+			emailData.put(CommonConstants.EMAIL_CC, cc.getText());
 			emailData.put(CommonConstants.EMAIL_BODY, body.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, "Dispatch Details");
 			emailData.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_DISPATCH_EMAIL));

@@ -74,6 +74,7 @@ public class CommonConstants
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
 	public static final String KEY_ENQUIRY_EMAIL_PASSWORD = "email_password";
 	public static final String EMAIL_TO = "TO";
+	public static final String EMAIL_CC = "CC";
 	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";
 	public static final String EMAIL_BODY = "BODY";
 	public static final String EMAIL_SUBJECT = "SUBJECT";

@@ -142,6 +142,7 @@ public class ServiceModifyComplaintController implements Initializable {
 			Map<String,String> emailMap = new HashMap<String,String>();
 			emailMap = serviceDAO.getServiceOptionDefaultValues();
 			emailData.put(CommonConstants.EMAIL_TO, receiver.getText());
+			emailData.put(CommonConstants.EMAIL_CC, cc.getText());
 			emailData.put(CommonConstants.EMAIL_BODY, message.getText());
 			emailData.put(CommonConstants.EMAIL_SUBJECT, "New Complaint");
 			emailData.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_SERVICE_EMAIL));
