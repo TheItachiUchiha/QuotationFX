@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -41,7 +44,7 @@ public class LoginController extends Application implements Initializable{
 	public static Stage emailStage; 
 	public static Scene scene;
 	public static BorderPane home;
-	public static BorderPane login;
+	public static AnchorPane login;
 	private LoginDAO loginDAO;
 	private EnquiryDAO enquiryDAO;
 	public static ModulesVO modulesVO=new ModulesVO();
@@ -52,6 +55,8 @@ public class LoginController extends Application implements Initializable{
 	private TextField password;
 	@FXML
 	public static Label message;
+	@FXML
+	private Button loginButton;
 	
 	public static String userType;
 	
@@ -92,6 +97,12 @@ public class LoginController extends Application implements Initializable{
 		    }
 		});
 		
+		loginButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				doLogin();
+			}
+		});
 	}
 	@SuppressWarnings("static-access")
 	@Override
@@ -104,12 +115,11 @@ public class LoginController extends Application implements Initializable{
 			// Load the root layout from the fxml file
 			FXMLLoader loader = new FXMLLoader(
 					LoginController.class.getResource("/com/kc/view/root.fxml"));
-			login = (BorderPane) loader.load();
+			login = (AnchorPane) loader.load();
 			Scene scene = new Scene(this.login);
 			this.scene=scene;
-			this.primaryStage.setHeight(566);
-			this.primaryStage.setWidth(874);
-			this.primaryStage.setResizable(false);
+			this.primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+			this.primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
 			this.primaryStage.setScene(this.scene);
 			this.primaryStage.show();
 		} catch (IOException e) {
@@ -136,13 +146,15 @@ public class LoginController extends Application implements Initializable{
 						LoginController.class
 								.getResource("/com/kc/view/home-admin.fxml"));*/
 				this.home = (BorderPane) loader.load();
+				this.home.setPrefHeight(Screen.getPrimary().getBounds().getHeight());
+				this.home.setPrefWidth(Screen.getPrimary().getBounds().getWidth()-17);
 				//BorderPane subMenu = (BorderPane) subMenuLoader.load();
 				//this.home.setCenter(subMenu);
 				Scene scene = new Scene(this.home);
-				this.primaryStage.setX(0);
+				/*this.primaryStage.setX(0);
 				primaryStage.setY(0);
 				primaryStage.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
-			    primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
+			    primaryStage.setHeight(Screen.getPrimary().getVisualBounds().getHeight());*/
 				this.primaryStage.setScene(scene);
 				//this.primaryStage.setResizable(true);
 				sendEmails();

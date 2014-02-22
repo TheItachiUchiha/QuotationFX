@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.TopMenuController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.TopMenuController">
   <!-- TODO Add Nodes -->
   <bottom>
-    <HBox prefHeight="31.0" prefWidth="877.0" spacing="5.0">
+    <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="877.0" spacing="5.0">
       <children>
         <ImageView fx:id="comLogo" fitHeight="31.0" fitWidth="41.33333212045523" pickOnBounds="true" preserveRatio="true" />
         <Label fx:id="companyLable" alignment="CENTER_LEFT" contentDisplay="LEFT" prefHeight="30.0" prefWidth="345.0" text="" />
@@ -95,7 +95,7 @@
             <Insets />
           </HBox.margin>
         </HBox>
-        <HBox id="HBox" alignment="CENTER_RIGHT" maxHeight="-1.0" maxWidth="368.0" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="368.0" spacing="10.0" HBox.hgrow="NEVER">
+        <HBox id="HBox" alignment="CENTER_RIGHT" maxHeight="-1.0" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" HBox.hgrow="NEVER">
           <children>
             <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#00ff66">
               <font>
