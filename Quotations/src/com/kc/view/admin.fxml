@@ -22,6 +22,9 @@
       </padding>
     </HBox>
   </bottom>
+  <center>
+    <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT" />
+  </center>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
@@ -97,9 +100,9 @@
         </HBox>
         <HBox id="HBox" alignment="CENTER_RIGHT" maxHeight="-1.0" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="70.0" prefHeight="-1.0" prefWidth="-1.0" spacing="10.0" HBox.hgrow="NEVER">
           <children>
-            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="#00ff66">
+            <Label fx:id="currentUser" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="30.0" prefWidth="291.0" text="Welcome : " textFill="BLACK">
               <font>
-                <Font name="System Bold" size="15.0" />
+                <Font name="System Italic" size="15.0" />
               </font>
             </Label>
             <Button id="logout" maxWidth="70.0" mnemonicParsing="false" onAction="#logout" prefHeight="30.0" prefWidth="30.0" styleClass="logout" text="" textFill="RED">

@@ -147,7 +147,7 @@ public class LoginController extends Application implements Initializable{
 						LoginController.class
 								.getResource("/com/kc/view/home.fxml"));
 				this.home = (BorderPane) loader.load();
-				this.home.setPrefHeight(Screen.getPrimary().getBounds().getHeight());
+				this.home.setPrefHeight(Screen.getPrimary().getBounds().getHeight()-120);
 				this.home.setPrefWidth(Screen.getPrimary().getBounds().getWidth()-17);
 				VBox subMenu = (VBox) subMenuLoader.load();
 				this.home.setLeft(subMenu);
