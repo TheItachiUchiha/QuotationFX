@@ -202,6 +202,7 @@ public class ComponentsModifyController implements Initializable {
 
 	public void fillTextFieldValues(ComponentsVO componentsVO) {
 		LOG.info("Enter : fillTextFieldValues");
+		modifyHbox.setVisible(true);
 		ComponentsModifyController.this.componentsVO
 				.setId(componentsVO.getId());
 		componentName.setText(componentsVO.getComponentName());

@@ -445,7 +445,7 @@ public class ComponentsViewController implements Initializable {
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(componentModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(500);
+						modifyStage.setHeight(600);
 						modifyStage.setWidth(600);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);
