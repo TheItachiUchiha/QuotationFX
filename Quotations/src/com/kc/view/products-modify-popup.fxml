@@ -13,33 +13,10 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane maxWidth="-Infinity" prefHeight="401.0" prefWidth="833.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyPopUpController">
+<BorderPane maxWidth="-Infinity" prefHeight="456.0" prefWidth="833.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyPopUpController">
   <!-- TODO Add Nodes -->
-  <bottom>
-    <VBox minHeight="40.0" prefHeight="40.0" prefWidth="600.0" spacing="10.0">
-      <children>
-        <HBox fx:id="modifyHBox" alignment="CENTER" prefHeight="48.0" prefWidth="600.0" spacing="20.0" visible="true">
-          <children>
-            <Button mnemonicParsing="false" onAction="#modifyProduct" styleClass="button-style" text="Modify" />
-          </children>
-        </HBox>
-        <HBox id="HBox" alignment="CENTER" prefHeight="30.0" prefWidth="800.0" spacing="10.0">
-          <children>
-            <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
-              <font>
-                <Font size="15.0" />
-              </font>
-            </Label>
-          </children>
-        </HBox>
-      </children>
-      <padding>
-        <Insets top="10.0" />
-      </padding>
-    </VBox>
-  </bottom>
   <center>
-    <VBox fx:id="tableVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true">
+    <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true">
       <children>
         <TableView fx:id="componentTable" maxHeight="-1.0" maxWidth="-1.0" prefHeight="340.0" prefWidth="580.0" styleClass="table-style" visible="true" VBox.vgrow="ALWAYS">
           <columns>
@@ -62,6 +39,12 @@
             <Button id="addComponent" mnemonicParsing="false" onAction="#addComponent" styleClass="button-style" text="Add Component" />
           </children>
         </HBox>
+        <Button mnemonicParsing="false" onAction="#modifyProduct" styleClass="button-style" text="Modify" />
+        <Label id="title" fx:id="message" alignment="CENTER" prefHeight="20.0" prefWidth="258.0" text="" textFill="#a533ff" visible="false">
+          <font>
+            <Font size="15.0" />
+          </font>
+        </Label>
       </children>
     </VBox>
   </center>

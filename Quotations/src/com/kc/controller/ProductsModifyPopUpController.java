@@ -94,9 +94,6 @@ public class ProductsModifyPopUpController implements Initializable {
     private TableColumn<ComponentsVO, String> model;
 
     @FXML
-    private HBox modifyHBox;
-
-    @FXML
 	private AutoCompleteTextField<String> productCategoryTextField;
     
 	@FXML

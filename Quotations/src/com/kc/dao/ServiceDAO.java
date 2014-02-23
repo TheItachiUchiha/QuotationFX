@@ -316,17 +316,19 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT e.service_count, s.engineer_name,s.charge,s.rating FROM quotation.enquiry e ,quotation.service s where e.ref_number=s.reference_no and s.date!='N/A' and e.ref_number=?");
+					.prepareStatement("SELECT e.service_count,(select count(*) from quotation.service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and reference_no=?), s.engineer_name,s.charge,s.rating FROM quotation.enquiry e ,quotation.service s where e.ref_number=s.reference_no and s.date!='N/A' and e.ref_number=?");
 			preparedStatement.setString(1, reference);
+			preparedStatement.setString(2, reference);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next())
 			{
 				ServiceVO serviceVO = new ServiceVO();
 				serviceVO.setServiceCount(resultSet.getInt(1));
-				serviceVO.setEngineerName(resultSet.getString(2));
-				serviceVO.setCharge(resultSet.getDouble(3));
-				serviceVO.setRating(resultSet.getString(4));
+				serviceVO.setServiceCountThisYear(resultSet.getInt(2));
+				serviceVO.setEngineerName(resultSet.getString(3));
+				serviceVO.setCharge(resultSet.getDouble(4));
+				serviceVO.setRating(resultSet.getString(5));
  
 				listOfEnquries.add(serviceVO);
 			}

@@ -397,9 +397,19 @@ public class ServiceViewController implements Initializable {
 		try
 		{
 			ObservableList<EnquiryViewVO> finalTemplist = FXCollections.observableArrayList();
+			ObservableList<String> finalTemplistRefNo = FXCollections.observableArrayList();
 			for(EnquiryViewVO enquiryViewVO : tempList)
 			{
-				if(!finalTemplist.contains(enquiryViewVO))
+				if(finalTemplist.size()!=finalTemplistRefNo.size())
+				{
+					finalTemplistRefNo.clear();
+					for(EnquiryViewVO temp : finalTemplist)
+					{
+						finalTemplistRefNo.add(temp.getReferenceNo());
+					}
+				}
+				
+				if(!finalTemplistRefNo.contains(enquiryViewVO.getReferenceNo()))
 				{
 					finalTemplist.add(enquiryViewVO);
 				}
@@ -429,7 +439,7 @@ public class ServiceViewController implements Initializable {
 			totalService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("serviceCount"));
 			serviceCharge.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("charge"));
 			rating.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("rating"));
-			//thisYearService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("thisYearService"));
+			thisYearService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("serviceCountThisYear"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();

@@ -17,6 +17,7 @@ public class ServiceVO {
 	private String customerName;
 	int customerId;
 	int serviceCount;
+	int serviceCountThisYear;
 	public int getId() {
 		return id;
 	}
@@ -106,6 +107,12 @@ public class ServiceVO {
 	}
 	public void setServiceCount(int serviceCount) {
 		this.serviceCount = serviceCount;
+	}
+	public int getServiceCountThisYear() {
+		return serviceCountThisYear;
+	}
+	public void setServiceCountThisYear(int serviceCountThisYear) {
+		this.serviceCountThisYear = serviceCountThisYear;
 	}
 
 }
