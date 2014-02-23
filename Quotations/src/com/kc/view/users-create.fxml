@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="452.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.UsersCreateController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="452.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.UsersCreateController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="35.0" prefWidth="115.0" text="Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -84,7 +84,7 @@
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.82105128252073" />
   </columnConstraints>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets left="40.0" top="80.0" />
   </padding>
   <rowConstraints>
     <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />

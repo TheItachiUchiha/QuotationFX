@@ -69,6 +69,7 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			AdminHomeController.currentPage.setText("CREATE CUSTOMER");
 			validation.allowAsPhoneNumber(contactNumber);
 			dealer.setSelected(true);
 			cityList = customersDAO.getCustomerCityList();

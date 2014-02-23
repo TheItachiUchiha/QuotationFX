@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.GridPane?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="123.0" prefWidth="451.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.BackupImportController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="451.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.BackupImportController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="19.0" prefWidth="88.0" text="Restore *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
@@ -25,7 +25,7 @@
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="358.0" minWidth="10.0" percentWidth="78.90416652478461" prefWidth="358.0" />
   </columnConstraints>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets left="40.0" top="80.0" />
   </padding>
   <rowConstraints>
     <RowConstraints maxHeight="28.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />

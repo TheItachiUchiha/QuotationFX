@@ -87,6 +87,7 @@ public class ComponentsViewController implements Initializable {
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try{
 			LOG.info("Enter : initialize");
+			AdminHomeController.currentPage.setText("VIEW COMPONENTS");
 			componentsList = componentsDAO.getComponents();
 			componentTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			searchByList = FXCollections.observableArrayList();

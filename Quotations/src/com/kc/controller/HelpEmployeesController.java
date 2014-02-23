@@ -42,6 +42,8 @@ public class HelpEmployeesController implements Initializable {
 			LOG.info("Enter : initialize");
 			try{
 				
+				AdminHomeController.currentPage.setText("EMPLOYEE DETAILS");
+				
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees-new.fxml"));
 				final GridPane newEmployee = (GridPane) loader.load();
 				newTab.setContent(newEmployee);

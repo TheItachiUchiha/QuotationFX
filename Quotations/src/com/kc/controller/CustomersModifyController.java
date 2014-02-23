@@ -77,6 +77,7 @@ public class CustomersModifyController implements Initializable{
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		LOG.info("Enter : initialize");
 		try{
+			AdminHomeController.currentPage.setText("MODIFY CUSTOMER");
 			validation.allowAsPhoneNumber(contactNumber);
 			customersList = customersDAO.getCustomers();
 			

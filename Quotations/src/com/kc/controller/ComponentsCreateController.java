@@ -69,6 +69,7 @@ public class ComponentsCreateController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			AdminHomeController.currentPage.setText("CREATE COMPONENT");
 			validation.allowAsAmount(costPrice);
 			validation.allowAsAmount(dealerPrice);
 			validation.allowAsAmount(endUserPrice);

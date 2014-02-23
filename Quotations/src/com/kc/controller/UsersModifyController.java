@@ -86,6 +86,7 @@ public class UsersModifyController implements Initializable{
 		LOG.info("Enter : initialize");
 		
 		try{
+			AdminHomeController.currentPage.setText("MODIFY USER");
 			validation.allowAsPhoneNumber(mobileNumber);
 			usersList = usersDAO.getUsers();
 			userType.valueProperty().addListener(new ChangeListener<String>() {

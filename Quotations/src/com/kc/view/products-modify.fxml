@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane maxWidth="-Infinity" prefHeight="583.0" prefWidth="833.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyController">
+<BorderPane maxWidth="-Infinity" prefHeight="583.0" prefWidth="924.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyController">
   <!-- TODO Add Nodes -->
   <center>
     <VBox fx:id="tableVBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true" BorderPane.alignment="TOP_LEFT">
@@ -56,7 +56,7 @@
     </VBox>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets left="40.0" top="80.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />

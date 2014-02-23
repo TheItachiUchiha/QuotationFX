@@ -41,6 +41,8 @@ public class HelpAboutController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			
+			AdminHomeController.currentPage.setText("ABOUT");
 			helpVO = helpDAO.getCompanyDetails();
 			description.setWrapText(true);
 			address.setWrapText(true);

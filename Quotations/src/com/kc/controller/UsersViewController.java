@@ -84,6 +84,7 @@ public class UsersViewController implements Initializable {
 		LOG.info("Enter : initialize");
 		try{
 			
+			AdminHomeController.currentPage.setText("VIEW USERS");
 			//autoHBox.getChildren().removeAll(keyword,go);
 			usersList = usersDAO.getModules();
 			usersTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);

@@ -58,7 +58,7 @@
     </VBox>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets left="40.0" top="80.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />

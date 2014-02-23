@@ -126,6 +126,7 @@ public class ProductsModifyController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		AdminHomeController.currentPage.setText("MODIFY PRODUCT");
 		ObservableList<String> tempProductCategoryList = FXCollections.observableArrayList();
 		final ObservableList<String> tempProductSubCategoryList = FXCollections.observableArrayList();
 		final ObservableList<ProductsVO> tempProductList = FXCollections.observableArrayList();

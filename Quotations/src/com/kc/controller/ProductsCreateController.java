@@ -94,6 +94,8 @@ public class ProductsCreateController implements Initializable{
 		LOG.info("Enter : initialize");
 		try
 		{
+			
+			AdminHomeController.currentPage.setText("CREATE PRODUCT");
 			componentTable.setItems(componentsList);
 			componentTable.setEditable(true);
 			

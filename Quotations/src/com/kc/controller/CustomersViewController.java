@@ -98,7 +98,8 @@ public class CustomersViewController implements Initializable {
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		LOG.info("Enter : initialize");
 		try {
-
+			
+			AdminHomeController.currentPage.setText("VIEW CUSTOMERS");
 			customersList = customersDAO.getCustomers();
 			customerTable.getSelectionModel().setSelectionMode(
 					SelectionMode.MULTIPLE);

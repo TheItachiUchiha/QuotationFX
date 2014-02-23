@@ -64,6 +64,8 @@ private Button hLogoButton;
 
 @Override
 public void initialize(URL location, ResourceBundle resources) {
+	
+	AdminHomeController.currentPage.setText("COMPANY DETAILS");
 	helpVO = helpDAO.getCompanyDetails();
 	description.setWrapText(true);
 	address.setWrapText(true);

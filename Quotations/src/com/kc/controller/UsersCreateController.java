@@ -72,6 +72,8 @@ public class UsersCreateController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		AdminHomeController.currentPage.setText("CREATE USER");
 		validation.allowAsPhoneNumber(mobileNumber);
 		userType.valueProperty().addListener(new ChangeListener<String>() {
             

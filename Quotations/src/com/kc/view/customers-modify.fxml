@@ -12,7 +12,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="503.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersModifyController">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersModifyController">
   <center>
     <HBox fx:id="modifyHbox" prefHeight="100.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER_LEFT">
       <children>
@@ -99,7 +99,7 @@
     </HBox>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets left="40.0" top="80.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />

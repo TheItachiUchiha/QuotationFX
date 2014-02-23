@@ -48,6 +48,8 @@ public class BackupExportController implements Initializable {
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		
+		AdminHomeController.currentPage.setText("EXPORT");
+		
 		browse.setOnAction(new EventHandler<ActionEvent>() {
 		     @Override
 		     public void handle(ActionEvent event) {

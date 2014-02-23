@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -247,13 +248,14 @@ public class TopMenuController implements Initializable {
 						.getResource("/com/kc/view/products-create.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
 		
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(productCreate);
 		tab.setClosable(false);
-		tab.setText("Create Product");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Create Product");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(productCreate);
+		LoginController.home.setAlignment(productCreate, Pos.TOP_LEFT);
 		
 		}
 		catch (Exception e) {
@@ -271,13 +273,14 @@ public class TopMenuController implements Initializable {
 						.getResource("/com/kc/view/products-modify.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
 		
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(productCreate);
 		tab.setClosable(false);
-		tab.setText("Modify Product");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Modify Product");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(productCreate);
+		LoginController.home.setAlignment(productCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -293,13 +296,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/products-view.fxml"));
 		BorderPane productCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(productCreate);
 		tab.setClosable(false);
-		tab.setText("View Products");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("View Products");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(productCreate);
+		LoginController.home.setAlignment(productCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -316,13 +320,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/components-create.fxml"));
 		GridPane componentCreate = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(componentCreate);
 		tab.setClosable(false);
-		tab.setText("Create Component");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Create Component");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(componentCreate);
+		LoginController.home.setAlignment(componentCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -337,13 +342,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/components-modify.fxml"));
 		BorderPane componentCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(componentCreate);
 		tab.setClosable(false);
-		tab.setText("Modify Component");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Modify Component");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(componentCreate);
+		LoginController.home.setAlignment(componentCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -358,13 +364,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/components-view.fxml"));
 		BorderPane componentCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(componentCreate);
 		tab.setClosable(false);
-		tab.setText("View Components");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("View Components");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(componentCreate);
+		LoginController.home.setAlignment(componentCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -381,13 +388,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/customers-create.fxml"));
 		GridPane customerCreate = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(customerCreate);
 		tab.setClosable(false);
-		tab.setText("Create Customer");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Create Customer");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(customerCreate);
+		LoginController.home.setAlignment(customerCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -402,13 +410,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/customers-modify.fxml"));
 		BorderPane customerCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(customerCreate);
 		tab.setClosable(false);
-		tab.setText("Modify Customer");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Modify Customer");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(customerCreate);
+		LoginController.home.setAlignment(customerCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -424,13 +433,14 @@ public class TopMenuController implements Initializable {
 							.getResource("/com/kc/view/customers-view.fxml"));
 			BorderPane customerCreate = (BorderPane) menuLoader.load();
 			
-			tab = new Tab();
+			/*tab = new Tab();
 			tabPane = new TabPane();
 			tab.setContent(customerCreate);
 			tab.setClosable(false);
-			tab.setText("View Customers");
-			tabPane.getTabs().add(tab);
-			LoginController.home.setCenter(tabPane);
+			//tab.setText("View Customers");
+			tabPane.getTabs().add(tab);*/
+			LoginController.home.setCenter(customerCreate);
+			LoginController.home.setAlignment(customerCreate, Pos.TOP_LEFT);
 			
 			}
 			catch (Exception e) {
@@ -448,13 +458,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/users-create.fxml"));
 		GridPane userCreate = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(userCreate);
 		tab.setClosable(false);
-		tab.setText("Create User");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Create User");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(userCreate);
+		LoginController.home.setAlignment(userCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -469,13 +480,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/users-modify.fxml"));
 		BorderPane userCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(userCreate);
 		tab.setClosable(false);
-		tab.setText("Modify User");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Modify User");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(userCreate);
+		LoginController.home.setAlignment(userCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -492,13 +504,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/users-view.fxml"));
 		BorderPane userCreate = (BorderPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(userCreate);
 		tab.setClosable(false);
-		tab.setText("View Users");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("View Users");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(userCreate);
+		LoginController.home.setAlignment(userCreate, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -515,13 +528,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/backup-import.fxml"));
 		GridPane importb = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(importb);
 		tab.setClosable(false);
-		tab.setText("Import");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Import");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(importb);
+		LoginController.home.setAlignment(importb, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -537,13 +551,14 @@ public class TopMenuController implements Initializable {
 				this.getClass()
 						.getResource("/com/kc/view/backup-export.fxml"));
 		GridPane exportb = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(exportb);
-		tab.setText("Export");
+		//tab.setText("Export");
 		tab.setClosable(false);
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(exportb);
+		LoginController.home.setAlignment(exportb, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -570,13 +585,14 @@ public class TopMenuController implements Initializable {
 				LoginController.class
 						.getResource("/com/kc/view/help-companyDetails.fxml"));
 		GridPane companyDetails = (GridPane) menuLoader.load();
-		tab = new Tab();
+		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(companyDetails);
 		tab.setClosable(false);
-		tab.setText("Company details");
-		tabPane.getTabs().add(tab);
-		LoginController.home.setCenter(tabPane);
+		//tab.setText("Company details");
+		tabPane.getTabs().add(tab);*/
+		LoginController.home.setCenter(companyDetails);
+		LoginController.home.setAlignment(companyDetails, Pos.TOP_LEFT);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -590,13 +606,16 @@ public class TopMenuController implements Initializable {
 					LoginController.class
 							.getResource("/com/kc/view/help-about.fxml"));
 			GridPane about = (GridPane) menuLoader.load();
-			tab = new Tab();
+			
+			/*tab = new Tab();
 			tabPane = new TabPane();
 			tab.setContent(about);
 			tab.setClosable(false);
-			tab.setText("About");
-			tabPane.getTabs().add(tab);
-			LoginController.home.setCenter(tabPane);
+			//tab.setText("About");
+			tabPane.getTabs().add(tab);*/
+			LoginController.home.setCenter(about);
+			LoginController.home.setAlignment(about, Pos.TOP_LEFT);
+			
 		}
 			catch (Exception e) {
 				e.printStackTrace();

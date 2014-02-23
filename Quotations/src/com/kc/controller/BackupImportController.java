@@ -45,6 +45,8 @@ public class BackupImportController implements Initializable {
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		
+		AdminHomeController.currentPage.setText("IMPORT");
+		
 		browse.setOnAction(new EventHandler<ActionEvent>() {
 		     @Override
 		     public void handle(ActionEvent event) {

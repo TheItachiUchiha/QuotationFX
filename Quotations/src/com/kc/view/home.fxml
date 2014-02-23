@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -11,9 +12,9 @@
 <VBox minHeight="638.0" prefHeight="638.0" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="105.0" prefWidth="252.0" text="HOME" textFill="#14ff00">
+    <Label fx:id="currentPage" alignment="CENTER" contentDisplay="CENTER" prefHeight="105.0" prefWidth="252.0" text="HOME" textFill="BLACK">
       <font>
-        <Font size="18.0" />
+        <Font size="16.0" />
       </font>
     </Label>
     <StackPane minHeight="488.0" prefHeight="488.0" prefWidth="252.0">
@@ -41,4 +42,7 @@
       </children>
     </StackPane>
   </children>
+  <stylesheets>
+    <URL value="@../style/gui.css" />
+  </stylesheets>
 </VBox>

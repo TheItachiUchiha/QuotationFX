@@ -133,7 +133,7 @@ public class ReportController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
-		
+			AdminHomeController.currentPage.setText("REPORT");
 			reportVBox.getChildren().removeAll(standardGrid,customGrid);
 			periodVBox.getChildren().removeAll(yearHBox,monthHBox);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));

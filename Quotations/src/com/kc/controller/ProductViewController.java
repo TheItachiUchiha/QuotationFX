@@ -77,6 +77,7 @@ public class ProductViewController implements Initializable{
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		try{
 			LOG.info("Enter : initialize");
+			AdminHomeController.currentPage.setText("VIEW PRODUCTS");
 			productsList = productsDAO.getProducts();
 			productsTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 			searchByList = FXCollections.observableArrayList();

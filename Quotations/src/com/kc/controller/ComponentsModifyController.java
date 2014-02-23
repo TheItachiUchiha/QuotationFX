@@ -83,6 +83,7 @@ public class ComponentsModifyController implements Initializable {
 		LOG.info("Enter : initialize");
 		try {
 
+			AdminHomeController.currentPage.setText("MODIFY COMPONENT");
 			validation.allowAsAmount(costPrice);
 			validation.allowAsAmount(dealerPrice);
 			validation.allowAsAmount(endUserPrice);

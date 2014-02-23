@@ -1048,8 +1048,9 @@
     );
 }
 
+
 .tab{
-	  -fx-background-color:rgb(255,0,128);
+	  -fx-background-color:#FFB6C1;
 	   -fx-border-style: solid ;
     -fx-border-color: black;
 }
@@ -1077,7 +1078,7 @@
 }
 
 .tab:selected {
-    -fx-background-color: #FFB6C1 ;
+    -fx-background-color: rgb(255,0,128) ;
     -fx-border-style: solid ;
     -fx-border-color: black;
     -fx-background-insets: 0, 1 1 0 1;
@@ -1152,5 +1153,9 @@
 	-fx-background-color: #D6D2D3 ;
 }
 #admin-bg{
-	-fx-background-image: url("bg-cyan.jpg");
+	-fx-background-image: url("bg-pink.jpg");
+}
+
+.invisible-tab{
+	 -fx-background-color:transparent;
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<BorderPane maxWidth="-Infinity" prefHeight="456.0" prefWidth="833.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyPopUpController">
+<BorderPane maxWidth="-Infinity" prefHeight="456.0" prefWidth="925.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductsModifyPopUpController">
   <!-- TODO Add Nodes -->
   <center>
     <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" spacing="10.0" visible="true">
@@ -55,24 +55,24 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="-1.0" prefWidth="-1.0">
+    <VBox maxHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0">
       <children>
-        <GridPane fx:id="showGrid" alignment="TOP_CENTER" prefHeight="-1.0" prefWidth="-1.0" visible="true">
+        <GridPane fx:id="showGrid" alignment="TOP_CENTER" maxHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="682.0" visible="true">
           <children>
-            <Label text="Product Category" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <Label prefWidth="93.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label prefWidth="108.0" text="Product Category" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="108.0" text="SubCategory" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <AutoCompleteTextField id="productCategory" fx:id="productCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <AutoCompleteTextField id="productSubCategory" fx:id="productSubCategoryTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-            <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
+            <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
             <AutoCompleteTextField id="productName" fx:id="productNameTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
             <TextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="108.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="341.0" minWidth="10.0" prefWidth="206.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="350.0" minWidth="10.0" prefWidth="139.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="468.0" minWidth="10.0" prefWidth="432.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
