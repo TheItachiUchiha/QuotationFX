@@ -45,7 +45,7 @@ public class HelpEmployeesController implements Initializable {
 				AdminHomeController.currentPage.setText("EMPLOYEE DETAILS");
 				
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees-new.fxml"));
-				final GridPane newEmployee = (GridPane) loader.load();
+				final BorderPane newEmployee = (BorderPane) loader.load();
 				newTab.setContent(newEmployee);
 				
 				
@@ -57,7 +57,7 @@ public class HelpEmployeesController implements Initializable {
 								if(t1.equals(newTab))
 								{
 									FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees-new.fxml"));
-									GridPane newEmployee = (GridPane) loader.load();
+									BorderPane newEmployee = (BorderPane) loader.load();
 									newTab.setContent(newEmployee);
 								}
 								else

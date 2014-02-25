@@ -43,7 +43,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,complaint_count,dispatch_done,service_count,purchase_order_no,product_quantity) VALUES(?,?,?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,dispatch_done,purchase_order_no,product_quantity) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -66,11 +66,9 @@ public class EnquiryDAO {
 			preparedStatement.setInt(20, 0);
 			preparedStatement.setDouble(21, 0);
 			preparedStatement.setString(22, CommonConstants.NA);
-			preparedStatement.setInt(23, 0);
-			preparedStatement.setString(24, enquiryVO.getDispatchDone());
-			preparedStatement.setInt(25, 0);
-			preparedStatement.setString(26, enquiryVO.getPurchaseOrderNo());
-			preparedStatement.setInt(27, enquiryVO.getProductQuantity());
+			preparedStatement.setString(23, enquiryVO.getDispatchDone());
+			preparedStatement.setString(24, enquiryVO.getPurchaseOrderNo());
+			preparedStatement.setInt(25, enquiryVO.getProductQuantity());
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -116,11 +114,9 @@ public class EnquiryDAO {
 				enquiryVO.setReminderSent(resultSet.getInt(21));
 				enquiryVO.setTotalRevenue(resultSet.getDouble(22));
 				enquiryVO.setEnquiryCustomerType(resultSet.getString(23));
-				enquiryVO.setComplaintCount(resultSet.getInt(24));
-				enquiryVO.setDispatchDone(resultSet.getString(25));
-				enquiryVO.setServiceCount(resultSet.getInt(26));
-				enquiryVO.setPurchaseOrderNo(resultSet.getString(27));
-				enquiryVO.setProductQuantity(resultSet.getInt(28));
+				enquiryVO.setDispatchDone(resultSet.getString(24));
+				enquiryVO.setPurchaseOrderNo(resultSet.getString(25));
+				enquiryVO.setProductQuantity(resultSet.getInt(26));
 				listOfEnquries.add(enquiryVO);
 			}
 		}

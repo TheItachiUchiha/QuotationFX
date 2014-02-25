@@ -9,85 +9,102 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?scenebuilder-classpath-element ../../../../lib/AutoCompleteTextField.jar?>
 
-<GridPane alignment="TOP_LEFT" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="447.00003370568027" vgap="0.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersCreateController">
-  <!-- TODO Add Nodes -->
-  <children>
-    <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
-      <font>
-        <Font name="Calibri" size="15.0" fx:id="x1" />
-      </font>
-    </Label>
-    <Label font="$x1" prefHeight="33.0" prefWidth="128.0" text="Company Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-    <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-    <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="City" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-    <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="State" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
-    <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="Email id *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
-    <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Mobile Number *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-    <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Telephone" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
-    <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Website" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-    <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
-    <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
-    <AutoCompleteTextField fx:id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-    <AutoCompleteTextField fx:id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-    <TextArea fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="48.000099999997474" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <AutoCompleteTextField fx:id="city" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-    <AutoCompleteTextField fx:id="state" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-    <TextField fx:id="emailId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-    <TextField fx:id="contactNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-    <TextField id="contactNumber" fx:id="telephone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-    <TextField id="contactNumber" fx:id="website" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-    <TextField fx:id="tinNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-    <HBox alignment="CENTER_LEFT" prefHeight="26.999900000002526" prefWidth="458.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+<BorderPane id="BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="603.0" prefWidth="625.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.CustomersCreateController">
+  <center>
+    <StackPane prefHeight="507.0" prefWidth="560.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <RadioButton fx:id="dealer" mnemonicParsing="false" text="Dealer">
-          <toggleGroup>
-            <ToggleGroup fx:id="customerType" />
-          </toggleGroup>
-        </RadioButton>
-        <RadioButton fx:id="endUser" mnemonicParsing="false" text="End User" toggleGroup="$customerType" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="483.0" opacity="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="560.0" StackPane.alignment="TOP_LEFT">
+          <StackPane.margin>
+            <Insets fx:id="x3" />
+          </StackPane.margin>
+        </Rectangle>
+        <GridPane alignment="TOP_LEFT" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" padding="$x3" prefHeight="483.0" prefWidth="447.00003370568027" vgap="0.0" StackPane.alignment="TOP_LEFT">
+          <!-- TODO Add Nodes -->
+          <children>
+            <Label prefHeight="33.0" prefWidth="128.0" text="Customer Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
+              <font>
+                <Font name="Calibri" size="15.0" fx:id="x1" />
+              </font>
+            </Label>
+            <Label font="$x1" prefHeight="33.0" prefWidth="128.0" text="Company Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="Address" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="City" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="State" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" />
+            <Label font="$x1" prefHeight="35.0" prefWidth="128.0" text="Email id *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+            <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Mobile Number *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
+            <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Telephone" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="7" />
+            <Label font="$x1" prefHeight="30.0" prefWidth="128.0" text="Website" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+            <Label font="$x1" prefHeight="31.0" prefWidth="128.0" text="TIN Number *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+            <Label font="$x1" prefHeight="28.0" prefWidth="128.0" text="Customer Type" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+            <AutoCompleteTextField fx:id="customerName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <AutoCompleteTextField fx:id="companyName" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextArea fx:id="address" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="48.000099999997474" prefWidth="253.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <AutoCompleteTextField fx:id="city" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <AutoCompleteTextField fx:id="state" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="emailId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextField fx:id="contactNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField id="contactNumber" fx:id="telephone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField id="contactNumber" fx:id="website" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <TextField fx:id="tinNumber" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="253.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <HBox alignment="CENTER_LEFT" prefHeight="26.999900000002526" prefWidth="458.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
+              <children>
+                <RadioButton fx:id="dealer" mnemonicParsing="false" text="Dealer">
+                  <toggleGroup>
+                    <ToggleGroup fx:id="customerType" />
+                  </toggleGroup>
+                </RadioButton>
+                <RadioButton fx:id="endUser" mnemonicParsing="false" text="End User" toggleGroup="$customerType" />
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
+              <children>
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#saveCustomers" styleClass="button-style" text="Save">
+                  <font>
+                    <Font size="15.0" fx:id="x2" />
+                  </font>
+                </Button>
+              </children>
+            </HBox>
+            <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="12">
+              <children>
+                <Label id="title" fx:id="message" alignment="CENTER" font="$x2" prefHeight="20.0" prefWidth="210.0" text="" textFill="#a533ff" visible="false" />
+              </children>
+            </HBox>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.053302554767157" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.18088948270358" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="123.0" minHeight="8.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="136.0" minHeight="9.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="162.0" minHeight="7.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="29.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="33.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="6.0" prefHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="100.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <stylesheets>
+            <URL value="@../style/gui.css" />
+          </stylesheets>
+          <StackPane.margin>
+            <Insets left="10.0" top="10.0" />
+          </StackPane.margin>
+        </GridPane>
       </children>
-    </HBox>
-    <HBox id="HBox" alignment="CENTER" spacing="30.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="11">
-      <children>
-        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#saveCustomers" styleClass="button-style" text="Save">
-          <font>
-            <Font size="15.0" fx:id="x2" />
-          </font>
-        </Button>
-      </children>
-    </HBox>
-    <HBox id="HBox" alignment="CENTER" spacing="10.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="12">
-      <children>
-        <Label id="title" fx:id="message" alignment="CENTER" font="$x2" prefHeight="20.0" prefWidth="210.0" text="" textFill="#a533ff" visible="false" />
-      </children>
-    </HBox>
-  </children>
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="34.0427863149533" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="66.21561161786325" />
-  </columnConstraints>
+    </StackPane>
+  </center>
   <padding>
     <Insets left="40.0" top="80.0" />
   </padding>
-  <rowConstraints>
-    <RowConstraints maxHeight="123.0" minHeight="8.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="136.0" minHeight="9.0" prefHeight="29.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="162.0" minHeight="7.0" prefHeight="30.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="172.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="193.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="26.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="243.0" minHeight="0.0" prefHeight="27.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="262.0" minHeight="6.0" prefHeight="48.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="262.0" minHeight="0.0" prefHeight="22.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-  <stylesheets>
-    <URL value="@../style/gui.css" />
-  </stylesheets>
-</GridPane>
+</BorderPane>

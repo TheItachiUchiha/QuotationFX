@@ -77,7 +77,18 @@
   <top>
     <VBox prefHeight="130.0" prefWidth="666.0" spacing="5.0">
       <children>
-        <HBox id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <HBox id="choiceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="true">
+          <children>
+            <Label prefHeight="26.0" prefWidth="131.0" text="Select a Customer with:" />
+            <RadioButton id="referenceNo" fx:id="referenceRadio" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Reference Number">
+              <toggleGroup>
+                <ToggleGroup fx:id="customerToggle" />
+              </toggleGroup>
+            </RadioButton>
+            <RadioButton id="customerName" fx:id="nameRadio" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
+          </children>
+        </HBox>
+        <HBox id="referenceHBox" fx:id="choiceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="21.0" prefWidth="131.0" text="Month:" />
             <ComboBox fx:id="monthCombo" minHeight="16.0" prefHeight="21.0" prefWidth="104.0" promptText="" styleClass="combo-style">
@@ -102,32 +113,40 @@
             <Button mnemonicParsing="false" onAction="#search" prefWidth="60.0" text="Search" />
           </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
+        <VBox id="VBox" fx:id="mainVBox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="5.0">
           <children>
-            <Label prefHeight="26.0" prefWidth="131.0" text="Select a Customer with:" />
-            <RadioButton fx:id="referenceNo" mnemonicParsing="false" prefHeight="26.0" prefWidth="131.0" text="Reference Number">
-              <toggleGroup>
-                <ToggleGroup fx:id="customerToggle" />
-              </toggleGroup>
-            </RadioButton>
-            <RadioButton fx:id="customerName" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
+            <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0" visible="true">
+              <children>
+                <Label prefHeight="26.0" prefWidth="131.0" text="Enter / Select a Ref_No:" />
+                <ComboBox id="monthCombo" fx:id="referenceCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Button mnemonicParsing="false" onAction="#viewComplaints" prefWidth="117.0" text="View Complaints" />
+              </children>
+            </HBox>
+            <HBox id="referenceHBox" fx:id="contactHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0" visible="true">
+              <children>
+                <Label prefHeight="26.0" prefWidth="131.0" text="Select Contact No:" />
+                <ComboBox id="monthCombo" fx:id="contactCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Button mnemonicParsing="false" onAction="#viewComplaintsForName" prefWidth="117.0" text="View Complaints" />
+              </children>
+            </HBox>
           </children>
-        </HBox>
-        <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
-          <children>
-            <Label prefHeight="26.0" prefWidth="131.0" text="Enter / Select a Ref_No:" />
-            <ComboBox id="monthCombo" fx:id="referenceCombo" minHeight="16.0" prefHeight="21.0" prefWidth="140.0" promptText="" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <Button mnemonicParsing="false" onAction="#viewComplaints" prefWidth="117.0" text="View Complaints" />
-          </children>
-        </HBox>
+        </VBox>
         <HBox fx:id="complaintHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="26.0" prefWidth="131.0" text="Complaint:" />

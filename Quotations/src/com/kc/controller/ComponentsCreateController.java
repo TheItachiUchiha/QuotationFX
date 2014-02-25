@@ -103,7 +103,14 @@ public class ComponentsCreateController implements Initializable{
 
 		try
 		{
-			if(validation.isEmpty(componentName, componentCategory, subCategory, vendor, model, type, size, costPrice, dealerPrice, endUserPrice))
+			if(validation.isEmptyAutoComplte(componentName,vendor,componentCategory,subCategory,model,size,type))
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(validation.isEmpty(costPrice,endUserPrice,dealerPrice))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
 				message.getStyleClass().remove("success");

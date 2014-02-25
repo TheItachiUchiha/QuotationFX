@@ -38,6 +38,8 @@ public class EnquiryViewVO {
 	private String complaintDate;
 	private String serviceDate;
 	private String purchaseOrderNo;
+	private String telephone;
+	private String website;
 	private int productQuantity;
 	private int serviceCount;
 	
@@ -274,6 +276,18 @@ public class EnquiryViewVO {
 	}
 	public void setProductQuantity(int productQuantity) {
 		this.productQuantity = productQuantity;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 	
 }

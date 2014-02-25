@@ -30,8 +30,8 @@ public class EnquiryVO {
 	private String dispatchDone;
 	private String purchaseOrderNo;
 	private int productQuantity;
-	private int complaintCount;
-	private int serviceCount;
+	//private int complaintCount;
+	//private int serviceCount;
 	private ObservableList<ComponentsVO> list;
 	
 	public int getId() {
@@ -184,23 +184,11 @@ public class EnquiryVO {
 	public void setEnquiryCustomerType(String enquiryCustomerType) {
 		this.enquiryCustomerType = enquiryCustomerType;
 	}
-	public int getComplaintCount() {
-		return complaintCount;
-	}
-	public void setComplaintCount(int complaintCount) {
-		this.complaintCount = complaintCount;
-	}
 	public String getDispatchDone() {
 		return dispatchDone;
 	}
 	public void setDispatchDone(String dispatchDone) {
 		this.dispatchDone = dispatchDone;
-	}
-	public int getServiceCount() {
-		return serviceCount;
-	}
-	public void setServiceCount(int serviceCount) {
-		this.serviceCount = serviceCount;
 	}
 	public String getPurchaseOrderNo() {
 		return purchaseOrderNo;

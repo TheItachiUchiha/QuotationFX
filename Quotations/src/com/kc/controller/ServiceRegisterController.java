@@ -19,9 +19,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -50,7 +52,7 @@ public class ServiceRegisterController implements Initializable {
     private TextField charge;
 
     @FXML
-    private RadioButton customerName;
+    private RadioButton nameRadio;
 
     @FXML
     private ToggleGroup customerToggle;
@@ -77,10 +79,13 @@ public class ServiceRegisterController implements Initializable {
     private ComboBox<String> referenceCombo;
     
     @FXML
+    private ComboBox<String> conatctCombo;
+    
+    @FXML
     private ComboBox<String> complaintCombo;
 
     @FXML
-    private RadioButton referenceNo;
+    private RadioButton referenceRadio;
     
     @FXML
     private GridPane serviceGrid;
@@ -88,18 +93,30 @@ public class ServiceRegisterController implements Initializable {
     @FXML
     private HBox complaintHBox;
     
+    @FXML
+    private HBox contactHBox;
+    
+    @FXML
+    private HBox referenceHBox;
+    
+    @FXML
+    private VBox mainVBox;
+    
     Validation validation;
     private DatePicker calendar;
     ServiceDAO serviceDAO;
     EnquiryDAO enquiryDAO;
     CustomersDAO customersDAO;
+    int custId;
     private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
 	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
     private ObservableList<ServiceVO> refList = FXCollections.observableArrayList();
     private ObservableList<String> uniqueRefList = FXCollections.observableArrayList();
+    private ObservableList<String> uniqueContactList = FXCollections.observableArrayList();
     private ObservableList<String> complaintList = FXCollections.observableArrayList();
     private EnquiryViewVO viewVO = new EnquiryViewVO();
+    private CustomersVO custVO = new CustomersVO();
     
 	public ServiceRegisterController() {
 		validation = new Validation();
@@ -112,6 +129,7 @@ public class ServiceRegisterController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		try
 		{
+			mainVBox.getChildren().clear();
 			validation.allowAsAmount(charge);
 			calendar = new DatePicker(Locale.ENGLISH);
     		calendar.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));
@@ -128,12 +146,22 @@ public class ServiceRegisterController implements Initializable {
     		refList=serviceDAO.getComplaintList();
     		for(ServiceVO serviceVO : refList)
     		{
-    			if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
+    			if(serviceVO.getReferenceNo()!=null)
     			{
-    				uniqueRefList.add(serviceVO.getReferenceNo());
+	    			if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
+	    			{
+	    				uniqueRefList.add(serviceVO.getReferenceNo());
+	    			}
     			}
     		}
-    		referenceCombo.setItems(uniqueRefList);
+    		
+    		for(ServiceVO serviceVO : refList)
+    		{
+    			if(!uniqueContactList.contains(serviceVO.getContactNo()))
+    			{
+    				uniqueContactList.add(serviceVO.getContactNo());
+    			}
+    		}
     		
     		referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -160,6 +188,50 @@ public class ServiceRegisterController implements Initializable {
 					
 				}
 			});
+    		conatctCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+					
+						complaintHBox.setVisible(false);
+						serviceGrid.setVisible(false);
+						
+						for(CustomersVO customersVO : customerList)
+						{
+							if(customersVO.getContactNumber().equals(conatctCombo.getSelectionModel().getSelectedItem()))
+							{
+								ServiceRegisterController.this.custVO = customersVO;
+							}
+						}
+				}
+			});
+    		customerToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends Toggle> observable,
+						Toggle oldValue, Toggle newValue) {
+						
+						if(referenceRadio.isSelected())
+						{
+							mainVBox.getChildren().clear();
+							mainVBox.getChildren().add(referenceHBox);
+							referenceCombo.setItems(uniqueRefList);
+							conatctCombo.getSelectionModel().clearSelection();
+						}
+						else if(nameRadio.isSelected())
+						{
+							mainVBox.getChildren().clear();
+							mainVBox.getChildren().add(contactHBox);
+							conatctCombo.setItems(uniqueContactList);
+							referenceCombo.getSelectionModel().clearSelection();
+							
+						}
+					
+				}
+			});
     		
 		}
 		catch (Exception e) {
@@ -175,21 +247,43 @@ public class ServiceRegisterController implements Initializable {
 		complaintList.clear();
 		for(ServiceVO serviceVO : refList)
 		{
-			if(serviceVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
+			if(serviceVO.getReferenceNo()!=null)
 			{
-				complaintList.add(serviceVO.getComplaintId());
+				if(serviceVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()))
+				{
+					complaintList.add(serviceVO.getComplaintId());
+				}
 			}
 		}
 		complaintCombo.setItems(complaintList);
 		
 		for(EnquiryViewVO enquiryVO : enquiryViewList)
 		{
-			if(enquiryVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()) )
+			if(enquiryVO.getReferenceNo()!=null)
 			{
-				ServiceRegisterController.this.viewVO=enquiryVO;
-				break;
+				if(enquiryVO.getReferenceNo().equals(referenceCombo.getSelectionModel().getSelectedItem()) )
+				{
+					ServiceRegisterController.this.viewVO=enquiryVO;
+					break;
+				}
 			}
 		}
+		complaintHBox.setVisible(true);
+	}
+	
+	public void showComplaintsForContact()
+	{
+		complaintCombo.getSelectionModel().clearSelection();
+		complaintList.clear();
+		for(ServiceVO serviceVO : refList)
+		{
+			if(serviceVO.getContactNo().equals(conatctCombo.getSelectionModel().getSelectedItem()))
+			{
+				complaintList.add(serviceVO.getComplaintId());
+			}
+		}
+		complaintCombo.setItems(complaintList);
+		
 		complaintHBox.setVisible(true);
 	}
 	
@@ -198,12 +292,9 @@ public class ServiceRegisterController implements Initializable {
 	{
     	try
     	{
-    		if(referenceCombo.getSelectionModel().getSelectedIndex()==-1)
+    		if(referenceCombo.getSelectionModel().getSelectedIndex()>-1)
     		{
-    			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_REFERENCE);
-    		}
-    		else
-    		{
+    		
 				FXMLLoader menuLoader = new FXMLLoader(this.getClass()
 						.getResource("/com/kc/view/service-customer-popup.fxml"));
 				GridPane customerInf;
@@ -220,6 +311,29 @@ public class ServiceRegisterController implements Initializable {
 				
 				((ServiceCustomerInfoController) menuLoader.getController())
 				.fillTextFieldValues(ServiceRegisterController.this.viewVO);
+    		}
+    		else if(conatctCombo.getSelectionModel().getSelectedIndex()>-1)
+    		{
+    			FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+						.getResource("/com/kc/view/service-customer-popup.fxml"));
+				GridPane customerInf;
+				customerInf = (GridPane) menuLoader.load();
+				Stage viewStage = new Stage();
+				Scene viewScene = new Scene(customerInf);
+				viewStage.setResizable(false);
+				viewStage.setHeight(500);
+				viewStage.setWidth(600);
+				viewStage.initModality(Modality.WINDOW_MODAL);
+				viewStage.initOwner(LoginController.primaryStage);
+				viewStage.setScene(viewScene);
+				viewStage.show();
+				
+				((ServiceCustomerInfoController) menuLoader.getController())
+				.fillTextFieldValuesForCust(ServiceRegisterController.this.custVO);
+    		}
+    		else
+    		{
+    			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE_OR_CONTACT);
     		}
 			
     	}
@@ -238,6 +352,7 @@ public class ServiceRegisterController implements Initializable {
 				if(complaintCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getComplaintId()))
 				{
 					natureOfComplaint.setText(serviceVO.getComplaint());
+					custId = serviceVO.getCustomerId();
 					break;
 				}
 			}
@@ -252,7 +367,7 @@ public class ServiceRegisterController implements Initializable {
 	public void registerService()
 	{
 		ServiceVO serviceVO = new ServiceVO();
-		serviceVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
+		serviceVO.setCustomerId(custId);
 		serviceVO.setCharge(Double.parseDouble(charge.getText()));
 		serviceVO.setComplaint(natureOfComplaint.getText());
 		serviceVO.setDate(((TextField)calendar.getChildren().get(0)).getText());

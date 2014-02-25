@@ -29,7 +29,7 @@ public class CustomersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber,telephone,website) VALUES(?, ?, ?,?,?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber,telephone,website,complaint_count,service_count) VALUES(?, ?,?, ?, ?,?,?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
 			preparedStatement.setString(3, customersVO.getAddress());
@@ -41,6 +41,8 @@ public class CustomersDAO {
 			preparedStatement.setString(9, customersVO.getTinNumber());
 			preparedStatement.setString(10, customersVO.getTelephone());
 			preparedStatement.setString(11, customersVO.getWebsite());
+			preparedStatement.setInt(12, customersVO.getComplaintCount());
+			preparedStatement.setInt(13, customersVO.getServiceCount());
 			
 			preparedStatement.execute();
 			
@@ -121,6 +123,8 @@ public class CustomersDAO {
 				customersVO.setTinNumber(resultSet.getString(10));
 				customersVO.setTelephone(resultSet.getString(11));
 				customersVO.setWebsite(resultSet.getString(12));
+				customersVO.setComplaintCount(resultSet.getInt(13));
+				customersVO.setServiceCount(resultSet.getInt(14));
 				
 				listOfCustomers.add(customersVO);
 			}

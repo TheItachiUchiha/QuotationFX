@@ -76,8 +76,8 @@ public class ServiceViewController implements Initializable {
 	    @FXML
 	    private TableColumn<ServiceVO, String> rating;
 
-	    @FXML
-	    private TableColumn<EnquiryViewVO, String> referedBy;
+	    /*@FXML
+	    private TableColumn<EnquiryViewVO, String> referedBy;*/
 
 	    @FXML
 	    private TableColumn<EnquiryViewVO, String> referenceNo;
@@ -421,19 +421,19 @@ public class ServiceViewController implements Initializable {
 			location.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
 			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
 			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+			//referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	//Fill the Service Details In the Service Table
-	public void updateServiceTable(String reference)
+	public void updateServiceTable(String contact)
 	{
 		try
 		{
 			ObservableList<ServiceVO> listOfServicesForReference = FXCollections.observableArrayList();
-			listOfServicesForReference = serviceDAO.getServicesForReference(reference);
+			listOfServicesForReference = serviceDAO.getServicesForContact(contact);
 			serviceTable.setItems(listOfServicesForReference);
 			engineerName.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("engineerName"));
 			totalService.setCellValueFactory(new PropertyValueFactory<ServiceVO, String>("serviceCount"));
@@ -461,7 +461,7 @@ public class ServiceViewController implements Initializable {
                 @Override
                 public void handle(ActionEvent t) {
                     try {
-                    		updateServiceTable(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()).getReferenceNo());
+                    		updateServiceTable(ButtonCell.this.getTableView().getItems().get(ButtonCell.this.getIndex()).getContactNumber());
                     		serviceTable.setVisible(true);
                     	
 					} catch (Exception e) {

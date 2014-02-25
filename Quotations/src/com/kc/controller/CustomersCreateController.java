@@ -92,9 +92,16 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 		LOG.info("Enter : saveCustomers");
 		try
 		{
-			if(validation.isEmpty(customerName, companyName, contactNumber, tinNumber))
+			if(validation.isEmpty(contactNumber, tinNumber))
 			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else if(validation.isEmpty(customerName, companyName))
+			{
+				message.setText(CommonConstants.INCORRECT_EMAIL);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
 				message.setVisible(true);

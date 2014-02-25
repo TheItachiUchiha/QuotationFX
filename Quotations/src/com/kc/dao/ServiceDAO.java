@@ -34,12 +34,12 @@ public class ServiceDAO {
 		{
 			int count=0;
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET complaint_count = complaint_count + 1 where REF_NUMBER=?");
-			preparedStatement.setString(1, serviceVO.getReferenceNo());
+			preparedStatement = conn.prepareStatement("UPDATE customers SET complaint_count = complaint_count + 1 where id=?");
+			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 		
-			preparedStatement = conn.prepareStatement("SELECT complaint_count FROM ENQUIRY WHERE REF_NUMBER = ?");
-			preparedStatement.setString(1, serviceVO.getReferenceNo());
+			preparedStatement = conn.prepareStatement("SELECT complaint_count FROM customers WHERE id = ?");
+			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
 			{
@@ -56,7 +56,7 @@ public class ServiceDAO {
 			preparedStatement.setDouble(6, serviceVO.getCharge());
 			preparedStatement.setString(7, serviceVO.getComplaintDate());
 			preparedStatement.setString(8, serviceVO.getFeedback());
-			preparedStatement.setString(9, serviceVO.getReferenceNo()+"-"+count);
+			preparedStatement.setString(9, serviceVO.getCustomerId()+"-"+count);
 			preparedStatement.setString(10, serviceVO.getProductName());
 			preparedStatement.setInt(11, serviceVO.getCustomerId());
 			preparedStatement.setString(12, serviceVO.getCustomerName());
@@ -97,7 +97,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id, e.service_count from quotation.service s, quotation.enquiry e where e.ref_number=s.reference_no and s.date=?");
+					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id,s.contact_no, c.service_count from quotation.service s, quotation.customers c where c.id=s.customer_id and s.date=?");
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -111,7 +111,8 @@ public class ServiceDAO {
 				serviceVO.setComplaintId(resultSet.getString(5));
 				serviceVO.setProductName(resultSet.getString(6));
 				serviceVO.setCustomerId(resultSet.getInt(7));
-				serviceVO.setServiceCount(resultSet.getInt(8));
+				serviceVO.setContactNo(resultSet.getString(8));
+				serviceVO.setServiceCount(resultSet.getInt(9));
 				
 				listOfEnquries.add(serviceVO);
 			}
@@ -164,8 +165,8 @@ public class ServiceDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count + 1 where REF_NUMBER=?");
-			preparedStatement.setString(1, serviceVO.getReferenceNo());
+			preparedStatement = conn.prepareStatement("UPDATE customers SET service_count = service_count + 1 where id=?");
+			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
@@ -173,6 +174,31 @@ public class ServiceDAO {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : newService");
+	}
+	
+	public void updateService(ServiceVO serviceVO,String complaintId)
+	{
+		LOG.info("Enter : updateService");
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET engineer_name=?,complaint=?,date=?,rating=?,charge=?,feedback=? where complaint_id=?");
+			preparedStatement.setString(1, serviceVO.getEngineerName());
+			preparedStatement.setString(2, serviceVO.getComplaint());
+			preparedStatement.setString(3, serviceVO.getDate());
+			preparedStatement.setString(4, serviceVO.getRating());
+			preparedStatement.setDouble(5, serviceVO.getCharge());
+			preparedStatement.setString(6, serviceVO.getFeedback());
+			preparedStatement.setString(7, complaintId);
+			
+			preparedStatement.execute();
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		LOG.info("Exit : updateService");
 	}
 	
 	public ObservableList<ServiceVO> getServiceList(String startDate, String endDate) throws Exception
@@ -183,7 +209,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select reference_no,complaint,complaint_date,complaint_id,product_name,customer_id from quotation.service where date!=? and "+
+					.prepareStatement("select * from quotation.service where date!=? and "+
 							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, CommonConstants.NA);
@@ -194,12 +220,20 @@ public class ServiceDAO {
 			while(resultSet.next())
 			{
 				ServiceVO serviceVO = new ServiceVO();
-				serviceVO.setReferenceNo(resultSet.getString(1));
-				serviceVO.setComplaint(resultSet.getString(2));
-				serviceVO.setComplaintDate(resultSet.getString(3));
-				serviceVO.setComplaintId(resultSet.getString(4));
-				serviceVO.setProductName(resultSet.getString(5));
-				serviceVO.setCustomerId(resultSet.getInt(6));
+				serviceVO.setId(resultSet.getInt(1));
+				serviceVO.setReferenceNo(resultSet.getString(2));
+				serviceVO.setEngineerName(resultSet.getString(3));
+				serviceVO.setComplaint(resultSet.getString(4));
+				serviceVO.setDate(resultSet.getString(5));
+				serviceVO.setRating(resultSet.getString(6));
+				serviceVO.setCharge(resultSet.getDouble(7));
+				serviceVO.setComplaintDate(resultSet.getString(8));
+				serviceVO.setFeedback(resultSet.getString(9));
+				serviceVO.setComplaintId(resultSet.getString(10));
+				serviceVO.setProductName(resultSet.getString(11));
+				serviceVO.setCustomerId(resultSet.getInt(12));
+				serviceVO.setCustomerName(resultSet.getString(13));
+				serviceVO.setContactNo(resultSet.getString(14));
 				
 				listOfEnquries.add(serviceVO);
 			}
@@ -269,8 +303,8 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date, c.customername, c.companyname, c.state , e.referedby,e.id FROM quotation.SERVICE s, "+
-			"quotation.Customers c, quotation.enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.date!=? and "+
+					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date,s.contact_no, c.customername, c.companyname, c.state  FROM quotation.SERVICE s, "+
+			"quotation.Customers c where s.customer_id=c.id and s.date!=? and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, CommonConstants.NA);
@@ -285,11 +319,10 @@ public class ServiceDAO {
 				viewVO.setProductName(resultSet.getString(2));
 				viewVO.setComplaintDate(resultSet.getString(3));
 				viewVO.setServiceDate(resultSet.getString(4));
-				viewVO.setCustomerName(resultSet.getString(5));
-				viewVO.setCompanyName(resultSet.getString(6));
-				viewVO.setState(resultSet.getString(7));
-				viewVO.setReferedBy(resultSet.getString(8));
-				viewVO.setId(resultSet.getInt(9));
+				viewVO.setContactNumber(resultSet.getString(5));
+				viewVO.setCustomerName(resultSet.getString(6));
+				viewVO.setCompanyName(resultSet.getString(7));
+				viewVO.setState(resultSet.getString(8));
 				
 				listOfServices.add(viewVO);
 			}
@@ -308,7 +341,7 @@ public class ServiceDAO {
 		return listOfServices;
 	}
 	
-	public ObservableList<ServiceVO> getServicesForReference(String reference) throws Exception
+	public ObservableList<ServiceVO> getServicesForContact(String contact) throws Exception
 	{
 		LOG.info("Enter : getServicesForReference");
 		ObservableList<ServiceVO> listOfEnquries = FXCollections.observableArrayList();
@@ -316,9 +349,9 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT e.service_count,(select count(*) from quotation.service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and reference_no=?), s.engineer_name,s.charge,s.rating FROM quotation.enquiry e ,quotation.service s where e.ref_number=s.reference_no and s.date!='N/A' and e.ref_number=?");
-			preparedStatement.setString(1, reference);
-			preparedStatement.setString(2, reference);
+					.prepareStatement("SELECT c.service_count,(select count(*) from quotation.service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and contact_no=?), s.engineer_name,s.charge,s.rating FROM quotation.customers c ,quotation.service s where c.contactnumber=s.contact_no and s.date!='N/A' and c.contactnumber=?");
+			preparedStatement.setString(1, contact);
+			preparedStatement.setString(2, contact);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next())
@@ -363,8 +396,8 @@ public class ServiceDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET service_count = service_count - 1 where REF_NUMBER=?");
-			preparedStatement.setString(1, serviceVO.getReferenceNo());
+			preparedStatement = conn.prepareStatement("UPDATE customers SET service_count = service_count - 1 where id=?");
+			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 			
 		}

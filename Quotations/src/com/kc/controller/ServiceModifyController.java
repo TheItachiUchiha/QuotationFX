@@ -20,9 +20,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import org.apache.log4j.LogManager;
@@ -32,9 +34,6 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ServiceDAO;
-import com.kc.model.CustomersVO;
-import com.kc.model.EnquiryVO;
-import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
@@ -49,7 +48,7 @@ public class ServiceModifyController implements Initializable {
 	    private TextField charge;
 
 	    @FXML
-	    private RadioButton customerName;
+	    private RadioButton nameRadio;
 
 	    @FXML
 	    private ToggleGroup customerToggle;
@@ -77,9 +76,12 @@ public class ServiceModifyController implements Initializable {
 	    
 	    @FXML
 	    private ComboBox<String> complaintCombo;
+	    
+	    @FXML
+	    private ComboBox<String> contactCombo;
 
 	    @FXML
-	    private RadioButton referenceNo;
+	    private RadioButton referenceRadio;
 
 	    @FXML
 	    private ComboBox<String> yearCombo;
@@ -91,7 +93,16 @@ public class ServiceModifyController implements Initializable {
 	    private HBox complaintHBox;
 	    
 	    @FXML
+	    private HBox contactHBox;
+	    
+	    @FXML
 	    private HBox referenceHBox;
+	    
+	    @FXML
+	    private HBox choiceHBox;
+	    
+	    @FXML
+	    private VBox mainVBox;
 	    
 	    Validation validation;
 	    private DatePicker calendar;
@@ -100,6 +111,7 @@ public class ServiceModifyController implements Initializable {
 	    CustomersDAO customersDAO;
 	    String startDate;
 	    String endDate;
+	    int customerId;
 	    
 	   /* private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
 		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
@@ -107,6 +119,7 @@ public class ServiceModifyController implements Initializable {
 	    private ObservableList<ServiceVO> refList = FXCollections.observableArrayList();
 	    private ObservableList<ServiceVO> serviceList = FXCollections.observableArrayList();
 	    private ObservableList<String> uniqueRefList = FXCollections.observableArrayList();
+	    private ObservableList<String> contactList = FXCollections.observableArrayList();
 	    private ObservableList<String> complaintList = FXCollections.observableArrayList();
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
 	   	private ObservableList<String> yearList = FXCollections.observableArrayList();
@@ -122,6 +135,8 @@ public class ServiceModifyController implements Initializable {
 		
 		try
 		{
+			mainVBox.getChildren().clear();
+			choiceHBox.setVisible(false);
 			monthList.addAll(Arrays.asList(CommonConstants.MONTHS.split(",")));
 			yearList.addAll(Arrays.asList(CommonConstants.YEARS.split(",")));
 			yearCombo.setItems(yearList);
@@ -149,6 +164,7 @@ public class ServiceModifyController implements Initializable {
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
 						referenceHBox.setVisible(false);
+						contactHBox.setVisible(false);
 						message.setText("");
 				}
 			});
@@ -162,6 +178,7 @@ public class ServiceModifyController implements Initializable {
 						serviceGrid.setVisible(false);
 						complaintHBox.setVisible(false);
 						referenceHBox.setVisible(false);
+						contactHBox.setVisible(false);
 						message.setText("");
 				}
 			});
@@ -186,6 +203,44 @@ public class ServiceModifyController implements Initializable {
 					
 						serviceGrid.setVisible(false);
 						message.setText("");
+				}
+			});
+    		contactCombo.valueProperty().addListener(new ChangeListener<String>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends String> paramObservableValue,
+						String paramT1, String paramT2) {
+						
+						complaintHBox.setVisible(false);
+						serviceGrid.setVisible(false);
+						message.setText("");
+					
+				}
+			});
+    		
+    		customerToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+				@Override
+				public void changed(
+						ObservableValue<? extends Toggle> paramObservableValue,
+						Toggle paramT1, Toggle paramT2) {
+						
+						mainVBox.setVisible(false);
+						choiceHBox.setVisible(true);
+						complaintHBox.setVisible(false);
+						serviceGrid.setVisible(false);
+						if(referenceRadio.isSelected())
+						{
+							mainVBox.getChildren().clear();
+							mainVBox.getChildren().add(referenceHBox);
+						}
+						else if(nameRadio.isSelected())
+						{
+							mainVBox.getChildren().clear();
+							mainVBox.getChildren().add(contactHBox);
+						}
+					
 				}
 			});
 		}
@@ -217,17 +272,35 @@ public class ServiceModifyController implements Initializable {
 				}
 				else
 				{
-					serviceList=serviceDAO.getServiceDetails();
-					
-					for(ServiceVO serviceVO : refList)
+					if(referenceRadio.isSelected())
 					{
-						if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
+						for(ServiceVO serviceVO : refList)
 						{
-							uniqueRefList.add(serviceVO.getReferenceNo());
+							if(serviceVO.getReferenceNo()!=null)
+							{
+								if(!uniqueRefList.contains(serviceVO.getReferenceNo()))
+								{
+									uniqueRefList.add(serviceVO.getReferenceNo());
+								}
+							}
 						}
+						referenceCombo.setItems(uniqueRefList);
+						referenceHBox.setVisible(true);
+						mainVBox.setVisible(true);
 					}
-					referenceCombo.setItems(uniqueRefList);
-					referenceHBox.setVisible(true);
+					else if(nameRadio.isSelected())
+					{
+						for(ServiceVO serviceVO : refList)
+						{
+							if(!contactList.contains(serviceVO.getContactNo()))
+							{
+								contactList.add(serviceVO.getContactNo());
+							}
+						}
+						contactCombo.setItems(contactList);
+						contactHBox.setVisible(true);
+						mainVBox.setVisible(true);
+					}
 				}
 			}
 			catch (Exception e) {
@@ -257,6 +330,27 @@ public class ServiceModifyController implements Initializable {
 		}
 	}
 	
+	public void viewComplaintsForName()
+	{
+		try
+		{
+			complaintCombo.getSelectionModel().clearSelection();
+			complaintList.clear();
+			for(ServiceVO serviceVO : refList)
+			{
+				if(serviceVO.getContactNo().equals(contactCombo.getSelectionModel().getSelectedItem()))
+				{
+					complaintList.add(serviceVO.getComplaintId());
+				}
+			}
+			complaintCombo.setItems(complaintList);
+			complaintHBox.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	//fill the Service Form according to the complaint id  
 
    public void viewDetails()
@@ -269,12 +363,13 @@ public class ServiceModifyController implements Initializable {
 	   		}
    		else
    		{
-   			for(ServiceVO serviceVO : serviceList)
+   			for(ServiceVO serviceVO : refList)
    			{
    				
    				if(complaintCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getComplaintId()))
    				{
    					fillTextFieldValues(serviceVO);
+   					customerId = serviceVO.getCustomerId();
    					break;
    				}
    				
@@ -321,7 +416,7 @@ public class ServiceModifyController implements Initializable {
 		serviceVO.setEngineerName(engineerName.getText());
 		serviceVO.setFeedback(feedback.getText());
 		serviceVO.setRating(ratingCombo.getSelectionModel().getSelectedItem());
-		serviceDAO.newService(serviceVO,complaintCombo.getSelectionModel().getSelectedItem());
+		serviceDAO.updateService(serviceVO,complaintCombo.getSelectionModel().getSelectedItem());
 		message.setText(CommonConstants.SERVICE_UPDATED);
 		message.getStyleClass().remove("failure");
 		message.getStyleClass().add("success");
@@ -350,7 +445,7 @@ public class ServiceModifyController implements Initializable {
 					serviceVO.setFeedback(CommonConstants.NA);
 					serviceVO.setRating(CommonConstants.NA);
 					serviceVO.setComplaintId(complaintCombo.getSelectionModel().getSelectedItem());
-					serviceVO.setReferenceNo(referenceCombo.getSelectionModel().getSelectedItem());
+					serviceVO.setCustomerId(customerId);
 					serviceDAO.deleteService(serviceVO);
 					clearFields();
 					message.setText(CommonConstants.SERVICE_DELETED);

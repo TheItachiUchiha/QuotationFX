@@ -221,14 +221,22 @@ public class ComponentsModifyController implements Initializable {
 	public void modifyComponent() {
 		LOG.info("Enter : modifyComponent");
 		try {
-			if (validation.isEmpty(componentName, componentCategory,
-					subCategory, vendor, model, type, size, costPrice,
-					dealerPrice, endUserPrice)) {
+			if(validation.isEmptyAutoComplte(componentName,vendor,componentCategory,subCategory,model,size,type))
+			{
 				message.setText(CommonConstants.MANDATORY_FIELDS);
 				message.getStyleClass().remove("success");
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
-			} else {
+			}
+			else if(validation.isEmpty(costPrice,endUserPrice,dealerPrice))
+			{
+				message.setText(CommonConstants.MANDATORY_FIELDS);
+				message.getStyleClass().remove("success");
+				message.getStyleClass().add("failure");
+				message.setVisible(true);
+			}
+			else
+			{
 				ComponentsVO componentsVO = new ComponentsVO();
 				componentsVO.setComponentName(componentName.getText());
 				componentsVO.setComponentCategory(componentCategory.getText());

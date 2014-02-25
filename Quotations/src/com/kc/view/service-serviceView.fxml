@@ -11,16 +11,15 @@
 <BorderPane prefHeight="564.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ServiceViewController">
   <!-- TODO Add Nodes -->
   <center>
-    <VBox alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="413.0" prefWidth="867.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
+    <VBox alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="413.0" prefWidth="779.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <TableView fx:id="salesOrderTable" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="223.0" prefWidth="867.0" styleClass="table-style" visible="false">
+        <TableView fx:id="salesOrderTable" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="220.0" prefWidth="776.0" styleClass="table-style" visible="false">
           <columns>
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Ref_No" fx:id="referenceNo" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="122.0" text="Service Date" fx:id="serviceDate" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Product Purchased" fx:id="productPurchased" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="126.0" text="Customer Name" fx:id="customerName" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="114.0" text="Company Name" fx:id="companyName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Referred By" fx:id="referedBy" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="90.0" text="Location" fx:id="location" />
             <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="74.0" text="Action" fx:id="action" />
           </columns>

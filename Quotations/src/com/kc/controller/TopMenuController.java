@@ -319,7 +319,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
 						.getResource("/com/kc/view/components-create.fxml"));
-		GridPane componentCreate = (GridPane) menuLoader.load();
+		BorderPane componentCreate = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(componentCreate);
@@ -387,7 +387,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
 						.getResource("/com/kc/view/customers-create.fxml"));
-		GridPane customerCreate = (GridPane) menuLoader.load();
+		BorderPane customerCreate = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(customerCreate);
@@ -457,7 +457,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
 						.getResource("/com/kc/view/users-create.fxml"));
-		GridPane userCreate = (GridPane) menuLoader.load();
+		BorderPane userCreate = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(userCreate);
@@ -527,7 +527,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
 						.getResource("/com/kc/view/backup-import.fxml"));
-		GridPane importb = (GridPane) menuLoader.load();
+		BorderPane importb = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(importb);
@@ -550,7 +550,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				this.getClass()
 						.getResource("/com/kc/view/backup-export.fxml"));
-		GridPane exportb = (GridPane) menuLoader.load();
+		BorderPane exportb = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(exportb);
@@ -584,7 +584,7 @@ public class TopMenuController implements Initializable {
 		FXMLLoader menuLoader = new FXMLLoader(
 				LoginController.class
 						.getResource("/com/kc/view/help-companyDetails.fxml"));
-		GridPane companyDetails = (GridPane) menuLoader.load();
+		BorderPane companyDetails = (BorderPane) menuLoader.load();
 		/*tab = new Tab();
 		tabPane = new TabPane();
 		tab.setContent(companyDetails);
@@ -605,7 +605,7 @@ public class TopMenuController implements Initializable {
 			FXMLLoader menuLoader = new FXMLLoader(
 					LoginController.class
 							.getResource("/com/kc/view/help-about.fxml"));
-			GridPane about = (GridPane) menuLoader.load();
+			BorderPane about = (BorderPane) menuLoader.load();
 			
 			/*tab = new Tab();
 			tabPane = new TabPane();

@@ -70,34 +70,53 @@
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox prefHeight="65.00009999999747" prefWidth="600.0" spacing="5.0">
+    <VBox prefHeight="81.0" prefWidth="666.0" spacing="5.0">
       <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
+        <HBox alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="666.0" spacing="10.0" visible="true">
           <children>
             <Label prefHeight="26.0" prefWidth="132.0" text="Select a Customer with:" />
-            <RadioButton fx:id="referenceNo" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" text="Reference Number">
+            <RadioButton id="referenceNo" fx:id="referenceRadio" mnemonicParsing="false" prefHeight="26.0" prefWidth="127.0" text="Reference Number">
               <toggleGroup>
                 <ToggleGroup fx:id="customerToggle" />
               </toggleGroup>
             </RadioButton>
-            <RadioButton fx:id="customerName" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
+            <RadioButton id="customerName" fx:id="nameRadio" mnemonicParsing="false" prefHeight="26.0" text="Customer Name" toggleGroup="$customerToggle" />
           </children>
         </HBox>
-        <HBox alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0">
+        <VBox id="VBox" fx:id="mainVBox" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" spacing="5.0">
           <children>
-            <Label prefHeight="26.0" prefWidth="132.0" text="Enter / Select a Ref_No:" />
-            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="148.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-            <Button mnemonicParsing="false" onAction="#showComplaints" prefWidth="127.0" text="Show Complaints" />
+            <HBox fx:id="referenceHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0">
+              <children>
+                <Label prefHeight="26.0" prefWidth="132.0" text="Enter / Select a Ref_No:" />
+                <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="148.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Button mnemonicParsing="false" onAction="#showComplaints" prefWidth="127.0" text="Show Complaints" />
+              </children>
+            </HBox>
+            <HBox fx:id="contactHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="600.0" spacing="10.0">
+              <children>
+                <Label prefHeight="26.0" prefWidth="132.0" text="Contact No :" />
+                <ComboBox id="referenceCombo" fx:id="conatctCombo" prefHeight="21.0" prefWidth="148.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+                <Button mnemonicParsing="false" onAction="#showComplaintsForContact" prefWidth="127.0" text="Show Complaints" />
+              </children>
+            </HBox>
           </children>
-        </HBox>
+        </VBox>
         <HBox fx:id="complaintHBox" alignment="CENTER_LEFT" prefHeight="31.0" prefWidth="600.0" spacing="10.0" visible="false">
           <children>
             <Label prefHeight="26.0" prefWidth="132.0" text="Complaints" />

@@ -48,9 +48,9 @@ public class QuotationUtil {
 			enquiryViewVO.setReminderSent(enquiryVO.getReminderSent());
 			enquiryViewVO.setTotalRevenue(enquiryVO.getTotalRevenue());
 			enquiryViewVO.setEnquiryCustomerType(enquiryVO.getEnquiryCustomerType());
-			enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
+			//enquiryViewVO.setComplaintCount(enquiryVO.getComplaintCount());
 			enquiryViewVO.setDispatchDone(enquiryVO.getDispatchDone());
-			enquiryViewVO.setServiceCount(enquiryVO.getServiceCount());
+			//enquiryViewVO.setServiceCount(enquiryVO.getServiceCount());
 			enquiryViewVO.setPurchaseOrderNo(enquiryVO.getPurchaseOrderNo());
 			enquiryViewVO.setProductQuantity(enquiryVO.getProductQuantity());
 			if(enquiryVO.getFlag().equalsIgnoreCase("C"))
@@ -75,6 +75,10 @@ public class QuotationUtil {
 					enquiryViewVO.setTinNumber(customersVO.getTinNumber());
 					enquiryViewVO.setContactNumber(customersVO.getContactNumber());
 					enquiryViewVO.setCustomerId(customersVO.getId());
+					enquiryViewVO.setServiceCount(customersVO.getServiceCount());
+					enquiryViewVO.setComplaintCount(customersVO.getComplaintCount());
+					enquiryViewVO.setTelephone(customersVO.getTelephone());
+					enquiryViewVO.setWebsite(customersVO.getWebsite());
 					if(customersVO.getCustomerType().equalsIgnoreCase("Dealer"))
 					{
 						enquiryViewVO.setCustomerType("Dealer");

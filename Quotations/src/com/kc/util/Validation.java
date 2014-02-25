@@ -60,10 +60,43 @@ public class Validation
 			}
 		}
 	
+	public boolean isEmptyAutocomplete(AutoCompleteTextField textField){
+		Pattern p =Pattern.compile(" ");
+		 Matcher m = p.matcher(textField.getText());
+		 String temp=textField.getText();
+		 temp=m.replaceAll("");
+		
+			if ((temp==null)||("".equals(temp))){
+				textField.requestFocus();
+				return true;
+			}
+			
+			else{
+				
+			
+			return false;
+			}
+		}
+	
 	public boolean isEmpty(Object...args){
 		for(int i=0;i<args.length;i++)
 		{
 			TextField textField = (TextField) args[i];
+			Pattern p =Pattern.compile(" ");
+			Matcher m = p.matcher(textField.getText());
+			String temp=textField.getText();
+			temp=m.replaceAll("");
+			if ((temp==null)||("".equals(temp))){
+				textField.requestFocus();
+				return true;
+			}	
+		}
+		return false;
+		}
+	public boolean isEmptyAutoComplte(Object...args){
+		for(int i=0;i<args.length;i++)
+		{
+			AutoCompleteTextField textField = (AutoCompleteTextField) args[i];
 			Pattern p =Pattern.compile(" ");
 			Matcher m = p.matcher(textField.getText());
 			String temp=textField.getText();
@@ -92,23 +125,6 @@ public class Validation
 	
 		}
 	
-	public boolean isEmpty(AutoCompleteTextField textField){
-		Pattern p =Pattern.compile(" ");
-		 Matcher m = p.matcher(textField.getText());
-		 String temp=textField.getText();
-		 temp=m.replaceAll("");
-		
-			if ((temp==null)||("".equals(temp))){
-				textField.requestFocus();
-				return true;
-			}
-			
-			else{
-				
-			
-			return false;
-			}
-		}
 	public boolean isInvalidDate(TextField textField) {
 		String strdate= new String();
 		String text=textField.getText();

@@ -27,6 +27,10 @@ public class CustomersVO {
 	
 	private String website;
 	
+	public int serviceCount;
+	
+	public int complaintCount;
+	
 	public int getId() {
 		return id;
 	}
@@ -102,6 +106,18 @@ public class CustomersVO {
 	}
 	public void setWebsite(String website) {
 		this.website = website;
+	}
+	public int getServiceCount() {
+		return serviceCount;
+	}
+	public void setServiceCount(int serviceCount) {
+		this.serviceCount = serviceCount;
+	}
+	public int getComplaintCount() {
+		return complaintCount;
+	}
+	public void setComplaintCount(int complaintCount) {
+		this.complaintCount = complaintCount;
 	}
 
 }
