@@ -12,6 +12,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,6 +24,7 @@ import javax.imageio.ImageIO;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EmployeeVO;
@@ -206,4 +210,56 @@ public class HelpDAO {
 		}
 		LOG.info("Exit : deleteEmployees");
 	}
+	
+	public void saveConfiguration(Map<String, String> map, String date)
+	{
+		try{
+			Set<String> keys = map.keySet();
+			conn = DBConnector.getConnection();
+			statement = conn.createStatement();
+			for(String key : keys)
+			{
+				String query = "UPDATE STATIC_UTIL SET `value`='";
+				query=query+map.get(key);
+				query = query + "' ,`last_updated`='";
+				query = query + date;
+				query = query + "' where `key`='" + key + "'";
+				statement.addBatch(query);
+			}
+			statement.executeBatch();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+	}
+	
+	
+	public Map<String, String> getBackground()
+	{
+		LOG.info("Enter : getBackground");
+		Map<String, String> map = new HashMap<String, String>();
+		
+		try
+		{
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement("SELECT `KEY`, VALUE FROM STATIC_UTIL");
+			resultSet = preparedStatement.executeQuery();
+			while(resultSet.next())
+			{
+				if(resultSet.getString(1).equals(CommonConstants.KEY_BACKGROUND))
+				{
+					map.put(CommonConstants.KEY_BACKGROUND,resultSet.getString(2));
+					break;
+				}
+			}
+			LOG.info("Exit : getBackground");
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			LOG.error(e.getMessage());
+		}
+		return map;
+	}
+	
 }

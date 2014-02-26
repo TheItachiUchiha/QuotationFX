@@ -281,6 +281,7 @@ public class ServiceNewComplaint implements Initializable {
 					receiver.setText(enquiryVO.getEmailId());
 					message.setText(emailDetails.get(CommonConstants.KEY_SERVICE_MESSAGE));
 					ServiceNewComplaint.this.viewVO=enquiryVO;
+					break;
 				}
 			}
 			referenceGrid.setVisible(true);
@@ -293,23 +294,38 @@ public class ServiceNewComplaint implements Initializable {
     {
     	try
     	{
-    	
-			FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-					.getResource("/com/kc/view/service-customer-popup.fxml"));
-			GridPane customerInf;
-			customerInf = (GridPane) menuLoader.load();
-			Stage viewStage = new Stage();
-			Scene viewScene = new Scene(customerInf);
-			viewStage.setResizable(false);
-			viewStage.setHeight(500);
-			viewStage.setWidth(600);
-			viewStage.initModality(Modality.WINDOW_MODAL);
-			viewStage.initOwner(LoginController.primaryStage);
-			viewStage.setScene(viewScene);
-			viewStage.show();
-			
-			((ServiceCustomerInfoController) menuLoader.getController())
-			.fillTextFieldValues(ServiceNewComplaint.this.viewVO);
+    		if(referenceAutoFill.getText()=="")
+    		{
+    			Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_REFERENCE);
+    		}
+    		else
+    		{
+	    		for(EnquiryViewVO enquiryVO : enquiryViewList)
+				{
+					if(enquiryVO.getReferenceNo().equals(referenceAutoFill.getText()) )
+					{
+						ServiceNewComplaint.this.viewVO=enquiryVO;
+						break;
+					}
+				}
+	    	
+				FXMLLoader menuLoader = new FXMLLoader(this.getClass()
+						.getResource("/com/kc/view/service-customer-popup.fxml"));
+				GridPane customerInf;
+				customerInf = (GridPane) menuLoader.load();
+				Stage viewStage = new Stage();
+				Scene viewScene = new Scene(customerInf);
+				viewStage.setResizable(false);
+				viewStage.setHeight(500);
+				viewStage.setWidth(600);
+				viewStage.initModality(Modality.WINDOW_MODAL);
+				viewStage.initOwner(LoginController.primaryStage);
+				viewStage.setScene(viewScene);
+				viewStage.show();
+				
+				((ServiceCustomerInfoController) menuLoader.getController())
+				.fillTextFieldValues(ServiceNewComplaint.this.viewVO);
+    		}
 			
     	}
     	catch (Exception e) {

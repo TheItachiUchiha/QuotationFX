@@ -622,6 +622,29 @@ public class TopMenuController implements Initializable {
 			}
 	}
 	
+	public void theme()
+	{
+		try{
+			FXMLLoader menuLoader = new FXMLLoader(
+					LoginController.class
+							.getResource("/com/kc/view/help-theme.fxml"));
+			BorderPane theme = (BorderPane) menuLoader.load();
+			
+			/*tab = new Tab();
+			tabPane = new TabPane();
+			tab.setContent(about);
+			tab.setClosable(false);
+			//tab.setText("About");
+			tabPane.getTabs().add(tab);*/
+			LoginController.home.setCenter(theme);
+			LoginController.home.setAlignment(theme, Pos.TOP_LEFT);
+			
+		}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+	
 	public void logout()
 	{
 		LoginController.primaryStage.setScene(LoginController.scene);

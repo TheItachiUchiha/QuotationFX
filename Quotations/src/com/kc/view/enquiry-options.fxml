@@ -6,73 +6,82 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="390.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryOptionsController">
+<BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="408.0000999999975" prefWidth="537.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryOptionsController">
   <!-- TODO Add Nodes -->
-  <left>
-    <GridPane fx:id="optionsGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-1.0" minHeight="-Infinity" minWidth="-1.0" prefHeight="367.0" prefWidth="446.0" BorderPane.alignment="TOP_LEFT">
-      <children>
-        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="249.0" text="Select a Default Folder for Customers File :" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0">
-          <font>
-            <Font name="System Bold" size="12.0" />
-          </font>
-          <GridPane.margin>
-            <Insets />
-          </GridPane.margin>
-        </Label>
-        <Label prefHeight="32.0" prefWidth="103.0" text="Folder Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Label prefHeight="31.999900000002526" prefWidth="103.0" text="Branch Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-        <Label prefHeight="32.0" prefWidth="103.0" text="Device Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-        <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
-          <children>
-            <HBox id="HBox" alignment="CENTER" prefHeight="41.0" prefWidth="458.0" spacing="5.0">
-              <children>
-                <Button id="save" mnemonicParsing="false" onAction="#saveConfigurations" styleClass="button-style" text="Save" />
-                <Button fx:id="clear" mnemonicParsing="false" styleClass="button-style" text="Clear" />
-              </children>
-            </HBox>
-            <Label id="messageLocation" fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="297.0" text="" />
-          </children>
-        </VBox>
-        <Label prefHeight="32.0" prefWidth="103.0" text="Email Username" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
-        <Label prefHeight="32.0" prefWidth="103.0" text="Email Password" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
-        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-          <children>
-            <TextField fx:id="folderPath" editable="false" prefWidth="252.0" />
-            <Button fx:id="browse" mnemonicParsing="false" styleClass="button-style" text="Browse File" />
-          </children>
-          <padding>
-            <Insets />
-          </padding>
-        </HBox>
-        <TextField fx:id="branchCode" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextField id="branchCode" fx:id="defaultCode" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField id="branchCode" fx:id="username" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-        <PasswordField fx:id="password" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-        <TextArea fx:id="defaultMessage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="252.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-        <Label prefHeight="32.0" prefWidth="103.0" text="Default Messsage" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP" />
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.47828902632516" prefWidth="100.0" />
-        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="76.74643007479844" prefWidth="100.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
-  </left>
   <padding>
     <Insets left="40.0" top="40.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
+  <top>
+    <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="377.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="497.0" StackPane.alignment="TOP_LEFT" />
+        <GridPane fx:id="optionsGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="367.0" prefWidth="446.0" StackPane.alignment="TOP_LEFT">
+          <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="18.0" prefWidth="249.0" text="Select a Default Folder for Customers File :" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="LEFT" GridPane.rowIndex="0">
+              <font>
+                <Font name="System Bold" size="12.0" />
+              </font>
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </Label>
+            <Label prefHeight="32.0" prefWidth="103.0" text="Folder Location" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label prefHeight="31.999900000002526" prefWidth="103.0" text="Branch Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label prefHeight="32.0" prefWidth="103.0" text="Device Code" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <VBox id="VBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="7" GridPane.valignment="TOP">
+              <children>
+                <HBox id="HBox" alignment="CENTER" prefHeight="41.0" prefWidth="458.0" spacing="5.0">
+                  <children>
+                    <Button id="save" mnemonicParsing="false" onAction="#saveConfigurations" styleClass="button-style" text="Save" />
+                    <Button fx:id="clear" mnemonicParsing="false" styleClass="button-style" text="Clear" />
+                  </children>
+                </HBox>
+                <Label id="messageLocation" fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="297.0" text="" />
+              </children>
+            </VBox>
+            <Label prefHeight="32.0" prefWidth="103.0" text="Email Username" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <Label prefHeight="32.0" prefWidth="103.0" text="Email Password" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+              <children>
+                <TextField fx:id="folderPath" editable="false" prefWidth="252.0" />
+                <Button fx:id="browse" mnemonicParsing="false" styleClass="button-style" text="Browse File" />
+              </children>
+              <padding>
+                <Insets />
+              </padding>
+            </HBox>
+            <TextField fx:id="branchCode" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField id="branchCode" fx:id="defaultCode" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField id="branchCode" fx:id="username" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <PasswordField fx:id="password" maxWidth="-Infinity" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <TextArea fx:id="defaultMessage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="252.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Label prefHeight="32.0" prefWidth="103.0" text="Default Messsage" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="6" GridPane.valignment="TOP" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="23.873277836513658" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="76.35144126460995" prefWidth="100.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="108.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="112.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="141.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="213.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="199.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <StackPane.margin>
+            <Insets left="10.0" top="10.0" />
+          </StackPane.margin>
+        </GridPane>
+      </children>
+    </StackPane>
+  </top>
 </BorderPane>

@@ -2,6 +2,8 @@ package com.kc.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.application.Application;
@@ -33,7 +35,9 @@ import javafx.stage.StageStyle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
 import com.kc.dao.EnquiryDAO;
+import com.kc.dao.HelpDAO;
 import com.kc.dao.LoginDAO;
 import com.kc.model.ModulesVO;
 import com.kc.service.ReminderEmailSendService;
@@ -48,7 +52,9 @@ public class LoginController extends Application implements Initializable{
 	public static AnchorPane login;
 	private LoginDAO loginDAO;
 	private EnquiryDAO enquiryDAO;
+	private HelpDAO helpDAO;
 	public static ModulesVO modulesVO=new ModulesVO();
+	private Map<String, String> theme = new HashMap<String, String>();
 
 	@FXML
 	private static TextField username;
@@ -74,10 +80,12 @@ public class LoginController extends Application implements Initializable{
 	{
 		loginDAO = new LoginDAO();
 		enquiryDAO = new EnquiryDAO();
+		helpDAO = new HelpDAO();
 		enquiryDAO.checkAndUpdateEnquiryNumber();
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
 		username.setOnKeyPressed(new EventHandler<KeyEvent>() {
 		    @Override
 		    public void handle(KeyEvent event) {
@@ -137,7 +145,8 @@ public class LoginController extends Application implements Initializable{
 	public void doLogin() {
 		LOG.info("Enter : doLogin");
 		try {
-			if (loginDAO.verifyUser(username.getText(), password.getText())) {
+				theme = helpDAO.getBackground();
+				if (loginDAO.verifyUser(username.getText(), password.getText())) {
 				username.setText("");
 				password.setText("");
 				FXMLLoader loader = new FXMLLoader(
@@ -151,6 +160,7 @@ public class LoginController extends Application implements Initializable{
 				this.home.setPrefWidth(Screen.getPrimary().getBounds().getWidth()-17);
 				VBox subMenu = (VBox) subMenuLoader.load();
 				this.home.setLeft(subMenu);
+				this.home.getStyleClass().add(theme.get(CommonConstants.KEY_BACKGROUND));
 				Scene scene = new Scene(this.home);
 				/*this.primaryStage.setX(0);
 				primaryStage.setY(0);

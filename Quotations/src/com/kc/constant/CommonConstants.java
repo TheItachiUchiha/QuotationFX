@@ -73,6 +73,7 @@ public class CommonConstants
 	public static final String KEY_QUOTATION_PDF_PATH = "quotation_pdf_path";
 	public static final String KEY_ENQUIRY_EMAIL_USERNAME = "email_username";
 	public static final String KEY_ENQUIRY_EMAIL_PASSWORD = "email_password";
+	public static final String KEY_BACKGROUND = "background_image";
 	public static final String EMAIL_TO = "TO";
 	public static final String EMAIL_CC = "CC";
 	public static final String EMAIL_ATTACHMENT = "ATTACHMENT";

@@ -86,6 +86,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#employees" text="Employees" fx:id="employee" />
                     <MenuItem mnemonicParsing="false" onAction="#companyDetails" text="Company Details" fx:id="companyDetails" />
                     <MenuItem mnemonicParsing="false" onAction="#about" text="About" />
+                    <MenuItem mnemonicParsing="false" onAction="#theme" text="Theme" />
                   </items>
                 </Menu>
               </menus>

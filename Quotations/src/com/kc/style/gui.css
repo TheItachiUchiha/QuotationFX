@@ -1152,10 +1152,42 @@
 .background-hbox{
 	-fx-background-color: #D6D2D3 ;
 }
-#admin-bg{
+.background-pink{
 	-fx-background-image: url("bg-pink.jpg");
 }
 
+.background-blue{
+	-fx-background-image: url("bg-blue.jpg");
+}
+.background-cyan{
+	-fx-background-image: url("bg-cyan.jpg");
+}
+
+.background-green{
+	-fx-background-image: url("bg-green.jpg");
+}
+
+/*.pink-button{
+	 -fx-background-color: transparent;
+	 -fx-background-radius: 0,0,0;
+	 -fx-background-image: url("bg-pink.jpg");
+}
+.blue-button{
+	 -fx-background-color: transparent;
+	 -fx-background-radius: 0,0,0;
+	 -fx-background-image: url("bg-blue.jpg");
+}
+.cyan-button{
+	 -fx-background-color: transparent;
+	 -fx-background-radius: 0,0,0;
+	 -fx-background-image: url("bg-cyan.jpg");
+}
+.green-button{
+	 -fx-background-color: transparent;
+	 -fx-background-radius: 0,0,0;
+	 -fx-background-image: url("bg-green.jpg");
+}
+ */
 .invisible-tab{
 	 -fx-background-color:transparent;
 }
