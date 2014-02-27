@@ -12,14 +12,14 @@
 <VBox minHeight="638.0" prefHeight="638.0" styleClass="null" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.AdminHomeController">
   <!-- TODO Add Nodes -->
   <children>
-    <Label fx:id="currentPage" alignment="CENTER" contentDisplay="CENTER" prefHeight="105.0" prefWidth="252.0" text="HOME" textFill="BLACK">
+    <Label fx:id="currentPage" alignment="CENTER" contentDisplay="CENTER" prefHeight="79.0" prefWidth="252.0" text="HOME" textFill="BLACK">
       <font>
         <Font size="16.0" />
       </font>
     </Label>
-    <StackPane minHeight="488.0" prefHeight="488.0" prefWidth="252.0">
+    <StackPane minHeight="488.0" prefHeight="559.0" prefWidth="252.0">
       <children>
-        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="529.0" opacity="0.42" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="252.0" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="559.0" opacity="0.42" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="252.0" />
         <VBox alignment="CENTER" disable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="210.0" spacing="5.0">
           <children>
             <ToggleButton id="priceestimation" fx:id="enquiry" focusTraversable="true" mnemonicParsing="false" onAction="#enquiry" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Enquiry" textAlignment="LEFT">

@@ -19,7 +19,7 @@
           <content>
             <BorderPane maxHeight="-1.0" maxWidth="-1.0" minHeight="-1.0" minWidth="-1.0" prefHeight="431.0" prefWidth="538.0">
               <padding>
-                <Insets left="40.0" top="40.0" fx:id="x4" />
+                <Insets top="40.0" fx:id="x4" />
               </padding>
               <top>
                 <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
@@ -78,7 +78,7 @@
       <panes>
         <TitledPane fx:id="x2" animated="false" text="Default Location">
           <content>
-            <BorderPane prefHeight="507.0" prefWidth="675.0">
+            <BorderPane padding="$x4" prefHeight="507.0" prefWidth="675.0">
               <!-- TODO Add Nodes -->
               <left>
                 <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
@@ -177,9 +177,6 @@
                   </BorderPane.margin>
                 </StackPane>
               </left>
-              <padding>
-                <Insets left="40.0" top="40.0" fx:id="x4" />
-              </padding>
               <top>
                 <StackPane minHeight="36.0" prefHeight="47.0" prefWidth="765.0" BorderPane.alignment="TOP_LEFT">
                   <children>

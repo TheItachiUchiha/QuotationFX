@@ -14,12 +14,15 @@
 <BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.EnquiryController">
   <!-- TODO Add Nodes -->
   <center>
-    <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+    <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="TOP_LEFT">
       <tabs>
         <Tab fx:id="newTab" content="$null" text="New Enquiry" />
         <Tab fx:id="viewTab" content="$null" text="View Enquiry" />
         <Tab fx:id="optionTab" content="$null" text="Options" />
       </tabs>
+      <BorderPane.margin>
+        <Insets left="40.0" top="40.0" />
+      </BorderPane.margin>
     </TabPane>
   </center>
 </BorderPane>

@@ -117,7 +117,7 @@
     </StackPane>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets top="40.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />

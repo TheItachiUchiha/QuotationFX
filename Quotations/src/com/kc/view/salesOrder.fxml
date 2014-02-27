@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -26,6 +27,9 @@
           </content>
         </Tab>
       </tabs>
+      <BorderPane.margin>
+        <Insets left="40.0" top="40.0" fx:id="x4" />
+      </BorderPane.margin>
     </TabPane>
   </center>
 </BorderPane>
