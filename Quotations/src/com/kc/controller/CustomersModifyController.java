@@ -138,6 +138,7 @@ public class CustomersModifyController implements Initializable{
 		{
 			endUser.setSelected(true);
 		}
+		modifyHbox.setVisible(true);
 		LOG.info("Exit : fillTextFieldValues");
 	}
 	public void modifyCustomer()

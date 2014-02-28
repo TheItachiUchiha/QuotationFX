@@ -34,7 +34,7 @@
             <Label prefHeight="24.0" prefWidth="161.0" text="Contact Number" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
             <Label prefHeight="30.0" prefWidth="162.0" text="Customer Requirements" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
             <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
-            <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="12">
+            <HBox id="HBox" alignment="TOP_CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="12">
               <children>
                 <Button mnemonicParsing="false" onAction="#saveEnquiries" styleClass="button-style" text="Save" />
                 <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="279.0" text="">
@@ -44,9 +44,9 @@
                 </Label>
               </children>
               <padding>
-                <Insets />
+                <Insets left="155.0" />
               </padding>
-            </VBox>
+            </HBox>
             <AutoCompleteTextField id="tin" fx:id="tinNumber" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <AutoCompleteTextField id="email" fx:id="emailId" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <AutoCompleteTextField id="refer" fx:id="referedBy" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />

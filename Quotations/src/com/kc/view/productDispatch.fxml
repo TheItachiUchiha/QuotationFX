@@ -6,8 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 
-<BorderPane prefHeight="566.0" prefWidth="874.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductDispatchController">
+<BorderPane prefHeight="566.0" prefWidth="997.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ProductDispatchController">
   <!-- TODO Add Nodes -->
   <center>
     <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
@@ -16,23 +17,31 @@
           <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
               <padding>
-                <Insets left="40.0" top="40.0" />
+                <Insets top="40.0" />
               </padding>
               <top>
-                <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="834.0" spacing="15.0" visible="true">
+                <StackPane prefHeight="63.0" prefWidth="834.0" BorderPane.alignment="TOP_LEFT">
                   <children>
-                    <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="77.0" text="Select a Type" />
-                    <RadioButton id="createDispatch" fx:id="createRadio" mnemonicParsing="false" text="Create a New Dispatch">
-                      <toggleGroup>
-                        <ToggleGroup fx:id="dispatchToggle" />
-                      </toggleGroup>
-                    </RadioButton>
-                    <RadioButton id="viewDispatch" fx:id="viewRadio" mnemonicParsing="false" text="View Dispatch Details" toggleGroup="$dispatchToggle" />
+                    <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="955.0" StackPane.alignment="TOP_LEFT" />
+                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" prefHeight="49.0" prefWidth="834.0" spacing="15.0" visible="true" StackPane.alignment="TOP_LEFT">
+                      <children>
+                        <Label maxWidth="-Infinity" minHeight="13.999908447265625" prefHeight="21.0" prefWidth="77.0" text="Select a Type" />
+                        <RadioButton id="createDispatch" fx:id="createRadio" mnemonicParsing="false" text="Create a New Dispatch">
+                          <toggleGroup>
+                            <ToggleGroup fx:id="dispatchToggle" />
+                          </toggleGroup>
+                        </RadioButton>
+                        <RadioButton id="viewDispatch" fx:id="viewRadio" mnemonicParsing="false" text="View Dispatch Details" toggleGroup="$dispatchToggle" />
+                      </children>
+                      <padding>
+                        <Insets />
+                      </padding>
+                      <StackPane.margin>
+                        <Insets left="10.0" />
+                      </StackPane.margin>
+                    </HBox>
                   </children>
-                  <padding>
-                    <Insets />
-                  </padding>
-                </HBox>
+                </StackPane>
               </top>
             </BorderPane>
           </content>
@@ -43,6 +52,9 @@
           </content>
         </Tab>
       </tabs>
+      <BorderPane.margin>
+        <Insets left="40.0" top="40.0" />
+      </BorderPane.margin>
     </TabPane>
   </center>
 </BorderPane>

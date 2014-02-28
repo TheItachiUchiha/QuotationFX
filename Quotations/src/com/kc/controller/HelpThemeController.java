@@ -97,7 +97,7 @@ public class HelpThemeController implements Initializable{
 					}
 					helpDAO.saveConfiguration(theme, simpleDateFormat.format(new Date()));
 					theme = helpDAO.getBackground();
-					LoginController.home.getStyleClass().clear();
+					LoginController.home.getStyleClass().remove(1);
 					LoginController.home.getStyleClass().add(theme.get(CommonConstants.KEY_BACKGROUND));
 			}
 		});

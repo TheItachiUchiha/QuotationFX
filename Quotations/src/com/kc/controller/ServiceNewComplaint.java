@@ -110,6 +110,10 @@ public class ServiceNewComplaint implements Initializable {
 
     @FXML
     private VBox mainVBox;
+    
+    @FXML
+    private VBox containtVBox;
+    
     @FXML
     private Label registerConfirm;
 
@@ -164,6 +168,7 @@ public class ServiceNewComplaint implements Initializable {
 			mainVBox.getChildren().clear();
 			nameGrid.setVisible(false);
 			referenceGrid.setVisible(false);
+			containtVBox.getChildren().clear();
 			enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			productsList = productsDAO.getProductNameList();
@@ -207,6 +212,7 @@ public class ServiceNewComplaint implements Initializable {
 					if(referenceRadio.isSelected())
 					{
 						nameGrid.setVisible(false);
+						containtVBox.getChildren().clear();
 						customerCombo.getSelectionModel().clearSelection();
 						mainVBox.getChildren().clear();
 						mainVBox.getChildren().add(referenceHBox);
@@ -214,6 +220,7 @@ public class ServiceNewComplaint implements Initializable {
 					else if(nameRadio.isSelected())
 					{
 						referenceGrid.setVisible(false);
+						containtVBox.getChildren().clear();
 						referenceAutoFill.setText("");
 						mainVBox.getChildren().clear();
 						mainVBox.getChildren().add(nameHBox);
@@ -285,6 +292,7 @@ public class ServiceNewComplaint implements Initializable {
 				}
 			}
 			referenceGrid.setVisible(true);
+			containtVBox.getChildren().add(referenceGrid);
 		}
     }
 	
@@ -406,6 +414,7 @@ public class ServiceNewComplaint implements Initializable {
 			}
 			contactCombo.setItems(contactsList);
 			nameGrid.setVisible(true);
+			containtVBox.getChildren().add(nameGrid);
 		}
 	}
 	

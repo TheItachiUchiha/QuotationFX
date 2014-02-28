@@ -7,198 +7,227 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="587.0" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderController">
+<BorderPane prefHeight="611.0000999999975" prefWidth="771.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.ReminderController">
   <!-- TODO Add Nodes -->
   <bottom>
-    <GridPane fx:id="emailGrid" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="false" BorderPane.alignment="TOP_LEFT">
+    <StackPane prefHeight="350.0" prefWidth="771.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <Label prefHeight="23.000099999997474" prefWidth="31.0" text="To :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-        <Label prefHeight="22.0" prefWidth="83.0" text="Subject :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-        <Label prefHeight="23.0" prefWidth="79.0" text="Message :" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-        <TextField fx:id="receiver" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-        <TextField fx:id="subject" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-        <TextArea id="message" fx:id="emailMessage" maxWidth="-Infinity" prefHeight="242.0" prefWidth="462.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="350.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="771.0" StackPane.alignment="TOP_LEFT">
+          <StackPane.margin>
+            <Insets top="7.0" />
+          </StackPane.margin>
+        </Rectangle>
+        <GridPane fx:id="emailGrid" alignment="TOP_LEFT" maxWidth="-Infinity" prefHeight="325.0" prefWidth="466.0" visible="false" StackPane.alignment="TOP_LEFT">
           <children>
-            <Button mnemonicParsing="false" onAction="#sendMail" prefWidth="83.0" styleClass="button-style" text="Send Mail" />
-            <Button fx:id="stopReminder" mnemonicParsing="false" onAction="#stopReminder" prefWidth="109.0" styleClass="button-style" text="Stop reminder" visible="false" />
-          </children>
-          <padding>
-            <Insets top="2.0" />
-          </padding>
-        </HBox>
-        <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
-          <children>
-            <Label fx:id="messageSendMail" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="236.0" text="">
-              <HBox.margin>
-                <Insets right="40.0" />
-              </HBox.margin>
-            </Label>
-          </children>
-        </HBox>
-        <TextField id="receiver" fx:id="cc" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <Label prefHeight="22.0" prefWidth="83.0" text="CC :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-      </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="75.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="217.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="164.0" />
-      </columnConstraints>
-      <padding>
-        <Insets fx:id="x1" />
-      </padding>
-      <rowConstraints>
-        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="19.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-      <BorderPane.margin>
-        <Insets top="5.0" fx:id="x3" />
-      </BorderPane.margin>
-    </GridPane>
-  </bottom>
-  <center>
-    <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="105.0" prefWidth="359.0" visible="true" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x3">
-      <children>
-        <HBox id="HBox" fx:id="autoReminderHBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-          <children>
-            <Label prefHeight="22.0" prefWidth="91.0" text="Auto Reminder" />
-            <ComboBox fx:id="autoReminderCombo" prefHeight="21.0" prefWidth="69.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="ON" />
-                  <String fx:value="OFF" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </children>
-        </HBox>
-        <VBox id="VBox" fx:id="autoReminderVBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1">
-          <children>
-            <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+            <Label prefHeight="23.000099999997474" prefWidth="31.0" text="To :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label prefHeight="22.0" prefWidth="83.0" text="Subject :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label prefHeight="23.0" prefWidth="79.0" text="Message :" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <TextField fx:id="receiver" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <TextField fx:id="subject" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextArea id="message" fx:id="emailMessage" maxWidth="-Infinity" prefHeight="184.0" prefWidth="387.0" wrapText="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
               <children>
-                <Label prefHeight="22.0" prefWidth="91.0" text="Total Reminders" />
-                <ComboBox fx:id="reminderCombo" prefHeight="21.0" prefWidth="69.0" styleClass="combo-style">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <Integer fx:value="1" />
-                      <Integer fx:value="2" />
-                      <Integer fx:value="3" />
-                      <Integer fx:value="4" />
-                      <Integer fx:value="5" />
-                      <Integer fx:value="6" />
-                      <Integer fx:value="7" />
-                      <Integer fx:value="8" />
-                      <Integer fx:value="9" />
-                      <Integer fx:value="10" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
-                <Label prefHeight="22.0" prefWidth="76.0" text="   Frequency" />
-                <ComboBox fx:id="frequencyCombo" prefHeight="21.0" prefWidth="69.0" promptText="Days" styleClass="combo-style">
-                  <items>
-                    <FXCollections fx:factory="observableArrayList">
-                      <Integer fx:value="1" />
-                      <Integer fx:value="2" />
-                      <Integer fx:value="3" />
-                      <Integer fx:value="4" />
-                      <Integer fx:value="5" />
-                      <Integer fx:value="6" />
-                      <Integer fx:value="7" />
-                      <Integer fx:value="8" />
-                      <Integer fx:value="9" />
-                      <Integer fx:value="10" />
-                    </FXCollections>
-                  </items>
-                </ComboBox>
+                <Button mnemonicParsing="false" onAction="#sendMail" prefWidth="83.0" styleClass="button-style" text="Send Mail" />
+                <Button fx:id="stopReminder" mnemonicParsing="false" onAction="#stopReminder" prefWidth="109.0" styleClass="button-style" text="Stop reminder" visible="false" />
               </children>
+              <padding>
+                <Insets top="2.0" />
+              </padding>
             </HBox>
-            <HBox id="HBox" fx:id="sentHBox" alignment="CENTER_LEFT" prefHeight="20.000099999997474" prefWidth="359.0" spacing="5.0" visible="true">
+            <HBox id="HBox" alignment="TOP_RIGHT" spacing="5.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="5">
               <children>
-                <Label prefHeight="22.0" prefWidth="91.0" text="Reminders Sent" />
-                <Label fx:id="sentReminder" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="69.0" text="">
-                  <font>
-                    <Font name="System Bold" size="12.0" fx:id="x2" />
-                  </font>
+                <Label fx:id="messageSendMail" alignment="CENTER" contentDisplay="CENTER" prefHeight="22.0" prefWidth="236.0" text="">
+                  <HBox.margin>
+                    <Insets right="40.0" />
+                  </HBox.margin>
                 </Label>
               </children>
             </HBox>
-            <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
+            <TextField id="receiver" fx:id="cc" maxWidth="-Infinity" prefWidth="213.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="22.0" prefWidth="83.0" text="CC :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+          </children>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="386.0" minWidth="10.0" prefWidth="75.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="385.0" minWidth="10.0" prefWidth="217.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="435.0" minWidth="10.0" prefWidth="164.0" />
+          </columnConstraints>
+          <padding>
+            <Insets fx:id="x1" />
+          </padding>
+          <rowConstraints>
+            <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="148.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="296.0" minHeight="10.0" prefHeight="175.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="279.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <StackPane.margin>
+            <Insets left="10.0" top="15.0" />
+          </StackPane.margin>
+        </GridPane>
+      </children>
+      <BorderPane.margin>
+        <Insets top="10.0" fx:id="x3" />
+      </BorderPane.margin>
+    </StackPane>
+  </bottom>
+  <center>
+    <StackPane maxHeight="-Infinity" minHeight="95.0" prefHeight="114.0" prefWidth="771.0" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x3">
+      <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="114.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="771.0" StackPane.alignment="TOP_LEFT" />
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" padding="$x1" prefHeight="98.0" prefWidth="359.0" visible="true" StackPane.alignment="TOP_LEFT">
+          <children>
+            <HBox id="HBox" fx:id="autoReminderHBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
               <children>
-                <Button mnemonicParsing="false" onAction="#saveReminder" text="Save" />
-                <Label fx:id="message" prefHeight="22.0" prefWidth="161.0" text="" />
+                <Label prefHeight="22.0" prefWidth="91.0" text="Auto Reminder" />
+                <ComboBox fx:id="autoReminderCombo" prefHeight="21.0" prefWidth="69.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="ON" />
+                      <String fx:value="OFF" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
               </children>
             </HBox>
+            <VBox id="VBox" fx:id="autoReminderVBox" alignment="CENTER_LEFT" spacing="5.0" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="4" GridPane.rowIndex="1">
+              <children>
+                <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0">
+                  <children>
+                    <Label prefHeight="22.0" prefWidth="91.0" text="Total Reminders" />
+                    <ComboBox fx:id="reminderCombo" prefHeight="21.0" prefWidth="69.0" styleClass="combo-style">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <Integer fx:value="1" />
+                          <Integer fx:value="2" />
+                          <Integer fx:value="3" />
+                          <Integer fx:value="4" />
+                          <Integer fx:value="5" />
+                          <Integer fx:value="6" />
+                          <Integer fx:value="7" />
+                          <Integer fx:value="8" />
+                          <Integer fx:value="9" />
+                          <Integer fx:value="10" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                    <Label prefHeight="22.0" prefWidth="76.0" text="   Frequency" />
+                    <ComboBox fx:id="frequencyCombo" prefHeight="21.0" prefWidth="69.0" promptText="Days" styleClass="combo-style">
+                      <items>
+                        <FXCollections fx:factory="observableArrayList">
+                          <Integer fx:value="1" />
+                          <Integer fx:value="2" />
+                          <Integer fx:value="3" />
+                          <Integer fx:value="4" />
+                          <Integer fx:value="5" />
+                          <Integer fx:value="6" />
+                          <Integer fx:value="7" />
+                          <Integer fx:value="8" />
+                          <Integer fx:value="9" />
+                          <Integer fx:value="10" />
+                        </FXCollections>
+                      </items>
+                    </ComboBox>
+                  </children>
+                </HBox>
+                <HBox id="HBox" fx:id="sentHBox" alignment="CENTER_LEFT" prefHeight="20.000099999997474" prefWidth="359.0" spacing="5.0" visible="true">
+                  <children>
+                    <Label prefHeight="22.0" prefWidth="91.0" text="Reminders Sent" />
+                    <Label fx:id="sentReminder" alignment="CENTER" contentDisplay="CENTER" prefHeight="23.0" prefWidth="69.0" text="">
+                      <font>
+                        <Font name="System Bold" size="12.0" fx:id="x2" />
+                      </font>
+                    </Label>
+                  </children>
+                </HBox>
+                <HBox id="HBox" alignment="CENTER_RIGHT" spacing="5.0">
+                  <children>
+                    <Button mnemonicParsing="false" onAction="#saveReminder" text="Save" />
+                    <Label fx:id="message" prefHeight="22.0" prefWidth="161.0" text="" />
+                  </children>
+                </HBox>
+              </children>
+            </VBox>
           </children>
-        </VBox>
+          <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="96.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="97.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="80.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="76.0" />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
+          </rowConstraints>
+          <StackPane.margin>
+            <Insets left="10.0" top="5.0" />
+          </StackPane.margin>
+        </GridPane>
       </children>
-      <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="193.0" minWidth="10.0" prefWidth="96.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="263.0" minWidth="10.0" prefWidth="97.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="80.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="479.0" minWidth="10.0" prefWidth="76.0" />
-      </columnConstraints>
-      <rowConstraints>
-        <RowConstraints maxHeight="53.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="79.0" vgrow="SOMETIMES" />
-      </rowConstraints>
-    </GridPane>
+    </StackPane>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets top="40.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <VBox alignment="CENTER" prefHeight="98.0" prefWidth="771.0" BorderPane.alignment="TOP_LEFT" BorderPane.margin="$x1">
+    <StackPane prefHeight="86.0" prefWidth="771.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="771.0" spacing="5.0">
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="87.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="771.0" StackPane.alignment="TOP_LEFT" />
+        <VBox alignment="CENTER" prefHeight="86.0" prefWidth="771.0" StackPane.alignment="TOP_LEFT">
           <children>
-            <Label prefHeight="20.0" prefWidth="91.0" text="Month" />
-            <ComboBox fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ComboBox>
-            <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
-            <ComboBox fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ComboBox>
-            <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
+            <HBox alignment="CENTER_LEFT" prefHeight="26.000099999997474" prefWidth="771.0" spacing="5.0">
+              <children>
+                <Label prefHeight="20.0" prefWidth="91.0" text="Month" />
+                <ComboBox fx:id="monthCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                  </items>
+                </ComboBox>
+                <Label prefHeight="20.0" prefWidth="30.0" text="Year" />
+                <ComboBox fx:id="yearCombo" prefHeight="20.0" prefWidth="150.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                  </items>
+                </ComboBox>
+                <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
+              </children>
+            </HBox>
+            <HBox fx:id="actionHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" prefHeight="21.0" prefWidth="771.0" spacing="5.0" visible="false">
+              <children>
+                <Label prefHeight="21.0" prefWidth="91.0" text="Reminder" />
+                <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Create Reminder" />
+                      <String fx:value="Modify Reminder" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </children>
+            </HBox>
+            <HBox id="referenceHbox" fx:id="referenceHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" padding="$x1" prefHeight="26.0" prefWidth="771.0" spacing="5.0" visible="false">
+              <children>
+                <Label prefHeight="21.0" prefWidth="91.0" text="Reference No" />
+                <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                  </items>
+                </ComboBox>
+              </children>
+            </HBox>
           </children>
-        </HBox>
-        <HBox fx:id="actionHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" prefHeight="33.0" prefWidth="344.0" spacing="5.0" visible="false">
-          <children>
-            <Label prefHeight="21.0" prefWidth="91.0" text="Reminder" />
-            <ComboBox id="monthCombo" fx:id="actionCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Create Reminder" />
-                  <String fx:value="Modify Reminder" />
-                </FXCollections>
-              </items>
-            </ComboBox>
-          </children>
-        </HBox>
-        <HBox id="referenceHbox" fx:id="referenceHBox" alignment="CENTER_LEFT" maxWidth="-1.0" minWidth="-1.0" padding="$x1" prefHeight="33.0" prefWidth="363.0" spacing="5.0" visible="false">
-          <children>
-            <Label prefHeight="21.0" prefWidth="91.0" text="Reference No" />
-            <ComboBox fx:id="referenceCombo" prefHeight="21.0" prefWidth="150.0" styleClass="combo-style">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ComboBox>
-          </children>
-        </HBox>
+          <StackPane.margin>
+            <Insets left="10.0" />
+          </StackPane.margin>
+        </VBox>
       </children>
-    </VBox>
+    </StackPane>
   </top>
 </BorderPane>

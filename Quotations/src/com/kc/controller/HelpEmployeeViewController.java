@@ -5,9 +5,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,7 +27,6 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
@@ -38,9 +34,11 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 import com.kc.constant.CommonConstants;
 import com.kc.dao.HelpDAO;
-import com.kc.model.EmployeeVO;
 import com.kc.model.EmployeeVO;
 
 public class HelpEmployeeViewController implements Initializable {
@@ -189,8 +187,8 @@ public class HelpEmployeeViewController implements Initializable {
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(userModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(500);
-						modifyStage.setWidth(600);
+						modifyStage.setHeight(350);
+						modifyStage.setWidth(500);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);
 						modifyStage.setScene(modifyScene);

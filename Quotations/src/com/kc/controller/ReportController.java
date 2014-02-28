@@ -71,12 +71,6 @@ public class ReportController implements Initializable {
 	    private ComboBox<String> customTypeCombo;
 
 	    @FXML
-	    private Label messageCustom;
-
-	    @FXML
-	    private Label messageStandard;
-
-	    @FXML
 	    private ComboBox<String> monthCombo;
 
 	    @FXML

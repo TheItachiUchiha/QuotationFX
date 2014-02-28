@@ -7,70 +7,84 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.*?>
 
-<BorderPane prefHeight="485.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.SaleStatusController">
+<BorderPane prefHeight="535.0" prefWidth="1044.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.SaleStatusController">
   <!-- TODO Add Nodes -->
   <center>
-    <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="392.0" prefWidth="1001.0" spacing="5.0" visible="true" BorderPane.alignment="TOP_LEFT">
+    <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="390.0" prefWidth="866.0" styleClass="table-style">
-          <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ref_No" fx:id="referenceNo" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Enq" fx:id="dateOfEnquiry" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Quote Sent" fx:id="dateOfQuotation" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of SO" fx:id="dateOfSalesOrder" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="123.0" text="Product Name" fx:id="productName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="134.0" text="Customer Name" fx:id="customerName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Company Name" fx:id="companyName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Location" fx:id="location" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Referred By" fx:id="referedBy" />
-          </columns>
-        </TableView>
-        <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="390.0" prefWidth="1090.0" styleClass="table-style">
-          <columns>
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ref_No" fx:id="ureferenceNo" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Enq" fx:id="udateOfEnquiry" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Quote Sent" fx:id="udateOfQuotation" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Product Name" fx:id="uproductName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="149.0" text="Customer Name" fx:id="ucustomerName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="158.0" text="Company Name" fx:id="ucompanyName" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Referred By" fx:id="ureferedBy" />
-            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="125.0" text="Total Reminders Sent" fx:id="utotalReminderSent" />
-          </columns>
-        </TableView>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="433.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1044.0" StackPane.alignment="TOP_LEFT" />
+        <VBox fx:id="tableVBox" alignment="TOP_CENTER" maxWidth="-Infinity" prefHeight="392.0" prefWidth="1001.0" spacing="5.0" visible="true" StackPane.alignment="TOP_LEFT">
+          <children>
+            <TableView fx:id="successTable" maxHeight="-Infinity" maxWidth="-1.0" prefHeight="390.0" prefWidth="866.0" styleClass="table-style">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ref_No" fx:id="referenceNo" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Enq" fx:id="dateOfEnquiry" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Quote Sent" fx:id="dateOfQuotation" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of SO" fx:id="dateOfSalesOrder" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="123.0" text="Product Name" fx:id="productName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="134.0" text="Customer Name" fx:id="customerName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="124.0" text="Company Name" fx:id="companyName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="115.0" text="Location" fx:id="location" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="91.0" text="Referred By" fx:id="referedBy" />
+              </columns>
+            </TableView>
+            <TableView fx:id="unsuccessTable" maxWidth="-Infinity" prefHeight="390.0" prefWidth="1090.0" styleClass="table-style">
+              <columns>
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ref_No" fx:id="ureferenceNo" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Enq" fx:id="udateOfEnquiry" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="100.0" text="Dt.of Quote Sent" fx:id="udateOfQuotation" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="142.0" text="Product Name" fx:id="uproductName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="149.0" text="Customer Name" fx:id="ucustomerName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="158.0" text="Company Name" fx:id="ucompanyName" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Referred By" fx:id="ureferedBy" />
+                <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="125.0" text="Total Reminders Sent" fx:id="utotalReminderSent" />
+              </columns>
+            </TableView>
+          </children>
+          <StackPane.margin>
+            <Insets left="10.0" top="10.0" />
+          </StackPane.margin>
+        </VBox>
       </children>
       <BorderPane.margin>
-        <Insets top="20.0" />
+        <Insets top="10.0" />
       </BorderPane.margin>
-    </VBox>
+    </StackPane>
   </center>
   <padding>
-    <Insets left="40.0" top="40.0" />
+    <Insets top="40.0" />
   </padding>
   <stylesheets>
     <URL value="@../style/gui.css" />
   </stylesheets>
   <top>
-    <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="845.0" spacing="5.0" BorderPane.alignment="TOP_LEFT">
+    <StackPane prefHeight="52.0" prefWidth="1080.0" BorderPane.alignment="TOP_LEFT">
       <children>
-        <Label prefHeight="21.0" prefWidth="53.0" text="Month" />
-        <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
-          <items>
-            <FXCollections fx:factory="observableArrayList" />
-          </items>
-        </ComboBox>
-        <Label prefHeight="21.0" prefWidth="44.0" text="Year" />
-        <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
-          <items>
-            <FXCollections fx:factory="observableArrayList" />
-          </items>
-        </ComboBox>
-        <Button id="success" mnemonicParsing="false" onAction="#viewSuccess" styleClass="button-style" text="View Successful" />
-        <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" styleClass="button-style" text="View Unsuccessful" />
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="52.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1044.0" StackPane.alignment="TOP_LEFT" />
+        <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="845.0" spacing="5.0" StackPane.alignment="TOP_LEFT">
+          <children>
+            <Label prefHeight="21.0" prefWidth="53.0" text="Month" />
+            <ComboBox fx:id="monthCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
+              <items>
+                <FXCollections fx:factory="observableArrayList" />
+              </items>
+            </ComboBox>
+            <Label prefHeight="21.0" prefWidth="44.0" text="Year" />
+            <ComboBox fx:id="yearCombo" prefHeight="21.0" prefWidth="128.0" styleClass="combo-style">
+              <items>
+                <FXCollections fx:factory="observableArrayList" />
+              </items>
+            </ComboBox>
+            <Button id="success" mnemonicParsing="false" onAction="#viewSuccess" styleClass="button-style" text="View Successful" />
+            <Button id="unsuccess" mnemonicParsing="false" onAction="#viewUnsuccess" styleClass="button-style" text="View Unsuccessful" />
+          </children>
+          <StackPane.margin>
+            <Insets left="10.0" />
+          </StackPane.margin>
+        </HBox>
       </children>
-      <BorderPane.margin>
-        <Insets />
-      </BorderPane.margin>
-    </HBox>
+    </StackPane>
   </top>
 </BorderPane>

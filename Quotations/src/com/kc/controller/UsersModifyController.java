@@ -345,6 +345,7 @@ public class UsersModifyController implements Initializable{
 		{
 			userType.getSelectionModel().selectLast();
 		}
+		modifyHbox.setVisible(true);
 		LOG.info("Exit : fillTextFieldValues");
 	}
 	public void modifyUser()

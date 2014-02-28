@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import javafx.collections.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
@@ -34,4 +35,7 @@
       </tabs>
     </TabPane>
   </center>
+  <padding>
+    <Insets left="40.0" top="40.0" />
+  </padding>
 </BorderPane>
