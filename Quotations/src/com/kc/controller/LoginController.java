@@ -160,7 +160,7 @@ public class LoginController extends Application implements Initializable{
 				this.home.setPrefWidth(Screen.getPrimary().getBounds().getWidth()-17);
 				VBox subMenu = (VBox) subMenuLoader.load();
 				this.home.setLeft(subMenu);
-				this.home.getStyleClass().add(theme.get(CommonConstants.KEY_BACKGROUND));
+				this.home.getStyleClass().addAll(theme.get(CommonConstants.KEY_BACKGROUND));
 				Scene scene = new Scene(this.home);
 				/*this.primaryStage.setX(0);
 				primaryStage.setY(0);

@@ -89,12 +89,7 @@ public class ProductViewController implements Initializable{
 			
 			keyword.setPromptText("Type Keyword");
 			
-			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
-			productCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCategory"));
-			productSubCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productSubCategory"));
-			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
-			productCode.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCode"));
-			productsTable.setItems(productsList);
+			updateTable(productsList);
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
@@ -156,6 +151,16 @@ public class ProductViewController implements Initializable{
 			e.printStackTrace();
 		}
 		LOG.info("Exit : initialize");
+	}
+	
+	public void updateTable(ObservableList<ProductsVO> tempList)
+	{
+		productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
+		productCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCategory"));
+		productSubCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productSubCategory"));
+		productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
+		productCode.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCode"));
+		productsTable.setItems(tempList);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -267,12 +272,7 @@ public class ProductViewController implements Initializable{
 					}
 				}
 			}
-			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
-			productCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCategory"));
-			productSubCategory.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productSubCategory"));
-			productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
-			productCode.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productCode"));
-			productsTable.setItems(tempList);
+			updateTable(tempList);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -288,13 +288,29 @@ public class ProductViewController implements Initializable{
 					    "Do you want to delete selected product(s)", "Confirm", "Delete Product", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					productsDAO.deleteProducts(productsVO);
-					message.setText(CommonConstants.PRODUCT_DELETE_SUCCESS);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-					fillTableFromData();
+					if(combo.getSelectionModel().getSelectedIndex()>-1)
+					{
+						productsDAO.deleteProducts(productsVO);
+						message.setText(CommonConstants.PRODUCT_DELETE_SUCCESS);
+						message.getStyleClass().remove("failure");
+						message.getStyleClass().add("success");
+						message.setVisible(true);
+						fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+						fillTableFromData();
+					}
+					else
+					{
+						for(ProductsVO  productsVO2 : productsList)
+						{
+							if(productsVO2.getId()==productsVO.getId())
+							{
+								productsList.remove(productsVO2);
+								productsDAO.deleteProducts(productsVO2);
+								break;
+							}
+						}
+						updateTable(productsList);
+					}
 					
 				}
 		}
@@ -360,18 +376,29 @@ public class ProductViewController implements Initializable{
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										try
 										{
-											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-											for (ProductsVO productsVO : productsList) {
-												if (productsVO.getId() == ButtonCell.this.getTableView()
-														.getItems()
-														.get(ButtonCell.this.getIndex())
-														.getId()) {
-													updateAutoField(productsVO, combo.getSelectionModel().getSelectedItem());
+											if(combo.getSelectionModel().getSelectedIndex()>-1)
+											{
+												fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+												for (ProductsVO productsVO : productsList) {
+													if (productsVO.getId() == ButtonCell.this.getTableView()
+															.getItems()
+															.get(ButtonCell.this.getIndex())
+															.getId()) {
+														updateAutoField(productsVO, combo.getSelectionModel().getSelectedItem());
+													}
 												}
+												fillTableFromData();
 											}
-											fillTableFromData();
+											else
+											{
+												productsList = productsDAO.getProducts();
+												updateTable(productsList);
+											}
+										}
+										catch (Exception e) {
+											e.printStackTrace();
 										}
 									}
 								});

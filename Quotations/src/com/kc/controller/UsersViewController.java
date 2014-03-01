@@ -49,7 +49,6 @@ import com.mytdev.javafx.scene.control.AutoCompleteTextField;
 public class UsersViewController implements Initializable {
 	private static final Logger LOG = LogManager.getLogger(UsersViewController.class);
 	private ObservableList<UsersVO> usersList;
-	private ObservableList<UsersVO> modulesList;
 	private ObservableList<String> searchByList;
 	private UsersDAO usersDAO;
 	
@@ -93,12 +92,7 @@ public class UsersViewController implements Initializable {
 			searchByList.add("Username");
 			combo.setItems(searchByList);
 			
-			name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
-			username.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("username"));
-			password.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("password"));
-			modules.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("quotation"));
-			userType.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("userType"));
-			usersTable.setItems(usersList);
+			updateTable(usersList);
 			
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 	            
@@ -164,12 +158,22 @@ public class UsersViewController implements Initializable {
 		LOG.info("Exit : initialize");
 	}
 	
+	public void updateTable(ObservableList<UsersVO> tempList)
+	{
+		name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
+		username.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("username"));
+		password.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("password"));
+		modules.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("quotation"));
+		userType.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("userType"));
+		usersTable.setItems(tempList);
+	}
+	
 	@SuppressWarnings("unchecked")
 	private void fillAutoCompleteFromComboBox(String t1)
 	{
 		LOG.info("Enter : fillAutoCompleteFromComboBox");
 		try{
-			modulesList = usersDAO.getModules();
+			usersList = usersDAO.getModules();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
 			if(t1.equals("Name"))
 	        {
@@ -216,7 +220,7 @@ public class UsersViewController implements Initializable {
 			String tempString = keyword.getText();
 			if(combo.getSelectionModel().getSelectedItem().equals("Name"))
 			{
-				for(UsersVO usersVO : modulesList)
+				for(UsersVO usersVO : usersList)
 				{
 					if(usersVO.getName().equalsIgnoreCase(tempString))
 					{
@@ -226,7 +230,7 @@ public class UsersViewController implements Initializable {
 			}
 			else if(combo.getSelectionModel().getSelectedItem().equals("Username"))
 			{
-				for(UsersVO usersVO : modulesList)
+				for(UsersVO usersVO : usersList)
 				{
 					if(usersVO.getUsername().equalsIgnoreCase(tempString))
 					{
@@ -235,12 +239,7 @@ public class UsersViewController implements Initializable {
 				}
 			}
 			
-			name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
-			username.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("username"));
-			password.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("password"));
-			modules.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("quotation"));
-			userType.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("userType"));
-			usersTable.setItems(tempList);
+			updateTable(tempList);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -256,13 +255,29 @@ public class UsersViewController implements Initializable {
 				    "Do you want to delete selected customer(s)", "Confirm", "Delete customer", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					usersDAO.deleteUsers(usersVO);
-					message.setText(CommonConstants.USER_DELETE_SUCCESS);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-					fillTableFromData();
+					if(combo.getSelectionModel().getSelectedIndex()>-1)
+					{
+						usersDAO.deleteUsers(usersVO);
+						message.setText(CommonConstants.USER_DELETE_SUCCESS);
+						message.getStyleClass().remove("failure");
+						message.getStyleClass().add("success");
+						message.setVisible(true);
+						fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+						fillTableFromData();
+					}
+					else
+					{
+						for(UsersVO  usersVO2 : usersList)
+						{
+							if(usersVO2.getId()==usersVO.getId())
+							{
+								usersList.remove(usersVO2);
+								usersDAO.deleteUsers(usersVO2);
+								break;
+							}
+						}
+						updateTable(usersList);
+					}
 				}
 		}
 		catch (Exception e) {
@@ -336,23 +351,32 @@ public class UsersViewController implements Initializable {
 						modifyStage
 								.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
-									
 									@Override
 									public void handle(WindowEvent paramT) {
 										
-										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										try
 										{
-											
-											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-											for (UsersVO usersVO : modulesList) {
-												if (usersVO.getId() == ButtonCell.this.getTableView()
-														.getItems()
-														.get(ButtonCell.this.getIndex())
-														.getId()) {
-													updateAutoField(usersVO, combo.getSelectionModel().getSelectedItem());
+											if(combo.getSelectionModel().getSelectedIndex()>-1)
+											{
+												fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+												for (UsersVO usersVO : usersList) {
+													if (usersVO.getId() == ButtonCell.this.getTableView()
+															.getItems()
+															.get(ButtonCell.this.getIndex())
+															.getId()) {
+														updateAutoField(usersVO, combo.getSelectionModel().getSelectedItem());
+													}
 												}
+												fillTableFromData();
 											}
-											fillTableFromData();
+											else
+											{
+												usersList = usersDAO.getModules();
+												updateTable(usersList);
+											}
+										}
+										catch (Exception e) {
+											e.printStackTrace();
 										}
 									}
 								});

@@ -112,18 +112,8 @@ public class CustomersViewController implements Initializable {
 			searchByList.add("TIN Number");
 			searchByList.add("Customer Type");
 			combo.setItems(searchByList);
-			name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
-			companyName.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("companyName"));
-			address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("address"));
-			city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("city"));
-			state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("state"));
-			emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("emailId"));
-			contactNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("contactNumber"));
-			tinNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("tinNumber"));
-			customerType.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerType"));
-			telephone.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("telephone"));
-			website.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("website"));
-			customerTable.setItems(customersList);
+			
+			updateTable(customersList);
 
 			combo.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -182,6 +172,22 @@ public class CustomersViewController implements Initializable {
 			e.printStackTrace();
 		}
 		LOG.info("Exit : initialize");
+	}
+	
+	public void updateTable(ObservableList<CustomersVO> tempList)
+	{
+		name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
+		companyName.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("companyName"));
+		address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("address"));
+		city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("city"));
+		state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("state"));
+		emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("emailId"));
+		contactNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("contactNumber"));
+		tinNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("tinNumber"));
+		customerType.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerType"));
+		telephone.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("telephone"));
+		website.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("website"));
+		customerTable.setItems(tempList);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -315,18 +321,8 @@ public class CustomersViewController implements Initializable {
 				}
 			}
 
-			name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
-			companyName.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("companyName"));
-			address.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("address"));
-			city.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("city"));
-			state.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("state"));
-			emailId.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("emailId"));
-			contactNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("contactNumber"));
-			tinNumber.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("tinNumber"));
-			customerType.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerType"));
-			telephone.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("telephone"));
-			website.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("website"));
-			customerTable.setItems(tempList);
+			updateTable(tempList);
+			
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			e.printStackTrace();
@@ -341,14 +337,30 @@ public class CustomersViewController implements Initializable {
 					"Do you want to delete selected customer(s)", "Confirm",
 					"Delete customer", DialogOptions.OK_CANCEL);
 			if (response.equals(DialogResponse.OK)) {
-				customersDAO.deleteCustomers(customersVO);
-				message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-				message.getStyleClass().remove("failure");
-				message.getStyleClass().add("success");
-				message.setVisible(true);
-				fillAutoCompleteFromComboBox(combo.getSelectionModel()
-						.getSelectedItem());
-				fillTableFromData();
+				if(combo.getSelectionModel().getSelectedIndex()>-1)
+				{
+					customersDAO.deleteCustomers(customersVO);
+					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
+					message.getStyleClass().remove("failure");
+					message.getStyleClass().add("success");
+					message.setVisible(true);
+					fillAutoCompleteFromComboBox(combo.getSelectionModel()
+							.getSelectedItem());
+					fillTableFromData();
+				}
+				else
+				{
+					for(CustomersVO  customersVO2 : customersList)
+					{
+						if(customersVO2.getId()==customersVO.getId())
+						{
+							customersList.remove(customersVO2);
+							customersDAO.deleteCustomers(customersVO2);
+							break;
+						}
+					}
+					updateTable(customersList);
+				}
 			}
 		} catch (Exception e) {
 			message.setText(CommonConstants.FAILURE);
@@ -401,7 +413,7 @@ public class CustomersViewController implements Initializable {
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(customerModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(550);
+						modifyStage.setHeight(600);
 						modifyStage.setWidth(600);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);
@@ -416,18 +428,29 @@ public class CustomersViewController implements Initializable {
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										try
 										{
-											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-											for (CustomersVO customersVO : customersList) {
-												if (customersVO.getId() == ButtonCell.this.getTableView()
-														.getItems()
-														.get(ButtonCell.this.getIndex())
-														.getId()) {
-													updateAutoField(customersVO, combo.getSelectionModel().getSelectedItem());
+											if(combo.getSelectionModel().getSelectedIndex()>-1)
+											{
+												fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+												for (CustomersVO customersVO : customersList) {
+													if (customersVO.getId() == ButtonCell.this.getTableView()
+															.getItems()
+															.get(ButtonCell.this.getIndex())
+															.getId()) {
+														updateAutoField(customersVO, combo.getSelectionModel().getSelectedItem());
+													}
 												}
+												fillTableFromData();
 											}
-											fillTableFromData();
+											else
+											{
+												customersList=customersDAO.getCustomers();
+												updateTable(customersList);
+											}
+										}
+										catch (Exception e) {
+											e.printStackTrace();
 										}
 									}
 								});

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.beans.property.SimpleBooleanProperty;
@@ -59,6 +60,7 @@ public class EnquiryViewController implements Initializable {
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
 	Validation validation;
+	String currentYear;
 	public static Stage viewStage;
 	
 	public EnquiryViewController()
@@ -67,6 +69,7 @@ public class EnquiryViewController implements Initializable {
 		enquiryDAO = new EnquiryDAO();
 		customersDAO = new CustomersDAO();
 		validation = new Validation();
+		currentYear = yearFormat.format(new Date());
 	}
 	
 	@FXML
@@ -104,6 +107,7 @@ public class EnquiryViewController implements Initializable {
     ObservableList<EnquiryViewVO> tempList = FXCollections.observableArrayList();
     ObservableList<String> tempList2 = FXCollections.observableArrayList();
     SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+    SimpleDateFormat yearFormat = new SimpleDateFormat(CommonConstants.YEAR_FORMAT);
 
     
     
@@ -132,6 +136,17 @@ public class EnquiryViewController implements Initializable {
 			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 			productList = productsDAO.getProducts();
 			
+			enquiryListForTable.clear();
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+				{
+					enquiryListForTable.add(enquiryVO);
+				}
+			}
+			updateTable(enquiryListForTable);
+			
+			
 			monthCombo.valueProperty().addListener(new ChangeListener<String>() {
 
 				@Override
@@ -139,6 +154,10 @@ public class EnquiryViewController implements Initializable {
 						String oldValue, String newValue) {
 					try{
 						enquiryListForTable.clear();
+						searchCombo.getSelectionModel().clearSelection();
+						keyword.setText("");
+						enquiryList = enquiryDAO.getEnquries();
+						enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
 						if(newValue!=null && !newValue.equals(oldValue))
 						{
 							for(EnquiryViewVO enquiryVO : enquiryViewList)
@@ -148,18 +167,8 @@ public class EnquiryViewController implements Initializable {
 									enquiryListForTable.add(enquiryVO);
 								}
 							}
-							enquiryTable.setItems(enquiryListForTable);
 						}
-						referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-						enquiryType.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("enquiryType"));
-						productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-						companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-						customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-						city.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
-						state.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
-						referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-						purchasePeriod.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("purchasePeriod"));
-						dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+						updateTable(enquiryListForTable);
 					}
 					catch(Exception e)
 					{
@@ -174,6 +183,7 @@ public class EnquiryViewController implements Initializable {
 				public void changed(ObservableValue ov, String t, String t1) { 
 				 	fillAutoCompleteFromComboBox(t1);
 				 	//keyword.setText("");
+					enquiryViewList.clear();
 				 	monthCombo.getSelectionModel().clearSelection();
 				 	tempList = FXCollections.observableArrayList();
 				 	tempList.clear();
@@ -240,142 +250,145 @@ public class EnquiryViewController implements Initializable {
 			productList = productsDAO.getProducts();
 			customerList = customersDAO.getCustomers();
 			tempList2 = FXCollections.observableArrayList(); 
-			if(t1.equals("Product Name"))
-	        {
-	        	for(EnquiryVO enquiryVO : enquiryList)
-	        	{
-	        		if(!tempList2.contains(enquiryVO.getProductName()))
-	        		{
-	        			tempList2.add(enquiryVO.getProductName());
-	        		}
-	        	}
-	        }
-			else if(t1.equals("Ref_No"))
-	        {
-	        	for(EnquiryVO enquiryVO : enquiryList)
-	        	{
-	        		if(!tempList2.contains(enquiryVO.getRefNumber()))
-	        		{
-	        			tempList2.add(enquiryVO.getRefNumber());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Product Type"))
-	        {
-	        	for(ProductsVO productsVO : productList)
-	        	{
-	        		if(!tempList2.contains(productsVO.getProductCategory()))
-	        		{
-	        			for(EnquiryVO enquiryVO : enquiryList)
-	        			{
-	        				if(enquiryVO.getProductId() == productsVO.getId())
-	        				{
-	        					tempList2.add(productsVO.getProductCategory());
-	        					break;
-	        				}
-	        			}
-	        			
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Customer Name"))
-	        {
-	        	for(CustomersVO customersVO : customerList)
-	        	{
-	        		if(!tempList2.contains(customersVO.getCustomerName()))
-	        		{
-	        			for(EnquiryVO enquiryVO : enquiryList)
-	        			{
-	        				if(enquiryVO.getCustomerId() == customersVO.getId())
-	        				{
-	        					tempList2.add(customersVO.getCustomerName());
-	        					break;
-	        				}
-	        			}
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Company Name"))
-	        {
-	        	for(CustomersVO customersVO : customerList)
-	        	{
-	        		if(!tempList2.contains(customersVO.getCompanyName()))
-	        		{
-	        			for(EnquiryVO enquiryVO : enquiryList)
-	        			{
-	        				if(enquiryVO.getCustomerId() == customersVO.getId())
-	        				{
-	        					tempList2.add(customersVO.getCompanyName());
-	        					break;
-	        				}
-	        			}
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("City"))
-	        {
-	        	for(CustomersVO customersVO : customerList)
-	        	{
-	        		if(!tempList2.contains(customersVO.getCity()))
-	        		{
-	        			for(EnquiryVO enquiryVO : enquiryList)
-	        			{
-	        				if(enquiryVO.getCustomerId() == customersVO.getId())
-	        				{
-	        					tempList2.add(customersVO.getCity());
-	        					break;
-	        				}
-	        			}
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("State"))
-	        {
-	        	for(CustomersVO customersVO : customerList)
-	        	{
-	        		if(!tempList2.contains(customersVO.getState()))
-	        		{
-	        			for(EnquiryVO enquiryVO : enquiryList)
-	        			{
-	        				if(enquiryVO.getCustomerId() == customersVO.getId())
-	        				{
-	        					tempList2.add(customersVO.getState());
-	        					break;
-	        				}
-	        			}
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Referred By"))
-	        {
-	        	for(EnquiryVO enquiryVO : enquiryList)
-	        	{
-	        		if(!tempList2.contains(enquiryVO.getReferedBy()))
-	        		{
-	        			tempList2.add(enquiryVO.getReferedBy());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Estimate Purchase Period"))
-	        {
-	        	for(EnquiryVO enquiryVO : enquiryList)
-	        	{
-	        		if(!tempList2.contains(enquiryVO.getPurchasePeriod()))
-	        		{
-	        			tempList2.add(enquiryVO.getPurchasePeriod());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Date of Enquiry created"))
-	        {
-	        	for(EnquiryVO enquiryVO : enquiryList)
-	        	{
-	        		if(!tempList2.contains(enquiryVO.getDate()))
-	        		{
-	        			tempList2.add(enquiryVO.getDate());
-	        		}
-	        	}
-	        }
+			if(null!=t1)
+			{
+				if(t1.equals("Product Name"))
+		        {
+		        	for(EnquiryVO enquiryVO : enquiryList)
+		        	{
+		        		if(!tempList2.contains(enquiryVO.getProductName()))
+		        		{
+		        			tempList2.add(enquiryVO.getProductName());
+		        		}
+		        	}
+		        }
+				else if(t1.equals("Ref_No"))
+		        {
+		        	for(EnquiryVO enquiryVO : enquiryList)
+		        	{
+		        		if(!tempList2.contains(enquiryVO.getRefNumber()))
+		        		{
+		        			tempList2.add(enquiryVO.getRefNumber());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Product Type"))
+		        {
+		        	for(ProductsVO productsVO : productList)
+		        	{
+		        		if(!tempList2.contains(productsVO.getProductCategory()))
+		        		{
+		        			for(EnquiryVO enquiryVO : enquiryList)
+		        			{
+		        				if(enquiryVO.getProductId() == productsVO.getId())
+		        				{
+		        					tempList2.add(productsVO.getProductCategory());
+		        					break;
+		        				}
+		        			}
+		        			
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Customer Name"))
+		        {
+		        	for(CustomersVO customersVO : customerList)
+		        	{
+		        		if(!tempList2.contains(customersVO.getCustomerName()))
+		        		{
+		        			for(EnquiryVO enquiryVO : enquiryList)
+		        			{
+		        				if(enquiryVO.getCustomerId() == customersVO.getId())
+		        				{
+		        					tempList2.add(customersVO.getCustomerName());
+		        					break;
+		        				}
+		        			}
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Company Name"))
+		        {
+		        	for(CustomersVO customersVO : customerList)
+		        	{
+		        		if(!tempList2.contains(customersVO.getCompanyName()))
+		        		{
+		        			for(EnquiryVO enquiryVO : enquiryList)
+		        			{
+		        				if(enquiryVO.getCustomerId() == customersVO.getId())
+		        				{
+		        					tempList2.add(customersVO.getCompanyName());
+		        					break;
+		        				}
+		        			}
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("City"))
+		        {
+		        	for(CustomersVO customersVO : customerList)
+		        	{
+		        		if(!tempList2.contains(customersVO.getCity()))
+		        		{
+		        			for(EnquiryVO enquiryVO : enquiryList)
+		        			{
+		        				if(enquiryVO.getCustomerId() == customersVO.getId())
+		        				{
+		        					tempList2.add(customersVO.getCity());
+		        					break;
+		        				}
+		        			}
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("State"))
+		        {
+		        	for(CustomersVO customersVO : customerList)
+		        	{
+		        		if(!tempList2.contains(customersVO.getState()))
+		        		{
+		        			for(EnquiryVO enquiryVO : enquiryList)
+		        			{
+		        				if(enquiryVO.getCustomerId() == customersVO.getId())
+		        				{
+		        					tempList2.add(customersVO.getState());
+		        					break;
+		        				}
+		        			}
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Referred By"))
+		        {
+		        	for(EnquiryVO enquiryVO : enquiryList)
+		        	{
+		        		if(!tempList2.contains(enquiryVO.getReferedBy()))
+		        		{
+		        			tempList2.add(enquiryVO.getReferedBy());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Estimate Purchase Period"))
+		        {
+		        	for(EnquiryVO enquiryVO : enquiryList)
+		        	{
+		        		if(!tempList2.contains(enquiryVO.getPurchasePeriod()))
+		        		{
+		        			tempList2.add(enquiryVO.getPurchasePeriod());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Date of Enquiry created"))
+		        {
+		        	for(EnquiryVO enquiryVO : enquiryList)
+		        	{
+		        		if(!tempList2.contains(enquiryVO.getDate()))
+		        		{
+		        			tempList2.add(enquiryVO.getDate());
+		        		}
+		        	}
+		        }
+			}
 			autoHBox.getChildren().removeAll(keyword,go);
 			keyword = new AutoCompleteTextField<String>();
 			//go = new Button();
@@ -505,17 +518,7 @@ public class EnquiryViewController implements Initializable {
 				}
 			}
 			
-			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-			enquiryType.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("enquiryType"));
-			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-			city.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
-			state.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
-			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-			purchasePeriod.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("purchasePeriod"));
-			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-			enquiryTable.setItems(tempList);
+			updateTable(tempList);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -523,6 +526,22 @@ public class EnquiryViewController implements Initializable {
 		}
 		LOG.info("Exit : fillTableFromData");
 	}
+	
+	public void updateTable(ObservableList<EnquiryViewVO> tempList)
+	{
+		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+		enquiryType.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("enquiryType"));
+		productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+		companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+		customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+		city.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("city"));
+		state.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("state"));
+		referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+		purchasePeriod.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("purchasePeriod"));
+		dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+		enquiryTable.setItems(tempList);
+	}
+	
 	public void deleteEnquiry(EnquiryViewVO enquryViewVO) throws Exception
 	{
 		LOG.info("Enter : deleteEnquiry");
@@ -531,13 +550,25 @@ public class EnquiryViewController implements Initializable {
 					    "Do you want to delete selected Enquiry(s)", "Confirm", "Delete Enquiry", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					enquiryDAO.deleteEnquiry(enquryViewVO);
-					/*message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);*/
-					fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
-					fillTableFromData();
+					if(searchCombo.getSelectionModel().getSelectedIndex()>-1)
+					{	
+						enquiryDAO.deleteEnquiry(enquryViewVO);
+						fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
+						fillTableFromData();
+					}
+					else
+					{
+						for(EnquiryViewVO  enquiryViewVO2 : enquiryListForTable)
+						{
+							if(enquiryViewVO2.getId()==enquryViewVO.getId())
+							{
+								enquiryListForTable.remove(enquiryViewVO2);
+								enquiryDAO.deleteEnquiry(enquiryViewVO2);
+								break;
+							}
+						}
+					}
+					updateTable(enquiryListForTable);
 					
 				}
 				LOG.info("Exit : deleteEnquiry");
@@ -598,12 +629,47 @@ public class EnquiryViewController implements Initializable {
 
 						@Override
 						public void handle(WindowEvent paramT) {
-							if(searchCombo.getSelectionModel().getSelectedIndex()>-1)
+							try
 							{
-								fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
-								
+								if(searchCombo.getSelectionModel().getSelectedIndex()>-1)
+								{
+									fillAutoCompleteFromComboBox(searchCombo.getSelectionModel().getSelectedItem());
+									fillTableFromData();
+								}
+								else if(monthCombo.getSelectionModel().getSelectedIndex()>-1)
+								{
+									enquiryListForTable.clear();
+									enquiryViewList.clear();
+									enquiryList = enquiryDAO.getEnquries();
+									enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+									for(EnquiryViewVO enquiryVO : enquiryViewList)
+									{
+										if(new SimpleDateFormat("MMM").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(monthCombo.getSelectionModel().getSelectedItem()))
+										{
+											enquiryListForTable.add(enquiryVO);
+										}
+									}
+									updateTable(enquiryListForTable);
+								}
+								else
+								{
+									enquiryListForTable.clear();
+									enquiryViewList.clear();
+									enquiryList = enquiryDAO.getEnquries();
+									enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+									for(EnquiryViewVO enquiryVO : enquiryViewList)
+									{
+										if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+										{
+											enquiryListForTable.add(enquiryVO);
+										}
+									}
+									updateTable(enquiryListForTable);
+								}
 							}
-							fillTableFromData();
+							catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
 					});
 					
@@ -655,56 +721,6 @@ public class EnquiryViewController implements Initializable {
                 }
             });
         	
-        	/*cellEditButton.setOnAction(new EventHandler<ActionEvent>(){
-        		 
-                @Override
-                public void handle(ActionEvent t) {
-                	LOG.info("Enter : handle");
-                	try {FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("/com/kc/view/components-modify.fxml"));
-						BorderPane componentModify;
-						componentModify = (BorderPane) menuLoader.load();
-						componentModify.setTop(new HBox());
-						componentModify.getCenter().setVisible(true);
-						Stage modifyStage = new Stage();
-						Scene modifyScene = new Scene(componentModify);
-						modifyStage.setResizable(false);
-						modifyStage.setHeight(500);
-						modifyStage.setWidth(600);
-						modifyStage.initModality(Modality.WINDOW_MODAL);
-						modifyStage.initOwner(LoginController.primaryStage);
-						modifyStage.setScene(modifyScene);
-						modifyStage.show();
-						
-						((ComponentsModifyController) menuLoader.getController())
-								.fillTextFieldValues(ButtonCell.this
-										.getTableView().getItems()
-										.get(ButtonCell.this.getIndex()));
-						modifyStage
-								.setOnCloseRequest(new EventHandler<WindowEvent>() {
-
-									@Override
-									public void handle(WindowEvent paramT) {
-										fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-										for (EnquryViewVO componentsVO : componentsList) {
-											if (componentsVO.getId() == ButtonCell.this.getTableView()
-													.getItems()
-													.get(ButtonCell.this.getIndex())
-													.getId()) {
-												updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
-											}
-										}
-										fillTableFromData();
-									}
-								});
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-						LOG.error(e.getMessage());
-					}
-                	LOG.info("Exit : handle");
-                }
-            });*/
         }
  
         //Display button if the row is not empty
@@ -718,34 +734,4 @@ public class EnquiryViewController implements Initializable {
             }
         }
     }
-	/*private void updateAutoField(EnquryViewVO componentsVO, String t1) {
-		if(t1.equals("Component Category"))
-        {
-        	keyword.setText(componentsVO.getComponentCategory());
-        }
-        else if(t1.equals("Sub Category"))
-        {
-        	keyword.setText(componentsVO.getSubCategory());
-        }
-        else if(t1.equals("Component Name"))
-        {
-        	keyword.setText(componentsVO.getComponentName());
-        }
-        else if(t1.equals("Vendor"))
-        {
-        	keyword.setText(componentsVO.getVendor());
-        }
-        else if(t1.equals("Model"))
-        {
-        	keyword.setText(componentsVO.getModel());
-        }
-        else if(t1.equals("Type"))
-        {
-        	keyword.setText(componentsVO.getType());
-        }
-        else if(t1.equals("Size"))
-        {
-        	keyword.setText(componentsVO.getSize());
-        }
-	}*/
 }

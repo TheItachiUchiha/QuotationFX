@@ -153,7 +153,7 @@ public class CustomersModifyController implements Initializable{
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-			else if(validation.isEmpty(customerName, companyName))
+			else if(validation.isEmptyAutoComplte(customerName, companyName))
 			{
 				message.setText(CommonConstants.INCORRECT_EMAIL);
 				message.getStyleClass().remove("success");

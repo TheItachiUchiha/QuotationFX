@@ -100,17 +100,7 @@ public class ComponentsViewController implements Initializable {
 			searchByList.add("Size");
 			combo.setItems(searchByList);
 			
-			name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
-			category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
-			subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
-			vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
-			model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
-			type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
-			size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
-			componentTable.setItems(componentsList);
+			updateTable(componentsList);
 			
 			keyword.setPromptText("Type Keyword");
 			
@@ -175,6 +165,21 @@ public class ComponentsViewController implements Initializable {
 			e.printStackTrace();
 		}
 		LOG.info("Exit : initialize");
+	}
+	
+	public void updateTable(ObservableList<ComponentsVO> tempList)
+	{
+		name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
+		category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
+		subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
+		vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
+		model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
+		type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
+		size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
+		costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
+		dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
+		endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
+		componentTable.setItems(tempList);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -347,19 +352,8 @@ public class ComponentsViewController implements Initializable {
 					}
 				}
 			}
-			
-			
-			name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
-			category.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentCategory"));
-			subCategory.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("subCategory"));
-			vendor.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("vendor"));
-			model.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("model"));
-			type.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("type"));
-			size.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("size"));
-			costPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("costPrice"));
-			dealerPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("dealerPrice"));
-			endUserPrice.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("endUserPrice"));
-			componentTable.setItems(tempList);
+
+			updateTable(tempList);
 		}
 		catch (Exception e) {
 			LOG.error(e.getMessage());
@@ -375,13 +369,29 @@ public class ComponentsViewController implements Initializable {
 					    "Do you want to delete selected component(s)", "Confirm", "Delete Component", DialogOptions.OK_CANCEL);
 				if(response.equals(DialogResponse.OK))
 				{
-					componentsDAO.deleteComponents(componentsVO);
-					message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
-					message.getStyleClass().remove("failure");
-					message.getStyleClass().add("success");
-					message.setVisible(true);
-					fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-					fillTableFromData();
+					if(combo.getSelectionModel().getSelectedIndex()>-1)
+					{
+						componentsDAO.deleteComponents(componentsVO);
+						message.setText(CommonConstants.COMPONENT_DELETE_SUCCESS);
+						message.getStyleClass().remove("failure");
+						message.getStyleClass().add("success");
+						message.setVisible(true);
+						fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+						fillTableFromData();
+					}
+					else
+					{
+						for(ComponentsVO  componentsVO2 : componentsList)
+						{
+							if(componentsVO2.getId()==componentsVO.getId())
+							{
+								componentsList.remove(componentsVO2);
+								componentsDAO.deleteComponents(componentsVO2);
+								break;
+							}
+						}
+						updateTable(componentsList);
+					}
 					
 				}
 		}
@@ -461,18 +471,29 @@ public class ComponentsViewController implements Initializable {
 
 									@Override
 									public void handle(WindowEvent paramT) {
-										if(combo.getSelectionModel().getSelectedIndex()>-1)
+										try
 										{
-											fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
-											for (ComponentsVO componentsVO : componentsList) {
-												if (componentsVO.getId() == ButtonCell.this.getTableView()
-														.getItems()
-														.get(ButtonCell.this.getIndex())
-														.getId()) {
-													updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+											if(combo.getSelectionModel().getSelectedIndex()>-1)
+											{
+												fillAutoCompleteFromComboBox(combo.getSelectionModel().getSelectedItem());
+												for (ComponentsVO componentsVO : componentsList) {
+													if (componentsVO.getId() == ButtonCell.this.getTableView()
+															.getItems()
+															.get(ButtonCell.this.getIndex())
+															.getId()) {
+														updateAutoField(componentsVO, combo.getSelectionModel().getSelectedItem());
+													}
 												}
+												fillTableFromData();
 											}
-											fillTableFromData();
+											else
+											{
+												componentsList = componentsDAO.getComponents();
+												updateTable(componentsList);
+											}
+										}
+										catch (Exception e) {
+											e.printStackTrace();
 										}
 									}
 								});
