@@ -1049,12 +1049,6 @@
 }
 
 
-.tab{
-	  -fx-background-color:#FFB6C1;
-	   -fx-border-style: solid ;
-    -fx-border-color: black;
-}
-
 .tab .tab-label {
     -fx-skin: "com.sun.javafx.scene.control.skin.LabelSkin";
     -fx-background-color: transparent ;    
@@ -1077,14 +1071,6 @@
     -fx-color: -fx-hover-base;
 }
 
-.tab:selected {
-    -fx-background-color: rgb(255,0,128) ;
-    -fx-border-style: solid ;
-    -fx-border-color: black;
-    -fx-background-insets: 0, 1 1 0 1;
-    -fx-background-radius: 5 5 0 0, 4 4 0 0;
-}
- 
 .tab:disabled {
     -fx-opacity: -fx-disabled-opacity;
 }
@@ -1159,6 +1145,7 @@
 .background-blue{
 	-fx-background-image: url("bg-blue.jpg");
 }
+
 .background-cyan{
 	-fx-background-image: url("bg-cyan.jpg");
 }
@@ -1167,27 +1154,62 @@
 	-fx-background-image: url("bg-green.jpg");
 }
 
-/*.pink-button{
-	 -fx-background-color: transparent;
-	 -fx-background-radius: 0,0,0;
-	 -fx-background-image: url("bg-pink.jpg");
+.pink-tab{
+	  -fx-background-color:#FFB6C1;
+	   -fx-border-style: solid ;
+    -fx-border-color: black;
 }
-.blue-button{
-	 -fx-background-color: transparent;
-	 -fx-background-radius: 0,0,0;
-	 -fx-background-image: url("bg-blue.jpg");
+
+.pink-tab:selected {
+    -fx-background-color: rgb(255,0,128) ;
+    -fx-border-style: solid ;
+    -fx-border-color: black;
+    -fx-background-insets: 0, 1 1 0 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
 }
-.cyan-button{
-	 -fx-background-color: transparent;
-	 -fx-background-radius: 0,0,0;
-	 -fx-background-image: url("bg-cyan.jpg");
+
+.blue-tab{
+	  -fx-background-color: #64A4D2;
+	   -fx-border-style: solid ;
+    -fx-border-color: black;
 }
-.green-button{
-	 -fx-background-color: transparent;
-	 -fx-background-radius: 0,0,0;
-	 -fx-background-image: url("bg-green.jpg");
+
+.blue-tab:selected {
+    -fx-background-color: #1C5695 ;
+    -fx-border-style: solid ;
+    -fx-border-color: black;
+    -fx-background-insets: 0, 1 1 0 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
 }
- */
+
+.cyan-tab{
+	  -fx-background-color: #87C8CA;
+	   -fx-border-style: solid ;
+    -fx-border-color: black;
+}
+
+.cyan-tab:selected {
+    -fx-background-color: cyan ;
+    -fx-border-style: solid ;
+    -fx-border-color: black;
+    -fx-background-insets: 0, 1 1 0 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
+}
+
+.green-tab{
+	  -fx-background-color:#B6D9AF;
+	   -fx-border-style: solid ;
+    -fx-border-color: black;
+}
+
+.green-tab:selected {
+    -fx-background-color:rgb(128,255,128) ;
+    -fx-border-style: solid ;
+    -fx-border-color: black;
+    -fx-background-insets: 0, 1 1 0 1;
+    -fx-background-radius: 5 5 0 0, 4 4 0 0;
+}
+
 .invisible-tab{
 	 -fx-background-color:transparent;
 }

@@ -1,6 +1,8 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -17,6 +19,9 @@ import javafx.scene.layout.BorderPane;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import com.kc.constant.CommonConstants;
+import com.kc.dao.HelpDAO;
 
 public class ProductDispatchController implements Initializable {
 	
@@ -39,6 +44,13 @@ public class ProductDispatchController implements Initializable {
 
     @FXML
     private RadioButton viewRadio;
+    
+    HelpDAO helpDAO;
+	private Map<String, String> theme = new HashMap<String, String>();
+	
+	public ProductDispatchController() {
+		helpDAO = new HelpDAO();
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -46,6 +58,29 @@ public class ProductDispatchController implements Initializable {
 		
 		LOG.info("Enter : initialize");
 		try{
+			
+			theme = helpDAO.getBackground();
+			//newTab.getStyleClass().remove(1);
+			if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-pink"))
+			{
+				dispatchTab.getStyleClass().add("pink-tab");
+				optionTab.getStyleClass().add("pink-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-blue"))
+			{
+				dispatchTab.getStyleClass().add("blue-tab");
+				optionTab.getStyleClass().add("blue-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-cyan"))
+			{
+				dispatchTab.getStyleClass().add("cyan-tab");
+				optionTab.getStyleClass().add("cyan-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-green"))
+			{
+				dispatchTab.getStyleClass().add("green-tab");
+				optionTab.getStyleClass().add("green-tab");
+			}
 			createRadio.setSelected(true);
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch-new.fxml"));
 			final BorderPane productDispatch = (BorderPane) loader.load();

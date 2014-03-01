@@ -1,6 +1,8 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.apache.log4j.LogManager;
@@ -36,6 +38,14 @@ public class HelpEmployeesController implements Initializable {
 		private Tab newTab;
 		@FXML
 		private Tab viewTab;
+		
+		HelpDAO helpDAO;
+		private Map<String, String> theme = new HashMap<String, String>();
+		
+		public HelpEmployeesController() {
+			helpDAO = new HelpDAO();
+		}
+		
 		@Override
 		public void initialize(URL location, ResourceBundle resources) {
 			
@@ -43,6 +53,29 @@ public class HelpEmployeesController implements Initializable {
 			try{
 				
 				AdminHomeController.currentPage.setText("EMPLOYEE DETAILS");
+				
+				theme = helpDAO.getBackground();
+				//newTab.getStyleClass().remove(1);
+				if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-pink"))
+				{
+					newTab.getStyleClass().add("pink-tab");
+					viewTab.getStyleClass().add("pink-tab");
+				}
+				else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-blue"))
+				{
+					newTab.getStyleClass().add("blue-tab");
+					viewTab.getStyleClass().add("blue-tab");
+				}
+				else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-cyan"))
+				{
+					newTab.getStyleClass().add("cyan-tab");
+					viewTab.getStyleClass().add("cyan-tab");
+				}
+				else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-green"))
+				{
+					newTab.getStyleClass().add("green-tab");
+					viewTab.getStyleClass().add("green-tab");
+				}
 				
 				FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/help-employees-new.fxml"));
 				final BorderPane newEmployee = (BorderPane) loader.load();

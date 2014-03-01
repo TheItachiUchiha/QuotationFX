@@ -1,6 +1,8 @@
 package com.kc.controller;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import javafx.beans.value.ChangeListener;
@@ -15,6 +17,9 @@ import javafx.scene.layout.BorderPane;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.CommonConstants;
+import com.kc.dao.HelpDAO;
+
 public class PriceEstimationController implements Initializable {
 	
 	private static final Logger LOG = LogManager.getLogger(PriceEstimationController.class);
@@ -28,11 +33,50 @@ public class PriceEstimationController implements Initializable {
 	private Tab enquiryStatus;
 	@FXML
 	private TabPane tabPane;
+	
+	HelpDAO helpDAO;
+	private Map<String, String> theme = new HashMap<String, String>();
+	
+	public PriceEstimationController() {
+		helpDAO = new HelpDAO();
+	}
+	
 	@Override
 	public void initialize(URL paramURL, ResourceBundle paramResourceBundle) {
 		
 		LOG.info("Enter : initialize");
 		try{
+			
+			theme = helpDAO.getBackground();
+			//newTab.getStyleClass().remove(1);
+			if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-pink"))
+			{
+				newTab.getStyleClass().add("pink-tab");
+				viewTab.getStyleClass().add("pink-tab");
+				modifyTab.getStyleClass().add("pink-tab");
+				enquiryStatus.getStyleClass().add("pink-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-blue"))
+			{
+				newTab.getStyleClass().add("blue-tab");
+				viewTab.getStyleClass().add("blue-tab");
+				modifyTab.getStyleClass().add("blue-tab");
+				enquiryStatus.getStyleClass().add("blue-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-cyan"))
+			{
+				newTab.getStyleClass().add("cyan-tab");
+				viewTab.getStyleClass().add("cyan-tab");
+				modifyTab.getStyleClass().add("cyan-tab");
+				enquiryStatus.getStyleClass().add("cyan-tab");
+			}
+			else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-green"))
+			{
+				newTab.getStyleClass().add("green-tab");
+				viewTab.getStyleClass().add("green-tab");
+				modifyTab.getStyleClass().add("green-tab");
+				enquiryStatus.getStyleClass().add("green-tab");
+			}
 			
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-new.fxml"));
 			final BorderPane newEstimation = (BorderPane) loader.load();
