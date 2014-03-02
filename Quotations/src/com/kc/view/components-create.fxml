@@ -82,7 +82,7 @@
             <RowConstraints maxHeight="89.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
           </rowConstraints>
           <stylesheets>
-            <URL value="file:/E:/Workspace/QuotationFX/Quotations/src/com/kc/style/gui.css" />
+            <URL value="@../style/gui.css" />
           </stylesheets>
           <StackPane.margin>
             <Insets left="10.0" top="10.0" />
