@@ -16,11 +16,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
-import com.kc.model.ComplaintVO;
-import com.kc.model.CustomersVO;
+import com.kc.constant.SQLConstants;
 import com.kc.model.DispatchVO;
 import com.kc.model.EnquiryViewVO;
-import com.kc.model.ServiceVO;
 import com.kc.util.DBConnector;
 
 public class DispatchDAO {
@@ -30,7 +28,6 @@ public class DispatchDAO {
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
 	private ResultSet resultSet = null;
-	private Map<String, String> map;
 	
 	public ObservableList<EnquiryViewVO> getDispatchEnquiryList(String startDate , String endDate) throws Exception
 	{
@@ -40,9 +37,7 @@ public class DispatchDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select e.ref_number,c.email from quotation.enquiry e , quotation.customers c where e.salesdone=? and e.dispatch_done=? and e.cust_id=c.id and "+
-							"STR_TO_DATE(`sales_date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
-							"STR_TO_DATE(`sales_date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+					.prepareStatement(SQLConstants.GET_DISPATH_ENQUIRY_LIST);
 			preparedStatement.setString(1, "Y");
 			preparedStatement.setString(2, "N");
 			preparedStatement.setString(3, startDate);
@@ -77,7 +72,7 @@ public class DispatchDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO dispatch(reference_no,invoice_no,invoice_date,billing_name,shipping_to,transporter,dispatch_date,tracking_no,items,freight_mode,freight_amount,company_name,cust_email) VALUES(?,?,?,?,?,?,?,?,?, ?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_DISPATCH);
 			preparedStatement.setString(1, dispatchVO.getReferenceNo());
 			preparedStatement.setString(2, dispatchVO.getInvoiceNo());
 			preparedStatement.setString(3, dispatchVO.getInvoiceDate());
@@ -95,7 +90,7 @@ public class DispatchDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE enquiry SET dispatch_done='Y' where ref_number=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_DISPATCH_SUB);
 			preparedStatement.setString(1, dispatchVO.getReferenceNo());
 			preparedStatement.execute();
 		}
@@ -112,7 +107,7 @@ public class DispatchDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("Update dispatch SET invoice_no=?,invoice_date=?,billing_name=?,shipping_to=?,transporter=?,dispatch_date=?,tracking_no=?,items=?,freight_mode=?,freight_amount=?, company_name=? where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_DISPATCH);
 			
 			preparedStatement.setString(1, dispatchVO.getInvoiceNo());
 			preparedStatement.setString(2, dispatchVO.getInvoiceDate());
@@ -143,7 +138,7 @@ public class DispatchDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM DISPATCH");
+			resultSet = statement.executeQuery(SQLConstants.GET_PRODUCT_DISPATCHS);
 			
 			while(resultSet.next())
 			{
@@ -185,12 +180,12 @@ public class DispatchDAO {
 		LOG.info("Enter : deleteDispatch");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM DISPATCH WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_DISPATCH);
 			preparedStatement.setInt(1, dispatchVO.getId());
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE enquiry SET dispatch_done='N' where ref_number=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_DISPATCH_SUB);
 			preparedStatement.setString(1, dispatchVO.getReferenceNo());
 			preparedStatement.execute();
 		} catch (Exception e) {

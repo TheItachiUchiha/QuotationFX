@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
-import com.kc.dao.StatusReminderDAO;
+import com.kc.dao.ReminderDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -28,14 +28,14 @@ public class SaleStatusController implements Initializable {
 	
 	EnquiryDAO enquiryDAO;
 	CustomersDAO customersDAO;
-	StatusReminderDAO statusReminderDAO;
+	ReminderDAO statusReminderDAO;
 	String startDate;
 	String endDate;
 	
 	public SaleStatusController() {
 
 		enquiryDAO = new EnquiryDAO();
-		statusReminderDAO = new StatusReminderDAO();
+		statusReminderDAO = new ReminderDAO();
 		customersDAO = new CustomersDAO();
 	}
 	

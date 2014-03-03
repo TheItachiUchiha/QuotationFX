@@ -18,20 +18,20 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
-import com.kc.dao.StatusReminderDAO;
+import com.kc.dao.ReminderDAO;
 import com.kc.util.Encryption;
 import com.kc.util.Validation;
 
 public class ReminderOptionController implements Initializable {
 		private static final Logger LOG = LogManager.getLogger(ReminderOptionController.class);
 		Encryption encryption;
-		StatusReminderDAO statusReminderDAO;
+		ReminderDAO statusReminderDAO;
 		Validation validate;
 		public ReminderOptionController() {
 	
 			encryption = new Encryption("");
 			validate = new Validation();
-			statusReminderDAO = new StatusReminderDAO();
+			statusReminderDAO = new ReminderDAO();
 		}
 
 		@FXML

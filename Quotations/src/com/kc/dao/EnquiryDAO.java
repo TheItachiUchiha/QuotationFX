@@ -18,6 +18,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.constant.SQLConstants;
 import com.kc.model.ComponentsVO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
@@ -43,7 +44,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO enquiry(cust_id,referedby,cust_req,purchase_period,cust_doc,priceestimation,quotationpreparation,emailsent,date,prod_name,salesdone,type, ref_number, prod_id, margin, pe_date,qp_date,mail_sent_date,sales_date,reminder_sent,total_revenue,customer_type,dispatch_done,purchase_order_no,product_quantity) VALUES(?,?,?,?,?, ?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_ENQUIRY);
 			preparedStatement.setInt(1, enquiryVO.getCustomerId());
 			preparedStatement.setString(2, enquiryVO.getReferedBy());
 			preparedStatement.setString(3, enquiryVO.getCustomerrequirements());
@@ -86,7 +87,7 @@ public class EnquiryDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM ENQUIRY");
+			resultSet = statement.executeQuery(SQLConstants.GET_ENQUIRYS);
 			
 			while(resultSet.next())
 			{
@@ -139,7 +140,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET value=?, LAST_UPDATED=? where `key`=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_ENQUIRY_LOCATION);
 			preparedStatement.setString(1, location);
 			preparedStatement.setString(2, date);
 			preparedStatement.setString(3, "enquiry");
@@ -159,7 +160,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_LATEST_ENQUIRY_NO);
 			preparedStatement.setString(1, CommonConstants.ENQUIRY_MONTHLY_NUMBER);
 			resultSet = preparedStatement.executeQuery();
 			resultSet.next();
@@ -179,7 +180,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE STATIC_UTIL SET VALUE =?, LAST_UPDATED=? where `key` = ?");
+			preparedStatement = conn.prepareStatement(SQLConstants.INCREASE_ENQUIRY_NO);
 			preparedStatement.setString(1, enquiryNumber);
 			preparedStatement.setString(2, date);
 			preparedStatement.setString(3, CommonConstants.ENQUIRY_MONTHLY_NUMBER);
@@ -201,7 +202,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT LAST_UPDATED from STATIC_UTIL where `key`=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.CAU_ENQUIRY_NO);
 			preparedStatement.setString(1, CommonConstants.ENQUIRY_MONTHLY_NUMBER);
 			resultSet = preparedStatement.executeQuery();
 			resultSet.next();
@@ -230,7 +231,7 @@ public class EnquiryDAO {
 		LOG.info("Enter : deleteEnquiry");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM ENQUIRY WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_ENQUIRY);
 			preparedStatement.setInt(1, enquiryViewVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
@@ -246,7 +247,7 @@ public class EnquiryDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET cust_id=?,referedby=?,cust_req=?,purchase_period=?,cust_doc=?,priceestimation=?,quotationpreparation=?,emailsent=?,date=?,prod_name=?,salesdone=?,type=?, ref_number=?, prod_id=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_ENQUIRY);
 			
 			preparedStatement.setInt(1, enquiryViewVO.getCustomerId());
 			preparedStatement.setString(2, enquiryViewVO.getReferedBy());
@@ -275,26 +276,6 @@ public class EnquiryDAO {
 			LOG.error(e.getMessage());
 		}
 		LOG.info("Exit : updateEnquiry");
-	}
-	public String getDefault(String string )
-	{
-		String defaultPath = "";
-		LOG.info("Enter : getDefault");
-		try
-		{
-			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT value from STATIC_UTIL where `key`=?");
-			preparedStatement.setString(1, string);
-			resultSet = preparedStatement.executeQuery();
-			resultSet.next();
-			defaultPath = resultSet.getString(1);
-			LOG.info("Exit : getDefault");
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-			LOG.error(e.getMessage());
-		}
-		return defaultPath;
 	}
 	
 	public void saveConfiguration(Map<String, String> map, String date)
@@ -373,7 +354,7 @@ public class EnquiryDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT c.id, `name`, category, subcategory, vendor, model, `type`, size, costprice, enduserprice, dealerprice, quantity  FROM COMPONENTS c inner join enquiry_component pc on (c.id = pc.component_id) where pc.ENQUIRY_ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_FOR_ENQUIRY);
 			preparedStatement.setInt(1, enquiryId);
 			resultSet = preparedStatement.executeQuery();
 

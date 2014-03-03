@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.SQLConstants;
 import com.kc.model.ComponentsVO;
 import com.kc.util.DBConnector;
 
@@ -27,7 +28,7 @@ public class ComponentsDAO {
 		try {
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO components(name,category,subcategory,vendor,model,type,size,costprice,dealerprice,enduserprice) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+					.prepareStatement(SQLConstants.SAVE_COMPONENT);
 
 			preparedStatement.setString(1, componentsVO.getComponentName());
 			preparedStatement.setString(2, componentsVO.getComponentCategory());
@@ -56,7 +57,7 @@ public class ComponentsDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE components SET name=?,category=?,subcategory=?,vendor=?,model=?,type=?,size=?,costprice=?,dealerprice=?,enduserprice=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_COMPONENT);
 			
 			preparedStatement.setString(1, componentsVO.getComponentName());
 			preparedStatement.setString(2, componentsVO.getComponentCategory());
@@ -86,7 +87,7 @@ public class ComponentsDAO {
 		try {
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM COMPONENTS");
+			resultSet = statement.executeQuery(SQLConstants.GET_COMPONENTS);
 
 			while (resultSet.next()) {
 				ComponentsVO componentsVO = new ComponentsVO();
@@ -119,7 +120,7 @@ public class ComponentsDAO {
 		LOG.info("Enter : deleteComponents");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM COMPONENTS WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_COMPONENT);
 			preparedStatement.setInt(1, componentsVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
@@ -135,7 +136,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct category FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_CATEGORY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -157,7 +158,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct subcategory FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_SUBCATEGORY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -179,7 +180,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct name FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_NAME_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -201,7 +202,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct model FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_MODEL_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -223,7 +224,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct vendor FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_VENDOR_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -245,7 +246,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct type FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_TYPE_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -267,7 +268,7 @@ public class ComponentsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct size FROM quotation.components");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_SIZE_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {

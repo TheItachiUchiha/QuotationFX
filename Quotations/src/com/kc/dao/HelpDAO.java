@@ -4,8 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +23,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
-import com.kc.model.ComponentsVO;
-import com.kc.model.CustomersVO;
+import com.kc.constant.SQLConstants;
 import com.kc.model.EmployeeVO;
 import com.kc.model.HelpVO;
 import com.kc.util.DBConnector;
@@ -45,7 +42,7 @@ public class HelpDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE company_details SET name=?,description=?,address=?,contact_details=?,company_logo=?,home_logo=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_COMPANY_DETAILS);
 			
 			FileInputStream fis = null;
 			FileInputStream fis2 = null;
@@ -77,7 +74,7 @@ public class HelpDAO {
 		try {
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM company_details");
+			resultSet = statement.executeQuery(SQLConstants.GET_COMPANY_DETAILS);
 
 			while (resultSet.next()) {
 				helpVO.setId(resultSet.getInt(1));
@@ -90,15 +87,15 @@ public class HelpDAO {
 				int blobLength = (int) companyBlob.length();
 				byte[] blobAsBytes = companyBlob.getBytes(1, blobLength);
 				BufferedImage image = ImageIO.read( new ByteArrayInputStream( blobAsBytes ) );
-				ImageIO.write(image, "png", new File("E:\\companylogo.png"));
-				helpVO.setCompanyLogo(new File("E:\\companylogo.png"));
+				ImageIO.write(image, "png", new File("D:\\companylogo.png"));
+				helpVO.setCompanyLogo(new File("D:\\companylogo.png"));
 				
 				Blob homeBlob = resultSet.getBlob(7);
 				int blobLengthHome = (int) homeBlob.length();
 				byte[] blobAsBytesHome = homeBlob.getBytes(1, blobLengthHome);
 				BufferedImage imageHome = ImageIO.read( new ByteArrayInputStream( blobAsBytesHome ) );
-				ImageIO.write(imageHome, "png", new File("E:\\homelogo.png"));
-				helpVO.setHomeLogo(new File("E:\\homelogo.png"));
+				ImageIO.write(imageHome, "png", new File("D:\\homelogo.png"));
+				helpVO.setHomeLogo(new File("D:\\homelogo.png"));
 			}
 		} 
 		catch (Exception e) {
@@ -122,7 +119,7 @@ public class HelpDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO employee(name,designation,mobileno,address,rating) VALUES(?, ?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_EMPLOYEE);
 			preparedStatement.setString(1, employeeVO.getName());
 			preparedStatement.setString(2, employeeVO.getDesignation());
 			preparedStatement.setString(3, employeeVO.getMobileNo());
@@ -145,7 +142,7 @@ public class HelpDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM employee");
+			resultSet = statement.executeQuery(SQLConstants.GET_EMPLOYEES);
 			
 			while(resultSet.next())
 			{
@@ -179,7 +176,7 @@ public class HelpDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE employee SET name=?,designation=?,mobileno=?,address=?,rating=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_EMPLOYEE);
 			
 			preparedStatement.setString(1, employeeVO.getName());
 			preparedStatement.setString(2, employeeVO.getDesignation());
@@ -200,7 +197,7 @@ public class HelpDAO {
 		LOG.info("Enter : deleteEmployees");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM employee WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_EMPLOYEE);
 			preparedStatement.setInt(1, employeeVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {

@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.SQLConstants;
 import com.kc.model.ComponentsVO;
 import com.kc.model.ProductsVO;
 import com.kc.util.DBConnector;
@@ -32,7 +33,7 @@ public class ProductsDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("INSERT INTO products(name,category,subcategory,code, path_set) VALUES(?, ?, ?, ?,?)", Statement.RETURN_GENERATED_KEYS);
+					.prepareStatement(SQLConstants.SAVE_PRODUCT , Statement.RETURN_GENERATED_KEYS);
 	
 			preparedStatement.setString(1, productsVO.getProductName());
 			preparedStatement.setString(2, productsVO.getProductCategory());
@@ -49,7 +50,7 @@ public class ProductsDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : productsVO.getList())
 			{
-				statement.addBatch("INSERT into product_component(product_id, component_id, quantity) values("+id+","+component.getId()+","+component.getQuantity()+")");
+				statement.addBatch(SQLConstants.SAVE_PRODUCT_SUB+id+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 			
@@ -70,12 +71,12 @@ public class ProductsDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("DELETE FROM PRODUCT_COMPONENT WHERE PRODUCT_ID=?");
+					.prepareStatement(SQLConstants.UPDATE_PRODUCT);
 			preparedStatement.setInt(1, productsVO.getId());
 			preparedStatement.execute();
 			
 			preparedStatement = conn
-					.prepareStatement("UPDATE PRODUCTS SET NAME=?, CATEGORY=?, SUBCATEGORY=?, CODE=? WHERE ID=?");
+					.prepareStatement(SQLConstants.UPDATE_PRODUCT_SUB);
 			preparedStatement.setString(1, productsVO.getProductName());
 			preparedStatement.setString(2, productsVO.getProductCategory());
 			preparedStatement.setString(3, productsVO.getProductSubCategory());
@@ -86,7 +87,7 @@ public class ProductsDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : productsVO.getList())
 			{
-				statement.addBatch("INSERT into product_component(product_id, component_id, quantity) values("+productsVO.getId()+","+component.getId()+","+component.getQuantity()+")");
+				statement.addBatch(SQLConstants.UPDATE_PRODUCT_SUB2+productsVO.getId()+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 			
@@ -108,7 +109,7 @@ public class ProductsDAO {
 		try {
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM PRODUCTS");
+			resultSet = statement.executeQuery(SQLConstants.GET_PRODUCTS);
 
 			while (resultSet.next()) {
 				ProductsVO productsVO = new ProductsVO();
@@ -133,10 +134,10 @@ public class ProductsDAO {
 		LOG.info("Enter : deleteProducts");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement=conn.prepareStatement("DELETE FROM product_component WHERE PRODUCT_ID=?");
+			preparedStatement=conn.prepareStatement(SQLConstants.DELETE_PRODUCT);
 			preparedStatement.setInt(1, productsVO.getId());
 			preparedStatement.execute();
-			preparedStatement = conn.prepareStatement("DELETE FROM PRODUCTS WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_PRODUCT_SUB);
 			preparedStatement.setInt(1, productsVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
@@ -153,7 +154,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT c.id, `name`, category, subcategory, vendor, model, `type`, size, costprice, enduserprice, dealerprice, quantity  FROM COMPONENTS c inner join product_component pc on (c.id = pc.component_id) where pc.PRODUCT_ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_COMPONENTS_FOR_PRODUCT);
 			preparedStatement.setInt(1, productId);
 			resultSet = preparedStatement.executeQuery();
 
@@ -190,7 +191,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, category FROM PRODUCTS");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CATEGORY_FOR_PRODUCT);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -215,7 +216,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, subcategory FROM PRODUCTS");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_SUBCATEGORY_FOR_PRODUCT);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -240,7 +241,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, type FROM CUSTOMERS");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMET_TYPE_FOR_PRODUCT);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -265,7 +266,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT DISTINCT id, state FROM CUSTOMERS");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMET_STATE_FOR_PRODUCT);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -291,7 +292,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct category FROM quotation.products");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_PRODUCT_CATEGORY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -314,7 +315,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct subcategory FROM quotation.products");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_PRODUCT_SUBCATEGORY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -337,7 +338,7 @@ public class ProductsDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct name FROM quotation.products");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_PRODUCT_NAME_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {

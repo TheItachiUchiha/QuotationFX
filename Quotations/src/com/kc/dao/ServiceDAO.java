@@ -97,7 +97,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id,s.contact_no, c.service_count from quotation.service s, quotation.customers c where c.id=s.customer_id and s.date=?");
+					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id,s.contact_no, c.service_count from service s, customers c where c.id=s.customer_id and s.date=?");
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -209,7 +209,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select * from quotation.service where date!=? and "+
+					.prepareStatement("select * from service where date!=? and "+
 							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, CommonConstants.NA);
@@ -260,7 +260,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select * from quotation.SERVICE where date!=?");
+					.prepareStatement("select * from SERVICE where date!=?");
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -303,8 +303,8 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date,s.contact_no, c.customername, c.companyname, c.state  FROM quotation.SERVICE s, "+
-			"quotation.Customers c where s.customer_id=c.id and s.date!=? and "+
+					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date,s.contact_no, c.customername, c.companyname, c.state  FROM SERVICE s, "+
+			"Customers c where s.customer_id=c.id and s.date!=? and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, CommonConstants.NA);
@@ -349,7 +349,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT c.service_count,(select count(*) from quotation.service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and contact_no=?), s.engineer_name,s.charge,s.rating FROM quotation.customers c ,quotation.service s where c.contactnumber=s.contact_no and s.date!='N/A' and c.contactnumber=?");
+					.prepareStatement("SELECT c.service_count,(select count(*) from service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and contact_no=?), s.engineer_name,s.charge,s.rating FROM customers c ,service s where c.contactnumber=s.contact_no and s.date!='N/A' and c.contactnumber=?");
 			preparedStatement.setString(1, contact);
 			preparedStatement.setString(2, contact);
 			resultSet = preparedStatement.executeQuery();

@@ -5,27 +5,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+
 import com.kc.constant.CommonConstants;
 import com.kc.controller.LoginController;
-import com.kc.dao.EnquiryDAO;
-import com.kc.dao.StatusReminderDAO;
+import com.kc.dao.ReminderDAO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DateUtil;
 import com.kc.util.Email;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
-
 public class ReminderEmailSendService extends Task
 {
-	private StatusReminderDAO statusReminderDAO;
-	private EnquiryDAO enquiryDAO;
+	private ReminderDAO statusReminderDAO;
 	Email email;
 	
 	public ReminderEmailSendService()
 	{
-		statusReminderDAO = new StatusReminderDAO();
-		enquiryDAO = new EnquiryDAO();
+		statusReminderDAO = new ReminderDAO();
 		email = new Email();
 	}
 	@Override

@@ -33,7 +33,7 @@ public class ReportsDAO
 		ObservableList<EnquiryVO> listOfEnquiries = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("select ref_number,salesdone,prod_id,cust_id,total_revenue from quotation.enquiry e where STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
+			preparedStatement = conn.prepareStatement("select ref_number,salesdone,prod_id,cust_id,total_revenue from enquiry e where STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
 			preparedStatement.setString(2, endDate);
@@ -85,8 +85,8 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfDetails = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT s.reference_no, s.date, c.customername, c.companyname, c.state, s.charge FROM quotation.SERVICE s, " + 
-			"quotation.Customers c, quotation.enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.engineer_name=? and " +
+			preparedStatement = conn.prepareStatement("SELECT s.reference_no, s.date, c.customername, c.companyname, c.state, s.charge FROM SERVICE s, " + 
+			"Customers c, enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.engineer_name=? and " +
 					"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
 							"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, serviceEnggName);
@@ -123,8 +123,8 @@ public class ReportsDAO
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
 			"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-			"SUM(s.charge) FROM quotation.ENQUIRY e,"+
-			"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.ref_number=?");
+			"SUM(s.charge) FROM ENQUIRY e,"+
+			"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.ref_number=?");
 			preparedStatement.setString(1, ref_number);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -168,8 +168,8 @@ public class ReportsDAO
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
 					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM quotation.ENQUIRY e,"+
-					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.referedby=?");
+					"SUM(s.charge) FROM ENQUIRY e,"+
+					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.referedby=?");
 			preparedStatement.setString(1, referredBy);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -212,8 +212,8 @@ public class ReportsDAO
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
 					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM quotation.ENQUIRY e,"+
-					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.customername=?");
+					"SUM(s.charge) FROM ENQUIRY e,"+
+					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.customername=?");
 			preparedStatement.setString(1, customerName);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -257,8 +257,8 @@ public class ReportsDAO
 			conn = DBConnector.getConnection();
 			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
 					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM quotation.ENQUIRY e,"+
-					"quotation.service s, quotation.customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.companyname=?");
+					"SUM(s.charge) FROM ENQUIRY e,"+
+					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.companyname=?");
 			preparedStatement.setString(1, companyName);
 			resultSet = preparedStatement.executeQuery();
 			

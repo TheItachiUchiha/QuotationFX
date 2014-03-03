@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.SQLConstants;
 import com.kc.model.ComponentsVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
@@ -28,7 +29,7 @@ public class PriceEstimationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation = 'Y', margin=?, pe_date=?,total_revenue=?,customer_type=? where id=? ");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_PE);
 			preparedStatement.setDouble(1, enquiryVO.getMargin());
 			preparedStatement.setString(2, enquiryVO.getPeDate());
 			preparedStatement.setDouble(3, enquiryVO.getTotalRevenue());
@@ -38,7 +39,7 @@ public class PriceEstimationDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : enquiryVO.getList())
 			{
-				statement.addBatch("INSERT into enquiry_component(enquiry_id, component_id, quantity) values("+enquiryVO.getId()+","+component.getId()+","+component.getQuantity()+")");
+				statement.addBatch(SQLConstants.SAVE_PE_SUB+enquiryVO.getId()+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 		}
@@ -55,12 +56,12 @@ public class PriceEstimationDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("DELETE FROM ENQUIRY_COMPONENT WHERE ENQUIRY_ID=?");
+					.prepareStatement(SQLConstants.UPDATE_PE);
 			preparedStatement.setInt(1, enquiryVO.getId());
 			preparedStatement.execute();
 			
 			preparedStatement = conn
-					.prepareStatement("UPDATE ENQUIRY SET MARGIN=?,total_revenue=?, customer_type=? WHERE ID=?");
+					.prepareStatement(SQLConstants.UPDATE_PE_SUB);
 			preparedStatement.setDouble(1, enquiryVO.getMargin());
 			preparedStatement.setDouble(2, enquiryVO.getTotalRevenue());
 			preparedStatement.setString(3, enquiryVO.getEnquiryCustomerType());
@@ -70,7 +71,7 @@ public class PriceEstimationDAO {
 			statement = conn.createStatement();
 			for(ComponentsVO component : enquiryVO.getList())
 			{
-				statement.addBatch("INSERT into enquiry_component(enquiry_id, component_id, quantity) values("+enquiryVO.getId()+","+component.getId()+","+component.getQuantity()+")");
+				statement.addBatch(SQLConstants.UPDATE_PE_SUB2+enquiryVO.getId()+","+component.getId()+","+component.getQuantity()+")");
 			}
 			statement.executeBatch();
 			
@@ -89,7 +90,7 @@ public class PriceEstimationDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT * FROM ENQUIRY WHERE PRICEESTIMATION ='Y'");
+					.prepareStatement(SQLConstants.GET_PE);
 			resultSet = preparedStatement.executeQuery();
 			
 			while(resultSet.next())
@@ -139,11 +140,11 @@ public class PriceEstimationDAO {
 		LOG.info("Enter : deletePriceEstimation");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM ENQUIRY_COMPONENT WHERE ENQUIRY_ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_PE);
 			preparedStatement.setInt(1, enquiryViewVO.getId());
 			preparedStatement.execute();
 			
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET priceestimation=?, pe_date='N/A' WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_PE_SUB);
 			preparedStatement.setString(1,"N");
 			preparedStatement.setInt(2, enquiryViewVO.getId());
 			preparedStatement.execute();

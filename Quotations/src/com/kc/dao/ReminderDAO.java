@@ -24,9 +24,9 @@ import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DBConnector;
 
-public class StatusReminderDAO {
+public class ReminderDAO {
 	
-	private static final Logger LOG = LogManager.getLogger(StatusReminderDAO.class);
+	private static final Logger LOG = LogManager.getLogger(ReminderDAO.class);
 	private Connection conn = null;
 	private PreparedStatement preparedStatement = null;
 	private Statement statement = null;
@@ -132,7 +132,7 @@ public class StatusReminderDAO {
 		ObservableList<EnquiryViewVO> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement=conn.prepareStatement("SELECT e.REF_NUMBER FROM quotation.ENQUIRY e ,quotation.REMINDER r WHERE e.REF_NUMBER = r.REFERENCE_NO and " +
+			preparedStatement=conn.prepareStatement("SELECT e.REF_NUMBER FROM ENQUIRY e ,REMINDER r WHERE e.REF_NUMBER = r.REFERENCE_NO and " +
 					"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
 					"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
@@ -167,7 +167,7 @@ public class StatusReminderDAO {
 		ObservableList<EnquiryViewVO> listOfReminders = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT ref_number, c.email FROM quotation.ENQUIRY e, quotation.customers c where e.cust_id=c.id and e.ref_number NOT IN (select r1.reference_no from quotation.reminder r1) and e.salesdone='N' and " +
+			preparedStatement = conn.prepareStatement("SELECT ref_number, c.email FROM ENQUIRY e, customers c where e.cust_id=c.id and e.ref_number NOT IN (select r1.reference_no from reminder r1) and e.salesdone='N' and " +
 						"STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " +
 							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, startDate);
@@ -202,7 +202,7 @@ public class StatusReminderDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("select * from quotation.enquiry where salesdone=? and " +
+			preparedStatement = conn.prepareStatement("select * from enquiry where salesdone=? and " +
 							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and " + 
 							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
 			preparedStatement.setString(1, status);
@@ -331,7 +331,7 @@ public class StatusReminderDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT * FROM quotation.reminder q where status='ON' and next_send=? and q.total_reminder>(select reminder_sent from quotation.enquiry e where e.ref_number = q.reference_no);");
+			preparedStatement = conn.prepareStatement("SELECT * FROM reminder q where status='ON' and next_send=? and q.total_reminder>(select reminder_sent from enquiry e where e.ref_number = q.reference_no);");
 			preparedStatement.setString(1, date);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
@@ -380,7 +380,7 @@ public class StatusReminderDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT reminder_sent FROM quotation.enquiry where ref_number=?");
+			preparedStatement = conn.prepareStatement("SELECT reminder_sent FROM enquiry where ref_number=?");
 			preparedStatement.setString(1, refNumber);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())

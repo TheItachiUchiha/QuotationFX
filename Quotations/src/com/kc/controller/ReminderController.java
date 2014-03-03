@@ -36,7 +36,7 @@ import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ServiceDAO;
-import com.kc.dao.StatusReminderDAO;
+import com.kc.dao.ReminderDAO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ReminderVO;
 import com.kc.util.DateUtil;
@@ -52,7 +52,7 @@ public class ReminderController implements Initializable {
 		CustomersDAO customersDAO;
 		ServiceDAO serviceDAO;
 		Validation validate;
-		StatusReminderDAO statusReminderDAO;
+		ReminderDAO statusReminderDAO;
 		String startDate;
 		String endDate;
 	
@@ -61,7 +61,7 @@ public class ReminderController implements Initializable {
 		customersDAO = new CustomersDAO();
 		serviceDAO = new ServiceDAO();
 		validate = new Validation();
-		statusReminderDAO = new StatusReminderDAO();
+		statusReminderDAO = new ReminderDAO();
 		}
 	
 		@FXML

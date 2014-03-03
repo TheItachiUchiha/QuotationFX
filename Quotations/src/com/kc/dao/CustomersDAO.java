@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.SQLConstants;
 import com.kc.model.CustomersVO;
 import com.kc.util.DBConnector;
 
@@ -29,7 +30,7 @@ public class CustomersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO customers(customername,companyname,address,city,state,email,contactnumber,type,tinnumber,telephone,website,complaint_count,service_count) VALUES(?, ?,?, ?, ?,?,?, ?, ?, ?, ?, ?, ?)",  Statement.RETURN_GENERATED_KEYS);
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_CUSTOMER , Statement.RETURN_GENERATED_KEYS);
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
 			preparedStatement.setString(3, customersVO.getAddress());
@@ -68,7 +69,7 @@ public class CustomersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE customers SET customername=?,companyname=?,address=?,city=?,state=?,email=?,contactnumber=?,type=?,tinnumber=?,telephone=?,website=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_CUSTOMER);
 			
 			preparedStatement.setString(1, customersVO.getCustomerName());
 			preparedStatement.setString(2, customersVO.getCompanyName());
@@ -99,7 +100,7 @@ public class CustomersDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM CUSTOMERS");
+			resultSet = statement.executeQuery(SQLConstants.GET_CUSTOMERS);
 			
 			while(resultSet.next())
 			{
@@ -146,7 +147,7 @@ public class CustomersDAO {
 		LOG.info("Enter : deleteCustomers");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM CUSTOMERS WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_CUSTOMER);
 			preparedStatement.setInt(1, customersVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
@@ -162,7 +163,7 @@ public class CustomersDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct customername FROM quotation.customers");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMER_NAME_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -184,7 +185,7 @@ public class CustomersDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct companyname FROM quotation.customers");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMER_COMPANY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -206,7 +207,7 @@ public class CustomersDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct city FROM quotation.customers");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMER_CITY_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
@@ -228,7 +229,7 @@ public class CustomersDAO {
 				.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT distinct state FROM quotation.customers");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_CUSTOMER_STATE_LIST);
 			resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
