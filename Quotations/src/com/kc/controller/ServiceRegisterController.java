@@ -58,9 +58,6 @@ public class ServiceRegisterController implements Initializable {
     private ToggleGroup customerToggle;
 
     @FXML
-    private TextField dateOfService;
-
-    @FXML
     private TextField engineerName;
 
     @FXML
@@ -143,7 +140,7 @@ public class ServiceRegisterController implements Initializable {
     		enquiryList = enquiryDAO.getEnquries();
 			customerList = customersDAO.getCustomers();
 			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
-    		refList=serviceDAO.getComplaintList();
+			refList=serviceDAO.getComplaintList();
     		for(ServiceVO serviceVO : refList)
     		{
     			if(serviceVO.getReferenceNo()!=null)
@@ -213,22 +210,30 @@ public class ServiceRegisterController implements Initializable {
 				public void changed(
 						ObservableValue<? extends Toggle> observable,
 						Toggle oldValue, Toggle newValue) {
-						
-						if(referenceRadio.isSelected())
+						try
 						{
-							mainVBox.getChildren().clear();
-							mainVBox.getChildren().add(referenceHBox);
-							referenceCombo.setItems(uniqueRefList);
-							conatctCombo.getSelectionModel().clearSelection();
-						}
-						else if(nameRadio.isSelected())
-						{
-							mainVBox.getChildren().clear();
-							mainVBox.getChildren().add(contactHBox);
-							conatctCombo.setItems(uniqueContactList);
-							referenceCombo.getSelectionModel().clearSelection();
 							
+							if(referenceRadio.isSelected())
+							{
+								refList=serviceDAO.getComplaintList();
+								mainVBox.getChildren().clear();
+								mainVBox.getChildren().add(referenceHBox);
+								referenceCombo.setItems(uniqueRefList);
+								conatctCombo.getSelectionModel().clearSelection();
+							}
+							else if(nameRadio.isSelected())
+							{
+								refList=serviceDAO.getComplaintList();
+								mainVBox.getChildren().clear();
+								mainVBox.getChildren().add(contactHBox);
+								conatctCombo.setItems(uniqueContactList);
+								referenceCombo.getSelectionModel().clearSelection();
+							}
 						}
+						catch (Exception e) {
+							e.printStackTrace();
+						}
+						
 					
 				}
 			});
@@ -347,6 +352,7 @@ public class ServiceRegisterController implements Initializable {
 	{
 		try
 		{
+			clearFileds();
 			for(ServiceVO serviceVO : refList)
 			{
 				if(complaintCombo.getSelectionModel().getSelectedItem().equals(serviceVO.getComplaintId()))
@@ -379,6 +385,16 @@ public class ServiceRegisterController implements Initializable {
 		message.getStyleClass().remove("failure");
 		message.getStyleClass().add("success");
 		message.setVisible(true);
+	}
+	
+	public void clearFileds()
+	{
+		engineerName.setText("");
+		feedback.setText("");
+		charge.setText("");
+		ratingCombo.getSelectionModel().clearSelection();
+		((TextField)calendar.getChildren().get(0)).setText("");
+		message.setText("");
 	}
 
 }

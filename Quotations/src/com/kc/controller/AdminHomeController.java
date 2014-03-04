@@ -7,9 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 
 public class AdminHomeController implements Initializable {
@@ -38,9 +36,6 @@ public class AdminHomeController implements Initializable {
 	    @FXML
 	    private ToggleButton status;
 
-	    @FXML
-	    private ToggleGroup submenuButtons;
-	    
 	    @FXML
 	    public static Label currentPage;
 

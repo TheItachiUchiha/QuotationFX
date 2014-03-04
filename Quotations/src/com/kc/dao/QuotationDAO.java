@@ -16,6 +16,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.constant.SQLConstants;
 import com.kc.model.ProductsVO;
 import com.kc.model.QuotationVO;
 import com.kc.util.DBConnector;
@@ -35,7 +36,7 @@ public class QuotationDAO {
 		try {
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM PRODUCTS where path_set='N'");
+			resultSet = statement.executeQuery(SQLConstants.GET_QUOTATION_PRODUCTS);
 			
 			while (resultSet.next()) {
 				ProductsVO productsVO = new ProductsVO();
@@ -117,14 +118,14 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO quotation(product_id,default_file,word_file_path,pdf_file_path) VALUES(?, ?, ?, ?)");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_STANDARD_PATH);
 			preparedStatement.setInt(1, quotationVO.getProductId());
 			preparedStatement.setString(2, quotationVO.getQuotationPath());
 			preparedStatement.setString(3, quotationVO.getWordPath());
 			preparedStatement.setString(4, quotationVO.getPdfPath());
 			preparedStatement.execute();
 			
-			preparedStatement = conn.prepareStatement("UPDATE PRODUCTS SET path_set=? WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_STANDARD_PATH_SUB);
 			preparedStatement.setString(1, "Y");
 			preparedStatement.setInt(2, quotationVO.getProductId());
 			preparedStatement.execute();
@@ -138,7 +139,7 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET quotationpreparation=?, QP_DATE=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_QUOTATION_ENQUIRY);
 			
 			preparedStatement.setString(1, status);
 			preparedStatement.setString(2, date);
@@ -157,7 +158,7 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT * FROM quotation where product_id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_STANDARD_PATH);
 			preparedStatement.setInt(1, id);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -181,7 +182,7 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT PATH_SET FROM PRODUCTS where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_PRODUCT_PATH);
 			preparedStatement.setInt(1, productId);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -201,7 +202,7 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET emailsent=?, mail_sent_date=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_EMAIL_STATUS);
 			
 			preparedStatement.setString(1, "Y");
 			preparedStatement.setString(2, string);
@@ -220,7 +221,7 @@ public class QuotationDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT `KEY`, VALUE FROM STATIC_UTIL");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_EMAIL_DETAILS);
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
 			{

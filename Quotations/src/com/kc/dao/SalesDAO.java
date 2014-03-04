@@ -13,6 +13,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.constant.SQLConstants;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.DBConnector;
@@ -31,7 +32,7 @@ public class SalesDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM ENQUIRY WHERE priceestimation='Y' AND quotationpreparation='Y' AND emailsent='Y' AND salesdone='N'");
+			resultSet = statement.executeQuery(SQLConstants.GET_ENQUIRY_FOR_SALE);
 			
 			while(resultSet.next())
 			{
@@ -78,7 +79,7 @@ public class SalesDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=?,purchase_order_no=?,product_quantity=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_SALES_DATE);
 			preparedStatement.setString(1, enquiryViewVO.getSalesDate());
 			preparedStatement.setString(2, "Y");
 			preparedStatement.setString(3, enquiryViewVO.getPurchaseOrderNo());
@@ -87,7 +88,7 @@ public class SalesDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE REMINDER SET status =? where reference_no=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_SALES_DATE_SUB);
 			preparedStatement.setString(1, "OFF");
 			preparedStatement.setString(2, enquiryViewVO.getReferenceNo());
 			preparedStatement.execute();
@@ -103,7 +104,7 @@ public class SalesDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_SALES_DATE);
 			preparedStatement.setString(1, date);
 			preparedStatement.setInt(2, id);
 			preparedStatement.execute();
@@ -118,7 +119,7 @@ public class SalesDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE ENQUIRY SET sales_date=?, salesdone=?,purchase_order_no=?,product_quantity=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_SALES);
 			preparedStatement.setString(1, CommonConstants.NA);
 			preparedStatement.setString(2, "N");
 			preparedStatement.setString(3, CommonConstants.NA);

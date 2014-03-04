@@ -15,7 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
-import com.kc.model.ComponentsVO;
+import com.kc.constant.SQLConstants;
 import com.kc.model.EnquiryVO;
 import com.kc.util.DBConnector;
 
@@ -33,8 +33,7 @@ public class ReportsDAO
 		ObservableList<EnquiryVO> listOfEnquiries = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("select ref_number,salesdone,prod_id,cust_id,total_revenue from enquiry e where STR_TO_DATE(e.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
-							"STR_TO_DATE(e.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+			preparedStatement = conn.prepareStatement(SQLConstants.SALES_REPORT);
 			preparedStatement.setString(1, startDate);
 			preparedStatement.setString(2, endDate);
 			
@@ -62,7 +61,7 @@ public class ReportsDAO
 		ObservableList<Integer> listOfCharges = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT charge FROM SERVICE where reference_no=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_SERVICE_CHARGE);
 			preparedStatement.setString(1, referenceNumber);
 			resultSet = preparedStatement.executeQuery();
 
@@ -85,10 +84,7 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfDetails = FXCollections.observableArrayList();
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT s.reference_no, s.date, c.customername, c.companyname, c.state, s.charge FROM SERVICE s, " + 
-			"Customers c, enquiry e where e.ref_number=s.reference_no and e.cust_id=c.id and s.engineer_name=? and " +
-					"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
-							"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_SERVICE_ENGINEER_DETAILS);
 			preparedStatement.setString(1, serviceEnggName);
 			preparedStatement.setString(2, startDate);
 			preparedStatement.setString(3, endDate);
@@ -121,10 +117,7 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
-			"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-			"SUM(s.charge) FROM ENQUIRY e,"+
-			"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.ref_number=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_ENQUIRIES_FROM_REFNO);
 			preparedStatement.setString(1, ref_number);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -166,10 +159,7 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
-					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM ENQUIRY e,"+
-					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and e.referedby=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_ENQUIRIES_FROM_REFEREDBY);
 			preparedStatement.setString(1, referredBy);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -210,10 +200,7 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
-					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM ENQUIRY e,"+
-					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.customername=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_ENQUIRIES_FROM_CUST_NAME);
 			preparedStatement.setString(1, customerName);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -255,10 +242,7 @@ public class ReportsDAO
 		ObservableList<Map<String, Object>> listOfEnquries = FXCollections.observableArrayList();
 		try{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("SELECT e.ref_number, e.`date`, e.QP_DATE, e.sales_date, e.prod_name, "+
-					"c.customername, c.companyname, c.state, e.referedby, count(s.id), e.total_revenue, "+ 
-					"SUM(s.charge) FROM ENQUIRY e,"+
-					"service s, customers c where e.ref_number=s.reference_no and e.cust_id=c.id and c.companyname=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_ENQUIRIES_FROM_COMP_NAME);
 			preparedStatement.setString(1, companyName);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -300,7 +284,7 @@ public class ReportsDAO
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT ref_number FROM ENQUIRY");
+			resultSet = statement.executeQuery(SQLConstants.GET_REFNO);
 			
 			while(resultSet.next())
 			{
@@ -320,7 +304,7 @@ public class ReportsDAO
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT referedby FROM ENQUIRY");
+			resultSet = statement.executeQuery(SQLConstants.GET_REFEREDBY);
 			
 			while(resultSet.next())
 			{
@@ -343,7 +327,7 @@ public class ReportsDAO
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT companyname FROM CUSTOMERS");
+			resultSet = statement.executeQuery(SQLConstants.GET_COMPANY);
 			
 			while(resultSet.next())
 			{
@@ -366,7 +350,7 @@ public class ReportsDAO
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT customername FROM CUSTOMERS");
+			resultSet = statement.executeQuery(SQLConstants.GET_CUST_NAME);
 			
 			while(resultSet.next())
 			{

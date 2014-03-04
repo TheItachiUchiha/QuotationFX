@@ -230,6 +230,7 @@ public class PriceEstimationNewController implements Initializable {
 		{
 			componentTable.setItems(componentsList);
 			componentTable.setEditable(true);
+			endUserRadio.setSelected(true);
 			
 			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
 				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {

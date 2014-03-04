@@ -15,6 +15,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
+import com.kc.constant.SQLConstants;
 import com.kc.model.ComplaintVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
@@ -34,11 +35,11 @@ public class ServiceDAO {
 		{
 			int count=0;
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE customers SET complaint_count = complaint_count + 1 where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_COMPLAINT);
 			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 		
-			preparedStatement = conn.prepareStatement("SELECT complaint_count FROM customers WHERE id = ?");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_COMPLAINT_SUB);
 			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			resultSet = preparedStatement.executeQuery();
 			while(resultSet.next())
@@ -47,7 +48,7 @@ public class ServiceDAO {
 			}
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO service(reference_no,engineer_name,complaint,date,rating,charge,complaint_date,feedback,complaint_id,product_name,customer_id,customer_name,contact_no) VALUES(?,?,?,?,?,?,?, ?, ?, ?, ?, ?,?)");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_COMPLAINT_SUB2);
 			preparedStatement.setString(1, serviceVO.getReferenceNo());
 			preparedStatement.setString(2, serviceVO.getEngineerName());
 			preparedStatement.setString(3, serviceVO.getComplaint());
@@ -76,7 +77,7 @@ public class ServiceDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET complaint=?,complaint_date=? where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_COMPLAINT);
 			preparedStatement.setString(1, complaintVO.getComplaint());
 			preparedStatement.setString(2, complaintVO.getDateOfComplaint());
 			preparedStatement.setInt(3, complaintVO.getId());
@@ -97,7 +98,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select s.id,s.reference_no,s.complaint,s.complaint_date,s.complaint_id,s.product_name,s.customer_id,s.contact_no, c.service_count from service s, customers c where c.id=s.customer_id and s.date=?");
+					.prepareStatement(SQLConstants.GET_COMPLAINT_LIST);
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -136,7 +137,7 @@ public class ServiceDAO {
 		LOG.info("Enter : deleteComplaint");
 		try {
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM Service WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_COMPLAINT);
 			preparedStatement.setInt(1, complaintVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {
@@ -153,7 +154,7 @@ public class ServiceDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET engineer_name=?,complaint=?,date=?,rating=?,charge=?,feedback=? where complaint_id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_SERVICE);
 			preparedStatement.setString(1, serviceVO.getEngineerName());
 			preparedStatement.setString(2, serviceVO.getComplaint());
 			preparedStatement.setString(3, serviceVO.getDate());
@@ -165,7 +166,7 @@ public class ServiceDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE customers SET service_count = service_count + 1 where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.NEW_SERVICE_SUB);
 			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 		}
@@ -182,7 +183,7 @@ public class ServiceDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET engineer_name=?,complaint=?,date=?,rating=?,charge=?,feedback=? where complaint_id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_SERVICE);
 			preparedStatement.setString(1, serviceVO.getEngineerName());
 			preparedStatement.setString(2, serviceVO.getComplaint());
 			preparedStatement.setString(3, serviceVO.getDate());
@@ -209,9 +210,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select * from service where date!=? and "+
-							"STR_TO_DATE(`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
-							"STR_TO_DATE(`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+					.prepareStatement(SQLConstants.GET_SERVICE_LIST);
 			preparedStatement.setString(1, CommonConstants.NA);
 			preparedStatement.setString(2, startDate);
 			preparedStatement.setString(3, endDate);
@@ -260,7 +259,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("select * from SERVICE where date!=?");
+					.prepareStatement(SQLConstants.GET_SERVICE_DETATILS);
 			preparedStatement.setString(1, CommonConstants.NA);
 			resultSet = preparedStatement.executeQuery();
 			
@@ -303,10 +302,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT s.reference_no , s.product_name, s.complaint_date, s.date,s.contact_no, c.customername, c.companyname, c.state  FROM SERVICE s, "+
-			"Customers c where s.customer_id=c.id and s.date!=? and "+
-			"STR_TO_DATE(s.`date`, '%d/%m/%Y') >= STR_TO_DATE(?, '%d/%m/%Y') and "+
-			"STR_TO_DATE(s.`date`, '%d/%m/%Y') <= STR_TO_DATE(?, '%d/%m/%Y')");
+					.prepareStatement(SQLConstants.GET_SERVICE_HISTORY);
 			preparedStatement.setString(1, CommonConstants.NA);
 			preparedStatement.setString(2, startDate);
 			preparedStatement.setString(3, endDate);
@@ -349,7 +345,7 @@ public class ServiceDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement("SELECT c.service_count,(select count(*) from service where YEAR(STR_TO_DATE(`date`, '%d/%m/%Y'))=YEAR(NOW()) and contact_no=?), s.engineer_name,s.charge,s.rating FROM customers c ,service s where c.contactnumber=s.contact_no and s.date!='N/A' and c.contactnumber=?");
+					.prepareStatement(SQLConstants.GET_SERVICE_FOR_CONTACT);
 			preparedStatement.setString(1, contact);
 			preparedStatement.setString(2, contact);
 			resultSet = preparedStatement.executeQuery();
@@ -385,7 +381,7 @@ public class ServiceDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE SERVICE SET engineer_name=?,date=?,rating=?,charge=?,feedback=? where complaint_id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_SERVICE);
 			preparedStatement.setString(1, serviceVO.getEngineerName());
 			preparedStatement.setString(2, serviceVO.getDate());
 			preparedStatement.setString(3, serviceVO.getRating());
@@ -396,7 +392,7 @@ public class ServiceDAO {
 			preparedStatement.execute();
 			
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE customers SET service_count = service_count - 1 where id=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_SERVICE_SUB);
 			preparedStatement.setInt(1, serviceVO.getCustomerId());
 			preparedStatement.execute();
 			

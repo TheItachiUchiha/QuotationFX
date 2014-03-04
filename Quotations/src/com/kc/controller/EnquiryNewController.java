@@ -193,6 +193,7 @@ public class EnquiryNewController implements Initializable {
 						productHbox.setVisible(false);
 						productVbox.setVisible(true);
 						productName.setText("");
+						cc.setText("");
 						typeFlag="S";
 						customRef.setVisible(false);
 				}
@@ -203,6 +204,7 @@ public class EnquiryNewController implements Initializable {
 					productHbox.setVisible(true);
 					categoryCombo.getSelectionModel().clearSelection();
 					enquiryGrid.setVisible(true);
+					cc.setText("");
 					tinNumber.setText("");
 					emailId.setText("");
 					referedBy.setText("");

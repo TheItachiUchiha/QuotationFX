@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.kc.constant.SQLConstants;
 import com.kc.model.UsersVO;
 import com.kc.util.DBConnector;
 
@@ -28,7 +29,7 @@ public class UsersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("INSERT INTO users(name,designation,mobilenumber,username,password,quotation,priceestimation,report,salesorder,statusreminder,view,`edit`,`delete`,usertype,enquiry,product_dispatch,service_registry) VALUES(?,?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");			
+			preparedStatement = conn.prepareStatement(SQLConstants.SAVE_USER);			
 			preparedStatement.setString(1, usersVO.getName());
 			preparedStatement.setString(2, usersVO.getDesignation());
 			preparedStatement.setString(3, usersVO.getMobileNumber());
@@ -62,7 +63,7 @@ public class UsersDAO {
 		try
 		{
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("UPDATE users SET name=?,designation=?,mobilenumber=?,username=?,password=?,quotation=?,priceestimation=?,report=?,salesorder=?,statusreminder=?,view=?,`edit`=?,`delete`=?,usertype=?,enquiry=?,product_dispatch=?,service_registry=? where ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.UPDATE_USER);
 			
 			preparedStatement.setString(1, usersVO.getName());
 			preparedStatement.setString(2, usersVO.getDesignation());
@@ -98,7 +99,7 @@ public class UsersDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM USERS");
+			resultSet = statement.executeQuery(SQLConstants.GET_USERS);
 			
 			while(resultSet.next())
 			{
@@ -145,7 +146,7 @@ public class UsersDAO {
 		try{
 			conn = DBConnector.getConnection();
 			statement = conn.createStatement();
-			resultSet = statement.executeQuery("SELECT * FROM USERS");
+			resultSet = statement.executeQuery(SQLConstants.GET_USERS);
 			
 			while(resultSet.next())
 			{
@@ -214,7 +215,7 @@ public class UsersDAO {
 		try {
 			LOG.info("Enter : deleteUsers");
 			conn = DBConnector.getConnection();
-			preparedStatement = conn.prepareStatement("DELETE FROM USERS WHERE ID=?");
+			preparedStatement = conn.prepareStatement(SQLConstants.DELETE_USER);
 			preparedStatement.setInt(1, usersVO.getId());
 			preparedStatement.execute();
 		} catch (Exception e) {

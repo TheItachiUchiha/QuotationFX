@@ -30,7 +30,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

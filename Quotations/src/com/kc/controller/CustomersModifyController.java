@@ -79,6 +79,7 @@ public class CustomersModifyController implements Initializable{
 		try{
 			AdminHomeController.currentPage.setText("MODIFY CUSTOMER");
 			validation.allowAsPhoneNumber(contactNumber);
+			validation.allowAsPhoneNumber(telephone);
 			customersList = customersDAO.getCustomers();
 			
 			cityList = customersDAO.getCustomerCityList();

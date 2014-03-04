@@ -71,6 +71,7 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 		{
 			AdminHomeController.currentPage.setText("CREATE CUSTOMER");
 			validation.allowAsPhoneNumber(contactNumber);
+			validation.allowAsPhoneNumber(telephone);
 			dealer.setSelected(true);
 			cityList = customersDAO.getCustomerCityList();
 			namelist = customersDAO.getCustomerNameList();
@@ -99,7 +100,7 @@ private static final Logger LOG = LogManager.getLogger(CustomersCreateController
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-			else if(validation.isEmpty(customerName, companyName))
+			else if(validation.isEmptyAutoComplte(customerName, companyName))
 			{
 				message.setText(CommonConstants.INCORRECT_EMAIL);
 				message.getStyleClass().remove("success");
