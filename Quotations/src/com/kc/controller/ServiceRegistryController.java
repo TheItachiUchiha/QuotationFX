@@ -103,18 +103,21 @@ public class ServiceRegistryController implements Initializable {
 						}
 						else if(newValue.equals(newTab))
 						{
+							AdminHomeController.currentPage.setText("SERVICE REGISTER");
 							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceRegister.fxml"));
 							BorderPane modifyService = (BorderPane) loader3.load();
 							newTab.setContent(modifyService);
 						}
 						else if(newValue.equals(modifyTab))
 						{
+							AdminHomeController.currentPage.setText("MODIFY SERVICE");
 							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceModify.fxml"));
 							BorderPane modifyService = (BorderPane) loader3.load();
 							modifyTab.setContent(modifyService);
 						}
 						else if(newValue.equals(viewTab))
 						{
+							AdminHomeController.currentPage.setText("VIEW SERVICE HISTORY");
 							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-serviceView.fxml"));
 							BorderPane viewService = (BorderPane) loader2.load();
 							viewTab.setContent(viewService);

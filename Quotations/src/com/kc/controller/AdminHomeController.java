@@ -78,7 +78,6 @@ public class AdminHomeController implements Initializable {
 	public void priceEstimation()
 	{
 		try{
-			AdminHomeController.currentPage.setText("PRICE ESTIMATION");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation.fxml"));
 			BorderPane price = (BorderPane) loader.load();
 			LoginController.home.setCenter(price);
@@ -90,7 +89,6 @@ public class AdminHomeController implements Initializable {
 	public void enquiry()
 	{
 		try{
-			AdminHomeController.currentPage.setText("ENQUIRY");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry.fxml"));
 			BorderPane enquiry = (BorderPane) loader.load();
 			LoginController.home.setCenter(enquiry);
@@ -102,7 +100,6 @@ public class AdminHomeController implements Initializable {
 	public void quotation()
 	{
 		try{
-			AdminHomeController.currentPage.setText("EMAIL QUOTATION");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation.fxml"));
 			BorderPane quotation = (BorderPane) loader.load();
 			LoginController.home.setCenter(quotation);
@@ -114,7 +111,6 @@ public class AdminHomeController implements Initializable {
 	public void sales()
 	{
 		try{
-			AdminHomeController.currentPage.setText("SALES LEAD");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder.fxml"));
 			BorderPane sales = (BorderPane) loader.load();
 			LoginController.home.setCenter(sales);
@@ -126,7 +122,6 @@ public class AdminHomeController implements Initializable {
 	public void status()
 	{
 		try{
-			AdminHomeController.currentPage.setText("STATUS / REMINDER");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/statusReminder.fxml"));
 			BorderPane status = (BorderPane) loader.load();
 			LoginController.home.setCenter(status);
@@ -138,7 +133,6 @@ public class AdminHomeController implements Initializable {
 	public void service()
 	{
 		try{
-			AdminHomeController.currentPage.setText("SERVICE / REGISTRY");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/serviceRegistry.fxml"));
 			BorderPane service = (BorderPane) loader.load();
 			LoginController.home.setCenter(service);
@@ -162,7 +156,6 @@ public class AdminHomeController implements Initializable {
 	public void dispatch()
 	{
 		try{
-			AdminHomeController.currentPage.setText("MATERIAL DISPATCH");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch.fxml"));
 			BorderPane dispatch = (BorderPane) loader.load();
 			LoginController.home.setCenter(dispatch);

@@ -75,6 +75,7 @@ public class StatusReminderController implements Initializable {
 				optionTab.getStyleClass().add("green-tab");
 			}
 			
+			AdminHomeController.currentPage.setText("REMINDER");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/reminder.fxml"));
 			BorderPane newreminder = (BorderPane) loader.load();
 			reminderTab.setContent(newreminder);
@@ -87,18 +88,21 @@ public class StatusReminderController implements Initializable {
 					try{
 							if(newValue.equals(reminderTab))
 							{
+								AdminHomeController.currentPage.setText("REMINDER");
 								FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/reminder.fxml"));
 								BorderPane newreminder = (BorderPane) loader.load();
 								reminderTab.setContent(newreminder);
 							}
 							else if(newValue.equals(salesStatusTab))
 							{
+								AdminHomeController.currentPage.setText("SALES STATUS");
 								FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesStatus.fxml"));
 								BorderPane SalesStatus = (BorderPane) loader2.load();
 								salesStatusTab.setContent(SalesStatus);
 							}
 							else if(newValue.equals(optionTab))
 							{
+								AdminHomeController.currentPage.setText("OPTION");
 								FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/statusReminder-option.fxml"));
 								BorderPane option = (BorderPane) loader3.load();
 								optionTab.setContent(option);

@@ -77,6 +77,7 @@ public class QuotationController implements Initializable {
 				emailTab.getStyleClass().add("green-tab");
 				optionTab.getStyleClass().add("green-tab");
 			}
+			AdminHomeController.currentPage.setText("NEW QUOTATION");
 			FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-new.fxml"));
 			BorderPane newQuotation = (BorderPane) loadernew.load();
 			newTab.setContent(newQuotation);
@@ -88,18 +89,21 @@ public class QuotationController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
+						AdminHomeController.currentPage.setText("NEW QUOTATION");
 						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-new.fxml"));
 						BorderPane newQuotation = (BorderPane) loadernew.load();
 						newTab.setContent(newQuotation);
 					}
 					else if(t1.equals(viewTab))
 					{
+						AdminHomeController.currentPage.setText("VIEW QUOTATION");
 						FXMLLoader loaderview = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-view.fxml"));
 						BorderPane viewQuotation = (BorderPane) loaderview.load();
 						viewTab.setContent(viewQuotation);
 					}
 					else if(t1.equals(modifyTab))
 					{
+						AdminHomeController.currentPage.setText("MODIFY QUOTATION");
 						FXMLLoader loadermodify = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-modify.fxml"));
 						BorderPane modifyQuotation = (BorderPane) loadermodify.load();
 						modifyTab.setContent(modifyQuotation);
@@ -112,6 +116,7 @@ public class QuotationController implements Initializable {
 					}
 					else
 					{
+						AdminHomeController.currentPage.setText("OPTION");
 						FXMLLoader loaderoption = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-option.fxml"));
 						BorderPane optionQuotation = (BorderPane) loaderoption.load();
 						optionTab.setContent(optionQuotation);

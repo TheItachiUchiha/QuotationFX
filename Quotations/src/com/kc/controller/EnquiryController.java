@@ -68,6 +68,7 @@ public class EnquiryController implements Initializable {
 				viewTab.getStyleClass().add("green-tab");
 				optionTab.getStyleClass().add("green-tab");
 			}
+			AdminHomeController.currentPage.setText("NEW ENQUIRY");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-new.fxml"));
 			BorderPane newEnquiry = (BorderPane) loader.load();
 			newTab.setContent(newEnquiry);
@@ -79,18 +80,21 @@ public class EnquiryController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
+						AdminHomeController.currentPage.setText("NEW ENQUIRY");
 						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-new.fxml"));
 						BorderPane newEnquiry = (BorderPane) loader.load();
 						newTab.setContent(newEnquiry);
 					}
 					else if(t1.equals(viewTab))
 					{
+						AdminHomeController.currentPage.setText("VIEW ENQUIRY");
 						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-view.fxml"));
 						BorderPane viewEnquiry = (BorderPane) loader2.load();
 						viewTab.setContent(viewEnquiry);
 					}
 					else
 					{
+						AdminHomeController.currentPage.setText("OPTION");
 						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-options.fxml"));
 						BorderPane optionsEnquiry = (BorderPane) loader3.load();
 						optionTab.setContent(optionsEnquiry);

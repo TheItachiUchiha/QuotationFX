@@ -77,7 +77,7 @@ public class PriceEstimationController implements Initializable {
 				modifyTab.getStyleClass().add("green-tab");
 				enquiryStatus.getStyleClass().add("green-tab");
 			}
-			
+			AdminHomeController.currentPage.setText("NEW PRICE ESTIMATION");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-new.fxml"));
 			final BorderPane newEstimation = (BorderPane) loader.load();
 			newTab.setContent(newEstimation);
@@ -90,24 +90,28 @@ public class PriceEstimationController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
+						AdminHomeController.currentPage.setText("NEW PRICE ESTIMATION");
 						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-new.fxml"));
 						BorderPane newEstimation = (BorderPane) loader.load();
 						newTab.setContent(newEstimation);
 					}
 					else if(t1.equals(viewTab))
 					{
+						AdminHomeController.currentPage.setText("VIEW PRICE ESTIMATION");
 						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-view.fxml"));
 						BorderPane viewEstimation = (BorderPane) loader2.load();
 						viewTab.setContent(viewEstimation);
 					}
 					else if(t1.equals(modifyTab))
 					{
+						AdminHomeController.currentPage.setText("MODIFY PRICE ESTIMATION");
 						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/priceEstimation-modify.fxml"));
 						BorderPane modifyEstimation = (BorderPane) loader3.load();
 						modifyTab.setContent(modifyEstimation);
 					}
 					else
 					{
+						AdminHomeController.currentPage.setText("ENQUIRY STATUS");
 						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/enquiry-status.fxml"));
 						BorderPane status = (BorderPane) loader3.load();
 						enquiryStatus.setContent(status);

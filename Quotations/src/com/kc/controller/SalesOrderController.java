@@ -73,7 +73,7 @@ public class SalesOrderController implements Initializable {
 				viewTab.getStyleClass().add("green-tab");
 				modifyTab.getStyleClass().add("green-tab");
 			}
-			
+			AdminHomeController.currentPage.setText("NEW SALES LEAD");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-new.fxml"));
 			BorderPane newSalesOrder = (BorderPane) loader.load();
 			newTab.setContent(newSalesOrder);
@@ -85,18 +85,21 @@ public class SalesOrderController implements Initializable {
 					try{
 					if(t1.equals(newTab))
 					{
+						AdminHomeController.currentPage.setText("NEW SALES LEAD");
 						FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-new.fxml"));
 						BorderPane newSalesOrder = (BorderPane) loader.load();
 						newTab.setContent(newSalesOrder);
 					}
 					else if(t1.equals(viewTab))
 					{
+						AdminHomeController.currentPage.setText("VIEW SALES LEAD");
 						FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-view.fxml"));
 						BorderPane viewSalesOrder = (BorderPane) loader3.load();
 						viewTab.setContent(viewSalesOrder);
 					}
 					else
 					{
+						AdminHomeController.currentPage.setText("MODIFY SALES LEAD");
 						FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/salesOrder-modify.fxml"));
 						BorderPane modifySalesOrder = (BorderPane) loader2.load();
 						modifyTab.setContent(modifySalesOrder);

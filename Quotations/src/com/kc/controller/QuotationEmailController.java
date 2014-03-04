@@ -61,7 +61,7 @@ public class QuotationEmailController implements Initializable  {
 				sendQuotTab.getStyleClass().add("green-tab");
 				resendQuotTab.getStyleClass().add("green-tab");
 			}
-			
+			AdminHomeController.currentPage.setText("SEND QUOTATION");
 			FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-send.fxml"));
 			BorderPane send = (BorderPane) loadernew.load();
 			sendQuotTab.setContent(send);
@@ -73,12 +73,14 @@ public class QuotationEmailController implements Initializable  {
 				try{
 					if(newValue.equals(sendQuotTab))
 					{
+						AdminHomeController.currentPage.setText("SEND QUOTATION");
 						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-send.fxml"));
 						BorderPane send = (BorderPane) loadernew.load();
 						sendQuotTab.setContent(send);
 					}
 					else if(newValue.equals(resendQuotTab))
 					{
+						AdminHomeController.currentPage.setText("RESEND QUOTATION");
 						FXMLLoader loadernew = new FXMLLoader(this.getClass().getResource("/com/kc/view/quotation-email-resend.fxml"));
 						BorderPane resend = (BorderPane) loadernew.load();
 						resendQuotTab.setContent(resend);

@@ -82,6 +82,7 @@ public class ProductDispatchController implements Initializable {
 				optionTab.getStyleClass().add("green-tab");
 			}
 			createRadio.setSelected(true);
+			AdminHomeController.currentPage.setText("NEW PRODUCT DISPATCH");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch-new.fxml"));
 			final BorderPane productDispatch = (BorderPane) loader.load();
 			((BorderPane)dispatchTab.getContent()).setLeft(productDispatch);
@@ -95,12 +96,14 @@ public class ProductDispatchController implements Initializable {
 					{
 						if(createRadio.isSelected())
 						{
+							AdminHomeController.currentPage.setText("NEW PRODUCT DISPATCH");
 							FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch-new.fxml"));
 							final BorderPane productDispatch = (BorderPane) loader.load();
 							((BorderPane)dispatchTab.getContent()).setLeft(productDispatch);
 						}
 						else if(viewRadio.isSelected())
 						{
+							AdminHomeController.currentPage.setText("VIEW PRODUCT DISPATCH");
 							FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch-view.fxml"));
 							final BorderPane productDispatch = (BorderPane) loader.load();
 							((BorderPane)dispatchTab.getContent()).setLeft(productDispatch);
@@ -122,6 +125,7 @@ public class ProductDispatchController implements Initializable {
 					{
 						if(t1.equals(optionTab))
 						{
+							AdminHomeController.currentPage.setText("OPTION");
 							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/productDispatch-option.fxml"));
 							BorderPane option = (BorderPane) loader2.load();
 							optionTab.setContent(option);

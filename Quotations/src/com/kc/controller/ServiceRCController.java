@@ -76,6 +76,7 @@ public class ServiceRCController implements Initializable {
 				optionTab.getStyleClass().add("green-tab");
 			}
 			
+			AdminHomeController.currentPage.setText("NEW COMPLAINT");
 			FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-newComplaint.fxml"));
 			BorderPane newService = (BorderPane) loader.load();
 			newTab.setContent(newService);
@@ -89,18 +90,21 @@ public class ServiceRCController implements Initializable {
 					try{
 						if(newValue.equals(newTab))
 						{
+							AdminHomeController.currentPage.setText("NEW COMPLAINT");
 							FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-newComplaint.fxml"));
 							BorderPane newService = (BorderPane) loader.load();
 							newTab.setContent(newService);
 						}
 						else if(newValue.equals(optionTab))
 						{
+							AdminHomeController.currentPage.setText("OPTION");
 							FXMLLoader loader3 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-option.fxml"));
 							BorderPane modifyService = (BorderPane) loader3.load();
 							optionTab.setContent(modifyService);
 						}
 						else if(newValue.equals(viewTab))
 						{
+							AdminHomeController.currentPage.setText("VIEW COMPLAINTS");
 							FXMLLoader loader2 = new FXMLLoader(this.getClass().getResource("/com/kc/view/service-viewComplaint.fxml"));
 							BorderPane viewService = (BorderPane) loader2.load();
 							viewTab.setContent(viewService);
