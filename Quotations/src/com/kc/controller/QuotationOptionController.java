@@ -87,13 +87,9 @@ public class QuotationOptionController implements Initializable {
 	private Button pdfLocation;
 	@FXML
 	private Label message;
-	@FXML
-	private Label messageSent;
 	
 	@FXML
 	private Label messageEmail;
-	@FXML
-	private Button clear;
 	
 	@FXML
 	private Button define;
@@ -108,7 +104,6 @@ public class QuotationOptionController implements Initializable {
 	private ObservableList<String> categoryList = FXCollections.observableArrayList();
 	private ObservableList<String> subcategoryList = FXCollections.observableArrayList();
 	private ObservableList<String> nameList = FXCollections.observableArrayList();
-	private ObservableList<ProductsVO> productList = FXCollections.observableArrayList();
 	ObservableList<ProductsVO> standardList = FXCollections.observableArrayList();
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
@@ -130,6 +125,7 @@ public class QuotationOptionController implements Initializable {
 					tempProductCategoryList.add(productsVO.getProductCategory());
 				}
 			}
+			FXCollections.sort(tempProductCategoryList);
 			
 			categoryCombo.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -151,6 +147,7 @@ public class QuotationOptionController implements Initializable {
 								}
 							}
 						}
+						FXCollections.sort(tempProductSubCategoryList);
 					}
 					
 				}

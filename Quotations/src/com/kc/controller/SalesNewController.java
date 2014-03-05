@@ -40,11 +40,8 @@ public class SalesNewController {
 		customersDAO = new CustomersDAO();
 	}
 	
-	@FXML
-    private  ToggleButton viewEnquiry;
-    
     @FXML
-	 private ToggleGroup buttonToggle;
+	private ToggleGroup buttonToggle;
     
     @FXML
     private TextField city;
@@ -60,9 +57,6 @@ public class SalesNewController {
 
     @FXML
     private TextField dateOfQuotation;
-
-    @FXML
-    private TextField dateOfSalesOrder;
 
     @FXML
     private TextArea eaddress;
@@ -171,7 +165,7 @@ public class SalesNewController {
     		{
     			refList.add(enquiryViewVO.getReferenceNo());
     		}
-    		
+    		FXCollections.sort(refList);
     		referenceCombo.setItems(refList);
     		calendar = new DatePicker(Locale.ENGLISH);
     		calendar.setDateFormat(new SimpleDateFormat("dd/MM/yyyy"));

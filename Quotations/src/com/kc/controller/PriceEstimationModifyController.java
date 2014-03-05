@@ -264,6 +264,7 @@ public class PriceEstimationModifyController implements Initializable{
 						}
 						else
 						{
+							FXCollections.sort(refList);
 							referenceHBox.setVisible(true);
 							referenceCombo.setItems(refList);	
 						}

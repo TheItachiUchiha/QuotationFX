@@ -20,14 +20,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialogs;
+import javafx.scene.control.Dialogs.DialogOptions;
+import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.control.Dialogs.DialogOptions;
-import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -62,16 +61,18 @@ public class QuotationModifyController implements Initializable  {
 	
 	@FXML
 	private ComboBox<String> monthCombo;
+	
 	@FXML
 	private ComboBox<String> yearCombo;
+	
 	@FXML
 	private ComboBox<String> referenceCombo;
+	
 	@FXML
-	private ToggleButton enquiryDetails;
-	 @FXML
-	 private ToggleGroup buttonToggle;
-	 @FXML
-	    private TextField customerName;
+	private ToggleGroup buttonToggle;
+	
+	@FXML
+	private TextField customerName;
 
 	    @FXML
 	    private TextField estimatedPrice;
@@ -213,6 +214,7 @@ public class QuotationModifyController implements Initializable  {
 							}
 							else
 							{
+								FXCollections.sort(refList);
 								referenceCombo.setItems(refList);	
 								referenceHBox.setVisible(true);	
 								//flag=0;
@@ -221,6 +223,7 @@ public class QuotationModifyController implements Initializable  {
 					}
 					catch (Exception e) {
 						e.printStackTrace();
+						LOG.error(e.getMessage());
 					}
 					
 				}

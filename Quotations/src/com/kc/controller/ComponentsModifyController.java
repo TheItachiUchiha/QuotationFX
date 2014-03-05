@@ -123,6 +123,7 @@ public class ComponentsModifyController implements Initializable {
 					tempCategoryList.add(componentVO.getComponentCategory());
 				}
 			}
+			FXCollections.sort(tempCategoryList);
 
 			categoryCombo.setItems(tempCategoryList);
 
@@ -143,19 +144,17 @@ public class ComponentsModifyController implements Initializable {
 
 								tempComponentsList.clear();
 								for (ComponentsVO componentsVO : componentsList) {
-									if (componentsVO.getComponentCategory()
-											.equals(t1)) {
-										if (!tempSubCategoryList
-												.contains(componentsVO
-														.getSubCategory())) {
-											tempSubCategoryList
-													.add(componentsVO
-															.getSubCategory());
-											tempComponentsList
-													.add(componentsVO);
+									if (componentsVO.getComponentCategory().equals(t1))
+									{
+										if (!tempSubCategoryList.contains(componentsVO.getSubCategory()))
+										{
+											tempSubCategoryList.add(componentsVO.getSubCategory());
+											tempComponentsList.add(componentsVO);
 										}
 									}
 								}
+								FXCollections.sort(tempSubCategoryList);
+								
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

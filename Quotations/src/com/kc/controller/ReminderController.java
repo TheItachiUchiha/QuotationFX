@@ -125,9 +125,6 @@ public class ReminderController implements Initializable {
 	    private Label sentReminder;
 	    
 	    @FXML
-	    private Label message;
-	    
-	    @FXML
 	    private HBox sentHBox;
 
 	    private ObservableList<String> monthList = FXCollections.observableArrayList();
@@ -213,6 +210,7 @@ public class ReminderController implements Initializable {
 						}
 						else
 						{
+							FXCollections.sort(finalRefList);
 							referenceCombo.setItems(finalRefList);
 							referenceHBox.setVisible(true);
 						}

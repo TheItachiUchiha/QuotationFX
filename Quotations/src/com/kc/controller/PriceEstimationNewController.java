@@ -1,7 +1,6 @@
 package com.kc.controller;
 
 import java.awt.Desktop;
-import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -39,7 +38,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -153,11 +151,9 @@ public class PriceEstimationNewController implements Initializable {
 
     @FXML
     private TextField eenquiryType;
+    
     @FXML
     private Label endUserPriceTotal;
-
-    @FXML
-    private ToggleButton enquiryDetails;
 
     @FXML
     private TextField eproductName;
@@ -369,6 +365,7 @@ public class PriceEstimationNewController implements Initializable {
 						}
 						else
 						{
+							FXCollections.sort(refList);
 							referenceHBox.setVisible(true);
 							referenceCombo.setItems(refList);	
 							flag=0;

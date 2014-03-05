@@ -113,11 +113,7 @@ public class ServiceModifyController implements Initializable {
 	    String endDate;
 	    int customerId;
 	    
-	   /* private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
-		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
-		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();*/
 	    private ObservableList<ServiceVO> refList = FXCollections.observableArrayList();
-	    private ObservableList<ServiceVO> serviceList = FXCollections.observableArrayList();
 	    private ObservableList<String> uniqueRefList = FXCollections.observableArrayList();
 	    private ObservableList<String> contactList = FXCollections.observableArrayList();
 	    private ObservableList<String> complaintList = FXCollections.observableArrayList();
@@ -284,6 +280,7 @@ public class ServiceModifyController implements Initializable {
 								}
 							}
 						}
+						FXCollections.sort(uniqueRefList);
 						referenceCombo.setItems(uniqueRefList);
 						referenceHBox.setVisible(true);
 						mainVBox.setVisible(true);
@@ -297,6 +294,7 @@ public class ServiceModifyController implements Initializable {
 								contactList.add(serviceVO.getContactNo());
 							}
 						}
+						FXCollections.sort(contactList);
 						contactCombo.setItems(contactList);
 						contactHBox.setVisible(true);
 						mainVBox.setVisible(true);

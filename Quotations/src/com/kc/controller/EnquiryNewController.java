@@ -108,11 +108,9 @@ public class EnquiryNewController implements Initializable {
 	private TextField filePath;
 	private String typeFlag="S";
 	private int productId=0;
-	private Email email;
 	
 	private ObservableList<ProductsVO> productsList;
 	private ProductsDAO productsDAO;
-	private ProductsVO productsVO;
 	private ObservableList<CustomersVO> customersList;
 	private CustomersDAO customersDAO;
 	private EnquiryDAO enquiryDAO;
@@ -131,7 +129,6 @@ public class EnquiryNewController implements Initializable {
 		customersDAO = new CustomersDAO();
 		customersVO = new CustomersVO();
 		productsDAO = new ProductsDAO();
-		productsVO = new ProductsVO();
 		enquiryDAO = new EnquiryDAO();
 		validation = new Validation();
 		date = simpleDateFormat.format(new Date()); 
@@ -150,12 +147,9 @@ public class EnquiryNewController implements Initializable {
 		
 		ObservableList<String> tempTinList = FXCollections.observableArrayList();
 		ObservableList<String> tempEmailList = FXCollections.observableArrayList();
-		ObservableList<String> tempCategoryList = FXCollections
-				.observableArrayList();
-		final ObservableList<String> tempSubCategoryList = FXCollections
-				.observableArrayList();
-		final ObservableList<ProductsVO> tempProductList = FXCollections
-				.observableArrayList();
+		ObservableList<String> tempCategoryList = FXCollections.observableArrayList();
+		final ObservableList<String> tempSubCategoryList = FXCollections.observableArrayList();
+		final ObservableList<ProductsVO> tempProductList = FXCollections.observableArrayList();
 		defaultValues = enquiryDAO.getEnquiryOptionDefaultValues();
 		filePath = new TextField();
 		filePath.setEditable(false);
@@ -253,6 +247,7 @@ public class EnquiryNewController implements Initializable {
 					tempCategoryList.add(productsVO.getProductCategory());
 				}
 			}
+			FXCollections.sort(tempCategoryList);
 
 			categoryCombo.setItems(tempCategoryList);
 
@@ -300,6 +295,7 @@ public class EnquiryNewController implements Initializable {
 										}
 									}
 								}
+								FXCollections.sort(tempSubCategoryList);
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

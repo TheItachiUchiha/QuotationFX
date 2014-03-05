@@ -301,6 +301,7 @@ public class ProductDispatchViewController implements Initializable {
 						}
 					}
 				}
+				FXCollections.sort(keyList);
 				keyCombo.setItems(keyList);
 				keyVBox.setVisible(true);
 			}

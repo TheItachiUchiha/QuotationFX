@@ -174,6 +174,7 @@ public class ServiceNewComplaint implements Initializable {
 			productsList = productsDAO.getProductNameList();
 			emailDetails = serviceDAO.getServiceOptionDefaultValues();
 			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList,customerList);
+			FXCollections.sort(productsList);
 			productCombo.setItems(productsList);
 			
 			for(CustomersVO customersVO : customerList)
@@ -190,6 +191,7 @@ public class ServiceNewComplaint implements Initializable {
 					refList.add(enquiryVO.getReferenceNo());
 				}
 			}
+			FXCollections.sort(nameList);
 			referenceAutoFill.setItems(refList);
 			customerCombo.setItems(nameList);
 			
@@ -412,6 +414,7 @@ public class ServiceNewComplaint implements Initializable {
 					contactsList.add(customersVO.getContactNumber());
 				}
 			}
+			FXCollections.sort(contactsList);
 			contactCombo.setItems(contactsList);
 			nameGrid.setVisible(true);
 			containtVBox.getChildren().add(nameGrid);

@@ -2,11 +2,7 @@ package com.kc.controller;
 
 import java.awt.Desktop;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -30,7 +26,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -46,7 +41,6 @@ import com.kc.dao.QuotationDAO;
 import com.kc.model.CustomersVO;
 import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
-import com.kc.model.PriceEstimationVO;
 import com.kc.util.FileUtils;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
@@ -67,15 +61,16 @@ public class QuotationNewController implements Initializable {
 		quotationDAO = new QuotationDAO();
 	}
 	
-	@FXML
-	private ComboBox<String> monthCombo;
-	@FXML
-	private ComboBox<String> yearCombo;
-	@FXML
-	private ComboBox<String> referenceCombo;
-	@FXML
-	private ToggleButton enquiryDetails;
-	 @FXML
+		@FXML
+		private ComboBox<String> monthCombo;
+		
+		@FXML
+		private ComboBox<String> yearCombo;
+		
+		@FXML
+		private ComboBox<String> referenceCombo;
+	
+		@FXML
 	    private TextField customerName;
 
 	    @FXML
@@ -100,16 +95,10 @@ public class QuotationNewController implements Initializable {
 	    private TextField edateOfEnquiry;
 
 	    @FXML
-	    private TextField epriceEstimation;
-
-	    @FXML
 	    private TextField eproductName;
 
 	    @FXML
 	    private TextField epurchasePeriod;
-
-	    @FXML
-	    private TextField equotationPreparation;
 
 	    @FXML
 	    private TextField ereferedBy;
@@ -128,19 +117,25 @@ public class QuotationNewController implements Initializable {
 
 	    @FXML
 	    private TextField referenceNo;
+	    
 	    @FXML
 	    private GridPane enquiryGrid;
+	    
 	    @FXML
 	    private TextField ecustomerFile;
+	    
 	    @FXML
 	    private Button viewFile;
+	    
 	    @FXML
 	    private Button search;
 	    
 	    @FXML
 	    private Button openQuotation;
+	    
 	    @FXML
 	    private GridPane quotationGrid;
+	    
 	    @FXML
 	    private HBox referenceHBox;
 	    
@@ -152,16 +147,15 @@ public class QuotationNewController implements Initializable {
 	    
 	    //int flag=0;
 	    String newFileName = "";
-	private ObservableList<String> monthList = FXCollections.observableArrayList();
-	private ObservableList<String> yearList = FXCollections.observableArrayList();
-	private ObservableList<String> refList = FXCollections.observableArrayList();
-	private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
-	private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
-	private ObservableList<PriceEstimationVO> peList = FXCollections.observableArrayList();
-	private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
-	private Map<String, String> defaultValues = new HashMap<String, String>();
-	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
-	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+		private ObservableList<String> monthList = FXCollections.observableArrayList();
+		private ObservableList<String> yearList = FXCollections.observableArrayList();
+		private ObservableList<String> refList = FXCollections.observableArrayList();
+		private ObservableList<EnquiryViewVO> enquiryViewList = FXCollections.observableArrayList();
+		private ObservableList<EnquiryVO> enquiryList = FXCollections.observableArrayList();
+		private ObservableList<CustomersVO> customerList = FXCollections.observableArrayList();
+		private Map<String, String> defaultValues = new HashMap<String, String>();
+		SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
+		private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -267,6 +261,7 @@ public class QuotationNewController implements Initializable {
 							}
 							else
 							{
+								FXCollections.sort(refList);
 								referenceHBox.setVisible(true);
 								referenceCombo.setItems(refList);	
 								//flag=0;

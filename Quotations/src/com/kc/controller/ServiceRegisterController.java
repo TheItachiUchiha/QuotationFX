@@ -151,6 +151,7 @@ public class ServiceRegisterController implements Initializable {
 	    			}
     			}
     		}
+    		FXCollections.sort(uniqueRefList);
     		
     		for(ServiceVO serviceVO : refList)
     		{
@@ -159,6 +160,7 @@ public class ServiceRegisterController implements Initializable {
     				uniqueContactList.add(serviceVO.getContactNo());
     			}
     		}
+    		FXCollections.sort(uniqueContactList);
     		
     		referenceCombo.valueProperty().addListener(new ChangeListener<String>() {
 

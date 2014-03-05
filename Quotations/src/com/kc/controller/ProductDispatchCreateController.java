@@ -219,6 +219,7 @@ public class ProductDispatchCreateController implements Initializable {
 					{
 						reflist.add(enquiryViewVO.getReferenceNo());
 					}
+					FXCollections.sort(reflist);
 					referenceCombo.setItems(reflist);
 					referenceHBox.setVisible(true);
 				}

@@ -152,6 +152,7 @@ public class ProductsModifyController implements Initializable {
 					tempProductCategoryList.add(productsVO.getProductCategory());
 				}
 			}
+			FXCollections.sort(tempProductCategoryList);
 			
 			productCategory.valueProperty().addListener(new ChangeListener<String>() {
 
@@ -174,6 +175,7 @@ public class ProductsModifyController implements Initializable {
 								}
 							}
 						}
+						FXCollections.sort(tempProductSubCategoryList);
 					}
 				}
 			});

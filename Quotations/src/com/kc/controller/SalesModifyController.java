@@ -1,10 +1,19 @@
 package com.kc.controller;
 
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Locale;
-import java.util.ResourceBundle;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Dialogs;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
@@ -17,18 +26,6 @@ import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
 import eu.schudt.javafx.controls.calendar.DatePicker;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Dialogs;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 
 public class SalesModifyController {
 
@@ -153,6 +150,7 @@ public class SalesModifyController {
 									refList.add(enquiryVO.getReferenceNo());
 								}
 							}
+							FXCollections.sort(refList);
 							if(refList.isEmpty())
 							{
 								Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_ENQUIRY);

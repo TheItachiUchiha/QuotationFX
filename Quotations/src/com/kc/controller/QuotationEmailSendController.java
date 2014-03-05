@@ -120,9 +120,6 @@ public class QuotationEmailSendController implements Initializable {
     private GridPane enquiryGrid;
     
     @FXML
-    private  ToggleButton enquiryDetails;
-    
-    @FXML
 	 private ToggleGroup buttonToggle;
     
     @FXML
@@ -220,6 +217,7 @@ public class QuotationEmailSendController implements Initializable {
 							}
 							else
 							{
+								FXCollections.sort(refList);
 								referenceCombo.setItems(refList);
 								referenceHBox.setVisible(true);	
 								//flag=0;
