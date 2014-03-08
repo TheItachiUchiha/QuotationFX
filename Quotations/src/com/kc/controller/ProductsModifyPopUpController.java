@@ -57,6 +57,7 @@ public class ProductsModifyPopUpController implements Initializable {
 	private ObservableList<String> categorylist=FXCollections.observableArrayList();
 	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
 	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	private ObservableList<String> codelist=FXCollections.observableArrayList();
 	private ProductsDAO productsDAO;
 	public static Stage stage;
 	private Validation validate;
@@ -103,7 +104,7 @@ public class ProductsModifyPopUpController implements Initializable {
 	private AutoCompleteTextField<String> productSubCategoryTextField;
 
     @FXML
-    private TextField productCodeTextField;
+    private AutoCompleteTextField<String> productCodeTextField;
 
     @FXML
     private TableColumn<ComponentsVO, Integer> quantity;
@@ -135,9 +136,11 @@ public class ProductsModifyPopUpController implements Initializable {
 			categorylist = productsDAO.getProductCategoryList();
 			subcategorylist = productsDAO.getProductSubcategoryList();
 			namelist = productsDAO.getProductNameList();
+			codelist = productsDAO.getProductCodeList();
 			productCategoryTextField.setItems(categorylist);
 			productSubCategoryTextField.setItems(subcategorylist);
 			productNameTextField.setItems(namelist);
+			productCodeTextField.setItems(codelist);
 			
 			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
 				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {
@@ -285,7 +288,7 @@ public class ProductsModifyPopUpController implements Initializable {
 			message.setVisible(true);
 		}
 		}
-		catch (SQLException s) {
+		/*catch (SQLException s) {
 			s.printStackTrace();
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_PRODUCT_CODE);
@@ -293,7 +296,7 @@ public class ProductsModifyPopUpController implements Initializable {
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-		}
+		}*/
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());

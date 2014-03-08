@@ -67,19 +67,24 @@
             <TextArea id="customerRequirement" fx:id="customerRequirements" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="56.0" prefWidth="202.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10" />
             <TextField id="estimatePeriod" fx:id="purchasePeriod" maxWidth="-Infinity" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
             <Label prefHeight="24.0" prefWidth="115.0" text="Customer Document" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
-            <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="115.0" text="Email Message" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
-            <TextArea fx:id="emailMessage" maxWidth="-Infinity" prefHeight="164.0" prefWidth="370.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="6">
-              <GridPane.margin>
-                <Insets top="5.0" fx:id="x1" />
-              </GridPane.margin>
-            </TextArea>
             <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="115.0" text="CC" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <TextField id="estimatePeriod" fx:id="cc" maxWidth="-Infinity" prefWidth="370.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.margin="$x1" GridPane.rowIndex="8" GridPane.rowSpan="2" GridPane.valignment="TOP">
+            <TextArea fx:id="emailMessage" maxWidth="-Infinity" prefHeight="191.0" prefWidth="370.0" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="3" GridPane.rowSpan="6">
+              <GridPane.margin>
+                <Insets />
+              </GridPane.margin>
+            </TextArea>
+            <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="115.0" text="Email Message" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+            <Label contentDisplay="TOP" prefHeight="22.0" prefWidth="115.0" text="Subject" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
+            <TextField id="estimatePeriod" fx:id="subject" maxWidth="-Infinity" prefWidth="370.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="3" GridPane.rowIndex="9" GridPane.rowSpan="1" GridPane.valignment="TOP">
               <children>
                 <Button id="sendEmail" fx:id="" mnemonicParsing="false" onAction="#sendEmail" styleClass="button-style" text="Send Email" />
                 <Label id="messageCustom" fx:id="messageSendMail" alignment="CENTER" prefHeight="17.0" prefWidth="179.0" text="" />
               </children>
+              <GridPane.margin>
+                <Insets top="5.0" fx:id="x1" />
+              </GridPane.margin>
             </VBox>
           </children>
           <columnConstraints>

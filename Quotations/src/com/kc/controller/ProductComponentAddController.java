@@ -60,7 +60,6 @@ public class ProductComponentAddController implements Initializable {
     @FXML private TableColumn<ComponentsVO, Double> costPrice;
     @FXML private TableColumn<ComponentsVO, Double> dealerPrice;
     @FXML private TableColumn<ComponentsVO, Double> endUserPrice;
-    @FXML private Label message;
 
 	public TableView<ComponentsVO> getComponentTable() {
 		return componentTable;

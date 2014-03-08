@@ -102,6 +102,8 @@ public class EnquiryNewController implements Initializable {
 	@FXML
 	private TextField cc;
 	@FXML
+	private TextField subject;
+	@FXML
 	private Label messageSendMail;
 	@FXML
 	private Label messageNewEnquiry;
@@ -576,6 +578,7 @@ public class EnquiryNewController implements Initializable {
 				{
 					map.put(CommonConstants.EMAIL_TO, emailId.getText());
 					map.put(CommonConstants.EMAIL_CC, cc.getText());
+					map.put(CommonConstants.EMAIL_SUBJECT, subject.getText());
 					map.put(CommonConstants.EMAIL_ATTACHMENT, filePath.getText());
 					map.put(CommonConstants.EMAIL_BODY, emailMessage.getText());
 					map.put(CommonConstants.EMAIL_USERNAME, emailMap.get(CommonConstants.KEY_ENQUIRY_EMAIL_USERNAME));

@@ -5,6 +5,7 @@ import java.io.File;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -143,6 +144,9 @@ public class QuotationModifyController implements Initializable  {
 	    @FXML
 	    private TextField quotationPreparationDate;
 	    
+	    @FXML
+	    private HBox  createQuotationBox;
+	    
 	    //int flag=0;
 	
 	private ObservableList<String> monthList = FXCollections.observableArrayList();
@@ -154,6 +158,7 @@ public class QuotationModifyController implements Initializable  {
 	SimpleDateFormat formatter = new SimpleDateFormat(CommonConstants.DATE_FORMAT);
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	private EnquiryViewVO enquiryViewVO = new EnquiryViewVO();
+	String newFileName = "";
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -423,6 +428,7 @@ public class QuotationModifyController implements Initializable  {
 							message.getStyleClass().remove("success");
 							message.getStyleClass().add("failure");
 							message.setVisible(true);
+							createQuotationBox.setVisible(true);
 						}
 					}
 					else
@@ -437,5 +443,24 @@ public class QuotationModifyController implements Initializable  {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void createQuotation()
+	{
+		File file = new File(defaultValues.get(CommonConstants.KEY_QUOTATION_PATH));
+		if(file.exists())
+		{
+			newFileName = FileUtils.copyFile(file, defaultValues.get(CommonConstants.KEY_QUOTATION_WORD_PATH), referenceNo.getText() + "_" + customerName.getText() + "." +  FileUtils.getExtension(file));
+			message.setText(CommonConstants.QUOTATION_PREPARED);
+			message.getStyleClass().remove("failure");
+			message.getStyleClass().add("success");
+			message.setVisible(true);
+			openQuotation.setVisible(true);
+			quotationDAO.UpdateEnquiry(enquiryViewVO.getId(),"Y",formatter.format(new Date()));
+		}
+		else
+		{
+			Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
+		}
 	}
 }

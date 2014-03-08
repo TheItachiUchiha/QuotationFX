@@ -405,7 +405,7 @@ public class CustomersViewController implements Initializable {
 					LOG.info("Enter : handle");
 					try {
 						FXMLLoader menuLoader = new FXMLLoader(this.getClass()
-								.getResource("/com/kc/view/customers-modify.fxml"));
+								.getResource("/com/kc/view/customers-modify-popup.fxml"));
 						BorderPane customerModify;
 						customerModify = (BorderPane) menuLoader.load();
 						customerModify.setTop(new HBox());
@@ -413,8 +413,8 @@ public class CustomersViewController implements Initializable {
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(customerModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(600);
-						modifyStage.setWidth(600);
+						modifyStage.setHeight(550);
+						modifyStage.setWidth(500);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);
 						modifyStage.setScene(modifyScene);

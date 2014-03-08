@@ -31,19 +31,16 @@
         <Label prefHeight="30.0" prefWidth="162.0" text="Customer Requirements" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
         <Label prefHeight="21.0" prefWidth="162.0" text="Customer File" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="11" />
         <Label prefHeight="24.0" prefWidth="162.0" text="Estimated Purchase Period" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="12" />
-        <VBox id="VBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="13">
+        <HBox id="HBox" alignment="CENTER_RIGHT" spacing="40.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="13">
           <children>
             <Button mnemonicParsing="false" onAction="#modifyEnquiry" styleClass="button-style" text="Save" />
-            <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER" contentDisplay="CENTER" prefHeight="20.0" prefWidth="317.0" text="">
+            <Label id="messageStandard" fx:id="messageNewEnquiry" alignment="CENTER_LEFT" contentDisplay="CENTER" prefHeight="20.0" prefWidth="196.0" text="">
               <font>
                 <Font size="15.0" />
               </font>
             </Label>
           </children>
-          <padding>
-            <Insets top="5.0" fx:id="x1" />
-          </padding>
-        </VBox>
+        </HBox>
         <AutoCompleteTextField id="tin" fx:id="tinNumber" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
         <AutoCompleteTextField id="email" fx:id="emailId" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
         <AutoCompleteTextField id="refer" fx:id="referedBy" maxWidth="-Infinity" prefHeight="21.0" prefWidth="209.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -69,20 +66,20 @@
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="415.0" minWidth="10.0" percentWidth="63.86370547709398" prefWidth="415.0" />
       </columnConstraints>
       <rowConstraints>
-        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="29.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="167.0" minHeight="9.0" prefHeight="25.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="184.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="184.0" minHeight="6.0" prefHeight="27.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="53.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="28.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="184.0" minHeight="6.0" prefHeight="24.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="211.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="207.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="195.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
       </rowConstraints>
       <BorderPane.margin>
         <Insets top="30.0" />

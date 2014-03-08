@@ -11,8 +11,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -127,7 +125,7 @@ public class ServiceNewComplaint implements Initializable {
     private Label totalServiceInName;
     
     @FXML
-    private ComboBox<String> customerCombo;
+    private AutoCompleteTextField<String> customerAutoFill;
     
     @FXML
     private ComboBox<String> contactCombo;
@@ -186,23 +184,25 @@ public class ServiceNewComplaint implements Initializable {
 			}
 			for(EnquiryViewVO enquiryVO : enquiryViewList)
 			{
-				if(enquiryVO.getSales().equalsIgnoreCase("Y") )
+				if(enquiryVO.getSales().equalsIgnoreCase("Y") && enquiryVO.getDispatchDone().equalsIgnoreCase("Y") )
 				{
 					refList.add(enquiryVO.getReferenceNo());
 				}
 			}
 			FXCollections.sort(nameList);
 			referenceAutoFill.setItems(refList);
-			customerCombo.setItems(nameList);
+			customerAutoFill.setItems(nameList);
 			
-			referenceAutoFill.setOnAction(new EventHandler<ActionEvent>() {
-				
-				@Override
-				public void handle(ActionEvent arg0) {
-					
-					referenceGrid.setVisible(false);
-				}
-			});
+			referenceAutoFill.textProperty().addListener(new ChangeListener<String>() {
+
+					@Override
+					public void changed(ObservableValue<? extends String> arg0,
+							String arg1, String arg2) {
+
+						referenceGrid.setVisible(false);
+						
+					}
+				});
 			
 			 customerToggle.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -215,7 +215,7 @@ public class ServiceNewComplaint implements Initializable {
 					{
 						nameGrid.setVisible(false);
 						containtVBox.getChildren().clear();
-						customerCombo.getSelectionModel().clearSelection();
+						customerAutoFill.setText("");
 						mainVBox.getChildren().clear();
 						mainVBox.getChildren().add(referenceHBox);
 					}
@@ -254,17 +254,19 @@ public class ServiceNewComplaint implements Initializable {
 					
 				}
 			});
-			 customerCombo.valueProperty().addListener(new ChangeListener<String>() {
+			
+			 customerAutoFill.textProperty().addListener(new ChangeListener<String>() {
 
 				@Override
-				public void changed(
-						ObservableValue<? extends String> observable,
-						String oldValue, String newValue) {
-			    	productCombo.getSelectionModel().clearSelection();
+				public void changed(ObservableValue<? extends String> arg0,
+						String arg1, String arg2) {
+
+					productCombo.getSelectionModel().clearSelection();
 			    	nameGrid.setVisible(false);
 					
 				}
 			});
+			 
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -294,6 +296,7 @@ public class ServiceNewComplaint implements Initializable {
 				}
 			}
 			referenceGrid.setVisible(true);
+			containtVBox.getChildren().clear();
 			containtVBox.getChildren().add(referenceGrid);
 		}
     }
@@ -397,7 +400,7 @@ public class ServiceNewComplaint implements Initializable {
     
     public void createComplaintInName()
 	{
-    	if(customerCombo.getSelectionModel().getSelectedIndex()==-1)
+    	if(customerAutoFill.getText().equals(""))
 		{
 			Dialogs.showInformationDialog(LoginController.primaryStage,CommonConstants.NO_CUST);
 		}
@@ -409,7 +412,7 @@ public class ServiceNewComplaint implements Initializable {
 			contactCombo.getSelectionModel().clearSelection();
 			for(CustomersVO customersVO : customerList)
 			{
-				if(customersVO.getCustomerName().equals(customerCombo.getSelectionModel().getSelectedItem()) )
+				if(customersVO.getCustomerName().equals(customerAutoFill.getText()) )
 				{
 					contactsList.add(customersVO.getContactNumber());
 				}
@@ -417,6 +420,7 @@ public class ServiceNewComplaint implements Initializable {
 			FXCollections.sort(contactsList);
 			contactCombo.setItems(contactsList);
 			nameGrid.setVisible(true);
+			containtVBox.getChildren().clear();
 			containtVBox.getChildren().add(nameGrid);
 		}
 	}

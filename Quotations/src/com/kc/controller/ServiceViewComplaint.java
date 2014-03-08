@@ -265,8 +265,8 @@ public class ServiceViewComplaint implements Initializable {
 					Stage modifyStage = new Stage();
 					Scene modifyScene = new Scene(serviceModify);
 					modifyStage.setResizable(false);
-					modifyStage.setHeight(650);
-					modifyStage.setWidth(800);
+					modifyStage.setHeight(400);
+					modifyStage.setWidth(830);
 					modifyStage.initModality(Modality.WINDOW_MODAL);
 					modifyStage.initOwner(LoginController.primaryStage);
 					modifyStage.setScene(modifyScene);

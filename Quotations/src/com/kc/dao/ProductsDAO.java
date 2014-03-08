@@ -33,7 +33,7 @@ public class ProductsDAO {
 		{
 			conn = DBConnector.getConnection();
 			preparedStatement = conn
-					.prepareStatement(SQLConstants.SAVE_PRODUCT , Statement.RETURN_GENERATED_KEYS);
+					.prepareStatement(SQLConstants.SAVE_PRODUCT /* ,Statement.RETURN_GENERATED_KEYS*/);
 	
 			preparedStatement.setString(1, productsVO.getProductName());
 			preparedStatement.setString(2, productsVO.getProductCategory());
@@ -352,6 +352,29 @@ public class ProductsDAO {
 			}
 		}
 		LOG.info("Exit : getProductNameList");
+		return listOfCategory;
+	}
+
+	public ObservableList<String> getProductCodeList() throws SQLException {
+		LOG.info("Enter : getProductCodeList");
+		ObservableList<String> listOfCategory = FXCollections
+				.observableArrayList();
+		try {
+			conn = DBConnector.getConnection();
+			preparedStatement = conn.prepareStatement(SQLConstants.GET_PRODUCT_CODE_LIST);
+			resultSet = preparedStatement.executeQuery();
+
+			while (resultSet.next()) {
+				listOfCategory.add(resultSet.getString(1));
+			}
+		} catch (Exception e) {
+			LOG.error(e.getMessage());
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+		LOG.info("Exit : getProductCodeList");
 		return listOfCategory;
 	}
 }

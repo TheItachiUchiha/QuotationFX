@@ -479,7 +479,7 @@ public class ProductDispatchViewController implements Initializable {
 					Stage modifyStage = new Stage();
 					Scene modifyScene = new Scene(serviceModify);
 					modifyStage.setResizable(false);
-					modifyStage.setHeight(650);
+					modifyStage.setHeight(460);
 					modifyStage.setWidth(800);
 					modifyStage.initModality(Modality.WINDOW_MODAL);
 					modifyStage.initOwner(LoginController.primaryStage);
@@ -500,6 +500,7 @@ public class ProductDispatchViewController implements Initializable {
 								if(searchCombo.getSelectionModel().getSelectedIndex()==-1)
 								{
 									dispatchList = dispatchDAO.getProductDispatch();
+									finalDispatchList.clear();
 									for(DispatchVO dispatchVO : dispatchList)
 									{
 										if(new SimpleDateFormat("yyyy").format(formatter.parse(dispatchVO.getInvoiceDate())).equalsIgnoreCase(currentYear))
@@ -507,6 +508,7 @@ public class ProductDispatchViewController implements Initializable {
 											finalDispatchList.add(dispatchVO);
 										}
 									}
+									fillTable(finalDispatchList);
 								}
 								else
 								{

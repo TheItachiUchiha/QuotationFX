@@ -30,9 +30,9 @@
             <ToggleButton id="priceestimation" fx:id="priceEstimation" mnemonicParsing="false" onAction="#priceEstimation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Price Estimation" toggleGroup="$submenuButtons" />
             <ToggleButton fx:id="quotation" mnemonicParsing="false" onAction="#quotation" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Email Quotation" toggleGroup="$submenuButtons" />
             <ToggleButton fx:id="sales" mnemonicParsing="false" onAction="#sales" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Sales Leads" toggleGroup="$submenuButtons" />
+            <ToggleButton id="report" fx:id="dispatch" mnemonicParsing="false" onAction="#dispatch" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Material Dispatch" toggleGroup="$submenuButtons" />
             <ToggleButton fx:id="status" mnemonicParsing="false" onAction="#status" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Status / Reminder" toggleGroup="$submenuButtons" />
             <ToggleButton id="status" fx:id="service" mnemonicParsing="false" onAction="#service" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Service Register" toggleGroup="$submenuButtons" />
-            <ToggleButton id="report" fx:id="dispatch" mnemonicParsing="false" onAction="#dispatch" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Material Dispatch" toggleGroup="$submenuButtons" />
             <ToggleButton id="status" fx:id="report" mnemonicParsing="false" onAction="#report" prefHeight="70.0" prefWidth="210.0" styleClass="submenubuttons" text="Reports" toggleGroup="$submenuButtons" />
           </children>
           <padding>

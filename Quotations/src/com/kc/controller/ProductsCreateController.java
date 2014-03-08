@@ -54,6 +54,11 @@ public class ProductsCreateController implements Initializable{
 	private ObservableList<String> categorylist=FXCollections.observableArrayList();
 	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
 	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	private ObservableList<String> codelist=FXCollections.observableArrayList();
+	private ObservableList<String> uniquecategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> uniquesubcategorylist=FXCollections.observableArrayList();
+	private ObservableList<String> uniquenamelist=FXCollections.observableArrayList();
+	private ObservableList<String> uniquecodelist=FXCollections.observableArrayList();
 	private Validation validate;
 	
 	@FXML
@@ -77,7 +82,7 @@ public class ProductsCreateController implements Initializable{
     @FXML
     private AutoCompleteTextField<String> productName;
     @FXML
-    private TextField productCode;
+    private AutoCompleteTextField<String> productCode;
     @FXML
     private Label message;
     ProductsDAO productsDAO;
@@ -102,9 +107,39 @@ public class ProductsCreateController implements Initializable{
 			categorylist = productsDAO.getProductCategoryList();
 			subcategorylist = productsDAO.getProductSubcategoryList();
 			namelist = productsDAO.getProductNameList();
-			productCategory.setItems(categorylist);
-			productSubCategory.setItems(subcategorylist);
-			productName.setItems(namelist);
+			codelist = productsDAO.getProductCodeList();
+			for(String string : categorylist)
+			{
+				if(!uniquecategorylist.contains(string))
+				{
+					uniquecategorylist.add(string);
+				}
+			}
+			for(String string : subcategorylist)
+			{
+				if(!uniquesubcategorylist.contains(string))
+				{
+					uniquesubcategorylist.add(string);
+				}
+			}
+			for(String string : namelist)
+			{
+				if(!uniquenamelist.contains(string))
+				{
+					uniquenamelist.add(string);
+				}
+			}
+			for(String string : codelist)
+			{
+				if(!uniquecodelist.contains(string))
+				{
+					uniquecodelist.add(string);
+				}
+			}
+			productCategory.setItems(uniquecategorylist);
+			productSubCategory.setItems(uniquesubcategorylist);
+			productName.setItems(uniquenamelist);
+			productCode.setItems(uniquecodelist);
 			
 			final Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>> cellFactory = new Callback<TableColumn<ComponentsVO, Integer>, TableCell<ComponentsVO, Integer>>() {
 				public TableCell<ComponentsVO, Integer> call(TableColumn<ComponentsVO, Integer> p) {
@@ -262,7 +297,7 @@ public class ProductsCreateController implements Initializable{
 			message.setVisible(true);
 		}
 		}
-		catch (SQLException s) {
+		/*catch (SQLException s) {
 				if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT)
 				{
 					message.setText(CommonConstants.DUPLICATE_PRODUCT_CODE);
@@ -277,9 +312,10 @@ public class ProductsCreateController implements Initializable{
 					message.getStyleClass().add("failure");
 					message.setVisible(true);
 				}
-		}
+		}*/
 		catch (Exception e) {
 			LOG.error(e.getMessage());
+			e.printStackTrace();
 		}
 		LOG.info("Exit : saveProduct");
 	}

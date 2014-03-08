@@ -187,7 +187,7 @@ public class HelpEmployeeViewController implements Initializable {
 						Stage modifyStage = new Stage();
 						Scene modifyScene = new Scene(userModify);
 						modifyStage.setResizable(false);
-						modifyStage.setHeight(350);
+						modifyStage.setHeight(390);
 						modifyStage.setWidth(500);
 						modifyStage.initModality(Modality.WINDOW_MODAL);
 						modifyStage.initOwner(LoginController.primaryStage);

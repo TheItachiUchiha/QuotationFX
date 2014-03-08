@@ -304,6 +304,8 @@ public class PriceEstimationNewController implements Initializable {
 				public void changed(ObservableValue<? extends String> arg0,
 						String arg1, String arg2) {
 					referenceHBox.setVisible(false);
+					enquiryGrid.setVisible(false);
+					estimationVBox.setVisible(false);
 					
 				}
 			});
@@ -313,6 +315,8 @@ public class PriceEstimationNewController implements Initializable {
 				public void changed(ObservableValue<? extends String> arg0,
 						String arg1, String arg2) {
 					referenceHBox.setVisible(false);
+					enquiryGrid.setVisible(false);
+					estimationVBox.setVisible(false);
 					
 				}
 			});

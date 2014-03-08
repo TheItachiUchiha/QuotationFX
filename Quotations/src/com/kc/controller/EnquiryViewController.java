@@ -613,8 +613,8 @@ public class EnquiryViewController implements Initializable {
 					Stage modifyStage = new Stage();
 					Scene modifyScene = new Scene(enquiryModify);
 					modifyStage.setResizable(false);
-					modifyStage.setHeight(650);
-					modifyStage.setWidth(600);
+					modifyStage.setHeight(680);
+					modifyStage.setWidth(500);
 					modifyStage.initModality(Modality.WINDOW_MODAL);
 					modifyStage.initOwner(LoginController.primaryStage);
 					modifyStage.setScene(modifyScene);
@@ -692,7 +692,7 @@ public class EnquiryViewController implements Initializable {
 					Scene viewScene = new Scene(enquiryView);
 					viewStage.setResizable(false);
 					viewStage.setHeight(650);
-					viewStage.setWidth(600);
+					viewStage.setWidth(500);
 					viewStage.initModality(Modality.WINDOW_MODAL);
 					viewStage.initOwner(LoginController.primaryStage);
 					viewStage.setScene(viewScene);

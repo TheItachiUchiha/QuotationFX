@@ -1,7 +1,6 @@
 package com.kc.controller;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -25,7 +24,6 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -59,6 +57,7 @@ public class ProductsModifyController implements Initializable {
 	private ObservableList<String> categorylist=FXCollections.observableArrayList();
 	private ObservableList<String> subcategorylist=FXCollections.observableArrayList();
 	private ObservableList<String> namelist=FXCollections.observableArrayList();
+	private ObservableList<String> codelist=FXCollections.observableArrayList();
 	private ProductsDAO productsDAO;
 	public static Stage stage;
 	private Validation validate;
@@ -85,7 +84,7 @@ public class ProductsModifyController implements Initializable {
 	@FXML
 	private AutoCompleteTextField<String> productSubCategoryTextField;
 	@FXML
-	private TextField productCodeTextField;
+	private AutoCompleteTextField<String> productCodeTextField;
 
 	@FXML
 	private TableView<ComponentsVO> componentTable;
@@ -140,9 +139,11 @@ public class ProductsModifyController implements Initializable {
 			categorylist = productsDAO.getProductCategoryList();
 			subcategorylist = productsDAO.getProductSubcategoryList();
 			namelist = productsDAO.getProductNameList();
+			codelist = productsDAO.getProductCodeList();
 			productCategoryTextField.setItems(categorylist);
 			productSubCategoryTextField.setItems(subcategorylist);
 			productNameTextField.setItems(namelist);
+			productCodeTextField.setItems(codelist);
 			
 			
 			for(ProductsVO productsVO: productsList)
@@ -402,7 +403,7 @@ public class ProductsModifyController implements Initializable {
 			message.setVisible(true);
 		}
 		}
-		catch (SQLException s) {
+		/*catch (SQLException s) {
 			s.printStackTrace();
 			if (s.getErrorCode() == CommonConstants.UNIQUE_CONSTRAINT) {
 				message.setText(CommonConstants.DUPLICATE_PRODUCT_CODE);
@@ -410,7 +411,7 @@ public class ProductsModifyController implements Initializable {
 				message.getStyleClass().add("failure");
 				message.setVisible(true);
 			}
-		}
+		}*/
 		catch (Exception e) {
 			e.printStackTrace();
 			LOG.error(e.getMessage());

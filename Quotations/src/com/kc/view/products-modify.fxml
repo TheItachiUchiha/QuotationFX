@@ -137,7 +137,7 @@
                 <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
                 <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                 <AutoCompleteTextField id="productName" fx:id="productNameTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="0" GridPane.valignment="CENTER" />
-                <TextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+                <AutoCompleteTextField id="productCode" fx:id="productCodeTextField" maxWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="3" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="99.0" />

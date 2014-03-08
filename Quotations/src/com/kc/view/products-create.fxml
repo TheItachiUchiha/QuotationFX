@@ -77,7 +77,7 @@
             <Label prefWidth="93.0" text="Product Name" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
             <Label prefWidth="93.0" text="Product Code" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
             <AutoCompleteTextField fx:id="productName" maxWidth="-Infinity" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <TextField fx:id="productCode" maxWidth="-Infinity" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <AutoCompleteTextField fx:id="productCode" maxWidth="-Infinity" prefHeight="21.0" prefWidth="240.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <HBox id="HBox" alignment="CENTER" spacing="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2147483647" GridPane.rowIndex="2">
               <children>
                 <Button mnemonicParsing="false" onAction="#addComponent" styleClass="button-style" text="Add Component" />

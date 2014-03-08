@@ -93,6 +93,7 @@ public class SQLConstants {
 	public static final String GET_PRODUCT_CATEGORY_LIST = "SELECT distinct category FROM products";
 	public static final String GET_PRODUCT_SUBCATEGORY_LIST = "SELECT distinct subcategory FROM products";
 	public static final String GET_PRODUCT_NAME_LIST = "SELECT distinct name FROM products";
+	public static final String GET_PRODUCT_CODE_LIST = "SELECT distinct code FROM products";
 	
 	//constants for QuotationDAO
 	

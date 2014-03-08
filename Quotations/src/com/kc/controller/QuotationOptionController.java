@@ -20,6 +20,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -32,6 +33,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
+import com.kc.dao.HelpDAO;
 import com.kc.dao.ProductsDAO;
 import com.kc.dao.QuotationDAO;
 import com.kc.model.ProductsVO;
@@ -46,12 +48,16 @@ public class QuotationOptionController implements Initializable {
 	QuotationDAO quotationDAO;
 	Validation validation;
 	Encryption encryption;
+	HelpDAO helpDAO;
+	private Map<String, String> theme = new HashMap<String, String>();
+	
 	public QuotationOptionController() {
 		customersDAO = new CustomersDAO();
 		productsDAO = new ProductsDAO();
 		quotationDAO = new QuotationDAO();
 		validation = new Validation();
 		encryption = new Encryption("");
+		helpDAO = new HelpDAO();
 	}
 	
 	@FXML
@@ -99,6 +105,12 @@ public class QuotationOptionController implements Initializable {
 	@FXML
 	private GridPane setPathGrid;
 	
+	@FXML
+	private Tab defaultTab;
+	
+	@FXML
+	private Tab emailTab;
+	
 	int selectedProductId=0;
 	
 	private ObservableList<String> categoryList = FXCollections.observableArrayList();
@@ -109,6 +121,30 @@ public class QuotationOptionController implements Initializable {
 	private Map<String, String> defaultValues = new HashMap<String, String>();
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		theme = helpDAO.getBackground();
+		//newTab.getStyleClass().remove(1);
+		if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-pink"))
+		{
+			defaultTab.getStyleClass().add("pink-tab");
+			emailTab.getStyleClass().add("pink-tab");
+		}
+		else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-blue"))
+		{
+			defaultTab.getStyleClass().add("blue-tab");
+			emailTab.getStyleClass().add("blue-tab");
+		}
+		else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-cyan"))
+		{
+			defaultTab.getStyleClass().add("cyan-tab");
+			emailTab.getStyleClass().add("cyan-tab");
+		}
+		else if(theme.get(CommonConstants.KEY_BACKGROUND).equals("background-green"))
+		{
+			defaultTab.getStyleClass().add("green-tab");
+			emailTab.getStyleClass().add("green-tab");
+		}
+		
 		ObservableList<String> tempProductCategoryList = FXCollections.observableArrayList();
 		final ObservableList<String> tempProductSubCategoryList = FXCollections.observableArrayList();
 		final ObservableList<ProductsVO> tempProductList = FXCollections.observableArrayList();

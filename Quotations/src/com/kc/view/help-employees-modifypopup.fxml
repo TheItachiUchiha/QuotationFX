@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.text.*?>
 
-<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="259.0" prefWidth="547.9999000000025" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeModifyPopUpController">
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="306.0" prefWidth="418.000022070315" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.kc.controller.HelpEmployeeModifyPopUpController">
   <!-- TODO Add Nodes -->
   <children>
     <Label prefHeight="35.0" prefWidth="115.0" text="Name *" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
@@ -47,20 +47,20 @@
     <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="278.0" text="" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
   </children>
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="42.96576996197743" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="57.41443916349834" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="33.49151646614052" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="66.79258071292625" />
   </columnConstraints>
   <padding>
-    <Insets />
+    <Insets left="40.0" top="40.0" />
   </padding>
   <rowConstraints>
-    <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="123.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="136.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="80.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="148.0" minHeight="0.0" prefHeight="81.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="162.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="262.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
   </rowConstraints>
   <stylesheets>
     <URL value="@../style/gui.css" />

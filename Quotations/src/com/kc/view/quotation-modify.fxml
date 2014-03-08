@@ -34,8 +34,19 @@
                     <Button fx:id="deleteQuotation" mnemonicParsing="false" styleClass="button-style" text="Delete Quotation" />
                   </children>
                 </HBox>
+                <HBox id="HBox" fx:id="createQuotationBox" alignment="CENTER" spacing="5.0" visible="false">
+                  <children>
+                    <Button id="openQuotation" mnemonicParsing="false" onAction="#createQuotation" styleClass="button-style" text="Create Quotation" />
+                  </children>
+                  <padding>
+                    <Insets top="2.0" />
+                  </padding>
+                </HBox>
                 <Label fx:id="message" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="217.0" text="" />
               </children>
+              <GridPane.margin>
+                <Insets top="5.0" />
+              </GridPane.margin>
             </VBox>
             <TextField id="customerName" fx:id="referenceNo" editable="false" maxWidth="-Infinity" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <TextField fx:id="customerName" editable="false" maxWidth="-Infinity" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />

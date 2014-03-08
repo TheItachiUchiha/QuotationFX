@@ -179,15 +179,7 @@
                 <HBox id="referenceHBox" fx:id="nameHBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="600.0" spacing="10.0">
                   <children>
                     <Label prefHeight="26.0" prefWidth="132.0" text="Select Customer:" />
-                    <ComboBox fx:id="customerCombo" prefHeight="21.0" prefWidth="148.0" styleClass="combo-style">
-                      <items>
-                        <FXCollections fx:factory="observableArrayList">
-                          <String fx:value="Item 1" />
-                          <String fx:value="Item 2" />
-                          <String fx:value="Item 3" />
-                        </FXCollections>
-                      </items>
-                    </ComboBox>
+                    <AutoCompleteTextField id="customerNameAutoFill" fx:id="customerAutoFill" maxWidth="-Infinity" prefHeight="31.0" prefWidth="148.0" />
                     <Button mnemonicParsing="false" onAction="#createComplaintInName" prefWidth="132.0" text="Create Complaint" />
                     <Button mnemonicParsing="false" onAction="#customerInfoInName" text="Customer Info" />
                   </children>

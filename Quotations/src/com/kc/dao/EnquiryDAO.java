@@ -68,8 +68,8 @@ public class EnquiryDAO {
 			preparedStatement.setDouble(21, 0);
 			preparedStatement.setString(22, CommonConstants.NA);
 			preparedStatement.setString(23, enquiryVO.getDispatchDone());
-			preparedStatement.setString(24, enquiryVO.getPurchaseOrderNo());
-			preparedStatement.setInt(25, enquiryVO.getProductQuantity());
+			preparedStatement.setString(24, CommonConstants.NA);
+			preparedStatement.setInt(25, 0);
 			preparedStatement.execute();
 		}
 		catch (Exception e) {
