@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.itextpdf.text.error_messages.MessageLocalization;
 import com.kc.constant.CommonConstants;
 import com.kc.dao.CustomersDAO;
 import com.kc.dao.EnquiryDAO;
@@ -23,6 +24,7 @@ import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.Email;
 import com.kc.util.FileUtils;
+import com.kc.util.ProgressIndicatorStage;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
@@ -57,6 +59,7 @@ public class QuotationEmailResendController implements Initializable {
 	CustomersDAO customersDAO;
 	Validation validation;
 	QuotationDAO quotationDAO;
+	ProgressIndicatorStage progressIndicatorStage;
 	public QuotationEmailResendController()
 	{
 		enquiryDAO = new EnquiryDAO();
@@ -423,6 +426,8 @@ public class QuotationEmailResendController implements Initializable {
 	public void createPDF()
 	{
 		try{
+			progressIndicatorStage = new ProgressIndicatorStage((Stage) attachmentLabel.getScene().getWindow());
+			progressIndicatorStage.showProgress();
 			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 			{
 				defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
@@ -449,9 +454,11 @@ public class QuotationEmailResendController implements Initializable {
 				messageEmail.getStyleClass().add("success");
 				messageEmail.setText("PDF created successfully");
 				messageEmail.setVisible(true);
+				progressIndicatorStage.closeProgress();
 			}
 			else
 			{
+				progressIndicatorStage.closeProgress();
 				Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 			}
 		}

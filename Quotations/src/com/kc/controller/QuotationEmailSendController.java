@@ -23,6 +23,7 @@ import com.kc.model.EnquiryVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.util.Email;
 import com.kc.util.FileUtils;
+import com.kc.util.ProgressIndicatorStage;
 import com.kc.util.QuotationUtil;
 import com.kc.util.Validation;
 
@@ -57,6 +58,7 @@ public class QuotationEmailSendController implements Initializable {
 	CustomersDAO customersDAO;
 	Validation validation;
 	QuotationDAO quotationDAO;
+	ProgressIndicatorStage progressIndicatorStage;
 	public QuotationEmailSendController()
 	{
 		enquiryDAO = new EnquiryDAO();
@@ -423,7 +425,8 @@ public class QuotationEmailSendController implements Initializable {
 	public void createPDF()
 	{
 		try{
-			
+			progressIndicatorStage = new ProgressIndicatorStage((Stage) messageEmail.getScene().getWindow());
+			progressIndicatorStage.showProgress();
 			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 			{
 				defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
@@ -450,11 +453,11 @@ public class QuotationEmailSendController implements Initializable {
 				messageEmail.getStyleClass().add("success");
 				messageEmail.setText("PDF created successfully");
 				messageEmail.setVisible(true);
-				
+				progressIndicatorStage.closeProgress();
 			}
 			else
 			{
-				
+				progressIndicatorStage.closeProgress();
 				Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 			}
 		}
