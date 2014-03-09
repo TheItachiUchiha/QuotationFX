@@ -188,6 +188,28 @@ public class QuotationViewController implements Initializable  {
 		}
 		
 	}
+	public void reset()
+	{
+		try
+		{
+			yearCombo.getSelectionModel().clearSelection();
+			monthCombo.getSelectionModel().clearSelection();
+			tempEnquiryList.clear();
+			
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear)&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y"))))
+				{
+					tempEnquiryList.add(enquiryVO);
+				}
+			}
+			fillTable(tempEnquiryList);
+			quotationTable.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	private void fillTable(ObservableList<EnquiryViewVO> tempEnquiryList)
 	{
 		try

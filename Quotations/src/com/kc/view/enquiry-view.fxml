@@ -54,7 +54,7 @@
     <StackPane alignment="TOP_LEFT" minHeight="83.0" minWidth="1024.0" prefHeight="83.0" prefWidth="1024.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="83.0" opacity="0.4" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1037.0" StackPane.alignment="TOP_LEFT" />
-        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="577.0" StackPane.alignment="TOP_LEFT" StackPane.margin="$x1">
+        <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="660.0" StackPane.alignment="TOP_LEFT" StackPane.margin="$x1">
           <children>
             <Label prefHeight="23.0" prefWidth="114.0" text="Search By" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
             <Label prefHeight="23.0" prefWidth="114.0" text="Keyword" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
@@ -76,7 +76,7 @@
                 <Insets bottom="5.0" right="5.0" top="5.0" />
               </padding>
             </HBox>
-            <ComboBox id="monthOfEnquiry" fx:id="monthCombo" prefHeight="21.0" prefWidth="175.0" promptText="Select Month of Enquiry" styleClass="combo-style" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+            <ComboBox id="monthOfEnquiry" fx:id="monthCombo" prefHeight="21.0" prefWidth="175.0" promptText="Select Month of Enquiry" styleClass="combo-style" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -85,11 +85,13 @@
                 </FXCollections>
               </items>
             </ComboBox>
+            <Button mnemonicParsing="false" onAction="#reset" text="Reset" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="112.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="248.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="591.0" minWidth="10.0" prefWidth="217.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="284.0" minWidth="10.0" prefWidth="115.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="473.0" minWidth="10.0" prefWidth="239.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="591.0" minWidth="10.0" prefWidth="184.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="591.0" minWidth="10.0" prefWidth="122.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

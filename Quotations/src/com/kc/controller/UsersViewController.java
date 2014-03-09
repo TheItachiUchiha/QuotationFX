@@ -158,6 +158,21 @@ public class UsersViewController implements Initializable {
 		LOG.info("Exit : initialize");
 	}
 	
+	public void reset()
+	{
+		try
+		{
+			combo.getSelectionModel().clearSelection();
+			keyword.setText("");
+			
+			//componentsList = componentsDAO.getComponents();
+			updateTable(usersList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateTable(ObservableList<UsersVO> tempList)
 	{
 		name.setCellValueFactory(new PropertyValueFactory<UsersVO, String>("Name"));
@@ -175,34 +190,36 @@ public class UsersViewController implements Initializable {
 		try{
 			usersList = usersDAO.getModules();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
-			if(t1.equals("Name"))
-	        {
-	        	for(UsersVO usersVO : usersList)
-	        	{
-	        		if(!tempList.contains(usersVO.getName()))
-	        		{
-	        			tempList.add(usersVO.getName());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Username"))
-	        {
-	        	for(UsersVO usersVO : usersList)
-	        	{
-	        		if(!tempList.contains(usersVO.getUsername()))
-	        		{
-	        			tempList.add(usersVO.getUsername());
-	        		}
-	        	}
-	        }
-			autoHBox.getChildren().removeAll(keyword,go);
-			keyword = new AutoCompleteTextField<String>();
-			//go = new Button();
-			//go.setText("Go");
-			autoHBox.getChildren().addAll(keyword,go);
-			keyword.setPrefWidth(208);
-	        keyword.setItems(tempList);
-	        
+			if(t1!=null)
+			{
+				if(t1.equals("Name"))
+		        {
+		        	for(UsersVO usersVO : usersList)
+		        	{
+		        		if(!tempList.contains(usersVO.getName()))
+		        		{
+		        			tempList.add(usersVO.getName());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Username"))
+		        {
+		        	for(UsersVO usersVO : usersList)
+		        	{
+		        		if(!tempList.contains(usersVO.getUsername()))
+		        		{
+		        			tempList.add(usersVO.getUsername());
+		        		}
+		        	}
+		        }
+				autoHBox.getChildren().removeAll(keyword,go);
+				keyword = new AutoCompleteTextField<String>();
+				//go = new Button();
+				//go.setText("Go");
+				autoHBox.getChildren().addAll(keyword,go);
+				keyword.setPrefWidth(208);
+		        keyword.setItems(tempList);
+			}
 	        
 		}
 		catch (Exception e) {

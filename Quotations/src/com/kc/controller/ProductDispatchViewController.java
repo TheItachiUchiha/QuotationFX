@@ -168,6 +168,8 @@ public class ProductDispatchViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
+					if(newValue!=null)
+					{
 						if(newValue.equalsIgnoreCase("Calender") || newValue.equalsIgnoreCase("Invoice Date") || newValue.equalsIgnoreCase("Dispatch Date"))
 						{
 							keyVBox.getChildren().clear();
@@ -180,6 +182,7 @@ public class ProductDispatchViewController implements Initializable {
 						}
 						keyVBox.setVisible(false);
 						dispatchTable.setVisible(false);
+					}
 				}
 			});
 	        keyCombo.valueProperty().addListener(new ChangeListener<String>() {
@@ -198,37 +201,43 @@ public class ProductDispatchViewController implements Initializable {
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
 					finalDispatchList.clear();
-					if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice Date"))
+					if(newValue!=null)
 					{
-						for(DispatchVO dispatchVO : dispatchList)
+						if(searchCombo.getSelectionModel().getSelectedIndex()!=-1)
 						{
-							if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getInvoiceDate()))
+							if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Invoice Date"))
 							{
-								finalDispatchList.add(dispatchVO);
+								for(DispatchVO dispatchVO : dispatchList)
+								{
+									if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getInvoiceDate()))
+									{
+										finalDispatchList.add(dispatchVO);
+									}
+								}
+							}
+							else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch Date"))
+							{
+								for(DispatchVO dispatchVO : dispatchList)
+								{
+									if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getDispatchDate()))
+									{
+										finalDispatchList.add(dispatchVO);
+									}
+								}
 							}
 						}
-					}
-					else if(searchCombo.getSelectionModel().getSelectedItem().equalsIgnoreCase("Dispatch Date"))
-					{
-						for(DispatchVO dispatchVO : dispatchList)
+						
+						if(finalDispatchList.isEmpty())
 						{
-							if(((TextField)calendar.getChildren().get(0)).getText().equals(dispatchVO.getDispatchDate()))
-							{
-								finalDispatchList.add(dispatchVO);
-							}
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
 						}
+						else
+						{
+							fillTable(finalDispatchList);
+							dispatchTable.setVisible(true);
+						}
+						
 					}
-					
-					if(finalDispatchList.isEmpty())
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
-					}
-					else
-					{
-						fillTable(finalDispatchList);
-						dispatchTable.setVisible(true);
-					}
-					
 				}
 			});
 		}
@@ -236,6 +245,31 @@ public class ProductDispatchViewController implements Initializable {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void reset()
+	{
+		try
+		{
+			searchCombo.getSelectionModel().clearSelection();
+			keyCombo.getSelectionModel().clearSelection();
+			((TextField)calendar.getChildren().get(0)).setText("");
+			dispatchList = dispatchDAO.getProductDispatch();
+			finalDispatchList.clear();
+			
+			for(DispatchVO dispatchVO : dispatchList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(dispatchVO.getInvoiceDate())).equalsIgnoreCase(currentYear))
+				{
+					finalDispatchList.add(dispatchVO);
+				}
+			}
+			fillTable(finalDispatchList);
+			dispatchTable.setVisible(true);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//fill the ProductDispatch table 

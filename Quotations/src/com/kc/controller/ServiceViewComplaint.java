@@ -24,6 +24,7 @@ import javafx.scene.control.Dialogs.DialogResponse;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -44,6 +45,7 @@ import com.kc.dao.EnquiryDAO;
 import com.kc.dao.ServiceDAO;
 import com.kc.model.ComplaintVO;
 import com.kc.model.CustomersVO;
+import com.kc.model.DispatchVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
 
@@ -190,6 +192,30 @@ public class ServiceViewComplaint implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void reset()
+	{
+		try
+		{
+			monthCombo.getSelectionModel().clearSelection();
+			yearCombo.getSelectionModel().clearSelection();
+			tempList = serviceDAO.getComplaintList();
+			tempcomplaintList = QuotationUtil.fillComplaintListFromService(tempList, customerList);
+			complaintList.clear();
+			for(ComplaintVO complaintVO : tempcomplaintList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(complaintVO.getDateOfComplaint())).equalsIgnoreCase(currentYear))
+				{
+					complaintList.add(complaintVO);
+				}
+			}
+			fillTable(complaintList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	private void fillTable(ObservableList<ComplaintVO> tableList)
 	{
 		

@@ -59,7 +59,7 @@
             <Insets />
           </StackPane.margin>
         </Rectangle>
-        <GridPane fx:id="topGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="83.0" prefWidth="385.0" StackPane.alignment="TOP_LEFT">
+        <GridPane fx:id="topGrid" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="72.0" prefWidth="457.0" StackPane.alignment="TOP_LEFT">
           <children>
             <Label alignment="CENTER_LEFT" contentDisplay="CENTER" prefHeight="30.0" prefWidth="118.0" text="Search By" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label alignment="CENTER_LEFT" minHeight="13.0" prefHeight="30.0" prefWidth="118.0" text="Keyword" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -84,10 +84,12 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
               </padding>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#reset" text="Reset" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="126.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="716.0" minWidth="10.0" prefWidth="259.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="411.0" minWidth="10.0" prefWidth="81.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="716.0" minWidth="10.0" prefWidth="260.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="716.0" minWidth="10.0" prefWidth="116.0" />
           </columnConstraints>
           <rowConstraints>
             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

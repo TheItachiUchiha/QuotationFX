@@ -57,7 +57,7 @@
     <StackPane prefHeight="82.0" prefWidth="963.0" BorderPane.alignment="TOP_LEFT">
       <children>
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="82.0" opacity="0.41" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="999.0" StackPane.alignment="TOP_LEFT" />
-        <GridPane fx:id="topGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="395.0" StackPane.alignment="TOP_LEFT">
+        <GridPane fx:id="topGrid" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="478.0" StackPane.alignment="TOP_LEFT">
           <children>
             <Label alignment="CENTER_LEFT" contentDisplay="LEFT" prefHeight="30.0" prefWidth="127.0" text="Search By" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label alignment="CENTER_LEFT" minHeight="13.0" prefHeight="30.0" prefWidth="127.0" text="Keyword" GridPane.columnIndex="0" GridPane.rowIndex="1" />
@@ -78,10 +78,12 @@
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
               </padding>
             </HBox>
+            <Button mnemonicParsing="false" onAction="#reset" text="Reset" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
           </children>
           <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="125.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="621.0" minWidth="10.0" prefWidth="260.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="375.0" minWidth="10.0" prefWidth="102.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="621.0" minWidth="10.0" prefWidth="258.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="621.0" minWidth="10.0" prefWidth="108.0" />
           </columnConstraints>
           <padding>
             <Insets left="10.0" top="10.0" />

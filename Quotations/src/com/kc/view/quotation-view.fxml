@@ -70,6 +70,7 @@
               </items>
             </ComboBox>
             <Button fx:id="search" mnemonicParsing="false" styleClass="button-style" text="Search" />
+            <Button id="search" mnemonicParsing="false" onAction="#reset" styleClass="button-style" text="Reset" />
           </children>
           <padding>
             <Insets fx:id="x1" />

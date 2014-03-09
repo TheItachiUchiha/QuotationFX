@@ -36,6 +36,7 @@ import org.apache.log4j.Logger;
 
 import com.kc.constant.CommonConstants;
 import com.kc.dao.ServiceDAO;
+import com.kc.model.ComplaintVO;
 import com.kc.model.EnquiryViewVO;
 import com.kc.model.ServiceVO;
 import com.kc.util.QuotationUtil;
@@ -187,6 +188,8 @@ public class ServiceViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
+					if(newValue!=null)
+					{
 						if(newValue.equalsIgnoreCase("Complaint By Calender"))
 						{
 							keyVBox.getChildren().clear();
@@ -200,6 +203,7 @@ public class ServiceViewController implements Initializable {
 						salesOrderTable.setVisible(false);
 						serviceTable.setVisible(false);
 						keyVBox.setVisible(false);
+					}
 				}
 			});
 	        
@@ -209,8 +213,11 @@ public class ServiceViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
+					if(newValue!=null)
+					{
 						salesOrderTable.setVisible(false);
 						serviceTable.setVisible(false);
+					}
 					
 				}
 			});
@@ -220,10 +227,13 @@ public class ServiceViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					salesOrderTable.setVisible(false);
-					serviceTable.setVisible(false);
-					keyVBox.setVisible(false);
-					searchBox.setVisible(false);
+					if(newValue!=null)
+					{
+						salesOrderTable.setVisible(false);
+						serviceTable.setVisible(false);
+						keyVBox.setVisible(false);
+						searchBox.setVisible(false);
+					}
 					
 				}
 			});
@@ -233,10 +243,13 @@ public class ServiceViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					salesOrderTable.setVisible(false);
-					serviceTable.setVisible(false);
-					keyVBox.setVisible(false);
-					searchBox.setVisible(false);
+					if(newValue!=null)
+					{
+						salesOrderTable.setVisible(false);
+						serviceTable.setVisible(false);
+						keyVBox.setVisible(false);
+						searchBox.setVisible(false);
+					}
 					
 				}
 			});
@@ -246,22 +259,25 @@ public class ServiceViewController implements Initializable {
 				public void changed(
 						ObservableValue<? extends String> observable,
 						String oldValue, String newValue) {
-					finalListOfServices.clear();
-					for(EnquiryViewVO enquiryViewVO : listOfServices)
+					if(newValue!=null)
 					{
-						if(((TextField)calendar.getChildren().get(0)).getText().equals(enquiryViewVO.getComplaintDate()))
+						finalListOfServices.clear();
+						for(EnquiryViewVO enquiryViewVO : listOfServices)
 						{
-							finalListOfServices.add(enquiryViewVO);
+							if(((TextField)calendar.getChildren().get(0)).getText().equals(enquiryViewVO.getComplaintDate()))
+							{
+								finalListOfServices.add(enquiryViewVO);
+							}
 						}
-					}
-					if(finalListOfServices.isEmpty())
-					{
-						Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
-					}
-					else
-					{
-						fillTable(finalListOfServices);
-						salesOrderTable.setVisible(true);
+						if(finalListOfServices.isEmpty())
+						{
+							Dialogs.showInformationDialog(LoginController.primaryStage, CommonConstants.NO_ENQUIRY);
+						}
+						else
+						{
+							fillTable(finalListOfServices);
+							salesOrderTable.setVisible(true);
+						}
 					}
 					
 				}
@@ -393,6 +409,28 @@ public class ServiceViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void reset()
+	{
+		try
+		{
+			monthCombo.getSelectionModel().clearSelection();
+			yearCombo.getSelectionModel().clearSelection();
+			searchCombo.getSelectionModel().clearSelection();
+			keyCombo.getSelectionModel().clearSelection();
+			((TextField)calendar.getChildren().get(0)).setText("");
+			
+			listOfServices.clear();
+			listOfServices=serviceDAO.getServiceHistory(startDate, endDate);
+			fillTable(listOfServices);
+			salesOrderTable.setVisible(true);
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void fillTable(ObservableList<EnquiryViewVO> tempList)
 	{
 		try
@@ -428,6 +466,8 @@ public class ServiceViewController implements Initializable {
 			e.printStackTrace();
 		}
 	}
+	
+	
 	//Fill the Service Details In the Service Table
 	public void updateServiceTable(String contact)
 	{

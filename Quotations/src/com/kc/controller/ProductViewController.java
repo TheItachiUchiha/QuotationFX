@@ -153,6 +153,21 @@ public class ProductViewController implements Initializable{
 		LOG.info("Exit : initialize");
 	}
 	
+	public void reset()
+	{
+		try
+		{
+			combo.getSelectionModel().clearSelection();
+			keyword.setText("");
+			
+			//componentsList = componentsDAO.getComponents();
+			updateTable(productsList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateTable(ObservableList<ProductsVO> tempList)
 	{
 		productName.setCellValueFactory(new PropertyValueFactory<ProductsVO, String>("productName"));
@@ -170,53 +185,56 @@ public class ProductViewController implements Initializable{
 		try{
 			productsList = productsDAO.getProducts();
 			final ObservableList<String> tempList = FXCollections.observableArrayList(); 
-			if(t1.equals("Product Category"))
-	        {
-	        	for(ProductsVO productsVO : productsList)
-	        	{
-	        		if(!tempList.contains(productsVO.getProductCategory()))
-	        		{
-	        			tempList.add(productsVO.getProductCategory());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Sub Category"))
-	        {
-	        	for(ProductsVO productsVO : productsList)
-	        	{
-	        		if(!tempList.contains(productsVO.getProductSubCategory()))
-	        		{
-	        			tempList.add(productsVO.getProductSubCategory());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Product Name"))
-	        {
-	        	for(ProductsVO productsVO : productsList)
-	        	{
-	        		if(!tempList.contains(productsVO.getProductName()))
-	        		{
-	        			tempList.add(productsVO.getProductName());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Product Code"))
-	        {
-	        	for(ProductsVO productsVO : productsList)
-	        	{
-	        		if(!tempList.contains(productsVO.getProductCode()))
-	        		{
-	        			tempList.add(productsVO.getProductCode());
-	        		}
-	        	}
-	        }
-			autoHBox.getChildren().removeAll(keyword,go);
-			keyword = new AutoCompleteTextField<String>();
-			//go = new Button();
-			//go.setText("Go");
-			autoHBox.getChildren().addAll(keyword,go);
-			keyword.setPrefWidth(208);
-			keyword.setItems(tempList);
+			if(t1!=null)
+			{
+				if(t1.equals("Product Category"))
+		        {
+		        	for(ProductsVO productsVO : productsList)
+		        	{
+		        		if(!tempList.contains(productsVO.getProductCategory()))
+		        		{
+		        			tempList.add(productsVO.getProductCategory());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Sub Category"))
+		        {
+		        	for(ProductsVO productsVO : productsList)
+		        	{
+		        		if(!tempList.contains(productsVO.getProductSubCategory()))
+		        		{
+		        			tempList.add(productsVO.getProductSubCategory());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Product Name"))
+		        {
+		        	for(ProductsVO productsVO : productsList)
+		        	{
+		        		if(!tempList.contains(productsVO.getProductName()))
+		        		{
+		        			tempList.add(productsVO.getProductName());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Product Code"))
+		        {
+		        	for(ProductsVO productsVO : productsList)
+		        	{
+		        		if(!tempList.contains(productsVO.getProductCode()))
+		        		{
+		        			tempList.add(productsVO.getProductCode());
+		        		}
+		        	}
+		        }
+				autoHBox.getChildren().removeAll(keyword,go);
+				keyword = new AutoCompleteTextField<String>();
+				//go = new Button();
+				//go.setText("Go");
+				autoHBox.getChildren().addAll(keyword,go);
+				keyword.setPrefWidth(208);
+				keyword.setItems(tempList);
+			}
 			
 		}
 		catch (Exception e) {

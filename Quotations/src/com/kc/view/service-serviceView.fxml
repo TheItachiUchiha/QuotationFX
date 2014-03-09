@@ -75,6 +75,7 @@
                   </items>
                 </ComboBox>
                 <Button id="search" mnemonicParsing="false" onAction="#viewDetails" styleClass="button-style" text="View" />
+                <Button id="search" mnemonicParsing="false" onAction="#reset" styleClass="button-style" text="Reset" />
               </children>
             </HBox>
             <HBox id="referenceHBox" fx:id="searchBox" alignment="CENTER_LEFT" prefHeight="27.0" prefWidth="1047.0" spacing="5.0" visible="false">

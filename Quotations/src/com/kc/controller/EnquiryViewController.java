@@ -527,6 +527,32 @@ public class EnquiryViewController implements Initializable {
 		LOG.info("Exit : fillTableFromData");
 	}
 	
+	public void reset()
+	{
+		try
+		{
+			searchCombo.getSelectionModel().clearSelection();
+			monthCombo.getSelectionModel().clearSelection();
+			keyword.setText("");
+			
+			enquiryList = enquiryDAO.getEnquries();
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			
+			enquiryListForTable.clear();
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+				{
+					enquiryListForTable.add(enquiryVO);
+				}
+			}
+			updateTable(enquiryListForTable);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateTable(ObservableList<EnquiryViewVO> tempList)
 	{
 		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));

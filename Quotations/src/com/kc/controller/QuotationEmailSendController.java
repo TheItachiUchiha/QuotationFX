@@ -423,6 +423,7 @@ public class QuotationEmailSendController implements Initializable {
 	public void createPDF()
 	{
 		try{
+			
 			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 			{
 				defaultValues = quotationDAO.getStandardProductPath(enquiryViewVO.getProductId());
@@ -449,9 +450,11 @@ public class QuotationEmailSendController implements Initializable {
 				messageEmail.getStyleClass().add("success");
 				messageEmail.setText("PDF created successfully");
 				messageEmail.setVisible(true);
+				
 			}
 			else
 			{
+				
 				Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 			}
 		}

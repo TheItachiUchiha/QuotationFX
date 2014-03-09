@@ -174,6 +174,21 @@ public class CustomersViewController implements Initializable {
 		LOG.info("Exit : initialize");
 	}
 	
+	public void reset()
+	{
+		try
+		{
+			combo.getSelectionModel().clearSelection();
+			keyword.setText("");
+			
+			//componentsList = componentsDAO.getComponents();
+			updateTable(customersList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateTable(ObservableList<CustomersVO> tempList)
 	{
 		name.setCellValueFactory(new PropertyValueFactory<CustomersVO, String>("customerName"));
@@ -197,63 +212,66 @@ public class CustomersViewController implements Initializable {
 			customersList = customersDAO.getCustomers();
 			final ObservableList<String> tempList = FXCollections
 					.observableArrayList();
-			if (t1.equals("Customer Name")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getCustomerName()))
-	        		{
-					tempList.add(customersVO.getCustomerName());
-	        		}
+			if(t1!=null)
+			{
+				if (t1.equals("Customer Name")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getCustomerName()))
+		        		{
+						tempList.add(customersVO.getCustomerName());
+		        		}
+					}
+				} else if (t1.equals("Company Name")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getCompanyName()))
+		        		{
+						tempList.add(customersVO.getCompanyName());
+		        		}
+					}
+				} else if (t1.equals("State")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getState()))
+		        		{
+						tempList.add(customersVO.getState());
+		        		}
+					}
+				} else if (t1.equals("City")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getCity()))
+		        		{
+						tempList.add(customersVO.getCity());
+		        		}
+					}
+				} else if (t1.equals("Email Id")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getEmailId()))
+		        		{
+						tempList.add(customersVO.getEmailId());
+		        		}
+					}
+				} else if (t1.equals("TIN Number")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getTinNumber()))
+		        		{
+						tempList.add(customersVO.getTinNumber());
+		        		}
+					}
+				} else if (t1.equals("Customer Type")) {
+					for (CustomersVO customersVO : customersList) {
+						if(!tempList.contains(customersVO.getCustomerType()))
+		        		{
+						tempList.add(customersVO.getCustomerType());
+		        		}
+					}
 				}
-			} else if (t1.equals("Company Name")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getCompanyName()))
-	        		{
-					tempList.add(customersVO.getCompanyName());
-	        		}
-				}
-			} else if (t1.equals("State")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getState()))
-	        		{
-					tempList.add(customersVO.getState());
-	        		}
-				}
-			} else if (t1.equals("City")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getCity()))
-	        		{
-					tempList.add(customersVO.getCity());
-	        		}
-				}
-			} else if (t1.equals("Email Id")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getEmailId()))
-	        		{
-					tempList.add(customersVO.getEmailId());
-	        		}
-				}
-			} else if (t1.equals("TIN Number")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getTinNumber()))
-	        		{
-					tempList.add(customersVO.getTinNumber());
-	        		}
-				}
-			} else if (t1.equals("Customer Type")) {
-				for (CustomersVO customersVO : customersList) {
-					if(!tempList.contains(customersVO.getCustomerType()))
-	        		{
-					tempList.add(customersVO.getCustomerType());
-	        		}
-				}
+				autoHBox.getChildren().removeAll(keyword,go);
+				keyword = new AutoCompleteTextField<String>();
+				//go = new Button();
+				//go.setText("Go");
+				autoHBox.getChildren().addAll(keyword,go);
+				keyword.setPrefWidth(208);
+				keyword.setItems(tempList);
 			}
-			autoHBox.getChildren().removeAll(keyword,go);
-			keyword = new AutoCompleteTextField<String>();
-			//go = new Button();
-			//go.setText("Go");
-			autoHBox.getChildren().addAll(keyword,go);
-			keyword.setPrefWidth(208);
-			keyword.setItems(tempList);
 		} catch (Exception e) {
 			LOG.error(e.getMessage());
 			e.printStackTrace();

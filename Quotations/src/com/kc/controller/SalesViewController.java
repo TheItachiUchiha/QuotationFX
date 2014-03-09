@@ -198,25 +198,49 @@ public class SalesViewController {
 		e.printStackTrace();
 	}
     }
-
-private void fillTable(ObservableList<EnquiryViewVO> tempEnquiryList)
-{
-	try
+    
+    public void reset()
 	{
-		salesOrderTable.setItems(tempEnquiryList);
-		referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
-		productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
-		companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
-		customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
-		referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
-		dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
-		dateOfSalesOrder.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("salesDate"));
-		dateOfQuotation.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
+		try
+		{
+			yearCombo.getSelectionModel().clearSelection();
+			monthCombo.getSelectionModel().clearSelection();
+			enquiryList = enquiryDAO.getEnquries();
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			
+			tempEnquiryList.clear();
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear)&&(enquiryVO.getPriceEstimation().equalsIgnoreCase("Y")&&(enquiryVO.getQuotationPreparation().equalsIgnoreCase("Y") && enquiryVO.getEmailSent().equalsIgnoreCase("Y") && enquiryVO.getSales().equalsIgnoreCase("Y"))))
+				{
+					tempEnquiryList.add(enquiryVO);
+				}
+			}
+			fillTable(tempEnquiryList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-	catch (Exception e) {
-		e.printStackTrace();
+
+	private void fillTable(ObservableList<EnquiryViewVO> tempEnquiryList)
+	{
+		try
+		{
+			salesOrderTable.setItems(tempEnquiryList);
+			referenceNo.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referenceNo"));
+			productName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("productName"));
+			companyName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("companyName"));
+			customerName.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("customerName"));
+			referedBy.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("referedBy"));
+			dateOfEnquiry.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("dateOfEnquiry"));
+			dateOfSalesOrder.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("salesDate"));
+			dateOfQuotation.setCellValueFactory(new PropertyValueFactory<EnquiryViewVO, String>("qpDate"));
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-}
 private class ButtonCell extends TableCell<EnquiryViewVO, Boolean> {
 
 	Image buttonDeleteImage = new Image(getClass().getResourceAsStream(

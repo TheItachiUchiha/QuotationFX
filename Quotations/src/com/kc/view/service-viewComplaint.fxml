@@ -60,6 +60,7 @@
               </items>
             </ComboBox>
             <Button mnemonicParsing="false" onAction="#search" text="Search" />
+            <Button mnemonicParsing="false" onAction="#reset" text="Reset" />
           </children>
           <padding>
             <Insets />

@@ -167,6 +167,21 @@ public class ComponentsViewController implements Initializable {
 		LOG.info("Exit : initialize");
 	}
 	
+	public void reset()
+	{
+		try
+		{
+			combo.getSelectionModel().clearSelection();
+			keyword.setText("");
+			
+			//componentsList = componentsDAO.getComponents();
+			updateTable(componentsList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void updateTable(ObservableList<ComponentsVO> tempList)
 	{
 		name.setCellValueFactory(new PropertyValueFactory<ComponentsVO, String>("componentName"));
@@ -190,83 +205,86 @@ public class ComponentsViewController implements Initializable {
 			componentsList = componentsDAO.getComponents();
 			final ObservableList<String> tempList = FXCollections.observableArrayList();
 			tempList.clear();
-			if(t1.equals("Component Category"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getComponentCategory()))
-	        		{
-	        			tempList.add(componentsVO.getComponentCategory());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Sub Category"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getSubCategory()))
-	        		{
-	        			tempList.add(componentsVO.getSubCategory());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Component Name"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getComponentName()))
-	        		{
-	        			tempList.add(componentsVO.getComponentName());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Vendor"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getVendor()))
-	        		{
-	        			tempList.add(componentsVO.getVendor());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Model"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getModel()))
-	        		{
-	        			tempList.add(componentsVO.getModel());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Type"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getType()))
-	        		{
-	        			tempList.add(componentsVO.getType());
-	        		}
-	        	}
-	        }
-	        else if(t1.equals("Size"))
-	        {
-	        	for(ComponentsVO componentsVO : componentsList)
-	        	{
-	        		if(!tempList.contains(componentsVO.getSize()))
-	        		{
-	        			tempList.add(componentsVO.getSize());
-	        		}
-	        	}
-	        }
-			autoHBox.getChildren().removeAll(keyword,go);
-			keyword = new AutoCompleteTextField<String>();
-			//go = new Button();
-			//go.setText("Go");
-			autoHBox.getChildren().addAll(keyword,go);
-			keyword.setPrefWidth(208);
-			keyword.setItems(tempList);
+			if(t1!=null)
+			{
+				if(t1.equals("Component Category"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getComponentCategory()))
+		        		{
+		        			tempList.add(componentsVO.getComponentCategory());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Sub Category"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getSubCategory()))
+		        		{
+		        			tempList.add(componentsVO.getSubCategory());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Component Name"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getComponentName()))
+		        		{
+		        			tempList.add(componentsVO.getComponentName());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Vendor"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getVendor()))
+		        		{
+		        			tempList.add(componentsVO.getVendor());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Model"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getModel()))
+		        		{
+		        			tempList.add(componentsVO.getModel());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Type"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getType()))
+		        		{
+		        			tempList.add(componentsVO.getType());
+		        		}
+		        	}
+		        }
+		        else if(t1.equals("Size"))
+		        {
+		        	for(ComponentsVO componentsVO : componentsList)
+		        	{
+		        		if(!tempList.contains(componentsVO.getSize()))
+		        		{
+		        			tempList.add(componentsVO.getSize());
+		        		}
+		        	}
+		        }
+				autoHBox.getChildren().removeAll(keyword,go);
+				keyword = new AutoCompleteTextField<String>();
+				//go = new Button();
+				//go.setText("Go");
+				autoHBox.getChildren().addAll(keyword,go);
+				keyword.setPrefWidth(208);
+				keyword.setItems(tempList);
+			}
 			
 		}
 		catch (Exception e) {

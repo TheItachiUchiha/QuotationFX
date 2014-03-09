@@ -67,6 +67,7 @@
                   </items>
                 </ComboBox>
                 <Button mnemonicParsing="false" onAction="#go" prefWidth="56.0" text="Go" />
+                <Button mnemonicParsing="false" onAction="#reset" prefWidth="56.0" text="Reset" />
               </children>
               <VBox.margin>
                 <Insets fx:id="x1" />

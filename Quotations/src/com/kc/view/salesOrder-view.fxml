@@ -70,6 +70,7 @@
               </items>
             </ComboBox>
             <Button fx:id="view" mnemonicParsing="false" styleClass="button-style" text="View" />
+            <Button id="view" mnemonicParsing="false" onAction="#reset" styleClass="button-style" text="Reset" />
           </children>
           <StackPane.margin>
             <Insets left="10.0" />

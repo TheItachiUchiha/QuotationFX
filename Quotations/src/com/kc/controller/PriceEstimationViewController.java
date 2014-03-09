@@ -178,6 +178,30 @@ public class PriceEstimationViewController implements Initializable {
 		}
 		
 	}
+	
+	public void reset()
+	{
+		try
+		{
+			yearCombo.getSelectionModel().clearSelection();
+			monthCombo.getSelectionModel().clearSelection();
+			refList.clear();
+			enquiryList = priceEstimationDAO.getPriceEstimation();
+			enquiryViewList = QuotationUtil.fillEnquiryViewListFromEnquiryList(enquiryList, customerList);
+			for(EnquiryViewVO enquiryVO : enquiryViewList)
+			{
+				if(new SimpleDateFormat("yyyy").format(formatter.parse(enquiryVO.getDateOfEnquiry())).equalsIgnoreCase(currentYear))
+				{
+					refList.add(enquiryVO);
+				}
+			}
+			fillTable(refList);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void fillTable(ObservableList<EnquiryViewVO> refList)
 	{
 
