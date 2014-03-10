@@ -425,7 +425,7 @@ public class QuotationEmailSendController implements Initializable {
 	public void createPDF()
 	{
 		try{
-			progressIndicatorStage = new ProgressIndicatorStage((Stage) messageEmail.getScene().getWindow());
+			progressIndicatorStage = new ProgressIndicatorStage(LoginController.primaryStage);
 			progressIndicatorStage.showProgress();
 			if(enquiryViewVO.getEnquiryType().equalsIgnoreCase("STANDARD"))
 			{
@@ -453,11 +453,11 @@ public class QuotationEmailSendController implements Initializable {
 				messageEmail.getStyleClass().add("success");
 				messageEmail.setText("PDF created successfully");
 				messageEmail.setVisible(true);
-				progressIndicatorStage.closeProgress();
+				//progressIndicatorStage.closeProgress();
 			}
 			else
 			{
-				progressIndicatorStage.closeProgress();
+				//progressIndicatorStage.closeProgress();
 				Dialogs.showErrorDialog(LoginController.primaryStage, CommonConstants.FILE_ACCESS_FAILED_MSG, CommonConstants.FILE_ACCESS_FAILED);
 			}
 		}

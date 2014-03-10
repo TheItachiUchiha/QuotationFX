@@ -97,7 +97,7 @@ public class SQLConstants {
 	
 	//constants for QuotationDAO
 	
-	public static final String GET_QUOTATION_PRODUCTS = "SELECT * FROM PRODUCTS where path_set='N'";
+	public static final String GET_QUOTATION_PRODUCTS = "SELECT * FROM PRODUCTS";//where path_set='N'
 	public static final String SAVE_STANDARD_PATH = "INSERT INTO quotation(product_id,default_file,word_file_path,pdf_file_path) VALUES(?, ?, ?, ?)";
 	public static final String SAVE_STANDARD_PATH_SUB = "UPDATE PRODUCTS SET path_set=? WHERE ID=?";
 	public static final String UPDATE_QUOTATION_ENQUIRY = "UPDATE ENQUIRY SET quotationpreparation=?, QP_DATE=? where ID=?";

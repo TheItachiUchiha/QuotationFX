@@ -265,6 +265,7 @@ public class QuotationModifyController implements Initializable  {
 						String paramT1, String paramT2) {
 					quotationGrid.setVisible(false);
 					enquiryGrid.setVisible(false);
+					message.setText("");
 					for(EnquiryViewVO enquiryViewVO: enquiryViewList)
 					{
 						if(referenceCombo.getSelectionModel().getSelectedItem().equals(enquiryViewVO.getReferenceNo()))
